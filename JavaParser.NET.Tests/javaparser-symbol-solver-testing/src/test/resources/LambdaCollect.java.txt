@@ -1,0 +1,10 @@
+
+public class Agenda {
+
+    private List<String> persons;
+
+    public void lambdaMap(String personName) {
+        return persons.stream().collect(Collectors.toList());
+    }
+
+}

@@ -1,0 +1,8 @@
+namespace com.testbug;
+public class A {
+	private B obj;
+	public void run()
+	{
+		obj.setParameter(null);
+	}
+}

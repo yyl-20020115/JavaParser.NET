@@ -1,0 +1,9 @@
+namespace test;
+
+
+public class OverloadedMethodCall {
+    public void foo(Node node) {
+        node.accept((GenericVisitor) null, null);
+        node.accept((VoidVisitor) null, null);
+    }
+}

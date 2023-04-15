@@ -1,0 +1,32 @@
+/* 1
+1 *//*
+2
+2
+ */
+package
+/* a *//* b */
+//c
+//d
+com
+/*alma*//*körte*/
+//lófasz
+//jóska
+        .
+pany
+.
+experiment
+//z
+//x
+/*y*//*w*/
+;
+/*aa*//*bb*///cc
+//dd
+
+public class Main {
+    public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
+//        try (FileInputStream fisTargetFile = new FileInputStream(new File(FILENAME))) {
+//            final String content = IOUtils.toString(fisTargetFile, "UTF-8");
+//            System.out.println(content);
+//        }
+	}
+}

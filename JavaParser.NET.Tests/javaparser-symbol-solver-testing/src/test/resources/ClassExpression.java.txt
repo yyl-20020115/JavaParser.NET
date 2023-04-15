@@ -1,0 +1,8 @@
+
+class ClassExpression {
+
+	private void foo() {
+		EnumSet.noneOf(java.util.Locale.Category.class);
+	}
+
+}

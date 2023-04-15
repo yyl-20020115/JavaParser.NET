@@ -1,0 +1,4 @@
+namespace another;
+
+class String {
+}

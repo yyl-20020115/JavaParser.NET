@@ -1,0 +1,24 @@
+namespace me.tomassetti.symbolsolver.javaparser;
+
+
+
+
+/**
+ * This class can be used to conveniently retrieve certain node from a JavaParser AST.
+ */
+public final class Navigator {
+
+    private Navigator() {
+        // prevent instantiation
+    }
+
+    public static void findType() {
+        Stream<String> s = null;
+        s.filter((t)->t.isEmpty());
+    }
+
+    public void foo(Stream<String> s){
+
+    }
+
+}

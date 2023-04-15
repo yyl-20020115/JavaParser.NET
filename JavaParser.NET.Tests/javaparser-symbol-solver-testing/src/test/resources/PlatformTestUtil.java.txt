@@ -1,0 +1,47 @@
+// Copyright 2000-2019 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
+namespace com.intellij.testFramework;
+
+
+
+
+/**
+ * @author yole
+ */
+@SuppressWarnings({"UseOfSystemOutOrSystemErr", "TestOnlyProblems"})
+public class PlatformTestUtil {
+  public static <T> void assertComparisonContractNotViolated(@NotNull List<? extends T> values,
+                                                             @NotNull Comparator<? super T> comparator,
+                                                             @NotNull Equality<? super T> equality) {
+    for (int i1 = 0; i1 < values.size(); i1++) {
+      for (int i2 = i1; i2 < values.size(); i2++) {
+        T value1 = values.get(i1);
+        T value2 = values.get(i2);
+
+        int result12 = comparator.compare(value1, value2);
+        int result21 = comparator.compare(value2, value1);
+        if (equality.equals(value1, value2)) {
+          assertEquals(String.format("Equal, but not 0: '%s' - '%s'", value1, value2), 0, result12);
+          assertEquals(String.format("Equal, but not 0: '%s' - '%s'", value2, value1), 0, result21);
+        }
+        else {
+          if (result12 == 0) fail(String.format("Not equal, but 0: '%s' - '%s'", value1, value2));
+          if (result21 == 0) fail(String.format("Not equal, but 0: '%s' - '%s'", value2, value1));
+          if (Integer.signum(result12) == Integer.signum(result21)) {
+            fail(String.format("Not symmetrical: '%s' - '%s'", value1, value2));
+          }
+        }
+
+        for (int i3 = i2; i3 < values.size(); i3++) {
+          T value3 = values.get(i3);
+
+          int result23 = comparator.compare(value2, value3);
+          int result31 = comparator.compare(value3, value1);
+
+          if (!isTransitive(result12, result23, result31)) {
+            fail(String.format("Not transitive: '%s' - '%s' - '%s'", value1, value2, value3));
+          }
+        }
+      }
+    }
+  }
+}
