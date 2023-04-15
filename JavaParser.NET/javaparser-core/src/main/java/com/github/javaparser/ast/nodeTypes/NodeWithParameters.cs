@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,7 +23,7 @@ namespace com.github.javaparser.ast.nodeTypes;
 
 
 
-public interface NodeWithParameters<N extends Node> {
+public interface NodeWithParameters<N:Node> {
 
     NodeList<Parameter> getParameters();
 
@@ -33,7 +33,7 @@ public interface NodeWithParameters<N extends Node> {
 
     void tryAddImportToParentCompilationUnit(Class<?> clazz);
 
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     default N setParameter(int i, Parameter parameter) {
         getParameters().set(i, parameter);
         return (N) this;
@@ -41,48 +41,48 @@ public interface NodeWithParameters<N extends Node> {
 
     N setParameters(NodeList<Parameter> parameters);
 
-    default N addParameter(Type type, String name) {
+    default N addParameter(Type type, string name) {
         return addParameter(new Parameter(type, name));
     }
 
-    default N addParameter(Class<?> paramClass, String name) {
+    default N addParameter(Class<?> paramClass, string name) {
         tryAddImportToParentCompilationUnit(paramClass);
         return addParameter(parseType(paramClass.getSimpleName()), name);
     }
 
     /**
-     * Remember to import the class in the compilation unit yourself
+     * Remember to import the class _in the compilation unit yourself
      *
      * @param className the name of the class, ex : org.test.Foo or Foo if you added manually the import
      * @param name      the name of the parameter
      */
-    default N addParameter(String className, String name) {
+    default N addParameter(string className, string name) {
         return addParameter(parseType(className), name);
     }
 
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     default N addParameter(Parameter parameter) {
         getParameters().add(parameter);
         return (N) this;
     }
 
-    default Parameter addAndGetParameter(Type type, String name) {
+    default Parameter addAndGetParameter(Type type, string name) {
         return addAndGetParameter(new Parameter(type, name));
     }
 
-    default Parameter addAndGetParameter(Class<?> paramClass, String name) {
+    default Parameter addAndGetParameter(Class<?> paramClass, string name) {
         tryAddImportToParentCompilationUnit(paramClass);
         return addAndGetParameter(parseType(paramClass.getSimpleName()), name);
     }
 
     /**
-     * Remember to import the class in the compilation unit yourself
+     * Remember to import the class _in the compilation unit yourself
      *
      * @param className the name of the class, ex : org.test.Foo or Foo if you added manually the import
      * @param name      the name of the parameter
      * @return the {@link Parameter} created
      */
-    default Parameter addAndGetParameter(String className, String name) {
+    default Parameter addAndGetParameter(string className, string name) {
         return addAndGetParameter(parseType(className), name);
     }
 
@@ -97,7 +97,7 @@ public interface NodeWithParameters<N extends Node> {
      * @param name the name of the param
      * @return null if not found, the param found otherwise
      */
-    default Optional<Parameter> getParameterByName(String name) {
+    default Optional<Parameter> getParameterByName(string name) {
         return getParameters().stream().filter(p -> p.getNameAsString().equals(name)).findFirst();
     }
 
@@ -107,7 +107,7 @@ public interface NodeWithParameters<N extends Node> {
      * @param type the type of the param
      * @return null if not found, the param found otherwise
      */
-    default Optional<Parameter> getParameterByType(String type) {
+    default Optional<Parameter> getParameterByType(string type) {
         return getParameters().stream().filter(p -> p.getType().toString().equals(type)).findFirst();
     }
 
@@ -134,14 +134,14 @@ public interface NodeWithParameters<N extends Node> {
      *
      * @param paramTypes the types of parameters like {@code "Map&lt;Integer,String&gt;", "int"} to match
      *                   {@code void foo(Map&lt;Integer,String&gt; myMap, int number)}.
-     * @return {@code true} if all parameters match one by one, in the given order.
+     * @return {@code true} if all parameters match one by one, _in the given order.
      */
     default boolean hasParametersOfType(String... paramTypes) {
         return getParameters().stream().map(p -> p.getType().asString()).collect(toList()).equals(Arrays.asList(paramTypes));
     }
 
     /**
-     * Check if the parameters have certain types. Note that this is a match in SimpleName, so {@code java.awt.List} and
+     * Check if the parameters have certain types. Note that this is a match _in SimpleName, so {@code java.awt.List} and
      * {@code java.util.List} are identical to this algorithm. In addition, note that it is the erasure of each type
      * which is considered, so passing {@code List.class} to this method will be considered a match if this node has
      * exactly one parameter whose type is named {@code List}, regardless of whether the parameter type is declared
@@ -150,7 +150,7 @@ public interface NodeWithParameters<N extends Node> {
      *
      * @param paramTypes the types of parameters like {@code Map.class, int.class} to match
      *                   {@code void foo(Map&lt;Integer,String&gt; myMap, int number)}.
-     * @return {@code true} if all parameters match one by one, in the given order.
+     * @return {@code true} if all parameters match one by one, _in the given order.
      */
     default boolean hasParametersOfType(Class<?>... paramTypes) {
         return getParameters().stream().// if p.getType() is a class or interface type, we want to consider its erasure, i.e., if the parameter

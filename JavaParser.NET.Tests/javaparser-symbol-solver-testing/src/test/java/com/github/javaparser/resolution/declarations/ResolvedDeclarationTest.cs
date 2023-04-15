@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,11 +23,11 @@ namespace com.github.javaparser.resolution.declarations;
 
 
 
-public interface ResolvedDeclarationTest extends AssociableToASTTest {
+public interface ResolvedDeclarationTest:AssociableToASTTest {
 
     ResolvedDeclaration createValue();
 
-    @Test
+    [TestMethod]
     default void whenNameIsPresentACallForMethodGetNameShouldNotBeNull() {
         ResolvedDeclaration resolvedDeclaration = createValue();
         if (resolvedDeclaration.hasName())
@@ -36,7 +36,7 @@ public interface ResolvedDeclarationTest extends AssociableToASTTest {
             assertNull(resolvedDeclaration.getName());
     }
 
-    @Test
+    [TestMethod]
     default void whenDeclarationIsAFieldTheCallToTheMethodAsFieldShouldNotThrow() {
         ResolvedDeclaration resolvedDeclaration = createValue();
         if (resolvedDeclaration.isField())
@@ -45,7 +45,7 @@ public interface ResolvedDeclarationTest extends AssociableToASTTest {
             assertThrows(UnsupportedOperationException.class, resolvedDeclaration::asField);
     }
 
-    @Test
+    [TestMethod]
     default void whenDeclarationIsAMethodTheCallToTheMethodAsMethodShouldNotThrow() {
         ResolvedDeclaration resolvedDeclaration = createValue();
         if (resolvedDeclaration.isMethod())
@@ -54,7 +54,7 @@ public interface ResolvedDeclarationTest extends AssociableToASTTest {
             assertThrows(UnsupportedOperationException.class, resolvedDeclaration::asMethod);
     }
 
-    @Test
+    [TestMethod]
     default void whenDeclarationIsAParameterTheCallToTheMethodAsParameterShouldNotThrow() {
         ResolvedDeclaration resolvedDeclaration = createValue();
         if (resolvedDeclaration.isParameter())
@@ -63,7 +63,7 @@ public interface ResolvedDeclarationTest extends AssociableToASTTest {
             assertThrows(UnsupportedOperationException.class, resolvedDeclaration::asParameter);
     }
 
-    @Test
+    [TestMethod]
     default void whenDeclarationIsAPatternTheCallToTheMethodAsPatternShouldNotThrow() {
         ResolvedDeclaration resolvedDeclaration = createValue();
         if (resolvedDeclaration.isPattern())
@@ -72,7 +72,7 @@ public interface ResolvedDeclarationTest extends AssociableToASTTest {
             assertThrows(UnsupportedOperationException.class, resolvedDeclaration::asPattern);
     }
 
-    @Test
+    [TestMethod]
     default void whenDeclarationIsAEnumConstantTheCallToTheMethodAsEnumConstantShouldNotThrow() {
         ResolvedDeclaration resolvedDeclaration = createValue();
         if (resolvedDeclaration.isEnumConstant())
@@ -81,7 +81,7 @@ public interface ResolvedDeclarationTest extends AssociableToASTTest {
             assertThrows(UnsupportedOperationException.class, resolvedDeclaration::asEnumConstant);
     }
 
-    @Test
+    [TestMethod]
     default void whenDeclarationIsATypeTheCallToTheMethodAsTypeShouldNotThrow() {
         ResolvedDeclaration resolvedDeclaration = createValue();
         if (resolvedDeclaration.isType())
@@ -91,15 +91,15 @@ public interface ResolvedDeclarationTest extends AssociableToASTTest {
     }
 
     /**
-     * According to the documentation in {@link AssociableToAST#toAst()}
+     * According to the documentation _in {@link AssociableToAST#toAst()}
      * all the Resolved declaration most be associable to a AST.
      *
      * @see AssociableToAST#toAst()
      */
-    @Test
+    [TestMethod]
     default void declarationMostBeAssociableToAST() {
         ResolvedDeclaration resolvedDeclaration = createValue();
-        assertTrue(resolvedDeclaration instanceof AssociableToAST);
+        assertTrue(resolvedDeclaration is AssociableToAST);
     }
 
 }

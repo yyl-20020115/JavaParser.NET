@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,7 +25,7 @@ namespace com.github.javaparser.ast.expr;
 /**
  * @author Julio Vilmar Gesser
  */
-public final class InstanceOfExpr extends Expression implements NodeWithType<InstanceOfExpr> {
+public /*final*/class InstanceOfExpr:Expression implements NodeWithType<InstanceOfExpr> {
 
 	private Expression expr;
 
@@ -34,22 +34,22 @@ public final class InstanceOfExpr extends Expression implements NodeWithType<Ins
 	public InstanceOfExpr() {
 	}
 
-	public InstanceOfExpr(final Expression expr, final Type type) {
+	public InstanceOfExpr(/*final*/Expression expr, /*final*/Type type) {
 		setExpr(expr);
 		setType(type);
 	}
 
-	public InstanceOfExpr(final Range range, final Expression expr, final Type type) {
+	public InstanceOfExpr(/*final*/Range range, /*final*/Expression expr, /*final*/Type type) {
 		super(range);
 		setExpr(expr);
 		setType(type);
 	}
 
-	@Override public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+	@Override public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
 		return v.visit(this, arg);
 	}
 
-	@Override public <A> void accept(final VoidVisitor<A> v, final A arg) {
+	@Override public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
 		v.visit(this, arg);
 	}
 
@@ -62,14 +62,14 @@ public final class InstanceOfExpr extends Expression implements NodeWithType<Ins
 		return type;
 	}
 
-	public InstanceOfExpr setExpr(final Expression expr) {
+	public InstanceOfExpr setExpr(/*final*/Expression expr) {
 		this.expr = expr;
 		setAsParentNodeOf(this.expr);
 		return this;
 	}
 
 	@Override
-    public InstanceOfExpr setType(final Type type) {
+    public InstanceOfExpr setType(/*final*/Type type) {
 		this.type = type;
 		setAsParentNodeOf(this.type);
         return this;

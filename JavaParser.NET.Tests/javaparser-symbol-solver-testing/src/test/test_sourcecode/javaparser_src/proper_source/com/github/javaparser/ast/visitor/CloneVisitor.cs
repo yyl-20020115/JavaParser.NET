@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -1155,7 +1155,7 @@ public class CloneVisitor implements GenericVisitor<Node, Object> {
 		return r;
 	}
 
-    public <T extends Node> List<T> visit(List<T> _nodes, Object _arg) {
+    public <T:Node> List<T> visit(List<T> _nodes, Object _arg) {
         if (_nodes == null)
             return null;
         List<T> r = new ArrayList<T>(_nodes.size());
@@ -1167,7 +1167,7 @@ public class CloneVisitor implements GenericVisitor<Node, Object> {
         return r;
     }
 
-    protected <T extends Node> T cloneNodes(T _node, Object _arg) {
+    protected <T:Node> T cloneNodes(T _node, Object _arg) {
         if (_node == null)
             return null;
         Node r = _node.accept(this, _arg);

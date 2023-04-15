@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -31,7 +31,7 @@ namespace com.github.javaparser.ast.type;
  *
  * @author Julio Vilmar Gesser
  */
-public class PrimitiveType extends Type implements NodeWithAnnotations<PrimitiveType> {
+public class PrimitiveType:Type implements NodeWithAnnotations<PrimitiveType> {
 
     public static PrimitiveType booleanType() {
         return new PrimitiveType(Primitive.BOOLEAN);
@@ -76,17 +76,17 @@ public class PrimitiveType extends Type implements NodeWithAnnotations<Primitive
         FLOAT("Float", "F"),
         DOUBLE("Double", "D");
 
-        final String nameOfBoxedType;
+        /*final*/string nameOfBoxedType;
 
-        final String descriptor;
+        /*final*/string descriptor;
 
-        private String codeRepresentation;
+        private string codeRepresentation;
 
         /*
         * Returns the Primitive constant corresponding to the specified type name (e.g. "boolean", "int",
         * "long").
         */
-        public static Optional<Primitive> byTypeName(String name) {
+        public static Optional<Primitive> byTypeName(string name) {
             for (Primitive primitive : values()) {
                 if (primitive.name().toLowerCase().equals(name)) {
                     return Optional.of(primitive);
@@ -99,7 +99,7 @@ public class PrimitiveType extends Type implements NodeWithAnnotations<Primitive
         * Returns the Primitive constant corresponding to the specified boxed type name (e.g. "Boolean", "Integer",
         * "Long").
         */
-        public static Optional<Primitive> byBoxedTypeName(String simpleName) {
+        public static Optional<Primitive> byBoxedTypeName(string simpleName) {
             return Optional.ofNullable(unboxMap.getOrDefault(simpleName, null));
         }
 
@@ -107,22 +107,22 @@ public class PrimitiveType extends Type implements NodeWithAnnotations<Primitive
             return parseClassOrInterfaceType(nameOfBoxedType);
         }
 
-        public String asString() {
+        public string asString() {
             return codeRepresentation;
         }
 
-        public String toDescriptor() {
+        public string toDescriptor() {
             return descriptor;
         }
 
-        Primitive(String nameOfBoxedType, String descriptor) {
+        Primitive(string nameOfBoxedType, string descriptor) {
             this.nameOfBoxedType = nameOfBoxedType;
             this.codeRepresentation = name().toLowerCase();
             this.descriptor = descriptor;
         }
     }
 
-    static final HashMap<String, Primitive> unboxMap = new HashMap<>();
+    static /*final*/HashMap<String, Primitive> unboxMap = new HashMap<>();
 
     static {
         for (Primitive unboxedType : Primitive.values()) {
@@ -136,19 +136,19 @@ public class PrimitiveType extends Type implements NodeWithAnnotations<Primitive
         this(null, Primitive.INT, new NodeList<>());
     }
 
-    public PrimitiveType(final Primitive type) {
+    public PrimitiveType(/*final*/Primitive type) {
         this(null, type, new NodeList<>());
     }
 
-    @AllFieldsConstructor
-    public PrimitiveType(final Primitive type, NodeList<AnnotationExpr> annotations) {
+    //@AllFieldsConstructor
+    public PrimitiveType(/*final*/Primitive type, NodeList<AnnotationExpr> annotations) {
         this(null, type, annotations);
     }
 
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public PrimitiveType(TokenRange tokenRange, Primitive type, NodeList<AnnotationExpr> annotations) {
         super(tokenRange, annotations);
         setType(type);
@@ -156,18 +156,18 @@ public class PrimitiveType extends Type implements NodeWithAnnotations<Primitive
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Primitive getType() {
         return type;
     }
@@ -177,12 +177,12 @@ public class PrimitiveType extends Type implements NodeWithAnnotations<Primitive
     }
 
     @Override
-    public String toDescriptor() {
+    public string toDescriptor() {
         return type.toDescriptor();
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public PrimitiveType setType(final Primitive type) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public PrimitiveType setType(/*final*/Primitive type) {
         assertNotNull(type);
         if (type == this.type) {
             return this;
@@ -193,7 +193,7 @@ public class PrimitiveType extends Type implements NodeWithAnnotations<Primitive
     }
 
     @Override
-    public String asString() {
+    public string asString() {
         return type.asString();
     }
 
@@ -203,31 +203,31 @@ public class PrimitiveType extends Type implements NodeWithAnnotations<Primitive
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public PrimitiveType clone() {
         return (PrimitiveType) accept(new CloneVisitor(), null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public PrimitiveTypeMetaModel getMetaModel() {
         return JavaParserMetaModel.primitiveTypeMetaModel;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isPrimitiveType() {
         return true;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public PrimitiveType asPrimitiveType() {
         return this;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifPrimitiveType(Consumer<PrimitiveType> action) {
         action.accept(this);
     }
@@ -238,7 +238,7 @@ public class PrimitiveType extends Type implements NodeWithAnnotations<Primitive
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<PrimitiveType> toPrimitiveType() {
         return Optional.of(this);
     }

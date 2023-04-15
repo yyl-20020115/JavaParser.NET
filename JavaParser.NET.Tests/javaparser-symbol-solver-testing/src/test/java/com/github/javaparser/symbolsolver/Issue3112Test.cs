@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,7 +25,7 @@ namespace com.github.javaparser.symbolsolver;
 
 public class Issue3112Test {
 
-    @Test
+    [TestMethod]
     public void test0() {
         ParserConfiguration config = new ParserConfiguration();
         CombinedTypeSolver cts = new CombinedTypeSolver();
@@ -33,7 +33,7 @@ public class Issue3112Test {
         config.setSymbolResolver(new JavaSymbolSolver(cts));
         StaticJavaParser.setConfiguration(config);
 
-        String str = "public class MyClass {\n" +
+        string str = "public class MyClass {\n" +
                 "   class Inner1 {\n" +
                 "       class Inner2 {\n" +
                 "       }\n" +
@@ -47,7 +47,7 @@ public class Issue3112Test {
         local.forEach(lcl -> assertFalse(lcl.getType().resolve().asReferenceType().getTypeDeclaration().get().isInterface()));
     }
 
-    @Test
+    [TestMethod]
     public void test1() {
         ParserConfiguration config = new ParserConfiguration();
         CombinedTypeSolver cts = new CombinedTypeSolver();
@@ -55,7 +55,7 @@ public class Issue3112Test {
         config.setSymbolResolver(new JavaSymbolSolver(cts));
         StaticJavaParser.setConfiguration(config);
 
-        String str = "public class MyClass {\n" +
+        string str = "public class MyClass {\n" +
                 "   class Inner1 {\n" +
                 "       class Inner2 {\n" +
                 "           class Inner3 {\n" +

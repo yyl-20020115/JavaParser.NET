@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,19 +28,19 @@ namespace com.github.javaparser.printer;
  */
 public class XmlPrinter {
 
-    private final boolean outputNodeType;
+    private /*final*/boolean outputNodeType;
 
     public XmlPrinter(boolean outputNodeType) {
         this.outputNodeType = outputNodeType;
     }
 
-    public String output(Node node) {
+    public string output(Node node) {
         StringBuilder output = new StringBuilder();
         output(node, "root", 0, output);
         return output.toString();
     }
 
-    public void output(Node node, String name, int level, StringBuilder builder) {
+    public void output(Node node, string name, int level, StringBuilder builder) {
         assertNotNull(node);
         NodeMetaModel metaModel = node.getMetaModel();
         List<PropertyMetaModel> allPropertyMetaModels = metaModel.getAllPropertyMetaModels();
@@ -62,11 +62,11 @@ public class XmlPrinter {
             }
         }
         for (PropertyMetaModel subListMetaModel : subLists) {
-            NodeList<? extends Node> subList = (NodeList<? extends Node>) subListMetaModel.getValue(node);
+            NodeList<?:Node> subList = (NodeList<?:Node>) subListMetaModel.getValue(node);
             if (subList != null && !subList.isEmpty()) {
-                String listName = subListMetaModel.getName();
+                string listName = subListMetaModel.getName();
                 builder.append("<").append(listName).append(">");
-                String singular = listName.substring(0, listName.length() - 1);
+                string singular = listName.substring(0, listName.length() - 1);
                 for (Node subListNode : subList) {
                     output(subListNode, singular, level + 1, builder);
                 }
@@ -76,15 +76,15 @@ public class XmlPrinter {
         builder.append(close(name));
     }
 
-    private static String close(String name) {
+    private static string close(string name) {
         return "</" + name + ">";
     }
 
-    private static String attribute(String name, String value) {
+    private static string attribute(string name, string value) {
         return " " + name + "='" + value + "'";
     }
 
     public static void print(Node node) {
-        System.out.println(new XmlPrinter(true).output(node));
+        System._out.println(new XmlPrinter(true).output(node));
     }
 }

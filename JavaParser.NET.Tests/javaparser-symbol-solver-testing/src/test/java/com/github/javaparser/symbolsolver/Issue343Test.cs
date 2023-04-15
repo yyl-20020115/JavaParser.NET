@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -29,7 +29,7 @@ namespace com.github.javaparser.symbolsolver;
  *
  * https://github.com/javaparser/javasymbolsolver/issues/343
  */
-class Issue343Test extends AbstractResolutionTest {
+class Issue343Test:AbstractResolutionTest {
 
     private TypeSolver typeResolver;
     private Solver symbolSolver;
@@ -44,33 +44,33 @@ class Issue343Test extends AbstractResolutionTest {
         symbolSolver = new SymbolSolver(typeResolver);
     }
 
-    @Test
+    [TestMethod]
     void resolveStringLiteralOutsideAST() {
         assertTrue(symbolSolver.classToResolvedType(String.class).equals(getExpressionType(typeResolver, new StringLiteralExpr(""))));
     }
 
-    @Test
+    [TestMethod]
     void resolveIntegerLiteralOutsideAST() {
         assertEquals(symbolSolver.classToResolvedType(int.class), getExpressionType(typeResolver, new IntegerLiteralExpr(2)));
     }
 
-    @Test
+    [TestMethod]
     void toResolveDoubleWeNeedTheAST() {
         assertThrows(UnsolvedSymbolException.class, () -> getExpressionType(typeResolver, parseExpression("new Double[]{2.0d, 3.0d}[1]")));
     }
 
 
-    @Test
+    [TestMethod]
     void toResolveFloatWeNeedTheAST() {
         assertThrows(UnsolvedSymbolException.class, () -> getExpressionType(typeResolver, parseExpression("new Float[]{2.0d, 3.0d}[1]")));
     }
 
-    @Test
+    [TestMethod]
     void resolveMethodCallOnStringLiteralOutsideAST() {
     	assertTrue(symbolSolver.classToResolvedType(int.class).equals(getExpressionType(typeResolver, new MethodCallExpr(new StringLiteralExpr("hello"), "length"))));
     }
 
-    @Test
+    [TestMethod]
     void resolveLocaleOutsideAST() {
         assertThrows(IllegalStateException.class, () -> getExpressionType(typeResolver, new FieldAccessExpr(new NameExpr("Locale"), "US")));
     }

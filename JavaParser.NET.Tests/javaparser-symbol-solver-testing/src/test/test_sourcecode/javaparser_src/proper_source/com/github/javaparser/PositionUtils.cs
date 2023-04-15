@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,17 +24,17 @@ namespace com.github.javaparser;
 
 
 
-public final class PositionUtils {
+public /*final*/class PositionUtils {
 
     private PositionUtils() {
         // prevent instantiation
     }
 
-    public static <T extends Node> void sortByBeginPosition(List<T> nodes){
+    public static <T:Node> void sortByBeginPosition(List<T> nodes){
         sortByBeginPosition(nodes, false);
     }
 
-    public static <T extends Node> void sortByBeginPosition(List<T> nodes, final boolean ignoringAnnotations){
+    public static <T:Node> void sortByBeginPosition(List<T> nodes, /*final*/boolean ignoringAnnotations){
         Collections.sort(nodes, new Comparator<Node>() {
             @Override
             public int compare(Node o1, Node o2) {
@@ -70,7 +70,7 @@ public final class PositionUtils {
     }
 
     public static AnnotationExpr getLastAnnotation(Node node) {
-        if (node instanceof AnnotableNode){
+        if (node is AnnotableNode){
             List<AnnotationExpr> annotations = new LinkedList<AnnotationExpr>();
             annotations.addAll(((AnnotableNode) node).getAnnotations());
             if (annotations.size()==0){
@@ -93,13 +93,13 @@ public final class PositionUtils {
     }
 
     private static Node beginNodeWithoutConsideringAnnotations(Node node) {
-        if (node instanceof MethodDeclaration) {
+        if (node is MethodDeclaration) {
             MethodDeclaration casted = (MethodDeclaration) node;
             return casted.getType();
-        } else if (node instanceof FieldDeclaration) {
+        } else if (node is FieldDeclaration) {
             FieldDeclaration casted = (FieldDeclaration) node;
             return casted.getType();
-        } else if (node instanceof ClassOrInterfaceDeclaration) {
+        } else if (node is ClassOrInterfaceDeclaration) {
             ClassOrInterfaceDeclaration casted = (ClassOrInterfaceDeclaration) node;
             return casted.getNameExpr();
         }  else {
@@ -116,7 +116,7 @@ public final class PositionUtils {
         }
         // if the node is contained, but it comes immediately after the annotations,
         // let's not consider it contained
-        if (container instanceof AnnotableNode){
+        if (container is AnnotableNode){
             int bl = beginLineWithoutConsideringAnnotation(container);
             int bc = beginColumnWithoutConsideringAnnotation(container);
             if (bl>contained.getBeginLine()) return false;

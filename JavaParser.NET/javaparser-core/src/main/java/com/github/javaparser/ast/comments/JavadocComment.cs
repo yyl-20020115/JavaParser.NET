@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,35 +28,35 @@ namespace com.github.javaparser.ast.comments;
  *
  * @author Julio Vilmar Gesser
  */
-public class JavadocComment extends Comment {
+public class JavadocComment:Comment {
 
     public JavadocComment() {
         this(null, "empty");
     }
 
-    @AllFieldsConstructor
-    public JavadocComment(String content) {
+    //@AllFieldsConstructor
+    public JavadocComment(string content) {
         this(null, content);
     }
 
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
-    public JavadocComment(TokenRange tokenRange, String content) {
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    public JavadocComment(TokenRange tokenRange, string content) {
         super(tokenRange, content);
         customInitialization();
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
@@ -65,48 +65,48 @@ public class JavadocComment extends Comment {
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public JavadocComment clone() {
         return (JavadocComment) accept(new CloneVisitor(), null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public JavadocCommentMetaModel getMetaModel() {
         return JavaParserMetaModel.javadocCommentMetaModel;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isJavadocComment() {
         return true;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public JavadocComment asJavadocComment() {
         return this;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifJavadocComment(Consumer<JavadocComment> action) {
         action.accept(this);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<JavadocComment> toJavadocComment() {
         return Optional.of(this);
     }
     
     @Override
-	public String getHeader() {
+	public string getHeader() {
 		return "/**";
 	}
 	
 	@Override
-	public String getFooter() {
+	public string getFooter() {
 		return "*/";
 	}
 }

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,36 +25,36 @@ namespace com.github.javaparser.ast.expr;
 /**
  * @author Julio Vilmar Gesser
  */
-public final class MemberValuePair extends Node implements NodeWithName<MemberValuePair> {
+public /*final*/class MemberValuePair:Node implements NodeWithName<MemberValuePair> {
 
-	private String name;
+	private string name;
 
 	private Expression value;
 
 	public MemberValuePair() {
 	}
 
-	public MemberValuePair(final String name, final Expression value) {
+	public MemberValuePair(/*final*/string name, /*final*/Expression value) {
 		setName(name);
 		setValue(value);
 	}
 
-	public MemberValuePair(final Range range, final String name, final Expression value) {
+	public MemberValuePair(/*final*/Range range, /*final*/string name, /*final*/Expression value) {
 		super(range);
 		setName(name);
 		setValue(value);
 	}
 
-	@Override public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+	@Override public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
 		return v.visit(this, arg);
 	}
 
-	@Override public <A> void accept(final VoidVisitor<A> v, final A arg) {
+	@Override public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
 		v.visit(this, arg);
 	}
 
 	@Override
-	public String getName() {
+	public string getName() {
 		return name;
 	}
 
@@ -63,12 +63,12 @@ public final class MemberValuePair extends Node implements NodeWithName<MemberVa
 	}
 
     @Override
-    public MemberValuePair setName(final String name) {
+    public MemberValuePair setName(/*final*/string name) {
 		this.name = name;
         return this;
 	}
 
-	public MemberValuePair setValue(final Expression value) {
+	public MemberValuePair setValue(/*final*/Expression value) {
 		this.value = value;
 		setAsParentNodeOf(this.value);
 		return this;

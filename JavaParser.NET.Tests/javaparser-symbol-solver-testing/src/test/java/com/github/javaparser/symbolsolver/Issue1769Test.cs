@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,15 +23,15 @@ namespace com.github.javaparser.symbolsolver;
 
 
 
-public class Issue1769Test extends AbstractResolutionTest {
+public class Issue1769Test:AbstractResolutionTest {
 
-    @Test()
-    void testExtendsNestedclass() throws IOException {
+    [TestMethod]()
+    void testExtendsNestedclass(){
         Path rootSourceDir = adaptPath("src/test/resources/issue1769");
         
-        String src =
+        string src =
                 "import foo.OtherClass;\n" +
-                "public class MyClass extends OtherClass.InnerClass {\n" +
+                "public class MyClass:OtherClass.InnerClass {\n" +
                 "}\n";
 
         ParserConfiguration config = new ParserConfiguration();
@@ -47,11 +47,11 @@ public class Issue1769Test extends AbstractResolutionTest {
 
     }
     
-    @Test()
-    void testInstanciateNestedClass() throws IOException {
+    [TestMethod]()
+    void testInstanciateNestedClass(){
         Path rootSourceDir = adaptPath("src/test/resources/issue1769");
         
-        String src =
+        string src =
                 "import foo.OtherClass;\n" +
                 "public class MyClass{\n" +
                 "  public InnerClass myTest() {\n" + 

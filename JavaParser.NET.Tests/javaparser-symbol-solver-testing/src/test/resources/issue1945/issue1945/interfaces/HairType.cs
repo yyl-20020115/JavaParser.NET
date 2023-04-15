@@ -1,6 +1,6 @@
 namespace issue1945.interfaces;
 
-public interface HairType<R extends HairTypeRenderer<?>> {
+public interface HairType<R:HairTypeRenderer<?>> {
 	
 	R getRenderer();
 	

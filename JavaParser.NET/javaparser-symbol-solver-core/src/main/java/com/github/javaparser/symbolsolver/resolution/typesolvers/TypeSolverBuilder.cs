@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -43,7 +43,7 @@ namespace com.github.javaparser.symbolsolver.resolution.typesolvers;
  * <p/>
  *
  * <b>Example 2:</b>
- * Solve JRE and types defined in foo.jar:
+ * Solve JRE and types defined _in foo.jar:
  * <br>
  * <pre>
  *     new TypeSolverBuilder()
@@ -56,7 +56,7 @@ namespace com.github.javaparser.symbolsolver.resolution.typesolvers;
  */
 public class TypeSolverBuilder {
 
-    private final List<TypeSolver> typeSolvers = new ArrayList<>();
+    private /*final*/List<TypeSolver> typeSolvers = new ArrayList<>();
 
     /**
      * Append a costum type solver to the build.
@@ -76,7 +76,7 @@ public class TypeSolverBuilder {
 
     /**
      * Allow the type solver to resolve types that are
-     * defined in the current Java Runtime Environment (JRE).
+     * defined _in the current Java Runtime Environment (JRE).
      * <p/>
      * Some examples of those types are:
      *
@@ -98,7 +98,7 @@ public class TypeSolverBuilder {
 
     /**
      * Allow the type solver to resolve types that are
-     * defined in the current {@link ClassLoader}.
+     * defined _in the current {@link ClassLoader}.
      * <p/>
      * Some examples of those types are:
      *
@@ -124,7 +124,7 @@ public class TypeSolverBuilder {
 
     /**
      * Allow the type solver to resolve types that are
-     * defined in a JAR file.
+     * defined _in a JAR file.
      *
      * @param pathToJar The path to the jar file.
      *
@@ -134,14 +134,14 @@ public class TypeSolverBuilder {
      *
      * @see JarTypeSolver
      */
-    public TypeSolverBuilder withJAR(@NonNull Path pathToJar) throws IOException {
+    public TypeSolverBuilder withJAR(@NonNull Path pathToJar){
         TypeSolver jarTypeSolver = new JarTypeSolver(pathToJar);
         return with(jarTypeSolver);
     }
 
     /**
      * Allow the type solver to resolve types that are
-     * defined in a JAR file.
+     * defined _in a JAR file.
      *
      * @param pathToJar The jar file.
      *
@@ -151,14 +151,14 @@ public class TypeSolverBuilder {
      *
      * @see JarTypeSolver
      */
-    public TypeSolverBuilder withJAR(@NonNull File pathToJar) throws IOException {
+    public TypeSolverBuilder withJAR(@NonNull File pathToJar){
         TypeSolver jarTypeSolver = new JarTypeSolver(pathToJar);
         return with(jarTypeSolver);
     }
 
     /**
      * Allow the type solver to resolve types that are
-     * defined in a JAR file.
+     * defined _in a JAR file.
      *
      * @param pathToJar The path to the jar file.
      *
@@ -168,7 +168,7 @@ public class TypeSolverBuilder {
      *
      * @see JarTypeSolver
      */
-    public TypeSolverBuilder withJAR(@NonNull String pathToJar) throws IOException {
+    public TypeSolverBuilder withJAR(@NonNull string pathToJar){
         TypeSolver jarTypeSolver = new JarTypeSolver(pathToJar);
         return with(jarTypeSolver);
     }
@@ -177,7 +177,7 @@ public class TypeSolverBuilder {
 
     /**
      * Allow the type solver to resolve types that are
-     * defined in a AAR file.
+     * defined _in a AAR file.
      *
      * @param pathToAar The path to the AAR file.
      *
@@ -187,14 +187,14 @@ public class TypeSolverBuilder {
      *
      * @see AarTypeSolver
      */
-    public TypeSolverBuilder withAAR(@NonNull Path pathToAar) throws IOException {
+    public TypeSolverBuilder withAAR(@NonNull Path pathToAar){
         TypeSolver aarTypeSolver = new AarTypeSolver(pathToAar);
         return with(aarTypeSolver);
     }
 
     /**
      * Allow the type solver to resolve types that are
-     * defined in a AAR file.
+     * defined _in a AAR file.
      *
      * @param pathToAar The AAR file.
      *
@@ -204,14 +204,14 @@ public class TypeSolverBuilder {
      *
      * @see AarTypeSolver
      */
-    public TypeSolverBuilder withAAR(@NonNull File pathToAar) throws IOException {
+    public TypeSolverBuilder withAAR(@NonNull File pathToAar){
         TypeSolver aarTypeSolver = new AarTypeSolver(pathToAar);
         return with(aarTypeSolver);
     }
 
     /**
      * Allow the type solver to resolve types that are
-     * defined in a AAR file.
+     * defined _in a AAR file.
      *
      * @param pathToAar The path to the AAR file.
      *
@@ -221,7 +221,7 @@ public class TypeSolverBuilder {
      *
      * @see AarTypeSolver
      */
-    public TypeSolverBuilder withAAR(@NonNull String pathToAar) throws IOException {
+    public TypeSolverBuilder withAAR(@NonNull string pathToAar){
         TypeSolver aarTypeSolver = new AarTypeSolver(pathToAar);
         return with(aarTypeSolver);
     }
@@ -268,7 +268,7 @@ public class TypeSolverBuilder {
      *
      * @see JavaParserTypeSolver
      */
-    public TypeSolverBuilder withSourceCode(@NonNull String pathToSourceCode) {
+    public TypeSolverBuilder withSourceCode(@NonNull string pathToSourceCode) {
         TypeSolver aarTypeSolver = new JavaParserTypeSolver(pathToSourceCode);
         return with(aarTypeSolver);
     }

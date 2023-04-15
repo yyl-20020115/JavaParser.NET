@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,20 +27,20 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.contexts;
 /**
  * @author Federico Tomassetti
  */
-public class SwitchEntryContext extends AbstractJavaParserContext<SwitchEntry> {
+public class SwitchEntryContext:AbstractJavaParserContext<SwitchEntry> {
 
     public SwitchEntryContext(SwitchEntry wrappedNode, TypeSolver typeSolver) {
         super(wrappedNode, typeSolver);
     }
 
     @Override
-    public SymbolReference<? extends ResolvedValueDeclaration> solveSymbol(String name) {
+    public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name) {
         SwitchStmt switchStmt = (SwitchStmt) demandParentNode(wrappedNode);
         ResolvedType type = JavaParserFacade.get(typeSolver).getType(switchStmt.getSelector());
         if (type.isReferenceType() && type.asReferenceType().getTypeDeclaration().isPresent()) {
             ResolvedReferenceTypeDeclaration typeDeclaration = type.asReferenceType().getTypeDeclaration().get();
             if (typeDeclaration.isEnum()) {
-                if (type instanceof ReferenceTypeImpl) {
+                if (type is ReferenceTypeImpl) {
                     ReferenceTypeImpl referenceType = (ReferenceTypeImpl) type;
                     if(referenceType.getTypeDeclaration().isPresent()) {
                         ResolvedReferenceTypeDeclaration typeUsageTypeDeclaration = referenceType.getTypeDeclaration().get();
@@ -59,16 +59,16 @@ public class SwitchEntryContext extends AbstractJavaParserContext<SwitchEntry> {
             }
         }
 
-        // look for declaration in this and previous switch entry statements
+        // look for declaration _in this and previous switch entry statements
         for (SwitchEntry seStmt : switchStmt.getEntries()) {
             for (Statement stmt : seStmt.getStatements()) {
                 SymbolDeclarator symbolDeclarator = JavaParserFactory.getSymbolDeclarator(stmt, typeSolver);
-                SymbolReference<? extends ResolvedValueDeclaration> symbolReference = solveWith(symbolDeclarator, name);
+                SymbolReference<?:ResolvedValueDeclaration> symbolReference = solveWith(symbolDeclarator, name);
                 if (symbolReference.isSolved()) {
                     return symbolReference;
                 }
             }
-            // once we reach this switch entry statement, stop: we do not want to look in later switch entry statements
+            // once we reach this switch entry statement, stop: we do not want to look _in later switch entry statements
             if (seStmt == wrappedNode) {
                 break;
             }
@@ -78,7 +78,7 @@ public class SwitchEntryContext extends AbstractJavaParserContext<SwitchEntry> {
     }
 
     @Override
-    public SymbolReference<ResolvedMethodDeclaration> solveMethod(String name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
+    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
         // TODO: Document why staticOnly is forced to be false.
         return solveMethodInParentContext(name, argumentsTypes, false);
     }

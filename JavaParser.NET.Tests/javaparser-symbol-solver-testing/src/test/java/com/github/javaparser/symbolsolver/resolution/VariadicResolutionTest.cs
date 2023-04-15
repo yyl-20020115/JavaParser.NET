@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,9 +24,9 @@ namespace com.github.javaparser.symbolsolver.resolution;
 
 
 
-class VariadicResolutionTest extends AbstractResolutionTest {
+class VariadicResolutionTest:AbstractResolutionTest {
 
-    @Test
+    [TestMethod]
     void issue7() {
         CompilationUnit cu = parseSample("Generics_issue7");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "SomeCollection");
@@ -42,7 +42,7 @@ class VariadicResolutionTest extends AbstractResolutionTest {
         assertEquals("java.util.List<java.lang.Long>", type.describe());
     }
 
-    @Test
+    [TestMethod]
     void methodCallWithReferenceTypeAsVaridicArgumentIsSolved() {
         CompilationUnit cu = parseSample("MethodCalls");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "MethodCalls");
@@ -56,7 +56,7 @@ class VariadicResolutionTest extends AbstractResolutionTest {
         assertEquals("variadicMethod", callee.getName());
     }
 
-    @Test
+    [TestMethod]
     void resolveVariadicMethodWithGenericArgument() {
         CompilationUnit cu = parseSample("MethodCalls");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "MethodCalls");
@@ -70,7 +70,7 @@ class VariadicResolutionTest extends AbstractResolutionTest {
         assertEquals("variadicWithGenericArg", callee.getName());
     }
 
-    @Test
+    [TestMethod]
     void selectMostSpecificVariadic() {
         CompilationUnit cu = parseSample("MethodCalls");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "MethodCalls");
@@ -96,7 +96,7 @@ class VariadicResolutionTest extends AbstractResolutionTest {
         });
     }
 
-    @Test
+    [TestMethod]
     void getDeclaredConstructorTest() {
         CompilationUnit cu = parseSample("MethodCalls");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "MethodCalls");

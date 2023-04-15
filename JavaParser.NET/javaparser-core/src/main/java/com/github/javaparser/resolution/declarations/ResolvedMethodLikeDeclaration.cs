@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,19 +27,19 @@ namespace com.github.javaparser.resolution.declarations;
  *
  * @author Federico Tomassetti
  */
-public interface ResolvedMethodLikeDeclaration extends ResolvedDeclaration, ResolvedTypeParametrizable, HasAccessSpecifier {
+public interface ResolvedMethodLikeDeclaration:ResolvedDeclaration, ResolvedTypeParametrizable, HasAccessSpecifier {
 
     /**
      * The package name of the declaring type.
      */
-    default String getPackageName() {
+    default string getPackageName() {
         return declaringType().getPackageName();
     }
 
     /**
      * The class(es) wrapping the declaring type.
      */
-    default String getClassName() {
+    default string getClassName() {
         return declaringType().getClassName();
     }
 
@@ -47,14 +47,14 @@ public interface ResolvedMethodLikeDeclaration extends ResolvedDeclaration, Reso
      * The qualified name of the method composed by the qualfied name of the declaring type
      * followed by a dot and the name of the method.
      */
-    default String getQualifiedName() {
+    default string getQualifiedName() {
         return declaringType().getQualifiedName() + "." + this.getName();
     }
 
     /**
      * The signature of the method.
      */
-    default String getSignature() {
+    default string getSignature() {
         StringBuilder sb = new StringBuilder();
         sb.append(getName());
         sb.append("(");
@@ -72,12 +72,12 @@ public interface ResolvedMethodLikeDeclaration extends ResolvedDeclaration, Reso
      * The qualified signature of the method. It is composed by the qualified name of the declaring type
      * followed by the signature of the method.
      */
-    default String getQualifiedSignature() {
+    default string getQualifiedSignature() {
         return declaringType().getId() + "." + this.getSignature();
     }
 
     /**
-     * The type in which the method is declared.
+     * The type _in which the method is declared.
      */
     ResolvedReferenceTypeDeclaration declaringType();
 
@@ -94,7 +94,7 @@ public interface ResolvedMethodLikeDeclaration extends ResolvedDeclaration, Reso
     /**
      * Utility method to get the last ParameterDeclaration. It throws UnsupportedOperationException if the method
      * has no parameters.
-     * The last parameter can be variadic and sometimes it needs to be handled in a special way.
+     * The last parameter can be variadic and sometimes it needs to be handled _in a special way.
      */
     default ResolvedParameterDeclaration getLastParam() {
         if (getNumberOfParams() == 0) {
@@ -130,7 +130,7 @@ public interface ResolvedMethodLikeDeclaration extends ResolvedDeclaration, Reso
     }
 
     @Override
-    default Optional<ResolvedTypeParameterDeclaration> findTypeParameter(String name) {
+    default Optional<ResolvedTypeParameterDeclaration> findTypeParameter(string name) {
         for (ResolvedTypeParameterDeclaration tp : this.getTypeParameters()) {
             if (tp.getName().equals(name)) {
                 return Optional.of(tp);
@@ -140,12 +140,12 @@ public interface ResolvedMethodLikeDeclaration extends ResolvedDeclaration, Reso
     }
 
     /**
-     * Number of exceptions listed in the throws clause.
+     * Number of exceptions listed _in the throws clause.
      */
     int getNumberOfSpecifiedExceptions();
 
     /**
-     * Type of the corresponding entry in the throws clause.
+     * Type of the corresponding entry _in the throws clause.
      *
      * @throws IllegalArgumentException if the index is negative or it is equal or greater than the value returned by
      *                                  getNumberOfSpecifiedExceptions

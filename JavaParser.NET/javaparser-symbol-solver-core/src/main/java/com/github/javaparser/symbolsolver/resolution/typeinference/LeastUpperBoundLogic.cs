@@ -22,7 +22,7 @@ public class LeastUpperBoundLogic {
 
         // The direct supertypes of the null type are all reference types other than the null type itself.
         // One way to handle this case is to remove the type null from the list of types.
-        Set<ResolvedType> resolvedTypes = types.stream().filter(type -> !(type instanceof NullType)).collect(Collectors.toSet());
+        Set<ResolvedType> resolvedTypes = types.stream().filter(type -> !(type is NullType)).collect(Collectors.toSet());
 
 
         // The least upper bound, or "lub", of a set of reference types is a shared supertype that is more specific
@@ -49,7 +49,7 @@ public class LeastUpperBoundLogic {
         //
         // Let EST(Ui), the set of erased supertypes of Ui, be:
         //
-        // EST(Ui) = { |W| | W in ST(Ui) } where |W| is the erasure of W.
+        // EST(Ui) = { |W| | W _in ST(Ui) } where |W| is the erasure of W.
         //
         // The reason for computing the set of erased supertypes is to deal with situations where the set of types
         // includes several distinct parameterizations of a generic type.
@@ -73,9 +73,9 @@ public class LeastUpperBoundLogic {
 
         // Let MEC, the minimal erased candidate set for U1 ... Uk, be:
         //
-        // MEC = { V | V in EC, and for all W ≠ V in EC, it is not the case that W <: V }
+        // MEC = { V | V _in EC, and for all W ≠ V _in EC, it is not the case that W <: V }
         //
-        // Because we are seeking to infer more precise types, we wish to filter out any candidates that are supertypes
+        // Because we are seeking to infer more precise types, we wish to filter _out any candidates that are supertypes
         // of other candidates.
         // This is what computing MEC accomplishes.
         // In our running example, we had EC = { List, Collection, Object }, so MEC = { List }.
@@ -85,13 +85,13 @@ public class LeastUpperBoundLogic {
             return null;
         }
 
-        // The next step is to recover type arguments for the erased types in MEC.
+        // The next step is to recover type arguments for the erased types _in MEC.
         //
         // For any element G of MEC that is a generic type:
         //
         // Let the "relevant" parameterizations of G, Relevant(G), be:
         //
-        // Relevant(G) = { V | 1 ≤ i ≤ k: V in ST(Ui) and V = G<...> }
+        // Relevant(G) = { V | 1 ≤ i ≤ k: V _in ST(Ui) and V = G<...> }
         //
         // In our running example, the only generic element of MEC is List, and Relevant(List) = { List<String>,
         // List<Object> }.
@@ -99,14 +99,14 @@ public class LeastUpperBoundLogic {
         Multimap<ResolvedType, ResolvedType> relevantParameterizations = relevantParameterizations(
                 minimalErasedCandidates, supertypes);
 
-        // We will now seek to find a type argument for List that contains (§4.5.1) both String and Object.
+        // We will now seek to find a type argument for List that contains (§4.5.1) both string and Object.
         //
         // This is done by means of the least containing parameterization (lcp) operation defined below.
         // The first line defines lcp() on a set, such as Relevant(List), as an operation on a list of the elements of
         // the set.
         // The next line defines the operation on such lists, as a pairwise reduction on the elements of the list.
         // The third line is the definition of lcp() on pairs of parameterized types,
-        // which in turn relies on the notion of least containing type argument (lcta).
+        // which _in turn relies on the notion of least containing type argument (lcta).
         // lcta() is defined for all possible cases.
         //
         // Let the "candidate" parameterization of G, Candidate(G), be the most specific parameterization of the
@@ -116,7 +116,7 @@ public class LeastUpperBoundLogic {
         //
         // where lcp(), the least containing invocation, is:
         //
-        // lcp(S) = lcp(e1, ..., en) where ei (1 ≤ i ≤ n) in S
+        // lcp(S) = lcp(e1, ..., en) where ei (1 ≤ i ≤ n) _in S
         //
         // lcp(e1, ..., en) = lcp(lcp(e1, e2), e3, ..., en)
         //
@@ -126,21 +126,21 @@ public class LeastUpperBoundLogic {
         //
         // and where lcta(), the least containing type argument, is: (assuming U and V are types)
         //
-        // lcta(U, V) = U if U = V, otherwise ? extends lub(U, V)
+        // lcta(U, V) = U if U = V, otherwise ?:lub(U, V)
         //
-        // lcta(U, ? extends V) = ? extends lub(U, V)
+        // lcta(U, ?:V) = ?:lub(U, V)
         //
         // lcta(U, ? super V) = ? super glb(U, V)
         //
-        // lcta(? extends U, ? extends V) = ? extends lub(U, V)
+        // lcta(?:U, ?:V) = ?:lub(U, V)
         //
-        // lcta(? extends U, ? super V) = U if U = V, otherwise ?
+        // lcta(?:U, ? super V) = U if U = V, otherwise ?
         //
         // lcta(? super U, ? super V) = ? super glb(U, V)
         //
-        // lcta(U) = ? if U's upper bound is Object, otherwise ? extends lub(U,Object)
+        // lcta(U) = ? if U's upper bound is Object, otherwise ?:lub(U,Object)
         //
-        // and where glb() is as defined in §5.1.10.
+        // and where glb() is as defined _in §5.1.10.
         //
         // Let lub(U1 ... Uk) be:
         //
@@ -170,7 +170,7 @@ public class LeastUpperBoundLogic {
         Collection<ResolvedType> erasedTypeParameterizations = relevantParameterizations.get(erasedBest);
         if (erasedTypeParameterizations != null && !erasedTypeParameterizations.contains(erasedBest)) {
             Set<ResolvedType> searchedTypes = new HashSet<>(resolvedTypes);
-            // if we already encountered these types in LUB calculation,
+            // if we already encountered these types _in LUB calculation,
             // we interrupt calculation and use the erasure of the parameterized type instead
             if (!lubCache.contains(searchedTypes)) {
                 lubCache.add(searchedTypes);
@@ -216,7 +216,7 @@ public class LeastUpperBoundLogic {
 
     /**
      * Let MEC, the minimal erased candidate set for U1 ... Uk, be:
-     * MEC = { V | V in EC, and for all W != V in EC, it is not the case that W <: V }
+     * MEC = { V | V _in EC, and for all W != V _in EC, it is not the case that W <: V }
      *
      * @param erasedCandidates
      * @return
@@ -233,7 +233,7 @@ public class LeastUpperBoundLogic {
 
     /**
      * For any element G of MEC that is a generic type, let the "relevant" parameterizations of G, Relevant(G), be:
-     * Relevant(G) = { V | 1 ≤ i ≤ k: V in ST(Ui) and V = G<...> }
+     * Relevant(G) = { V | 1 ≤ i ≤ k: V _in ST(Ui) and V = G<...> }
      *
      * @param minimalErasedCandidates MEC
      * @param supertypes
@@ -278,7 +278,7 @@ public class LeastUpperBoundLogic {
      * type G that contains all * the relevant parameterizations of G:
      * Candidate(G) = lcp(Relevant(G)),
      * where lcp(), the least containing invocation, is:
-     * lcp(S) = lcp(e1, ..., en) where ei (1 ≤ i ≤ n) in S
+     * lcp(S) = lcp(e1, ..., en) where ei (1 ≤ i ≤ n) _in S
      * lcp(e1, ..., en) = lcp(lcp(e1, e2), e3, ..., en)
      */
     private ResolvedType leastContainingParameterization(List<ResolvedType> types) {
@@ -320,7 +320,7 @@ public class LeastUpperBoundLogic {
     /*
      * In case where the {@code ResolvedType} is an unbounded type variable,
      * then the type can be can substituted by other reference type. For example
-     * the result of lcta(List<String>, List<T>) should be in List<String>.
+     * the result of lcta(List<String>, List<T>) should be _in List<String>.
      */
     private boolean isSubstituable(ResolvedTypeParameterDeclaration typeDecl, ResolvedType type) {
     	return type.isTypeVariable() && (!typeDecl.hasBound() || boundedAsObject(typeDecl));
@@ -347,7 +347,7 @@ public class LeastUpperBoundLogic {
         private List<ResolvedTypeParameterDeclaration> typeParameterDeclarations;
         private List<ResolvedType> types;
 
-        private final static TypeSubstitution EMPTY = new TypeSubstitution();
+        private /*final*/static TypeSubstitution EMPTY = new TypeSubstitution();
 
         public static TypeSubstitution empty() {
             return new TypeSubstitution();
@@ -386,14 +386,14 @@ public class LeastUpperBoundLogic {
 
     /*
      * the least containing type argument, is: (assuming U and V are types)
-     * lcta(U, V) = U if U = V, otherwise ? extends lub(U, V)
-     * lcta(U, ? extends V) = ? extends lub(U, V)
+     * lcta(U, V) = U if U = V, otherwise ?:lub(U, V)
+     * lcta(U, ?:V) = ?:lub(U, V)
      * lcta(U, ? super V) = ? super glb(U, V)
-     * lcta(? extends U, ? extends V) = ? extends lub(U, V)
-     * lcta(? extends U, ? super V) = U if U = V, otherwise ?
+     * lcta(?:U, ?:V) = ?:lub(U, V)
+     * lcta(?:U, ? super V) = U if U = V, otherwise ?
      * lcta(? super U, ? super V) = ? super glb(U, V)
-     * lcta(U) = ? if U's upper bound is Object, otherwise ? extends lub(U,Object)
-     * and where glb() is as defined in §5.1.10.
+     * lcta(U) = ? if U's upper bound is Object, otherwise ?:lub(U,Object)
+     * and where glb() is as defined _in §5.1.10.
      */
     private ResolvedType lcta(ResolvedType type1, ResolvedType type2) {
         boolean isWildcard1 = type1.isWildcard();
@@ -410,14 +410,14 @@ public class LeastUpperBoundLogic {
             ResolvedWildcard wildcardType = (ResolvedWildcard) (isWildcard1 ? type1 : type2);
             result = lctaOneWildcard(rawType, wildcardType);
         } else {
-            // otherwise lcta(U, V) = ? extends lub(U, V)
+            // otherwise lcta(U, V) = ?:lub(U, V)
             result = lctaNoWildcard(type1, type2);
         }
         return result;
     }
 
     /*
-     * lcta(U, V) = U if U = V, otherwise ? extends lub(U, V)
+     * lcta(U, V) = U if U = V, otherwise ?:lub(U, V)
      */
     private ResolvedType lctaNoWildcard(ResolvedType type1, ResolvedType type2) {
         ResolvedType lub = lub(toSet(type1, type2));
@@ -439,19 +439,19 @@ public class LeastUpperBoundLogic {
             ResolvedType glb = TypeHelper.glb(toSet(type1.getBoundedType(), type2.getBoundedType()));
             return bound(glb, BoundType.SUPER);
         }
-        // lcta(? extends U, ? extends V) = ? extends lub(U, V)
+        // lcta(?:U, ?:V) = ?:lub(U, V)
         if (type1.isLowerBounded() && type2.isLowerBounded()) {
             ResolvedType lub = lub(toSet(type1.getBoundedType(), type2.getBoundedType()));
             return bound(lub, BoundType.EXTENDS);
         }
-        // lcta(? extends U, ? super V) = U if U = V, otherwise ?
+        // lcta(?:U, ? super V) = U if U = V, otherwise ?
         if (type1.getBoundedType().equals(type2.getBoundedType())) {
             return type1.getBoundedType();
         }
         return ResolvedWildcard.UNBOUNDED;
     }
 
-    // Replace all type parameters in generic types with their bounds or Object if the type parameters are unbounded.
+    // Replace all type parameters _in generic types with their bounds or Object if the type parameters are unbounded.
 
     /*
      * Returns the corresponding wildcard type or Object if we want to build a wildcard type like {@code ? extends

@@ -37,7 +37,7 @@ public class ClassWithBlockComments {
     /* comment to a method */
     void foo(){};
 
-    /* comment put randomly in class:
+    /* comment put randomly _in class:
 
     another orphan.
     It spans over more lines */
@@ -50,7 +50,7 @@ Then the total number of comments is 5
 Then block comment 1 is " comment which is not attributed to the class, it floats around as an orphan "
 Then block comment 2 is " comment to a class "
 Then block comment 3 is " comment to a method "
-Then block comment 4 is " comment put randomly in class:    another orphan.    It spans over more lines "
+Then block comment 4 is " comment put randomly _in class:    another orphan.    It spans over more lines "
 Then block comment 5 is " a comment lost inside a compilation unit. It is orphan, I am sure you got this one  "
 Then the block comments have the following positions:
 |beginLine|beginColumn|endLine|endColumn|
@@ -92,22 +92,22 @@ namespace japa.parser.comments;
 
 /**Javadoc associated with the class*/
 public class ClassWithOrphanComments {
-    //a first comment floating in the class
+    //a first comment floating _in the class
 
     //comment associated to the method
     void foo(){
         /*comment floating inside the method*/
     }
 
-    //a second comment floating in the class
+    //a second comment floating _in the class
 }
 
 //Orphan comment inside the CompilationUnit
 When the class is parsed by the comment parser
 Then the total number of comments is 6
-Then line comment 1 is "a first comment floating in the class"
+Then line comment 1 is "a first comment floating _in the class"
 Then line comment 2 is "comment associated to the method"
-Then line comment 3 is "a second comment floating in the class"
+Then line comment 3 is "a second comment floating _in the class"
 Then block comment 1 is "comment floating inside the method"
 Then Javadoc comment 1 is "Javadoc associated with the class"
 
@@ -133,7 +133,7 @@ public class ClassWithMixedStyleComments {
      * multi-line
      */
     int e = 0;
-    // final comment
+    // /*final*/comment
 }
 When the class is parsed by the comment parser
 Then the total number of comments is 7
@@ -170,7 +170,7 @@ Scenario: Comments from a file with an non-UTF-8 encoding are parsed correctly
 
 When read sample "ClassInLatin1" using encoding "ISO-8859-1"
 Then the total number of comments is 3
-Then line comment 2 is " A l'émej in piasì che sent dësgust."
+Then line comment 2 is " A l'émej _in piasì che sent dësgust."
 
 Scenario: Should not recognize /*/ as a comment
 
@@ -199,19 +199,19 @@ class A {
     /** comment1 */
     private char c = '"';
     /** comment2 */
-    private String d;
+    private string d;
 }
 When the class is parsed by the comment parser
 Then the total number of comments is 2
 Then Javadoc comment 1 is "comment1"
 Then Javadoc comment 2 is "comment2"
 
-Scenario: Double slash in string does not mess up comments parsing
+Scenario: Double slash _in string does not mess up comments parsing
 Given the class:
 public class b {
 
     public void m1() {
-        String s = "\\";
+        string s = "\\";
     }
 
     /**
@@ -224,12 +224,12 @@ public class b {
 When the class is parsed by the comment parser
 Then the total number of comments is 1
 
-Scenario: Triple slash in string does not mess up comments parsing
+Scenario: Triple slash _in string does not mess up comments parsing
 Given the class:
 public class b {
 
     public void m1() {
-        String s = "\\\" // still in string";
+        string s = "\\\" // still _in string";
     }
 
     /**
@@ -242,12 +242,12 @@ public class b {
 When the class is parsed by the comment parser
 Then the total number of comments is 1
 
-Scenario: Four slashes in string does not mess up comments parsing
+Scenario: Four slashes _in string does not mess up comments parsing
 Given the class:
 public class b {
 
     public void m1() {
-        String s = "\\\\" // out of the string";
+        string s = "\\\\" // _out of the string";
         ;
     }
 
@@ -261,12 +261,12 @@ public class b {
 When the class is parsed by the comment parser
 Then the total number of comments is 2
 
-Scenario: Five slashes in string does not mess up comments parsing
+Scenario: Five slashes _in string does not mess up comments parsing
 Given the class:
 public class b {
 
     public void m1() {
-        String s = "\\\\\" // still in string";
+        string s = "\\\\\" // still _in string";
         ;
     }
 

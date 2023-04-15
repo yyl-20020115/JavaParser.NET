@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -48,7 +48,7 @@ public enum NameCategory {
     /**
      * Certain category include two or more unambiguous categories.
      * These ambiguous categories are recognized solely through a syntactic process. In order to disambiguate them
-     * a semantic process (i.e., consider the symbols which are actually visible in a given context) is needed.
+     * a semantic process (i.e., consider the symbols which are actually visible _in a given context) is needed.
      */
     public boolean isNeedingDisambiguation() {
         return needDisambiguation;
@@ -57,7 +57,7 @@ public enum NameCategory {
     /**
      * Is the given name acceptable for the given category?
      */
-    public boolean isNameAcceptable(String name) {
+    public boolean isNameAcceptable(string name) {
         return this != TYPE_NAME || !name.equals("var");
     }
 

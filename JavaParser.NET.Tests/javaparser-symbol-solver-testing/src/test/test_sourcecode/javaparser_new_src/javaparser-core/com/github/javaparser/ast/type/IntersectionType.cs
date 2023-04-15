@@ -4,17 +4,17 @@ namespace com.github.javaparser.ast.type;
 
 /**
  * Represents a set of types. A given value of this type has to be assignable to at all of the element types.
- * As of Java 8 it is used in casts or while expressing bounds for generic types.
+ * As of Java 8 it is used _in casts or while expressing bounds for generic types.
  *
  * For example:
- * public class A&gt;T extends Serializable &amp; Cloneable&lt; { }
+ * public class A&gt;T:Serializable &amp; Cloneable&lt; { }
  *
  * Or:
  * void foo((Serializable &amp; Cloneable)myObject);
  *
  * @since 3.0.0
  */
-public class IntersectionType extends Type<IntersectionType> implements NodeWithAnnotations<IntersectionType> {
+public class IntersectionType:Type<IntersectionType> implements NodeWithAnnotations<IntersectionType> {
 
     private List<ReferenceType> elements;
 

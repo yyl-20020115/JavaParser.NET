@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,52 +24,52 @@ namespace com.github.javaparser.ast.body;
 
 
 class TypeDeclarationTest {
-    @Test
+    [TestMethod]
     void qualifiedNameOfClassInDefaultPackage() {
         assertFQN("X", parseCompilationUnit("class X{ }"));
     }
 
-    @Test
+    [TestMethod]
     void qualifiedNameOfClassInAPackage() {
         assertFQN("a.b.c.X", parseCompilationUnit("package a.b.c; class X{}"));
     }
 
-    @Test
+    [TestMethod]
     void qualifiedNameOfInterfaceInAPackage() {
         assertFQN("a.b.c.X", parseCompilationUnit("package a.b.c; interface X{}"));
     }
 
-    @Test
+    [TestMethod]
     void qualifiedNameOfEnumInAPackage() {
         assertFQN("a.b.c.X", parseCompilationUnit("package a.b.c; enum X{}"));
     }
 
-    @Test
+    [TestMethod]
     void qualifiedNameOfAnnotationInAPackage() {
         assertFQN("a.b.c.X", parseCompilationUnit("package a.b.c; @interface X{}"));
     }
 
-    @Test
+    [TestMethod]
     void qualifiedNameOfNestedClassInAPackage() {
         assertFQN("a.b.c.Outer,a.b.c.Outer.Nested", parseCompilationUnit("package a.b.c; class Outer{ class Nested {} }"));
     }
 
-    @Test
+    [TestMethod]
     void qualifiedNameOfAnonymousClassCantBeQueried() {
         assertFQN("X", parseCompilationUnit("class X{ int aaa() {new Object(){};} }"));
     }
 
-    @Test
+    [TestMethod]
     void qualifiedNameOfLocalClassIsEmpty() {
         assertFQN("X,?", parseCompilationUnit("class X{ int aaa() {class Local {}} }"));
     }
 
-    @Test
+    [TestMethod]
     void qualifiedNameOfDetachedClassIsEmpty() {
         assertFQN("?", parseBodyDeclaration("class X{}"));
     }
 
-    void assertFQN(String fqn, Node node) {
+    void assertFQN(string fqn, Node node) {
         assertEquals(fqn, node.findAll(TypeDeclaration.class).stream()
                 .map(td -> (TypeDeclaration<?>) td)
                 .map(td -> td.getFullyQualifiedName().orElse("?"))

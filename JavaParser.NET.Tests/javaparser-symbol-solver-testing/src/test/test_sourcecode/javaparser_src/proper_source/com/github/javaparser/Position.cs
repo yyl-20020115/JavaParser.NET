@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,8 +26,8 @@ public class Position {
     private int line;
     private int column;
 
-    public static final Position ABSOLUTE_START = new Position(Node.ABSOLUTE_BEGIN_LINE,-1);
-    public static final Position ABSOLUTE_END = new Position(Node.ABSOLUTE_END_LINE,-1);
+    public static /*final*/Position ABSOLUTE_START = new Position(Node.ABSOLUTE_BEGIN_LINE,-1);
+    public static /*final*/Position ABSOLUTE_END = new Position(Node.ABSOLUTE_END_LINE,-1);
 
     public static Position beginOf(Node node){
         return new Position(node.getBeginLine(),node.getBeginColumn());

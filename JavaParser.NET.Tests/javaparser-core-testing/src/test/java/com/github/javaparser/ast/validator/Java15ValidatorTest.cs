@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,7 +25,7 @@ namespace com.github.javaparser.ast.validator;
 
 class Java15ValidatorTest {
 
-    private final JavaParser javaParser = new JavaParser(new ParserConfiguration().setLanguageLevel(JAVA_15));
+    private /*final*/JavaParser javaParser = new JavaParser(new ParserConfiguration().setLanguageLevel(JAVA_15));
 
     // TODO: Confirm PERMITTED - text blocks
 
@@ -38,16 +38,16 @@ class Java15ValidatorTest {
 
         @Nested
         class RecordAsIdentifierPermitted {
-            @Test
+            [TestMethod]
             void recordUsedAsClassName() {
-                String s = "public class record {}";
+                string s = "public class record {}";
                 ParseResult<CompilationUnit> result = javaParser.parse(COMPILATION_UNIT, provider(s));
                 TestUtils.assertNoProblems(result);
             }
 
-            @Test
+            [TestMethod]
             void recordUsedAsFieldName() {
-                String s = "class X { int record; }";
+                string s = "class X { int record; }";
                 ParseResult<CompilationUnit> result = javaParser.parse(COMPILATION_UNIT, provider(s));
                 TestUtils.assertNoProblems(result);
             }
@@ -55,9 +55,9 @@ class Java15ValidatorTest {
 
         @Nested
         class RecordDeclarationForbidden {
-            @Test
+            [TestMethod]
             void recordDeclaration() {
-                String s = "record X() { }";
+                string s = "record X() { }";
                 ParseResult<CompilationUnit> result = javaParser.parse(COMPILATION_UNIT, provider(s));
                 TestUtils.assertProblems(result, "(line 1,col 1) Record Declarations are not supported.");
             }

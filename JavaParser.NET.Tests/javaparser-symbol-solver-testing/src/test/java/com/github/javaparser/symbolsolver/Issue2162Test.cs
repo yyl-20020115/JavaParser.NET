@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,7 +28,7 @@ namespace com.github.javaparser.symbolsolver;
 /**
  * @see <a href="https://github.com/javaparser/javaparser/issues/2162">https://github.com/javaparser/javaparser/issues/2162</a>
  */
-public class Issue2162Test extends AbstractSymbolResolutionTest {
+public class Issue2162Test:AbstractSymbolResolutionTest {
 
     private JavaParser javaParser;
     private CompilationUnit cu;
@@ -46,19 +46,19 @@ public class Issue2162Test extends AbstractSymbolResolutionTest {
         javaParser = new JavaParser(configuration);
 
         //language=JAVA
-        String src = "" +
+        string src = "" +
             "import java.awt.*;\n" +
             "\n" +
-            "abstract class Screen <V extends Component> {\n" +
+            "abstract class Screen <V:Component> {\n" +
             "    abstract V getView();\n" +
             "}\n" +
             "\n" +
-            "class D extends Component {\n" +
+            "class D:Component {\n" +
             "    void getTest() {\n" +
             "    }\n" +
             "}\n" +
             "\n" +
-            "class B extends Screen<D> {\n" +
+            "class B:Screen<D> {\n" +
             "    @Override\n" +
             "    D getView() {\n" +
             "        return new D();\n" +
@@ -70,11 +70,11 @@ public class Issue2162Test extends AbstractSymbolResolutionTest {
             "        B b1 = new B();\n" +
             "        b1.getView(); // b1.getView() -> B#getView(), overriding Screen#getView() -> returns object of type D.\n" +
             "        \n" +
-            "        // Note that if `b2.getView` is parsed as Screen#getView (as B extends Screen), it will return type `V extends Component` thus will fail to locate the method `Component#getTest()` \n" +
+            "        // Note that if `b2.getView` is parsed as Screen#getView (as B:Screen), it will return type `V:Component` thus will fail to locate the method `Component#getTest()` \n" +
             "        B b2 = new B();\n" +
             "        b2.getView().getTest(); // b2.getView() -> returns object of type D, per above // D#getTest returns void.\n" +
             "        \n" +
-            "        // This part is expected to fail as D#getView does not exist (where D is of type `V extends Component`)\n" +
+            "        // This part is expected to fail as D#getView does not exist (where D is of type `V:Component`)\n" +
             "        B b3 = new B();\n" +
             "        b3.getView().getView(); // b3.getView() -> returns object of type D, per above // D#getView doesn't exist, thus resolution will fail.\n" +
             "    }\n" +
@@ -88,7 +88,7 @@ public class Issue2162Test extends AbstractSymbolResolutionTest {
         );
 
 
-//        parseResult.getProblems().forEach(problem -> System.out.println("problem.getVerboseMessage() = " + problem.getVerboseMessage()));
+//        parseResult.getProblems().forEach(problem -> System._out.println("problem.getVerboseMessage() = " + problem.getVerboseMessage()));
 
         assertTrue(parseResult.isSuccessful());
         assertEquals(0, parseResult.getProblems().size(), "Expected zero errors when attempting to parse the input code.");
@@ -104,7 +104,7 @@ public class Issue2162Test extends AbstractSymbolResolutionTest {
     }
 
 
-    @Test
+    [TestMethod]
     public void doTest_withJavaParserFacade_explicit() {
         JavaParserFacade javaParserFacade = JavaParserFacade.get(this.typeSolver);
 

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -31,7 +31,7 @@ public class JavadocDescription {
 
     private List<JavadocDescriptionElement> elements;
 
-    public static JavadocDescription parseText(String text) {
+    public static JavadocDescription parseText(string text) {
         JavadocDescription instance = new JavadocDescription();
         int index = 0;
         Pair<Integer, Integer> nextInlineTagPos;
@@ -48,12 +48,12 @@ public class JavadocDescription {
         return instance;
     }
 
-    private static Pair<Integer, Integer> indexOfNextInlineTag(String text, int start) {
+    private static Pair<Integer, Integer> indexOfNextInlineTag(string text, int start) {
         int index = text.indexOf("{@", start);
         if (index == -1) {
             return null;
         }
-        // we are interested only in complete inline tags
+        // we are interested only _in complete inline tags
         int closeIndex = text.indexOf("}", index);
         if (closeIndex == -1) {
             return null;
@@ -78,7 +78,7 @@ public class JavadocDescription {
         return this.elements;
     }
 
-    public String toText() {
+    public string toText() {
         StringBuilder sb = new StringBuilder();
         elements.forEach(e -> sb.append(e.toText()));
         return sb.toString();
@@ -104,7 +104,7 @@ public class JavadocDescription {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "JavadocDescription{" + "elements=" + elements + '}';
     }
 }

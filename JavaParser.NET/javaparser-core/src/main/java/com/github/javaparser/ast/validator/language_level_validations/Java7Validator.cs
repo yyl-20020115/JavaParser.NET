@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,9 +24,9 @@ namespace com.github.javaparser.ast.validator.language_level_validations;
 /**
  * This validator validates according to Java 7 syntax rules.
  */
-public class Java7Validator extends Java6Validator {
+public class Java7Validator:Java6Validator {
 
-    final SingleNodeTypeValidator<TryStmt> tryWithLimitedResources = new SingleNodeTypeValidator<>(TryStmt.class, (n, reporter) -> {
+    /*final*/SingleNodeTypeValidator<TryStmt> tryWithLimitedResources = new SingleNodeTypeValidator<>(TryStmt.class, (n, reporter) -> {
         if (n.getCatchClauses().isEmpty() && n.getResources().isEmpty() && !n.getFinallyBlock().isPresent()) {
             reporter.report(n, "Try has no finally, no catch, and no resources.");
         }
@@ -37,7 +37,7 @@ public class Java7Validator extends Java6Validator {
         }
     });
 
-    private final SingleNodeTypeValidator<UnionType> multiCatch = new SingleNodeTypeValidator<>(UnionType.class, (n, reporter) -> {
+    private /*final*/SingleNodeTypeValidator<UnionType> multiCatch = new SingleNodeTypeValidator<>(UnionType.class, (n, reporter) -> {
         // Case "0 elements" is caught elsewhere.
         if (n.getElements().size() == 1) {
             reporter.report(n, "Union type (multi catch) must have at least two elements.");

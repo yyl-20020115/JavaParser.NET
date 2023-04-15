@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,9 +24,9 @@ namespace com.github.javaparser.modules;
 
 
 class ModuleDeclarationTest {
-    public static final JavaParser javaParser = new JavaParser(new ParserConfiguration().setLanguageLevel(JAVA_9));
+    public static /*final*/JavaParser javaParser = new JavaParser(new ParserConfiguration().setLanguageLevel(JAVA_9));
 
-    private CompilationUnit parse(String code) {
+    private CompilationUnit parse(string code) {
         ParseResult<CompilationUnit> result = javaParser.parse(ParseStart.COMPILATION_UNIT, provider(code));
         if(!result.isSuccessful()){
             System.err.println(result);
@@ -34,14 +34,14 @@ class ModuleDeclarationTest {
         return result.getResult().get();
     }
 
-    @Test
+    [TestMethod]
     void moduleInfoKeywordsAreSeenAsIdentifiers() {
         CompilationUnit cu = parse("class module { }");
         JavaToken moduleToken = cu.getClassByName("module").get().getName().getTokenRange().get().getBegin();
         assertEquals(IDENTIFIER, moduleToken.getKind());
     }
 
-    @Test
+    [TestMethod]
     void issue988RequireTransitiveShouldRequireAModuleCalledTransitive() {
         CompilationUnit cu = parse("module X { requires transitive; }");
         ModuleRequiresDirective requiresTransitive = (ModuleRequiresDirective) cu.getModule().get().getDirectives().get(0);
@@ -49,7 +49,7 @@ class ModuleDeclarationTest {
         assertEquals(IDENTIFIER, requiresTransitive.getName().getTokenRange().get().getBegin().getKind());
     }
 
-    @Test
+    [TestMethod]
     void jlsExample1() {
         CompilationUnit cu = parse(
                 "@Foo(1) @Foo(2) @Bar " +
@@ -100,7 +100,7 @@ class ModuleDeclarationTest {
 
     }
 
-    @Test
+    [TestMethod]
     void jlsExample2HasAnOpenModule() {
         CompilationUnit cu = parse("open module M.N {}");
 
@@ -109,7 +109,7 @@ class ModuleDeclarationTest {
         assertTrue(module.isOpen());
     }
 
-    @Test
+    [TestMethod]
     void testPrettyPrinting() {
         CompilationUnit cu = parse(
                 "@Foo(1) @Foo(2) @Bar " +
@@ -148,7 +148,7 @@ class ModuleDeclarationTest {
 
     }
 
-    @Test
+    [TestMethod]
     void testCsmPrinting() {
         CompilationUnit cu = parse(
                 "@Foo(1) @Foo(2) @Bar " +
@@ -187,7 +187,7 @@ class ModuleDeclarationTest {
 
     }
 
-    @Test
+    [TestMethod]
     void fluentInterface() {
         ModuleDeclaration moduleDeclaration = new CompilationUnit()
                 .setModule("com.laamella.base")
@@ -222,7 +222,7 @@ class ModuleDeclarationTest {
                 "}\n", moduleDeclaration.toString());
     }
     
-    @Test
+    [TestMethod]
     void testModifierRequire() {
         ModuleDeclaration moduleDeclaration = new CompilationUnit()
                 .setModule("com.laamella.base")
@@ -231,7 +231,7 @@ class ModuleDeclarationTest {
         assertTrue(moduleRequiresStmt.isTransitive());
     }
     
-    @Test
+    [TestMethod]
     void testModifierStatic() {
         ModuleDeclaration moduleDeclaration = new CompilationUnit()
                 .setModule("com.laamella.base")

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,9 +24,9 @@ namespace com.github.javaparser.symbolsolver.resolution.typesolvers;
 
 
 
-class JavaParserTypeSolverTest extends AbstractTypeSolverTest<JavaParserTypeSolver> {
+class JavaParserTypeSolverTest:AbstractTypeSolverTest<JavaParserTypeSolver> {
 
-    private static final Supplier<JavaParserTypeSolver> JAVA_PARSER_PROVIDER = () -> {
+    private static /*final*/Supplier<JavaParserTypeSolver> JAVA_PARSER_PROVIDER = () -> {
         Path src = adaptPath("src/test/test_sourcecode/javaparser_new_src/javaparser-core");
         return new JavaParserTypeSolver(src);
     };
@@ -36,7 +36,7 @@ class JavaParserTypeSolverTest extends AbstractTypeSolverTest<JavaParserTypeSolv
     }
 
     @Disabled // Unsure why this test is disabled -- passes locally.
-    @Test
+    [TestMethod]
     void containsLocationInStorage() {
         JavaParserTypeSolver typeSolver = new JavaParserTypeSolver(
                 CodeGenerationUtils.mavenModuleRoot(JavaParserTypeSolver.class).resolve("src/main/java"),
@@ -50,8 +50,8 @@ class JavaParserTypeSolverTest extends AbstractTypeSolverTest<JavaParserTypeSolv
         assertEquals("JavaParserTypeSolver.java", wrappedNode.findCompilationUnit().get().getStorage().get().getFileName());
     }
 
-    @Test
-    void folderTraversalDoesNotKeepFolderHandlesHostage(@TempDir Path tempDir) throws IOException {
+    [TestMethod]
+    void folderTraversalDoesNotKeepFolderHandlesHostage(@TempDir Path tempDir){
         File folder = tempDir.resolve("folder").toFile();
         assertTrue(folder.mkdirs());
 
@@ -63,7 +63,7 @@ class JavaParserTypeSolverTest extends AbstractTypeSolverTest<JavaParserTypeSolv
     }
 
 
-    @Test
+    [TestMethod]
     public void givenJavaParserTypeSolver_tryToSolveClass_expectSuccess() {
         Path src = adaptPath("src/test/test_sourcecode/javaparser_new_src/javaparser-core");
         JavaParserTypeSolver typeSolver = new JavaParserTypeSolver(src);
@@ -75,7 +75,7 @@ class JavaParserTypeSolverTest extends AbstractTypeSolverTest<JavaParserTypeSolv
         assertTrue(x.getCorrespondingDeclaration().isClass());
     }
 
-    @Test
+    [TestMethod]
     public void givenJavaParserTypeSolver_tryToSolveClassWithGeneric_expectSuccess() {
         Path src = adaptPath("src/test/test_sourcecode/javaparser_new_src/javaparser-core");
         JavaParserTypeSolver typeSolver = new JavaParserTypeSolver(src);
@@ -87,7 +87,7 @@ class JavaParserTypeSolverTest extends AbstractTypeSolverTest<JavaParserTypeSolv
         assertTrue(x.getCorrespondingDeclaration().isClass());
     }
 
-    @Test
+    [TestMethod]
     public void givenJavaParserTypeSolver_tryToSolveEnum_expectSuccess() {
         Path src = adaptPath("src/test/test_sourcecode/javaparser_new_src/javaparser-core");
         JavaParserTypeSolver typeSolver = new JavaParserTypeSolver(src);
@@ -99,7 +99,7 @@ class JavaParserTypeSolverTest extends AbstractTypeSolverTest<JavaParserTypeSolv
         assertTrue(x.getCorrespondingDeclaration().isEnum());
     }
 
-    @Test
+    [TestMethod]
     public void givenJavaParserTypeSolver_tryToSolveInterface_expectSuccess() {
         Path src = adaptPath("src/test/test_sourcecode/javaparser_new_src/javaparser-core");
         JavaParserTypeSolver typeSolver = new JavaParserTypeSolver(src);
@@ -111,7 +111,7 @@ class JavaParserTypeSolverTest extends AbstractTypeSolverTest<JavaParserTypeSolv
         assertTrue(x.getCorrespondingDeclaration().isInterface());
     }
 
-    @Test
+    [TestMethod]
     public void givenJavaParserTypeSolver_tryToSolveInterfaceWithGeneric_expectSuccess() {
         Path src = adaptPath("src/test/test_sourcecode/javaparser_new_src/javaparser-core");
         JavaParserTypeSolver typeSolver = new JavaParserTypeSolver(src);
@@ -123,7 +123,7 @@ class JavaParserTypeSolverTest extends AbstractTypeSolverTest<JavaParserTypeSolv
         assertTrue(x.getCorrespondingDeclaration().isInterface());
     }
     
-    @Test
+    [TestMethod]
     public void givenJavaParserTypeSolver_tryToSolveAnUnexpectedSourceFileName_expectSuccess() {
         Path src = adaptPath("src/test/test_sourcecode");
         JavaParserTypeSolver typeSolver = new JavaParserTypeSolver(src);
@@ -142,10 +142,10 @@ class JavaParserTypeSolverTest extends AbstractTypeSolverTest<JavaParserTypeSolv
     void testTryToSolveTypeWithMultipleThreads() {
         class StressRunnable implements Runnable {
 
-            private final String typeToSolve;
-            private final JavaParserTypeSolver javaParserTypeSolver;
+            private /*final*/string typeToSolve;
+            private /*final*/JavaParserTypeSolver javaParserTypeSolver;
 
-            StressRunnable(String typeToSolve, JavaParserTypeSolver javaParserTypeSolver) {
+            StressRunnable(string typeToSolve, JavaParserTypeSolver javaParserTypeSolver) {
                 this.typeToSolve = typeToSolve;
                 this.javaParserTypeSolver = javaParserTypeSolver;
             }

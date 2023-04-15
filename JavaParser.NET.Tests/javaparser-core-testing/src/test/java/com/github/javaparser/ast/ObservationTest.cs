@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,9 +25,9 @@ namespace com.github.javaparser.ast;
 
 public class ObservationTest {
 
-    @Test
+    [TestMethod]
     void registerSubTree() {
-        String code = "class A { int f; void foo(int p) { return 'z'; }}";
+        string code = "class A { int f; void foo(int p) { return 'z'; }}";
         CompilationUnit cu = parse(code);
         List<String> changes = new ArrayList<>();
         AstObserver observer = new AstObserverAdapter() {
@@ -55,9 +55,9 @@ public class ObservationTest {
                 "Parameter.name changed from p to myParam");
     }
 
-    @Test
+    [TestMethod]
     void registerWithJustNodeMode() {
-        String code = "class A { int f; void foo(int p) { return 'z'; }}";
+        string code = "class A { int f; void foo(int p) { return 'z'; }}";
         CompilationUnit cu = parse(code);
         List<String> changes = new ArrayList<>();
         AstObserver observer = new AstObserverAdapter() {
@@ -83,9 +83,9 @@ public class ObservationTest {
         assertThat(changes).containsExactlyInAnyOrder("ClassOrInterfaceDeclaration.name changed from A to MyCoolClass");
     }
 
-    @Test
+    [TestMethod]
     void registerWithNodeAndExistingDescendantsMode() {
-        String code = "class A { int f; void foo(int p) { return 'z'; }}";
+        string code = "class A { int f; void foo(int p) { return 'z'; }}";
         CompilationUnit cu = parse(code);
         List<String> changes = new ArrayList<>();
         AstObserver observer = new AstObserverAdapter() {
@@ -119,9 +119,9 @@ public class ObservationTest {
                 "Parameter.name changed from p to myParam");
     }
 
-    @Test
+    [TestMethod]
     void registerWithSelfPropagatingMode() {
-        String code = "class A { int f; void foo(int p) { return 'z'; }}";
+        string code = "class A { int f; void foo(int p) { return 'z'; }}";
         CompilationUnit cu = parse(code);
         List<String> changes = new ArrayList<>();
         AstObserver observer = new AstObserverAdapter() {
@@ -158,9 +158,9 @@ public class ObservationTest {
                 "VariableDeclarator.initializer changed from null to 0");
     }
 
-    @Test
+    [TestMethod]
     void deleteAParameterTriggerNotifications() {
-        String code = "class A { void foo(int p) { }}";
+        string code = "class A { void foo(int p) { }}";
         CompilationUnit cu = parse(code);
         List<String> changes = new ArrayList<>();
         AstObserver observer = new AstObserverAdapter() {
@@ -176,9 +176,9 @@ public class ObservationTest {
         assertThat(changes).containsExactlyInAnyOrder("removing [int p] from index 0");
     }
 
-    @Test
+    [TestMethod]
     void deleteClassNameDoesNotTriggerNotifications() {
-        String code = "class A { void foo(int p) { }}";
+        string code = "class A { void foo(int p) { }}";
         CompilationUnit cu = parse(code);
         List<String> changes = new ArrayList<>();
         AstObserver observer = new AstObserverAdapter() {
@@ -195,9 +195,9 @@ public class ObservationTest {
         assertThat(changes).isEmpty();
     }
 
-    @Test
+    [TestMethod]
     void deleteMethodBodyDoesTriggerNotifications() {
-        String code = "class A { void foo(int p) { }}";
+        string code = "class A { void foo(int p) { }}";
         CompilationUnit cu = parse(code);
         List<String> changes = new ArrayList<>();
         AstObserver observer = new AstObserverAdapter() {

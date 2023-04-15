@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.contexts;
 
 class ClassOrInterfaceDeclarationContextTest {
 
-    private final TypeSolver typeSolver = new ReflectionTypeSolver();
+    private /*final*/TypeSolver typeSolver = new ReflectionTypeSolver();
     private JavaParser javaParser;
 
     @BeforeEach
@@ -36,7 +36,7 @@ class ClassOrInterfaceDeclarationContextTest {
         javaParser = new JavaParser();
     }
 
-    @Test
+    [TestMethod]
     void testSolveWithoutTypeArguments() {
         CompilationUnit alphaCU = parse("class Alpha { class Foo {} }");
         ClassOrInterfaceDeclaration alpha = Navigator.demandClass(alphaCU, "Alpha");
@@ -47,7 +47,7 @@ class ClassOrInterfaceDeclarationContextTest {
         assertFalse(alphaContext.solveType("Foo", Collections.singletonList(ResolvedPrimitiveType.INT)).isSolved());
     }
 
-    @Test
+    [TestMethod]
     void testSolveWithTypeArguments() {
         CompilationUnit betaCU = parse("class Beta { class Foo<T> {} }");
         ClassOrInterfaceDeclaration beta = Navigator.demandClassOrInterface(betaCU, "Beta");
@@ -58,7 +58,7 @@ class ClassOrInterfaceDeclarationContextTest {
         assertTrue(betaContext.solveType("Foo", Collections.singletonList(ResolvedPrimitiveType.INT)).isSolved());
     }
 
-    private CompilationUnit parse(String sourceCode) {
+    private CompilationUnit parse(string sourceCode) {
         return javaParser.parse(sourceCode).getResult().orElseThrow(AssertionError::new);
     }
 

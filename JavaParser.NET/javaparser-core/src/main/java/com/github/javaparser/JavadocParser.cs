@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -29,7 +29,7 @@ namespace com.github.javaparser;
  */
 class JavadocParser {
 
-    private static String BLOCK_TAG_PREFIX = "@";
+    private static string BLOCK_TAG_PREFIX = "@";
 
     private static Pattern BLOCK_PATTERN = Pattern.compile("^\\s*" + BLOCK_TAG_PREFIX, Pattern.MULTILINE);
 
@@ -37,11 +37,11 @@ class JavadocParser {
         return parse(comment.getContent());
     }
 
-    public static Javadoc parse(String commentContent) {
+    public static Javadoc parse(string commentContent) {
         List<String> cleanLines = cleanLines(normalizeEolInTextBlock(commentContent, SYSTEM_EOL));
         int indexOfFirstBlockTag = cleanLines.stream().filter(JavadocParser::isABlockLine).map(cleanLines::indexOf).findFirst().orElse(-1);
         List<String> blockLines;
-        String descriptionText;
+        string descriptionText;
         if (indexOfFirstBlockTag == -1) {
             descriptionText = trimRight(String.join(SYSTEM_EOL, cleanLines));
             blockLines = Collections.emptyList();
@@ -49,7 +49,7 @@ class JavadocParser {
             descriptionText = trimRight(String.join(SYSTEM_EOL, cleanLines.subList(0, indexOfFirstBlockTag)));
             // Combine cleaned lines, but only starting with the first block tag till the end
             // In this combined string it is easier to handle multiple lines which actually belong together
-            String tagBlock = cleanLines.subList(indexOfFirstBlockTag, cleanLines.size()).stream().collect(Collectors.joining(SYSTEM_EOL));
+            string tagBlock = cleanLines.subList(indexOfFirstBlockTag, cleanLines.size()).stream().collect(Collectors.joining(SYSTEM_EOL));
             // Split up the entire tag back again, considering now that some lines belong to the same block tag.
             // The pattern splits the block at each new line starting with the '@' symbol, thus the symbol
             // then needs to be added again so that the block parsers handles everything correctly.
@@ -60,25 +60,25 @@ class JavadocParser {
         return document;
     }
 
-    private static JavadocBlockTag parseBlockTag(String line) {
+    private static JavadocBlockTag parseBlockTag(string line) {
         line = line.trim().substring(1);
-        String tagName = nextWord(line);
-        String rest = line.substring(tagName.length()).trim();
+        string tagName = nextWord(line);
+        string rest = line.substring(tagName.length()).trim();
         return new JavadocBlockTag(tagName, rest);
     }
 
-    private static boolean isABlockLine(String line) {
+    private static boolean isABlockLine(string line) {
         return line.trim().startsWith(BLOCK_TAG_PREFIX);
     }
 
-    private static String trimRight(String string) {
+    private static string trimRight(string string) {
         while (!string.isEmpty() && Character.isWhitespace(string.charAt(string.length() - 1))) {
             string = string.substring(0, string.length() - 1);
         }
         return string;
     }
 
-    private static List<String> cleanLines(String content) {
+    private static List<String> cleanLines(string content) {
         String[] lines = content.split(SYSTEM_EOL);
         if (lines.length == 0) {
             return Collections.emptyList();
@@ -116,7 +116,7 @@ class JavadocParser {
     }
 
     // Visible for testing
-    static int startsWithAsterisk(String line) {
+    static int startsWithAsterisk(string line) {
         if (line.startsWith("*")) {
             return 0;
         } else if ((line.startsWith(" ") || line.startsWith("\t")) && line.length() > 1) {

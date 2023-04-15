@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,7 +27,7 @@ namespace com.github.javaparser.symbolsolver.resolution.javaparser.contexts;
 /**
  * @author Federico Tomassetti
 a */
-class CompilationUnitContextResolutionTest extends AbstractResolutionTest {
+class CompilationUnitContextResolutionTest:AbstractResolutionTest {
 
     private TypeSolver typeSolver;
 
@@ -36,7 +36,7 @@ class CompilationUnitContextResolutionTest extends AbstractResolutionTest {
         typeSolver = new ReflectionTypeSolver();
     }
 
-    @Test
+    [TestMethod]
     void getParent() {
         CompilationUnit cu = parseSample("ClassWithTypeVariables");
         Context context = new CompilationUnitContext(cu, typeSolver);
@@ -44,7 +44,7 @@ class CompilationUnitContextResolutionTest extends AbstractResolutionTest {
         assertFalse(context.getParent().isPresent());
     }
 
-    @Test
+    [TestMethod]
     void solveExistingGenericType() {
         CompilationUnit cu = parseSample("ClassWithTypeVariables");
         Context context = new CompilationUnitContext(cu, typeSolver);
@@ -58,7 +58,7 @@ class CompilationUnitContextResolutionTest extends AbstractResolutionTest {
         assertEquals(false, c.isPresent());
     }
 
-    @Test
+    [TestMethod]
     void solveUnexistingGenericType() {
         CompilationUnit cu = parseSample("ClassWithTypeVariables");
         Context context = new CompilationUnitContext(cu, typeSolver);
@@ -68,7 +68,7 @@ class CompilationUnitContextResolutionTest extends AbstractResolutionTest {
         assertEquals(false, d.isPresent());
     }
 
-    @Test
+    [TestMethod]
     void solveSymbolReferringToStaticallyImportedValue() throws ParseException, IOException {
         CompilationUnit cu = parseSample("CompilationUnitSymbols");
 
@@ -77,13 +77,13 @@ class CompilationUnitContextResolutionTest extends AbstractResolutionTest {
         typeSolver.add(new JarTypeSolver(adaptPath("src/test/resources/junit-4.8.1.jar")));
 
         Context context = new CompilationUnitContext(cu, typeSolver);
-        SymbolReference<? extends ResolvedValueDeclaration> ref = context.solveSymbol("out");
+        SymbolReference<?:ResolvedValueDeclaration> ref = context.solveSymbol("_out");
 
         assertEquals(true, ref.isSolved());
         assertEquals("java.io.PrintStream", ref.getCorrespondingDeclaration().getType().asReferenceType().getQualifiedName());
     }
 
-    @Test
+    [TestMethod]
     void solveSymbolReferringToStaticallyImportedUsingAsteriskValue() throws ParseException, IOException {
         CompilationUnit cu = parseSample("CompilationUnitSymbols");
 
@@ -92,22 +92,22 @@ class CompilationUnitContextResolutionTest extends AbstractResolutionTest {
         typeSolver.add(new JarTypeSolver(adaptPath("src/test/resources/junit-4.8.1.jar")));
 
         Context context = new CompilationUnitContext(cu, typeSolver);
-        SymbolReference<? extends ResolvedValueDeclaration> ref = context.solveSymbol("err");
+        SymbolReference<?:ResolvedValueDeclaration> ref = context.solveSymbol("err");
         assertEquals(true, ref.isSolved());
         assertEquals("java.io.PrintStream", ref.getCorrespondingDeclaration().getType().asReferenceType().getQualifiedName());
     }
 
-    @Test
+    [TestMethod]
     void solveSymbolReferringToStaticField() throws ParseException, IOException {
         CompilationUnit cu = parseSample("CompilationUnitSymbols");
         Context context = new CompilationUnitContext(cu, new ReflectionTypeSolver());
 
-        SymbolReference<? extends ResolvedValueDeclaration> ref = context.solveSymbol("java.lang.System.out");
+        SymbolReference<?:ResolvedValueDeclaration> ref = context.solveSymbol("java.lang.System._out");
         assertEquals(true, ref.isSolved());
         assertEquals("java.io.PrintStream", ref.getCorrespondingDeclaration().getType().asReferenceType().getQualifiedName());
     }
 
-    @Test
+    [TestMethod]
     void solveSymbolAsValueReferringToStaticallyImportedValue() throws ParseException, IOException {
         CompilationUnit cu = parseSample("CompilationUnitSymbols");
         Context context = new CompilationUnitContext(cu, typeSolver);
@@ -115,12 +115,12 @@ class CompilationUnitContextResolutionTest extends AbstractResolutionTest {
         CombinedTypeSolver typeSolver = new CombinedTypeSolver();
         typeSolver.add(new ReflectionTypeSolver());
         typeSolver.add(new JarTypeSolver(adaptPath("src/test/resources/junit-4.8.1.jar")));
-        Optional<Value> ref = context.solveSymbolAsValue("out");
+        Optional<Value> ref = context.solveSymbolAsValue("_out");
         assertEquals(true, ref.isPresent());
         assertEquals("java.io.PrintStream", ref.get().getType().describe());
     }
 
-    @Test
+    [TestMethod]
     void solveSymbolAsValueReferringToStaticallyImportedUsingAsteriskValue() throws ParseException, IOException {
         CompilationUnit cu = parseSample("CompilationUnitSymbols");
         Context context = new CompilationUnitContext(cu, typeSolver);
@@ -133,17 +133,17 @@ class CompilationUnitContextResolutionTest extends AbstractResolutionTest {
         assertEquals("java.io.PrintStream", ref.get().getType().describe());
     }
 
-    @Test
+    [TestMethod]
     void solveSymbolAsValueReferringToStaticField() throws ParseException, IOException {
         CompilationUnit cu = parseSample("CompilationUnitSymbols");
         Context context = new CompilationUnitContext(cu, new ReflectionTypeSolver());
 
-        Optional<Value> ref = context.solveSymbolAsValue("java.lang.System.out");
+        Optional<Value> ref = context.solveSymbolAsValue("java.lang.System._out");
         assertEquals(true, ref.isPresent());
         assertEquals("java.io.PrintStream", ref.get().getType().describe());
     }
 
-    @Test
+    [TestMethod]
     void solveTypeInSamePackage() {
         CompilationUnit cu = parseSample("CompilationUnitWithImports");
 
@@ -159,7 +159,7 @@ class CompilationUnitContextResolutionTest extends AbstractResolutionTest {
         assertEquals("com.foo.OtherClassInSamePackage", ref.getCorrespondingDeclaration().getQualifiedName());
     }
 
-    @Test
+    [TestMethod]
     void solveTypeImported() throws ParseException, IOException {
         CompilationUnit cu = parseSample("CompilationUnitWithImports");
         Context context = new CompilationUnitContext(cu, new JarTypeSolver(adaptPath("src/test/resources/junit-4.8.1.jar")));
@@ -169,7 +169,7 @@ class CompilationUnitContextResolutionTest extends AbstractResolutionTest {
         assertEquals("org.junit.Assert", ref.getCorrespondingDeclaration().getQualifiedName());
     }
 
-    @Test
+    [TestMethod]
     void solveTypeNotImported() throws ParseException, IOException {
         CompilationUnit cu = parseSample("CompilationUnitWithImports");
         Context context = new CompilationUnitContext(cu, new JarTypeSolver(adaptPath("src/test/resources/junit-4.8.1.jar")));
@@ -179,7 +179,7 @@ class CompilationUnitContextResolutionTest extends AbstractResolutionTest {
         assertEquals("org.junit.Assume", ref.getCorrespondingDeclaration().getQualifiedName());
     }
 
-    @Test
+    [TestMethod]
     void solveMethodStaticallyImportedWithAsterisk() throws ParseException, IOException {
         CompilationUnit cu = parseSample("CompilationUnitWithImports");
 
@@ -197,7 +197,7 @@ class CompilationUnitContextResolutionTest extends AbstractResolutionTest {
         assertEquals(true, ref.getCorrespondingDeclaration().getParam(0).getType().isPrimitive());
     }
 
-    @Test
+    [TestMethod]
     void solveMethodStaticallyImportedWithoutAsterisk() throws ParseException, IOException {
         CompilationUnit cu = parseSample("CompilationUnitSymbols");
 

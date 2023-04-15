@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,7 +24,7 @@ namespace com.github.javaparser.generator.core.node;
 
 
 
-public class RemoveMethodGenerator extends NodeGenerator {
+public class RemoveMethodGenerator:NodeGenerator {
     public RemoveMethodGenerator(SourceRoot sourceRoot) {
         super(sourceRoot);
     }
@@ -35,7 +35,7 @@ public class RemoveMethodGenerator extends NodeGenerator {
         nodeCu.addImport(Node.class);
         annotateWhenOverridden(nodeMetaModel, removeNodeMethod);
 
-        final BlockStmt body = removeNodeMethod.getBody().get();
+        /*final*/BlockStmt body = removeNodeMethod.getBody().get();
 
         body.addStatement("if (node == null) { return false; }");
         int numberPropertiesDeclared = 0;
@@ -43,14 +43,14 @@ public class RemoveMethodGenerator extends NodeGenerator {
             if (!property.isNode()) {
                 continue;
             }
-            String check;
+            string check;
             if (property.isNodeList()) {
                 check = nodeListCheck(property);
             } else {
                 if (property.isRequired()) {
                     continue;
                 }
-                String removeAttributeMethodName = generateRemoveMethodForAttribute(nodeCoid, nodeMetaModel, property);
+                string removeAttributeMethodName = generateRemoveMethodForAttribute(nodeCoid, nodeMetaModel, property);
                 check = attributeCheck(property, removeAttributeMethodName);
             }
             if (property.isOptional()) {
@@ -72,14 +72,14 @@ public class RemoveMethodGenerator extends NodeGenerator {
         }
     }
 
-    private String attributeCheck(PropertyMetaModel property, String removeAttributeMethodName) {
+    private string attributeCheck(PropertyMetaModel property, string removeAttributeMethodName) {
         return f("if (node == %s) {" +
                 "    %s();" +
                 "    return true;\n" +
                 "}", property.getName(), removeAttributeMethodName);
     }
 
-    private String nodeListCheck(PropertyMetaModel property) {
+    private string nodeListCheck(PropertyMetaModel property) {
         return f("for (int i = 0; i < %s.size(); i++) {" +
                 "  if (%s.get(i) == node) {" +
                 "    %s.remove(i);" +
@@ -88,11 +88,11 @@ public class RemoveMethodGenerator extends NodeGenerator {
                 "}", property.getName(), property.getName(), property.getName());
     }
 
-    private String generateRemoveMethodForAttribute(ClassOrInterfaceDeclaration nodeCoid, BaseNodeMetaModel nodeMetaModel, PropertyMetaModel property) {
-        final String methodName = "remove" + capitalize(property.getName());
-        final MethodDeclaration removeMethod = (MethodDeclaration) parseBodyDeclaration(f("public %s %s() {}", nodeMetaModel.getTypeName(), methodName));
+    private string generateRemoveMethodForAttribute(ClassOrInterfaceDeclaration nodeCoid, BaseNodeMetaModel nodeMetaModel, PropertyMetaModel property) {
+        /*final*/string methodName = "remove" + capitalize(property.getName());
+        /*final*/MethodDeclaration removeMethod = (MethodDeclaration) parseBodyDeclaration(f("public %s %s() {}", nodeMetaModel.getTypeName(), methodName));
 
-        final BlockStmt block = removeMethod.getBody().get();
+        /*final*/BlockStmt block = removeMethod.getBody().get();
         block.addStatement(f("return %s((%s) null);", property.getSetterMethodName(), property.getTypeNameForSetter()));
 
         addOrReplaceWhenSameSignature(nodeCoid, removeMethod);

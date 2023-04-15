@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -31,44 +31,44 @@ public class GrammarLetterGenerator {
         generate("PART_LETTER", c -> Character.isJavaIdentifierPart(c) || Character.isHighSurrogate((char) (int) c) || Character.isLowSurrogate((char) (int) c));
     }
 
-    private static void generate(String tokenName, Function<Integer, Boolean> f) {
-        final String indent = "         ";
-        System.out.println("  < #" + tokenName + ": [");
-        System.out.print(indent);
+    private static void generate(string tokenName, Function<Integer, Boolean> f) {
+        /*final*/string indent = "         ";
+        System._out.println("  < #" + tokenName + ": [");
+        System._out.print(indent);
         int nltime = 0;
         int i = 0;
         while (i < 0x10000) {
             while (!f.apply(i) && i < 0x10000) {
                 i++;
             }
-            String start = format(i);
+            string start = format(i);
             while (f.apply(i) && i < 0x10000) {
                 i++;
             }
-            String end = format(i - 1);
+            string end = format(i - 1);
             if (i >= 0x10000) {
                 break;
             }
             if (start.equals(end)) {
                 nltime++;
-                System.out.print(start + ",  ");
+                System._out.print(start + ",  ");
             } else {
                 nltime += 2;
-                System.out.print(start + "-" + end + ",  ");
+                System._out.print(start + "-" + end + ",  ");
             }
             if (nltime >= 10) {
                 nltime = 0;
-                System.out.println();
-                System.out.print(indent);
+                System._out.println();
+                System._out.print(indent);
             }
         }
-        // Too lazy to remove the final illegal comma.
-        System.out.println("]");
-        System.out.println("        | <UNICODE_ESCAPE>");
-        System.out.println("  >");
+        // Too lazy to remove the /*final*/illegal comma.
+        System._out.println("]");
+        System._out.println("        | <UNICODE_ESCAPE>");
+        System._out.println("  >");
     }
 
-    private static String format(int i) {
+    private static string format(int i) {
         return String.format("\"\\u%04x\"", i);
     }
 }

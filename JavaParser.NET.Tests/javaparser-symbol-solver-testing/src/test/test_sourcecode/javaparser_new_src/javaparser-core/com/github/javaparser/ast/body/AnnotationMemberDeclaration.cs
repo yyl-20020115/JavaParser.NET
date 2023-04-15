@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.ast.body;
 /**
  * @author Julio Vilmar Gesser
  */
-public final class AnnotationMemberDeclaration extends BodyDeclaration<AnnotationMemberDeclaration>
+public /*final*/class AnnotationMemberDeclaration:BodyDeclaration<AnnotationMemberDeclaration>
         implements NodeWithJavaDoc<AnnotationMemberDeclaration>, NodeWithName<AnnotationMemberDeclaration>,
         NodeWithType<AnnotationMemberDeclaration>, NodeWithModifiers<AnnotationMemberDeclaration> {
 
@@ -34,21 +34,21 @@ public final class AnnotationMemberDeclaration extends BodyDeclaration<Annotatio
 
     private Type type;
 
-    private String name;
+    private string name;
 
     private Expression defaultValue;
 
     public AnnotationMemberDeclaration() {
     }
 
-    public AnnotationMemberDeclaration(EnumSet<Modifier> modifiers, Type type, String name, Expression defaultValue) {
+    public AnnotationMemberDeclaration(EnumSet<Modifier> modifiers, Type type, string name, Expression defaultValue) {
         setModifiers(modifiers);
         setType(type);
         setName(name);
         setDefaultValue(defaultValue);
     }
 
-    public AnnotationMemberDeclaration(EnumSet<Modifier> modifiers, List<AnnotationExpr> annotations, Type type, String name,
+    public AnnotationMemberDeclaration(EnumSet<Modifier> modifiers, List<AnnotationExpr> annotations, Type type, string name,
                                        Expression defaultValue) {
         super(annotations);
         setModifiers(modifiers);
@@ -58,7 +58,7 @@ public final class AnnotationMemberDeclaration extends BodyDeclaration<Annotatio
     }
 
     public AnnotationMemberDeclaration(Range range, EnumSet<Modifier> modifiers, List<AnnotationExpr> annotations, Type type,
-                                       String name, Expression defaultValue) {
+                                       string name, Expression defaultValue) {
         super(range, annotations);
         setModifiers(modifiers);
         setType(type);
@@ -92,7 +92,7 @@ public final class AnnotationMemberDeclaration extends BodyDeclaration<Annotatio
     }
 
     //@Override
-    public String getName() {
+    public string getName() {
         return name;
     }
 
@@ -114,7 +114,7 @@ public final class AnnotationMemberDeclaration extends BodyDeclaration<Annotatio
     }
 
     //@Override
-    public AnnotationMemberDeclaration setName(String name) {
+    public AnnotationMemberDeclaration setName(string name) {
         this.name = name;
         return this;
     }
@@ -128,7 +128,7 @@ public final class AnnotationMemberDeclaration extends BodyDeclaration<Annotatio
 
     //@Override
     public JavadocComment getJavaDoc() {
-        if (getComment() instanceof JavadocComment) {
+        if (getComment() is JavadocComment) {
             return (JavadocComment) getComment();
         }
         return null;

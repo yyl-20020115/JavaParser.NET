@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.generator.core.visitor;
 /**
  * Generates JavaParser's VoidVisitorAdapter.
  */
-public class GenericVisitorAdapterGenerator extends VisitorGenerator {
+public class GenericVisitorAdapterGenerator:VisitorGenerator {
     public GenericVisitorAdapterGenerator(SourceRoot sourceRoot) {
         super(sourceRoot, "com.github.javaparser.ast.visitor", "GenericVisitorAdapter", "R", "A", true);
     }
@@ -40,10 +40,10 @@ public class GenericVisitorAdapterGenerator extends VisitorGenerator {
         
         body.addStatement("R result;");
 
-        final String resultCheck = "if (result != null) return result;";
+        /*final*/string resultCheck = "if (result != null) return result;";
 
         for (PropertyMetaModel field : node.getAllPropertyMetaModels()) {
-            final String getter = field.getGetterMethodName() + "()";
+            /*final*/string getter = field.getGetterMethodName() + "()";
             if (field.getNodeReference().isPresent()) {
                 if (field.isOptional()) {
                     body.addStatement(f("if (n.%s.isPresent()) {" +

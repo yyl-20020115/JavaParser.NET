@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -36,53 +36,53 @@ class JavaParserTest {
         StaticJavaParser.getConfiguration().setLanguageLevel(CURRENT);
     }
 
-    @Test
+    [TestMethod]
     void rangeOfAnnotationMemberDeclarationIsCorrect() {
-        String code = "@interface AD { String foo(); }";
+        string code = "@interface AD { string foo(); }";
         CompilationUnit cu = parse(code);
         AnnotationMemberDeclaration memberDeclaration = cu.getAnnotationDeclarationByName("AD").get().getMember(0).asAnnotationMemberDeclaration();
         assertTrue(memberDeclaration.hasRange());
         assertEquals(new Range(new Position(1, 17), new Position(1, 29)), memberDeclaration.getRange().get());
     }
 
-    @Test
+    [TestMethod]
     void testSourcePositionsWithUnicodeEscapes() {
-        String code = "@interface AD \\u007B String foo(); \\u007D";
+        string code = "@interface AD \\u007B string foo(); \\u007D";
         CompilationUnit cu = parseWithUnicodeEscapes(code).getResult().get();
         AnnotationMemberDeclaration memberDeclaration = cu.getAnnotationDeclarationByName("AD").get().getMember(0).asAnnotationMemberDeclaration();
         assertTrue(memberDeclaration.hasRange());
         assertEquals(new Range(new Position(1, 22), new Position(1, 34)), memberDeclaration.getRange().get());
     }
 
-    @Test
+    [TestMethod]
     void testSourcePositionsWithBrokenUnicodeEscapes() {
     	// Source positions
     	//                      111111111122222222 2 22333 3333
     	//             123456789012345678901234567 8 90123 4567
-    	String code = "@interface AD { String X = \"\\uABC\"; }";
+    	string code = "@interface AD { string X = \"\\uABC\"; }";
     	ParseResult<CompilationUnit> cu = parseWithUnicodeEscapes(code);
     	assertFalse(cu.getResult().isPresent());
     	assertEquals("Lexical error at line 1, column 34.  Encountered: \"\\\"\" (34), after : \"\\\"\\\\uABC\"", cu.getProblem(0).getMessage());
     }
 
-	private static ParseResult<CompilationUnit> parseWithUnicodeEscapes(String code) {
+	private static ParseResult<CompilationUnit> parseWithUnicodeEscapes(string code) {
 		ParserConfiguration config = new ParserConfiguration();
         config.setPreprocessUnicodeEscapes(true);
 		return new JavaParser(config).parse(code);
 	}
 
-    @Test
+    [TestMethod]
     void rangeOfAnnotationMemberDeclarationWithArrayTypeIsCorrect() {
-        String code = "@interface AD { String[] foo(); }";
+        string code = "@interface AD { String[] foo(); }";
         CompilationUnit cu = parse(code);
         AnnotationMemberDeclaration memberDeclaration = cu.getAnnotationDeclarationByName("AD").get().getMember(0).asAnnotationMemberDeclaration();
         assertTrue(memberDeclaration.hasRange());
         assertEquals(new Range(new Position(1, 17), new Position(1, 31)), memberDeclaration.getRange().get());
     }
 
-    @Test
+    [TestMethod]
     void rangeOfArrayCreationLevelWithExpressionIsCorrect() {
-        String code = "new int[123][456]";
+        string code = "new int[123][456]";
         ArrayCreationExpr expression = parseExpression(code);
         Optional<Range> range;
 
@@ -95,9 +95,9 @@ class JavaParserTest {
         assertEquals(new Range(new Position(1, 13), new Position(1, 17)), range.get());
     }
 
-    @Test
+    [TestMethod]
     void rangeOfArrayCreationLevelWithoutExpressionIsCorrect() {
-        String code = "new int[][]";
+        string code = "new int[][]";
         ArrayCreationExpr expression = parseExpression(code);
         Optional<Range> range;
 
@@ -110,7 +110,7 @@ class JavaParserTest {
         assertEquals(new Range(new Position(1, 10), new Position(1, 11)), range.get());
     }
 
-    @Test
+    [TestMethod]
     void parseErrorContainsLocation() {
         ParseResult<CompilationUnit> result = new JavaParser().parse(COMPILATION_UNIT, provider("class X { // blah"));
 
@@ -120,24 +120,24 @@ class JavaParserTest {
         assertInstanceOf(ParseException.class, problem.getCause().get());
     }
 
-    @Test
+    [TestMethod]
     void parseIntersectionType() {
-        String code = "(Runnable & Serializable) (() -> {})";
+        string code = "(Runnable & Serializable) (() -> {})";
         Expression expression = parseExpression(code);
         Type type = expression.asCastExpr().getType();
 
-        assertTrue(type instanceof IntersectionType);
+        assertTrue(type is IntersectionType);
         IntersectionType intersectionType = type.asIntersectionType();
         assertEquals(2, intersectionType.getElements().size());
-        assertTrue(intersectionType.getElements().get(0) instanceof ClassOrInterfaceType);
+        assertTrue(intersectionType.getElements().get(0) is ClassOrInterfaceType);
         assertEquals("Runnable", intersectionType.getElements().get(0).asClassOrInterfaceType().getNameAsString());
-        assertTrue(intersectionType.getElements().get(1) instanceof ClassOrInterfaceType);
+        assertTrue(intersectionType.getElements().get(1) is ClassOrInterfaceType);
         assertEquals("Serializable", intersectionType.getElements().get(1).asClassOrInterfaceType().getNameAsString());
     }
 
-    @Test
+    [TestMethod]
     void rangeOfIntersectionType() {
-        String code = "class A {" + SYSTEM_EOL
+        string code = "class A {" + SYSTEM_EOL
                 + "  Object f() {" + SYSTEM_EOL
                 + "    return (Comparator<Map.Entry<K, V>> & Serializable)(c1, c2) -> c1.getKey().compareTo(c2.getKey()); " + SYSTEM_EOL
                 + "}}";
@@ -149,9 +149,9 @@ class JavaParserTest {
         assertEquals(range(3, 13, 3, 54), type.getRange().get());
     }
 
-    @Test
+    [TestMethod]
     void rangeOfCast() {
-        String code = "class A {" + SYSTEM_EOL
+        string code = "class A {" + SYSTEM_EOL
                 + "  Object f() {" + SYSTEM_EOL
                 + "    return (Comparator<Map.Entry<K, V>> & Serializable)(c1, c2) -> c1.getKey().compareTo(c2.getKey()); " + SYSTEM_EOL
                 + "}}";
@@ -162,9 +162,9 @@ class JavaParserTest {
         assertEquals(range(3, 12, 3, 101), castExpr.getRange().get());
     }
 
-    @Test
+    [TestMethod]
     void rangeOfCastNonIntersection() {
-        String code = "class A {" + SYSTEM_EOL
+        string code = "class A {" + SYSTEM_EOL
                 + "  Object f() {" + SYSTEM_EOL
                 + "    return (Comparator<Map.Entry<K, V>>               )(c1, c2) -> c1.getKey().compareTo(c2.getKey()); " + SYSTEM_EOL
                 + "}}";
@@ -175,9 +175,9 @@ class JavaParserTest {
         assertEquals(range(3, 12, 3, 101), castExpr.getRange().get());
     }
 
-    @Test
+    [TestMethod]
     void rangeOfLambda() {
-        String code = "class A {" + SYSTEM_EOL
+        string code = "class A {" + SYSTEM_EOL
                 + "  Object f() {" + SYSTEM_EOL
                 + "    return (Comparator<Map.Entry<K, V>> & Serializable)(c1, c2) -> c1.getKey().compareTo(c2.getKey()); " + SYSTEM_EOL
                 + "}}";
@@ -191,9 +191,9 @@ class JavaParserTest {
         assertEquals(GeneratedJavaParserConstants.RPAREN, lambdaExpr.getTokenRange().get().getEnd().getKind());
     }
 
-    @Test
+    [TestMethod]
     void rangeOfLambdaBody() {
-        String code = "class A {" + SYSTEM_EOL
+        string code = "class A {" + SYSTEM_EOL
                 + "  Object f() {" + SYSTEM_EOL
                 + "    return (Comparator<Map.Entry<K, V>> & Serializable)(c1, c2) -> c1.getKey().compareTo(c2.getKey()); " + SYSTEM_EOL
                 + "}}";
@@ -206,25 +206,25 @@ class JavaParserTest {
         assertEquals(range(3, 68, 3, 101), lambdaBody.getRange().get());
     }
 
-    @Test
+    [TestMethod]
     void testNotStoringTokens() {
         JavaParser javaParser = new JavaParser(new ParserConfiguration().setStoreTokens(false));
         ParseResult<CompilationUnit> result = javaParser.parse(ParseStart.COMPILATION_UNIT, provider("class X{}"));
         assertFalse(result.getResult().get().getTokenRange().isPresent());
     }
 
-    @Test
+    [TestMethod]
     void trailingCodeIsAnError() {
         assertThrows(ParseProblemException.class, () -> parseBlock("{} efijqoifjqefj"));
     }
 
-    @Test
+    [TestMethod]
     void trailingWhitespaceIsIgnored() {
         BlockStmt blockStmt = parseBlock("{} // hello");
         assertEquals("{}", blockStmt.getTokenRange().get().toString());
     }
 
-    @Test
+    [TestMethod]
     void parsingInitializedAndUnitializedVarsInForStmt() {
         ForStmt forStmt = parseStatement("for(int a,b=0;;){}").asForStmt();
         assertEquals(1, forStmt.getInitialization().size());
@@ -236,7 +236,7 @@ class JavaParserTest {
         assertTrue(forStmt.getInitialization().get(0).asVariableDeclarationExpr().getVariables().get(1).getInitializer().isPresent());
     }
 
-    @Test
+    [TestMethod]
     void parsingInitializedAndUnitializedVarsInForStmtComplexCase() {
         // See issue 1281
         ForStmt forStmt = parseStatement("for(int i, j = array2.length - 1;;){}").asForStmt();
@@ -249,41 +249,41 @@ class JavaParserTest {
         assertTrue(forStmt.getInitialization().get(0).asVariableDeclarationExpr().getVariables().get(1).getInitializer().isPresent());
     }
 
-    @Test
+    [TestMethod]
     void creatingNewObjectCreationExprShouldDefaultToParsing() {
-        String className = String.class.getCanonicalName();
+        string className = String.class.getCanonicalName();
         ClassOrInterfaceType type = parseClassOrInterfaceType(className);
         ObjectCreationExpr expected = parseExpression("new " + className + "()");
         ObjectCreationExpr actual = new ObjectCreationExpr(null, type, NodeList.nodeList());
         assertEquals(expected, actual);
     }
 
-    @Test
+    [TestMethod]
     void parseModuleDeclaration() {
         StaticJavaParser.parseModuleDeclaration("module X {}");
     }
 
-    @Test
+    [TestMethod]
     void parseModuleDirective() {
         StaticJavaParser.parseModuleDirective("opens C;");
     }
 
-    @Test
+    [TestMethod]
     void parseTypeParameter() {
-        StaticJavaParser.parseTypeParameter("T extends Serializable & AttachableListener");
+        StaticJavaParser.parseTypeParameter("T:Serializable & AttachableListener");
     }
 
-    @Test
+    [TestMethod]
     void parseTypeDeclaration() {
         StaticJavaParser.parseTypeDeclaration("enum Z {A, B}");
     }
 
-    @Test
+    [TestMethod]
     void xxx(){
         YamlPrinter.print(StaticJavaParser.parse("class X{}"));
     }
 
-    @Test
+    [TestMethod]
     void issue2879() {
         StaticJavaParser.parse(
             "public class Test {" +

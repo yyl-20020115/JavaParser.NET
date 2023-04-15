@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,8 +28,8 @@ namespace com.github.javaparser.symbolsolver.resolution.promotion;
  * If the second and third operands have the same type, then that is the type of the conditional expression.
  * If one of the second and third operands is of primitive type T, and the type of the other is the result of applying boxing conversion (§5.1.7) to T, then the type of the conditional expression is T.
  * If one of the operands is of type byte or Byte and the other is of type short or Short, then the type of the conditional expression is short.
- * If one of the operands is of type T where T is byte, short, or char, and the other operand is a constant expression (§15.28) of type int whose value is representable in type T, then the type of the conditional expression is T.
- * If one of the operands is of type T, where T is Byte, Short, or Character, and the other operand is a constant expression of type int whose value is representable in the type U which is the result of applying unboxing conversion to T, then the type of the conditional expression is U.
+ * If one of the operands is of type T where T is byte, short, or char, and the other operand is a constant expression (§15.28) of type int whose value is representable _in type T, then the type of the conditional expression is T.
+ * If one of the operands is of type T, where T is Byte, Short, or Character, and the other operand is a constant expression of type int whose value is representable _in the type U which is the result of applying unboxing conversion to T, then the type of the conditional expression is U.
  * Otherwise, binary numeric promotion (§5.6.2) is applied to the operand types, and the type of the conditional expression is the promoted type of the second and third operands.
  */
 public class NumericConditionalExprHandler implements ConditionalExprHandler {
@@ -37,7 +37,7 @@ public class NumericConditionalExprHandler implements ConditionalExprHandler {
     private static Map<ResolvedType, List<ResolvedType>> NumericConverter = new HashMap();
     static {
         // first type is the type of the resolution
-        // the list indicates the types that can be resolved in the type specified as
+        // the list indicates the types that can be resolved _in the type specified as
         // key
         NumericConverter.put(ResolvedPrimitiveType.SHORT,
                 Arrays.asList(ResolvedPrimitiveType.SHORT, ResolvedPrimitiveType.BYTE));
@@ -55,9 +55,9 @@ public class NumericConditionalExprHandler implements ConditionalExprHandler {
 
     @Override
     public ResolvedType resolveType() {
-        String qnameTypeThenExpr = thenExpr.isPrimitive() ? thenExpr.asPrimitive().describe()
+        string qnameTypeThenExpr = thenExpr.isPrimitive() ? thenExpr.asPrimitive().describe()
                 : thenExpr.asReferenceType().describe();
-        String qnameTypeElseExpr = elseExpr.isPrimitive() ? elseExpr.asPrimitive().describe()
+        string qnameTypeElseExpr = elseExpr.isPrimitive() ? elseExpr.asPrimitive().describe()
                 : elseExpr.asReferenceType().describe();
         if (qnameTypeThenExpr.equals(qnameTypeElseExpr)) {
             return thenExpr;
@@ -86,22 +86,22 @@ public class NumericConditionalExprHandler implements ConditionalExprHandler {
             return ResolvedPrimitiveType.SHORT;
         }
         
-//        if ((in(thenExpr, ResolvedPrimitiveType.SHORT) && in(elseExpr, ResolvedPrimitiveType.BYTE))
-//                || (in(elseExpr, ResolvedPrimitiveType.SHORT) && in(thenExpr, ResolvedPrimitiveType.BYTE))) {
+//        if ((_in(thenExpr, ResolvedPrimitiveType.SHORT) && _in(elseExpr, ResolvedPrimitiveType.BYTE))
+//                || (_in(elseExpr, ResolvedPrimitiveType.SHORT) && _in(thenExpr, ResolvedPrimitiveType.BYTE))) {
 //            return ResolvedPrimitiveType.SHORT;
 //        }
         
         // If one of the operands is of type T where T is byte, short, or char, and the
         // other operand is a constant expression (§15.28) of type int whose value is
-        // representable in type T, then the type of the conditional expression is T
-        // How can we know if the constant expression of type int is representable in
+        // representable _in type T, then the type of the conditional expression is T
+        // How can we know if the constant expression of type int is representable _in
         // type T ?
         
         if (thenExpr.isPrimitive() && elseExpr.isPrimitive()) {
-            if (((ResolvedPrimitiveType)thenExpr).in(resolvedPrimitiveTypeSubList)
+            if (((ResolvedPrimitiveType)thenExpr)._in(resolvedPrimitiveTypeSubList)
                 && ((ResolvedPrimitiveType)elseExpr).equals(ResolvedPrimitiveType.INT)) {
                 return thenExpr;
-            } else if (((ResolvedPrimitiveType)elseExpr).in(resolvedPrimitiveTypeSubList)
+            } else if (((ResolvedPrimitiveType)elseExpr)._in(resolvedPrimitiveTypeSubList)
                 && ((ResolvedPrimitiveType)thenExpr).equals(ResolvedPrimitiveType.INT)) {
                 return elseExpr;
             }
@@ -109,18 +109,18 @@ public class NumericConditionalExprHandler implements ConditionalExprHandler {
 
         // If one of the operands is of type T, where T is Byte, Short, or Character,
         // and the other operand is a constant expression of type int whose value is
-        // representable in the type U which is the result of applying unboxing
+        // representable _in the type U which is the result of applying unboxing
         // conversion to T, then the type of the conditional expression is U.
         // How can we know it?
         
         if (thenExpr.isReference() && elseExpr.isPrimitive()
                 && thenExpr.asReferenceType().isUnboxable()
-                && thenExpr.asReferenceType().toUnboxedType().get().in(resolvedPrimitiveTypeSubList)
+                && thenExpr.asReferenceType().toUnboxedType().get()._in(resolvedPrimitiveTypeSubList)
                 && ((ResolvedPrimitiveType)elseExpr).equals(ResolvedPrimitiveType.INT)) {
             return thenExpr.asReferenceType().toUnboxedType().get();
         } else if (elseExpr.isReference() && thenExpr.isPrimitive()
                 && elseExpr.asReferenceType().isUnboxable()
-                && elseExpr.asReferenceType().toUnboxedType().get().in(resolvedPrimitiveTypeSubList)
+                && elseExpr.asReferenceType().toUnboxedType().get()._in(resolvedPrimitiveTypeSubList)
                 && ((ResolvedPrimitiveType)thenExpr).equals(ResolvedPrimitiveType.INT)) {
             return elseExpr.asReferenceType().toUnboxedType().get();
         }
@@ -139,7 +139,7 @@ public class NumericConditionalExprHandler implements ConditionalExprHandler {
      * Verify if the {code ResolvedType} is equals to one of the specified primitive types
      */
     protected boolean exactMatch(ResolvedType type, ResolvedPrimitiveType... types) {
-        return type.isPrimitive() && type.asPrimitive().in(types);
+        return type.isPrimitive() && type.asPrimitive()._in(types);
     }
     
     protected boolean relaxMatch(ResolvedType type, ResolvedPrimitiveType... types) {

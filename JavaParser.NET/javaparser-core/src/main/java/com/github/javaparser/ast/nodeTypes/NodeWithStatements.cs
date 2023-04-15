@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,7 +25,7 @@ namespace com.github.javaparser.ast.nodeTypes;
 /**
  * A node that contains a list of statements.
  */
-public interface NodeWithStatements<N extends Node> {
+public interface NodeWithStatements<N:Node> {
 
     NodeList<Statement> getStatements();
 
@@ -33,22 +33,22 @@ public interface NodeWithStatements<N extends Node> {
         return getStatements().get(i);
     }
 
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     default N setStatement(int i, Statement statement) {
         getStatements().set(i, statement);
         return (N) this;
     }
 
-    N setStatements(final NodeList<Statement> statements);
+    N setStatements(/*final*/NodeList<Statement> statements);
 
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     default N addStatement(Statement statement) {
         getStatements().add(statement);
         return (N) this;
     }
 
-    @SuppressWarnings("unchecked")
-    default N addStatement(int index, final Statement statement) {
+    //@SuppressWarnings("unchecked")
+    default N addStatement(int index, /*final*/Statement statement) {
         getStatements().add(index, statement);
         return (N) this;
     }
@@ -60,21 +60,21 @@ public interface NodeWithStatements<N extends Node> {
     /**
      * It will use {@link JavaParser#parseStatement(String)} inside, so it should end with a semicolon
      */
-    default N addStatement(String statement) {
+    default N addStatement(string statement) {
         return addStatement(parseStatement(statement));
     }
 
-    default N addStatement(int index, final Expression expr) {
+    default N addStatement(int index, /*final*/Expression expr) {
         Statement stmt = new ExpressionStmt(expr);
         return addStatement(index, stmt);
     }
 
-    default <A extends Statement> A addAndGetStatement(A statement) {
+    default <A:Statement> A addAndGetStatement(A statement) {
         getStatements().add(statement);
         return statement;
     }
 
-    default Statement addAndGetStatement(int index, final Statement statement) {
+    default Statement addAndGetStatement(int index, /*final*/Statement statement) {
         getStatements().add(index, statement);
         return statement;
     }
@@ -84,18 +84,18 @@ public interface NodeWithStatements<N extends Node> {
         return addAndGetStatement(statement);
     }
 
-    default ExpressionStmt addAndGetStatement(String statement) {
+    default ExpressionStmt addAndGetStatement(string statement) {
         return addAndGetStatement(new NameExpr(statement));
     }
 
     /**
-     * @return true if there are no statements contained in this node.
+     * @return true if there are no statements contained _in this node.
      */
     default boolean isEmpty() {
         return getStatements().isEmpty();
     }
 
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     default N copyStatements(NodeList<Statement> nodeList) {
         for (Statement n : nodeList) {
             addStatement(n.clone());

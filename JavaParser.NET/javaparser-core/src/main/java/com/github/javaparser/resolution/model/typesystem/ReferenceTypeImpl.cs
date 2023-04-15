@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,9 +26,9 @@ namespace com.github.javaparser.resolution.model.typesystem;
 /**
  * @author Federico Tomassetti
  */
-public class ReferenceTypeImpl extends ResolvedReferenceType {
+public class ReferenceTypeImpl:ResolvedReferenceType {
 
-	private static final String[] ASSIGNABLE_REFERENCE_TYPE = { "java.lang.Object", "java.lang.Cloneable",
+	private static /*final*/String[] ASSIGNABLE_REFERENCE_TYPE = { "java.lang.Object", "java.lang.Cloneable",
 	"java.io.Serializable" };
 
     public static ResolvedReferenceType undeterminedParameters(ResolvedReferenceTypeDeclaration typeDeclaration) {
@@ -65,7 +65,7 @@ public class ReferenceTypeImpl extends ResolvedReferenceType {
      */
     @Override
     public boolean isAssignableBy(ResolvedType other) {
-        if (other instanceof NullType) {
+        if (other is NullType) {
             return !this.isPrimitive();
         }
         // everything is assignable to Object except void
@@ -84,7 +84,7 @@ public class ReferenceTypeImpl extends ResolvedReferenceType {
             // All numeric types extend Number
             return other.isNumericType() && this.isReferenceType() && this.asReferenceType().getQualifiedName().equals(Number.class.getCanonicalName());
         }
-        if (other instanceof LambdaArgumentTypePlaceholder) {
+        if (other is LambdaArgumentTypePlaceholder) {
             return FunctionalInterfaceLogic.isFunctionalInterfaceType(this);
         }
         if (other.isReferenceType()) {
@@ -133,7 +133,7 @@ public class ReferenceTypeImpl extends ResolvedReferenceType {
         return false;
     }
 
-    private boolean isAssignableByReferenceType(String qname) {
+    private boolean isAssignableByReferenceType(string qname) {
     	return Stream.of(ASSIGNABLE_REFERENCE_TYPE).anyMatch(ref -> ref.equals(qname));
     }
 

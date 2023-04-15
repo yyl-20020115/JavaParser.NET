@@ -17,10 +17,10 @@ namespace com.github.javaparser;
 /**
  * <p>This class was generated automatically by javacc, do not edit.</p>
  */
-final class ASTParser implements ASTParserConstants {
+/*final*/class ASTParser implements ASTParserConstants {
 
-    void reset(InputStream in, String encoding) {
-        ReInit(in, encoding);
+    void reset(InputStream _in, string encoding) {
+        ReInit(_in, encoding);
     }
 
     private List add(List list, Object obj) {
@@ -41,10 +41,10 @@ final class ASTParser implements ASTParserConstants {
 
         private class Modifier {
 
-                final int modifiers;
-                final List annotations;
-                final int beginLine;
-                final int beginColumn;
+                /*final*/int modifiers;
+                /*final*/List annotations;
+                /*final*/int beginLine;
+                /*final*/int beginColumn;
 
                 public Modifier(int beginLine, int beginColumn, int modifiers, List annotations) {
                         this.beginLine = beginLine;
@@ -61,7 +61,7 @@ final class ASTParser implements ASTParserConstants {
         return ModifierSet.addModifier(modifiers, mod);
     }
 
-    private void throwParseException(Token token, String message) {
+    private void throwParseException(Token token, string message) {
         StringBuilder buf = new StringBuilder();
         buf.append(message);
         buf.append(": \"");
@@ -76,20 +76,20 @@ final class ASTParser implements ASTParserConstants {
     }
 
     private Expression generateLambda(Expression ret, Statement lambdaBody) {
-            if (ret instanceof EnclosedExpr) {
+            if (ret is EnclosedExpr) {
                 Expression inner = ((EnclosedExpr) ret).getInner();
-                if (inner != null && inner instanceof NameExpr) {
+                if (inner != null && inner is NameExpr) {
                     VariableDeclaratorId id = new VariableDeclaratorId(inner.getBeginLine(), inner.getBeginColumn(), inner.getEndLine(), inner.getEndColumn(), ((NameExpr)inner).getName(), 0);
                     List params = add(null, new Parameter(ret.getBeginLine(), ret.getBeginColumn(), ret.getEndLine(), ret.getEndColumn(), 0, null, new UnknownType(), false, id));
                     ret = new LambdaExpr(ret.getBeginLine(), ret.getBeginColumn(), lambdaBody.getEndLine(), lambdaBody.getEndColumn(), params, lambdaBody, true);
                 } else {
                     ret = new LambdaExpr(ret.getBeginLine(), ret.getBeginColumn(), lambdaBody.getEndLine(), lambdaBody.getEndColumn(), null, lambdaBody, true);
                 }
-            } else if (ret instanceof NameExpr) {
+            } else if (ret is NameExpr) {
                     VariableDeclaratorId id = new VariableDeclaratorId(ret.getBeginLine(), ret.getBeginColumn(), ret.getEndLine(), ret.getEndColumn(), ((NameExpr)ret).getName(), 0);
                 List params = add(null, new Parameter(ret.getBeginLine(), ret.getBeginColumn(), ret.getEndLine(), ret.getEndColumn(), 0, null, new UnknownType(), false, id));
                 ret = new LambdaExpr(ret.getBeginLine(), ret.getBeginColumn(), ret.getEndLine(), ret.getEndColumn(), params, lambdaBody, false);
-            } else if (ret instanceof LambdaExpr) {
+            } else if (ret is LambdaExpr) {
                 ((LambdaExpr) ret).setBody(lambdaBody);
                 ret.setEndLine(lambdaBody.getEndLine());
                 ret.setEndColumn(lambdaBody.getEndColumn());
@@ -99,16 +99,16 @@ final class ASTParser implements ASTParserConstants {
             return ret;
     }
 
-    static final class GTToken extends Token {
+    static /*final*/class GTToken:Token {
 
         int realKind = ASTParserConstants.GT;
 
-        GTToken(int kind, String image) {
+        GTToken(int kind, string image) {
             this.kind = kind;
             this.image = image;
         }
 
-        public static Token newToken(int kind, String image) {
+        public static Token newToken(int kind, string image) {
             return new GTToken(kind, image);
         }
     }
@@ -122,10 +122,10 @@ final class ASTParser implements ASTParserConstants {
 /*
  * Program structuring syntax follows.
  */
-  final public CompilationUnit CompilationUnit() {
+  /*final*/public CompilationUnit CompilationUnit() {
         PackageDeclaration pakage = null;
         List imports = null;
-        ImportDeclaration in = null;
+        ImportDeclaration _in = null;
         List types = null;
         TypeDeclaration tn = null;
         int line = -1;
@@ -146,8 +146,8 @@ final class ASTParser implements ASTParserConstants {
         jj_la1[0] = jj_gen;
         break label_1;
       }
-      in = ImportDeclaration();
-                               if(line==-1){line = in.getBeginLine(); column = in.getBeginColumn();} imports = add(imports, in);
+      _in = ImportDeclaration();
+                               if(line==-1){line = _in.getBeginLine(); column = _in.getBeginColumn();} imports = add(imports, _in);
     }
     label_2:
     while (true) {
@@ -190,10 +190,10 @@ final class ASTParser implements ASTParserConstants {
       throw new ParseException();
     }
     {if (true) return new CompilationUnit(line == -1 ? 0 : line, column, token.endLine, token.endColumn,pakage, imports, types);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public PackageDeclaration PackageDeclaration() {
+  /*final*/public PackageDeclaration PackageDeclaration() {
         List annotations = null;
         AnnotationExpr ann;
         NameExpr name;
@@ -217,10 +217,10 @@ final class ASTParser implements ASTParserConstants {
     name = Name();
     jj_consume_token(SEMICOLON);
     {if (true) return new PackageDeclaration(line, column, token.endLine, token.endColumn,annotations, name);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public ImportDeclaration ImportDeclaration() {
+  /*final*/public ImportDeclaration ImportDeclaration() {
         NameExpr name;
         boolean isStatic = false;
         boolean isAsterisk = false;
@@ -250,15 +250,15 @@ final class ASTParser implements ASTParserConstants {
     }
     jj_consume_token(SEMICOLON);
     {if (true) return new ImportDeclaration(line, column, token.endLine, token.endColumn,name, isStatic, isAsterisk);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
 /*
- * Modifiers. We match all modifiers in a single rule to reduce the chances of
+ * Modifiers. We match all modifiers _in a single rule to reduce the chances of
  * syntax errors for simple modifier mistakes. It will also enable us to give
  * better error messages.
  */
-  final public Modifier Modifiers() {
+  /*final*/public Modifier Modifiers() {
     int beginLine = -1;
     int beginColumn = -1;
     int modifiers = 0;
@@ -327,13 +327,13 @@ final class ASTParser implements ASTParserConstants {
       }
     }
     {if (true) return new Modifier(beginLine, beginColumn, modifiers, annotations);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
 /*
  * Declaration syntax follows.
  */
-  final public TypeDeclaration TypeDeclaration() {
+  /*final*/public TypeDeclaration TypeDeclaration() {
    Modifier modifier;
    TypeDeclaration ret;
 
@@ -381,10 +381,10 @@ final class ASTParser implements ASTParserConstants {
       throw new ParseException();
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public ClassOrInterfaceDeclaration ClassOrInterfaceDeclaration(Modifier modifier) {
+  /*final*/public ClassOrInterfaceDeclaration ClassOrInterfaceDeclaration(Modifier modifier) {
    boolean isInterface = false;
    NameExpr name;
    List typePar = null;
@@ -437,10 +437,10 @@ final class ASTParser implements ASTParserConstants {
     ClassOrInterfaceDeclaration tmp = new ClassOrInterfaceDeclaration(line, column, token.endLine, token.endColumn, modifier.modifiers, modifier.annotations, isInterface, null, typePar, extList, impList, members);
     tmp.setNameExpr(name);
     {if (true) return tmp;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public List ExtendsList(boolean isInterface) {
+  /*final*/public List ExtendsList(boolean isInterface) {
    boolean extendsMoreThanOne = false;
    List ret = new LinkedList();
    ClassOrInterfaceType cit;
@@ -479,10 +479,10 @@ final class ASTParser implements ASTParserConstants {
       if (extendsMoreThanOne && !isInterface)
          throwParseException(token, "A class cannot extend more than one other class");
      {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public List ImplementsList(boolean isInterface) {
+  /*final*/public List ImplementsList(boolean isInterface) {
    List ret = new LinkedList();
    ClassOrInterfaceType cit;
    AnnotationExpr ann;
@@ -520,10 +520,10 @@ final class ASTParser implements ASTParserConstants {
       if (isInterface)
          throwParseException(token, "An interface cannot implement other interfaces");
      {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public EnumDeclaration EnumDeclaration(Modifier modifier) {
+  /*final*/public EnumDeclaration EnumDeclaration(Modifier modifier) {
         NameExpr name;
         List impList = null;
         EnumConstantDeclaration entry;
@@ -627,13 +627,13 @@ final class ASTParser implements ASTParserConstants {
       EnumDeclaration tmp = new EnumDeclaration(line, column, token.endLine, token.endColumn, modifier.modifiers, modifier.annotations, null, impList, entries, members);
       tmp.setNameExpr(name);
       {if (true) return tmp;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public EnumConstantDeclaration EnumConstantDeclaration() {
+  /*final*/public EnumConstantDeclaration EnumConstantDeclaration() {
         List annotations = null;
         AnnotationExpr ann;
-        String name;
+        string name;
         List args = null;
         List classBody = null;
         int line = -1;
@@ -673,10 +673,10 @@ final class ASTParser implements ASTParserConstants {
       EnumConstantDeclaration tmp = new EnumConstantDeclaration(line, column, token.endLine, token.endColumn, annotations, name, args, classBody);
 
       {if (true) return tmp;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public List TypeParameters() {
+  /*final*/public List TypeParameters() {
         List ret = new LinkedList();
         TypeParameter tp;
         List annotations = null;
@@ -727,11 +727,11 @@ final class ASTParser implements ASTParserConstants {
     }
     jj_consume_token(GT);
      {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public TypeParameter TypeParameter() {
-        String name;
+  /*final*/public TypeParameter TypeParameter() {
+        string name;
         List typeBound = null;
         int line;
         int column;
@@ -746,10 +746,10 @@ final class ASTParser implements ASTParserConstants {
       ;
     }
      {if (true) return new TypeParameter(line, column, token.endLine, token.endColumn,name, typeBound);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public List TypeBound() {
+  /*final*/public List TypeBound() {
         List ret = new LinkedList();
         ClassOrInterfaceType cit;
         AnnotationExpr ann;
@@ -798,10 +798,10 @@ final class ASTParser implements ASTParserConstants {
                                                                                                            cit.setAnnotations(annotations); ret.add(cit); annotations=null;
     }
      {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public List ClassOrInterfaceBody(boolean isInterface) {
+  /*final*/public List ClassOrInterfaceBody(boolean isInterface) {
         List ret = new LinkedList();
         BodyDeclaration member;
     jj_consume_token(LBRACE);
@@ -848,10 +848,10 @@ final class ASTParser implements ASTParserConstants {
     }
     jj_consume_token(RBRACE);
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public BodyDeclaration ClassOrInterfaceBodyDeclaration(boolean isInterface) {
+  /*final*/public BodyDeclaration ClassOrInterfaceBodyDeclaration(boolean isInterface) {
    boolean isNestedInterface = false;
    Modifier modifier;
    Modifier modifier2 = null;
@@ -956,7 +956,7 @@ final class ASTParser implements ASTParserConstants {
             }
           }
         }
-            if(isDefault && ! (ret instanceof MethodDeclaration))
+            if(isDefault && ! (ret is MethodDeclaration))
             {
               throwParseException(token, "Just methods can have the keyword \"default\".");
             }
@@ -972,14 +972,14 @@ final class ASTParser implements ASTParserConstants {
       }
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public FieldDeclaration FieldDeclaration(Modifier modifier) {
+  /*final*/public FieldDeclaration FieldDeclaration(Modifier modifier) {
         Type type;
         List variables = new LinkedList();
         VariableDeclarator val;
-    // Modifiers are already matched in the caller
+    // Modifiers are already matched _in the caller
       type = Type();
     val = VariableDeclarator();
                                      variables.add(val);
@@ -1002,10 +1002,10 @@ final class ASTParser implements ASTParserConstants {
         int column = modifier.beginColumn;
         if (line == -1) { line=type.getBeginLine(); column=type.getBeginColumn(); }
         {if (true) return new FieldDeclaration(line, column, token.endLine, token.endColumn, modifier.modifiers, modifier.annotations, type, variables);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public VariableDeclarator VariableDeclarator() {
+  /*final*/public VariableDeclarator VariableDeclarator() {
         VariableDeclaratorId id;
         Expression init = null;
     id = VariableDeclaratorId();
@@ -1019,11 +1019,11 @@ final class ASTParser implements ASTParserConstants {
       ;
     }
     {if (true) return new  VariableDeclarator(id.getBeginLine(), id.getBeginColumn(), token.endLine, token.endColumn, id, init);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public VariableDeclaratorId VariableDeclaratorId() {
-        String name;
+  /*final*/public VariableDeclaratorId VariableDeclaratorId() {
+        string name;
         int arrayCount = 0;
         int line;
         int column;
@@ -1044,10 +1044,10 @@ final class ASTParser implements ASTParserConstants {
                                                                                                    arrayCount++;
     }
     {if (true) return new VariableDeclaratorId(line, column, token.endLine, token.endColumn,name, arrayCount);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Expression VariableInitializer() {
+  /*final*/public Expression VariableInitializer() {
         Expression ret;
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case LBRACE:
@@ -1089,10 +1089,10 @@ final class ASTParser implements ASTParserConstants {
       throw new ParseException();
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public ArrayInitializerExpr ArrayInitializer() {
+  /*final*/public ArrayInitializerExpr ArrayInitializer() {
         List values = null;
         Expression val;
         int line;
@@ -1157,10 +1157,10 @@ final class ASTParser implements ASTParserConstants {
     }
     jj_consume_token(RBRACE);
     {if (true) return new ArrayInitializerExpr(line, column, token.endLine, token.endColumn,values);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public MethodDeclaration MethodDeclaration(Modifier modifier) {
+  /*final*/public MethodDeclaration MethodDeclaration(Modifier modifier) {
         List typeParameters = null;
         Type type;
         NameExpr name;
@@ -1221,10 +1221,10 @@ final class ASTParser implements ASTParserConstants {
       MethodDeclaration tmp = new MethodDeclaration(line, column, token.endLine, token.endColumn, modifier.modifiers, modifier.annotations, typeParameters, type, null, parameters, arrayCount, throws_, block);
       tmp.setNameExpr(name);
       {if (true) return tmp;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public List FormalParameters() {
+  /*final*/public List FormalParameters() {
         List ret = null;
         Parameter par;
     jj_consume_token(LPAREN);
@@ -1273,10 +1273,10 @@ final class ASTParser implements ASTParserConstants {
     }
     jj_consume_token(RPAREN);
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public List FormalLambdaParameters() {
+  /*final*/public List FormalLambdaParameters() {
   List ret = null;
   Parameter par;
     jj_consume_token(COMMA);
@@ -1297,10 +1297,10 @@ final class ASTParser implements ASTParserConstants {
                                                                                            ret = add(ret, par);
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public List InferredLambdaParameters() {
+  /*final*/public List InferredLambdaParameters() {
   List ret = null;
   VariableDeclaratorId id;
     jj_consume_token(COMMA);
@@ -1321,10 +1321,10 @@ final class ASTParser implements ASTParserConstants {
                                        ret = add(ret, new Parameter(id.getBeginLine(), id.getBeginColumn(), id.getEndLine(), id.getEndColumn(), 0, null, new UnknownType(), false, id));
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Parameter FormalParameter() {
+  /*final*/public Parameter FormalParameter() {
         Modifier modifier;
         Type type;
         boolean isVarArg = false;
@@ -1345,10 +1345,10 @@ final class ASTParser implements ASTParserConstants {
     int column = modifier.beginColumn;
     if(line==-1){ line=type.getBeginLine(); column=type.getBeginColumn(); }
     {if (true) return new Parameter(line, column, token.endLine, token.endColumn, modifier.modifiers, modifier.annotations, type, isVarArg, id);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public ConstructorDeclaration ConstructorDeclaration(Modifier modifier) {
+  /*final*/public ConstructorDeclaration ConstructorDeclaration(Modifier modifier) {
         List typeParameters = null;
         NameExpr name;
         List parameters;
@@ -1370,7 +1370,7 @@ final class ASTParser implements ASTParserConstants {
       jj_la1[52] = jj_gen;
       ;
     }
-    // Modifiers matched in the caller
+    // Modifiers matched _in the caller
       name = SimpleName();
                         if(line==-1){line=token.beginLine; column=token.beginColumn;}
     parameters = FormalParameters();
@@ -1398,10 +1398,10 @@ final class ASTParser implements ASTParserConstants {
         ConstructorDeclaration tmp = new ConstructorDeclaration(line, column, token.endLine, token.endColumn, modifier.modifiers, modifier.annotations, typeParameters, null, parameters, throws_, new BlockStmt(bbLine, bbColumn, token.endLine, token.endColumn, stmts));
     tmp.setNameExpr(name);
     {if (true) return tmp;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public ExplicitConstructorInvocationStmt ExplicitConstructorInvocation() {
+  /*final*/public ExplicitConstructorInvocationStmt ExplicitConstructorInvocation() {
         boolean isThis = false;
         List args;
         Expression expr = null;
@@ -1478,10 +1478,10 @@ final class ASTParser implements ASTParserConstants {
       }
     }
     {if (true) return new ExplicitConstructorInvocationStmt(line, column, token.endLine, token.endColumn,typeArgs, isThis, expr, args);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public List Statements() {
+  /*final*/public List Statements() {
         List ret = null;
         Statement stmt;
     label_26:
@@ -1548,10 +1548,10 @@ final class ASTParser implements ASTParserConstants {
                                     ret = add(ret, stmt);
     }
           {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public InitializerDeclaration InitializerDeclaration() {
+  /*final*/public InitializerDeclaration InitializerDeclaration() {
         BlockStmt block;
         int line = -1;
         int column = 0;
@@ -1568,13 +1568,13 @@ final class ASTParser implements ASTParserConstants {
     block = Block();
                                                                                                     if(line==-1){line=block.getBeginLine(); column=block.getBeginColumn();}
     {if (true) return new InitializerDeclaration(line, column, token.endLine, token.endColumn, isStatic, block);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
 /*
  * Type, name and expression syntax follows.
  */
-  final public Type Type() {
+  /*final*/public Type Type() {
         Type ret;
     if (jj_2_11(2)) {
       ret = ReferenceType();
@@ -1597,10 +1597,10 @@ final class ASTParser implements ASTParserConstants {
       }
     }
    {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public ReferenceType ReferenceType() {
+  /*final*/public ReferenceType ReferenceType() {
         Type type;
         int arrayCount = 0;
         List annotations = null;
@@ -1674,12 +1674,12 @@ final class ASTParser implements ASTParserConstants {
       throw new ParseException();
     }
     {if (true) return new ReferenceType(type.getBeginLine(), type.getBeginColumn(), token.endLine, token.endColumn, type, arrayCount, null, accum);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public ClassOrInterfaceType ClassOrInterfaceType() {
+  /*final*/public ClassOrInterfaceType ClassOrInterfaceType() {
         ClassOrInterfaceType ret;
-        String name;
+        string name;
         List typeArgs = null;
         int line;
         int column;
@@ -1727,10 +1727,10 @@ final class ASTParser implements ASTParserConstants {
                                                                               ret = new ClassOrInterfaceType(line, column, token.endLine, token.endColumn,ret, name, typeArgs); ret.setAnnotations(annotations); annotations = null;
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public List TypeArguments() {
+  /*final*/public List TypeArguments() {
         List ret = new LinkedList();
         Type type;
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -1766,10 +1766,10 @@ final class ASTParser implements ASTParserConstants {
       jj_consume_token(-1);
       throw new ParseException();
     }
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Type TypeArgument() {
+  /*final*/public Type TypeArgument() {
         Type ret;
         List annotations = null;
         AnnotationExpr ann;
@@ -1807,10 +1807,10 @@ final class ASTParser implements ASTParserConstants {
       throw new ParseException();
     }
    ret.setAnnotations(annotations); {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public WildcardType Wildcard() {
+  /*final*/public WildcardType Wildcard() {
         ReferenceType ext = null;
         ReferenceType sup = null;
         int line;
@@ -1870,10 +1870,10 @@ final class ASTParser implements ASTParserConstants {
       ;
     }
      {if (true) return new WildcardType(line, column, token.endLine, token.endColumn,ext, sup);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public PrimitiveType PrimitiveType() {
+  /*final*/public PrimitiveType PrimitiveType() {
         PrimitiveType ret;
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case BOOLEAN:
@@ -1914,10 +1914,10 @@ final class ASTParser implements ASTParserConstants {
       throw new ParseException();
     }
   {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Type ResultType() {
+  /*final*/public Type ResultType() {
         Type ret;
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case VOID:
@@ -1941,10 +1941,10 @@ final class ASTParser implements ASTParserConstants {
       throw new ParseException();
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public NameExpr Name() {
+  /*final*/public NameExpr Name() {
         NameExpr ret;
     jj_consume_token(IDENTIFIER);
                  ret = new NameExpr(token.beginLine, token.beginColumn, token.endLine, token.endColumn, token.image);
@@ -1960,10 +1960,10 @@ final class ASTParser implements ASTParserConstants {
                                     ret = new QualifiedNameExpr(ret.getBeginLine(), ret.getBeginColumn(), token.endLine, token.endColumn, ret, token.image);
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public List ClassOrInterfaceTypeList() {
+  /*final*/public List ClassOrInterfaceTypeList() {
         List ret = new LinkedList();
         ClassOrInterfaceType type;
         List annotations= null;
@@ -2011,18 +2011,18 @@ final class ASTParser implements ASTParserConstants {
                                                                                                                                                                                                                                                                                  type.setAnnotations(annotations); ret.add(type); annotations=null;
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public NameExpr SimpleName() {
+  /*final*/public NameExpr SimpleName() {
     NameExpr ret;
     jj_consume_token(IDENTIFIER);
                  ret = new NameExpr(token.beginLine, token.beginColumn, token.endLine, token.endColumn, token.image);
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public List NameList() {
+  /*final*/public List NameList() {
         List ret = new LinkedList();
         NameExpr name;
     name = Name();
@@ -2042,13 +2042,13 @@ final class ASTParser implements ASTParserConstants {
                                                           ret.add(name);
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
 /*
  * Expression syntax follows.
  */
-  final public Expression Expression() {
+  /*final*/public Expression Expression() {
         Expression ret;
         AssignExpr.Operator op;
         Expression value;
@@ -2082,12 +2082,12 @@ final class ASTParser implements ASTParserConstants {
         case ARROW:
           jj_consume_token(ARROW);
           lambdaBody = LambdaBody();
-     if (ret instanceof CastExpr)
+     if (ret is CastExpr)
      {
        inner = generateLambda(((CastExpr)ret).getExpr(), lambdaBody);
        ((CastExpr)ret).setExpr(inner);
      }
-     else if (ret instanceof ConditionalExpr){
+     else if (ret is ConditionalExpr){
          ConditionalExpr ce = (ConditionalExpr) ret;
          if(ce.getElseExpr() != null){
             ce.setElseExpr(generateLambda(ce.getElseExpr(), lambdaBody));
@@ -2135,10 +2135,10 @@ final class ASTParser implements ASTParserConstants {
       ;
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public AssignExpr.Operator AssignmentOperator() {
+  /*final*/public AssignExpr.Operator AssignmentOperator() {
         AssignExpr.Operator ret;
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case ASSIGN:
@@ -2195,10 +2195,10 @@ final class ASTParser implements ASTParserConstants {
       throw new ParseException();
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Expression ConditionalExpression() {
+  /*final*/public Expression ConditionalExpression() {
         Expression ret;
         Expression left;
         Expression right;
@@ -2216,10 +2216,10 @@ final class ASTParser implements ASTParserConstants {
       ;
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Expression ConditionalOrExpression() {
+  /*final*/public Expression ConditionalOrExpression() {
         Expression ret;
         Expression right;
     ret = ConditionalAndExpression();
@@ -2238,10 +2238,10 @@ final class ASTParser implements ASTParserConstants {
                                                                                ret = new BinaryExpr(ret.getBeginLine(), ret.getBeginColumn(), token.endLine, token.endColumn, ret, right, BinaryExpr.Operator.or);
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Expression ConditionalAndExpression() {
+  /*final*/public Expression ConditionalAndExpression() {
         Expression ret;
         Expression right;
     ret = InclusiveOrExpression();
@@ -2260,10 +2260,10 @@ final class ASTParser implements ASTParserConstants {
                                                                          ret = new BinaryExpr(ret.getBeginLine(), ret.getBeginColumn(), token.endLine, token.endColumn, ret, right, BinaryExpr.Operator.and);
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Expression InclusiveOrExpression() {
+  /*final*/public Expression InclusiveOrExpression() {
         Expression ret;
         Expression right;
     ret = ExclusiveOrExpression();
@@ -2282,10 +2282,10 @@ final class ASTParser implements ASTParserConstants {
                                                                         ret = new BinaryExpr(ret.getBeginLine(), ret.getBeginColumn(), token.endLine, token.endColumn, ret, right, BinaryExpr.Operator.binOr);
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Expression ExclusiveOrExpression() {
+  /*final*/public Expression ExclusiveOrExpression() {
         Expression ret;
         Expression right;
     ret = AndExpression();
@@ -2304,10 +2304,10 @@ final class ASTParser implements ASTParserConstants {
                                                         ret = new BinaryExpr(ret.getBeginLine(), ret.getBeginColumn(), token.endLine, token.endColumn, ret, right, BinaryExpr.Operator.xor);
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Expression AndExpression() {
+  /*final*/public Expression AndExpression() {
         Expression ret;
         Expression right;
     ret = EqualityExpression();
@@ -2326,10 +2326,10 @@ final class ASTParser implements ASTParserConstants {
                                                                   ret = new BinaryExpr(ret.getBeginLine(), ret.getBeginColumn(), token.endLine, token.endColumn, ret, right, BinaryExpr.Operator.binAnd);
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Expression EqualityExpression() {
+  /*final*/public Expression EqualityExpression() {
         Expression ret;
         Expression right;
         BinaryExpr.Operator op;
@@ -2363,10 +2363,10 @@ final class ASTParser implements ASTParserConstants {
                                        ret = new BinaryExpr(ret.getBeginLine(), ret.getBeginColumn(), token.endLine, token.endColumn, ret, right, op);
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Expression InstanceOfExpression() {
+  /*final*/public Expression InstanceOfExpression() {
         Expression ret;
         Type type;
     ret = RelationalExpression();
@@ -2381,10 +2381,10 @@ final class ASTParser implements ASTParserConstants {
       ;
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Expression RelationalExpression() {
+  /*final*/public Expression RelationalExpression() {
         Expression ret;
         Expression right;
         BinaryExpr.Operator op;
@@ -2428,10 +2428,10 @@ final class ASTParser implements ASTParserConstants {
                                       ret = new BinaryExpr(ret.getBeginLine(), ret.getBeginColumn(), token.endLine, token.endColumn, ret, right, op);
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Expression ShiftExpression() {
+  /*final*/public Expression ShiftExpression() {
         Expression ret;
         Expression right;
         BinaryExpr.Operator op;
@@ -2465,10 +2465,10 @@ final class ASTParser implements ASTParserConstants {
                                          ret = new BinaryExpr(ret.getBeginLine(), ret.getBeginColumn(), token.endLine, token.endColumn, ret, right, op);
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Expression AdditiveExpression() {
+  /*final*/public Expression AdditiveExpression() {
         Expression ret;
         Expression right;
         BinaryExpr.Operator op;
@@ -2502,10 +2502,10 @@ final class ASTParser implements ASTParserConstants {
                                                ret = new BinaryExpr(ret.getBeginLine(), ret.getBeginColumn(), token.endLine, token.endColumn, ret, right, op);
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Expression MultiplicativeExpression() {
+  /*final*/public Expression MultiplicativeExpression() {
         Expression ret;
         Expression right;
         BinaryExpr.Operator op;
@@ -2544,10 +2544,10 @@ final class ASTParser implements ASTParserConstants {
                                       ret = new BinaryExpr(ret.getBeginLine(), ret.getBeginColumn(), token.endLine, token.endColumn, ret, right, op);
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Expression UnaryExpression() {
+  /*final*/public Expression UnaryExpression() {
         Expression ret;
         UnaryExpr.Operator op;
         int line = 0;
@@ -2577,9 +2577,9 @@ final class ASTParser implements ASTParserConstants {
       }
       ret = UnaryExpression();
                  if(op == UnaryExpr.Operator.negative) {
-                        if (ret instanceof IntegerLiteralExpr && ((IntegerLiteralExpr)ret).isMinValue()) {
+                        if (ret is IntegerLiteralExpr && ((IntegerLiteralExpr)ret).isMinValue()) {
                                 ret = new IntegerLiteralMinValueExpr(line, column, token.endLine, token.endColumn);
-                        } else if (ret instanceof LongLiteralExpr && ((LongLiteralExpr)ret).isMinValue()) {
+                        } else if (ret is LongLiteralExpr && ((LongLiteralExpr)ret).isMinValue()) {
                                 ret = new LongLiteralMinValueExpr(line, column, token.endLine, token.endColumn);
                         } else {
                                 ret = new UnaryExpr(line, column, token.endLine, token.endColumn,ret, op);
@@ -2620,10 +2620,10 @@ final class ASTParser implements ASTParserConstants {
       throw new ParseException();
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Expression PreIncrementExpression() {
+  /*final*/public Expression PreIncrementExpression() {
         Expression ret;
         int line;
         int column;
@@ -2632,10 +2632,10 @@ final class ASTParser implements ASTParserConstants {
     ret = UnaryExpression();
                                                                                    ret = new UnaryExpr(line, column, token.endLine, token.endColumn,ret, UnaryExpr.Operator.preIncrement);
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Expression PreDecrementExpression() {
+  /*final*/public Expression PreDecrementExpression() {
         Expression ret;
         int line;
         int column;
@@ -2644,10 +2644,10 @@ final class ASTParser implements ASTParserConstants {
     ret = UnaryExpression();
                                                                                    ret = new UnaryExpr(line, column, token.endLine, token.endColumn,ret, UnaryExpr.Operator.preDecrement);
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Expression UnaryExpressionNotPlusMinus() {
+  /*final*/public Expression UnaryExpressionNotPlusMinus() {
         Expression ret;
         UnaryExpr.Operator op;
         int line = 0;
@@ -2710,10 +2710,10 @@ final class ASTParser implements ASTParserConstants {
       }
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Expression PostfixExpression() {
+  /*final*/public Expression PostfixExpression() {
         Expression ret;
         UnaryExpr.Operator op;
     ret = PrimaryExpression();
@@ -2737,10 +2737,10 @@ final class ASTParser implements ASTParserConstants {
       ;
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Expression CastExpression() {
+  /*final*/public Expression CastExpression() {
         Expression ret;
         Type type;
         int line;
@@ -2790,10 +2790,10 @@ final class ASTParser implements ASTParserConstants {
       }
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Expression PrimaryExpression() {
+  /*final*/public Expression PrimaryExpression() {
         Expression ret;
         Expression inner;
     ret = PrimaryPrefix();
@@ -2807,10 +2807,10 @@ final class ASTParser implements ASTParserConstants {
       ret = PrimarySuffix(ret);
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Expression PrimaryExpressionWithoutSuperSuffix() {
+  /*final*/public Expression PrimaryExpressionWithoutSuperSuffix() {
         Expression ret;
         Expression inner;
     ret = PrimaryPrefix();
@@ -2824,10 +2824,10 @@ final class ASTParser implements ASTParserConstants {
       ret = PrimarySuffixWithoutSuper(ret);
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Expression PrimaryPrefix() {
+  /*final*/public Expression PrimaryPrefix() {
         Expression ret = null;
         NameExpr name;
         List typeArgs = null;
@@ -3036,7 +3036,7 @@ final class ASTParser implements ASTParserConstants {
                            if(!isLambda) { ret = new EnclosedExpr(line, column, token.endLine, token.endColumn,ret);}
                            else{
                                   if(ret != null){
-                                          if(ret instanceof NameExpr)
+                                          if(ret is NameExpr)
                                           {
                                             id = new VariableDeclaratorId(ret.getBeginLine(), ret.getBeginColumn(), ret.getEndLine(), ret.getEndColumn(), ((NameExpr)ret).getName(), 0);
                                             p = new Parameter(ret.getBeginLine(), ret.getBeginColumn(), ret.getEndLine(), ret.getEndColumn(), 0, null, new UnknownType(), false, id);
@@ -3113,10 +3113,10 @@ final class ASTParser implements ASTParserConstants {
       }
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Expression PrimarySuffix(Expression scope) {
+  /*final*/public Expression PrimarySuffix(Expression scope) {
         Expression ret;
     if (jj_2_30(2)) {
       ret = PrimarySuffixWithoutSuper(scope);
@@ -3134,10 +3134,10 @@ final class ASTParser implements ASTParserConstants {
       }
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Expression PrimarySuffixWithoutSuper(Expression scope) {
+  /*final*/public Expression PrimarySuffixWithoutSuper(Expression scope) {
         Expression ret;
         List typeArgs = null;
         List args = null;
@@ -3204,10 +3204,10 @@ final class ASTParser implements ASTParserConstants {
       throw new ParseException();
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Expression Literal() {
+  /*final*/public Expression Literal() {
         Expression ret;
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case INTEGER_LITERAL:
@@ -3243,10 +3243,10 @@ final class ASTParser implements ASTParserConstants {
       throw new ParseException();
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Expression BooleanLiteral() {
+  /*final*/public Expression BooleanLiteral() {
         Expression ret;
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case TRUE:
@@ -3263,16 +3263,16 @@ final class ASTParser implements ASTParserConstants {
       throw new ParseException();
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Expression NullLiteral() {
+  /*final*/public Expression NullLiteral() {
     jj_consume_token(NULL);
     {if (true) return new NullLiteralExpr(token.beginLine, token.beginColumn, token.endLine, token.endColumn);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public List Arguments() {
+  /*final*/public List Arguments() {
         List ret = null;
     jj_consume_token(LPAREN);
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -3312,10 +3312,10 @@ final class ASTParser implements ASTParserConstants {
     }
     jj_consume_token(RPAREN);
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public List ArgumentList() {
+  /*final*/public List ArgumentList() {
         List ret = new LinkedList();
         Expression expr;
     expr = Expression();
@@ -3335,10 +3335,10 @@ final class ASTParser implements ASTParserConstants {
                                                                      ret.add(expr);
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Expression AllocationExpression(Expression scope) {
+  /*final*/public Expression AllocationExpression(Expression scope) {
         Expression ret;
         ArrayCreationExpr arrayExpr;
         Type type;
@@ -3379,7 +3379,7 @@ final class ASTParser implements ASTParserConstants {
       arr = ArrayDimsAndInits();
             arrayExpr = new ArrayCreationExpr(line, column, token.endLine, token.endColumn, type, null, 0);
             arrayExpr.setArraysAnnotations((List)arr[2]);
-                if (arr[0] instanceof Integer) {
+                if (arr[0] is Integer) {
                     arrayExpr.setArrayCount(((Integer)arr[0]).intValue());
                     arrayExpr.setInitializer((ArrayInitializerExpr)arr[1]);
                 } else {
@@ -3421,7 +3421,7 @@ final class ASTParser implements ASTParserConstants {
         arr = ArrayDimsAndInits();
                                          type.setAnnotations(annotations); arrayExpr = new ArrayCreationExpr(line, column, token.endLine, token.endColumn, type, null, 0);
                     arrayExpr.setArraysAnnotations((List)arr[2]);
-                        if (arr[0] instanceof Integer) {
+                        if (arr[0] is Integer) {
                                 arrayExpr.setArrayCount(((Integer)arr[0]).intValue());
                             arrayExpr.setInitializer((ArrayInitializerExpr)arr[1]);
                         } else {
@@ -3451,14 +3451,14 @@ final class ASTParser implements ASTParserConstants {
       throw new ParseException();
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
 /*
  * The third LOOKAHEAD specification below is to parse to PrimarySuffix
  * if there is an expression between the "[...]".
  */
-  final public Object[] ArrayDimsAndInits() {
+  /*final*/public Object[] ArrayDimsAndInits() {
         Object[] ret = new Object[3];
         Expression expr;
         List inits = null;
@@ -3544,13 +3544,13 @@ final class ASTParser implements ASTParserConstants {
       }
     }
     ret[2]=accum; {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
 /*
  * Statement syntax follows.
  */
-  final public Statement Statement() {
+  /*final*/public Statement Statement() {
         Statement ret;
     if (jj_2_36(2)) {
       ret = LabeledStatement();
@@ -3631,10 +3631,10 @@ final class ASTParser implements ASTParserConstants {
       }
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public AssertStmt AssertStatement() {
+  /*final*/public AssertStmt AssertStatement() {
         Expression check;
         Expression msg = null;
         int line;
@@ -3653,11 +3653,11 @@ final class ASTParser implements ASTParserConstants {
     }
     jj_consume_token(SEMICOLON);
     {if (true) return new AssertStmt(line, column, token.endLine, token.endColumn,check, msg);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public LabeledStmt LabeledStatement() {
-        String label;
+  /*final*/public LabeledStmt LabeledStatement() {
+        string label;
         Statement stmt;
         int line;
         int column;
@@ -3667,10 +3667,10 @@ final class ASTParser implements ASTParserConstants {
     jj_consume_token(COLON);
     stmt = Statement();
     {if (true) return new LabeledStmt(line, column, token.endLine, token.endColumn,label, stmt);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public BlockStmt Block() {
+  /*final*/public BlockStmt Block() {
         List stmts;
         int beginLine;
         int beginColumn;
@@ -3679,13 +3679,13 @@ final class ASTParser implements ASTParserConstants {
     stmts = Statements();
     jj_consume_token(RBRACE);
     {if (true) return new BlockStmt(beginLine, beginColumn, token.endLine, token.endColumn, stmts);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
 /*
  * Classes inside block stametents can only be abstract or final. The semantic must check it.
  */
-  final public Statement BlockStatement() {
+  /*final*/public Statement BlockStatement() {
         Statement ret;
         Expression expr;
         ClassOrInterfaceDeclaration typeDecl;
@@ -3748,10 +3748,10 @@ final class ASTParser implements ASTParserConstants {
       }
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public VariableDeclarationExpr VariableDeclarationExpression() {
+  /*final*/public VariableDeclarationExpr VariableDeclarationExpression() {
         Modifier modifier;
         Type type;
         List vars = new LinkedList();
@@ -3778,16 +3778,16 @@ final class ASTParser implements ASTParserConstants {
     int column = modifier.beginColumn;
     if(line==-1) {line=type.getBeginLine(); column=type.getBeginColumn(); }
     {if (true) return new VariableDeclarationExpr(line, column, token.endLine, token.endColumn, modifier.modifiers, modifier.annotations, type, vars);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public EmptyStmt EmptyStatement() {
+  /*final*/public EmptyStmt EmptyStatement() {
     jj_consume_token(SEMICOLON);
     {if (true) return new EmptyStmt(token.beginLine, token.beginColumn, token.endLine, token.endColumn);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Statement LambdaBody() {
+  /*final*/public Statement LambdaBody() {
   Expression expr;
   Statement n = null;
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -3831,10 +3831,10 @@ final class ASTParser implements ASTParserConstants {
       throw new ParseException();
     }
         {if (true) return n;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public ExpressionStmt StatementExpression() {
+  /*final*/public ExpressionStmt StatementExpression() {
         Expression expr;
         AssignExpr.Operator op;
         Expression value;
@@ -3944,7 +3944,7 @@ final class ASTParser implements ASTParserConstants {
           case ARROW:
             jj_consume_token(ARROW);
             lambdaBody = LambdaBody();
-             if (expr instanceof CastExpr)
+             if (expr is CastExpr)
              {
            inner = generateLambda(((CastExpr)expr).getExpr(), lambdaBody);
            ((CastExpr)expr).setExpr(inner);
@@ -3973,10 +3973,10 @@ final class ASTParser implements ASTParserConstants {
     }
     jj_consume_token(SEMICOLON);
     {if (true) return new ExpressionStmt(expr.getBeginLine(), expr.getBeginColumn(), token.endLine, token.endColumn, expr);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public SwitchStmt SwitchStatement() {
+  /*final*/public SwitchStmt SwitchStatement() {
         Expression selector;
         SwitchEntryStmt entry;
         List entries = null;
@@ -4004,10 +4004,10 @@ final class ASTParser implements ASTParserConstants {
     }
     jj_consume_token(RBRACE);
     {if (true) return new SwitchStmt(line, column, token.endLine, token.endColumn,selector, entries);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public SwitchEntryStmt SwitchEntry() {
+  /*final*/public SwitchEntryStmt SwitchEntry() {
         Expression label = null;
         List stmts;
         int line;
@@ -4030,10 +4030,10 @@ final class ASTParser implements ASTParserConstants {
     jj_consume_token(COLON);
     stmts = Statements();
     {if (true) return new SwitchEntryStmt(line, column, token.endLine, token.endColumn,label, stmts);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public IfStmt IfStatement() {
+  /*final*/public IfStmt IfStatement() {
         Expression condition;
         Statement thenStmt;
         Statement elseStmt = null;
@@ -4064,10 +4064,10 @@ final class ASTParser implements ASTParserConstants {
       if (elseStmt != null)
           elseStmt.setComment(elseCmmt);
       {if (true) return tmp;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public WhileStmt WhileStatement() {
+  /*final*/public WhileStmt WhileStatement() {
         Expression condition;
         Statement body;
         int line;
@@ -4079,10 +4079,10 @@ final class ASTParser implements ASTParserConstants {
     jj_consume_token(RPAREN);
     body = Statement();
     {if (true) return new WhileStmt(line, column, token.endLine, token.endColumn,condition, body);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public DoStmt DoStatement() {
+  /*final*/public DoStmt DoStatement() {
         Expression condition;
         Statement body;
         int line;
@@ -4096,11 +4096,11 @@ final class ASTParser implements ASTParserConstants {
     jj_consume_token(RPAREN);
     jj_consume_token(SEMICOLON);
     {if (true) return new DoStmt(line, column, token.endLine, token.endColumn,body, condition);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Statement ForStatement() {
-        String id = null;
+  /*final*/public Statement ForStatement() {
+        string id = null;
         VariableDeclarationExpr varExpr = null;
         Expression expr = null;
         List init = null;
@@ -4290,10 +4290,10 @@ final class ASTParser implements ASTParserConstants {
                 {if (true) return new ForeachStmt(line, column, token.endLine, token.endColumn,varExpr, expr, body);}
         }
         {if (true) return new ForStmt(line, column, token.endLine, token.endColumn,init, expr, update, body);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public List ForInit() {
+  /*final*/public List ForInit() {
         List ret;
         Expression expr;
     if (jj_2_41(2147483647)) {
@@ -4338,10 +4338,10 @@ final class ASTParser implements ASTParserConstants {
       }
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public List ExpressionList() {
+  /*final*/public List ExpressionList() {
         List ret = new LinkedList();
         Expression expr;
     expr = Expression();
@@ -4361,18 +4361,18 @@ final class ASTParser implements ASTParserConstants {
                                                                       ret.add(expr);
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public List ForUpdate() {
+  /*final*/public List ForUpdate() {
         List ret;
     ret = ExpressionList();
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public BreakStmt BreakStatement() {
-        String id = null;
+  /*final*/public BreakStmt BreakStatement() {
+        string id = null;
         int line;
         int column;
     jj_consume_token(BREAK);
@@ -4388,11 +4388,11 @@ final class ASTParser implements ASTParserConstants {
     }
     jj_consume_token(SEMICOLON);
     {if (true) return new BreakStmt(line, column, token.endLine, token.endColumn,id);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public ContinueStmt ContinueStatement() {
-        String id = null;
+  /*final*/public ContinueStmt ContinueStatement() {
+        string id = null;
         int line;
         int column;
     jj_consume_token(CONTINUE);
@@ -4408,10 +4408,10 @@ final class ASTParser implements ASTParserConstants {
     }
     jj_consume_token(SEMICOLON);
     {if (true) return new ContinueStmt(line, column, token.endLine, token.endColumn,id);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public ReturnStmt ReturnStatement() {
+  /*final*/public ReturnStmt ReturnStatement() {
         Expression expr = null;
         int line;
         int column;
@@ -4454,10 +4454,10 @@ final class ASTParser implements ASTParserConstants {
     }
     jj_consume_token(SEMICOLON);
     {if (true) return new ReturnStmt(line, column, token.endLine, token.endColumn,expr);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public ThrowStmt ThrowStatement() {
+  /*final*/public ThrowStmt ThrowStatement() {
         Expression expr;
         int line;
         int column;
@@ -4466,10 +4466,10 @@ final class ASTParser implements ASTParserConstants {
     expr = Expression();
     jj_consume_token(SEMICOLON);
     {if (true) return new ThrowStmt(line, column, token.endLine, token.endColumn,expr);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public SynchronizedStmt SynchronizedStatement() {
+  /*final*/public SynchronizedStmt SynchronizedStatement() {
         Expression expr;
         BlockStmt block;
         int line;
@@ -4481,10 +4481,10 @@ final class ASTParser implements ASTParserConstants {
     jj_consume_token(RPAREN);
     block = Block();
     {if (true) return new SynchronizedStmt(line, column, token.endLine, token.endColumn,expr, block);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public TryStmt TryStatement() {
+  /*final*/public TryStmt TryStatement() {
         List resources = new LinkedList();
         BlockStmt tryBlock;
         BlockStmt finallyBlock = null;
@@ -4555,10 +4555,10 @@ final class ASTParser implements ASTParserConstants {
       ;
     }
     {if (true) return new TryStmt(line, column, token.endLine, token.endColumn, resources, tryBlock, catchs, finallyBlock);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public List ResourceSpecification() {
+  /*final*/public List ResourceSpecification() {
 List vars;
     jj_consume_token(LPAREN);
     vars = Resources();
@@ -4569,10 +4569,10 @@ List vars;
     }
     jj_consume_token(RPAREN);
     {if (true) return vars;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public List Resources() {
+  /*final*/public List Resources() {
         List vars = new LinkedList();
         VariableDeclarationExpr var;
     /*this is a bit more lenient than we need to be, eg allowing access modifiers like private*/
@@ -4590,13 +4590,13 @@ List vars;
                                                                                                                   vars.add(var);
     }
     {if (true) return vars;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
 /* We use productions to match >>>, >> and > so that we can keep the
  * type declaration syntax with generics clean
  */
-  final public void RUNSIGNEDSHIFT() {
+  /*final*/public void RUNSIGNEDSHIFT() {
     if (getToken(1).kind == GT &&
                     ((GTToken)getToken(1)).realKind == RUNSIGNEDSHIFT) {
 
@@ -4609,7 +4609,7 @@ List vars;
     jj_consume_token(GT);
   }
 
-  final public void RSIGNEDSHIFT() {
+  /*final*/public void RSIGNEDSHIFT() {
     if (getToken(1).kind == GT &&
                     ((GTToken)getToken(1)).realKind == RSIGNEDSHIFT) {
 
@@ -4622,7 +4622,7 @@ List vars;
   }
 
 /* Annotation syntax follows. */
-  final public AnnotationExpr Annotation() {
+  /*final*/public AnnotationExpr Annotation() {
         AnnotationExpr ret;
     if (jj_2_44(2147483647)) {
       ret = NormalAnnotation();
@@ -4640,10 +4640,10 @@ List vars;
       }
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public NormalAnnotationExpr NormalAnnotation() {
+  /*final*/public NormalAnnotationExpr NormalAnnotation() {
         NameExpr name;
         List pairs = null;
         int line;
@@ -4662,10 +4662,10 @@ List vars;
     }
     jj_consume_token(RPAREN);
      {if (true) return new NormalAnnotationExpr(line, column, token.endLine, token.endColumn,name, pairs);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public MarkerAnnotationExpr MarkerAnnotation() {
+  /*final*/public MarkerAnnotationExpr MarkerAnnotation() {
         NameExpr name;
         int line;
         int column;
@@ -4673,10 +4673,10 @@ List vars;
        line=token.beginLine; column=token.beginColumn;
     name = Name();
     {if (true) return new MarkerAnnotationExpr(line, column, token.endLine, token.endColumn,name);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public SingleMemberAnnotationExpr SingleMemberAnnotation() {
+  /*final*/public SingleMemberAnnotationExpr SingleMemberAnnotation() {
         NameExpr name;
         Expression memberVal;
         int line;
@@ -4688,10 +4688,10 @@ List vars;
     memberVal = MemberValue();
     jj_consume_token(RPAREN);
     {if (true) return new SingleMemberAnnotationExpr(line, column, token.endLine, token.endColumn,name, memberVal);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public List MemberValuePairs() {
+  /*final*/public List MemberValuePairs() {
         List ret = new LinkedList();
         MemberValuePair pair;
     pair = MemberValuePair();
@@ -4711,11 +4711,11 @@ List vars;
                                                                                 ret.add(pair);
     }
      {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public MemberValuePair MemberValuePair() {
-        String name;
+  /*final*/public MemberValuePair MemberValuePair() {
+        string name;
         Expression value;
         int line;
         int column;
@@ -4724,10 +4724,10 @@ List vars;
     jj_consume_token(ASSIGN);
     value = MemberValue();
       {if (true) return new MemberValuePair(line, column, token.endLine, token.endColumn,name, value);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Expression MemberValue() {
+  /*final*/public Expression MemberValue() {
         Expression ret;
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case AT:
@@ -4772,10 +4772,10 @@ List vars;
       throw new ParseException();
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Expression MemberValueArrayInitializer() {
+  /*final*/public Expression MemberValueArrayInitializer() {
         List ret = new LinkedList();
         Expression member;
         int line;
@@ -4841,11 +4841,11 @@ List vars;
     }
     jj_consume_token(RBRACE);
     {if (true) return new ArrayInitializerExpr(line, column, token.endLine, token.endColumn,ret);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
 /* Annotation Types. */
-  final public AnnotationDeclaration AnnotationTypeDeclaration(Modifier modifier) {
+  /*final*/public AnnotationDeclaration AnnotationTypeDeclaration(Modifier modifier) {
         NameExpr name;
         List members;
         int line = modifier.beginLine;
@@ -4858,10 +4858,10 @@ List vars;
       AnnotationDeclaration tmp = new AnnotationDeclaration(line, column, token.endLine, token.endColumn, modifier.modifiers, modifier.annotations, null, members);
       tmp.setNameExpr(name);
       {if (true) return tmp;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public List AnnotationTypeBody() {
+  /*final*/public List AnnotationTypeBody() {
         List ret = null;
         BodyDeclaration member;
     jj_consume_token(LBRACE);
@@ -4904,10 +4904,10 @@ List vars;
     }
     jj_consume_token(RBRACE);
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public BodyDeclaration AnnotationBodyDeclaration() {
+  /*final*/public BodyDeclaration AnnotationBodyDeclaration() {
    Modifier modifier;
    BodyDeclaration ret;
 
@@ -4979,12 +4979,12 @@ List vars;
       throw new ParseException();
     }
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public AnnotationMemberDeclaration AnnotationTypeMemberDeclaration(Modifier modifier) {
+  /*final*/public AnnotationMemberDeclaration AnnotationTypeMemberDeclaration(Modifier modifier) {
         Type type;
-        String name;
+        string name;
         Expression defaultVal = null;
     type = Type();
     jj_consume_token(IDENTIFIER);
@@ -5004,15 +5004,15 @@ List vars;
     int column = modifier.beginColumn;
     { if (line == -1) {line=type.getBeginLine(); column=type.getBeginColumn();} }
     {if (true) return new AnnotationMemberDeclaration(line, column, token.endLine, token.endColumn, modifier.modifiers, modifier.annotations, type, name, defaultVal);}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
-  final public Expression DefaultValue() {
+  /*final*/public Expression DefaultValue() {
         Expression ret;
     jj_consume_token(_DEFAULT);
     ret = MemberValue();
     {if (true) return ret;}
-    throw new Error("Missing return statement in function");
+    throw new Error("Missing return statement _in function");
   }
 
   private boolean jj_2_1(int xla) {
@@ -8793,7 +8793,7 @@ List vars;
   private boolean jj_lookingAhead = false;
   private boolean jj_semLA;
   private int jj_gen;
-  final private int[] jj_la1 = new int[175];
+  /*final*/private int[] jj_la1 = new int[175];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static private int[] jj_la1_2;
@@ -8821,7 +8821,7 @@ List vars;
    private static void jj_la1_init_4() {
       jj_la1_4 = new int[] {0x0,0x0,0x8,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x10,0x10,0x10,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x10,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x4,0x4,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x10,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x10,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x10,0x0,0x10,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
-  final private JJCalls[] jj_2_rtns = new JJCalls[47];
+  /*final*/private JJCalls[] jj_2_rtns = new JJCalls[47];
   private boolean jj_rescan = false;
   private int jj_gc = 0;
 
@@ -8830,7 +8830,7 @@ List vars;
      this(stream, null);
   }
   /** Constructor with InputStream and supplied encoding */
-  public ASTParser(java.io.InputStream stream, String encoding) {
+  public ASTParser(java.io.InputStream stream, string encoding) {
     try { jj_input_stream = new JavaCharStream(stream, encoding, 1, 1); } catch(java.io.UnsupportedEncodingException e) { throw new RuntimeException(e); }
     token_source = new ASTParserTokenManager(jj_input_stream);
     token = new Token();
@@ -8845,7 +8845,7 @@ List vars;
      ReInit(stream, null);
   }
   /** Reinitialise. */
-  public void ReInit(java.io.InputStream stream, String encoding) {
+  public void ReInit(java.io.InputStream stream, string encoding) {
     try { jj_input_stream.ReInit(stream, encoding, 1, 1); } catch(java.io.UnsupportedEncodingException e) { throw new RuntimeException(e); }
     token_source.ReInit(jj_input_stream);
     token = new Token();
@@ -8921,8 +8921,8 @@ List vars;
     throw generateParseException();
   }
 
-  static private final class LookaheadSuccess extends java.lang.Error { }
-  final private LookaheadSuccess jj_ls = new LookaheadSuccess();
+  static private /*final*/class LookaheadSuccess:java.lang.Error { }
+  /*final*/private LookaheadSuccess jj_ls = new LookaheadSuccess();
   private boolean jj_scan_token(int kind) {
     if (jj_scanpos == jj_lastpos) {
       jj_la--;
@@ -8946,7 +8946,7 @@ List vars;
 
 
 /** Get the next Token. */
-  final public Token getNextToken() {
+  /*final*/public Token getNextToken() {
     if (token.next != null) token = token.next;
     else token = token.next = token_source.getNextToken();
     jj_ntk = -1;
@@ -8955,7 +8955,7 @@ List vars;
   }
 
 /** Get the specific Token. */
-  final public Token getToken(int index) {
+  /*final*/public Token getToken(int index) {
     Token t = jj_lookingAhead ? jj_scanpos : token;
     for (int i = 0; i < index; i++) {
       if (t.next != null) t = t.next;
@@ -9049,11 +9049,11 @@ List vars;
   }
 
   /** Enable tracing. */
-  final public void enable_tracing() {
+  /*final*/public void enable_tracing() {
   }
 
   /** Disable tracing. */
-  final public void disable_tracing() {
+  /*final*/public void disable_tracing() {
   }
 
   private void jj_rescan_token() {
@@ -9130,7 +9130,7 @@ List vars;
     p.gen = jj_gen + xla - jj_la; p.first = token; p.arg = xla;
   }
 
-  static final class JJCalls {
+  static /*final*/class JJCalls {
     int gen;
     Token first;
     int arg;

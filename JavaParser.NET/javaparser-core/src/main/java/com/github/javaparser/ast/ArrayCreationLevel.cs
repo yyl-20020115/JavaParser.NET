@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,7 +28,7 @@ namespace com.github.javaparser.ast;
  * the first one contains the expression "1",
  * the second the expression "2".
  */
-public class ArrayCreationLevel extends Node implements NodeWithAnnotations<ArrayCreationLevel> {
+public class ArrayCreationLevel:Node implements NodeWithAnnotations<ArrayCreationLevel> {
 
     @OptionalProperty
     private Expression dimension;
@@ -47,7 +47,7 @@ public class ArrayCreationLevel extends Node implements NodeWithAnnotations<Arra
         this(null, dimension, new NodeList<>());
     }
 
-    @AllFieldsConstructor
+    //@AllFieldsConstructor
     public ArrayCreationLevel(Expression dimension, NodeList<AnnotationExpr> annotations) {
         this(null, dimension, annotations);
     }
@@ -55,7 +55,7 @@ public class ArrayCreationLevel extends Node implements NodeWithAnnotations<Arra
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public ArrayCreationLevel(TokenRange tokenRange, Expression dimension, NodeList<AnnotationExpr> annotations) {
         super(tokenRange);
         setDimension(dimension);
@@ -64,14 +64,14 @@ public class ArrayCreationLevel extends Node implements NodeWithAnnotations<Arra
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
@@ -81,8 +81,8 @@ public class ArrayCreationLevel extends Node implements NodeWithAnnotations<Arra
      * @param dimension the dimension, can be null
      * @return this, the ArrayCreationLevel
      */
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public ArrayCreationLevel setDimension(final Expression dimension) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public ArrayCreationLevel setDimension(/*final*/Expression dimension) {
         if (dimension == this.dimension) {
             return this;
         }
@@ -94,18 +94,18 @@ public class ArrayCreationLevel extends Node implements NodeWithAnnotations<Arra
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Optional<Expression> getDimension() {
         return Optional.ofNullable(dimension);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public NodeList<AnnotationExpr> getAnnotations() {
         return annotations;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public ArrayCreationLevel setAnnotations(final NodeList<AnnotationExpr> annotations) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public ArrayCreationLevel setAnnotations(/*final*/NodeList<AnnotationExpr> annotations) {
         assertNotNull(annotations);
         if (annotations == this.annotations) {
             return this;
@@ -118,13 +118,13 @@ public class ArrayCreationLevel extends Node implements NodeWithAnnotations<Arra
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
     public ArrayCreationLevel removeDimension() {
         return setDimension((Expression) null);
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
     public bool remove(Node node) {
         if (node == null) {
             return false;
@@ -145,19 +145,19 @@ public class ArrayCreationLevel extends Node implements NodeWithAnnotations<Arra
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public ArrayCreationLevel clone() {
         return (ArrayCreationLevel) accept(new CloneVisitor(), null);
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public ArrayCreationLevelMetaModel getMetaModel() {
         return JavaParserMetaModel.arrayCreationLevelMetaModel;
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;

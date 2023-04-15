@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -35,7 +35,7 @@ public class AnnotationDeclaration : TypeDeclaration<AnnotationDeclaration>, Nod
     {
     }
 
-    public AnnotationDeclaration(NodeList<Modifier> modifiers, String name)
+    public AnnotationDeclaration(NodeList<Modifier> modifiers, string name)
     : this(null, modifiers, new NodeList<>(), new SimpleName(name), new NodeList<>())
     {
 
@@ -111,19 +111,19 @@ public class AnnotationDeclaration : TypeDeclaration<AnnotationDeclaration>, Nod
     //@Override
     public ResolvedAnnotationDeclaration resolve()
     {
-        return getSymbolResolver().resolveDeclaration(this, ResolvedAnnotationDeclaration.class);
+        return getSymbolResolver().resolveDeclaration(this, typeof(ResolvedAnnotationDeclaration));
     }
 
-//@Override
-//@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-public Optional<AnnotationDeclaration> toAnnotationDeclaration()
-{
-    return Optional.of(this);
-}
+    //@Override
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    public Optional<AnnotationDeclaration> toAnnotationDeclaration()
+    {
+        return Optional.of(this);
+    }
 
-//@Override
-public FieldDeclaration addField(Type type, String name, params Modifier.Keyword[] modifiers)
-{
-    throw new IllegalStateException("Cannot add a field to an annotation declaration.");
-}
+    //@Override
+    public FieldDeclaration addField(Type type, string name, params Modifier.Keyword[] modifiers)
+    {
+        throw new IllegalStateException("Cannot add a field to an annotation declaration.");
+    }
 }

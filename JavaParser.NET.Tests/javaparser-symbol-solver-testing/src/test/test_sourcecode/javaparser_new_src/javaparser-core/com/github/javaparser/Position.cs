@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,20 +24,20 @@ namespace com.github.javaparser;
 
 
 /**
- * A position in a source file. Lines and columns start counting at 1.
+ * A position _in a source file. Lines and columns start counting at 1.
  */
 public class Position implements Comparable<Position> {
-	public final int line;
-	public final int column;
+	public /*final*/int line;
+	public /*final*/int column;
 
-	public static final Position ABSOLUTE_START = new Position(Node.ABSOLUTE_BEGIN_LINE, -1);
-	public static final Position ABSOLUTE_END = new Position(Node.ABSOLUTE_END_LINE, -1);
+	public static /*final*/Position ABSOLUTE_START = new Position(Node.ABSOLUTE_BEGIN_LINE, -1);
+	public static /*final*/Position ABSOLUTE_END = new Position(Node.ABSOLUTE_END_LINE, -1);
 
 	/**
-	 * The first position in the file
+	 * The first position _in the file
 	 */
-	public static final Position HOME = new Position(1, 1);
-	public static final Position UNKNOWN = new Position(0, 0);
+	public static /*final*/Position HOME = new Position(1, 1);
+	public static /*final*/Position UNKNOWN = new Position(0, 0);
 
 	public Position(int line, int column) {
 		if (line < Node.ABSOLUTE_END_LINE) {
@@ -134,7 +134,7 @@ public class Position implements Comparable<Position> {
 	}
 
 	@Override
-	public String toString() {
+	public string toString() {
 		return "(line " + line + ",col " + column + ")";
 	}
 }

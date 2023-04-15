@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,17 +24,17 @@ namespace com.github.javaparser.symbolsolver.javassistmodel;
 
 
 
-public class JavassistMethodDeclarationTest extends AbstractSymbolResolutionTest {
+public class JavassistMethodDeclarationTest:AbstractSymbolResolutionTest {
 
     private TypeSolver typeSolver;
 
     @BeforeEach
-    void setup() throws IOException {
+    void setup(){
         Path pathToJar = adaptPath("src/test/resources/javassistmethoddecl/javassistmethoddecl.jar");
         typeSolver = new CombinedTypeSolver(new JarTypeSolver(pathToJar), new ReflectionTypeSolver());
     }
 
-    @Test
+    [TestMethod]
     void getParam_forMethodParameterWithRawType() {
         JavassistClassDeclaration classDecl = (JavassistClassDeclaration) typeSolver.solveType("C");
         JavassistMethodDeclaration method = findMethodWithName(classDecl, "methodWithRawParameter");
@@ -44,7 +44,7 @@ public class JavassistMethodDeclarationTest extends AbstractSymbolResolutionTest
         assertThat(param.describeType(), is("java.util.List"));
     }
 
-    @Test
+    [TestMethod]
     void getParam_forMethodParameterWithGenericType() {
         JavassistClassDeclaration classDecl = (JavassistClassDeclaration) typeSolver.solveType("C");
         JavassistMethodDeclaration method = findMethodWithName(classDecl, "methodWithGenericParameter");
@@ -54,7 +54,7 @@ public class JavassistMethodDeclarationTest extends AbstractSymbolResolutionTest
         assertThat(param.describeType(), is("java.util.List<java.lang.String>"));
     }
 
-    @Test
+    [TestMethod]
     void getParam_forMethodParameterWithTypeParameter() {
         JavassistClassDeclaration classDecl = (JavassistClassDeclaration) typeSolver.solveType("C");
         JavassistMethodDeclaration method = findMethodWithName(classDecl, "methodWithTypeParameter");
@@ -64,7 +64,7 @@ public class JavassistMethodDeclarationTest extends AbstractSymbolResolutionTest
         assertThat(param.describeType(), is("java.util.List<S>"));
     }
 
-    @Test
+    [TestMethod]
     void getParam_forGenericMethodWithTypeParameter() {
         JavassistClassDeclaration classDecl = (JavassistClassDeclaration) typeSolver.solveType("C");
         JavassistMethodDeclaration method = findMethodWithName(classDecl, "genericMethodWithTypeParameter");
@@ -74,7 +74,7 @@ public class JavassistMethodDeclarationTest extends AbstractSymbolResolutionTest
         assertThat(param.describeType(), is("java.util.List<T>"));
     }
 
-    @Test
+    [TestMethod]
     void testGetExceptionsFromMethodWithoutExceptions() {
         JavassistClassDeclaration classDecl = (JavassistClassDeclaration) typeSolver.solveType("C");
         JavassistMethodDeclaration method = findMethodWithName(classDecl, "genericMethodWithTypeParameter");
@@ -82,7 +82,7 @@ public class JavassistMethodDeclarationTest extends AbstractSymbolResolutionTest
         assertThat(method.getNumberOfSpecifiedExceptions(), is(0));
     }
 
-    @Test
+    [TestMethod]
     void testGetExceptionsFromMethodWithExceptions() {
         JavassistClassDeclaration classDecl = (JavassistClassDeclaration) typeSolver.solveType("C");
         JavassistMethodDeclaration method = findMethodWithName(classDecl, "methodWithExceptions");
@@ -92,7 +92,7 @@ public class JavassistMethodDeclarationTest extends AbstractSymbolResolutionTest
         assertThat(method.getSpecifiedException(1).describe(), is("java.io.IOException"));
     }
 
-    private JavassistMethodDeclaration findMethodWithName(JavassistClassDeclaration classDecl, String name) {
+    private JavassistMethodDeclaration findMethodWithName(JavassistClassDeclaration classDecl, string name) {
         return classDecl.getDeclaredMethods().stream().filter(methodDecl -> methodDecl.getName().equals(name))
                 .map(m -> (JavassistMethodDeclaration) m).findAny().get();
     }

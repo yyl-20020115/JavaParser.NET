@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,7 +25,7 @@ namespace com.github.javaparser.symbolsolver;
 
 public class Issue3200Test {
 
-    @Test
+    [TestMethod]
     public void test0() {
         ParserConfiguration config = new ParserConfiguration();
         CombinedTypeSolver cts = new CombinedTypeSolver();
@@ -33,7 +33,7 @@ public class Issue3200Test {
         config.setSymbolResolver(new JavaSymbolSolver(cts));
         StaticJavaParser.setConfiguration(config);
 
-        String str = "public class Test {\n" +
+        string str = "public class Test {\n" +
                 "    private void bad() {\n" +
                 "        Test test = new Test();\n" +
                 "        test.setRunnable(\"\", new Runnable() {\n" +
@@ -47,7 +47,7 @@ public class Issue3200Test {
                 "    private void getContext(Test test) {\n" +
                 "    }\n" +
                 "\n" +
-                "    private void setRunnable(String str, Runnable runnable) {\n" +
+                "    private void setRunnable(string str, Runnable runnable) {\n" +
                 "    }\n" +
                 "}";
         CompilationUnit cu = StaticJavaParser.parse(str);
@@ -57,7 +57,7 @@ public class Issue3200Test {
         assertEquals("Test.getContext(Test)", mce.get(1).resolve().getQualifiedSignature());
     }
 
-    @Test
+    [TestMethod]
     public void test1() {
         ParserConfiguration config = new ParserConfiguration();
         CombinedTypeSolver cts = new CombinedTypeSolver();
@@ -65,7 +65,7 @@ public class Issue3200Test {
         config.setSymbolResolver(new JavaSymbolSolver(cts));
         StaticJavaParser.setConfiguration(config);
 
-        String str = "public class Test {\n" +
+        string str = "public class Test {\n" +
                 "    class Inner { }" +
                 "    void getContext(Test test) {  }\n" +
                 "    {\n" +
@@ -79,7 +79,7 @@ public class Issue3200Test {
         CompilationUnit cu = StaticJavaParser.parse(str);
         MethodCallExpr mce = cu.findFirst(MethodCallExpr.class).get();
         ResolvedMethodDeclaration rmd = mce.resolve();
-        String sig = rmd.getQualifiedSignature();
+        string sig = rmd.getQualifiedSignature();
         assertEquals("Test.getContext(Test)", sig);
     }
 

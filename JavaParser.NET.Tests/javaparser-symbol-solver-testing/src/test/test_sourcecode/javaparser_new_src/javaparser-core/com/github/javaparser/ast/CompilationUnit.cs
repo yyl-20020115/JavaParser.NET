@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -43,7 +43,7 @@ namespace com.github.javaparser.ast;
  * 
  * @author Julio Vilmar Gesser
  */
-public final class CompilationUnit extends Node {
+public /*final*/class CompilationUnit:Node {
 
     private PackageDeclaration pakage;
 
@@ -79,7 +79,7 @@ public final class CompilationUnit extends Node {
     }
 
     /**
-     * Return a list containing all comments declared in this compilation unit.
+     * Return a list containing all comments declared _in this compilation unit.
      * Including javadocs, line comments and block comments of all types,
      * inner-classes and other members.<br>
      * If there is no comment, <code>null</code> is returned.
@@ -95,7 +95,7 @@ public final class CompilationUnit extends Node {
     }
 
     /**
-     * Retrieves the list of imports declared in this compilation unit or
+     * Retrieves the list of imports declared _in this compilation unit or
      * <code>null</code> if there is no import.
      * 
      * @return the list of imports or <code>null</code> if there is no import
@@ -117,7 +117,7 @@ public final class CompilationUnit extends Node {
     }
 
     /**
-     * Return the list of types declared in this compilation unit.<br>
+     * Return the list of types declared _in this compilation unit.<br>
      * If there is no types declared, <code>null</code> is returned.
      * 
      * @return the list of types or <code>null</code> null if there is no type
@@ -168,7 +168,7 @@ public final class CompilationUnit extends Node {
     }
 
     /**
-     * Sets the list of types declared in this compilation unit.
+     * Sets the list of types declared _in this compilation unit.
      * 
      * @param types
      *            the lis of types
@@ -185,7 +185,7 @@ public final class CompilationUnit extends Node {
      * @param name the name of the package
      * @return this, the {@link CompilationUnit}
      */
-    public CompilationUnit setPackageName(String name) {
+    public CompilationUnit setPackageName(string name) {
         setPackage(new PackageDeclaration(name(name)));
         return this;
     }
@@ -197,7 +197,7 @@ public final class CompilationUnit extends Node {
      * @param name the import name
      * @return this, the {@link CompilationUnit}
      */
-    public CompilationUnit addImport(String name) {
+    public CompilationUnit addImport(string name) {
         return addImport(name, false, false);
     }
 
@@ -219,14 +219,14 @@ public final class CompilationUnit extends Node {
 
     /**
      * Add an import to the list of {@link ImportDeclaration} of this compilation unit<br>
-     * <b>This method check if no import with the same name is already in the list</b>
+     * <b>This method check if no import with the same name is already _in the list</b>
      * 
      * @param name the import name
      * @param isStatic      is it an "import static"
      * @param isAsterisk does the import end with ".*"
      * @return this, the {@link CompilationUnit}
      */
-    public CompilationUnit addImport(String name, bool isStatic, bool isAsterisk) {
+    public CompilationUnit addImport(string name, bool isStatic, bool isAsterisk) {
         if (getImports().stream().anyMatch(i -> i.getName().toString().equals(name)))
             return this;
         else {
@@ -244,7 +244,7 @@ public final class CompilationUnit extends Node {
      * @param name the class name
      * @return the newly created class
      */
-    public ClassOrInterfaceDeclaration addClass(String name) {
+    public ClassOrInterfaceDeclaration addClass(string name) {
         return addClass(name, Modifier.PUBLIC);
     }
 
@@ -255,7 +255,7 @@ public final class CompilationUnit extends Node {
      * @param modifiers the modifiers (like Modifier.PUBLIC)
      * @return the newly created class
      */
-    public ClassOrInterfaceDeclaration addClass(String name, Modifier... modifiers) {
+    public ClassOrInterfaceDeclaration addClass(string name, Modifier... modifiers) {
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = new ClassOrInterfaceDeclaration(
                 Arrays.stream(modifiers)
                         .collect(Collectors.toCollection(() -> EnumSet.noneOf(Modifier.class))),
@@ -271,7 +271,7 @@ public final class CompilationUnit extends Node {
      * @param name the interface name
      * @return the newly created class
      */
-    public ClassOrInterfaceDeclaration addInterface(String name) {
+    public ClassOrInterfaceDeclaration addInterface(string name) {
         return addInterface(name, Modifier.PUBLIC);
     }
 
@@ -282,7 +282,7 @@ public final class CompilationUnit extends Node {
      * @param modifiers the modifiers (like Modifier.PUBLIC)
      * @return the newly created class
      */
-    public ClassOrInterfaceDeclaration addInterface(String name, Modifier... modifiers) {
+    public ClassOrInterfaceDeclaration addInterface(string name, Modifier... modifiers) {
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = new ClassOrInterfaceDeclaration(
                 Arrays.stream(modifiers)
                         .collect(Collectors.toCollection(() -> EnumSet.noneOf(Modifier.class))),
@@ -298,7 +298,7 @@ public final class CompilationUnit extends Node {
      * @param name the enum name
      * @return the newly created class
      */
-    public EnumDeclaration addEnum(String name) {
+    public EnumDeclaration addEnum(string name) {
         return addEnum(name, Modifier.PUBLIC);
     }
 
@@ -309,7 +309,7 @@ public final class CompilationUnit extends Node {
      * @param modifiers the modifiers (like Modifier.PUBLIC)
      * @return the newly created class
      */
-    public EnumDeclaration addEnum(String name, Modifier... modifiers) {
+    public EnumDeclaration addEnum(string name, Modifier... modifiers) {
         EnumDeclaration enumDeclaration = new EnumDeclaration(Arrays.stream(modifiers)
                 .collect(Collectors.toCollection(() -> EnumSet.noneOf(Modifier.class))), name);
         getTypes().add(enumDeclaration);
@@ -323,7 +323,7 @@ public final class CompilationUnit extends Node {
      * @param name the annotation name
      * @return the newly created class
      */
-    public AnnotationDeclaration addAnnotationDeclaration(String name) {
+    public AnnotationDeclaration addAnnotationDeclaration(string name) {
         return addAnnotationDeclaration(name, Modifier.PUBLIC);
     }
 
@@ -334,7 +334,7 @@ public final class CompilationUnit extends Node {
      * @param modifiers the modifiers (like Modifier.PUBLIC)
      * @return the newly created class
      */
-    public AnnotationDeclaration addAnnotationDeclaration(String name, Modifier... modifiers) {
+    public AnnotationDeclaration addAnnotationDeclaration(string name, Modifier... modifiers) {
         AnnotationDeclaration annotationDeclaration = new AnnotationDeclaration(Arrays.stream(modifiers)
                 .collect(Collectors.toCollection(() -> EnumSet.noneOf(Modifier.class))), name);
         getTypes().add(annotationDeclaration);
@@ -348,9 +348,9 @@ public final class CompilationUnit extends Node {
      * @param className the class name (case-sensitive)
      * @return null if not found, the class otherwise
      */
-    public ClassOrInterfaceDeclaration getClassByName(String className) {
+    public ClassOrInterfaceDeclaration getClassByName(string className) {
         return (ClassOrInterfaceDeclaration) getTypes().stream().filter(type -> type.getName().equals(className)
-                && type instanceof ClassOrInterfaceDeclaration && !((ClassOrInterfaceDeclaration) type).isInterface())
+                && type is ClassOrInterfaceDeclaration && !((ClassOrInterfaceDeclaration) type).isInterface())
                 .findFirst().orElse(null);
     }
 
@@ -360,9 +360,9 @@ public final class CompilationUnit extends Node {
      * @param interfaceName the interface name (case-sensitive)
      * @return null if not found, the interface otherwise
      */
-    public ClassOrInterfaceDeclaration getInterfaceByName(String interfaceName) {
+    public ClassOrInterfaceDeclaration getInterfaceByName(string interfaceName) {
         return (ClassOrInterfaceDeclaration) getTypes().stream().filter(type -> type.getName().equals(interfaceName)
-                && type instanceof ClassOrInterfaceDeclaration && ((ClassOrInterfaceDeclaration) type).isInterface())
+                && type is ClassOrInterfaceDeclaration && ((ClassOrInterfaceDeclaration) type).isInterface())
                 .findFirst().orElse(null);
     }
 
@@ -372,9 +372,9 @@ public final class CompilationUnit extends Node {
      * @param enumName the enum name (case-sensitive)
      * @return null if not found, the enum otherwise
      */
-    public EnumDeclaration getEnumByName(String enumName) {
+    public EnumDeclaration getEnumByName(string enumName) {
         return (EnumDeclaration) getTypes().stream().filter(type -> type.getName().equals(enumName)
-                && type instanceof EnumDeclaration)
+                && type is EnumDeclaration)
                 .findFirst().orElse(null);
     }
 
@@ -384,9 +384,9 @@ public final class CompilationUnit extends Node {
      * @param annotationName the annotation name (case-sensitive)
      * @return null if not found, the annotation otherwise
      */
-    public AnnotationDeclaration getAnnotationDeclarationByName(String annotationName) {
+    public AnnotationDeclaration getAnnotationDeclarationByName(string annotationName) {
         return (AnnotationDeclaration) getTypes().stream().filter(type -> type.getName().equals(annotationName)
-                && type instanceof AnnotationDeclaration)
+                && type is AnnotationDeclaration)
                 .findFirst().orElse(null);
     }
 }

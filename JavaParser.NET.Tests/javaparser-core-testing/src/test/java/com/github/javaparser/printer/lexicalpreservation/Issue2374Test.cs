@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,34 +24,34 @@ namespace com.github.javaparser.printer.lexicalpreservation;
 
 
 
-public class Issue2374Test extends AbstractLexicalPreservingTest {
+public class Issue2374Test:AbstractLexicalPreservingTest {
     
-    @Test
+    [TestMethod]
     public void test() {
-        String lineComment = "Example comment";
+        string lineComment = "Example comment";
         considerCode(
                 "public class Bar {\n" + 
                 "    public void foo() {\n" + 
-                "        System.out.print(\"Hello\");\n" + 
+                "        System._out.print(\"Hello\");\n" + 
                 "    }\n" + 
                 "}"
                 );
-        String expected =
+        string expected =
         		"public class Bar {\n"
         		+ "    public void foo() {\n"
-        		+ "        System.out.print(\"Hello\");\n"
+        		+ "        System._out.print(\"Hello\");\n"
         		+ "        //Example comment\n"
-        		+ "        System.out.println(\"World!\");\n"
+        		+ "        System._out.println(\"World!\");\n"
         		+ "    }\n"
         		+ "}";
         // contruct a statement with a comment
-        Statement stmt = StaticJavaParser.parseStatement("System.out.println(\"World!\");");
+        Statement stmt = StaticJavaParser.parseStatement("System._out.println(\"World!\");");
         stmt.setLineComment(lineComment);
         // add the statement to the ast
         Optional<MethodDeclaration> md = cu.findFirst(MethodDeclaration.class);
         md.get().getBody().get().addStatement(stmt);
         // print the result from LexicalPreservingPrinter
-        String result = LexicalPreservingPrinter.print(cu);
+        string result = LexicalPreservingPrinter.print(cu);
         // verify that the LexicalPreservingPrinter don't forget the comment
         assertEqualsStringIgnoringEol(expected, result);
     }

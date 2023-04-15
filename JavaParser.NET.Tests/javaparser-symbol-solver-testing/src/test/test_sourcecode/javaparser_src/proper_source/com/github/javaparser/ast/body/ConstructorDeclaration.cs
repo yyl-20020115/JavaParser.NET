@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.ast.body;
 /**
  * @author Julio Vilmar Gesser
  */
-public final class ConstructorDeclaration extends BodyDeclaration implements DocumentableNode, WithDeclaration,
+public /*final*/class ConstructorDeclaration:BodyDeclaration implements DocumentableNode, WithDeclaration,
         NamedNode {
 
     private int modifiers;
@@ -44,13 +44,13 @@ public final class ConstructorDeclaration extends BodyDeclaration implements Doc
     public ConstructorDeclaration() {
     }
 
-    public ConstructorDeclaration(int modifiers, String name) {
+    public ConstructorDeclaration(int modifiers, string name) {
         setModifiers(modifiers);
         setName(name);
     }
 
     public ConstructorDeclaration(int modifiers, List<AnnotationExpr> annotations, List<TypeParameter> typeParameters,
-                                  String name, List<Parameter> parameters, List<NameExpr> throws_, BlockStmt block) {
+                                  string name, List<Parameter> parameters, List<NameExpr> throws_, BlockStmt block) {
         super(annotations);
         setModifiers(modifiers);
         setTypeParameters(typeParameters);
@@ -61,7 +61,7 @@ public final class ConstructorDeclaration extends BodyDeclaration implements Doc
     }
 
     public ConstructorDeclaration(int beginLine, int beginColumn, int endLine, int endColumn, int modifiers,
-                                  List<AnnotationExpr> annotations, List<TypeParameter> typeParameters, String name,
+                                  List<AnnotationExpr> annotations, List<TypeParameter> typeParameters, string name,
                                   List<Parameter> parameters, List<NameExpr> throws_, BlockStmt block) {
         super(beginLine, beginColumn, endLine, endColumn, annotations);
         setModifiers(modifiers);
@@ -96,7 +96,7 @@ public final class ConstructorDeclaration extends BodyDeclaration implements Doc
         return modifiers;
     }
 
-    public String getName() {
+    public string getName() {
         return name == null ? null : name.getName();
     }
 
@@ -131,7 +131,7 @@ public final class ConstructorDeclaration extends BodyDeclaration implements Doc
         this.modifiers = modifiers;
     }
 
-    public void setName(String name) {
+    public void setName(string name) {
         this.name = new NameExpr(name);
     }
 
@@ -161,7 +161,7 @@ public final class ConstructorDeclaration extends BodyDeclaration implements Doc
      * [throws exceptionsList]
      */
     @Override
-    public String getDeclarationAsString(boolean includingModifiers, boolean includingThrows,
+    public string getDeclarationAsString(boolean includingModifiers, boolean includingThrows,
                                          boolean includingParameterName) {
         StringBuffer sb = new StringBuffer();
         if (includingModifiers) {
@@ -202,12 +202,12 @@ public final class ConstructorDeclaration extends BodyDeclaration implements Doc
     }
 
     @Override
-    public String getDeclarationAsString(boolean includingModifiers, boolean includingThrows) {
+    public string getDeclarationAsString(boolean includingModifiers, boolean includingThrows) {
         return getDeclarationAsString(includingModifiers, includingThrows, true);
     }
 
     @Override
-    public String getDeclarationAsString() {
+    public string getDeclarationAsString() {
         return getDeclarationAsString(true, true, true);
     }
 

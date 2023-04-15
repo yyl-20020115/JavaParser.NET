@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -29,8 +29,8 @@ namespace com.github.javaparser;
  *
  * @author Júlio Vilmar Gesser
  */
-public final class JavaParser {
-	private final CommentsInserter commentsInserter;
+public /*final*/class JavaParser {
+	private /*final*/CommentsInserter commentsInserter;
 
 	private ASTParser astParser = null;
 
@@ -62,18 +62,18 @@ public final class JavaParser {
 	/**
 	 * Parses source code.
 	 * It takes the source code from a Provider.
-	 * The start indicates what can be found in the source code (compilation unit, block, import...)
+	 * The start indicates what can be found _in the source code (compilation unit, block, import...)
 	 *
-     * @param start    refer to the constants in ParseStart to see what can be parsed.
+     * @param start    refer to the constants _in ParseStart to see what can be parsed.
      * @param provider refer to Providers to see how you can read source.
-     * @param <N>      the subclass of Node that is the result of parsing in the start.
+     * @param <N>      the subclass of Node that is the result of parsing _in the start.
      * @return the parse result, a collection of encountered problems, and some extra data.
      */
-	public <N extends Node> ParseResult<N> parse(ParseStart<N> start, Provider provider) {
+	public <N:Node> ParseResult<N> parse(ParseStart<N> start, Provider provider) {
 		try {
-            final ASTParser parser = getParserForProvider(provider);
+            /*final*/ASTParser parser = getParserForProvider(provider);
 			N resultNode = start.parse(parser);
-            final CommentsCollection comments = astParser.getCommentsCollection();
+            /*final*/CommentsCollection comments = astParser.getCommentsCollection();
             commentsInserter.insertComments(resultNode, comments.copy().getComments());
             
 			return new ParseResult<>(Optional.of(resultNode), parser.problems, Optional.of(astParser.getTokens()), Optional.of(astParser.getCommentsCollection()));
@@ -91,33 +91,33 @@ public final class JavaParser {
 	}
 
 	/**
-	 * Parses the Java code contained in the {@link InputStream} and returns a
+	 * Parses the Java code contained _in the {@link InputStream} and returns a
 	 * {@link CompilationUnit} that represents it.
 	 *
-	 * @param in       {@link InputStream} containing Java source code
+	 * @param _in       {@link InputStream} containing Java source code
 	 * @param encoding encoding of the source code
 	 * @return CompilationUnit representing the Java source code
 	 * @throws ParseProblemException if the source code has parser errors
 	 */
-	public static CompilationUnit parse(final InputStream in, Charset encoding) {
-		return simplifiedParse(COMPILATION_UNIT, provider(in, encoding));
+	public static CompilationUnit parse(/*final*/InputStream _in, Charset encoding) {
+		return simplifiedParse(COMPILATION_UNIT, provider(_in, encoding));
 	}
 
 	/**
-	 * Parses the Java code contained in the {@link InputStream} and returns a
+	 * Parses the Java code contained _in the {@link InputStream} and returns a
 	 * {@link CompilationUnit} that represents it.<br>
 	 * Note: Uses UTF-8 encoding
 	 *
-	 * @param in {@link InputStream} containing Java source code
+	 * @param _in {@link InputStream} containing Java source code
 	 * @return CompilationUnit representing the Java source code
 	 * @throws ParseProblemException if the source code has parser errors
 	 */
-	public static CompilationUnit parse(final InputStream in) {
-		return parse(in, UTF8);
+	public static CompilationUnit parse(/*final*/InputStream _in) {
+		return parse(_in, UTF8);
 	}
 
 	/**
-	 * Parses the Java code contained in a {@link File} and returns a
+	 * Parses the Java code contained _in a {@link File} and returns a
 	 * {@link CompilationUnit} that represents it.
 	 *
 	 * @param file     {@link File} containing Java source code
@@ -126,12 +126,12 @@ public final class JavaParser {
 	 * @throws ParseProblemException if the source code has parser errors
      * @throws FileNotFoundException the file was not found
 	 */
-	public static CompilationUnit parse(final File file, final Charset encoding) throws FileNotFoundException {
+	public static CompilationUnit parse(/*final*/File file, /*final*/Charset encoding) throws FileNotFoundException {
 		return simplifiedParse(COMPILATION_UNIT, provider(file, encoding));
 	}
 
 	/**
-	 * Parses the Java code contained in a {@link File} and returns a
+	 * Parses the Java code contained _in a {@link File} and returns a
 	 * {@link CompilationUnit} that represents it.<br>
 	 * Note: Uses UTF-8 encoding
 	 *
@@ -140,12 +140,12 @@ public final class JavaParser {
 	 * @throws ParseProblemException if the source code has parser errors
 	 * @throws FileNotFoundException the file was not found
 	 */
-	public static CompilationUnit parse(final File file) throws FileNotFoundException {
+	public static CompilationUnit parse(/*final*/File file) throws FileNotFoundException {
 		return simplifiedParse(COMPILATION_UNIT, provider(file));
 	}
 
 	/**
-	 * Parses the Java code contained in a file and returns a
+	 * Parses the Java code contained _in a file and returns a
 	 * {@link CompilationUnit} that represents it.
 	 *
 	 * @param path     path to a file containing Java source code
@@ -154,12 +154,12 @@ public final class JavaParser {
 	 * @throws IOException the path could not be accessed
 	 * @throws ParseProblemException if the source code has parser errors
 	 */
-	public static CompilationUnit parse(final Path path, final Charset encoding) throws IOException {
+	public static CompilationUnit parse(/*final*/Path path, /*final*/Charset encoding){
 		return simplifiedParse(COMPILATION_UNIT, provider(path, encoding));
 	}
 
 	/**
-	 * Parses the Java code contained in a file and returns a
+	 * Parses the Java code contained _in a file and returns a
 	 * {@link CompilationUnit} that represents it.<br>
 	 * Note: Uses UTF-8 encoding
 	 *
@@ -168,7 +168,7 @@ public final class JavaParser {
 	 * @throws ParseProblemException if the source code has parser errors
 	 * @throws IOException the path could not be accessed
 	 */
-	public static CompilationUnit parse(final Path path) throws IOException {
+	public static CompilationUnit parse(/*final*/Path path){
 		return simplifiedParse(COMPILATION_UNIT, provider(path));
 	}
 
@@ -180,47 +180,47 @@ public final class JavaParser {
      * @return CompilationUnit representing the Java source code
      * @throws ParseProblemException if the source code has parser errors
      */
-	public static CompilationUnit parse(final Reader reader) {
+	public static CompilationUnit parse(/*final*/Reader reader) {
 		return simplifiedParse(COMPILATION_UNIT, provider(reader));
 	}
 
 	/**
-	 * Parses the Java code contained in code and returns a
+	 * Parses the Java code contained _in code and returns a
 	 * {@link CompilationUnit} that represents it.
 	 *
 	 * @param code             Java source code
 	 * @return CompilationUnit representing the Java source code
 	 * @throws ParseProblemException if the source code has parser errors
 	 */
-	public static CompilationUnit parse(String code) {
+	public static CompilationUnit parse(string code) {
 		return simplifiedParse(COMPILATION_UNIT, provider(code));
 	}
 
 	/**
-	 * Parses the Java block contained in a {@link String} and returns a
+	 * Parses the Java block contained _in a {@link String} and returns a
 	 * {@link BlockStmt} that represents it.
 	 *
 	 * @param blockStatement {@link String} containing Java block code
 	 * @return BlockStmt representing the Java block
 	 * @throws ParseProblemException if the source code has parser errors
 	 */
-	public static BlockStmt parseBlock(final String blockStatement) {
+	public static BlockStmt parseBlock(/*final*/string blockStatement) {
 		return simplifiedParse(BLOCK, provider(blockStatement));
 	}
 
 	/**
-	 * Parses the Java statement contained in a {@link String} and returns a
+	 * Parses the Java statement contained _in a {@link String} and returns a
 	 * {@link Statement} that represents it.
 	 *
 	 * @param statement {@link String} containing Java statement code
 	 * @return Statement representing the Java statement
 	 * @throws ParseProblemException if the source code has parser errors
 	 */
-	public static Statement parseStatement(final String statement) {
+	public static Statement parseStatement(/*final*/string statement) {
 		return simplifiedParse(STATEMENT, provider(statement));
 	}
 
-	private static <T extends Node> T simplifiedParse(ParseStart<T> context, Provider provider) {
+	private static <T:Node> T simplifiedParse(ParseStart<T> context, Provider provider) {
 		ParseResult<T> result = new JavaParser(new ParserConfiguration()).parse(context, provider);
 		if (result.isSuccessful()) {
 			return result.getResult().get();
@@ -229,50 +229,50 @@ public final class JavaParser {
 	}
 
 	/**
-	 * Parses the Java import contained in a {@link String} and returns a
+	 * Parses the Java import contained _in a {@link String} and returns a
 	 * {@link ImportDeclaration} that represents it.
 	 *
 	 * @param importDeclaration {@link String} containing Java import code
 	 * @return ImportDeclaration representing the Java import declaration
 	 * @throws ParseProblemException if the source code has parser errors
 	 */
-	public static ImportDeclaration parseImport(final String importDeclaration) {
+	public static ImportDeclaration parseImport(/*final*/string importDeclaration) {
 		return simplifiedParse(IMPORT_DECLARATION, provider(importDeclaration));
 	}
 
 	/**
-	 * Parses the Java expression contained in a {@link String} and returns a
+	 * Parses the Java expression contained _in a {@link String} and returns a
 	 * {@link Expression} that represents it.
 	 *
 	 * @param expression {@link String} containing Java expression
 	 * @return Expression representing the Java expression
 	 * @throws ParseProblemException if the source code has parser errors
 	 */
-	public static Expression parseExpression(final String expression) {
+	public static Expression parseExpression(/*final*/string expression) {
 		return simplifiedParse(EXPRESSION, provider(expression));
 	}
 
 	/**
-	 * Parses the Java annotation contained in a {@link String} and returns a
+	 * Parses the Java annotation contained _in a {@link String} and returns a
 	 * {@link AnnotationExpr} that represents it.
 	 *
 	 * @param annotation {@link String} containing Java annotation
 	 * @return AnnotationExpr representing the Java annotation
 	 * @throws ParseProblemException if the source code has parser errors
 	 */
-	public static AnnotationExpr parseAnnotation(final String annotation) {
+	public static AnnotationExpr parseAnnotation(/*final*/string annotation) {
 		return simplifiedParse(ANNOTATION, provider(annotation));
 	}
 
 	/**
-	 * Parses the Java annotation body declaration(e.g fields or methods) contained in a
+	 * Parses the Java annotation body declaration(e.g fields or methods) contained _in a
 	 * {@link String} and returns a {@link BodyDeclaration} that represents it.
 	 *
 	 * @param body {@link String} containing Java body declaration
 	 * @return BodyDeclaration representing the Java annotation
 	 * @throws ParseProblemException if the source code has parser errors
 	 */
-	public static BodyDeclaration<?> parseAnnotationBodyDeclaration(final String body) {
+	public static BodyDeclaration<?> parseAnnotationBodyDeclaration(/*final*/string body) {
 		return simplifiedParse(ANNOTATION_BODY, provider(body));
 	}
 
@@ -284,7 +284,7 @@ public final class JavaParser {
 	 * @return BodyDeclaration representing the Java class body
 	 * @throws ParseProblemException if the source code has parser errors
 	 */
-	public static BodyDeclaration<?> parseClassBodyDeclaration(String body) {
+	public static BodyDeclaration<?> parseClassBodyDeclaration(string body) {
 		return simplifiedParse(CLASS_BODY, provider(body));
 	}
 
@@ -296,7 +296,7 @@ public final class JavaParser {
 	 * @return BodyDeclaration representing the Java interface body
 	 * @throws ParseProblemException if the source code has parser errors
 	 */
-	public static BodyDeclaration parseInterfaceBodyDeclaration(String body) {
+	public static BodyDeclaration parseInterfaceBodyDeclaration(string body) {
 		return simplifiedParse(INTERFACE_BODY, provider(body));
 	}
 }

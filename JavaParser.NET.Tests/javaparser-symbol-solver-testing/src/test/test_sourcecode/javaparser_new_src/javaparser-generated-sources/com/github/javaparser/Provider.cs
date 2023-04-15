@@ -25,14 +25,14 @@ public interface Provider {
      * @return The number of characters read, or -1 if all read
      * @exception  IOException
      */
-    public int read(char buffer[], int offset, int len) throws IOException;
+    public int read(char buffer[], int offset, int len);
     
     /**
      * Closes the stream and releases any system resources associated with
      * it.
      * @exception IOException
      */
-     public void close() throws IOException;
+     public void close();
     
 }
 /* JavaCC - OriginalChecksum=89684d4e3db82aa5e480d095c170b352 (do not edit this line) */

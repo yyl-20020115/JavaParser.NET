@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,13 +24,13 @@ namespace com.github.javaparser.ast.stmt;
 
 
 class YieldStmtTest {
-    @Test
+    [TestMethod]
     void yield() {
         YieldStmt statement = parseStatement("yield 12*12;").asYieldStmt();
         assertEquals(BinaryExpr.class, statement.getExpression().getClass());
     }
 
-    @Test
+    [TestMethod]
     void yield2() {
         YieldStmt statement;
         statement = parseStatement("yield (2 + 2);").asYieldStmt();
@@ -39,7 +39,7 @@ class YieldStmtTest {
         assertEquals(EnclosedExpr.class, statement.getExpression().getClass());
     }
 
-    @Test
+    [TestMethod]
     void yieldMethodCall() {
         YieldStmt statement;
         statement = parseStatement("yield a();").asYieldStmt();
@@ -60,24 +60,24 @@ class YieldStmtTest {
         assertEquals(MethodCallExpr.class, statement.getExpression().getClass());
     }
 
-    @Test
+    [TestMethod]
     void yieldAssignment() {
         YieldStmt statement = parseStatement("yield (x = 5);").asYieldStmt();
         assertEquals(EnclosedExpr.class, statement.getExpression().getClass());
     }
 
-    @Test
+    [TestMethod]
     void yieldConditional() {
         YieldStmt statement = parseStatement("yield x ? 5 : 6;").asYieldStmt();
         assertEquals(ConditionalExpr.class, statement.getExpression().getClass());
     }
 
-    @Test
+    [TestMethod]
     void threadYieldShouldNotBreak() {
         parseStatement("Thread.yield();").asExpressionStmt().getExpression().asMethodCallExpr();
     }
 
-    @Test
+    [TestMethod]
     void keywordShouldNotInterfereWithIdentifiers() {
         CompilationUnit compilationUnit = parseCompilationUnit(JAVA_12, "class yield { yield yield(yield yield){yield();} }");
         assertEqualsStringIgnoringEol("class yield {\n" +
@@ -88,7 +88,7 @@ class YieldStmtTest {
                 "}\n", compilationUnit.toString());
     }
 
-    @Test
+    [TestMethod]
     void keywordShouldNotInterfereWithIdentifiers2() {
         CompilationUnit compilationUnit = parseCompilationUnit("enum X { yield, }");
         assertEqualsStringIgnoringEol("enum X {\n" +
@@ -97,7 +97,7 @@ class YieldStmtTest {
                 "}\n", compilationUnit.toString());
     }
 
-    @Test
+    [TestMethod]
     void keywordShouldNotInterfereWithIdentifiers3() {
         YieldStmt statement;
         statement = parseStatement("yield yield;").asYieldStmt();

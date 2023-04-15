@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -32,13 +32,13 @@ namespace com.github.javaparser.ast.expr;
  * </ul>
  *
  * <blockquote>
- * The instanceof grammar is extended accordingly:
+ * The is grammar is extended accordingly:
  *
  * <pre>
  *     RelationalExpression:
  *          ...
- *          RelationalExpression instanceof ReferenceType
- *          RelationalExpression instanceof Pattern
+ *          RelationalExpression is ReferenceType
+ *          RelationalExpression is Pattern
  *
  *     Pattern:
  *          ReferenceType Identifier
@@ -47,9 +47,9 @@ namespace com.github.javaparser.ast.expr;
  */
 class InstanceOfExprTest {
 
-    @Test
+    [TestMethod]
     void annotationsOnTheType_patternExpression() {
-        InstanceOfExpr expr = TestParser.parseExpression(LanguageLevel.JAVA_14_PREVIEW, "obj instanceof @A @DA String s");
+        InstanceOfExpr expr = TestParser.parseExpression(LanguageLevel.JAVA_14_PREVIEW, "obj is @A @DA string s");
 
         assertThat(expr.getType().getAnnotations())
                 .containsExactly(
@@ -58,9 +58,9 @@ class InstanceOfExprTest {
                 );
     }
 
-    @Test
+    [TestMethod]
     void annotationsOnTheType_finalPatternExpression() {
-        InstanceOfExpr expr = TestParser.parseExpression(LanguageLevel.JAVA_14_PREVIEW, "obj instanceof @A final @DA String s");
+        InstanceOfExpr expr = TestParser.parseExpression(LanguageLevel.JAVA_14_PREVIEW, "obj is @A /*final*/@DA string s");
 
         assertThat(expr.getType().getAnnotations())
                 .containsExactly(
@@ -68,16 +68,16 @@ class InstanceOfExprTest {
                         new MarkerAnnotationExpr("DA"));
     }
 
-    @Test
+    [TestMethod]
     void annotationsOnTheType_finalPatternExpression_prettyPrinter() {
-        InstanceOfExpr expr = TestParser.parseExpression(LanguageLevel.JAVA_14_PREVIEW, "obj instanceof @A final @DA String s");
+        InstanceOfExpr expr = TestParser.parseExpression(LanguageLevel.JAVA_14_PREVIEW, "obj is @A /*final*/@DA string s");
 
-        assertEquals("obj instanceof final @A @DA String s", expr.toString());
+        assertEquals("obj is /*final*/@A @DA string s", expr.toString());
     }
 
-    @Test
+    [TestMethod]
     void annotationsOnTheType_referenceTypeExpression() {
-        InstanceOfExpr expr = TestParser.parseExpression(LanguageLevel.JAVA_14, "obj instanceof @A @DA String");
+        InstanceOfExpr expr = TestParser.parseExpression(LanguageLevel.JAVA_14, "obj is @A @DA String");
 
         assertThat(expr.getType().getAnnotations())
                 .containsExactly(
@@ -86,9 +86,9 @@ class InstanceOfExprTest {
                 );
     }
 
-    @Test
+    [TestMethod]
     void instanceOf_patternExpression() {
-        String x = "obj instanceof String s";
+        string x = "obj is string s";
         InstanceOfExpr expr = TestParser.parseExpression(LanguageLevel.JAVA_14_PREVIEW, x);
 
         assertEquals("obj", expr.getExpression().toString());
@@ -105,17 +105,17 @@ class InstanceOfExprTest {
         assertEquals("s", expr.getName().get().asString());
     }
 
-    @Test
+    [TestMethod]
     void instanceOf_patternExpression_prettyPrinter() {
-        String x = "obj instanceof String s";
+        string x = "obj is string s";
         InstanceOfExpr expr = TestParser.parseExpression(LanguageLevel.JAVA_14_PREVIEW, x);
 
-        assertEquals("obj instanceof String s", expr.toString());
+        assertEquals("obj is string s", expr.toString());
     }
 
-    @Test
+    [TestMethod]
     void instanceOf_referenceTypeExpression() {
-        String x = "obj instanceof String";
+        string x = "obj is String";
         InstanceOfExpr expr = TestParser.parseExpression(LanguageLevel.JAVA_14, x);
 
         assertEquals("obj", expr.getExpression().toString());
@@ -126,9 +126,9 @@ class InstanceOfExprTest {
         assertFalse(expr.getName().isPresent());
     }
 
-    @Test
+    [TestMethod]
     void instanceOf_finalPatternExpression() {
-        String x = "obj instanceof final String s";
+        string x = "obj is /*final*/string s";
         InstanceOfExpr expr = TestParser.parseExpression(LanguageLevel.JAVA_14_PREVIEW, x);
 
         assertEquals("obj", expr.getExpression().toString());
@@ -145,12 +145,12 @@ class InstanceOfExprTest {
         assertEquals("s", expr.getName().get().asString());
     }
 
-    @Test
+    [TestMethod]
     void instanceOf_finalPatternExpression_prettyPrinter() {
-        String x = "obj instanceof final String s";
+        string x = "obj is /*final*/string s";
         InstanceOfExpr expr = TestParser.parseExpression(LanguageLevel.JAVA_14_PREVIEW, x);
 
-        assertEquals("obj instanceof final String s", expr.toString());
+        assertEquals("obj is /*final*/string s", expr.toString());
     }
 
 
@@ -159,7 +159,7 @@ class InstanceOfExprTest {
      *
      * <pre>
      * {@code
-     * if (!(obj instanceof String s)) {
+     * if (!(obj is string s)) {
      *     .. s.contains(..) ..
      * } else {
      *     .. s.contains(..) ..
@@ -167,8 +167,8 @@ class InstanceOfExprTest {
      * }
      * </pre>
      *
-     * Allowed / in scope: {@code if (obj instanceof String s && s.length() > 5) {..}}
-     * Not in scope:       {@code if (obj instanceof String s || s.length() > 5) {..}}
+     * Allowed / _in scope: {@code if (obj is string s && s.length() > 5) {..}}
+     * Not _in scope:       {@code if (obj is string s || s.length() > 5) {..}}
      *
      */
 

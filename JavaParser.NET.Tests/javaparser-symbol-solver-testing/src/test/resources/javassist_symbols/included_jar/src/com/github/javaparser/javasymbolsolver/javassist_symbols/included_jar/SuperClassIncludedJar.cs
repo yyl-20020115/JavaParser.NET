@@ -1,5 +1,5 @@
 namespace com.github.javaparser.javasymbolsolver.javassist_symbols.included_jar;
 
 public class SuperClassIncludedJar {
-    public static final String SUPER_FIELD = "ThisIsAString";
+    public static /*final*/string SUPER_FIELD = "ThisIsAString";
 }

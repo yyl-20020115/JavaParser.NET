@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,9 +23,9 @@ namespace com.github.javaparser.symbolsolver.resolution;
 
 
 
-class EnumResolutionTest extends AbstractResolutionTest {
+class EnumResolutionTest:AbstractResolutionTest {
 
-    @Test
+    [TestMethod]
     void switchOnEnum() {
         CompilationUnit cu = parseSample("SwitchOnEnum");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "SwitchOnEnum");
@@ -33,12 +33,12 @@ class EnumResolutionTest extends AbstractResolutionTest {
         SwitchStmt switchStmt = Navigator.demandSwitch(method);
         Expression expression = switchStmt.getEntries().get(0).getLabels().get(0);
 
-        SymbolReference<? extends ResolvedValueDeclaration> ref = JavaParserFacade.get(new ReflectionTypeSolver()).solve(expression);
+        SymbolReference<?:ResolvedValueDeclaration> ref = JavaParserFacade.get(new ReflectionTypeSolver()).solve(expression);
         assertTrue(ref.isSolved());
         assertEquals("SwitchOnEnum.MyEnum", ref.getCorrespondingDeclaration().getType().asReferenceType().getQualifiedName());
     }
 
-    @Test
+    [TestMethod]
     void enumAndStaticInitializer() {
         CompilationUnit cu = parseSample("EnumAndStaticInitializer");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "MyClass");
@@ -49,7 +49,7 @@ class EnumResolutionTest extends AbstractResolutionTest {
     }
 
     // Related to issue 1699
-    @Test
+    [TestMethod]
     void resolveEnumConstantAccess() {
         try {
             // configure symbol solver before parsing
@@ -77,7 +77,7 @@ class EnumResolutionTest extends AbstractResolutionTest {
         }
     }
 
-    @Test
+    [TestMethod]
     void enumAccessSpecifier() {
         try {
             StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver()));
@@ -100,19 +100,19 @@ class EnumResolutionTest extends AbstractResolutionTest {
         }
     }
 
-    @Test
+    [TestMethod]
     public void testResolveValueOfMethod() {
-        String s =
+        string s =
                 "public class ClassTest {\n" +
                         "    public enum SecurityPolicyScopedTemplatesKeys {\n" +
                         "        SUSPICIOUS(\"suspicious\");\n" +
-                        "        private String displayName;\n" +
+                        "        private string displayName;\n" +
                         "\n" +
-                        "        private SecurityPolicyScopedTemplatesKeys(String displayName) {\n" +
+                        "        private SecurityPolicyScopedTemplatesKeys(string displayName) {\n" +
                         "            this.displayName = displayName;\n" +
                         "        }\n" +
                         "\n" +
-                        "        public String getDisplayName() {\n" +
+                        "        public string getDisplayName() {\n" +
                         "            return this.displayName;\n" +
                         "        }\n" +
                         "    }\n" +

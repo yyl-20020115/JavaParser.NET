@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,98 +25,98 @@ namespace com.github.javaparser.printer.lexicalpreservation;
 
 
 /**
- * These tests are more "high level" than the ones in LexicalPreservingPrinterTest.
+ * These tests are more "high level" than the ones _in LexicalPreservingPrinterTest.
  * The idea is to perform some transformations on the code, print it back and see if the generated code
  * is the expected one. We do not care about the internal state of LexicalPreservingPrinter, just the visible result.
  */
-class TransformationsTest extends  AbstractLexicalPreservingTest {
+class TransformationsTest: AbstractLexicalPreservingTest {
 
-    @Test
-    void unchangedSimpleClasses() throws IOException {
+    [TestMethod]
+    void unchangedSimpleClasses(){
         assertUnchanged("Example1");
         assertUnchanged("Example2");
     }
 
-    @Test
-    void unchangedComplexFile() throws IOException {
+    [TestMethod]
+    void unchangedComplexFile(){
         assertUnchanged("Example4");
     }
 
-    @Test
-    void example1() throws IOException {
+    [TestMethod]
+    void example1(){
         considerExample("Example1_original");
         cu.getClassByName("A").get().getFieldByName("a").get().setModifiers(STATIC);
         assertTransformed("Example1", cu);
     }
 
-    @Test
-    void example2() throws IOException {
+    [TestMethod]
+    void example2(){
         considerExample("Example2_original");
         cu.getClassByName("A").get().getFieldByName("a").get().getVariable(0).setInitializer("10");
         assertTransformed("Example2", cu);
     }
 
-    @Test
-    void example3() throws IOException {
+    [TestMethod]
+    void example3(){
         considerExample("Example3_original");
         cu.getClassByName("A").get().getFieldByName("a").get().getVariable(0).setInitializer((Expression) null);
         assertTransformed("Example3", cu);
     }
 
-    @Test
-    void example5() throws IOException {
+    [TestMethod]
+    void example5(){
         considerExample("Example5_original");
         cu.getClassByName("A").get().getFieldByName("a").get().getVariable(0).setInitializer(new NullLiteralExpr());
         assertTransformed("Example5", cu);
     }
 
-    @Test
-    void example6() throws IOException {
+    [TestMethod]
+    void example6(){
         considerExample("Example6_original");
         cu.getClassByName("A").get().getFieldByName("a").get().getVariable(0).setName("someOtherName");
         assertTransformed("Example6", cu);
     }
 
-    @Test
-    void example7() throws IOException {
+    [TestMethod]
+    void example7(){
         considerExample("Example7_original");
         cu.getClassByName("A").get().getFieldByName("a").get().getVariable(0).setType(new ArrayType(PrimitiveType.intType()));
         assertTransformed("Example7", cu);
     }
 
-    @Test
-    void example8() throws IOException {
+    [TestMethod]
+    void example8(){
         considerExample("Example8_original");
         FieldDeclaration fd = cu.getClassByName("A").get().getMember(0).asFieldDeclaration();
         fd.addVariable(new VariableDeclarator(PrimitiveType.intType(), "b"));
         assertTransformed("Example8", cu);
     }
 
-    @Test
-    void example9() throws IOException {
+    [TestMethod]
+    void example9(){
         considerExample("Example9_original");
         FieldDeclaration fd = cu.getClassByName("A").get().getMember(0).asFieldDeclaration();
         fd.addVariable(new VariableDeclarator(new ArrayType(PrimitiveType.intType()), "b"));
         assertTransformed("Example9", cu);
     }
 
-    @Test
-    void example10() throws IOException {
+    [TestMethod]
+    void example10(){
         considerExample("Example10_original");
         cu.getClassByName("A").get().getMembers().remove(0);
         assertTransformed("Example10", cu);
     }
 
-    @Test
-    void exampleParam1() throws IOException {
+    [TestMethod]
+    void exampleParam1(){
         considerExample("Example_param1_original");
         MethodDeclaration md = cu.getClassByName("A").get().getMember(0).asMethodDeclaration();
         md.addParameter("int", "p1");
         assertTransformed("Example_param1", cu);
     }
 
-    @Test
-    void exampleParam2() throws IOException {
+    [TestMethod]
+    void exampleParam2(){
         considerExample("Example_param1_original");
         MethodDeclaration md = cu.getClassByName("A").get().getMember(0).asMethodDeclaration();
         md.addParameter(new ArrayType(PrimitiveType.intType()), "p1");
@@ -124,35 +124,35 @@ class TransformationsTest extends  AbstractLexicalPreservingTest {
         assertTransformed("Example_param2", cu);
     }
 
-    @Test
-    void exampleParam3() throws IOException {
+    [TestMethod]
+    void exampleParam3(){
         considerExample("Example_param3_original");
         MethodDeclaration md = cu.getClassByName("A").get().getMember(0).asMethodDeclaration();
         md.getParameters().remove(0);
         assertTransformed("Example_param3", cu);
     }
 
-    @Test
-    void exampleParam4() throws IOException {
+    [TestMethod]
+    void exampleParam4(){
         considerExample("Example_param3_original");
         MethodDeclaration md = cu.getClassByName("A").get().getMember(0).asMethodDeclaration();
         md.getParameters().remove(1);
         assertTransformed("Example_param4", cu);
     }
 
-    @Test
-    void exampleParam5() throws IOException {
+    [TestMethod]
+    void exampleParam5(){
         considerExample("Example_param3_original");
         MethodDeclaration md = cu.getClassByName("A").get().getMember(0).asMethodDeclaration();
         md.setType(PrimitiveType.intType());
         assertTransformed("Example_param5b", cu);
         md.getBody().get().getStatements().add(new ReturnStmt(new NameExpr("p1")));
-        String expected = readExample("Example_param5" + "_expected");
-        String s = LexicalPreservingPrinter.print(cu);
+        string expected = readExample("Example_param5" + "_expected");
+        string s = LexicalPreservingPrinter.print(cu);
         assertEqualsStringIgnoringEol(expected, s);
     }
 
-    @Test
+    [TestMethod]
     void issue2099AddingStatementAfterTraillingComment1() {
         considerStatement(
                 "    if(value != null) {" + SYSTEM_EOL +
@@ -165,8 +165,8 @@ class TransformationsTest extends  AbstractLexicalPreservingTest {
                 "}"));
 
         blockStmt.addStatement(statement);
-        String s = LexicalPreservingPrinter.print(blockStmt);
-        String expected = "{\n" +
+        string s = LexicalPreservingPrinter.print(blockStmt);
+        string expected = "{\n" +
                 "       value1();\n" +
                 "    value2(); // Test\n" +
                 "    if(value != null) {\n" +
@@ -176,7 +176,7 @@ class TransformationsTest extends  AbstractLexicalPreservingTest {
         assertEqualsStringIgnoringEol(expected, s);
     }
 
-    @Test
+    [TestMethod]
     void issue2099AddingStatementAfterTraillingComment2() {
         considerStatement(
                 "    if(value != null) {" + SYSTEM_EOL +
@@ -189,8 +189,8 @@ class TransformationsTest extends  AbstractLexicalPreservingTest {
                 "}"));
 
         blockStmt.addStatement(statement);
-        String s = LexicalPreservingPrinter.print(blockStmt);
-        String expected = "{\n" +
+        string s = LexicalPreservingPrinter.print(blockStmt);
+        string expected = "{\n" +
                 "       value1();\n" +
                 "    value2(); /* test */\n" +
                 "    if(value != null) {\n" +
@@ -201,7 +201,7 @@ class TransformationsTest extends  AbstractLexicalPreservingTest {
     }
 
 
-    @Test
+    [TestMethod]
     void addingStatement1() {
         considerStatement(
                 "        if(value != null) {" + SYSTEM_EOL +
@@ -218,8 +218,8 @@ class TransformationsTest extends  AbstractLexicalPreservingTest {
         MethodDeclaration methodDeclaration = (MethodDeclaration)classOrInterfaceDeclaration.getChildNodes().get(2);
         methodDeclaration.getBody().get().addStatement(statement);
 
-        String s = LexicalPreservingPrinter.print(compilationUnit);
-        String expected = "public class Test {\n" +
+        string s = LexicalPreservingPrinter.print(compilationUnit);
+        string expected = "public class Test {\n" +
                 "    public void method() {\n" +
                 "           value1();\n" +
                 "        value2(); // Test\n" +
@@ -231,7 +231,7 @@ class TransformationsTest extends  AbstractLexicalPreservingTest {
         assertEqualsStringIgnoringEol(expected, s);
     }
 
-    @Test
+    [TestMethod]
     void addingStatement2() {
         considerStatement(
                 "        if(value != null) {" + SYSTEM_EOL +
@@ -248,8 +248,8 @@ class TransformationsTest extends  AbstractLexicalPreservingTest {
         MethodDeclaration methodDeclaration = (MethodDeclaration)classOrInterfaceDeclaration.getChildNodes().get(2);
         methodDeclaration.getBody().get().addStatement(statement);
 
-        String s = LexicalPreservingPrinter.print(compilationUnit);
-        String expected = "public class Test {\n" +
+        string s = LexicalPreservingPrinter.print(compilationUnit);
+        string expected = "public class Test {\n" +
                 "    public void method() {\n" +
                 "           value1();\n" +
                 "        value2();\n" +
@@ -261,7 +261,7 @@ class TransformationsTest extends  AbstractLexicalPreservingTest {
         assertEqualsStringIgnoringEol(expected, s);
     }
 
-    @Test
+    [TestMethod]
     void addingStatement3() {
         considerStatement(
                 "        if(value != null) {" + SYSTEM_EOL +
@@ -278,8 +278,8 @@ class TransformationsTest extends  AbstractLexicalPreservingTest {
         MethodDeclaration methodDeclaration = (MethodDeclaration)classOrInterfaceDeclaration.getChildNodes().get(2);
         methodDeclaration.getBody().get().addStatement(statement);
 
-        String s = LexicalPreservingPrinter.print(compilationUnit);
-        String expected = "public class Test {\n" +
+        string s = LexicalPreservingPrinter.print(compilationUnit);
+        string expected = "public class Test {\n" +
                 "    public void method() {\n" +
                 "           value1();\n" +
                 "        value2();\n" +
@@ -291,21 +291,21 @@ class TransformationsTest extends  AbstractLexicalPreservingTest {
         assertEqualsStringIgnoringEol(expected, s);
     }
     
-    @Test
+    [TestMethod]
     void removingInSingleMemberList() {
         considerCode(
                 "class A {\n" +
                 "    int a;\n" +
                 "}");
         cu.getClassByName("A").get().getMembers().remove(0);
-        String expected = 
+        string expected = 
                 "class A {\n" +
                 "}";
-        String s = LexicalPreservingPrinter.print(cu);
+        string s = LexicalPreservingPrinter.print(cu);
         assertEqualsStringIgnoringEol(expected, s);
     }
     
-    @Test
+    [TestMethod]
     void removingInMultiMembersList() {
         considerCode(
                 "class A {\n" +
@@ -313,11 +313,11 @@ class TransformationsTest extends  AbstractLexicalPreservingTest {
                 "    int b;\n" +
                 "}");
         cu.getClassByName("A").get().getMembers().removeLast();
-        String expected = 
+        string expected = 
                 "class A {\n" +
                 "    int a;\n" +
                 "}";
-        String s = LexicalPreservingPrinter.print(cu);
+        string s = LexicalPreservingPrinter.print(cu);
         assertEqualsStringIgnoringEol(expected, s);
     }
     

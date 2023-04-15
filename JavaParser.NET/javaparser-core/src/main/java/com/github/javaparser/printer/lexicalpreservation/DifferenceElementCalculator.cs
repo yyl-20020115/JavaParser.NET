@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,7 +24,7 @@ namespace com.github.javaparser.printer.lexicalpreservation;
 
 class DifferenceElementCalculator {
 
-    // internally keep track of a node position in a List<CsmElement>
+    // internally keep track of a node position _in a List<CsmElement>
     public static class ChildPositionInfo {
 
         Node node;
@@ -38,12 +38,12 @@ class DifferenceElementCalculator {
 
         @Override
         public boolean equals(Object other) {
-            if (other == null || !(other instanceof ChildPositionInfo))
+            if (other == null || !(other is ChildPositionInfo))
                 return false;
             ChildPositionInfo cpi = (ChildPositionInfo) other;
             // verify that the node content and the position are equal
-            // because we can have nodes with the same content but in different lines
-            // in this case we consider that nodes are not equals
+            // because we can have nodes with the same content but _in different lines
+            // _in this case we consider that nodes are not equals
             // If the nodes have no declared position they are considered equal.
             return this.node.equals(cpi.node) 
             		&& (this.node.hasRange() == false && cpi.node.hasRange() == false
@@ -59,22 +59,22 @@ class DifferenceElementCalculator {
     }
 
     static boolean matching(CsmElement a, CsmElement b) {
-        if (a instanceof CsmChild) {
-            if (b instanceof CsmChild) {
+        if (a is CsmChild) {
+            if (b is CsmChild) {
                 CsmChild childA = (CsmChild) a;
                 CsmChild childB = (CsmChild) b;
                 return childA.getChild().equals(childB.getChild());
-            } else if (b instanceof CsmToken) {
+            } else if (b is CsmToken) {
                 return false;
-            } else if (b instanceof CsmIndent) {
+            } else if (b is CsmIndent) {
                 return false;
-            } else if (b instanceof CsmUnindent) {
+            } else if (b is CsmUnindent) {
                 return false;
             } else {
                 throw new UnsupportedOperationException(a.getClass().getSimpleName() + " " + b.getClass().getSimpleName());
             }
-        } else if (a instanceof CsmToken) {
-            if (b instanceof CsmToken) {
+        } else if (a is CsmToken) {
+            if (b is CsmToken) {
                 // fix #2382:
                 // Tokens are described by their type AND their content
                 // and TokenContentCalculator. By using .equals(), all
@@ -82,43 +82,43 @@ class DifferenceElementCalculator {
                 CsmToken childA = (CsmToken) a;
                 CsmToken childB = (CsmToken) b;
                 return childA.equals(childB);
-            } else if (b instanceof CsmChild) {
+            } else if (b is CsmChild) {
                 return false;
-            } else if (b instanceof CsmIndent) {
+            } else if (b is CsmIndent) {
                 return false;
-            } else if (b instanceof CsmUnindent) {
+            } else if (b is CsmUnindent) {
                 return false;
             } else {
                 throw new UnsupportedOperationException(a.getClass().getSimpleName() + " " + b.getClass().getSimpleName());
             }
-        } else if (a instanceof CsmIndent) {
-            return b instanceof CsmIndent;
-        } else if (a instanceof CsmUnindent) {
-            return b instanceof CsmUnindent;
+        } else if (a is CsmIndent) {
+            return b is CsmIndent;
+        } else if (a is CsmUnindent) {
+            return b is CsmUnindent;
         }
         throw new UnsupportedOperationException(a.getClass().getSimpleName() + " " + b.getClass().getSimpleName());
     }
 
     private static boolean replacement(CsmElement a, CsmElement b) {
-        if (a instanceof CsmIndent || b instanceof CsmIndent || a instanceof CsmUnindent || b instanceof CsmUnindent) {
+        if (a is CsmIndent || b is CsmIndent || a is CsmUnindent || b is CsmUnindent) {
             return false;
         }
-        if (a instanceof CsmChild) {
-            if (b instanceof CsmChild) {
+        if (a is CsmChild) {
+            if (b is CsmChild) {
                 CsmChild childA = (CsmChild) a;
                 CsmChild childB = (CsmChild) b;
                 return childA.getChild().getClass().equals(childB.getChild().getClass());
-            } else if (b instanceof CsmToken) {
+            } else if (b is CsmToken) {
                 return false;
             } else {
                 throw new UnsupportedOperationException(a.getClass().getSimpleName() + " " + b.getClass().getSimpleName());
             }
-        } else if (a instanceof CsmToken) {
-            if (b instanceof CsmToken) {
+        } else if (a is CsmToken) {
+            if (b is CsmToken) {
                 CsmToken childA = (CsmToken) a;
                 CsmToken childB = (CsmToken) b;
                 return childA.getTokenType() == childB.getTokenType();
-            } else if (b instanceof CsmChild) {
+            } else if (b is CsmChild) {
                 return false;
             }
         }
@@ -132,7 +132,7 @@ class DifferenceElementCalculator {
         List<ChildPositionInfo> positions = new ArrayList<>();
         for (int i = 0; i < calculatedSyntaxModel.elements.size(); i++) {
             CsmElement element = calculatedSyntaxModel.elements.get(i);
-            if (element instanceof CsmChild) {
+            if (element is CsmChild) {
                 positions.add(new ChildPositionInfo(((CsmChild) element).getChild(), i));
             }
         }
@@ -168,34 +168,34 @@ class DifferenceElementCalculator {
         // The algorithm is based on common child elements. 
         // It first analyzes the elements preceding this child. 
         // Then it keeps the common element and continues the analysis between the element 
-        // following this child and the common element in the list.
+        // following this child and the common element _in the list.
         while (commonChildrenIndex < commonChildren.size()) {
             ChildPositionInfo child = commonChildren.get(commonChildrenIndex++);
-            // search the position of the node "child" in the original list of cms element
-            final int currentPosOfNextChildInOriginal = posOfNextChildInOriginal;
-            final int currentPosOfNextChildInAfter = posOfNextChildInAfter;
+            // search the position of the node "child" _in the original list of cms element
+            /*final*/int currentPosOfNextChildInOriginal = posOfNextChildInOriginal;
+            /*final*/int currentPosOfNextChildInAfter = posOfNextChildInAfter;
             posOfNextChildInOriginal = childrenInOriginal.stream()
             		.filter(i -> i.equals(child))
             		.map(i -> i.position)
             		.filter(position -> position > currentPosOfNextChildInOriginal)
             		.findFirst().orElse(posOfNextChildInOriginal);
-            // search the position of the node "child" in the modified list of cms element
+            // search the position of the node "child" _in the modified list of cms element
             posOfNextChildInAfter = childrenInAfter.stream()
             		.filter(i -> i.equals(child))
             		.map(i -> i.position)
             		.filter(position -> position > currentPosOfNextChildInAfter)
             		.findFirst().orElse(posOfNextChildInAfter);
-            // Imagine that the common elements has been moved, for example in the case where the parameters of a method are reversed
-			// In this case the afterIndex will be greater than the position of the child in
+            // Imagine that the common elements has been moved, for example _in the case where the parameters of a method are reversed
+			// In this case the afterIndex will be greater than the position of the child _in
 			// the list
 			// For example : if {@code new Foo(a, b)} become {@code new Foo(b, a)}
-			// Nota: in this example there is 3 child elements Foo, 'a' and 'b', others are tokens
+			// Nota: _in this example there is 3 child elements Foo, 'a' and 'b', others are tokens
 			// In the orginal list the child element 'a' is at the position 5 and the
 			// element 'b' is at the position 8
 			// After reverting the list of parameters the child element 'a' is at the
 			// position 8 and the element 'b' is at the position 5
-			// When we deal with element 'b', it is in 5th position in the list after the
-			// modification but the previous position in the list was that of element 'a'.
+			// When we deal with element 'b', it is _in 5th position _in the list after the
+			// modification but the previous position _in the list was that of element 'a'.
             if (originalIndex < posOfNextChildInOriginal || afterIndex < posOfNextChildInAfter) {
             	// defines the sublist of elements located before the common element  
             	CalculatedSyntaxModel originalSub = originalIndex < posOfNextChildInOriginal ? original.sub(originalIndex, posOfNextChildInOriginal) : new CalculatedSyntaxModel(Collections.EMPTY_LIST);
@@ -206,7 +206,7 @@ class DifferenceElementCalculator {
             	// we need to keep the current common node
             	elements.add(new Kept(new CsmChild(child.node)));
             } else {
-            	// In this case the current node was not found in the list after change
+            	// In this case the current node was not found _in the list after change
             	// so we need to remove it.
             	elements.add(new Removed(new CsmChild(child.node)));
             }
@@ -223,10 +223,10 @@ class DifferenceElementCalculator {
 
     private static void considerRemoval(NodeText nodeTextForChild, List<DifferenceElement> elements) {
         for (TextElement el : nodeTextForChild.getElements()) {
-            if (el instanceof ChildTextElement) {
+            if (el is ChildTextElement) {
                 ChildTextElement cte = (ChildTextElement) el;
                 considerRemoval(LexicalPreservingPrinter.getOrCreateNodeText(cte.getChild()), elements);
-            } else if (el instanceof TokenTextElement) {
+            } else if (el is TokenTextElement) {
                 TokenTextElement tte = (TokenTextElement) el;
                 elements.add(new Removed(new CsmToken(tte.getTokenKind(), tte.getText())));
             } else {
@@ -237,9 +237,9 @@ class DifferenceElementCalculator {
 
     private static int considerRemoval(CsmElement removedElement, int originalIndex, List<DifferenceElement> elements) {
         boolean dealtWith = false;
-        if (removedElement instanceof CsmChild) {
+        if (removedElement is CsmChild) {
             CsmChild removedChild = (CsmChild) removedElement;
-            if (removedChild.getChild() instanceof Type && removedChild.getChild().getParentNode().isPresent() && removedChild.getChild().getParentNode().get() instanceof VariableDeclarator) {
+            if (removedChild.getChild() is Type && removedChild.getChild().getParentNode().isPresent() && removedChild.getChild().getParentNode().get() is VariableDeclarator) {
                 NodeText nodeTextForChild = LexicalPreservingPrinter.getOrCreateNodeText(removedChild.getChild());
                 considerRemoval(nodeTextForChild, elements);
                 originalIndex++;
@@ -269,7 +269,7 @@ class DifferenceElementCalculator {
             } else {
                 CsmElement nextOriginal = original.elements.get(originalIndex);
                 CsmElement nextAfter = after.elements.get(afterIndex);
-                if ((nextOriginal instanceof CsmMix) && (nextAfter instanceof CsmMix)) {
+                if ((nextOriginal is CsmMix) && (nextAfter is CsmMix)) {
                     if (((CsmMix) nextAfter).getElements().equals(((CsmMix) nextOriginal).getElements())) {
                         // No reason to deal with a reshuffled, we are just going to keep everything as it is
                         ((CsmMix) nextAfter).getElements().forEach(el -> elements.add(new Kept(el)));
@@ -307,7 +307,7 @@ class DifferenceElementCalculator {
     }
 
     private static long cost(List<DifferenceElement> elements) {
-        return elements.stream().filter(e -> !(e instanceof Kept)).count();
+        return elements.stream().filter(e -> !(e is Kept)).count();
     }
 
     /**
@@ -315,6 +315,6 @@ class DifferenceElementCalculator {
      * This is mainly intended for test purposes.
      */
     static void removeIndentationElements(List<DifferenceElement> elements) {
-        elements.removeIf(el -> el.getElement() instanceof CsmIndent || el.getElement() instanceof CsmUnindent);
+        elements.removeIf(el -> el.getElement() is CsmIndent || el.getElement() is CsmUnindent);
     }
 }

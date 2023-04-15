@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -30,19 +30,19 @@ namespace com.github.javaparser.ast.comments;
  * @see JavadocComment
  * @author Julio Vilmar Gesser
  */
-public abstract class Comment extends Node {
+public abstract class Comment:Node {
 
-    private String content;
+    private string content;
     private Node commentedNode;
 
     public Comment() {
     }
 
-    public Comment(String content) {
+    public Comment(string content) {
         this.content = content;
     }
 
-    public Comment(Range range, String content) {
+    public Comment(Range range, string content) {
         super(range);
         this.content = content;
     }
@@ -52,7 +52,7 @@ public abstract class Comment extends Node {
      * 
      * @return text of the comment
      */
-    public final String getContent() {
+    public /*final*/string getContent() {
         return content;
     }
 
@@ -62,7 +62,7 @@ public abstract class Comment extends Node {
      * @param content
      *            the text of the comment to set
      */
-    public Comment setContent(String content) {
+    public Comment setContent(string content) {
         this.content = content;
         return this;
     }
@@ -94,7 +94,7 @@ public abstract class Comment extends Node {
         if (commentedNode==this) {
             throw new IllegalArgumentException();
         }
-        if (commentedNode instanceof Comment) {
+        if (commentedNode is Comment) {
             throw new IllegalArgumentException();
         }
         this.commentedNode = commentedNode;

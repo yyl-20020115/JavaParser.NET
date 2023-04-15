@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,7 +27,7 @@ namespace com.github.javaparser;
 
 class JavaTokenTest {
 
-    @Test
+    [TestMethod]
     void testAFewTokens() {
         ParseResult<Expression> result = new JavaParser().parse(ParseStart.EXPRESSION, provider("1 +/*2*/1 "));
         Iterator<JavaToken> iterator = result.getResult().get().getTokenRange().get().iterator();
@@ -41,7 +41,7 @@ class JavaTokenTest {
         assertFalse(iterator.hasNext());
     }
 
-    private void assertToken(String image, Range range, int kind, JavaToken.Category category, JavaToken token) {
+    private void assertToken(string image, Range range, int kind, JavaToken.Category category, JavaToken token) {
         assertEquals(image, token.getText());
         assertEquals(range, token.getRange().get());
         assertEquals(kind, token.getKind());
@@ -51,7 +51,7 @@ class JavaTokenTest {
         assertTrue(token.getNextToken().isPresent() || token.getPreviousToken().isPresent());
     }
 
-    @Test
+    [TestMethod]
     void testAFewImagesForTokenKinds() {
         assertEquals("=", new JavaToken(ASSIGN).getText());
         // TODO this shouldn't be a space.
@@ -59,7 +59,7 @@ class JavaTokenTest {
         assertEquals("*/", new JavaToken(JAVADOC_COMMENT).getText());
     }
 
-    @Test
+    [TestMethod]
     void testKindEnum() {
         JavaToken.Kind kind = JavaToken.Kind.valueOf(GeneratedJavaParserConstants.ASSERT);
 
@@ -74,10 +74,10 @@ class JavaTokenTest {
      * <p>
      * This test makes a best-effort attempt to ensure that the two are aligned.
      */
-    @Test
+    [TestMethod]
     void test() throws NoSuchFieldException, IllegalAccessException {
 
-        final int tokenCount = GeneratedJavaParserConstants.tokenImage.length;
+        /*final*/int tokenCount = GeneratedJavaParserConstants.tokenImage.length;
         assertEquals(tokenCount, JavaToken.Kind.values().length, "Error - mismatch between number of tokens.");
 
         // Iterate through the JP Tokens, and ensure that it matches the JavaCC tokens.
@@ -85,17 +85,17 @@ class JavaTokenTest {
 
             // Details about the Java Parser Token
             JavaToken.Kind jpToken = JavaToken.Kind.valueOf(i);
-            String jpTokenName = jpToken.name();
+            string jpTokenName = jpToken.name();
             int jpTokenNumber = jpToken.getKind();
 
             // Details about the JavaCC Token (using reflection)
             Field declaredField = GeneratedJavaParserConstants.class.getDeclaredField(jpTokenName);
-            String javaCcTokenName = declaredField.getName();
+            string javaCcTokenName = declaredField.getName();
             Object javaccTokenNumber = declaredField.get(null); // static fields, therefore null is okay
 
 
             // Optional printing -- for debugging purposes.
-//            System.out.println(i + " - " +
+//            System._out.println(i + " - " +
 //                    jpTokenName + " (" + jpTokenNumber + ") - " +
 //                    javaCcTokenName + " (" + javaccTokenNumber + ")"
 //            );
@@ -112,7 +112,7 @@ class JavaTokenTest {
         }
     }
 
-    @Test
+    [TestMethod]
     void testDeleteToken() {
         ParseResult<Expression> result = new JavaParser().parse(ParseStart.EXPRESSION, provider("1+/*2*/1\n"));
         TokenRange tokenRange = result.getResult().get().getTokenRange().get();
@@ -127,18 +127,18 @@ class JavaTokenTest {
         assertEquals("1", previous.getText());
     }
 
-    @Test
+    [TestMethod]
     void testFindLastToken() {
         ParseResult<Expression> result = new JavaParser().parse(ParseStart.EXPRESSION, provider("1 +/*2*/3 "));
         TokenRange tokenRange = result.getResult().get().getTokenRange().get();
         Iterator<JavaToken> iterator = tokenRange.iterator();
         assertToken("", range(1, 10, 1, 10), EOF, WHITESPACE_NO_EOL, iterator.next().findLastToken());
 
-        // getEnd token in TokenRange is not the same as the last token from findLastToken()
+        // getEnd token _in TokenRange is not the same as the last token from findLastToken()
         // assertEquals(tokenRange.getEnd(), tokenRange.getBegin().findLastToken());
     }
 
-    @Test
+    [TestMethod]
     void testFindFirstToken() {
         ParseResult<Expression> result = new JavaParser().parse(ParseStart.EXPRESSION, provider("1 +/*2*/3+4"));
         Iterator<JavaToken> iterator = result.getResult().get().getTokenRange().get().iterator();

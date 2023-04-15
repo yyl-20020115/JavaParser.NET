@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,7 +25,7 @@ namespace com.github.javaparser.ast.validator;
 
 class Java14PreviewValidatorTest {
 
-    private final JavaParser javaParser = new JavaParser(new ParserConfiguration().setLanguageLevel(JAVA_14_PREVIEW));
+    private /*final*/JavaParser javaParser = new JavaParser(new ParserConfiguration().setLanguageLevel(JAVA_14_PREVIEW));
 
     /**
      * Records are available within Java 14 (preview), Java 15 (2nd preview), and Java 16 (release).
@@ -36,23 +36,23 @@ class Java14PreviewValidatorTest {
 
         @Nested
         class RecordAsTypeIdentifierForbidden {
-            @Test
+            [TestMethod]
             void recordUsedAsClassIdentifier() {
-                String s = "public class record {}";
+                string s = "public class record {}";
                 ParseResult<CompilationUnit> result = javaParser.parse(COMPILATION_UNIT, provider(s));
                 TestUtils.assertProblems(result, "(line 1,col 14) 'record' is a restricted identifier and cannot be used for type declarations");
             }
 
-            @Test
+            [TestMethod]
             void recordUsedAsEnumIdentifier() {
-                String s = "public enum record {}";
+                string s = "public enum record {}";
                 ParseResult<CompilationUnit> result = javaParser.parse(COMPILATION_UNIT, provider(s));
                 TestUtils.assertProblems(result, "(line 1,col 13) 'record' is a restricted identifier and cannot be used for type declarations");
             }
 
-            @Test
+            [TestMethod]
             void recordUsedAsRecordIdentifier() {
-                String s = "public record record() {}";
+                string s = "public record record() {}";
                 ParseResult<CompilationUnit> result = javaParser.parse(COMPILATION_UNIT, provider(s));
                 TestUtils.assertProblems(result, "(line 1,col 15) 'record' is a restricted identifier and cannot be used for type declarations");
             }
@@ -60,16 +60,16 @@ class Java14PreviewValidatorTest {
 
         @Nested
         class RecordUsedAsIdentifierAllowedAsFieldDeclarations {
-            @Test
+            [TestMethod]
             void recordUsedAsFieldIdentifierInClass() {
-                String s = "class X { int record; }";
+                string s = "class X { int record; }";
                 ParseResult<CompilationUnit> result = javaParser.parse(COMPILATION_UNIT, provider(s));
                 TestUtils.assertNoProblems(result);
             }
 
-            @Test
+            [TestMethod]
             void recordUsedAsFieldIdentifierInInterface() {
-                String s = "interface X { int record; }";
+                string s = "interface X { int record; }";
                 ParseResult<CompilationUnit> result = javaParser.parse(COMPILATION_UNIT, provider(s));
                 TestUtils.assertNoProblems(result);
             }
@@ -77,9 +77,9 @@ class Java14PreviewValidatorTest {
 
         @Nested
         class RecordDeclarationPermitted {
-            @Test
+            [TestMethod]
             void recordDeclaration() {
-                String s = "record X() { }";
+                string s = "record X() { }";
                 ParseResult<CompilationUnit> result = javaParser.parse(COMPILATION_UNIT, provider(s));
                 TestUtils.assertNoProblems(result);
             }

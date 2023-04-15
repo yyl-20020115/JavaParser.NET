@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -35,7 +35,7 @@ class JavaParserVariableDeclarationTest implements ResolvedValueDeclarationTest 
 
     @Override
     public JavaParserVariableDeclaration createValue() {
-        String code = "class A {a() {String s;}}";
+        string code = "class A {a() {string s;}}";
         CompilationUnit compilationUnit = StaticJavaParser.parse(code);
         VariableDeclarator variableDeclarator = compilationUnit.findFirst(VariableDeclarator.class).get();
         ReflectionTypeSolver reflectionTypeSolver = new ReflectionTypeSolver();
@@ -43,21 +43,21 @@ class JavaParserVariableDeclarationTest implements ResolvedValueDeclarationTest 
     }
 
     @Override
-    public String getCanonicalNameOfExpectedType(ResolvedValueDeclaration resolvedDeclaration) {
+    public string getCanonicalNameOfExpectedType(ResolvedValueDeclaration resolvedDeclaration) {
         return String.class.getCanonicalName();
     }
 
-    @Test
+    [TestMethod]
     void test3631() {
-        String code = ""
+        string code = ""
                 + "class InnerScope {\n"
                 + "    int x = 0;\n"
                 + "    void method() {\n"
                 + "        {\n"
                 + "            var x = 1;\n"
-                + "            System.out.println(x);   // prints 1\n"
+                + "            System._out.println(x);   // prints 1\n"
                 + "        }\n"
-                + "        System.out.println(x);       // prints 0\n"
+                + "        System._out.println(x);       // prints 0\n"
                 + "    }\n"
                 + "    public static void main(String[] args) {\n"
                 + "        new InnerScope().method();\n"
@@ -73,7 +73,7 @@ class JavaParserVariableDeclarationTest implements ResolvedValueDeclarationTest 
         List<NameExpr> names = cu.findAll(NameExpr.class);
         ResolvedValueDeclaration rvd = names.get(3).resolve();
 
-        String decl = rvd.asField().toAst().get().toString();
+        string decl = rvd.asField().toAst().get().toString();
 
         assertTrue("int x = 0;".equals(decl));
     }

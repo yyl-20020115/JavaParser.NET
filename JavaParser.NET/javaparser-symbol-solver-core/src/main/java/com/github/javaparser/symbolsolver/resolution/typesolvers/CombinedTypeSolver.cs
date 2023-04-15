@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -31,19 +31,19 @@ namespace com.github.javaparser.symbolsolver.resolution.typesolvers;
  */
 public class CombinedTypeSolver implements TypeSolver {
 
-    private final Cache<String, SymbolReference<ResolvedReferenceTypeDeclaration>> typeCache;
+    private /*final*/Cache<String, SymbolReference<ResolvedReferenceTypeDeclaration>> typeCache;
 
     private TypeSolver parent;
     private List<TypeSolver> elements = new ArrayList<>();
     
     /**
      * A predicate which determines what to do if an exception is raised during the parsing process.
-     * If it returns {@code true} the exception will be ignored, and solving will continue using the next solver in line.
+     * If it returns {@code true} the exception will be ignored, and solving will continue using the next solver _in line.
      * If it returns {@code false} the exception will be thrown, stopping the solving process.
      * 
-     * Main use case for this is to circumvent bugs or missing functionality in some type solvers.
-     * If for example solver A has a bug resulting in a {@link NullPointerException}, you could use a {@link ExceptionHandlers#getTypeBasedWhitelist(Class...) whitelist} to ignore that type of exception.
-     * A secondary solver would then be able to step in when such an error occurs.
+     * Main use case for this is to circumvent bugs or missing functionality _in some type solvers.
+     * If for example solver A has a bug resulting _in a {@link NullPointerException}, you could use a {@link ExceptionHandlers#getTypeBasedWhitelist(Class...) whitelist} to ignore that type of exception.
+     * A secondary solver would then be able to step _in when such an error occurs.
      * 
      * @see #CombinedTypeSolver(Predicate, TypeSolver...)
      * @see #setExceptionHandler(Predicate)
@@ -141,7 +141,7 @@ public class CombinedTypeSolver implements TypeSolver {
     }
 
     //@Override
-    public SymbolReference<ResolvedReferenceTypeDeclaration> tryToSolveType(String name) {
+    public SymbolReference<ResolvedReferenceTypeDeclaration> tryToSolveType(string name) {
         Optional<SymbolReference<ResolvedReferenceTypeDeclaration>> cachedSymbol = typeCache.get(name);
         if (cachedSymbol.isPresent()) {
             return cachedSymbol.get();
@@ -169,7 +169,7 @@ public class CombinedTypeSolver implements TypeSolver {
     }
 
     //@Override
-    public ResolvedReferenceTypeDeclaration solveType(String name) throws UnsolvedSymbolException {
+    public ResolvedReferenceTypeDeclaration solveType(string name) throws UnsolvedSymbolException {
         SymbolReference<ResolvedReferenceTypeDeclaration> res = tryToSolveType(name);
         if (res.isSolved()) {
             return res.getCorrespondingDeclaration();
@@ -185,10 +185,10 @@ public class CombinedTypeSolver implements TypeSolver {
     public static class ExceptionHandlers {
 
         /** Doesn't ignore any exceptions (default) */
-        public static final Predicate<Exception> IGNORE_NONE = e -> false;
+        public static /*final*/Predicate<Exception> IGNORE_NONE = e -> false;
 
         /** Ignores all exceptions */
-        public static final Predicate<Exception> IGNORE_ALL = e -> true;
+        public static /*final*/Predicate<Exception> IGNORE_ALL = e -> true;
 
         /**
          * Ignores any exception that is {@link Class#isAssignableFrom(Class) assignable from}
@@ -196,7 +196,7 @@ public class CombinedTypeSolver implements TypeSolver {
          * 
          * @see #getTypeBasedWhitelist(Class...)
          */
-        public static final Predicate<Exception> IGNORE_UNSUPPORTED_OPERATION = getTypeBasedWhitelist(
+        public static /*final*/Predicate<Exception> IGNORE_UNSUPPORTED_OPERATION = getTypeBasedWhitelist(
                 UnsupportedOperationException.class);
 
         /**
@@ -205,7 +205,7 @@ public class CombinedTypeSolver implements TypeSolver {
          * 
          * @see #getTypeBasedWhitelist(Class...)
          */
-        public static final Predicate<Exception> IGNORE_UNSOLVED_SYMBOL = getTypeBasedWhitelist(
+        public static /*final*/Predicate<Exception> IGNORE_UNSOLVED_SYMBOL = getTypeBasedWhitelist(
                 UnsolvedSymbolException.class);
 
         /**
@@ -216,7 +216,7 @@ public class CombinedTypeSolver implements TypeSolver {
          * @see #IGNORE_UNSUPPORTED_OPERATION
          * @see #getTypeBasedWhitelist(Class...)
          */
-        public static final Predicate<Exception> IGNORE_UNSUPPORTED_AND_UNSOLVED = getTypeBasedWhitelist(
+        public static /*final*/Predicate<Exception> IGNORE_UNSUPPORTED_AND_UNSOLVED = getTypeBasedWhitelist(
                 UnsupportedOperationException.class, UnsolvedSymbolException.class);
 
         /**
@@ -227,9 +227,9 @@ public class CombinedTypeSolver implements TypeSolver {
          *         {@link Class#isAssignableFrom(Class) assignable from}
          *         the thrown exception class.
          */
-        public static Predicate<Exception> getTypeBasedBlacklist(Class<? extends Exception>... blacklist) {
+        public static Predicate<Exception> getTypeBasedBlacklist(Class<?:Exception>... blacklist) {
             return e -> {
-                for (Class<? extends Exception> clazz : blacklist) {
+                for (Class<?:Exception> clazz : blacklist) {
                     if (clazz.isAssignableFrom(e.getClass())) {
                         return false;
                     }
@@ -246,9 +246,9 @@ public class CombinedTypeSolver implements TypeSolver {
          *         {@link Class#isAssignableFrom(Class) assignable from}
          *         the thrown exception class.
          */
-        public static Predicate<Exception> getTypeBasedWhitelist(Class<? extends Exception>... whitelist) {
+        public static Predicate<Exception> getTypeBasedWhitelist(Class<?:Exception>... whitelist) {
             return e -> {
-                for (Class<? extends Exception> clazz : whitelist) {
+                for (Class<?:Exception> clazz : whitelist) {
                     if (clazz.isAssignableFrom(e.getClass())) {
                         return true;
                     }

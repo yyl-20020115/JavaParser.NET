@@ -8,7 +8,7 @@ namespace com.github.javaparser.ast;
  * the first one contains the expression "1",
  * the second the expression "2".
  */
-public class ArrayCreationLevel extends Node implements NodeWithAnnotations<ArrayCreationLevel> {
+public class ArrayCreationLevel:Node implements NodeWithAnnotations<ArrayCreationLevel> {
     private Expression dimension;
     private List<AnnotationExpr> annotations;
 
@@ -19,12 +19,12 @@ public class ArrayCreationLevel extends Node implements NodeWithAnnotations<Arra
     }
 
     //@Override
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     //@Override 
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 

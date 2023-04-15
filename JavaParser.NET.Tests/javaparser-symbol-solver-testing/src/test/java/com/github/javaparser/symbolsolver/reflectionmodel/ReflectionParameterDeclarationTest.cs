@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.symbolsolver.reflectionmodel;
 
 class ReflectionParameterDeclarationTest {
 
-    @Test
+    [TestMethod]
     void testGetSignature() {
         TypeSolver typeResolver = new ReflectionTypeSolver();
 
@@ -40,11 +40,11 @@ class ReflectionParameterDeclarationTest {
 
         assertEquals("hashCode()", hashCode.getSignature());
         assertEquals("equals(java.lang.Object)", equals.getSignature());
-        assertEquals("containsAll(java.util.Collection<? extends java.lang.Object>)", containsAll.getSignature());
+        assertEquals("containsAll(java.util.Collection<?:java.lang.Object>)", containsAll.getSignature());
         assertEquals("subList(int, int)", subList.getSignature());
     }
 
-    @Test
+    [TestMethod]
     void testGetGenericReturnType() {
         TypeSolver typeResolver = new ReflectionTypeSolver();
 
@@ -56,7 +56,7 @@ class ReflectionParameterDeclarationTest {
         assertEquals("java.util.Map.V", put.getReturnType().asTypeParameter().getQualifiedName());
     }
 
-    @Test
+    [TestMethod]
     void testGetGenericParameters() {
         TypeSolver typeResolver = new ReflectionTypeSolver();
 

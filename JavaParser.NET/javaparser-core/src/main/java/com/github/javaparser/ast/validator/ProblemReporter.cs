@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,7 +28,7 @@ namespace com.github.javaparser.ast.validator;
  */
 public class ProblemReporter {
 
-    private final Consumer<Problem> problemConsumer;
+    private /*final*/Consumer<Problem> problemConsumer;
 
     public ProblemReporter(Consumer<Problem> problemConsumer) {
         this.problemConsumer = problemConsumer;
@@ -38,13 +38,13 @@ public class ProblemReporter {
      * Report a problem.
      *
      * @param message description of the problem
-     * @param node the node in which the problem occurred, used to find the Range of the problem.
+     * @param node the node _in which the problem occurred, used to find the Range of the problem.
      */
-    public void report(NodeWithTokenRange<?> node, String message, Object... args) {
+    public void report(NodeWithTokenRange<?> node, string message, Object... args) {
         report(node.getTokenRange().orElse(null), message, args);
     }
 
-    public void report(TokenRange range, String message, Object... args) {
+    public void report(TokenRange range, string message, Object... args) {
         problemConsumer.accept(new Problem(f(message, args), range, null));
     }
 }

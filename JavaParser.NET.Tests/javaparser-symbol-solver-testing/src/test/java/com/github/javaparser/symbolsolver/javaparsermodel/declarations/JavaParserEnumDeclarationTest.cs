@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,7 +25,7 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.declarations;
 
 
 
-class JavaParserEnumDeclarationTest extends AbstractTypeDeclarationTest implements ResolvedEnumDeclarationTest,
+class JavaParserEnumDeclarationTest:AbstractTypeDeclarationTest implements ResolvedEnumDeclarationTest,
         MethodResolutionCapabilityTest, MethodUsageResolutionCapabilityTest {
 
     private TypeSolver typeSolver;
@@ -44,43 +44,43 @@ class JavaParserEnumDeclarationTest extends AbstractTypeDeclarationTest implemen
     /// Test misc
     ///
 
-    @Test
+    [TestMethod]
     void testIsClass() {
         JavaParserEnumDeclaration modifier = (JavaParserEnumDeclaration) typeSolver.solveType("com.github.javaparser.ast.Modifier");
         assertEquals(false, modifier.isClass());
     }
 
-    @Test
+    [TestMethod]
     void testIsInterface() {
         JavaParserEnumDeclaration modifier = (JavaParserEnumDeclaration) typeSolver.solveType("com.github.javaparser.ast.Modifier");
         assertEquals(false, modifier.isInterface());
     }
 
-    @Test
+    [TestMethod]
     void testIsEnum() {
         JavaParserEnumDeclaration modifier = (JavaParserEnumDeclaration) typeSolver.solveType("com.github.javaparser.ast.Modifier");
         assertEquals(true, modifier.isEnum());
     }
 
-    @Test
+    [TestMethod]
     void testIsTypeVariable() {
         JavaParserEnumDeclaration modifier = (JavaParserEnumDeclaration) typeSolver.solveType("com.github.javaparser.ast.Modifier");
         assertEquals(false, modifier.isTypeParameter());
     }
 
-    @Test
+    [TestMethod]
     void testIsType() {
         JavaParserEnumDeclaration modifier = (JavaParserEnumDeclaration) typeSolver.solveType("com.github.javaparser.ast.Modifier");
         assertEquals(true, modifier.isType());
     }
 
-    @Test
+    [TestMethod]
     void testAsType() {
         JavaParserEnumDeclaration modifier = (JavaParserEnumDeclaration) typeSolver.solveType("com.github.javaparser.ast.Modifier");
         assertEquals(modifier, modifier.asType());
     }
 
-    @Test
+    [TestMethod]
     void testAsClass() {
         assertThrows(UnsupportedOperationException.class, () -> {
             JavaParserEnumDeclaration modifier = (JavaParserEnumDeclaration) typeSolver.solveType("com.github.javaparser.ast.Modifier");
@@ -88,7 +88,7 @@ class JavaParserEnumDeclarationTest extends AbstractTypeDeclarationTest implemen
     });
 }
 
-    @Test
+    [TestMethod]
     void testAsInterface() {
         assertThrows(UnsupportedOperationException.class, () -> {
             JavaParserEnumDeclaration modifier = (JavaParserEnumDeclaration) typeSolver.solveType("com.github.javaparser.ast.Modifier");
@@ -96,25 +96,25 @@ class JavaParserEnumDeclarationTest extends AbstractTypeDeclarationTest implemen
     });
 }
 
-    @Test
+    [TestMethod]
     void testAsEnum() {
         JavaParserEnumDeclaration modifier = (JavaParserEnumDeclaration) typeSolver.solveType("com.github.javaparser.ast.Modifier");
         assertEquals(modifier, modifier.asEnum());
     }
 
-    @Test
+    [TestMethod]
     void testGetPackageName() {
         JavaParserEnumDeclaration modifier = (JavaParserEnumDeclaration) typeSolver.solveType("com.github.javaparser.ast.Modifier");
         assertEquals("com.github.javaparser.ast", modifier.getPackageName());
     }
 
-    @Test
+    [TestMethod]
     void testGetClassName() {
         JavaParserEnumDeclaration modifier = (JavaParserEnumDeclaration) typeSolver.solveType("com.github.javaparser.ast.Modifier");
         assertEquals("Modifier", modifier.getClassName());
     }
 
-    @Test
+    [TestMethod]
     void testGetQualifiedName() {
         JavaParserEnumDeclaration modifier = (JavaParserEnumDeclaration) typeSolver.solveType("com.github.javaparser.ast.Modifier");
         assertEquals("com.github.javaparser.ast.Modifier", modifier.getQualifiedName());
@@ -124,7 +124,7 @@ class JavaParserEnumDeclarationTest extends AbstractTypeDeclarationTest implemen
     /// Test ancestors
     ///
 
-    @Test
+    [TestMethod]
     void getGetAncestors() {
         Path src = adaptPath("src/test/resources/enums");
         CombinedTypeSolver combinedtypeSolver = new CombinedTypeSolver();
@@ -138,26 +138,26 @@ class JavaParserEnumDeclarationTest extends AbstractTypeDeclarationTest implemen
         assertEquals("java.lang.Cloneable", ancestors.get(1).getQualifiedName());
     }
 
-//    @Test
+//    [TestMethod]
 //    public void testGetSuperclassWithoutTypeParameters() {
 //        JavaParserEnumDeclaration modifier = (JavaParserEnumDeclaration) typeSolver.solveType("com.github.javaparser.ast.Modifier");
 //        assertEquals("com.github.javaparser.ast.Node", compilationUnit.getSuperClass().getQualifiedName());
 //    }
 
-    @Test
+    [TestMethod]
     void testGetSuperclassWithTypeParameters() {
         JavaParserClassDeclaration compilationUnit = (JavaParserClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
         assertEquals("com.github.javaparser.ast.body.BodyDeclaration", compilationUnit.getSuperClass().get().getQualifiedName());
         assertEquals("com.github.javaparser.ast.body.ConstructorDeclaration", compilationUnit.getSuperClass().get().typeParametersMap().getValueBySignature("com.github.javaparser.ast.body.BodyDeclaration.T").get().asReferenceType().getQualifiedName());
     }
 
-    @Test
+    [TestMethod]
     void testGetAllSuperclassesWithoutTypeParameters() {
         JavaParserClassDeclaration cu = (JavaParserClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.CompilationUnit");
         assertEquals(ImmutableSet.of("com.github.javaparser.ast.Node", "java.lang.Object"), cu.getAllSuperClasses().stream().map(i -> i.getQualifiedName()).collect(Collectors.toSet()));
     }
 
-    @Test
+    [TestMethod]
     void testGetAllSuperclassesWithTypeParameters() {
         JavaParserClassDeclaration constructorDeclaration = (JavaParserClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
         assertEquals(3, constructorDeclaration.getAllSuperClasses().size());
@@ -175,7 +175,7 @@ class JavaParserEnumDeclarationTest extends AbstractTypeDeclarationTest implemen
         assertEquals("java.lang.Object", ancestor.getQualifiedName());
     }
 
-//    @Test
+//    [TestMethod]
 //    public void testGetInterfacesWithoutParameters() {
 //        JavaParserEnumDeclaration modifier = (JavaParserEnumDeclaration) typeSolver.solveType("com.github.javaparser.ast.Modifier");
 //        assertEquals(ImmutableSet.of(), compilationUnit.getInterfaces().stream().map(i -> i.getQualifiedName()).collect(Collectors.toSet()));
@@ -184,7 +184,7 @@ class JavaParserEnumDeclarationTest extends AbstractTypeDeclarationTest implemen
 //        assertEquals(ImmutableSet.of("com.github.javaparser.ast.DocumentableNode"), coid.getInterfaces().stream().map(i -> i.getQualifiedName()).collect(Collectors.toSet()));
 //    }
 
-    @Test
+    [TestMethod]
     void testGetInterfacesWithParameters() {
         JavaParserClassDeclaration constructorDeclaration = (JavaParserClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
         assertEquals(7, constructorDeclaration.getInterfaces().size());
@@ -219,7 +219,7 @@ class JavaParserEnumDeclarationTest extends AbstractTypeDeclarationTest implemen
         assertEquals("com.github.javaparser.ast.body.ConstructorDeclaration", interfaze.typeParametersMap().getValueBySignature("com.github.javaparser.ast.nodeTypes.NodeWithBlockStmt.T").get().asReferenceType().getQualifiedName());
     }
 
-//    @Test
+//    [TestMethod]
 //    public void testGetAllInterfacesWithoutParameters() {
 //        JavaParserEnumDeclaration modifier = (JavaParserEnumDeclaration) typeSolver.solveType("com.github.javaparser.ast.Modifier");
 //        assertEquals(ImmutableSet.of("java.lang.Cloneable"), compilationUnit.getAllInterfaces().stream().map(i -> i.getQualifiedName()).collect(Collectors.toSet()));
@@ -228,7 +228,7 @@ class JavaParserEnumDeclarationTest extends AbstractTypeDeclarationTest implemen
 //        assertEquals(ImmutableSet.of("java.lang.Cloneable", "com.github.javaparser.ast.NamedNode", "com.github.javaparser.ast.body.AnnotableNode", "com.github.javaparser.ast.DocumentableNode"), coid.getAllInterfaces().stream().map(i -> i.getQualifiedName()).collect(Collectors.toSet()));
 //    }
 
-    @Test
+    [TestMethod]
     void testGetAllInterfacesWithParametersWithDepthFirstTraversalOrder() {
         JavaParserClassDeclaration constructorDeclaration = (JavaParserClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
         assertEquals(9, constructorDeclaration.getAllInterfaces().size());
@@ -270,7 +270,7 @@ class JavaParserEnumDeclarationTest extends AbstractTypeDeclarationTest implemen
         assertEquals("com.github.javaparser.ast.body.ConstructorDeclaration", interfaze.typeParametersMap().getValueBySignature("com.github.javaparser.ast.nodeTypes.NodeWithAnnotations.T").get().asReferenceType().getQualifiedName());
     }
 
-    @Test
+    [TestMethod]
     void testGetAncestorsWithTypeParameters() {
         JavaParserClassDeclaration constructorDeclaration = (JavaParserClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
         assertEquals(8, constructorDeclaration.getAncestors().size());
@@ -309,13 +309,13 @@ class JavaParserEnumDeclarationTest extends AbstractTypeDeclarationTest implemen
         assertEquals("com.github.javaparser.ast.body.ConstructorDeclaration", ancestor.typeParametersMap().getValueBySignature("com.github.javaparser.ast.nodeTypes.NodeWithBlockStmt.T").get().asReferenceType().getQualifiedName());
     }
 
-    @Test
+    [TestMethod]
     void testGetAllAncestorsWithoutTypeParametersWithDepthFirstTraversalOrder() {
         JavaParserClassDeclaration cu = (JavaParserClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.CompilationUnit");
         assertEquals(ImmutableSet.of("java.lang.Cloneable", "com.github.javaparser.ast.Node", "java.lang.Object"), cu.getAllAncestors().stream().map(i -> i.getQualifiedName()).collect(Collectors.toSet()));
     }
 
-    @Test
+    [TestMethod]
     void testGetAllAncestorsWithTypeParametersWithDepthFirstTraversalOrder() {
         JavaParserClassDeclaration constructorDeclaration = (JavaParserClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
 
@@ -374,7 +374,7 @@ class JavaParserEnumDeclarationTest extends AbstractTypeDeclarationTest implemen
     /// Test fields
     ///
 
-    @Test
+    [TestMethod]
     void testGetFieldForExistingField() {
         JavaParserClassDeclaration constructorDeclaration = (JavaParserClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
 
@@ -394,7 +394,7 @@ class JavaParserEnumDeclarationTest extends AbstractTypeDeclarationTest implemen
         assertEquals(AccessSpecifier.PRIVATE, fieldDeclaration.accessSpecifier());
     }
 
-    @Test
+    [TestMethod]
     void testGetFieldForUnexistingField() {
         assertThrows(UnsolvedSymbolException.class, () -> {
             JavaParserClassDeclaration constructorDeclaration = (JavaParserClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
@@ -403,7 +403,7 @@ class JavaParserEnumDeclarationTest extends AbstractTypeDeclarationTest implemen
 
 }
 
-    @Test
+    [TestMethod]
     void testGetAllFields() {
         JavaParserClassDeclaration constructorDeclaration = (JavaParserClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
 
@@ -461,7 +461,7 @@ class JavaParserEnumDeclarationTest extends AbstractTypeDeclarationTest implemen
         assertEquals("ABSOLUTE_END_LINE", fieldDeclaration.getName());
     }
 
-    @Test
+    [TestMethod]
     void testGetAllStaticFields() {
         JavaParserClassDeclaration constructorDeclaration = (JavaParserClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
 
@@ -480,7 +480,7 @@ class JavaParserEnumDeclarationTest extends AbstractTypeDeclarationTest implemen
         assertEquals("ABSOLUTE_END_LINE", fieldDeclaration.getName());
     }
 
-    @Test
+    [TestMethod]
     void testGetAllNonStaticFields() {
         JavaParserClassDeclaration constructorDeclaration = (JavaParserClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
 
@@ -529,7 +529,7 @@ class JavaParserEnumDeclarationTest extends AbstractTypeDeclarationTest implemen
         assertEquals("comment", fieldDeclaration.getName());
     }
 
-    @Test
+    [TestMethod]
     void testGetDeclaredFields() {
         JavaParserClassDeclaration constructorDeclaration = (JavaParserClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
 
@@ -561,7 +561,7 @@ class JavaParserEnumDeclarationTest extends AbstractTypeDeclarationTest implemen
     /// Test methods
     ///
 
-    @Test
+    [TestMethod]
     void testGetDeclaredMethods() {
         JavaParserClassDeclaration constructorDeclaration = (JavaParserClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
 
@@ -594,7 +594,7 @@ class JavaParserEnumDeclarationTest extends AbstractTypeDeclarationTest implemen
         assertEquals("com.github.javaparser.ast.body.ConstructorDeclaration.setTypeParameters(java.util.List<com.github.javaparser.ast.type.TypeParameter>)", sortedMethods.get(19).getQualifiedSignature());
     }
 
-    @Test
+    [TestMethod]
     void testGetAllMethods() {
         JavaParserClassDeclaration constructorDeclaration = (JavaParserClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
 
@@ -606,7 +606,7 @@ class JavaParserEnumDeclarationTest extends AbstractTypeDeclarationTest implemen
 
         List<String> signatures = sortedMethods.stream().map(m -> m.getQualifiedSignature()).collect(Collectors.toList());
 
-        signatures.stream().forEach(m -> System.out.println(m));
+        signatures.stream().forEach(m -> System._out.println(m));
 
         List<String> expected = new ArrayList<>(Arrays.asList(
                 "com.github.javaparser.ast.Node.addOrphanComment(com.github.javaparser.ast.comments.Comment)",
@@ -629,7 +629,7 @@ class JavaParserEnumDeclarationTest extends AbstractTypeDeclarationTest implemen
                 "com.github.javaparser.ast.Node.isPositionedAfter(com.github.javaparser.Position)",
                 "com.github.javaparser.ast.Node.isPositionedBefore(com.github.javaparser.Position)",
                 "com.github.javaparser.ast.Node.setAsParentNodeOf(com.github.javaparser.ast.Node)",
-                "com.github.javaparser.ast.Node.setAsParentNodeOf(java.util.List<? extends com.github.javaparser.ast.Node>)",
+                "com.github.javaparser.ast.Node.setAsParentNodeOf(java.util.List<?:com.github.javaparser.ast.Node>)",
                 "com.github.javaparser.ast.Node.setBegin(com.github.javaparser.Position)",
                 "com.github.javaparser.ast.Node.setBlockComment(java.lang.String)",
                 "com.github.javaparser.ast.Node.setComment(com.github.javaparser.ast.comments.Comment)",
@@ -663,15 +663,15 @@ class JavaParserEnumDeclarationTest extends AbstractTypeDeclarationTest implemen
                 "com.github.javaparser.ast.body.ConstructorDeclaration.setParameters(java.util.List<com.github.javaparser.ast.body.Parameter>)",
                 "com.github.javaparser.ast.body.ConstructorDeclaration.setThrows(java.util.List<com.github.javaparser.ast.type.ReferenceType>)",
                 "com.github.javaparser.ast.body.ConstructorDeclaration.setTypeParameters(java.util.List<com.github.javaparser.ast.type.TypeParameter>)",
-                "com.github.javaparser.ast.nodeTypes.NodeWithAnnotations.addAnnotation(java.lang.Class<? extends java.lang.annotation.Annotation>)",
+                "com.github.javaparser.ast.nodeTypes.NodeWithAnnotations.addAnnotation(java.lang.Class<?:java.lang.annotation.Annotation>)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithAnnotations.addAnnotation(java.lang.String)",
-                "com.github.javaparser.ast.nodeTypes.NodeWithAnnotations.addMarkerAnnotation(java.lang.Class<? extends java.lang.annotation.Annotation>)",
+                "com.github.javaparser.ast.nodeTypes.NodeWithAnnotations.addMarkerAnnotation(java.lang.Class<?:java.lang.annotation.Annotation>)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithAnnotations.addMarkerAnnotation(java.lang.String)",
-                "com.github.javaparser.ast.nodeTypes.NodeWithAnnotations.addSingleMemberAnnotation(java.lang.Class<? extends java.lang.annotation.Annotation>, java.lang.String)",
+                "com.github.javaparser.ast.nodeTypes.NodeWithAnnotations.addSingleMemberAnnotation(java.lang.Class<?:java.lang.annotation.Annotation>, java.lang.String)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithAnnotations.addSingleMemberAnnotation(java.lang.String, java.lang.String)",
-                "com.github.javaparser.ast.nodeTypes.NodeWithAnnotations.getAnnotationByClass(java.lang.Class<? extends java.lang.annotation.Annotation>)",
+                "com.github.javaparser.ast.nodeTypes.NodeWithAnnotations.getAnnotationByClass(java.lang.Class<?:java.lang.annotation.Annotation>)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithAnnotations.getAnnotationByName(java.lang.String)",
-                "com.github.javaparser.ast.nodeTypes.NodeWithAnnotations.isAnnotationPresent(java.lang.Class<? extends java.lang.annotation.Annotation>)",
+                "com.github.javaparser.ast.nodeTypes.NodeWithAnnotations.isAnnotationPresent(java.lang.Class<?:java.lang.annotation.Annotation>)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithAnnotations.isAnnotationPresent(java.lang.String)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithBlockStmt.createBody()",
                 "com.github.javaparser.ast.nodeTypes.NodeWithBlockStmt.setBody(com.github.javaparser.ast.stmt.BlockStmt)",
@@ -703,8 +703,8 @@ class JavaParserEnumDeclarationTest extends AbstractTypeDeclarationTest implemen
                 "com.github.javaparser.ast.nodeTypes.NodeWithParameters.getParamByType(java.lang.String)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithParameters.setParameters(java.util.List<com.github.javaparser.ast.body.Parameter>)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithThrowable.addThrows(com.github.javaparser.ast.type.ReferenceType)",
-                "com.github.javaparser.ast.nodeTypes.NodeWithThrowable.addThrows(java.lang.Class<? extends java.lang.Throwable>)",
-                "com.github.javaparser.ast.nodeTypes.NodeWithThrowable.isThrows(java.lang.Class<? extends java.lang.Throwable>)",
+                "com.github.javaparser.ast.nodeTypes.NodeWithThrowable.addThrows(java.lang.Class<?:java.lang.Throwable>)",
+                "com.github.javaparser.ast.nodeTypes.NodeWithThrowable.isThrows(java.lang.Class<?:java.lang.Throwable>)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithThrowable.isThrows(java.lang.String)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithThrowable.setThrows(java.util.List<com.github.javaparser.ast.type.ReferenceType>)",
                 "java.lang.Object.clone()",
@@ -730,7 +730,7 @@ class JavaParserEnumDeclarationTest extends AbstractTypeDeclarationTest implemen
     /// Test constructors
     ///
 
-    @Test
+    [TestMethod]
     void testGetConstructors() {
         JavaParserClassDeclaration constructorDeclaration = (JavaParserClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
 
@@ -747,8 +747,8 @@ class JavaParserEnumDeclarationTest extends AbstractTypeDeclarationTest implemen
     /// Resolution
     ///
 
-    //SymbolReference<MethodDeclaration> solveMethod(String name, List<Type> parameterTypes);
-    @Test
+    //SymbolReference<MethodDeclaration> solveMethod(string name, List<Type> parameterTypes);
+    [TestMethod]
     void testSolveMethodExisting() {
         JavaParserClassDeclaration constructorDeclaration = (JavaParserClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
 
@@ -758,17 +758,17 @@ class JavaParserEnumDeclarationTest extends AbstractTypeDeclarationTest implemen
         assertEquals("com.github.javaparser.ast.nodeTypes.NodeWithModifiers.isStatic()", res.getCorrespondingDeclaration().getQualifiedSignature());
 
         res = constructorDeclaration.solveMethod("isThrows", ImmutableList.of(ReflectionFactory.typeUsageFor(RuntimeException.class.getClass(), typeSolver)));
-        assertEquals("com.github.javaparser.ast.nodeTypes.NodeWithThrowable.isThrows(java.lang.Class<? extends java.lang.Throwable>)", res.getCorrespondingDeclaration().getQualifiedSignature());
+        assertEquals("com.github.javaparser.ast.nodeTypes.NodeWithThrowable.isThrows(java.lang.Class<?:java.lang.Throwable>)", res.getCorrespondingDeclaration().getQualifiedSignature());
 
         res = constructorDeclaration.solveMethod("isThrows", ImmutableList.of(ReflectionFactory.typeUsageFor(String.class, typeSolver)));
         assertEquals("com.github.javaparser.ast.nodeTypes.NodeWithThrowable.isThrows(java.lang.String)", res.getCorrespondingDeclaration().getQualifiedSignature());
 
         // This is solved because it is raw
         res = constructorDeclaration.solveMethod("isThrows", ImmutableList.of(ReflectionFactory.typeUsageFor(Class.class, typeSolver)));
-        assertEquals("com.github.javaparser.ast.nodeTypes.NodeWithThrowable.isThrows(java.lang.Class<? extends java.lang.Throwable>)", res.getCorrespondingDeclaration().getQualifiedSignature());
+        assertEquals("com.github.javaparser.ast.nodeTypes.NodeWithThrowable.isThrows(java.lang.Class<?:java.lang.Throwable>)", res.getCorrespondingDeclaration().getQualifiedSignature());
     }
 
-    @Test
+    [TestMethod]
     void testSolveMethodNotExisting() {
         JavaParserClassDeclaration constructorDeclaration = (JavaParserClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
 
@@ -781,7 +781,7 @@ class JavaParserEnumDeclarationTest extends AbstractTypeDeclarationTest implemen
         assertEquals(false, res.isSolved());
     }
 
-//    @Test
+//    [TestMethod]
 //    public void testSolveMethodNotExistingBecauseOfTypeParameters() {
 //        JavaParserClassDeclaration constructorDeclaration = (JavaParserClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
 //
@@ -794,37 +794,37 @@ class JavaParserEnumDeclarationTest extends AbstractTypeDeclarationTest implemen
 //        assertEquals(false, res.isSolved());
 //    }
 
-//    @Test
+//    [TestMethod]
 //    public void testSolveSymbolUnexisting() {
 //        JavaParserClassDeclaration constructorDeclaration = (JavaParserClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
 //
-//        SymbolReference<? extends ResolvedValueDeclaration> res = constructorDeclaration.solveSymbol("unexisting", typeSolver);
+//        SymbolReference<?:ResolvedValueDeclaration> res = constructorDeclaration.solveSymbol("unexisting", typeSolver);
 //        assertEquals(false, res.isSolved());
 //    }
 //
-//    @Test
+//    [TestMethod]
 //    public void testSolveSymbolToDeclaredField() {
 //        JavaParserClassDeclaration constructorDeclaration = (JavaParserClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
 //
-//        SymbolReference<? extends ResolvedValueDeclaration> res = constructorDeclaration.solveSymbol("name", typeSolver);
+//        SymbolReference<?:ResolvedValueDeclaration> res = constructorDeclaration.solveSymbol("name", typeSolver);
 //        assertEquals(true, res.isSolved());
 //        assertEquals(true, res.getCorrespondingDeclaration().isField());
 //    }
 //
-//    @Test
+//    [TestMethod]
 //    public void testSolveSymbolToInheritedPublicField() {
 //        JavaParserClassDeclaration constructorDeclaration = (JavaParserClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
 //
-//        SymbolReference<? extends ResolvedValueDeclaration> res = constructorDeclaration.solveSymbol("NODE_BY_BEGIN_POSITION", typeSolver);
+//        SymbolReference<?:ResolvedValueDeclaration> res = constructorDeclaration.solveSymbol("NODE_BY_BEGIN_POSITION", typeSolver);
 //        assertEquals(true, res.isSolved());
 //        assertEquals(true, res.getCorrespondingDeclaration().isField());
 //    }
 //
-//    @Test
+//    [TestMethod]
 //    public void testSolveSymbolToInheritedPrivateField() {
 //        JavaParserClassDeclaration constructorDeclaration = (JavaParserClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
 //
-//        SymbolReference<? extends ResolvedValueDeclaration> res = constructorDeclaration.solveSymbol("parentNode", typeSolver);
+//        SymbolReference<?:ResolvedValueDeclaration> res = constructorDeclaration.solveSymbol("parentNode", typeSolver);
 //        assertEquals(false, res.isSolved());
 //    }
 
@@ -859,7 +859,7 @@ class JavaParserEnumDeclarationTest extends AbstractTypeDeclarationTest implemen
     ///
 
     // Set<TypeDeclaration> internalTypes()
-    @Test
+    [TestMethod]
     void testGetInternalTypes() {
         Path src = adaptPath("src/test/resources/enums");
         CombinedTypeSolver combinedtypeSolver = new CombinedTypeSolver();
@@ -883,7 +883,7 @@ class JavaParserEnumDeclarationTest extends AbstractTypeDeclarationTest implemen
     ///
 
     // Issue 1749
-    @Test
+    [TestMethod]
     void testHasDirectlyAnnotationNegative() {
         ParserConfiguration parserConfiguration = new ParserConfiguration().setSymbolResolver(
                 new JavaSymbolSolver(new ReflectionTypeSolver()));
@@ -899,7 +899,7 @@ class JavaParserEnumDeclarationTest extends AbstractTypeDeclarationTest implemen
     }
 
     // Issue 1749
-    @Test
+    [TestMethod]
     void testHasDirectlyAnnotationPositive() {
         ParserConfiguration parserConfiguration = new ParserConfiguration().setSymbolResolver(
                 new JavaSymbolSolver(new ReflectionTypeSolver()));
@@ -936,9 +936,9 @@ class JavaParserEnumDeclarationTest extends AbstractTypeDeclarationTest implemen
         return false;
     }
 
-    @Disabled(value = "This test was disable in this class due to a bug reported at https://github" +
+    @Disabled(value = "This test was disable _in this class due to a bug reported at https://github" +
             ".com/javaparser/javaparser/issues/3061. It should be renabled when the issue is fixed.")
-    @Test
+    [TestMethod]
     @Override
     public void containerTypeCantBeNull() {
         super.containerTypeCantBeNull();

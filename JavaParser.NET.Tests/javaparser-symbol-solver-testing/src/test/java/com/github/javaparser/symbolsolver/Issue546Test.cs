@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,11 +23,11 @@ namespace com.github.javaparser.symbolsolver;
 
 
 public class Issue546Test {
-    @Test
+    [TestMethod]
     void switchWithTabs() {
         Statement cu = parseStatement("switch(x){ case 1: return y; case 2: return z;}");
 
-        String printed = new PrettyPrinter(new PrettyPrinterConfiguration())
+        string printed = new PrettyPrinter(new PrettyPrinterConfiguration())
                 .print(cu);
         assertEqualsStringIgnoringEol("switch(x) {\n" +
                 "    case 1:\n" +
@@ -36,11 +36,11 @@ public class Issue546Test {
                 "        return z;\n" +
                 "}", printed);
     }
-    @Test
+    [TestMethod]
     void switchWithoutTabs() {
         Statement cu = parseStatement("switch(x){ case 1: return y; case 2: return z;}");
 
-        String printed = new PrettyPrinter(new PrettyPrinterConfiguration().setIndentCaseInSwitch(false))
+        string printed = new PrettyPrinter(new PrettyPrinterConfiguration().setIndentCaseInSwitch(false))
                 .print(cu);
         assertEqualsStringIgnoringEol("switch(x) {\n" +
                 "case 1:\n" +
@@ -50,7 +50,7 @@ public class Issue546Test {
                 "}", printed);
     }
 
-    public static void assertEqualsStringIgnoringEol(String expected, String actual) {
+    public static void assertEqualsStringIgnoringEol(string expected, string actual) {
         assertEquals(
                 normalizeEolInTextBlock(expected, LineSeparator.ARBITRARY),
                 normalizeEolInTextBlock(actual, LineSeparator.ARBITRARY)

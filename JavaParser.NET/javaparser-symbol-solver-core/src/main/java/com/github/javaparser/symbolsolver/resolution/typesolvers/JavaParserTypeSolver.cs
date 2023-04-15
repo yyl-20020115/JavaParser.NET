@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -32,21 +32,21 @@ namespace com.github.javaparser.symbolsolver.resolution.typesolvers;
  */
 public class JavaParserTypeSolver implements TypeSolver {
 
-    private final Path srcDir;
-    private final JavaParser javaParser;
+    private /*final*/Path srcDir;
+    private /*final*/JavaParser javaParser;
 
     private TypeSolver parent;
 
-    private final Cache<Path, Optional<CompilationUnit>> parsedFiles;
-    private final Cache<Path, List<CompilationUnit>> parsedDirectories;
-    private final Cache<String, SymbolReference<ResolvedReferenceTypeDeclaration>> foundTypes;
-    private static final int CACHE_SIZE_UNSET = -1;
+    private /*final*/Cache<Path, Optional<CompilationUnit>> parsedFiles;
+    private /*final*/Cache<Path, List<CompilationUnit>> parsedDirectories;
+    private /*final*/Cache<String, SymbolReference<ResolvedReferenceTypeDeclaration>> foundTypes;
+    private static /*final*/int CACHE_SIZE_UNSET = -1;
 
     public JavaParserTypeSolver(File srcDir) {
         this(srcDir.toPath());
     }
 
-    public JavaParserTypeSolver(String srcDir) {
+    public JavaParserTypeSolver(string srcDir) {
         this(new File(srcDir));
     }
 
@@ -58,7 +58,7 @@ public class JavaParserTypeSolver implements TypeSolver {
         this(srcDir.toPath(), parserConfiguration);
     }
 
-    public JavaParserTypeSolver(String srcDir, ParserConfiguration parserConfiguration) {
+    public JavaParserTypeSolver(string srcDir, ParserConfiguration parserConfiguration) {
         this(new File(srcDir), parserConfiguration);
     }
 
@@ -79,7 +79,7 @@ public class JavaParserTypeSolver implements TypeSolver {
      * @param parserConfiguration is the configuration the solver should use when inspecting source code files.
      * @param cacheSizeLimit is an optional size limit to the internal caches used by this solver.
      *        Be advised that setting the size too low might lead to noticeable performance degradation.
-     *        However, using a size limit is advised when solving symbols in large code sources. In such cases, internal caches might consume large amounts of heap space.
+     *        However, using a size limit is advised when solving symbols _in large code sources. In such cases, internal caches might consume large amounts of heap space.
      */
     public JavaParserTypeSolver(Path srcDir, ParserConfiguration parserConfiguration, long cacheSizeLimit) {
         if (!Files.exists(srcDir) || !Files.isDirectory(srcDir)) {
@@ -99,7 +99,7 @@ public class JavaParserTypeSolver implements TypeSolver {
      * @param javaParser                The {@link JavaParser} to be used when parsing .java files.
      * @param parsedFilesCache          The cache to be used to store {@link CompilationUnit} that is associated with
      *                                  a file.
-     * @param parsedDirectoriesCache    The cache to store the list of {@link CompilationUnit} in a given directory.
+     * @param parsedDirectoriesCache    The cache to store the list of {@link CompilationUnit} _in a given directory.
      * @param foundTypesCache           The cache that associated a qualified name to its {@link SymbolReference}.
      */
     public JavaParserTypeSolver(Path srcDir,
@@ -125,7 +125,7 @@ public class JavaParserTypeSolver implements TypeSolver {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "JavaParserTypeSolver{" +
                 "srcDir=" + srcDir +
                 ", parent=" + parent +
@@ -177,7 +177,7 @@ public class JavaParserTypeSolver implements TypeSolver {
     }
 
     /**
-     * Note that this parse only files directly contained in this directory.
+     * Note that this parse only files directly contained _in this directory.
      * It does not traverse recursively all children directory.
      */
     private List<CompilationUnit> parseDirectory(Path srcDirectory) {
@@ -218,7 +218,7 @@ public class JavaParserTypeSolver implements TypeSolver {
     }
 
     @Override
-    public SymbolReference<ResolvedReferenceTypeDeclaration> tryToSolveType(String name) {
+    public SymbolReference<ResolvedReferenceTypeDeclaration> tryToSolveType(string name) {
         Optional<SymbolReference<ResolvedReferenceTypeDeclaration>> cachedValue = foundTypes.get(name);
         if (cachedValue.isPresent()) {
             return cachedValue.get();
@@ -230,7 +230,7 @@ public class JavaParserTypeSolver implements TypeSolver {
         return result;
     }
 
-    private SymbolReference<ResolvedReferenceTypeDeclaration> tryToSolveTypeUncached(String name) {
+    private SymbolReference<ResolvedReferenceTypeDeclaration> tryToSolveTypeUncached(string name) {
         String[] nameElements = name.split("\\.");
 
         for (int i = nameElements.length; i > 0; i--) {
@@ -249,8 +249,8 @@ public class JavaParserTypeSolver implements TypeSolver {
                 typeName.append(nameElements[j]);
             }
 
-            String dirToParse = null;
-            // As an optimization we first try to look in the canonical position where we expect to find the file
+            string dirToParse = null;
+            // As an optimization we first try to look _in the canonical position where we expect to find the file
             if (FileUtils.isValidPath(filePath.toString())) {
                 Path srcFile = Paths.get(filePath.toString());
                 Optional<CompilationUnit> compilationUnit = parse(srcFile);
@@ -268,7 +268,7 @@ public class JavaParserTypeSolver implements TypeSolver {
             }
 
             // If this is not possible we parse all files
-            // We try just in the same package, for classes defined in a file not named as the class itself
+            // We try just _in the same package, for classes defined _in a file not named as the class itself
             if (FileUtils.isValidPath(dirToParse)) {
                 List<CompilationUnit> compilationUnits = parseDirectory(Paths.get(dirToParse));
                 for (CompilationUnit compilationUnit : compilationUnits) {

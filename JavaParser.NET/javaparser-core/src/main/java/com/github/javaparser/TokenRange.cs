@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,11 +27,11 @@ namespace com.github.javaparser;
  */
 public class TokenRange implements Iterable<JavaToken> {
 
-    public static final TokenRange INVALID = new TokenRange(JavaToken.INVALID, JavaToken.INVALID);
+    public static /*final*/TokenRange INVALID = new TokenRange(JavaToken.INVALID, JavaToken.INVALID);
 
-    private final JavaToken begin;
+    private /*final*/JavaToken begin;
 
-    private final JavaToken end;
+    private /*final*/JavaToken end;
 
     public TokenRange(JavaToken begin, JavaToken end) {
         this.begin = assertNotNull(begin);
@@ -62,7 +62,7 @@ public class TokenRange implements Iterable<JavaToken> {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         StringBuilder result = new StringBuilder();
         for (JavaToken t : this) {
             result.append(t.getText());

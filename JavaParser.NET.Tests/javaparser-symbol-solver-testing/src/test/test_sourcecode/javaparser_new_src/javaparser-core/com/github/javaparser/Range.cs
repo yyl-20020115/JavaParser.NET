@@ -2,13 +2,13 @@ namespace com.github.javaparser;
 
 
 /**
- * A range of characters in a source file, from "begin" to "end", including the characters at "begin" and "end".
+ * A range of characters _in a source file, from "begin" to "end", including the characters at "begin" and "end".
  */
 public class Range {
-    public static final Range UNKNOWN = range(Position.UNKNOWN, Position.UNKNOWN);
+    public static /*final*/Range UNKNOWN = range(Position.UNKNOWN, Position.UNKNOWN);
 
-    public final Position begin;
-    public final Position end;
+    public /*final*/Position begin;
+    public /*final*/Position end;
 
     public Range(Position begin, Position end) {
         if (begin == null) {
@@ -82,7 +82,7 @@ public class Range {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return begin+"-"+end;
     }
 }

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,7 +24,7 @@ namespace com.github.javaparser.ast.body;
 
 
 class FieldDeclarationTest {
-    @Test
+    [TestMethod]
     void wofjweoifj() {
         CompilationUnit compilationUnit = parse("" +
                 "class A {\n" +
@@ -39,15 +39,15 @@ class FieldDeclarationTest {
         assertEquals(var2, var2.getType().getParentNode().get());
     }
     
-    @Test
+    [TestMethod]
     void setModifiersPrimitiveType() {
-    	FieldDeclaration field = parseBodyDeclaration("public static final int var = 1;").asFieldDeclaration();
+    	FieldDeclaration field = parseBodyDeclaration("public static /*final*/int var = 1;").asFieldDeclaration();
     	testChangingModifiers(field);
     }
     
-    @Test
+    [TestMethod]
     void setModifiersNonPrimitiveType() {
-    	FieldDeclaration field = parseBodyDeclaration("public static final String var = \"a\";").asFieldDeclaration();
+    	FieldDeclaration field = parseBodyDeclaration("public static /*final*/string var = \"a\";").asFieldDeclaration();
     	testChangingModifiers(field);
     }
     
@@ -69,18 +69,18 @@ class FieldDeclarationTest {
     	assertEquals(2, modifiers.size());
     }
 
-    @Test
+    [TestMethod]
     void interfaceFieldTest() {
         CompilationUnit compilationUnit = parse("" +
                 "interface A {\n" +
                 "    int a = 1;\n" +
                 "    static int a_s = 1;\n" +
-                "    final int a_f = 1;\n" +
-                "    static final int a_s_f = 1;\n" +
-                "    String b = \"b\";\n" +
-                "    static String b_s = \"b\";\n" +
-                "    final String b_f = \"b\";\n" +
-                "    static final String b_s_f = \"b\";\n" +
+                "    /*final*/int a_f = 1;\n" +
+                "    static /*final*/int a_s_f = 1;\n" +
+                "    string b = \"b\";\n" +
+                "    static string b_s = \"b\";\n" +
+                "    /*final*/string b_f = \"b\";\n" +
+                "    static /*final*/string b_s_f = \"b\";\n" +
                 "}\n");
         for (int i = 0; i < 8; ++i) {
             BodyDeclaration<?> declaration = compilationUnit.getType(0).getMembers().get(i);

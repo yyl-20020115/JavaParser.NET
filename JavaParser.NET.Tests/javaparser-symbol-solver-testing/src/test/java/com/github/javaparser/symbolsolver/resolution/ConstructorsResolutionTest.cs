@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,14 +24,14 @@ namespace com.github.javaparser.symbolsolver.resolution;
 
 
 
-class ConstructorsResolutionTest extends AbstractResolutionTest {
+class ConstructorsResolutionTest:AbstractResolutionTest {
 
     @AfterEach
     void resetConfiguration() {
         StaticJavaParser.setConfiguration(new ParserConfiguration());
     }
 
-    @Test
+    [TestMethod]
     void solveNormalConstructor() {
         CompilationUnit cu = parseSample("ConstructorCalls");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "ConstructorCalls");
@@ -50,7 +50,7 @@ class ConstructorsResolutionTest extends AbstractResolutionTest {
         assertEquals(expectedConstructor, actualConstructor);
     }
 
-    @Test
+    [TestMethod]
     void solveInnerClassConstructor() {
         CompilationUnit cu = parseSample("ConstructorCalls");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "ConstructorCalls");
@@ -69,7 +69,7 @@ class ConstructorsResolutionTest extends AbstractResolutionTest {
         assertEquals(expectedConstructor, actualConstructor);
     }
 
-    @Test
+    [TestMethod]
     void solveInnerClassConstructorWithNewScope() {
         CompilationUnit cu = parseSample("ConstructorCalls");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "ConstructorCalls");
@@ -88,7 +88,7 @@ class ConstructorsResolutionTest extends AbstractResolutionTest {
         assertEquals(expectedConstructor, actualConstructor);
     }
 
-    @Test
+    [TestMethod]
     void solveInnerInnerClassConstructor() {
         CompilationUnit cu = parseSample("ConstructorCalls");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "ConstructorCalls");
@@ -107,7 +107,7 @@ class ConstructorsResolutionTest extends AbstractResolutionTest {
         assertEquals(expectedConstructor, actualConstructor);
     }
 
-    @Test
+    [TestMethod]
     void solveAnonymousInnerClassEmptyConstructor() {
         CompilationUnit cu = parseSample("ConstructorCalls");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "ConstructorCalls");
@@ -122,7 +122,7 @@ class ConstructorsResolutionTest extends AbstractResolutionTest {
         assertEquals(0, ref.getCorrespondingDeclaration().getNumberOfParams());
     }
 
-    @Test
+    [TestMethod]
     void solveAnonymousInnerClassEmptyConstructorInterface() {
         CompilationUnit cu = parseSample("ConstructorCalls");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "ConstructorCalls");
@@ -137,7 +137,7 @@ class ConstructorsResolutionTest extends AbstractResolutionTest {
         assertEquals(0, ref.getCorrespondingDeclaration().getNumberOfParams());
     }
 
-    @Test
+    [TestMethod]
     void solveAnonymousInnerClassStringConstructor() {
         CompilationUnit cu = parseSample("ConstructorCalls");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "ConstructorCalls");
@@ -153,7 +153,7 @@ class ConstructorsResolutionTest extends AbstractResolutionTest {
         assertEquals("java.lang.String", ref.getCorrespondingDeclaration().getParam(0).getType().describe());
     }
 
-    @Test
+    [TestMethod]
     public void testIssue1436() {
         CompilationUnit cu = StaticJavaParser.parse("interface TypeIfc {}" +
                 "class TypeA {" +
@@ -182,7 +182,7 @@ class ConstructorsResolutionTest extends AbstractResolutionTest {
         assertTrue(ref.getCorrespondingDeclaration().declaringType().getQualifiedName().startsWith("B.Anonymous-"));
     }
 
-    @Test
+    [TestMethod]
     void solveEnumConstructor() {
         // configure symbol solver before parsing
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver()));
@@ -199,7 +199,7 @@ class ConstructorsResolutionTest extends AbstractResolutionTest {
         assertEquals(ResolvedPrimitiveType.INT, resolvedConstructor.getParam(0).getType());
     }
 
-    @Test
+    [TestMethod]
     void solveNonPublicParentConstructorReflection() {
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver()));
 
@@ -216,8 +216,8 @@ class ConstructorsResolutionTest extends AbstractResolutionTest {
         assertEquals("java.lang.AbstractStringBuilder", cd.declaringType().getQualifiedName());
     }
 
-    @Test
-    void testGenericParentContructorJavassist() throws IOException {
+    [TestMethod]
+    void testGenericParentContructorJavassist(){
         Path pathToJar = adaptPath("src/test/resources/javassist_generics/generics.jar");
         TypeSolver typeSolver = new CombinedTypeSolver(new JarTypeSolver(pathToJar), new ReflectionTypeSolver(true));
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(typeSolver));

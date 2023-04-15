@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -29,13 +29,13 @@ public class JavassistParameterDeclaration implements ResolvedParameterDeclarati
     private ResolvedType type;
     private TypeSolver typeSolver;
     private boolean variadic;
-    private String name;
+    private string name;
 
-    public JavassistParameterDeclaration(CtClass type, TypeSolver typeSolver, boolean variadic, String name) {
+    public JavassistParameterDeclaration(CtClass type, TypeSolver typeSolver, boolean variadic, string name) {
         this(JavassistFactory.typeUsageFor(type, typeSolver), typeSolver, variadic, name);
     }
 
-    public JavassistParameterDeclaration(ResolvedType type, TypeSolver typeSolver, boolean variadic, String name) {
+    public JavassistParameterDeclaration(ResolvedType type, TypeSolver typeSolver, boolean variadic, string name) {
         this.name = name;
         this.type = type;
         this.typeSolver = typeSolver;
@@ -43,7 +43,7 @@ public class JavassistParameterDeclaration implements ResolvedParameterDeclarati
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "JavassistParameterDeclaration{" +
                 "type=" + type +
                 ", typeSolver=" + typeSolver +
@@ -57,7 +57,7 @@ public class JavassistParameterDeclaration implements ResolvedParameterDeclarati
     }
 
     @Override
-    public String getName() {
+    public string getName() {
         return name;
     }
 

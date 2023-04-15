@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,7 +23,7 @@ namespace com.github.javaparser.generator.core.node;
 
 
 
-public class ReplaceMethodGenerator extends NodeGenerator {
+public class ReplaceMethodGenerator:NodeGenerator {
     public ReplaceMethodGenerator(SourceRoot sourceRoot) {
         super(sourceRoot);
     }
@@ -34,7 +34,7 @@ public class ReplaceMethodGenerator extends NodeGenerator {
         nodeCu.addImport(Node.class);
         annotateWhenOverridden(nodeMetaModel, replaceNodeMethod);
 
-        final BlockStmt body = replaceNodeMethod.getBody().get();
+        /*final*/BlockStmt body = replaceNodeMethod.getBody().get();
 
         body.addStatement("if (node == null) { return false; }");
 
@@ -43,7 +43,7 @@ public class ReplaceMethodGenerator extends NodeGenerator {
             if (!property.isNode()) {
                 continue;
             }
-            String check;
+            string check;
             if (property.isNodeList()) {
                 check = nodeListCheck(property);
             } else {
@@ -68,14 +68,14 @@ public class ReplaceMethodGenerator extends NodeGenerator {
         }
     }
 
-    private String attributeCheck(PropertyMetaModel property, String attributeSetterName) {
+    private string attributeCheck(PropertyMetaModel property, string attributeSetterName) {
         return f("if (node == %s) {" +
                 "    %s((%s) replacementNode);" +
                 "    return true;\n" +
                 "}", property.getName(), attributeSetterName, property.getTypeName());
     }
 
-    private String nodeListCheck(PropertyMetaModel property) {
+    private string nodeListCheck(PropertyMetaModel property) {
         return f("for (int i = 0; i < %s.size(); i++) {" +
                 "  if (%s.get(i) == node) {" +
                 "    %s.set(i, (%s) replacementNode);" +

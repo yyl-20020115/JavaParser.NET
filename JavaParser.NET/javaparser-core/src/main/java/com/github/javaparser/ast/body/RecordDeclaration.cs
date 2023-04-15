@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -38,7 +38,7 @@ namespace com.github.javaparser.ast.body;
  * Note that the syntax of records is substantively different to standard classes/interfaces/enums. Specifically, note
  * that record header contains the component declarations - where a "component" is defined as a non-static field.
  * </p><p>
- * This is in contrast to "normal" classes, where fields declarations are within the class body (optionally  then
+ * This is _in contrast to "normal" classes, where fields declarations are within the class body (optionally  then
  * initialised
  * within a constructor.
  * </p><p>
@@ -64,7 +64,7 @@ namespace com.github.javaparser.ast.body;
  * @see <a href="https://docs.oracle.com/javase/specs/jls/se16/html/jls-8.html#jls-8.10">JLS 8.10 - Record Classes</a>
  * @since 3.22.0
  */
-public class RecordDeclaration extends TypeDeclaration<RecordDeclaration> implements NodeWithParameters<RecordDeclaration>, NodeWithImplements<RecordDeclaration>, NodeWithTypeParameters<RecordDeclaration>, NodeWithFinalModifier<RecordDeclaration>, Resolvable<ResolvedReferenceTypeDeclaration> {
+public class RecordDeclaration:TypeDeclaration<RecordDeclaration> implements NodeWithParameters<RecordDeclaration>, NodeWithImplements<RecordDeclaration>, NodeWithTypeParameters<RecordDeclaration>, NodeWithFinalModifier<RecordDeclaration>, Resolvable<ResolvedReferenceTypeDeclaration> {
 
     private NodeList<TypeParameter> typeParameters;
 
@@ -79,19 +79,19 @@ public class RecordDeclaration extends TypeDeclaration<RecordDeclaration> implem
         this(null, new NodeList<>(), new NodeList<>(), new SimpleName(), new NodeList<>(), new NodeList<>(), new NodeList<>(), new NodeList<>(), null);
     }
 
-    public RecordDeclaration(final NodeList<Modifier> modifiers, final String name) {
+    public RecordDeclaration(/*final*/NodeList<Modifier> modifiers, /*final*/string name) {
         this(null, modifiers, new NodeList<>(), new SimpleName(name), new NodeList<>(), new NodeList<>(), new NodeList<>(), new NodeList<>(), null);
     }
 
-    @AllFieldsConstructor
-    public RecordDeclaration(final NodeList<Modifier> modifiers, final NodeList<AnnotationExpr> annotations, final SimpleName name, final NodeList<Parameter> parameters, final NodeList<TypeParameter> typeParameters, final NodeList<ClassOrInterfaceType> implementedTypes, final NodeList<BodyDeclaration<?>> members, final ReceiverParameter receiverParameter) {
+    //@AllFieldsConstructor
+    public RecordDeclaration(/*final*/NodeList<Modifier> modifiers, /*final*/NodeList<AnnotationExpr> annotations, /*final*/SimpleName name, /*final*/NodeList<Parameter> parameters, /*final*/NodeList<TypeParameter> typeParameters, /*final*/NodeList<ClassOrInterfaceType> implementedTypes, /*final*/NodeList<BodyDeclaration<?>> members, /*final*/ReceiverParameter receiverParameter) {
         this(null, modifiers, annotations, name, parameters, typeParameters, implementedTypes, members, receiverParameter);
     }
 
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public RecordDeclaration(TokenRange tokenRange, NodeList<Modifier> modifiers, NodeList<AnnotationExpr> annotations, SimpleName name, NodeList<Parameter> parameters, NodeList<TypeParameter> typeParameters, NodeList<ClassOrInterfaceType> implementedTypes, NodeList<BodyDeclaration<?>> members, ReceiverParameter receiverParameter) {
         super(tokenRange, modifiers, annotations, name, members);
         setParameters(parameters);
@@ -102,29 +102,29 @@ public class RecordDeclaration extends TypeDeclaration<RecordDeclaration> implem
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public NodeList<ClassOrInterfaceType> getImplementedTypes() {
         return implementedTypes;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public NodeList<TypeParameter> getTypeParameters() {
         return typeParameters;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public RecordDeclaration setImplementedTypes(final NodeList<ClassOrInterfaceType> implementedTypes) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public RecordDeclaration setImplementedTypes(/*final*/NodeList<ClassOrInterfaceType> implementedTypes) {
         assertNotNull(implementedTypes);
         if (implementedTypes == this.implementedTypes) {
             return this;
@@ -137,8 +137,8 @@ public class RecordDeclaration extends TypeDeclaration<RecordDeclaration> implem
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public RecordDeclaration setTypeParameters(final NodeList<TypeParameter> typeParameters) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public RecordDeclaration setTypeParameters(/*final*/NodeList<TypeParameter> typeParameters) {
         assertNotNull(typeParameters);
         if (typeParameters == this.typeParameters) {
             return this;
@@ -156,7 +156,7 @@ public class RecordDeclaration extends TypeDeclaration<RecordDeclaration> implem
      * @return is this class's parent a LocalRecordDeclarationStmt ?
      */
     public boolean isLocalRecordDeclaration() {
-        return getParentNode().map(p -> p instanceof LocalRecordDeclarationStmt).orElse(false);
+        return getParentNode().map(p -> p is LocalRecordDeclarationStmt).orElse(false);
     }
 
     // TODO document and remove duplication between here and com.github.javaparser.ast.body.ClassOrInterfaceDeclaration
@@ -174,31 +174,31 @@ public class RecordDeclaration extends TypeDeclaration<RecordDeclaration> implem
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isRecordDeclaration() {
         return true;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public RecordDeclaration asRecordDeclaration() {
         return this;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<RecordDeclaration> toRecordDeclaration() {
         return Optional.of(this);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifRecordDeclaration(Consumer<RecordDeclaration> action) {
         action.accept(this);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
     public boolean remove(Node node) {
         if (node == null) {
             return false;
@@ -231,7 +231,7 @@ public class RecordDeclaration extends TypeDeclaration<RecordDeclaration> implem
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public boolean replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
@@ -264,13 +264,13 @@ public class RecordDeclaration extends TypeDeclaration<RecordDeclaration> implem
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public RecordDeclaration clone() {
         return (RecordDeclaration) accept(new CloneVisitor(), null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public RecordDeclarationMetaModel getMetaModel() {
         return JavaParserMetaModel.recordDeclarationMetaModel;
     }
@@ -283,13 +283,13 @@ public class RecordDeclaration extends TypeDeclaration<RecordDeclaration> implem
      *
      * @see <a href="https://openjdk.java.net/jeps/359">https://openjdk.java.net/jeps/359</a>
      */
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public NodeList<Parameter> getParameters() {
         return parameters;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public RecordDeclaration setParameters(final NodeList<Parameter> parameters) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public RecordDeclaration setParameters(/*final*/NodeList<Parameter> parameters) {
         assertNotNull(parameters);
         if (parameters == this.parameters) {
             return this;
@@ -302,13 +302,13 @@ public class RecordDeclaration extends TypeDeclaration<RecordDeclaration> implem
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Optional<ReceiverParameter> getReceiverParameter() {
         return Optional.ofNullable(receiverParameter);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public RecordDeclaration setReceiverParameter(final ReceiverParameter receiverParameter) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public RecordDeclaration setReceiverParameter(/*final*/ReceiverParameter receiverParameter) {
         if (receiverParameter == this.receiverParameter) {
             return this;
         }
@@ -320,7 +320,7 @@ public class RecordDeclaration extends TypeDeclaration<RecordDeclaration> implem
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
     public RecordDeclaration removeReceiverParameter() {
         return setReceiverParameter((ReceiverParameter) null);
     }
@@ -329,7 +329,7 @@ public class RecordDeclaration extends TypeDeclaration<RecordDeclaration> implem
      * Records are implicitly final, even without the explicit modifier.
      * https://openjdk.java.net/jeps/359#Restrictions-on-records
      *
-     * If wanting to find out if the keyword {@code final} is explicitly added to this parameter,
+     * If wanting to find _out if the keyword {@code final} is explicitly added to this parameter,
      * you should use {@code node.hasModifier(Modifier.Keyword.FINAL)}
      *
      * @return always true -- Records are always implicitly final, therefore can never not be final.
@@ -349,7 +349,7 @@ public class RecordDeclaration extends TypeDeclaration<RecordDeclaration> implem
     public boolean isStatic() {
         if (getParentNode().isPresent()) {
             Node parentNode = getParentNode().get();
-            if (!(parentNode instanceof CompilationUnit)) {
+            if (!(parentNode is CompilationUnit)) {
                 return true;
             }
         }
@@ -362,6 +362,6 @@ public class RecordDeclaration extends TypeDeclaration<RecordDeclaration> implem
      * not "normal" constructors (which are obtainable via {@link #getConstructors()}).
      */
     public List<CompactConstructorDeclaration> getCompactConstructors() {
-        return unmodifiableList(getMembers().stream().filter(m -> m instanceof CompactConstructorDeclaration).map(m -> (CompactConstructorDeclaration) m).collect(toList()));
+        return unmodifiableList(getMembers().stream().filter(m -> m is CompactConstructorDeclaration).map(m -> (CompactConstructorDeclaration) m).collect(toList()));
     }
 }

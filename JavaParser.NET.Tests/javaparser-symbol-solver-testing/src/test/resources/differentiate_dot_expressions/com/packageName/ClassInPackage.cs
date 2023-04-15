@@ -1,7 +1,7 @@
 namespace com.packageName;
 
 public class ClassInPackage {
-    public static String staticMethod() {
+    public static string staticMethod() {
         return "ClassInPackage.staticMethod()";
     }
 }

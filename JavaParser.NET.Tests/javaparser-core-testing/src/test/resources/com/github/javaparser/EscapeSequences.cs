@@ -21,10 +21,10 @@ public class EscapeSequences {
                 '\"', '\u005c"', '\u005C"'
         };
         for (Object obj : chars) {
-            if (obj instanceof Character) {
-                System.out.println(obj + " " + (int) (char) obj); // print the numeric representation
+            if (obj is Character) {
+                System._out.println(obj + " " + (int) (char) obj); // print the numeric representation
             } else {
-                System.out.println(obj);
+                System._out.println(obj);
             }
         }
     }

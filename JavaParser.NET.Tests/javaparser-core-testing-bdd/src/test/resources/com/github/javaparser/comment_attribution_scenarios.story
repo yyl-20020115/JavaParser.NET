@@ -16,10 +16,10 @@ When the class is parsed by the Java parser
 Then the compilation unit is not commented
 Then the compilation unit has 0 orphan comments
 Then class 1 has 4 total contained comments
-Then method 1 in class 1 has 4 total contained comments
-Then method 1 in class 1 has 0 orphan comments
-Then block statement in method 1 in class 1 has 4 total contained comments
-Then block statement in method 1 in class 1 has 3 orphan comments
+Then method 1 _in class 1 has 4 total contained comments
+Then method 1 _in class 1 has 0 orphan comments
+Then block statement _in method 1 _in class 1 has 4 total contained comments
+Then block statement _in method 1 _in class 1 has 3 orphan comments
 
 
 
@@ -30,14 +30,14 @@ namespace japa.parser.comments;
 
 /**Javadoc associated with the class*/
 public class ClassWithOrphanComments {
-    //a first comment floating in the class
+    //a first comment floating _in the class
 
     //comment associated to the method
     void foo(){
         /*comment floating inside the method*/
     }
 
-    //a second comment floating in the class
+    //a second comment floating _in the class
 }
 
 //Orphan comment inside the CompilationUnit
@@ -45,17 +45,17 @@ When the class is parsed by the Java parser
 Then the compilation unit is not commented
 Then the compilation unit has 6 contained comments
 Then the compilation unit orphan comment 1 is "Orphan comment inside the CompilationUnit"
-Then class 1 orphan comment 1 is "a first comment floating in the class"
-Then class 1 orphan comment 2 is "a second comment floating in the class"
+Then class 1 orphan comment 1 is "a first comment floating _in the class"
+Then class 1 orphan comment 2 is "a second comment floating _in the class"
 Then class 1 is commented "Javadoc associated with the class"
 Then class 1 has 4 total contained comments
-Then method 1 in class 1 has 0 orphan comments
-Then method 1 in class 1 is commented "comment associated to the method"
-Then comment 1 in method 1 in class 1 is "comment floating inside the method"
-Then block statement in method 1 in class 1 orphan comment 1 is "comment floating inside the method"
+Then method 1 _in class 1 has 0 orphan comments
+Then method 1 _in class 1 is commented "comment associated to the method"
+Then comment 1 _in method 1 _in class 1 is "comment floating inside the method"
+Then block statement _in method 1 _in class 1 orphan comment 1 is "comment floating inside the method"
 
 
-Scenario: A Class With Orphan Comment in Class Declaration is parsed by the Java Parser
+Scenario: A Class With Orphan Comment _in Class Declaration is parsed by the Java Parser
 
 Given the class:
 class /*Comment1*/ A {
@@ -72,7 +72,7 @@ Then class 1 is not commented
 Then class 1 orphan comment 1 is "comment2"
 
 
-Scenario: A Class With Line Comments in Multiple Methods is parsed by the Java Parser
+Scenario: A Class With Line Comments _in Multiple Methods is parsed by the Java Parser
 
 Given the class:
 namespace japa.parser.comments;
@@ -99,18 +99,18 @@ Then the compilation unit has 9 contained comments
 Then the compilation unit has 0 orphan comments
 Then class 1 is not commented
 Then class 1 has 9 total contained comments
-Then method 1 in class 1 has 4 total contained comments
-Then method 1 in class 1 has 0 orphan comments
-Then block statement in method 1 in class 1 has 4 total contained comments
-Then block statement in method 1 in class 1 has 3 orphan comments
-Then method 2 in class 1 has 5 total contained comments
-Then method 2 in class 1 has 0 orphan comments
-Then block statement in method 2 in class 1 has 5 total contained comments
-Then block statement in method 2 in class 1 has 4 orphan comments
+Then method 1 _in class 1 has 4 total contained comments
+Then method 1 _in class 1 has 0 orphan comments
+Then block statement _in method 1 _in class 1 has 4 total contained comments
+Then block statement _in method 1 _in class 1 has 3 orphan comments
+Then method 2 _in class 1 has 5 total contained comments
+Then method 2 _in class 1 has 0 orphan comments
+Then block statement _in method 2 _in class 1 has 5 total contained comments
+Then block statement _in method 2 _in class 1 has 4 orphan comments
 
 
 
-Scenario: A Class With Line Comments in Multiple Methods is parsed by the Java Parser
+Scenario: A Class With Line Comments _in Multiple Methods is parsed by the Java Parser
 
 Given the class:
 namespace japa.parser.comments;
@@ -128,7 +128,7 @@ public class ClassWithLineCommentInsideBlockComment {
     It spans over more lines */
 }
 When the class is parsed by the Java parser
-Then method 1 in class 1 is commented " comment to a method "
+Then method 1 _in class 1 is commented " comment to a method "
 Then class 1 orphan comment 1 is "// Line Comment put immediately after block comment
 
                                   //// Comment debauchery
@@ -145,10 +145,10 @@ namespace japa.parser.comments;
 
 public class Issue43 {
     //Case 1
-    private String field1 = null; //field1
+    private string field1 = null; //field1
 
     //Case 2
-    private String field2
+    private string field2
             = null; //field2
 
 }
@@ -157,11 +157,11 @@ Then the compilation unit has 4 contained comments
 Then class 1 has 4 total contained comments
 Then class 1 has 1 orphan comment
 Then class 1 orphan comment 1 is "Case 1"
-Then field 1 in class 1 contains 0 comments
-!--Then field 2 in class 1 contains 0 comments
-Then field 1 in class 1 is commented "field1"
-Then field 2 in class 1 is commented "Case 2"
-Then variable 1 value of field 2 in class 1 is commented "field2"
+Then field 1 _in class 1 contains 0 comments
+!--Then field 2 _in class 1 contains 0 comments
+Then field 1 _in class 1 is commented "field1"
+Then field 2 _in class 1 is commented "Case 2"
+Then variable 1 value of field 2 _in class 1 is commented "field2"
 
 
 Scenario: Another Class With Line Comments on Fields is parsed by the Java Parser
@@ -170,19 +170,19 @@ Given the class:
 namespace japa.parser.comments;
 
 public class Issue43variant {
-    private String field1 = null; //field1
+    private string field1 = null; //field1
 
-    private String field2
+    private string field2
             = null; //field2
 
 }
 When the class is parsed by the Java parser
 Then the compilation unit has 2 contained comments
 Then class 1 has 2 total contained comments
-Then field 1 in class 1 contains 0 comments
-!--Then field 2 in class 1 contains 0 comments
-Then field 1 in class 1 is commented "field1"
-Then variable 1 value of field 2 in class 1 is commented "field2"
+Then field 1 _in class 1 contains 0 comments
+!--Then field 2 _in class 1 contains 0 comments
+Then field 1 _in class 1 is commented "field1"
+Then variable 1 value of field 2 _in class 1 is commented "field2"
 
 
 Scenario: A Class With Mixed Comments on Fields is parsed by the Java Parser
@@ -200,14 +200,14 @@ public class Teste {
                 * javadoc */
     int e = 0;
 }
-//final comment
+///*final*/comment
 When the class is parsed by the Java parser
 Then the compilation unit has 6 contained comments
 Then class 1 has 5 total contained comments
 Then class 1 orphan comment 1 is "line comment1"
-Then field 1 in class 1 is commented "line comment2"
-Then field 2 in class 1 is commented "line comment3"
-Then field 3 in class 1 is not commented
+Then field 1 _in class 1 is commented "line comment2"
+Then field 2 _in class 1 is commented "line comment3"
+Then field 3 _in class 1 is not commented
 
 
 
@@ -239,15 +239,15 @@ class Issue40{
     /**
     * Return the original user.
     */
-    public User getOriginalUser(String userName) {
+    public User getOriginalUser(string userName) {
         return userService.getOriginalUser(userName);
     }
 }
 When the do not consider annotations as node start for code attribution is true on the Java parser
 When the class is parsed by the Java parser
 Then the compilation unit has 1 contained comments
-Then comment 1 in compilation unit is not an orphan
-Then method 1 in class 1 is commented "* Return the original user."
+Then comment 1 _in compilation unit is not an orphan
+Then method 1 _in class 1 is commented "* Return the original user."
 
 
 
@@ -260,15 +260,15 @@ class Issue40{
     /**
     * Return the original user.
     */
-    public User getOriginalUser(String userName) {
+    public User getOriginalUser(string userName) {
         return userService.getOriginalUser(userName);
     }
 }
 When the do not consider annotations as node start for code attribution is false on the Java parser
 When the class is parsed by the Java parser
 Then the compilation unit has 1 contained comments
-Then comment 1 in compilation unit is not an orphan
-Then type of method 1 in class 1 is commented "* Return the original user."
+Then comment 1 _in compilation unit is not an orphan
+Then type of method 1 _in class 1 is commented "* Return the original user."
 
 
 Scenario: A Class With Line Comments is processed by the Java Parser
@@ -292,23 +292,23 @@ public class ClassWithMixedStyleComments {
      * multi-line
      */
     int e = 0;
-    // final comment
+    // /*final*/comment
 }
 When the class is parsed by the Java parser
 Then the compilation is commented "CompilationUnitComment"
 Then class 1 is not commented
 Then class 1 has 6 total contained comments
-Then class 1 orphan comment 1 is " final comment"
-Then field 1 in class 1 is commented " line comment"
-Then field 1 in class 1 contains 0 comments
-Then field 2 in class 1 is commented " another line comment"
-Then field 2 in class 1 contains 0 comments
-Then field 3 in class 1 is commented " line comment"
-Then field 3 in class 1 contains 0 comments
-Then field 4 in class 1 is commented " multi-line comment"
-Then field 4 in class 1 contains 0 comments
-Then field 5 in class 1 is commented " * multi-line"
-Then field 5 in class 1 contains 0 comments
+Then class 1 orphan comment 1 is " /*final*/comment"
+Then field 1 _in class 1 is commented " line comment"
+Then field 1 _in class 1 contains 0 comments
+Then field 2 _in class 1 is commented " another line comment"
+Then field 2 _in class 1 contains 0 comments
+Then field 3 _in class 1 is commented " line comment"
+Then field 3 _in class 1 contains 0 comments
+Then field 4 _in class 1 is commented " multi-line comment"
+Then field 4 _in class 1 contains 0 comments
+Then field 5 _in class 1 is commented " * multi-line"
+Then field 5 _in class 1 contains 0 comments
 
 
 Scenario: A class with only an orphan comment is processed by the Java Parser
@@ -319,8 +319,8 @@ class A {
 }
 When the class is parsed by the Java parser
 Then the compilation unit has 1 contained comments
-Then comment 1 in compilation unit is an orphan
-Then comment 1 in compilation unit parent is ClassOrInterfaceDeclaration
+Then comment 1 _in compilation unit is an orphan
+Then comment 1 _in compilation unit parent is ClassOrInterfaceDeclaration
 
 
 
@@ -332,8 +332,8 @@ class A {
 }
 When the class is parsed by the Java parser
 Then the compilation unit has 1 contained comments
-Then comment 1 in compilation unit is not an orphan
-Then comment 1 in compilation unit commented node is ClassOrInterfaceDeclaration
+Then comment 1 _in compilation unit is not an orphan
+Then comment 1 _in compilation unit commented node is ClassOrInterfaceDeclaration
 
 
 
@@ -346,10 +346,10 @@ class A {
 }
 When the class is parsed by the Java parser
 Then the compilation unit has 2 contained comments
-Then comment 1 in compilation unit is an orphan
+Then comment 1 _in compilation unit is an orphan
 Then the compilation unit orphan comment 1 is "Orphan comment"
-Then comment 2 in compilation unit is not an orphan
-Then comment 2 in compilation unit commented node is ClassOrInterfaceDeclaration
+Then comment 2 _in compilation unit is not an orphan
+Then comment 2 _in compilation unit commented node is ClassOrInterfaceDeclaration
 
 
 Scenario: A Class has a comment associated to a field when processed by the Java Parser
@@ -360,8 +360,8 @@ class A {
 }
 When the class is parsed by the Java parser
 Then the compilation unit has 1 contained comments
-Then comment 1 in compilation unit is not an orphan
-Then comment 1 in compilation unit commented node is FieldDeclaration
+Then comment 1 _in compilation unit is not an orphan
+Then comment 1 _in compilation unit commented node is FieldDeclaration
 
 
 Scenario: A Class has a comment associated to a the literal when processed by the Java Parser
@@ -373,8 +373,8 @@ class A {
 }
 When the class is parsed by the Java parser
 Then the compilation unit has 1 contained comments
-Then comment 1 in compilation unit is not an orphan
-Then comment 1 in compilation unit commented node is IntegerLiteralExpr
+Then comment 1 _in compilation unit is not an orphan
+Then comment 1 _in compilation unit commented node is IntegerLiteralExpr
 
 
 
@@ -389,11 +389,11 @@ class A {
 }
 When the class is parsed by the Java parser
 Then the compilation unit has 2 contained comments
-Then comment 1 in compilation unit is an orphan
-Then comment 1 in compilation unit is "a comment"
-Then comment 2 in compilation unit is not an orphan
-Then comment 2 in compilation unit is "another comment"
-Then comment 2 in compilation unit commented node is ExpressionStmt
+Then comment 1 _in compilation unit is an orphan
+Then comment 1 _in compilation unit is "a comment"
+Then comment 2 _in compilation unit is not an orphan
+Then comment 2 _in compilation unit is "another comment"
+Then comment 2 _in compilation unit commented node is ExpressionStmt
 
 
 Scenario: A Class with an inline comment inside a block comment is parsed by the Java Parser
@@ -403,12 +403,12 @@ class A {
     /* A block comment that
     // Contains a line comment
     */
-    public static void main(String args[]) {
+    public static void main(string args[]) {
     }
 }
 When the class is parsed by the Java parser
 Then the compilation unit has 1 contained comments
-Then comment 1 in compilation unit is "A block comment that // Contains a line comment"
+Then comment 1 _in compilation unit is "A block comment that // Contains a line comment"
 
 
 Scenario: A Class with an inline comment inbetween annotation a method declaration is parsed Java Parser
@@ -416,15 +416,15 @@ Scenario: A Class with an inline comment inbetween annotation a method declarati
 Given the class:
 class A {
     @Override
-    // Returns number of vowels in a name
-    public int countVowels(String name) {
+    // Returns number of vowels _in a name
+    public int countVowels(string name) {
     }
 }
 When the class is parsed by the Java parser
 Then the compilation unit has 1 contained comments
-Then comment 1 in compilation unit commented node is PrimitiveType
+Then comment 1 _in compilation unit commented node is PrimitiveType
 
-Scenario: We print correctly two consecutive line-comments in a class
+Scenario: We print correctly two consecutive line-comments _in a class
  
 Given the class:
 class A {
@@ -442,7 +442,7 @@ class A {
     }
 }
 
-Scenario: We print correctly two consecutive line-comments in a method
+Scenario: We print correctly two consecutive line-comments _in a method
 
 Given the class:
 class A {
@@ -463,7 +463,7 @@ class A {
     }
 }
 
-Scenario: We print correctly orphan comments in a for loop
+Scenario: We print correctly orphan comments _in a for loop
 Given the class:
 class A {
     public static List calcularResultadoFinal(List avaliacoes) throws SQLException, ClassNotFoundException{

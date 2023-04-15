@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,7 +25,7 @@ namespace com.github.javaparser.ast.nodeTypes;
 /**
  * A node that declares the types of exception it throws.
  */
-public interface NodeWithThrownExceptions<N extends Node> {
+public interface NodeWithThrownExceptions<N:Node> {
 
     N setThrownExceptions(NodeList<ReferenceType> thrownExceptions);
 
@@ -43,7 +43,7 @@ public interface NodeWithThrownExceptions<N extends Node> {
      * @param throwType the exception type
      * @return this
      */
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     default N addThrownException(ReferenceType throwType) {
         getThrownExceptions().add(throwType);
         return (N) this;
@@ -55,7 +55,7 @@ public interface NodeWithThrownExceptions<N extends Node> {
      * @param clazz the exception class
      * @return this
      */
-    default N addThrownException(Class<? extends Throwable> clazz) {
+    default N addThrownException(Class<?:Throwable> clazz) {
         tryAddImportToParentCompilationUnit(clazz);
         return addThrownException(parseClassOrInterfaceType(clazz.getSimpleName()));
     }
@@ -66,9 +66,9 @@ public interface NodeWithThrownExceptions<N extends Node> {
      * no actual type resolution takes place.
      *
      * @param clazz the class of the exception
-     * @return true if found in throws clause, false if not
+     * @return true if found _in throws clause, false if not
      */
-    default boolean isThrown(Class<? extends Throwable> clazz) {
+    default boolean isThrown(Class<?:Throwable> clazz) {
         return isThrown(clazz.getSimpleName());
     }
 
@@ -78,9 +78,9 @@ public interface NodeWithThrownExceptions<N extends Node> {
      * no actual type resolution takes place.
      *
      * @param throwableName the class of the exception
-     * @return true if found in throws clause, false if not
+     * @return true if found _in throws clause, false if not
      */
-    default boolean isThrown(String throwableName) {
+    default boolean isThrown(string throwableName) {
         return getThrownExceptions().stream().anyMatch(t -> t.toString().equals(throwableName));
     }
 }

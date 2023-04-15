@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,12 +24,12 @@ namespace com.github.javaparser.generator.metamodel;
 
 
 
-public class NodeMetaModelGenerator extends AbstractGenerator {
+public class NodeMetaModelGenerator:AbstractGenerator {
 
-    private final InitializePropertyMetaModelsStatementsGenerator initializePropertyMetaModelsStatementsGenerator = new InitializePropertyMetaModelsStatementsGenerator();
-    private final InitializeConstructorParametersStatementsGenerator initializeConstructorParametersStatementsGenerator = new InitializeConstructorParametersStatementsGenerator();
+    private /*final*/InitializePropertyMetaModelsStatementsGenerator initializePropertyMetaModelsStatementsGenerator = new InitializePropertyMetaModelsStatementsGenerator();
+    private /*final*/InitializeConstructorParametersStatementsGenerator initializeConstructorParametersStatementsGenerator = new InitializeConstructorParametersStatementsGenerator();
 
-    public static final String GENERATED_CLASS_COMMENT = "" +
+    public static /*final*/string GENERATED_CLASS_COMMENT = "" +
             "This file, class, and its contents are completely generated based on:" +
             "\n<ul>" +
             "\n    <li>The contents and annotations within the package `com.github.javaparser.ast`, and</li>" +
@@ -39,29 +39,29 @@ public class NodeMetaModelGenerator extends AbstractGenerator {
             "\nFor this reason, any changes made directly to this file will be overwritten the next time generators are run." +
             "";
 
-    private static final String GENERATED_JAVADOC_COMMENT = "Warning: The content of this class is partially or completely generated - manual edits risk being overwritten.";
+    private static /*final*/string GENERATED_JAVADOC_COMMENT = "Warning: The content of this class is partially or completely generated - manual edits risk being overwritten.";
 
     protected NodeMetaModelGenerator(SourceRoot sourceRoot) {
         super(sourceRoot);
     }
 
-    public void generate(Class<? extends Node> nodeClass, ClassOrInterfaceDeclaration metaModelCoid, NodeList<Statement> initializeNodeMetaModelsStatements, NodeList<Statement> initializePropertyMetaModelsStatements, NodeList<Statement> initializeConstructorParametersStatements, SourceRoot sourceRoot) throws NoSuchMethodException {
+    public void generate(Class<?:Node> nodeClass, ClassOrInterfaceDeclaration metaModelCoid, NodeList<Statement> initializeNodeMetaModelsStatements, NodeList<Statement> initializePropertyMetaModelsStatements, NodeList<Statement> initializeConstructorParametersStatements, SourceRoot sourceRoot) throws NoSuchMethodException {
         metaModelCoid.setJavadocComment(GENERATED_JAVADOC_COMMENT);
 
-        final AstTypeAnalysis typeAnalysis = new AstTypeAnalysis(nodeClass);
+        /*final*/AstTypeAnalysis typeAnalysis = new AstTypeAnalysis(nodeClass);
 
-        final String className = MetaModelGenerator.nodeMetaModelName(nodeClass);
-        final String nodeMetaModelFieldName = decapitalize(className);
+        /*final*/string className = MetaModelGenerator.nodeMetaModelName(nodeClass);
+        /*final*/string nodeMetaModelFieldName = decapitalize(className);
         metaModelCoid.getFieldByName(nodeMetaModelFieldName).ifPresent(Node::remove);
 
         initializeNodeMetaModelsStatements.add(parseStatement(f("nodeMetaModels.add(%s);", nodeMetaModelFieldName)));
         this.initializeConstructorParametersStatementsGenerator.generate(nodeClass, initializeConstructorParametersStatements);
 
-        final Class<?> superclass = nodeClass.getSuperclass();
-        final String superNodeMetaModel = MetaModelGenerator.nodeMetaModelName(superclass);
-        final boolean isRootNode = !MetaModelGenerator.isNode(superclass);
+        /*final*/Class<?> superclass = nodeClass.getSuperclass();
+        /*final*/string superNodeMetaModel = MetaModelGenerator.nodeMetaModelName(superclass);
+        /*final*/boolean isRootNode = !MetaModelGenerator.isNode(superclass);
 
-        final FieldDeclaration nodeField = metaModelCoid.addField(className, nodeMetaModelFieldName, PUBLIC, STATIC, FINAL);
+        /*final*/FieldDeclaration nodeField = metaModelCoid.addField(className, nodeMetaModelFieldName, PUBLIC, STATIC, FINAL);
         annotateGenerated(nodeField);
         nodeField.getVariable(0).setInitializer(
                 parseExpression(
@@ -73,13 +73,13 @@ public class NodeMetaModelGenerator extends AbstractGenerator {
 
 
         // The node-specific metamodel file
-        final CompilationUnit classMetaModelJavaFile = new CompilationUnit(MetaModelGenerator.METAMODEL_PACKAGE);
+        /*final*/CompilationUnit classMetaModelJavaFile = new CompilationUnit(MetaModelGenerator.METAMODEL_PACKAGE);
         classMetaModelJavaFile.setBlockComment(COPYRIGHT_NOTICE_JP_CORE);
         classMetaModelJavaFile.addImport(Optional.class);
         classMetaModelJavaFile.addImport(nodeClass);
 
         //
-        final ClassOrInterfaceDeclaration nodeMetaModelClass = classMetaModelJavaFile.addClass(className, PUBLIC);
+        /*final*/ClassOrInterfaceDeclaration nodeMetaModelClass = classMetaModelJavaFile.addClass(className, PUBLIC);
         annotateGenerated(nodeMetaModelClass);
         nodeMetaModelClass.setJavadocComment(GENERATED_CLASS_COMMENT);
 
@@ -90,7 +90,7 @@ public class NodeMetaModelGenerator extends AbstractGenerator {
         }
 
         // Constructors
-        final ConstructorDeclaration classMMConstructor = nodeMetaModelClass
+        /*final*/ConstructorDeclaration classMMConstructor = nodeMetaModelClass
                 .addConstructor()
                 .addParameter(
                         f("Optional<%s>", MetaModelGenerator.BASE_NODE_META_MODEL),
@@ -114,7 +114,7 @@ public class NodeMetaModelGenerator extends AbstractGenerator {
         if (typeAnalysis.isAbstract) {
             classMetaModelJavaFile.addImport(Node.class);
             BodyDeclaration<?> bodyDeclaration = parseBodyDeclaration(f(
-                    "protected %s(Optional<%s> superNodeMetaModel, Class<? extends Node> type, String name, String packageName, boolean isAbstract, boolean hasWildcard) {" +
+                    "protected %s(Optional<%s> superNodeMetaModel, Class<?:Node> type, string name, string packageName, boolean isAbstract, boolean hasWildcard) {" +
                             "super(superNodeMetaModel, type, name, packageName, isAbstract, hasWildcard);" +
                             " }",
                     className,
@@ -125,7 +125,7 @@ public class NodeMetaModelGenerator extends AbstractGenerator {
         }
 
         // Fields, sorted by name.
-        final List<Field> fields = new ArrayList<>(Arrays.asList(nodeClass.getDeclaredFields()));
+        /*final*/List<Field> fields = new ArrayList<>(Arrays.asList(nodeClass.getDeclaredFields()));
         fields.sort(Comparator.comparing(Field::getName));
         for (Field field : fields) {
             if (this.fieldShouldBeIgnored(field)) {
@@ -136,7 +136,7 @@ public class NodeMetaModelGenerator extends AbstractGenerator {
         }
 
         // Methods, sorted by name.
-        final List<Method> methods = new ArrayList<>(Arrays.asList(nodeClass.getMethods()));
+        /*final*/List<Method> methods = new ArrayList<>(Arrays.asList(nodeClass.getMethods()));
         methods.sort(Comparator.comparing(Method::getName));
         for (Method method : methods) {
             if (method.isAnnotationPresent(DerivedProperty.class)) {
@@ -153,7 +153,7 @@ public class NodeMetaModelGenerator extends AbstractGenerator {
 
     private void moveStaticInitializeToTheEndOfTheClassBecauseWeNeedTheFieldsToInitializeFirst(ClassOrInterfaceDeclaration metaModelCoid) {
         for (BodyDeclaration<?> m : metaModelCoid.getMembers()) {
-            if (m instanceof InitializerDeclaration) {
+            if (m is InitializerDeclaration) {
                 m.remove();
                 metaModelCoid.addMember(m);
                 return;

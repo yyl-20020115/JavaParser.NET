@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -77,7 +77,7 @@ public class Indentation {
     }
 
     // default size
-    private static final int DEFAULT_SIZE = 4;
+    private static /*final*/int DEFAULT_SIZE = 4;
 
     // type of the indentation
     private IndentType type;
@@ -86,7 +86,7 @@ public class Indentation {
     private int size;
 
     // formatted indentation
-    private String formattedIndentation = "";
+    private string formattedIndentation = "";
 
     /*
      * Creates an Indentation with a type and size
@@ -133,7 +133,7 @@ public class Indentation {
     /*
      * returns the formatted string that represents the identification
      */
-    public String getIndent() {
+    public string getIndent() {
         return formattedIndentation;
     }
 
@@ -148,7 +148,7 @@ public class Indentation {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return type.name() + " size=" + size;
     }
 }

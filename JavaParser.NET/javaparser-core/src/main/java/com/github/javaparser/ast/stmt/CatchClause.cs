@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,7 +28,7 @@ namespace com.github.javaparser.ast.stmt;
  *
  * @author Julio Vilmar Gesser
  */
-public class CatchClause extends Node implements NodeWithBlockStmt<CatchClause> {
+public class CatchClause:Node implements NodeWithBlockStmt<CatchClause> {
 
     private Parameter parameter;
 
@@ -38,19 +38,19 @@ public class CatchClause extends Node implements NodeWithBlockStmt<CatchClause> 
         this(null, new Parameter(), new BlockStmt());
     }
 
-    public CatchClause(final NodeList<Modifier> exceptModifier, final NodeList<AnnotationExpr> exceptAnnotations, final ClassOrInterfaceType exceptType, final SimpleName exceptName, final BlockStmt body) {
+    public CatchClause(/*final*/NodeList<Modifier> exceptModifier, /*final*/NodeList<AnnotationExpr> exceptAnnotations, /*final*/ClassOrInterfaceType exceptType, /*final*/SimpleName exceptName, /*final*/BlockStmt body) {
         this(null, new Parameter(null, exceptModifier, exceptAnnotations, exceptType, false, new NodeList<>(), exceptName), body);
     }
 
-    @AllFieldsConstructor
-    public CatchClause(final Parameter parameter, final BlockStmt body) {
+    //@AllFieldsConstructor
+    public CatchClause(/*final*/Parameter parameter, /*final*/BlockStmt body) {
         this(null, parameter, body);
     }
 
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public CatchClause(TokenRange tokenRange, Parameter parameter, BlockStmt body) {
         super(tokenRange);
         setParameter(parameter);
@@ -59,29 +59,29 @@ public class CatchClause extends Node implements NodeWithBlockStmt<CatchClause> 
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
     /**
      * Note that the type of the Parameter can be a UnionType. In this case, any annotations found at the start of the
-     * catch(@X A a |...) are found directly in the Parameter. Annotations that are on the second or later type -
+     * catch(@X A a |...) are found directly _in the Parameter. Annotations that are on the second or later type -
      * catch(A a | @X B b ...) are found on those types.
      */
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Parameter getParameter() {
         return parameter;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public CatchClause setParameter(final Parameter parameter) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public CatchClause setParameter(/*final*/Parameter parameter) {
         assertNotNull(parameter);
         if (parameter == this.parameter) {
             return this;
@@ -94,13 +94,13 @@ public class CatchClause extends Node implements NodeWithBlockStmt<CatchClause> 
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public BlockStmt getBody() {
         return body;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public CatchClause setBody(final BlockStmt body) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public CatchClause setBody(/*final*/BlockStmt body) {
         assertNotNull(body);
         if (body == this.body) {
             return this;
@@ -114,19 +114,19 @@ public class CatchClause extends Node implements NodeWithBlockStmt<CatchClause> 
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public CatchClause clone() {
         return (CatchClause) accept(new CloneVisitor(), null);
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public CatchClauseMetaModel getMetaModel() {
         return JavaParserMetaModel.catchClauseMetaModel;
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;

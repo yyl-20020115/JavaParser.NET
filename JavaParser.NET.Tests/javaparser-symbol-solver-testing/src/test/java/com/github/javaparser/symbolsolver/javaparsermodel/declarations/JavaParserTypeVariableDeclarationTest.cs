@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,7 +24,7 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.declarations;
 
 
 
-class JavaParserTypeVariableDeclarationTest extends AbstractTypeDeclarationTest {
+class JavaParserTypeVariableDeclarationTest:AbstractTypeDeclarationTest {
 
     @Override
     public JavaParserTypeVariableDeclaration createValue() {
@@ -46,7 +46,7 @@ class JavaParserTypeVariableDeclarationTest extends AbstractTypeDeclarationTest 
         return false;
     }
 
-    @Test
+    [TestMethod]
     void getWrappedNodeShouldNotBeNull() {
         assertNotNull(createValue().getWrappedNode());
     }
@@ -54,10 +54,10 @@ class JavaParserTypeVariableDeclarationTest extends AbstractTypeDeclarationTest 
     @Nested
     class TestGetAncestorAncestorsMethod {
 
-        private final JavaParser parser = new JavaParser();
-        private final ReflectionTypeSolver typeSolver = new ReflectionTypeSolver();
+        private /*final*/JavaParser parser = new JavaParser();
+        private /*final*/ReflectionTypeSolver typeSolver = new ReflectionTypeSolver();
 
-        private void testGetAncestorWith(Iterable<String> expectedTypes, String sourceCode) {
+        private void testGetAncestorWith(Iterable<String> expectedTypes, string sourceCode) {
             CompilationUnit cu = parser.parse(sourceCode).getResult().orElseThrow(AssertionError::new);
             TypeParameter typeParameter = Navigator.demandNodeOfGivenClass(cu, TypeParameter.class);
             JavaParserTypeVariableDeclaration parserTypeParameter = new JavaParserTypeVariableDeclaration(typeParameter, typeSolver);
@@ -67,21 +67,21 @@ class JavaParserTypeVariableDeclarationTest extends AbstractTypeDeclarationTest 
                     .collect(Collectors.toList()));
         }
 
-        @Test
+        [TestMethod]
         void withoutBound() {
-            String sourceCode = "class A<T> {}";
+            string sourceCode = "class A<T> {}";
             testGetAncestorWith(Collections.singletonList("java.lang.Object"), sourceCode);
         }
 
-        @Test
+        [TestMethod]
         void withObjectBound() {
-            String sourceCode = "class A<T extends Object> {}";
+            string sourceCode = "class A<T:Object> {}";
             testGetAncestorWith(Collections.singletonList("java.lang.Object"), sourceCode);
         }
 
-        @Test
+        [TestMethod]
         void withMultipleBounds() {
-            String sourceCode = "class A {} interface B {} class C<T extends A & B> {}";
+            string sourceCode = "class A {} interface B {} class C<T:A & B> {}";
             testGetAncestorWith(Arrays.asList("A", "B"), sourceCode);
         }
 

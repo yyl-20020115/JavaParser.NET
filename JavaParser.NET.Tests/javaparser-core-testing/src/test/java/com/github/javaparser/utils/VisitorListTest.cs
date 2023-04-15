@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.utils;
 
 class VisitorListTest {
 
-    @Test
+    [TestMethod]
     void visitorAddAll() {
         List<CompilationUnit> list = new ArrayList<>();
         list.add(parse("class X{}"));
@@ -38,7 +38,7 @@ class VisitorListTest {
             assertEquals(list.get(i), vList.get(i));
     }
 
-    @Test
+    [TestMethod]
     void visitorAddAllAtIndex() {
         List<CompilationUnit> list = new ArrayList<>();
         list.add(parse("class X{}"));
@@ -53,7 +53,7 @@ class VisitorListTest {
             assertEquals(list.get(i), vList.get(2 + i));
     }
 
-    @Test
+    [TestMethod]
     void visitorListContains() {
         CompilationUnit x1 = parse("class X{}");
         VisitorList<CompilationUnit> list = new VisitorList<>(new ObjectIdentityHashCodeVisitor(),
@@ -62,7 +62,7 @@ class VisitorListTest {
         assertTrue(list.contains(x1));
     }
 
-    @Test
+    [TestMethod]
     void visitorListContainsAll() {
         List<CompilationUnit> list = new ArrayList<>();
         list.add(parse("class X{}"));
@@ -73,7 +73,7 @@ class VisitorListTest {
         assertTrue(vList.size() == 2 && vList.containsAll(list));
     }
 
-    @Test
+    [TestMethod]
     void visitorListIterator() {
         VisitorList<CompilationUnit> list = new VisitorList<>(new ObjectIdentityHashCodeVisitor(),
                 new ObjectIdentityEqualsVisitor());
@@ -90,7 +90,7 @@ class VisitorListTest {
         assertEquals(0, list.size());
     }
 
-    @Test
+    [TestMethod]
     void visitorListListIterator() {
         VisitorList<CompilationUnit> list = new VisitorList<>(new ObjectIdentityHashCodeVisitor(),
                 new ObjectIdentityEqualsVisitor());
@@ -109,7 +109,7 @@ class VisitorListTest {
         assertEquals(2, list.size());
     }
 
-    @Test
+    [TestMethod]
     void visitorListRemove() {
         CompilationUnit x1 = parse("class X{}");
         VisitorList<CompilationUnit> list = new VisitorList<>(new ObjectIdentityHashCodeVisitor(),
@@ -118,7 +118,7 @@ class VisitorListTest {
         assertTrue(list.remove(x1));
     }
 
-    @Test
+    [TestMethod]
     void visitorListRemoveAll() {
         List<CompilationUnit> list = new ArrayList<>();
         list.add(parse("class X{}"));
@@ -130,7 +130,7 @@ class VisitorListTest {
         assertEquals(0, vList.size());
     }
 
-    @Test
+    [TestMethod]
     void visitorListRetainAll() {
         List<CompilationUnit> list = new ArrayList<>();
         list.add(parse("class X{}"));
@@ -143,7 +143,7 @@ class VisitorListTest {
         assertEquals(2, vList.size());
     }
 
-    @Test
+    [TestMethod]
     void visitorListSubList() {
         VisitorList<CompilationUnit> list = new VisitorList<>(new ObjectIdentityHashCodeVisitor(),
                 new ObjectIdentityEqualsVisitor());
@@ -160,7 +160,7 @@ class VisitorListTest {
 
     }
 
-    @Test
+    [TestMethod]
     void visitorListToArray() {
         List<CompilationUnit> list = new ArrayList<>();
         list.add(parse("class X{}"));

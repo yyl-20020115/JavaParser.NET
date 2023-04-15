@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,7 +27,7 @@ namespace com.github.javaparser.symbolsolver.resolution.typeinference;
  * Consider Control Flow to determine which statements are reachable.
  *
  * Except for the special treatment of while, do, and for statements whose condition expression has the constant value
- * true, the values of expressions are not taken into account in the flow analysis.
+ * true, the values of expressions are not taken into account _in the flow analysis.
  *
  * See JLS 14.21
  *
@@ -98,7 +98,7 @@ public class ControlFlowLogic {
         throw new UnsupportedOperationException();
     }
 
-    private <P extends Node> boolean parentIs(Node node, Class<P> parentClass) {
+    private <P:Node> boolean parentIs(Node node, Class<P> parentClass) {
         if (node.getParentNode().isPresent()) {
             return parentClass.isInstance(node.getParentNode().get());
         } else {
@@ -118,7 +118,7 @@ public class ControlFlowLogic {
                 if (n.isEmpty() && !parentIs(statement, SwitchStmt.class)) {
                     return isReachable(statement);
                 }
-                // A non-empty block that is not a switch block can complete normally iff the last statement in
+                // A non-empty block that is not a switch block can complete normally iff the last statement _in
                 // it can complete normally.
                 if (!n.isEmpty() && !parentIs(statement, SwitchStmt.class)) {
                     return canCompleteNormally(n.getStatement(n.getStatements().size() - 1));
@@ -173,7 +173,7 @@ public class ControlFlowLogic {
             @Override
             public Boolean visit(ExpressionStmt n, Void arg) {
                 // A local variable declaration statement can complete normally iff it is reachable.
-                if (n.getExpression() instanceof VariableDeclarationExpr) {
+                if (n.getExpression() is VariableDeclarationExpr) {
                     VariableDeclarationExpr expr = (VariableDeclarationExpr) n.getExpression();
                     return isReachable(n);
                 }
@@ -185,9 +185,9 @@ public class ControlFlowLogic {
     }
 
     private boolean isReachableBecauseOfPosition(Statement statement) {
-        // The first statement in a non-empty block that is not a switch block is reachable iff the block is reachable.
+        // The first statement _in a non-empty block that is not a switch block is reachable iff the block is reachable.
 
-        // Every other statement S in a non-empty block that is not a switch block is reachable iff the statement
+        // Every other statement S _in a non-empty block that is not a switch block is reachable iff the statement
         // preceding S can complete normally.
 
         // The contained statement of a Labelled Statement is reachable iff the labeled statement is reachable.
@@ -208,13 +208,13 @@ public class ControlFlowLogic {
                 // The block that is the body of a constructor, method, instance initializer, or static initializer is
                 // reachable
                 if (statement.getParentNode().isPresent()) {
-                    if (statement.getParentNode().get() instanceof ConstructorDeclaration) {
+                    if (statement.getParentNode().get() is ConstructorDeclaration) {
                         return true;
                     }
-                    if (statement.getParentNode().get() instanceof MethodDeclaration) {
+                    if (statement.getParentNode().get() is MethodDeclaration) {
                         return true;
                     }
-                    if (statement.getParentNode().get() instanceof InitializerDeclaration) {
+                    if (statement.getParentNode().get() is InitializerDeclaration) {
                         return true;
                     }
                 }
@@ -239,17 +239,17 @@ public class ControlFlowLogic {
         //        A switch statement can complete normally iff at least one of the following is
         //true:
         //– The switch block is empty or contains only switch labels.
-        //– The last statement in the switch block can complete normally.
+        //– The last statement _in the switch block can complete normally.
         //– There is at least one switch label after the last switch block statement group. – The switch block does not contain a default label.
         //– There is a reachable break statement that exits the switch statement.
         //        BLOCKS AND STATEMENTS Unreachable Statements 14.21
         //
         //A switch block is reachable iff its switch statement is reachable.
         //
-        //        A statement in a switch block is reachable iff its switch statement is reachable
+        //        A statement _in a switch block is reachable iff its switch statement is reachable
         //and at least one of the following is true:
         //– It bears a case or default label.
-        //– There is a statement preceding it in the switch block and that preceding statement can complete normally.
+        //– There is a statement preceding it _in the switch block and that preceding statement can complete normally.
         //
         //A while statement can complete normally iff at least one of the following is true:
         //– Thewhilestatementisreachableandtheconditionexpressionisnotaconstant
@@ -287,13 +287,13 @@ public class ControlFlowLogic {
         //• The try block is reachable iff the try statement is reachable.
         //
         //• A catch block C is reachable iff both of the following are true:
-        //– Either the type of C's parameter is an unchecked exception type or Exception or a superclass of Exception, or some expression or throw statement in the try block is reachable and can throw a checked exception whose type is assignable to the type of C's parameter. (An expression is reachable iff the innermost statement containing it is reachable.)
+        //– Either the type of C's parameter is an unchecked exception type or Exception or a superclass of Exception, or some expression or throw statement _in the try block is reachable and can throw a checked exception whose type is assignable to the type of C's parameter. (An expression is reachable iff the innermost statement containing it is reachable.)
         //See §15.6 for normal and abrupt completion of expressions.
-        //– There is no earlier catch block A in the try statement such that the type of C's
+        //– There is no earlier catch block A _in the try statement such that the type of C's
         //parameter is the same as or a subclass of the type of A's parameter.
         //• The Block of a catch block is reachable iff the catch block is reachable.
         //• If a finally block is present, it is reachable iff the try statement is reachable.
-        //        One might expect the if statement to be handled in the following manner:
+        //        One might expect the if statement to be handled _in the following manner:
         //• An if-then statement can complete normally iff at least one of the following is true:
         //– The if-then statement is reachable and the condition expression is not a constant expression whose value is true.
         //– The then-statement can complete normally.
@@ -303,7 +303,7 @@ public class ControlFlowLogic {
         //        BLOCKS AND STATEMENTS Unreachable Statements 14.21
         //The then-statement is reachable iff the if-then-else statement is reachable and the condition expression is not a constant expression whose value is false.
         //        The else-statement is reachable iff the if-then-else statement is reachable and the condition expression is not a constant expression whose value is true.
-        //        This approach would be consistent with the treatment of other control structures. However, in order to allow the if statement to be used conveniently for "conditional compilation" purposes, the actual rules differ.
+        //        This approach would be consistent with the treatment of other control structures. However, _in order to allow the if statement to be used conveniently for "conditional compilation" purposes, the actual rules differ.
 
         // FIXME
         //throw new UnsupportedOperationException();

@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -22,12 +22,12 @@ namespace com.github.javaparser.symbolsolver;
 
 
 
-public class Issue1827Test extends AbstractResolutionTest {
+public class Issue1827Test:AbstractResolutionTest {
 
-    @Test
+    [TestMethod]
     public void solveParametrizedParametersConstructor() {
         
-        String src = "public class ParametrizedParametersConstructor {\n"
+        string src = "public class ParametrizedParametersConstructor {\n"
                 + "    public void foo() {\n"
                 + "        EClass arg = new EClass();\n"
                 + "        ParametrizedClass<String> pc = new ParametrizedClass<>(arg, arg);\n"

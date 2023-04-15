@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,19 +26,19 @@ namespace com.github.javaparser.ast.validator.language_level_validations.chunks;
 /**
  * Verifies that only allowed modifiers are used where modifiers are expected.
  */
-public class ModifierValidator extends VisitorValidator {
+public class ModifierValidator:VisitorValidator {
 
-    private final Modifier.Keyword[] interfaceWithNothingSpecial = new Modifier.Keyword[] { PUBLIC, PROTECTED, ABSTRACT, FINAL, SYNCHRONIZED, NATIVE, STRICTFP };
+    private /*final*/Modifier.Keyword[] interfaceWithNothingSpecial = new Modifier.Keyword[] { PUBLIC, PROTECTED, ABSTRACT, FINAL, SYNCHRONIZED, NATIVE, STRICTFP };
 
-    private final Modifier.Keyword[] interfaceWithStaticAndDefault = new Modifier.Keyword[] { PUBLIC, PROTECTED, ABSTRACT, STATIC, FINAL, SYNCHRONIZED, NATIVE, STRICTFP, DEFAULT };
+    private /*final*/Modifier.Keyword[] interfaceWithStaticAndDefault = new Modifier.Keyword[] { PUBLIC, PROTECTED, ABSTRACT, STATIC, FINAL, SYNCHRONIZED, NATIVE, STRICTFP, DEFAULT };
 
-    private final Modifier.Keyword[] interfaceWithStaticAndDefaultAndPrivate = new Modifier.Keyword[] { PUBLIC, PROTECTED, PRIVATE, ABSTRACT, STATIC, FINAL, SYNCHRONIZED, NATIVE, STRICTFP, DEFAULT };
+    private /*final*/Modifier.Keyword[] interfaceWithStaticAndDefaultAndPrivate = new Modifier.Keyword[] { PUBLIC, PROTECTED, PRIVATE, ABSTRACT, STATIC, FINAL, SYNCHRONIZED, NATIVE, STRICTFP, DEFAULT };
 
-    private final boolean hasStrictfp;
+    private /*final*/boolean hasStrictfp;
 
-    private final boolean hasDefaultAndStaticInterfaceMethods;
+    private /*final*/boolean hasDefaultAndStaticInterfaceMethods;
 
-    private final boolean hasPrivateInterfaceMethods;
+    private /*final*/boolean hasPrivateInterfaceMethods;
 
     public ModifierValidator(boolean hasStrictfp, boolean hasDefaultAndStaticInterfaceMethods, boolean hasPrivateInterfaceMethods) {
         this.hasStrictfp = hasStrictfp;
@@ -112,7 +112,7 @@ public class ModifierValidator extends VisitorValidator {
     @Override
     public void visit(MethodDeclaration n, ProblemReporter reporter) {
         if (n.isAbstract()) {
-            final SeparatedItemStringBuilder builder = new SeparatedItemStringBuilder("Cannot be 'abstract' and also '", "', '", "'.");
+            /*final*/SeparatedItemStringBuilder builder = new SeparatedItemStringBuilder("Cannot be 'abstract' and also '", "', '", "'.");
             for (Modifier.Keyword m : asList(PRIVATE, STATIC, FINAL, NATIVE, STRICTFP, SYNCHRONIZED)) {
                 if (n.hasModifier(m)) {
                     builder.append(m.asString());
@@ -123,7 +123,7 @@ public class ModifierValidator extends VisitorValidator {
             }
         }
         if (n.getParentNode().isPresent()) {
-            if (n.getParentNode().get() instanceof ClassOrInterfaceDeclaration) {
+            if (n.getParentNode().get() is ClassOrInterfaceDeclaration) {
                 if (((ClassOrInterfaceDeclaration) n.getParentNode().get()).isInterface()) {
                     if (hasDefaultAndStaticInterfaceMethods) {
                         if (hasPrivateInterfaceMethods) {
@@ -170,7 +170,7 @@ public class ModifierValidator extends VisitorValidator {
         super.visit(n, reporter);
     }
 
-    private <T extends NodeWithModifiers<?> & NodeWithTokenRange<?>> void validateModifiers(T n, ProblemReporter reporter, Modifier.Keyword... allowedModifiers) {
+    private <T:NodeWithModifiers<?> & NodeWithTokenRange<?>> void validateModifiers(T n, ProblemReporter reporter, Modifier.Keyword... allowedModifiers) {
         validateAtMostOneOf(n, reporter, PUBLIC, PROTECTED, PRIVATE);
         validateAtMostOneOf(n, reporter, FINAL, ABSTRACT);
         if (hasStrictfp) {
@@ -186,7 +186,7 @@ public class ModifierValidator extends VisitorValidator {
     }
 
     private Modifier.Keyword[] removeModifierFromArray(Modifier.Keyword m, Modifier.Keyword[] allowedModifiers) {
-        final List<Modifier.Keyword> newModifiers = new ArrayList<>(asList(allowedModifiers));
+        /*final*/List<Modifier.Keyword> newModifiers = new ArrayList<>(asList(allowedModifiers));
         newModifiers.remove(m);
         allowedModifiers = newModifiers.toArray(new Modifier.Keyword[0]);
         return allowedModifiers;
@@ -201,7 +201,7 @@ public class ModifierValidator extends VisitorValidator {
         return false;
     }
 
-    private <T extends NodeWithModifiers<?> & NodeWithTokenRange<?>> void validateAtMostOneOf(T t, ProblemReporter reporter, Modifier.Keyword... modifiers) {
+    private <T:NodeWithModifiers<?> & NodeWithTokenRange<?>> void validateAtMostOneOf(T t, ProblemReporter reporter, Modifier.Keyword... modifiers) {
         List<Modifier.Keyword> foundModifiers = new ArrayList<>();
         for (Modifier.Keyword m : modifiers) {
             if (t.hasModifier(m)) {

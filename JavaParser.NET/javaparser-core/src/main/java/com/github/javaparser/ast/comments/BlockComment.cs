@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -31,81 +31,81 @@ namespace com.github.javaparser.ast.comments;
  *
  * @author Julio Vilmar Gesser
  */
-public class BlockComment extends Comment {
+public class BlockComment:Comment {
 
     public BlockComment() {
         this(null, "empty");
     }
 
-    @AllFieldsConstructor
-    public BlockComment(String content) {
+    //@AllFieldsConstructor
+    public BlockComment(string content) {
         this(null, content);
     }
 
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
-    public BlockComment(TokenRange tokenRange, String content) {
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    public BlockComment(TokenRange tokenRange, string content) {
         super(tokenRange, content);
         customInitialization();
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public BlockComment clone() {
         return (BlockComment) accept(new CloneVisitor(), null);
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public BlockCommentMetaModel getMetaModel() {
         return JavaParserMetaModel.blockCommentMetaModel;
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public bool isBlockComment() {
         return true;
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public BlockComment asBlockComment() {
         return this;
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifBlockComment(Consumer<BlockComment> action) {
         action.accept(this);
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<BlockComment> toBlockComment() {
         return Optional.of(this);
     }
 
 	//@Override
-	public String getHeader() {
+	public string getHeader() {
 		return "/*";
 	}
 	
 	//@Override
-	public String getFooter() {
+	public string getFooter() {
 		return "*/";
 	}
 }

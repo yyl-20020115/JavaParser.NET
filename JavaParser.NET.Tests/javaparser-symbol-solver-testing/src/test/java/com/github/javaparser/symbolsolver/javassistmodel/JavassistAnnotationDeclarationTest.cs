@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,7 +24,7 @@ namespace com.github.javaparser.symbolsolver.javassistmodel;
 
 
 
-class JavassistAnnotationDeclarationTest extends AbstractTypeDeclarationTest
+class JavassistAnnotationDeclarationTest:AbstractTypeDeclarationTest
         implements ResolvedAnnotationDeclarationTest {
 
     @Override
@@ -49,20 +49,20 @@ class JavassistAnnotationDeclarationTest extends AbstractTypeDeclarationTest
     }
 
     @Disabled(value = "This feature is not yet implemented. See https://github.com/javaparser/javaparser/issues/1841")
-    @Test
+    [TestMethod]
     @Override
     public void containerTypeCantBeNull() {
         super.containerTypeCantBeNull();
     }
 
     @Disabled(value = "This feature is not yet implemented. See https://github.com/javaparser/javaparser/issues/1838")
-    @Test
+    [TestMethod]
     @Override
     public void getDeclaredMethodsCantBeNull() {
         super.getDeclaredMethodsCantBeNull();
     }
 
-    @Test
+    [TestMethod]
     void getAncestors_shouldReturnAnnotation() throws NotFoundException {
         TypeSolver typeSolver = new ReflectionTypeSolver();
         CtClass clazz = ClassPool.getDefault().getCtClass("java.lang.Override");
@@ -74,7 +74,7 @@ class JavassistAnnotationDeclarationTest extends AbstractTypeDeclarationTest
         assertEquals(Annotation.class.getCanonicalName(), ancestors.get(1).getQualifiedName());
     }
 
-    @Test
+    [TestMethod]
     void internalTypes_shouldMatchNestedTypes() {
         TypeSolver typeSolver = new ReflectionTypeSolver();
 
@@ -90,7 +90,7 @@ class JavassistAnnotationDeclarationTest extends AbstractTypeDeclarationTest
         assertEquals("com.example.Foo.Bar", innerTypes.get(0).getQualifiedName());
     }
 
-    @Test
+    [TestMethod]
     void isAnnotationNotInheritable() {
         TypeSolver typeSolver = new ReflectionTypeSolver();
 
@@ -102,7 +102,7 @@ class JavassistAnnotationDeclarationTest extends AbstractTypeDeclarationTest
         assertFalse(fooAnnotationDeclaration.isInheritable());
     }
 
-    @Test
+    [TestMethod]
     void isAnnotationInheritable() {
         TypeSolver typeSolver = new ReflectionTypeSolver();
 
@@ -115,7 +115,7 @@ class JavassistAnnotationDeclarationTest extends AbstractTypeDeclarationTest
         assertTrue(fooAnnotationDeclaration.isInheritable());
     }
 
-    private void addAnnotation(CtClass ctClass, String annotationName) {
+    private void addAnnotation(CtClass ctClass, string annotationName) {
         ConstPool constpool = ctClass.getClassFile().getConstPool();
 
         AnnotationsAttribute annotationsAttribute = new AnnotationsAttribute(constpool,
@@ -125,7 +125,7 @@ class JavassistAnnotationDeclarationTest extends AbstractTypeDeclarationTest
         ctClass.getClassFile().addAttribute(annotationsAttribute);
     }
 
-    private javassist.bytecode.annotation.Annotation createAnnotation(String annotationName, ConstPool constpool) {
+    private javassist.bytecode.annotation.Annotation createAnnotation(string annotationName, ConstPool constpool) {
         return new javassist.bytecode.annotation.Annotation(annotationName, constpool);
     }
 

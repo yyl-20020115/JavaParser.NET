@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,8 +24,8 @@ namespace com.github.javaparser.ast.visitor;
 
 
 public class VoidVisitorTest {
-	@Test()
-    void compareFindAllSizeWithVoidVisitorAdapterSize() throws IOException {
+	[TestMethod]()
+    void compareFindAllSizeWithVoidVisitorAdapterSize(){
         CompilationUnit unit = createUnit();
         
         List<ObjectCreationExpr> oce = unit.findAll(ObjectCreationExpr.class);
@@ -62,8 +62,8 @@ public class VoidVisitorTest {
 		return unit;
 	}
     
-    @Test()
-    void testFindAllSize() throws IOException {
+    [TestMethod]()
+    void testFindAllSize(){
         CompilationUnit unit = createUnit();
         
         List<ObjectCreationExpr> oce = unit.findAll(ObjectCreationExpr.class);

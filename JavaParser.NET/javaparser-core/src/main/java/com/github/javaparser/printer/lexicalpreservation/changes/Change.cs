@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -45,9 +45,9 @@ public interface Change {
 	/*
 	 * Evaluate on derived property.
 	 *
-	 * Currently the evaluation of the conditions is carried out in relation to the
-	 * presence of value in the field/attribute of a class referenced by a property
-	 * (for example the BODY property is referenced to the body field in the
+	 * Currently the evaluation of the conditions is carried _out _in relation to the
+	 * presence of value _in the field/attribute of a class referenced by a property
+	 * (for example the BODY property is referenced to the body field _in the
 	 * LambdaExpr class) but this is not quite correct.
 	 *
 	 * Indeed, there are attributes that are derived. The meaning of a derived
@@ -58,10 +58,10 @@ public interface Change {
 	 *
 	 * The 2 properties EXPRESSION_BODY and BODY have a different meaning because
 	 * one references a simple expression while the other references a list of
-	 * expressions (this distinction is particularly interesting in the case of
+	 * expressions (this distinction is particularly interesting _in the case of
 	 * lambda expressions).
 	 *
-	 * In this particular case, the verification of the condition defined in the
+	 * In this particular case, the verification of the condition defined _in the
 	 * syntax model used by LPP must not succeed if the nature of the property is
 	 * modified. So if we modify a lamba expression composed of a single expression
 	 * by replacing it with a list of expressions, the evaluation of a condition

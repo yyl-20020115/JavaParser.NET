@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -41,7 +41,7 @@ public interface NodeWithModifiers<N> where N:Node {
 
     N setModifiers(NodeList<Modifier> modifiers);
 
-    //@SuppressWarnings("unchecked")
+    ////@SuppressWarnings("unchecked")
     default N addModifier(Modifier.Keyword... newModifiers) {
         NodeList<Modifier> existingModifiers = new NodeList<>(getModifiers());
         for (Modifier.Keyword newModifier : newModifiers) {
@@ -54,7 +54,7 @@ public interface NodeWithModifiers<N> where N:Node {
         return (N) this;
     }
 
-    //@SuppressWarnings("unchecked")
+    ////@SuppressWarnings("unchecked")
     default N removeModifier(Modifier.Keyword... modifiersToRemove) {
         List<Modifier.Keyword> modifiersToRemoveAsList = Arrays.asList(modifiersToRemove);
         NodeList<Modifier> remaining = getModifiers().stream().filter(existingModifier -> !modifiersToRemoveAsList.contains(existingModifier.getKeyword())).collect(toNodeList());
@@ -86,7 +86,7 @@ public interface NodeWithModifiers<N> where N:Node {
     /**
      * Creates a list of modifier nodes corresponding to the keywords passed, and set it.
      */
-    default N setModifiers(final Modifier.Keyword... modifiers) {
+    default N setModifiers(/*final*/Modifier.Keyword... modifiers) {
         return setModifiers(Arrays.stream(modifiers).map(Modifier::new).collect(toNodeList()));
     }
 

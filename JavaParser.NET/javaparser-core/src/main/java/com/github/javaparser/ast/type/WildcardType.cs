@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,12 +25,12 @@ namespace com.github.javaparser.ast.type;
 /**
  * A wildcard type argument. Examples:
  * <br>{@code void printCollection(Collection<}<b>{@code ?}</b>{@code > c) { ... }}
- * <br>{@code boolean addAll(Collection<}<b>{@code ? extends E}</b>{@code > c)}
+ * <br>{@code boolean addAll(Collection<}<b>{@code ?:E}</b>{@code > c)}
  * <br>{@code Reference(T referent, ReferenceQueue<}<b>{@code ? super T}</b>{@code > queue)}
  *
  * @author Julio Vilmar Gesser
  */
-public class WildcardType extends Type implements NodeWithAnnotations<WildcardType> {
+public class WildcardType:Type implements NodeWithAnnotations<WildcardType> {
 
     @OptionalProperty
     private ReferenceType extendedType;
@@ -42,19 +42,19 @@ public class WildcardType extends Type implements NodeWithAnnotations<WildcardTy
         this(null, null, null, new NodeList<>());
     }
 
-    public WildcardType(final ReferenceType extendedType) {
+    public WildcardType(/*final*/ReferenceType extendedType) {
         this(null, extendedType, null, new NodeList<>());
     }
 
-    @AllFieldsConstructor
-    public WildcardType(final ReferenceType extendedType, final ReferenceType superType, final NodeList<AnnotationExpr> annotations) {
+    //@AllFieldsConstructor
+    public WildcardType(/*final*/ReferenceType extendedType, /*final*/ReferenceType superType, /*final*/NodeList<AnnotationExpr> annotations) {
         this(null, extendedType, superType, annotations);
     }
 
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public WildcardType(TokenRange tokenRange, ReferenceType extendedType, ReferenceType superType, NodeList<AnnotationExpr> annotations) {
         super(tokenRange, annotations);
         setExtendedType(extendedType);
@@ -63,23 +63,23 @@ public class WildcardType extends Type implements NodeWithAnnotations<WildcardTy
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Optional<ReferenceType> getExtendedType() {
         return Optional.ofNullable(extendedType);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Optional<ReferenceType> getSuperType() {
         return Optional.ofNullable(superType);
     }
@@ -90,8 +90,8 @@ public class WildcardType extends Type implements NodeWithAnnotations<WildcardTy
      * @param extendedType the extends, can be null
      * @return this, the WildcardType
      */
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public WildcardType setExtendedType(final ReferenceType extendedType) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public WildcardType setExtendedType(/*final*/ReferenceType extendedType) {
         if (extendedType == this.extendedType) {
             return this;
         }
@@ -109,8 +109,8 @@ public class WildcardType extends Type implements NodeWithAnnotations<WildcardTy
      * @param superType the super, can be null
      * @return this, the WildcardType
      */
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public WildcardType setSuperType(final ReferenceType superType) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public WildcardType setSuperType(/*final*/ReferenceType superType) {
         if (superType == this.superType) {
             return this;
         }
@@ -128,7 +128,7 @@ public class WildcardType extends Type implements NodeWithAnnotations<WildcardTy
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
     public boolean remove(Node node) {
         if (node == null) {
             return false;
@@ -149,37 +149,37 @@ public class WildcardType extends Type implements NodeWithAnnotations<WildcardTy
     }
 
     @Override
-    public String asString() {
+    public string asString() {
         StringBuilder str = new StringBuilder("?");
-        getExtendedType().ifPresent(t -> str.append(" extends ").append(t.asString()));
+        getExtendedType().ifPresent(t -> str.append(":").append(t.asString()));
         getSuperType().ifPresent(t -> str.append(" super ").append(t.asString()));
         return str.toString();
     }
 
-    @Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
     public WildcardType removeExtendedType() {
         return setExtendedType((ReferenceType) null);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
     public WildcardType removeSuperType() {
         return setSuperType((ReferenceType) null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public WildcardType clone() {
         return (WildcardType) accept(new CloneVisitor(), null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public WildcardTypeMetaModel getMetaModel() {
         return JavaParserMetaModel.wildcardTypeMetaModel;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public boolean replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
@@ -202,7 +202,7 @@ public class WildcardType extends Type implements NodeWithAnnotations<WildcardTy
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public WildcardType(TokenRange tokenRange, ReferenceType extendedType, ReferenceType superType) {
         super(tokenRange);
         setExtendedType(extendedType);
@@ -211,19 +211,19 @@ public class WildcardType extends Type implements NodeWithAnnotations<WildcardTy
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isWildcardType() {
         return true;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public WildcardType asWildcardType() {
         return this;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifWildcardType(Consumer<WildcardType> action) {
         action.accept(this);
     }
@@ -234,7 +234,7 @@ public class WildcardType extends Type implements NodeWithAnnotations<WildcardTy
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<WildcardType> toWildcardType() {
         return Optional.of(this);
     }

@@ -19,17 +19,17 @@ namespace com.github.javaparser;
 	
 	public class StringProvider implements Provider {
 
-		String _string;
+		string _string;
 		int _position = 0;
 		int _size;
 		
-		public StringProvider(String string) {
+		public StringProvider(string string) {
 			_string = string;
 			_size = string.length();
 		}
 		
 		@Override
-		public int read(char[] cbuf, int off, int len) throws IOException {
+		public int read(char[] cbuf, int off, int len){
 			int numCharsOutstandingInString = _size - _position;
 			
 			if (numCharsOutstandingInString == 0) {
@@ -52,7 +52,7 @@ namespace com.github.javaparser;
 		}
 
 		@Override
-		public void close() throws IOException {
+		public void close(){
 			_string = null;
 		}
 		

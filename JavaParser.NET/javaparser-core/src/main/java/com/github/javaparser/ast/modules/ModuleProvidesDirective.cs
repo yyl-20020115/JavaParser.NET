@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,9 +24,9 @@ namespace com.github.javaparser.ast.modules;
 
 
 /**
- * A provides directive in module-info.java. {@code provides X.Y with Z1.Z2, Z3.Z4;}
+ * A provides directive _in module-info.java. {@code provides X.Y with Z1.Z2, Z3.Z4;}
  */
-public class ModuleProvidesDirective extends ModuleDirective implements NodeWithName<ModuleProvidesDirective> {
+public class ModuleProvidesDirective:ModuleDirective implements NodeWithName<ModuleProvidesDirective> {
 
     private Name name;
 
@@ -36,7 +36,7 @@ public class ModuleProvidesDirective extends ModuleDirective implements NodeWith
         this(null, new Name(), new NodeList<>());
     }
 
-    @AllFieldsConstructor
+    //@AllFieldsConstructor
     public ModuleProvidesDirective(Name name, NodeList<Name> with) {
         this(null, name, with);
     }
@@ -44,7 +44,7 @@ public class ModuleProvidesDirective extends ModuleDirective implements NodeWith
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public ModuleProvidesDirective(TokenRange tokenRange, Name name, NodeList<Name> with) {
         super(tokenRange);
         setName(name);
@@ -53,19 +53,19 @@ public class ModuleProvidesDirective extends ModuleDirective implements NodeWith
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
     public boolean remove(Node node) {
         if (node == null) {
             return false;
@@ -80,41 +80,41 @@ public class ModuleProvidesDirective extends ModuleDirective implements NodeWith
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public ModuleProvidesDirective clone() {
         return (ModuleProvidesDirective) accept(new CloneVisitor(), null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isModuleProvidesStmt() {
         return true;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public ModuleProvidesDirective asModuleProvidesStmt() {
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifModuleProvidesStmt(Consumer<ModuleProvidesDirective> action) {
         action.accept(this);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<ModuleProvidesDirective> toModuleProvidesStmt() {
         return Optional.of(this);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Name getName() {
         return name;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public ModuleProvidesDirective setName(final Name name) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public ModuleProvidesDirective setName(/*final*/Name name) {
         assertNotNull(name);
         if (name == this.name) {
             return this;
@@ -127,8 +127,8 @@ public class ModuleProvidesDirective extends ModuleDirective implements NodeWith
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public ModuleProvidesDirective setWith(final NodeList<Name> with) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public ModuleProvidesDirective setWith(/*final*/NodeList<Name> with) {
         assertNotNull(with);
         if (with == this.with) {
             return this;
@@ -141,13 +141,13 @@ public class ModuleProvidesDirective extends ModuleDirective implements NodeWith
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public NodeList<Name> getWith() {
         return with;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public boolean replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
@@ -166,31 +166,31 @@ public class ModuleProvidesDirective extends ModuleDirective implements NodeWith
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isModuleProvidesDirective() {
         return true;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public ModuleProvidesDirective asModuleProvidesDirective() {
         return this;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<ModuleProvidesDirective> toModuleProvidesDirective() {
         return Optional.of(this);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifModuleProvidesDirective(Consumer<ModuleProvidesDirective> action) {
         action.accept(this);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public ModuleProvidesDirectiveMetaModel getMetaModel() {
         return JavaParserMetaModel.moduleProvidesDirectiveMetaModel;
     }

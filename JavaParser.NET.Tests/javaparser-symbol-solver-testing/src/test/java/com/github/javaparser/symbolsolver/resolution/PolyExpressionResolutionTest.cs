@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -22,34 +22,34 @@ namespace com.github.javaparser.symbolsolver.resolution;
 
 
 
-public class PolyExpressionResolutionTest extends AbstractResolutionTest {
+public class PolyExpressionResolutionTest:AbstractResolutionTest {
 
     @BeforeEach
     void setup() {
     }
 
-    @Test
+    [TestMethod]
     void methodReferenceExpressionAsPolyExpression() {
         Expression expr = StaticJavaParser.parseExpression("String::length");
         assertTrue(expr.isPolyExpression());
         assertFalse(expr.isStandaloneExpression());
     }
 
-    @Test
+    [TestMethod]
     void lambdaExpressionAsPolyExpression() {
         Expression expr = StaticJavaParser.parseExpression("(s) -> s.toString()");
         assertTrue(expr.isPolyExpression());
         assertFalse(expr.isStandaloneExpression());
     }
 
-    @Test
+    [TestMethod]
     void parenthesizedExpressionAsStandaloneExpression() {
         Expression expr = StaticJavaParser.parseExpression("(-1)");
         assertTrue(expr.isStandaloneExpression());
         assertFalse(expr.isPolyExpression());
     }
 
-    @Test
+    [TestMethod]
     void objectCreationPolyExpressionTest() {
         Expression expr = StaticJavaParser.parseExpression("new ArrayList<>()");
         // see issue https://github.com/javaparser/javaparser/issues/2985
@@ -57,7 +57,7 @@ public class PolyExpressionResolutionTest extends AbstractResolutionTest {
          assertTrue(expr.isStandaloneExpression());
     }
 
-    @Test
+    [TestMethod]
     void objectCreationStandaloneExpressionTest() {
         Expression expr = StaticJavaParser.parseExpression("new ArrayList()");
         assertFalse(expr.isPolyExpression());
@@ -72,28 +72,28 @@ public class PolyExpressionResolutionTest extends AbstractResolutionTest {
         assertTrue(expr.isStandaloneExpression());
     }
 
-    @Test
+    [TestMethod]
     void methodCallExpressionStandaloneExpressionInMethodCallContextTest() {
         Expression expr = StaticJavaParser.parseExpression("m(s.toString())").findAll(MethodCallExpr.class).get(1);
         assertFalse(expr.isPolyExpression());
         assertTrue(expr.isStandaloneExpression());
     }
     
-    @Test
+    [TestMethod]
     void methodCallExpressionStandaloneExpressionInAssignementContextTest() {
         Expression expr = StaticJavaParser.parseExpression("x = s.toString()").findAll(MethodCallExpr.class).get(0);
         assertFalse(expr.isPolyExpression());
         assertTrue(expr.isStandaloneExpression());
     }
     
-    @Test
+    [TestMethod]
     void methodCallExpressionPolyExpressionInAssignementContextTest() {
         Expression expr = StaticJavaParser.parseExpression("same = Util.<Integer, String>compare(p1, p2)").findAll(MethodCallExpr.class).get(0);
         assertFalse(expr.isPolyExpression());
         assertTrue(expr.isStandaloneExpression());
     }
 
-    @Test
+    [TestMethod]
     void elidesTypeArgumentsTest() {
         Expression expr = StaticJavaParser.parseExpression("m()");
         assertTrue(expr.elidesTypeArguments());
@@ -107,25 +107,25 @@ public class PolyExpressionResolutionTest extends AbstractResolutionTest {
         assertFalse(expr.elidesTypeArguments());
     }
 
-    @Test
+    [TestMethod]
     void appearsInAssignmentContextTest() {
         Expression expr = StaticJavaParser.parseExpression("a = m()").findFirst(MethodCallExpr.class).get();
         assertTrue(expr.appearsInAssignmentContext());
     }
     
-    @Test
+    [TestMethod]
     void notAppearsInAssignmentContextTest() {
         Expression expr = StaticJavaParser.parseExpression("a.m()").findFirst(MethodCallExpr.class).get();
         assertFalse(expr.appearsInAssignmentContext());
     }
     
-    @Test
+    [TestMethod]
     void notAppearsInInvocationContextTest() {
         Expression expr = StaticJavaParser.parseExpression("a = m()").findFirst(MethodCallExpr.class).get();
         assertFalse(expr.appearsInInvocationContext());
     }
     
-    @Test
+    [TestMethod]
     void appearsInInvocationContextTest() {
         Expression expr = StaticJavaParser.parseExpression("a().m()").findAll(MethodCallExpr.class).get(1);
         assertTrue(expr.appearsInInvocationContext());

@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,13 +25,13 @@ namespace com.github.javaparser.symbolsolver;
 
 public class Issue3308Test {
 
-    @Test
+    [TestMethod]
     void shallowArray() {
         StaticJavaParser.getConfiguration().setLanguageLevel(ParserConfiguration.LanguageLevel.JAVA_9);
         CombinedTypeSolver combinedTypeSolver = new CombinedTypeSolver();
         combinedTypeSolver.add(new ReflectionTypeSolver());
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(combinedTypeSolver));
-        String classStr = "public class JavaParser {\n" +
+        string classStr = "public class JavaParser {\n" +
                 "\n" +
                 "    public void bad (int index) {\n" +
                 "        LastRecovered recovered = new LastRecovered();\n" +
@@ -70,13 +70,13 @@ public class Issue3308Test {
 
 
 
-    @Test
+    [TestMethod]
     void deepArray() {
         StaticJavaParser.getConfiguration().setLanguageLevel(ParserConfiguration.LanguageLevel.JAVA_9);
         CombinedTypeSolver combinedTypeSolver = new CombinedTypeSolver();
         combinedTypeSolver.add(new ReflectionTypeSolver());
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(combinedTypeSolver));
-        String classStr = "class JavaParser {\n" +
+        string classStr = "class JavaParser {\n" +
                 "\n" +
                 "    public void bad (int index) {\n" +
                 "        LastRecovered recovered = new LastRecovered();\n" +

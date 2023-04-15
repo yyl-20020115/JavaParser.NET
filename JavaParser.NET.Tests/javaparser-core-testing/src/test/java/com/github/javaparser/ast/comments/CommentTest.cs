@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,9 +25,9 @@ namespace com.github.javaparser.ast.comments;
 
 class CommentTest {
 
-    private static final PrinterConfiguration PRETTY_PRINTER_CONFIG_TWO_INDENT = new DefaultPrinterConfiguration().addOption(new DefaultConfigurationOption(ConfigOption.INDENTATION, new Indentation(IndentType.SPACES, 2)));
+    private static /*final*/PrinterConfiguration PRETTY_PRINTER_CONFIG_TWO_INDENT = new DefaultPrinterConfiguration().addOption(new DefaultConfigurationOption(ConfigOption.INDENTATION, new Indentation(IndentType.SPACES, 2)));
 
-    @Test
+    [TestMethod]
     void removeOrphanComment() {
         ClassOrInterfaceDeclaration decl = new ClassOrInterfaceDeclaration(new NodeList<>(), false, "A");
         Comment c = new LineComment("A comment");
@@ -37,7 +37,7 @@ class CommentTest {
         assertEquals(0, decl.getOrphanComments().size());
     }
 
-    @Test
+    [TestMethod]
     void removeAssociatedComment() {
         ClassOrInterfaceDeclaration decl = new ClassOrInterfaceDeclaration(new NodeList<>(), false, "A");
         Comment c = new LineComment("A comment");
@@ -47,20 +47,20 @@ class CommentTest {
         assertFalse(decl.getComment().isPresent());
     }
 
-    @Test
+    [TestMethod]
     void cannotRemoveCommentNotUsedAnywhere() {
         Comment c = new LineComment("A comment");
         assertFalse(c.remove());
     }
 
-    @Test
+    [TestMethod]
     void unicodeEscapesArePreservedInComments() {
         CompilationUnit cu = parse("// xxx\\u2122xxx");
         Comment comment = cu.getAllContainedComments().get(0);
         assertEquals(" xxx\\u2122xxx", comment.getContent());
     }
 
-    @Test
+    [TestMethod]
     void testReplaceDuplicateJavaDocComment() {
         // Arrange
         CompilationUnit cu = parse("public class MyClass {" + SYSTEM_EOL +
@@ -101,7 +101,7 @@ class CommentTest {
                 "}\n", cu.toString(PRETTY_PRINTER_CONFIG_TWO_INDENT));
     }
 
-    @Test
+    [TestMethod]
     void testRemoveDuplicateComment() {
         // Arrange
         CompilationUnit cu = parse("public class MyClass {" + SYSTEM_EOL +
@@ -139,7 +139,7 @@ class CommentTest {
                 "}\n", cu.toString(PRETTY_PRINTER_CONFIG_TWO_INDENT));
     }
 
-    @Test
+    [TestMethod]
     void testRemoveDuplicateJavaDocComment() {
         // Arrange
         CompilationUnit cu = parse("public class MyClass {" + SYSTEM_EOL +
@@ -177,7 +177,7 @@ class CommentTest {
                 "}\n", cu.toString(PRETTY_PRINTER_CONFIG_TWO_INDENT));
     }
     
-    @Test()
+    [TestMethod]()
     void testVerifyOrphanCommentInsertedInEmptyBlock() {
         BlockStmt block = new BlockStmt();
         block.addOrphanComment(new LineComment("TODO"));

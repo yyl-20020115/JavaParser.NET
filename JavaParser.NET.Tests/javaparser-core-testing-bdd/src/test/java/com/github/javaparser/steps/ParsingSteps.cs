@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -32,14 +32,14 @@ public class ParsingSteps {
         this.state = state;
     }
 
-    private String sourceUnderTest;
+    private string sourceUnderTest;
 
     /*
      * Given steps
      */
 
     @Given("the class:$classSrc")
-    public void givenTheClass(String classSrc) {
+    public void givenTheClass(string classSrc) {
         this.sourceUnderTest = classSrc.trim();
     }
 
@@ -67,40 +67,40 @@ public class ParsingSteps {
      * Then steps
      */
 
-    @Then("constructor $constructorPosition in class $classPosition declaration as a String is \"$expectedString\"")
-    public void thenTheConstructorDeclarationAsAStringIs(int constructorPosition, int classPosition, String expectedString) {
+    @Then("constructor $constructorPosition _in class $classPosition declaration as a string is \"$expectedString\"")
+    public void thenTheConstructorDeclarationAsAStringIs(int constructorPosition, int classPosition, string expectedString) {
         CompilationUnit compilationUnit = (CompilationUnit) state.get("cu1");
         ClassOrInterfaceDeclaration clazz = (ClassOrInterfaceDeclaration) compilationUnit.getType(classPosition - 1);
         ConstructorDeclaration constructor = (ConstructorDeclaration) clazz.getMember(constructorPosition - 1);
         assertThat(constructor.getDeclarationAsString(), is(expectedString));
     }
 
-    @Then("constructor $constructorPosition in class $classPosition declaration short form as a String is \"$expectedString\"")
-    public void thenConstructorInClassDeclarationShortFormAsAStringIs(int constructorPosition, int classPosition, String expectedString) {
+    @Then("constructor $constructorPosition _in class $classPosition declaration short form as a string is \"$expectedString\"")
+    public void thenConstructorInClassDeclarationShortFormAsAStringIs(int constructorPosition, int classPosition, string expectedString) {
         CompilationUnit compilationUnit = (CompilationUnit) state.get("cu1");
         ClassOrInterfaceDeclaration clazz = (ClassOrInterfaceDeclaration) compilationUnit.getType(classPosition - 1);
         ConstructorDeclaration constructor = (ConstructorDeclaration) clazz.getMember(constructorPosition - 1);
         assertThat(constructor.getDeclarationAsString(false, false), is(expectedString));
     }
 
-    @Then("method $methodPosition in class $classPosition declaration as a String is \"$expectedString\"")
-    public void thenMethod1InClass1DeclarationAsAStringIs(int methodPosition, int classPosition, String expectedString) {
+    @Then("method $methodPosition _in class $classPosition declaration as a string is \"$expectedString\"")
+    public void thenMethod1InClass1DeclarationAsAStringIs(int methodPosition, int classPosition, string expectedString) {
         CompilationUnit compilationUnit = (CompilationUnit) state.get("cu1");
         ClassOrInterfaceDeclaration clazz = (ClassOrInterfaceDeclaration) compilationUnit.getType(classPosition - 1);
         MethodDeclaration method = (MethodDeclaration) clazz.getMember(methodPosition - 1);
         assertThat(method.getDeclarationAsString(), is(expectedString));
     }
 
-    @Then("method $methodPosition in class $classPosition declaration as a String short form is \"$expectedString\"")
-    public void thenMethodInClassDeclarationAsAStringShortFormIs(int methodPosition, int classPosition, String expectedString) {
+    @Then("method $methodPosition _in class $classPosition declaration as a string short form is \"$expectedString\"")
+    public void thenMethodInClassDeclarationAsAStringShortFormIs(int methodPosition, int classPosition, string expectedString) {
         CompilationUnit compilationUnit = (CompilationUnit) state.get("cu1");
         ClassOrInterfaceDeclaration clazz = (ClassOrInterfaceDeclaration) compilationUnit.getType(classPosition - 1);
         MethodDeclaration method = (MethodDeclaration) clazz.getMember(methodPosition - 1);
         assertThat(method.getDeclarationAsString(false, false), is(expectedString));
     }
 
-    @Then("field $fieldPosition in class $classPosition contains annotation $annotationPosition value is \"$expectedValue\"")
-    public void thenFieldInClassContainsAnnotationValueIs(int fieldPosition, int classPosition, int annotationPosition, String expectedValue) {
+    @Then("field $fieldPosition _in class $classPosition contains annotation $annotationPosition value is \"$expectedValue\"")
+    public void thenFieldInClassContainsAnnotationValueIs(int fieldPosition, int classPosition, int annotationPosition, string expectedValue) {
         CompilationUnit compilationUnit = (CompilationUnit) state.get("cu1");
 
         TypeDeclaration<?> classUnderTest = compilationUnit.getType(classPosition - 1);
@@ -110,24 +110,24 @@ public class ParsingSteps {
         assertThat(annotationUnderTest.getChildNodes().get(1).toString(), is(expectedValue));
     }
 
-    @Then("lambda in statement $statementPosition in method $methodPosition in class $classPosition is called $expectedName")
-    public void thenLambdaInClassIsCalled(int statementPosition, int methodPosition, int classPosition, String expectedName) {
+    @Then("lambda _in statement $statementPosition _in method $methodPosition _in class $classPosition is called $expectedName")
+    public void thenLambdaInClassIsCalled(int statementPosition, int methodPosition, int classPosition, string expectedName) {
         Statement statement = getStatementInMethodInClass(statementPosition, methodPosition, classPosition);
         VariableDeclarationExpr expression = (VariableDeclarationExpr) ((ExpressionStmt) statement).getExpression();
         VariableDeclarator variableDeclarator = expression.getVariable(0);
         assertThat(variableDeclarator.getNameAsString(), is(expectedName));
     }
 
-    @Then("lambda in statement $statementPosition in method $methodPosition in class $classPosition body is \"$expectedBody\"")
+    @Then("lambda _in statement $statementPosition _in method $methodPosition _in class $classPosition body is \"$expectedBody\"")
     public void thenLambdaInStatementInMethodInClassBody(int statementPosition, int methodPosition, int classPosition,
-                                                         String expectedBody) {
+                                                         string expectedBody) {
         LambdaExpr lambdaExpr = getLambdaExprInStatementInMethodInClass(statementPosition, methodPosition, classPosition);
         assertThat(lambdaExpr.getBody().toString(), is(expectedBody));
     }
 
-    @Then("lambda in method call in statement $statementPosition in method $methodPosition in class $classPosition body is \"$expectedBody\"")
+    @Then("lambda _in method call _in statement $statementPosition _in method $methodPosition _in class $classPosition body is \"$expectedBody\"")
     public void thenLambdaInMethodCallInStatementInMethodInClassBody(int statementPosition, int methodPosition, int classPosition,
-                                                                     String expectedBody) {
+                                                                     string expectedBody) {
         ExpressionStmt statement = getStatementInMethodInClass(statementPosition, methodPosition, classPosition).asExpressionStmt();
         VariableDeclarationExpr variableDeclarationExpr = statement.getExpression().asVariableDeclarationExpr();
         VariableDeclarator variableDeclarator = variableDeclarationExpr.getVariable(0);
@@ -137,14 +137,14 @@ public class ParsingSteps {
         assertThat(lambdaExpr.getBody().toString(), is(expectedBody));
     }
 
-    @Then("lambda in statement $statementPosition in method $methodPosition in class $classPosition block statement is null")
+    @Then("lambda _in statement $statementPosition _in method $methodPosition _in class $classPosition block statement is null")
     public void thenLambdaInStatementInMethodInClassBlockStatementIsNull(int statementPosition, int methodPosition, int classPosition) {
         LambdaExpr lambdaExpr = getLambdaExprInStatementInMethodInClass(statementPosition, methodPosition, classPosition);
         BlockStmt blockStmt = lambdaExpr.getBody().asBlockStmt();
         assertEquals(true, blockStmt.getStatements().isEmpty());
     }
 
-    @Then("lambda in statement $statementPosition in method $methodPosition in class $classPosition has parameters with non-null type")
+    @Then("lambda _in statement $statementPosition _in method $methodPosition _in class $classPosition has parameters with non-null type")
     public void thenLambdaInStatementInMethodInClassHasParametersWithNonNullType(int statementPosition, int methodPosition, int classPosition) {
         LambdaExpr lambdaExpr = getLambdaExprInStatementInMethodInClass(statementPosition, methodPosition, classPosition);
         for (Parameter parameter : lambdaExpr.getParameters()) {
@@ -152,41 +152,41 @@ public class ParsingSteps {
         }
     }
 
-    @Then("lambda in statement $statementPosition in method $methodPosition in class $classPosition block statement is \"$expectedBody\"")
+    @Then("lambda _in statement $statementPosition _in method $methodPosition _in class $classPosition block statement is \"$expectedBody\"")
     public void thenLambdaInStatementInMethodInClassBlockStatement(int statementPosition, int methodPosition, int classPosition,
-                                                                   String expectedBody) {
+                                                                   string expectedBody) {
         LambdaExpr lambdaExpr = getLambdaExprInStatementInMethodInClass(statementPosition, methodPosition, classPosition);
         BlockStmt blockStmt = lambdaExpr.getBody().asBlockStmt();
         Statement lambdaStmt = blockStmt.getStatement(0);
         assertThat(lambdaStmt.toString(), is(expectedBody));
     }
 
-    @Then("lambda in statement $statementPosition in method $methodPosition in class $classPosition is parent of contained body")
+    @Then("lambda _in statement $statementPosition _in method $methodPosition _in class $classPosition is parent of contained body")
     public void thenLambdaInStatementInMethodInClassIsParentOfContainedBody(int statementPosition, int methodPosition, int classPosition) {
         LambdaExpr lambdaExpr = getLambdaExprInStatementInMethodInClass(statementPosition, methodPosition, classPosition);
         Statement body = lambdaExpr.getBody();
         assertThat(body.getParentNode().get(), is(lambdaExpr));
     }
 
-    @Then("lambda in statement $statementPosition in method $methodPosition in class $classPosition is parent of contained parameter")
+    @Then("lambda _in statement $statementPosition _in method $methodPosition _in class $classPosition is parent of contained parameter")
     public void thenLambdaInStatementInMethodInClassIsParentOfContainedParameter(int statementPosition, int methodPosition, int classPosition) {
         LambdaExpr lambdaExpr = getLambdaExprInStatementInMethodInClass(statementPosition, methodPosition, classPosition);
         Parameter parameter = lambdaExpr.getParameter(0);
         assertThat(parameter.getParentNode().get(), is(lambdaExpr));
     }
 
-    @Then("method reference in statement $statementPosition in method $methodPosition in class $classPosition scope is $expectedName")
+    @Then("method reference _in statement $statementPosition _in method $methodPosition _in class $classPosition scope is $expectedName")
     public void thenMethodReferenceInStatementInMethodInClassIsScope(int statementPosition, int methodPosition,
-                                                                     int classPosition, String expectedName) {
+                                                                     int classPosition, string expectedName) {
         ExpressionStmt statementUnderTest = getStatementInMethodInClass(statementPosition, methodPosition, classPosition).asExpressionStmt();
         assertEquals(1, statementUnderTest.findAll(MethodReferenceExpr.class).size());
         MethodReferenceExpr methodReferenceUnderTest = statementUnderTest.findFirst(MethodReferenceExpr.class).get();
         assertThat(methodReferenceUnderTest.getScope().toString(), is(expectedName));
     }
 
-    @Then("method reference in statement $statementPosition in method $methodPosition in class $classPosition identifier is $expectedName")
+    @Then("method reference _in statement $statementPosition _in method $methodPosition _in class $classPosition identifier is $expectedName")
     public void thenMethodReferenceInStatementInMethodInClassIdentifierIsCompareByAge(int statementPosition, int methodPosition,
-                                                                                      int classPosition, String expectedName) {
+                                                                                      int classPosition, string expectedName) {
         Statement statementUnderTest = getStatementInMethodInClass(statementPosition, methodPosition, classPosition);
         assertEquals(1, statementUnderTest.findAll(MethodReferenceExpr.class).size());
         MethodReferenceExpr methodReferenceUnderTest = statementUnderTest.findFirst(MethodReferenceExpr.class).get();
@@ -232,13 +232,13 @@ public class ParsingSteps {
         assertAllNodesOfTheCompilationUnitHaveTheirParentSet("cu2");
     }
 
-    private void assertAllNodesOfTheCompilationUnitHaveTheirParentSet(String stateKey) {
+    private void assertAllNodesOfTheCompilationUnitHaveTheirParentSet(string stateKey) {
         CompilationUnit compilationUnit = (CompilationUnit) state.get(stateKey);
         ExistenceOfParentNodeVerifier parentVerifier = new ExistenceOfParentNodeVerifier();
         parentVerifier.verify(compilationUnit);
     }
 
-    @Then("ThenExpr in the conditional expression of the statement $statementPosition in method $methodPosition in class $classPosition is LambdaExpr")
+    @Then("ThenExpr _in the conditional expression of the statement $statementPosition _in method $methodPosition _in class $classPosition is LambdaExpr")
     public void thenLambdaInConditionalExpressionInMethodInClassIsParentOfContainedParameter(int statementPosition, int methodPosition, int classPosition) {
         ReturnStmt returnStmt = getStatementInMethodInClass(statementPosition, methodPosition, classPosition).asReturnStmt();
         ConditionalExpr conditionalExpr = (ConditionalExpr) returnStmt.getExpression().orElse(null);
@@ -271,12 +271,12 @@ public class ParsingSteps {
 
     @Then("no errors are reported")
     public void thenNoErrorsAreReported() {
-        // this is present just for readability in the scenario specification
+        // this is present just for readability _in the scenario specification
         // if the code is not parsed then exceptions are thrown before reaching this step
     }
 
     @Then("the package name is $package")
-    public void thenThePackageNameIs(String expected) {
+    public void thenThePackageNameIs(string expected) {
         PackageDeclaration node = (PackageDeclaration) state.get("selectedNode");
         assertEquals(expected, node.getNameAsString());
         assertEquals(expected, node.getName().toString());
@@ -308,9 +308,9 @@ public class ParsingSteps {
         assertEquals(assignExpr.getTarget().asNameExpr().getNameAsString(), "mString");
     }
 
-    private void setSelectedNodeFromCompilationUnit(Class<? extends Node> nodeType) {
+    private void setSelectedNodeFromCompilationUnit(Class<?:Node> nodeType) {
         CompilationUnit compilationUnit = (CompilationUnit) state.get("cu1");
-        List<? extends Node> nodes = compilationUnit.findAll(nodeType);
+        List<?:Node> nodes = compilationUnit.findAll(nodeType);
         if (nodes.size() != 1) {
             throw new RuntimeException(format("Exactly one %s expected", nodeType.getSimpleName()));
         }

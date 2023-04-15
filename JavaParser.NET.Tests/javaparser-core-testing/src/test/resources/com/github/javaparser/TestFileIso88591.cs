@@ -2,6 +2,6 @@ namespace com.github.javaparser;
 
 public class TestFile {
 
-    public String strïng = "Strange attribute name [check the i]";
+    public string strïng = "Strange attribute name [check the i]";
 
 }

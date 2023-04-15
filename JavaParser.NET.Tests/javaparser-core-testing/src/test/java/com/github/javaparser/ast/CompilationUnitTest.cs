@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,7 +25,7 @@ namespace com.github.javaparser.ast;
 
 
 class CompilationUnitTest {
-    @Test
+    [TestMethod]
     void issue578TheFirstCommentIsWithinTheCompilationUnit() {
         CompilationUnit compilationUnit = parse("// This is my class, with my comment\n" +
                 "class A {\n" +
@@ -35,8 +35,8 @@ class CompilationUnitTest {
         assertEquals(1, compilationUnit.getAllContainedComments().size());
     }
 
-    @Test
-    void testGetSourceRoot() throws IOException {
+    [TestMethod]
+    void testGetSourceRoot(){
         Path sourceRoot = mavenModuleRoot(CompilationUnitTest.class).resolve(Paths.get("src", "test", "resources")).normalize();
         Path testFile = sourceRoot.resolve(Paths.get("com", "github", "javaparser", "storage", "Z.java"));
 
@@ -45,7 +45,7 @@ class CompilationUnitTest {
         assertEquals(sourceRoot, sourceRoot1);
     }
 
-    @Test
+    [TestMethod]
     void testGetSourceRootWithBadPackageDeclaration() {
         assertThrows(RuntimeException.class, () -> {
             Path sourceRoot = mavenModuleRoot(CompilationUnitTest.class).resolve(Paths.get("src", "test", "resources")).normalize();
@@ -56,8 +56,8 @@ class CompilationUnitTest {
         
         }
 
-    @Test
-    void testGetSourceRootInDefaultPackage() throws IOException {
+    [TestMethod]
+    void testGetSourceRootInDefaultPackage(){
         Path sourceRoot = mavenModuleRoot(CompilationUnitTest.class).resolve(Paths.get("src", "test", "resources", "com", "github", "javaparser", "storage")).normalize();
         Path testFile = sourceRoot.resolve(Paths.get("B.java"));
 
@@ -66,8 +66,8 @@ class CompilationUnitTest {
         assertEquals(sourceRoot, sourceRoot1);
     }
     
-    @Test
-    void testGetPrimaryTypeName() throws IOException {
+    [TestMethod]
+    void testGetPrimaryTypeName(){
         Path sourceRoot = mavenModuleRoot(CompilationUnitTest.class).resolve(Paths.get("src", "test", "resources")).normalize();
         Path testFile = sourceRoot.resolve(Paths.get("com", "github", "javaparser", "storage", "PrimaryType.java"));
         CompilationUnit cu = parse(testFile);
@@ -75,14 +75,14 @@ class CompilationUnitTest {
         assertEquals("PrimaryType", cu.getPrimaryTypeName().get());
     }
 
-    @Test
+    [TestMethod]
     void testNoPrimaryTypeName() {
         CompilationUnit cu = parse("class PrimaryType{}");
 
         assertFalse(cu.getPrimaryTypeName().isPresent());
     }
-    @Test
-    void testGetPrimaryType() throws IOException {
+    [TestMethod]
+    void testGetPrimaryType(){
         Path sourceRoot = mavenModuleRoot(CompilationUnitTest.class).resolve(Paths.get("src", "test", "resources")).normalize();
         Path testFile = sourceRoot.resolve(Paths.get("com", "github", "javaparser", "storage", "PrimaryType.java"));
         CompilationUnit cu = parse(testFile);
@@ -90,8 +90,8 @@ class CompilationUnitTest {
         assertEquals("PrimaryType",     cu.getPrimaryType().get().getNameAsString());
     }
 
-    @Test
-    void testNoPrimaryType() throws IOException {
+    [TestMethod]
+    void testNoPrimaryType(){
         Path sourceRoot = mavenModuleRoot(CompilationUnitTest.class).resolve(Paths.get("src", "test", "resources")).normalize();
         Path testFile = sourceRoot.resolve(Paths.get("com", "github", "javaparser", "storage", "PrimaryType2.java"));
         CompilationUnit cu = parse(testFile);

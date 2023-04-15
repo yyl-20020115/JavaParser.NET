@@ -1,6 +1,6 @@
 namespace main;
 
-public class Child extends Parent {
+public class Child:Parent {
 
     void method() {
     }

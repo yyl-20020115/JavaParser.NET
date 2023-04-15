@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,9 +25,9 @@ namespace com.github.javaparser.symbolsolver.cache;
 
 class NoCacheTest {
 
-    private final NoCache<Object, Object> cache = new NoCache<>();
+    private /*final*/NoCache<Object, Object> cache = new NoCache<>();
 
-    @Test
+    [TestMethod]
     void create_ShouldCreateDifferentCache() {
         NoCache<Object, Object> firstCache = NoCache.create();
         assertNotNull(firstCache);
@@ -37,43 +37,43 @@ class NoCacheTest {
         assertNotEquals(firstCache, secondCache);
     }
 
-    @Test
+    [TestMethod]
     void put_shouldNotRegisterTheKey() {
         assertEquals(0, cache.size());
         cache.put("key", "value");
         assertEquals(0, cache.size());
     }
 
-    @Test
+    [TestMethod]
     void get_ShouldNotBePresent() {
         assertFalse(cache.get("key").isPresent());
     }
 
-    @Test
+    [TestMethod]
     void remove_ShouldDoNothing() {
         assertEquals(0, cache.size());
         cache.remove("key");
         assertEquals(0, cache.size());
     }
 
-    @Test
+    [TestMethod]
     void removeAll_ShouldDoNothing() {
         assertEquals(0, cache.size());
         cache.removeAll();
         assertEquals(0, cache.size());
     }
 
-    @Test
+    [TestMethod]
     void contains_ShouldNotContainsKey() {
         assertFalse(cache.contains("key"));
     }
 
-    @Test
+    [TestMethod]
     void size_ShouldHaveSizeOfZero() {
         assertEquals(0, cache.size());
     }
 
-    @Test
+    [TestMethod]
     void isEmpty_ShouldAlwaysBeTrue() {
         assertTrue(cache.isEmpty());
     }

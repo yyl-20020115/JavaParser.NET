@@ -8,9 +8,9 @@ public class Complex {
         imaginary = _imaginary;
     }
 
-    Complex(String eval) {
+    Complex(string eval) {
         Complex result = new Complex(0,0);
-        System.out.println(result.getReal()+","+result.getImaginary());
+        System._out.println(result.getReal()+","+result.getImaginary());
     }
 
     public Complex add(Complex arg) {

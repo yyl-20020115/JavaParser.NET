@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -33,7 +33,7 @@ namespace com.github.javaparser.ast.expr;
  *
  * @author Julio Vilmar Gesser
  */
-public class AssignExpr extends Expression {
+public class AssignExpr:Expression {
 
     public enum Operator implements Stringable {
 
@@ -50,13 +50,13 @@ public class AssignExpr extends Expression {
         SIGNED_RIGHT_SHIFT(">>="),
         UNSIGNED_RIGHT_SHIFT(">>>=");
 
-        private final String codeRepresentation;
+        private /*final*/string codeRepresentation;
 
-        Operator(String codeRepresentation) {
+        Operator(string codeRepresentation) {
             this.codeRepresentation = codeRepresentation;
         }
 
-        public String asString() {
+        public string asString() {
             return codeRepresentation;
         }
 
@@ -100,7 +100,7 @@ public class AssignExpr extends Expression {
         this(null, new NameExpr(), new StringLiteralExpr(), Operator.ASSIGN);
     }
 
-    @AllFieldsConstructor
+    //@AllFieldsConstructor
     public AssignExpr(Expression target, Expression value, Operator operator) {
         this(null, target, value, operator);
     }
@@ -108,7 +108,7 @@ public class AssignExpr extends Expression {
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public AssignExpr(TokenRange tokenRange, Expression target, Expression value, Operator operator) {
         super(tokenRange);
         setTarget(target);
@@ -118,34 +118,34 @@ public class AssignExpr extends Expression {
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Operator getOperator() {
         return operator;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Expression getTarget() {
         return target;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Expression getValue() {
         return value;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public AssignExpr setOperator(final Operator operator) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public AssignExpr setOperator(/*final*/Operator operator) {
         assertNotNull(operator);
         if (operator == this.operator) {
             return this;
@@ -155,8 +155,8 @@ public class AssignExpr extends Expression {
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public AssignExpr setTarget(final Expression target) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public AssignExpr setTarget(/*final*/Expression target) {
         assertNotNull(target);
         if (target == this.target) {
             return this;
@@ -169,8 +169,8 @@ public class AssignExpr extends Expression {
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public AssignExpr setValue(final Expression value) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public AssignExpr setValue(/*final*/Expression value) {
         assertNotNull(value);
         if (value == this.value) {
             return this;
@@ -184,19 +184,19 @@ public class AssignExpr extends Expression {
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public AssignExpr clone() {
         return (AssignExpr) accept(new CloneVisitor(), null);
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public AssignExprMetaModel getMetaModel() {
         return JavaParserMetaModel.assignExprMetaModel;
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
@@ -213,25 +213,25 @@ public class AssignExpr extends Expression {
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public bool isAssignExpr() {
         return true;
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public AssignExpr asAssignExpr() {
         return this;
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifAssignExpr(Consumer<AssignExpr> action) {
         action.accept(this);
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<AssignExpr> toAssignExpr() {
         return Optional.of(this);
     }

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,14 +23,14 @@ namespace com.github.javaparser.javadoc.description;
 /**
  * A piece of text inside a Javadoc description.
  * <p>
- * For example in <code>A class totally unrelated to {@link String}, I swear!</code> we would have two snippets: one
+ * For example _in <code>A class totally unrelated to {@link String}, I swear!</code> we would have two snippets: one
  * before and one after the inline tag (<code>{@link String}</code>).
  */
 public class JavadocSnippet implements JavadocDescriptionElement {
 
-    private String text;
+    private string text;
 
-    public JavadocSnippet(String text) {
+    public JavadocSnippet(string text) {
         if (text == null) {
             throw new NullPointerException();
         }
@@ -38,7 +38,7 @@ public class JavadocSnippet implements JavadocDescriptionElement {
     }
 
     @Override
-    public String toText() {
+    public string toText() {
         return this.text;
     }
 
@@ -58,7 +58,7 @@ public class JavadocSnippet implements JavadocDescriptionElement {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "JavadocSnippet{" + "text='" + text + '\'' + '}';
     }
 }

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,9 +26,9 @@ namespace com.github.javaparser;
  * Factory for providers of source code for JavaParser. Providers that have no parameter for encoding but need it will
  * use UTF-8.
  */
-public final class Providers {
+public /*final*/class Providers {
 
-    public static final Charset UTF8 = Charset.forName("utf-8");
+    public static /*final*/Charset UTF8 = Charset.forName("utf-8");
 
     private Providers() {
     }
@@ -61,23 +61,23 @@ public final class Providers {
         return provider(assertNotNull(file), UTF8);
     }
 
-    public static Provider provider(Path path, Charset encoding) throws IOException {
+    public static Provider provider(Path path, Charset encoding){
         return provider(Files.newInputStream(assertNotNull(path)), assertNotNull(encoding));
     }
 
-    public static Provider provider(Path path) throws IOException {
+    public static Provider provider(Path path){
         return provider(assertNotNull(path), UTF8);
     }
 
-    public static Provider provider(String source) {
+    public static Provider provider(string source) {
         return new StringProvider(assertNotNull(source));
     }
 
     /**
-     * Provide a Provider from the resource found in class loader with the provided encoding.<br> As resource is
-     * accessed through a class loader, a leading "/" is not allowed in pathToResource
+     * Provide a Provider from the resource found _in class loader with the provided encoding.<br> As resource is
+     * accessed through a class loader, a leading "/" is not allowed _in pathToResource
      */
-    public static Provider resourceProvider(ClassLoader classLoader, String pathToResource, Charset encoding) throws IOException {
+    public static Provider resourceProvider(ClassLoader classLoader, string pathToResource, Charset encoding){
         InputStream resourceAsStream = classLoader.getResourceAsStream(pathToResource);
         if (resourceAsStream == null) {
             throw new IOException("Cannot find " + pathToResource);
@@ -86,19 +86,19 @@ public final class Providers {
     }
 
     /**
-     * Provide a Provider from the resource found in the current class loader with the provided encoding.<br> As
-     * resource is accessed through a class loader, a leading "/" is not allowed in pathToResource
+     * Provide a Provider from the resource found _in the current class loader with the provided encoding.<br> As
+     * resource is accessed through a class loader, a leading "/" is not allowed _in pathToResource
      */
-    public static Provider resourceProvider(String pathToResource, Charset encoding) throws IOException {
+    public static Provider resourceProvider(string pathToResource, Charset encoding){
         ClassLoader classLoader = Provider.class.getClassLoader();
         return resourceProvider(classLoader, pathToResource, encoding);
     }
 
     /**
-     * Provide a Provider from the resource found in the current class loader with UTF-8 encoding.<br> As resource is
-     * accessed through a class loader, a leading "/" is not allowed in pathToResource
+     * Provide a Provider from the resource found _in the current class loader with UTF-8 encoding.<br> As resource is
+     * accessed through a class loader, a leading "/" is not allowed _in pathToResource
      */
-    public static Provider resourceProvider(String pathToResource) throws IOException {
+    public static Provider resourceProvider(string pathToResource){
         return resourceProvider(pathToResource, UTF8);
     }
 }

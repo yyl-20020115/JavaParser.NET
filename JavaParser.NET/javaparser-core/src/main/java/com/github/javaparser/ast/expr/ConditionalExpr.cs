@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -29,7 +29,7 @@ namespace com.github.javaparser.ast.expr;
  *
  * @author Julio Vilmar Gesser
  */
-public class ConditionalExpr extends Expression implements NodeWithCondition<ConditionalExpr> {
+public class ConditionalExpr:Expression implements NodeWithCondition<ConditionalExpr> {
 
     private Expression condition;
 
@@ -41,7 +41,7 @@ public class ConditionalExpr extends Expression implements NodeWithCondition<Con
         this(null, new BooleanLiteralExpr(), new StringLiteralExpr(), new StringLiteralExpr());
     }
 
-    @AllFieldsConstructor
+    //@AllFieldsConstructor
     public ConditionalExpr(Expression condition, Expression thenExpr, Expression elseExpr) {
         this(null, condition, thenExpr, elseExpr);
     }
@@ -49,7 +49,7 @@ public class ConditionalExpr extends Expression implements NodeWithCondition<Con
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public ConditionalExpr(TokenRange tokenRange, Expression condition, Expression thenExpr, Expression elseExpr) {
         super(tokenRange);
         setCondition(condition);
@@ -59,34 +59,34 @@ public class ConditionalExpr extends Expression implements NodeWithCondition<Con
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Expression getCondition() {
         return condition;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Expression getElseExpr() {
         return elseExpr;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Expression getThenExpr() {
         return thenExpr;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public ConditionalExpr setCondition(final Expression condition) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public ConditionalExpr setCondition(/*final*/Expression condition) {
         assertNotNull(condition);
         if (condition == this.condition) {
             return this;
@@ -99,8 +99,8 @@ public class ConditionalExpr extends Expression implements NodeWithCondition<Con
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public ConditionalExpr setElseExpr(final Expression elseExpr) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public ConditionalExpr setElseExpr(/*final*/Expression elseExpr) {
         assertNotNull(elseExpr);
         if (elseExpr == this.elseExpr) {
             return this;
@@ -113,8 +113,8 @@ public class ConditionalExpr extends Expression implements NodeWithCondition<Con
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public ConditionalExpr setThenExpr(final Expression thenExpr) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public ConditionalExpr setThenExpr(/*final*/Expression thenExpr) {
         assertNotNull(thenExpr);
         if (thenExpr == this.thenExpr) {
             return this;
@@ -128,19 +128,19 @@ public class ConditionalExpr extends Expression implements NodeWithCondition<Con
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public ConditionalExpr clone() {
         return (ConditionalExpr) accept(new CloneVisitor(), null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public ConditionalExprMetaModel getMetaModel() {
         return JavaParserMetaModel.conditionalExprMetaModel;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public boolean replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
@@ -161,31 +161,31 @@ public class ConditionalExpr extends Expression implements NodeWithCondition<Con
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isConditionalExpr() {
         return true;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public ConditionalExpr asConditionalExpr() {
         return this;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifConditionalExpr(Consumer<ConditionalExpr> action) {
         action.accept(this);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<ConditionalExpr> toConditionalExpr() {
         return Optional.of(this);
     }
 
     /*
-     * A reference conditional expression is a poly expression if it appears in an assignment context or an invocation context (§5.2. §5.3).
+     * A reference conditional expression is a poly expression if it appears _in an assignment context or an invocation context (§5.2. §5.3).
      * Otherwise, it is a standalone expression.
      */
     @Override

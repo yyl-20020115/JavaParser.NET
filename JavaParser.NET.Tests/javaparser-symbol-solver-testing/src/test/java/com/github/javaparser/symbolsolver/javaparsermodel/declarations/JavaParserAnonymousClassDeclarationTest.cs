@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,9 +23,9 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.declarations;
 
 
 
-class JavaParserAnonymousClassDeclarationTest extends AbstractResolutionTest {
+class JavaParserAnonymousClassDeclarationTest:AbstractResolutionTest {
 
-  @Test
+  [TestMethod]
   void anonymousClassAsMethodArgument() {
     CompilationUnit cu = parseSample("AnonymousClassDeclarations");
     ClassOrInterfaceDeclaration aClass = Navigator.demandClass(cu, "AnonymousClassDeclarations");
@@ -43,7 +43,7 @@ class JavaParserAnonymousClassDeclarationTest extends AbstractResolutionTest {
                is("AnonymousClassDeclarations.ParDo.of(AnonymousClassDeclarations.DoFn<java.lang.Integer, java.lang.Long>)"));
   }
 
-  @Test
+  [TestMethod]
   void callingSuperClassInnerClassMethod() {
     CompilationUnit cu = parseSample("AnonymousClassDeclarations");
     ClassOrInterfaceDeclaration aClass = Navigator.demandClass(cu, "AnonymousClassDeclarations");
@@ -59,7 +59,7 @@ class JavaParserAnonymousClassDeclarationTest extends AbstractResolutionTest {
                is("AnonymousClassDeclarations.DoFn.ProcessContext.innerClassMethod()"));
   }
 
-  @Test
+  [TestMethod]
   void callingAnonymousClassInnerMethod() {
     CompilationUnit cu = parseSample("AnonymousClassDeclarations");
     ClassOrInterfaceDeclaration aClass = Navigator.demandClass(cu, "AnonymousClassDeclarations");
@@ -76,7 +76,7 @@ class JavaParserAnonymousClassDeclarationTest extends AbstractResolutionTest {
     assertTrue(methodUsage.getQualifiedSignature().endsWith("callAnnonClassInnerMethod()"));
   }
 
-  @Test
+  [TestMethod]
   void usingAnonymousSuperClassInnerType() {
     CompilationUnit cu = parseSample("AnonymousClassDeclarations");
     ClassOrInterfaceDeclaration aClass = Navigator.demandClass(cu, "AnonymousClassDeclarations");
@@ -91,7 +91,7 @@ class JavaParserAnonymousClassDeclarationTest extends AbstractResolutionTest {
     assertThat(methodUsage.getQualifiedSignature(), is("java.lang.Enum.toString()"));
   }
 
-  @Test
+  [TestMethod]
   void usingAnonymousClassInnerType() {
     CompilationUnit cu = parseSample("AnonymousClassDeclarations");
     ClassOrInterfaceDeclaration aClass = Navigator.demandClass(cu, "AnonymousClassDeclarations");
@@ -106,7 +106,7 @@ class JavaParserAnonymousClassDeclarationTest extends AbstractResolutionTest {
     assertThat(methodUsage.getQualifiedSignature(), is("java.lang.Enum.toString()"));
   }
 
-  @Test
+  [TestMethod]
   void callingScopedAnonymousClassInnerMethod() {
     CompilationUnit cu = parseSample("AnonymousClassDeclarations");
     ClassOrInterfaceDeclaration aClass = Navigator.demandClass(cu, "AnonymousClassDeclarations");

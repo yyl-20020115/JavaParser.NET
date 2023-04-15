@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,9 +23,9 @@ namespace com.github.javaparser.symbolsolver;
 
 
 
-class JavaSymbolSolverTest extends AbstractResolutionTest {
+class JavaSymbolSolverTest:AbstractResolutionTest {
 
-    @Test
+    [TestMethod]
     void resolveMethodDeclaration() {
         CompilationUnit cu = parseSample("SymbolResolverExample", new ReflectionTypeSolver());
 
@@ -37,7 +37,7 @@ class JavaSymbolSolverTest extends AbstractResolutionTest {
         assertEquals("int[]", resolvedMethodDeclaration.getParam(1).getType().describe());
     }
 
-    @Test
+    [TestMethod]
     void resolveMethodReferenceExpr() {
         JavaParser parser = createParserWithResolver(new ReflectionTypeSolver());
         MethodReferenceExpr methodRef = parser.parse("import java.util.function.Function; class X{void x(){Function<Object, Integer>r=Object::hashCode;}}")
@@ -49,7 +49,7 @@ class JavaSymbolSolverTest extends AbstractResolutionTest {
         assertEquals(0, resolvedMethodRef.getNumberOfParams());
     }
 
-    @Test
+    [TestMethod]
     void resolveArrayType() {
         CompilationUnit cu = parseSample("SymbolResolverExample", new ReflectionTypeSolver());
 

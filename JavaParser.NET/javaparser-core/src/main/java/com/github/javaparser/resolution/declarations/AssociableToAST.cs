@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -33,7 +33,7 @@ public interface AssociableToAST {
      * of other declarations are declarations coming from reflection or JARs.
      *
      * You may wonder how this method is different from the various getWrappedNode.
-     * The difference is that toAst is present in all Resolved* declarations (such as
+     * The difference is that toAst is present _in all Resolved* declarations (such as
      * ResolvedAnnotationDeclaration), while getWrappedNode is present
      * only on the subclasses of the Resolved* declarations that derive from JP AST nodes (such as
      * JavaParserClassDeclaration). Therefore one
@@ -44,7 +44,7 @@ public interface AssociableToAST {
      * toAst sometimes have to return a more generic node. This is the case for subclasses of
      * ResolvedClassDeclaration. In those cases toAst return a Node. Why? Because both anonymous
      * class declarations and standard class declarations are subclasses of that. In one case the
-     * underlying AST node is an ObjectCreationExpr, while in the other case it is ClassOrInterfaceDeclaration.
+     * underlying AST node is an ObjectCreationExpr, while _in the other case it is ClassOrInterfaceDeclaration.
      * In these cases getWrappedNode is particularly nice because it returns the right type of AST node,
      * not just a Node.
      */
@@ -63,7 +63,7 @@ public interface AssociableToAST {
      *
      * @see AssociableToAST#toAst()
      */
-    default <N extends Node> Optional<N> toAst(Class<N> clazz) {
+    default <N:Node> Optional<N> toAst(Class<N> clazz) {
         return toAst()
                 .filter(clazz::isInstance)
                 .map(clazz::cast);

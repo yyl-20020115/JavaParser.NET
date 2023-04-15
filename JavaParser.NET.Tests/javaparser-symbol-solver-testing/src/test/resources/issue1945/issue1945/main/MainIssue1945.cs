@@ -3,7 +3,7 @@ namespace issue1945.main;
 
 public class MainIssue1945 {
 	
-	private final HairyAnimal sheep = new Sheep();
+	private /*final*/HairyAnimal sheep = new Sheep();
 	
 	public void chokes() {
 		sheep.getHairType().getRenderer().renderHair(sheep.getHairType(), sheep);

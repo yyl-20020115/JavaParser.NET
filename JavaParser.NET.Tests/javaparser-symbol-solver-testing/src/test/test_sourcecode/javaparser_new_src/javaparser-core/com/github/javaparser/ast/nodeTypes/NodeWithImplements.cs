@@ -10,11 +10,11 @@ public interface NodeWithImplements<T> {
     /**
      * Add an implements to this
      * 
-     * @param name the name of the type to extends from
+     * @param name the name of the type to:from
      * @return this
      */
-    @SuppressWarnings("unchecked")
-    public default T addImplements(String name) {
+    //@SuppressWarnings("unchecked")
+    public default T addImplements(string name) {
         ClassOrInterfaceType classOrInterfaceType = new ClassOrInterfaceType(name);
         getImplements().add(classOrInterfaceType);
         classOrInterfaceType.setParentNode((Node) this);

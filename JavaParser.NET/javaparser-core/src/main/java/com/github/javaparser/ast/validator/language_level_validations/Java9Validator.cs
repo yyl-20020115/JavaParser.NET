@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,13 +26,13 @@ namespace com.github.javaparser.ast.validator.language_level_validations;
  *
  * @see <a href="https://openjdk.java.net/projects/jdk9/">https://openjdk.java.net/projects/jdk9/</a>
  */
-public class Java9Validator extends Java8Validator {
+public class Java9Validator:Java8Validator {
 
-    final Validator underscoreKeywordValidator = new UnderscoreKeywordValidator();
+    /*final*/Validator underscoreKeywordValidator = new UnderscoreKeywordValidator();
 
-    final Validator modifiers = new ModifierValidator(true, true, true);
+    /*final*/Validator modifiers = new ModifierValidator(true, true, true);
 
-    final SingleNodeTypeValidator<TryStmt> tryWithResources = new SingleNodeTypeValidator<>(TryStmt.class, (n, reporter) -> {
+    /*final*/SingleNodeTypeValidator<TryStmt> tryWithResources = new SingleNodeTypeValidator<>(TryStmt.class, (n, reporter) -> {
         if (n.getCatchClauses().isEmpty() && n.getResources().isEmpty() && !n.getFinallyBlock().isPresent()) {
             reporter.report(n, "Try has no finally, no catch, and no resources.");
         }
@@ -42,7 +42,7 @@ public class Java9Validator extends Java8Validator {
         super();
         // Released Language Features
         /*
-         * Note there is no validator that validates that "var" is not used in Java 9 and lower, since
+         * Note there is no validator that validates that "var" is not used _in Java 9 and lower, since
          * the parser will never create a VarType node (that is done by the Java 10 post-processor).
          * You can add the node by hand, but that is obscure enough to ignore.
          */

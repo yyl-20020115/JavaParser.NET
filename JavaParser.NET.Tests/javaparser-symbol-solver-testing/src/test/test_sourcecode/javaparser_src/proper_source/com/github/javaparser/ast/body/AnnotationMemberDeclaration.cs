@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,27 +26,27 @@ namespace com.github.javaparser.ast.body;
 /**
  * @author Julio Vilmar Gesser
  */
-public final class AnnotationMemberDeclaration extends BodyDeclaration implements DocumentableNode, NamedNode {
+public /*final*/class AnnotationMemberDeclaration:BodyDeclaration implements DocumentableNode, NamedNode {
 
     private int modifiers;
 
     private Type type;
 
-    private String name;
+    private string name;
 
     private Expression defaultValue;
 
     public AnnotationMemberDeclaration() {
     }
 
-    public AnnotationMemberDeclaration(int modifiers, Type type, String name, Expression defaultValue) {
+    public AnnotationMemberDeclaration(int modifiers, Type type, string name, Expression defaultValue) {
         setModifiers(modifiers);
         setType(type);
         setName(name);
         setDefaultValue(defaultValue);
     }
 
-    public AnnotationMemberDeclaration(int modifiers, List<AnnotationExpr> annotations, Type type, String name, Expression defaultValue) {
+    public AnnotationMemberDeclaration(int modifiers, List<AnnotationExpr> annotations, Type type, string name, Expression defaultValue) {
         super(annotations);
         setModifiers(modifiers);
         setType(type);
@@ -54,7 +54,7 @@ public final class AnnotationMemberDeclaration extends BodyDeclaration implement
         setDefaultValue(defaultValue);
     }
 
-    public AnnotationMemberDeclaration(int beginLine, int beginColumn, int endLine, int endColumn, int modifiers, List<AnnotationExpr> annotations, Type type, String name, Expression defaultValue) {
+    public AnnotationMemberDeclaration(int beginLine, int beginColumn, int endLine, int endColumn, int modifiers, List<AnnotationExpr> annotations, Type type, string name, Expression defaultValue) {
         super(beginLine, beginColumn, endLine, endColumn, annotations);
         setModifiers(modifiers);
         setType(type);
@@ -86,7 +86,7 @@ public final class AnnotationMemberDeclaration extends BodyDeclaration implement
         return modifiers;
     }
 
-    public String getName() {
+    public string getName() {
         return name;
     }
 
@@ -103,7 +103,7 @@ public final class AnnotationMemberDeclaration extends BodyDeclaration implement
         this.modifiers = modifiers;
     }
 
-    public void setName(String name) {
+    public void setName(string name) {
         this.name = name;
     }
 

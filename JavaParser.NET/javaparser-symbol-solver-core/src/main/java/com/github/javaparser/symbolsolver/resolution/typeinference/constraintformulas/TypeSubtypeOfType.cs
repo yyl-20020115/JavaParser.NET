@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,7 +28,7 @@ namespace com.github.javaparser.symbolsolver.resolution.typeinference.constraint
  *
  * @author Federico Tomassetti
  */
-public class TypeSubtypeOfType extends ConstraintFormula {
+public class TypeSubtypeOfType:ConstraintFormula {
     private ResolvedType S;
     private ResolvedType T;
     private TypeSolver typeSolver;
@@ -55,13 +55,13 @@ public class TypeSubtypeOfType extends ConstraintFormula {
 
         // - Otherwise, if S is the null type, the constraint reduces to true.
 
-        if (S instanceof NullType) {
+        if (S is NullType) {
             return ReductionResult.trueResult();
         }
 
         // - Otherwise, if T is the null type, the constraint reduces to false.
 
-        if (T instanceof NullType) {
+        if (T is NullType) {
             return ReductionResult.falseResult();
         }
 
@@ -101,7 +101,7 @@ public class TypeSubtypeOfType extends ConstraintFormula {
 
             //     - If S is an intersection type of which T is an element, the constraint reduces to true.
 
-            if (S instanceof ResolvedIntersectionType) {
+            if (S is ResolvedIntersectionType) {
                 throw new UnsupportedOperationException();
             }
 
@@ -142,7 +142,7 @@ public class TypeSubtypeOfType extends ConstraintFormula {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "TypeSubtypeOfType{" +
                 "S=" + S +
                 ", T=" + T +

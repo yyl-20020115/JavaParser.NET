@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -30,7 +30,7 @@ public class RecordDeclarationTest {
         @ParameterizedTest
         @EnumSource(value = ParserConfiguration.LanguageLevel.class, names = {"JAVA_13", "JAVA_13_PREVIEW", "JAVA_14", "JAVA_15"})
         void basicGrammarCompiles_languageLevelValidation_forbidden(ParserConfiguration.LanguageLevel languageLevel) {
-            String s = "record Point(int x, int y) { }";
+            string s = "record Point(int x, int y) { }";
             assertThrows(AssertionFailedError.class, () -> {
                 CompilationUnit cu = TestParser.parseCompilationUnit(languageLevel, s);
             });
@@ -39,14 +39,14 @@ public class RecordDeclarationTest {
         @ParameterizedTest
         @EnumSource(value = ParserConfiguration.LanguageLevel.class, names = {"JAVA_14_PREVIEW", "JAVA_15_PREVIEW", "JAVA_16", "JAVA_16_PREVIEW"})
         void basicGrammarCompiles_languageLevelValidation_permitted(ParserConfiguration.LanguageLevel languageLevel) {
-            String s = "record Point(int x, int y) { }";
+            string s = "record Point(int x, int y) { }";
             CompilationUnit cu = TestParser.parseCompilationUnit(languageLevel, s);
         }
 
         @ParameterizedTest
         @EnumSource(value = ParserConfiguration.LanguageLevel.class, names = {"JAVA_14_PREVIEW", "JAVA_15_PREVIEW", "JAVA_16", "JAVA_16_PREVIEW"})
         void languageLevelValidation_recordAsTypeIdentifier_permitted(ParserConfiguration.LanguageLevel languageLevel) {
-            String s = "class record {}";
+            string s = "class record {}";
             assertThrows(AssertionFailedError.class, () -> {
                 CompilationUnit cu = TestParser.parseCompilationUnit(languageLevel, s);
             });
@@ -55,7 +55,7 @@ public class RecordDeclarationTest {
         @ParameterizedTest
         @EnumSource(value = ParserConfiguration.LanguageLevel.class, names = {"JAVA_13", "JAVA_13_PREVIEW", "JAVA_14", "JAVA_15"})
         void languageLevelValidation_recordAsTypeIdentifier_forbidden(ParserConfiguration.LanguageLevel languageLevel) {
-            String s = "class record {}";
+            string s = "class record {}";
             CompilationUnit cu = TestParser.parseCompilationUnit(languageLevel, s);
         }
     }
@@ -63,18 +63,18 @@ public class RecordDeclarationTest {
     /**
      * https://openjdk.java.net/jeps/395#Description
      */
-    @Test
+    [TestMethod]
     void basicGrammarCompiles() {
-        String s = "record Point(int x, int y) { }";
+        string s = "record Point(int x, int y) { }";
         assertOneRecordDeclaration(TestParser.parseCompilationUnit(s));
     }
 
     /**
      * https://openjdk.java.net/jeps/395#Description
      */
-    @Test
+    [TestMethod]
     void basicGrammar() {
-        String s = "record Point(int x, int y) { }";
+        string s = "record Point(int x, int y) { }";
         CompilationUnit cu = TestParser.parseCompilationUnit(s);
         assertOneRecordDeclaration(cu);
 
@@ -103,26 +103,26 @@ public class RecordDeclarationTest {
     /**
      * https://openjdk.java.net/jeps/395#Description
      */
-    @Test
+    [TestMethod]
     void basicRecordPrints() {
-        String s = "record Point(int x, int y) { }";
+        string s = "record Point(int x, int y) { }";
         CompilationUnit cu = TestParser.parseCompilationUnit(s);
         assertOneRecordDeclaration(cu);
 
-        String expected = "" +
+        string expected = "" +
                 "record Point(int x, int y) {\n" +
                 "}\n" +
                 "";
         assertEqualsStringIgnoringEol(expected, cu.toString());
     }
 
-    @Test
+    [TestMethod]
     void genericRecordPrints() {
-        String s = "record Point<X,Y>(X x, Y y) { }";
+        string s = "record Point<X,Y>(X x, Y y) { }";
         CompilationUnit cu = TestParser.parseCompilationUnit(s);
         assertOneRecordDeclaration(cu);
 
-        String expected = "" +
+        string expected = "" +
                 "record Point<X, Y>(X x, Y y) {\n" +
                 "}\n" +
                 "";
@@ -132,27 +132,27 @@ public class RecordDeclarationTest {
     /**
      * https://openjdk.java.net/jeps/395#Restrictions-on-record
      */
-    @Test
+    [TestMethod]
     void record_cannotExtend() {
-        String s = "record Point(int x, int y) extends OtherThing { }";
+        string s = "record Point(int x, int y):OtherThing { }";
         assertCompilationFails(s);
     }
 
     /**
      * https://openjdk.java.net/jeps/395#Restrictions-on-records
      */
-    @Test
+    [TestMethod]
     void record_cannotBeAbstract() {
-        String s = "abstract record Point(int x, int y) { }";
+        string s = "abstract record Point(int x, int y) { }";
         assertCompilationFails(s);
     }
 
     /**
      * https://openjdk.java.net/jeps/395#Restrictions-on-records
      */
-    @Test
+    [TestMethod]
     void record_mayImplementInterfaces() {
-        String s = "record Point(int x, int y) implements OtherInterface { }";
+        string s = "record Point(int x, int y) implements OtherInterface { }";
         CompilationUnit cu = TestParser.parseCompilationUnit(s);
 
         assertOneRecordDeclaration(cu);
@@ -161,17 +161,17 @@ public class RecordDeclarationTest {
     /**
      * https://openjdk.java.net/jeps/395#Restrictions-on-records
      */
-    @Test
+    [TestMethod]
     void record_mayBeStatic() {
-        String s = "static record Point(int x, int y) { }";
+        string s = "static record Point(int x, int y) { }";
         CompilationUnit cu = TestParser.parseCompilationUnit(s);
 
         assertOneRecordDeclaration(cu);
     }
 
-    @Test
+    [TestMethod]
     void recordWithVarArgs() {
-        String s = "record R(T1 c1, Tn... cn){ }";
+        string s = "record R(T1 c1, Tn... cn){ }";
         CompilationUnit cu = TestParser.parseCompilationUnit(s);
 
         List<RecordDeclaration> recordDeclarations = cu.findAll(RecordDeclaration.class);
@@ -192,9 +192,9 @@ public class RecordDeclarationTest {
         assertTrue(parameter1.isVarArgs());
     }
 
-    @Test
+    [TestMethod]
     void recordWithAnnotationedParameters() {
-        String s = "record Card(@MyAnno Rank rank, @MyAnno Suit suit) { }";
+        string s = "record Card(@MyAnno Rank rank, @MyAnno Suit suit) { }";
         CompilationUnit cu = TestParser.parseCompilationUnit(s);
 
         List<RecordDeclaration> recordDeclarations = cu.findAll(RecordDeclaration.class);
@@ -217,9 +217,9 @@ public class RecordDeclarationTest {
         assertEquals(0, recordDeclaration.getMembers().size());
     }
 
-    @Test
+    [TestMethod]
     void record_emptyMembers() {
-        String s = "record Point(int x, int y) { }";
+        string s = "record Point(int x, int y) { }";
         CompilationUnit cu = TestParser.parseCompilationUnit(s);
         assertOneRecordDeclaration(cu);
 
@@ -229,9 +229,9 @@ public class RecordDeclarationTest {
         assertEquals(0, recordDeclaration.getMembers().size());
     }
 
-    @Test
+    [TestMethod]
     void record_permitStaticMethods() {
-        String s = "" +
+        string s = "" +
                 "record ABC(int x, int y) {\n" +
                 "\n" +
                 "    static public int abc() {\n" +
@@ -244,16 +244,16 @@ public class RecordDeclarationTest {
         assertOneRecordDeclaration(cu);
     }
 
-    @Test
+    [TestMethod]
     void record_permitMethods() {
-        String s = "" +
+        string s = "" +
                 "record ABC(int x, int y) {\n" +
                 "\n" +
                 "    public int x() {\n" +
                 "        return x;\n" +
                 "    }\n" +
                 "\n" +
-                "    public String xyz() {\n" +
+                "    public string xyz() {\n" +
                 "        return \"10\";\n" +
                 "    }\n" +
                 "\n" +
@@ -263,42 +263,42 @@ public class RecordDeclarationTest {
         assertOneRecordDeclaration(cu);
     }
 
-    @Test
+    [TestMethod]
     void record_forbidNonStaticFields() {
-        String s = "record Point(int x, int y) { int z; }";
+        string s = "record Point(int x, int y) { int z; }";
         assertCompilationFails(s);
     }
 
-    @Test
+    [TestMethod]
     void record_permitStaticFields() {
-        String s = "record Point(int x, int y) { static int z; }";
+        string s = "record Point(int x, int y) { static int z; }";
         CompilationUnit cu = TestParser.parseCompilationUnit(s);
         assertOneRecordDeclaration(cu);
     }
 
-    @Test
+    [TestMethod]
     void record_permitPublicStaticFieldInRecord1() {
-        String s = "public final record RecordPublicField() {" +
-                   "  public static final Object EMPTY = new Object();" +
+        string s = "public /*final*/record RecordPublicField() {" +
+                   "  public static /*final*/Object EMPTY = new Object();" +
                    "}\n";
         CompilationUnit cu = TestParser.parseCompilationUnit(s);
         assertOneRecordDeclaration(cu);
     }
 
-    @Test
+    [TestMethod]
     void record_permitPublicStaticFieldInNestedRecord() {
-        String s = "public final record RecordTopLevel(Object member) {\n" +
+        string s = "public /*final*/record RecordTopLevel(Object member) {\n" +
                    "    private static record RecordNested() {\n" +
-                   "        public static final RecordNested EMPTY = new RecordNested();\n" +
+                   "        public static /*final*/RecordNested EMPTY = new RecordNested();\n" +
                    "    }\n" +
                    "}\n";
         CompilationUnit cu = TestParser.parseCompilationUnit(s);
         assertTwoRecordDeclarations(cu);
     }
 
-    @Test
+    [TestMethod]
     void record_permitStaticFields2() {
-        String s = "" +
+        string s = "" +
                 "record ABC(int x, int y) {\n" +
                 "\n" +
                 "    static int z;\n" +
@@ -320,9 +320,9 @@ public class RecordDeclarationTest {
     /**
      * https://openjdk.java.net/jeps/395#Restrictions-on-records
      */
-    @Test
+    [TestMethod]
     void record_isImplicitlyFinal() {
-        String s = "record Point(int x, int y) { static int z; }";
+        string s = "record Point(int x, int y) { static int z; }";
         CompilationUnit cu = TestParser.parseCompilationUnit(s);
         assertOneRecordDeclaration(cu);
 
@@ -334,9 +334,9 @@ public class RecordDeclarationTest {
     /**
      * https://openjdk.java.net/jeps/395#Restrictions-on-records
      */
-    @Test
+    [TestMethod]
     void record_isImplicitlyFinalWithoutExplicit() {
-        String s = "record Point(int x, int y) { static int z; }";
+        string s = "record Point(int x, int y) { static int z; }";
         CompilationUnit cu = TestParser.parseCompilationUnit(s);
         assertOneRecordDeclaration(cu);
 
@@ -348,9 +348,9 @@ public class RecordDeclarationTest {
     /**
      * https://openjdk.java.net/jeps/395#Restrictions-on-records
      */
-    @Test
+    [TestMethod]
     void record_canHaveGenerics() {
-        String s = "record Point <T> (T x, int y) { }";
+        string s = "record Point <T> (T x, int y) { }";
         CompilationUnit cu = TestParser.parseCompilationUnit(s);
         assertOneRecordDeclaration(cu);
 
@@ -360,20 +360,20 @@ public class RecordDeclarationTest {
     }
 
 
-    @Test
+    [TestMethod]
     void record_mustNotAllowMismatchedComponentAccessorReturnType() {
-        String s = "record Point(int x, int y) {\n" +
-                "    public String x() {\n" +
+        string s = "record Point(int x, int y) {\n" +
+                "    public string x() {\n" +
                 "        return \"10\";\n" +
                 "    }\n" +
                 "}";
         assertCompilationFails(s);
     }
 
-    @Test
+    [TestMethod]
     void record_allowMethodsWithSameNameAsRecordComponentButNotAnAccessorMethod() {
-        String s = "record Point(int x, int y) {\n" +
-                "    public String x(int a) {\n" +
+        string s = "record Point(int x, int y) {\n" +
+                "    public string x(int a) {\n" +
                 "        return \"10\";\n" +
                 "    }\n" +
                 "}";
@@ -382,9 +382,9 @@ public class RecordDeclarationTest {
         assertOneRecordDeclaration(cu);
     }
 
-    @Test
+    [TestMethod]
     void record_allowMethodsWithSameNameAsRecordComponentButNotAnAccessorMethod2() {
-        String s = "record Point(int x, int y) {\n" +
+        string s = "record Point(int x, int y) {\n" +
                 "    public int x(int a) {\n" +
                 "        return 10;\n" +
                 "    }\n" +
@@ -394,9 +394,9 @@ public class RecordDeclarationTest {
         assertOneRecordDeclaration(cu);
     }
 
-    @Test
+    [TestMethod]
     void record_allowComponentAccessorWithMatchingType() {
-        String s = "record Point(int x, int y) {\n" +
+        string s = "record Point(int x, int y) {\n" +
                 "    public int x() {\n" +
                 "        return 10;\n" +
                 "    }\n" +
@@ -409,9 +409,9 @@ public class RecordDeclarationTest {
     /**
      * https://openjdk.java.net/jeps/395#Restrictions-on-records
      */
-    @Test
+    [TestMethod]
     void record_allowNestedWithinClass() {
-        String s = "\n" +
+        string s = "\n" +
                 "class X {\n" +
                 "    record Point(int x, int y) {\n" +
                 "    }\n" +
@@ -424,9 +424,9 @@ public class RecordDeclarationTest {
     /**
      * https://openjdk.java.net/jeps/395#Restrictions-on-records
      */
-    @Test
+    [TestMethod]
     void record_componentsAreImplicitlyFinal() {
-        String s = "record Point(int x, int y) { }";
+        string s = "record Point(int x, int y) { }";
 
         CompilationUnit cu = TestParser.parseCompilationUnit(s);
         assertOneRecordDeclaration(cu);
@@ -441,9 +441,9 @@ public class RecordDeclarationTest {
     /**
      * https://openjdk.java.net/jeps/395#Restrictions-on-records
      */
-    @Test
+    [TestMethod]
     void record_allowClassWithinRecord() {
-        String s = "\n" +
+        string s = "\n" +
                 "record Point(int x, int y) {\n" +
                 "    class X {\n" +
                 "    }\n" +
@@ -464,9 +464,9 @@ public class RecordDeclarationTest {
     /**
      * https://openjdk.java.net/jeps/395#Restrictions-on-records
      */
-    @Test
+    [TestMethod]
     void record_allowNestedWithinInterface() {
-        String s = "\n" +
+        string s = "\n" +
                 "interface X {\n" +
                 "    record Point(int x, int y) {\n" +
                 "    }\n" +
@@ -479,9 +479,9 @@ public class RecordDeclarationTest {
     /**
      * https://openjdk.java.net/jeps/395#Restrictions-on-records
      */
-    @Test
+    [TestMethod]
     void record_allowNestedWithinEnum() {
-        String s = "\n" +
+        string s = "\n" +
                 "enum ABC {\n" +
                 "    ABC;\n" +
                 "    \n" +
@@ -496,9 +496,9 @@ public class RecordDeclarationTest {
     /**
      * https://openjdk.java.net/jeps/395#Restrictions-on-records
      */
-    @Test
+    [TestMethod]
     void record_allowNestedMultiple() {
-        String s = "\n" +
+        string s = "\n" +
                 "interface Y {\n" +
                 "    class X {\n" +
                 "        record Point(int x, int y) {\n" +
@@ -513,9 +513,9 @@ public class RecordDeclarationTest {
     /**
      * https://openjdk.java.net/jeps/395#Restrictions-on-records
      */
-    @Test
+    [TestMethod]
     void record_allowNestedMultiple2() {
-        String s = "\n" +
+        string s = "\n" +
                 "interface Y {\n" +
                 "    class X {\n" +
                 "        record Point(int x, int y) {\n" +
@@ -537,9 +537,9 @@ public class RecordDeclarationTest {
     /**
      * https://openjdk.java.net/jeps/395#Restrictions-on-records
      */
-    @Test
+    [TestMethod]
     void record_topLevelRecordsAreNotStatic() {
-        String s = "record Point(int x, int y) { }\n";
+        string s = "record Point(int x, int y) { }\n";
 
         CompilationUnit cu = TestParser.parseCompilationUnit(s);
         assertOneRecordDeclaration(cu);
@@ -552,9 +552,9 @@ public class RecordDeclarationTest {
     /**
      * https://openjdk.java.net/jeps/395#Restrictions-on-records
      */
-    @Test
+    [TestMethod]
     void record_nestedRecordsAreImplicitlyStatic() {
-        String s = "\n" +
+        string s = "\n" +
                 "class X {\n" +
                 "    record Point(int x, int y) {\n" +
                 "    }\n" +
@@ -570,9 +570,9 @@ public class RecordDeclarationTest {
     }
 
 
-    @Test
+    [TestMethod]
     void record_canBeCreatedUsingKeywordNew() {
-        String s = "\n" +
+        string s = "\n" +
                 "\n" +
                 "record Point(int x, int y) {\n" +
                 "}\n" +
@@ -600,7 +600,7 @@ public class RecordDeclarationTest {
      * <p>
      * https://bugs.openjdk.java.net/browse/JDK-8222777
      */
-    @Test
+    [TestMethod]
     void recordDeclarationFromTheJDK8222777() {
         CompilationUnit cu = TestParser.parseCompilationUnit("" +
                 "public record Range(int lo, int hi) {\n" +
@@ -620,7 +620,7 @@ public class RecordDeclarationTest {
         // test parameters (none)
     }
 
-    @Test
+    [TestMethod]
     void recordDeclaration_exampleFromJls_8_10_4_1_normalCanonicalConstructors() {
         CompilationUnit cu = TestParser.parseCompilationUnit("" +
                 "import java.lang.annotation.Target;\n" +
@@ -629,8 +629,8 @@ public class RecordDeclarationTest {
                 "@interface Foo {}\n" +
                 "@interface Bar {}\n" +
                 "\n" +
-                "record Person(@Foo String name) {\n" +
-                "    Person(String name2) {\n" +
+                "record Person(@Foo string name) {\n" +
+                "    Person(string name2) {\n" +
                 "    }\n" +
                 "}"
         );
@@ -644,7 +644,7 @@ public class RecordDeclarationTest {
 
     }
 
-    @Test
+    [TestMethod]
     void compactConstructor_exampleFromJls_8_10_4_2_compactConstructors() {
         CompilationUnit cu = TestParser.parseCompilationUnit("" +
                 "record Rational(int num, int denom) {\n" +
@@ -670,7 +670,7 @@ public class RecordDeclarationTest {
 
     }
 
-    @Test
+    [TestMethod]
     void nonCompactConstructor_exampleFromJls_8_10_4_2_compactConstructors() {
         CompilationUnit cu = TestParser.parseCompilationUnit("" +
                 "record Rational(int num, int denom) {\n" +
@@ -701,7 +701,7 @@ public class RecordDeclarationTest {
     /**
      * https://openjdk.java.net/jeps/395
      */
-    @Test
+    [TestMethod]
     void localRecords() {
         CompilationUnit cu = TestParser.parseCompilationUnit("" +
                 "class Scratch {\n" +
@@ -723,16 +723,16 @@ public class RecordDeclarationTest {
 
     }
 
-    @Test
+    [TestMethod]
     void instanceFieldIsNotAllowedInRecord() {
-        String s = "record X { int record; }";
+        string s = "record X { int record; }";
 
         assertThrows(AssertionFailedError.class, () -> {
             CompilationUnit cu = TestParser.parseCompilationUnit(s);
         });
     }
 
-    private void assertCompilationFails(String s) {
+    private void assertCompilationFails(string s) {
         assertThrows(AssertionFailedError.class, () -> {
             CompilationUnit cu = TestParser.parseCompilationUnit(s);
         });

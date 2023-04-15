@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,15 +24,15 @@ namespace com.github.javaparser.printer.concretesyntaxmodel;
 
 public class CsmList implements CsmElement {
 
-    private final ObservableProperty property;
+    private /*final*/ObservableProperty property;
 
-    private final CsmElement separatorPost;
+    private /*final*/CsmElement separatorPost;
 
-    private final CsmElement separatorPre;
+    private /*final*/CsmElement separatorPre;
 
-    private final CsmElement preceeding;
+    private /*final*/CsmElement preceeding;
 
-    private final CsmElement following;
+    private /*final*/CsmElement following;
 
     public ObservableProperty getProperty() {
         return property;
@@ -73,7 +73,7 @@ public class CsmList implements CsmElement {
     @Override
     public void prettyPrint(Node node, SourcePrinter printer) {
         if (property.isAboutNodes()) {
-            NodeList<? extends Node> nodeList = property.getValueAsMultipleReference(node);
+            NodeList<?:Node> nodeList = property.getValueAsMultipleReference(node);
             if (nodeList == null) {
                 return;
             }
@@ -116,7 +116,7 @@ public class CsmList implements CsmElement {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return String.format("%s(property:%s)", this.getClass().getSimpleName(), getProperty());
     }
 }

@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -52,7 +52,7 @@ public interface ImportOrderingStrategy {
      * In this case, we have two groups of imports. The first group contains only import for java.util.List,
      * while the second group contains NodeList and ImportDeclaration.
      * <p>
-     * For this example this method should return 2 groups in the list, and the first group should have
+     * For this example this method should return 2 groups _in the list, and the first group should have
      * exactly 1 import, while the second group should have 2 imports.
      *
      * @param imports The imports to be ordered.

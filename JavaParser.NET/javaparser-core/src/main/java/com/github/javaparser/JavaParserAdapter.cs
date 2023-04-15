@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -35,7 +35,7 @@ public class JavaParserAdapter {
         return new JavaParserAdapter(parser);
     }
 
-    private final JavaParser parser;
+    private /*final*/JavaParser parser;
 
     public JavaParserAdapter(JavaParser parser) {
         this.parser = Objects.requireNonNull(parser, "A non-null parser should be provided.");
@@ -46,7 +46,7 @@ public class JavaParserAdapter {
     }
 
     /**
-     * Helper function to handle the result in a simpler way.
+     * Helper function to handle the result _in a simpler way.
      *
      * @param result The result to be handled.
      *
@@ -54,7 +54,7 @@ public class JavaParserAdapter {
      *
      * @return The parsed value.
      */
-    private <T extends Node> T handleResult(ParseResult<T> result) {
+    private <T:Node> T handleResult(ParseResult<T> result) {
         if (result.isSuccessful()) {
             return result.getResult().orElse(null);
         }
@@ -66,15 +66,15 @@ public class JavaParserAdapter {
         return parser.getParserConfiguration();
     }
     
-    public CompilationUnit parse(InputStream in) {
-        return handleResult(getParser().parse(in));
+    public CompilationUnit parse(InputStream _in) {
+        return handleResult(getParser().parse(_in));
     }
     
     public CompilationUnit parse(File file) throws FileNotFoundException {
         return handleResult(getParser().parse(file));
     }
     
-    public CompilationUnit parse(Path path) throws IOException {
+    public CompilationUnit parse(Path path){
         return handleResult(getParser().parse(path));
     }
     
@@ -82,95 +82,95 @@ public class JavaParserAdapter {
         return handleResult(getParser().parse(reader));
     }
     
-    public CompilationUnit parse(String code) {
+    public CompilationUnit parse(string code) {
         return handleResult(getParser().parse(code));
     }
     
-    public CompilationUnit parseResource(String path) throws IOException {
+    public CompilationUnit parseResource(string path){
         return handleResult(getParser().parseResource(path));
     }
     
-    public BlockStmt parseBlock(String blockStatement) {
+    public BlockStmt parseBlock(string blockStatement) {
         return handleResult(getParser().parseBlock(blockStatement));
     }
     
-    public Statement parseStatement(String statement) {
+    public Statement parseStatement(string statement) {
         return handleResult(getParser().parseStatement(statement));
     }
     
-    public ImportDeclaration parseImport(String importDeclaration) {
+    public ImportDeclaration parseImport(string importDeclaration) {
         return handleResult(getParser().parseImport(importDeclaration));
     }
     
-    public <T extends Expression> T parseExpression(String expression) {
+    public <T:Expression> T parseExpression(string expression) {
         return handleResult(getParser().parseExpression(expression));
     }
     
-    public AnnotationExpr parseAnnotation(String annotation) {
+    public AnnotationExpr parseAnnotation(string annotation) {
         return handleResult(getParser().parseAnnotation(annotation));
     }
     
-    public BodyDeclaration<?> parseAnnotationBodyDeclaration(String body) {
+    public BodyDeclaration<?> parseAnnotationBodyDeclaration(string body) {
         return handleResult(getParser().parseAnnotationBodyDeclaration(body));
     }
     
-    public BodyDeclaration<?> parseBodyDeclaration(String body) {
+    public BodyDeclaration<?> parseBodyDeclaration(string body) {
         return handleResult(getParser().parseBodyDeclaration(body));
     }
     
-    public ClassOrInterfaceType parseClassOrInterfaceType(String type) {
+    public ClassOrInterfaceType parseClassOrInterfaceType(string type) {
         return handleResult(getParser().parseClassOrInterfaceType(type));
     }
     
-    public Type parseType(String type) {
+    public Type parseType(string type) {
         return handleResult(getParser().parseType(type));
     }
     
-    public VariableDeclarationExpr parseVariableDeclarationExpr(String declaration) {
+    public VariableDeclarationExpr parseVariableDeclarationExpr(string declaration) {
         return handleResult(getParser().parseVariableDeclarationExpr(declaration));
     }
     
-    public Javadoc parseJavadoc(String content) {
+    public Javadoc parseJavadoc(string content) {
         return JavadocParser.parse(content);
     }
     
-    public ExplicitConstructorInvocationStmt parseExplicitConstructorInvocationStmt(String statement) {
+    public ExplicitConstructorInvocationStmt parseExplicitConstructorInvocationStmt(string statement) {
         return handleResult(getParser().parseExplicitConstructorInvocationStmt(statement));
     }
 
-    public Name parseName(String qualifiedName) {
+    public Name parseName(string qualifiedName) {
         return handleResult(getParser().parseName(qualifiedName));
     }
     
-    public SimpleName parseSimpleName(String name) {
+    public SimpleName parseSimpleName(string name) {
         return handleResult(getParser().parseSimpleName(name));
     }
 
-    public Parameter parseParameter(String parameter) {
+    public Parameter parseParameter(string parameter) {
         return handleResult(getParser().parseParameter(parameter));
     }
     
-    public PackageDeclaration parsePackageDeclaration(String packageDeclaration) {
+    public PackageDeclaration parsePackageDeclaration(string packageDeclaration) {
         return handleResult(getParser().parsePackageDeclaration(packageDeclaration));
     }
     
-    public TypeDeclaration<?> parseTypeDeclaration(String typeDeclaration) {
+    public TypeDeclaration<?> parseTypeDeclaration(string typeDeclaration) {
         return handleResult(getParser().parseTypeDeclaration(typeDeclaration));
     }
 
-    public ModuleDeclaration parseModuleDeclaration(String moduleDeclaration) {
+    public ModuleDeclaration parseModuleDeclaration(string moduleDeclaration) {
         return handleResult(getParser().parseModuleDeclaration(moduleDeclaration));
     }
 
-    public ModuleDirective parseModuleDirective(String moduleDirective) {
+    public ModuleDirective parseModuleDirective(string moduleDirective) {
         return handleResult(getParser().parseModuleDirective(moduleDirective));
     }
 
-    public TypeParameter parseTypeParameter(String typeParameter) {
+    public TypeParameter parseTypeParameter(string typeParameter) {
         return handleResult(getParser().parseTypeParameter(typeParameter));
     }
     
-    public MethodDeclaration parseMethodDeclaration(String methodDeclaration) {
+    public MethodDeclaration parseMethodDeclaration(string methodDeclaration) {
         return handleResult(getParser().parseMethodDeclaration(methodDeclaration));
     }
 

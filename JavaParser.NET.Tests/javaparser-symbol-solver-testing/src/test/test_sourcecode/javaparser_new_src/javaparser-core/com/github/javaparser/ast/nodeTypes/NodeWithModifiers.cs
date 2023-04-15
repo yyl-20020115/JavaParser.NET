@@ -16,7 +16,7 @@ public interface NodeWithModifiers<T> {
 
     T setModifiers(EnumSet<Modifier> modifiers);
 
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     default T addModifier(Modifier... modifiers) {
         getModifiers().addAll(Arrays.stream(modifiers)
                 .collect(Collectors.toCollection(() -> EnumSet.noneOf(Modifier.class))));

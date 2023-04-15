@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -39,50 +39,50 @@ public abstract class AbstractLexicalPreservingTest {
         StaticJavaParser.setConfiguration(new ParserConfiguration());
     }
 
-    protected void considerCode(String code) {
+    protected void considerCode(string code) {
         cu = LexicalPreservingPrinter.setup(StaticJavaParser.parse(code));
     }
 
-    protected void considerExpression(String code) {
+    protected void considerExpression(string code) {
         expression = LexicalPreservingPrinter.setup(StaticJavaParser.parseExpression(code));
     }
     
-    protected void considerStatement(String code) {
+    protected void considerStatement(string code) {
         statement = LexicalPreservingPrinter.setup(StaticJavaParser.parseStatement(code));
     }
 
-    protected void considerVariableDeclaration(String code) {
+    protected void considerVariableDeclaration(string code) {
         expression = LexicalPreservingPrinter.setup(StaticJavaParser.parseVariableDeclarationExpr(code));
     }
 
-    protected String considerExample(String resourceName) throws IOException {
-        String code = readExample(resourceName);
+    protected string considerExample(string resourceName){
+        string code = readExample(resourceName);
         considerCode(code);
         return code;
     }
 
-    protected String readExample(String resourceName) throws IOException {
+    protected string readExample(string resourceName){
         return readResource("com/github/javaparser/lexical_preservation_samples/" + resourceName + ".java.txt");
     }
 
-    protected void assertTransformed(String exampleName, Node node) throws IOException {
-        String expectedCode = readExample(exampleName + "_expected");
-        String actualCode = LexicalPreservingPrinter.print(node);
+    protected void assertTransformed(string exampleName, Node node){
+        string expectedCode = readExample(exampleName + "_expected");
+        string actualCode = LexicalPreservingPrinter.print(node);
 
         // Note that we explicitly care about line endings when handling lexical preservation.
         assertEqualsString(expectedCode, actualCode);
     }
 
-    protected void assertUnchanged(String exampleName) throws IOException {
-        String expectedCode = considerExample(exampleName + "_original");
-        String actualCode = LexicalPreservingPrinter.print(cu != null ? cu : expression);
+    protected void assertUnchanged(string exampleName){
+        string expectedCode = considerExample(exampleName + "_original");
+        string actualCode = LexicalPreservingPrinter.print(cu != null ? cu : expression);
 
         // Note that we explicitly care about line endings when handling lexical preservation.
         assertEqualsString(expectedCode, actualCode);
     }
 
-    protected void assertTransformedToString(String expectedPartialCode, Node node) {
-        String actualCode = LexicalPreservingPrinter.print(node);
+    protected void assertTransformedToString(string expectedPartialCode, Node node) {
+        string actualCode = LexicalPreservingPrinter.print(node);
 
         // Note that we explicitly care about line endings when handling lexical preservation.
         assertEqualsString(expectedPartialCode, actualCode);

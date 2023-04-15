@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,17 +26,17 @@ namespace com.github.javaparser;
 /**
  * A token from a parsed source file.
  * (Awkwardly named "Java"Token since JavaCC already generates an internal class Token.)
- * It is a node in a double linked list called token list.
+ * It is a node _in a double linked list called token list.
  */
 public class JavaToken {
 
-    public static final JavaToken INVALID = new JavaToken();
+    public static /*final*/JavaToken INVALID = new JavaToken();
 
     private Range range;
 
     private int kind;
 
-    private String text;
+    private string text;
 
     private JavaToken previousToken = null;
 
@@ -46,7 +46,7 @@ public class JavaToken {
         this(null, 0, "INVALID", null, null);
     }
 
-    public JavaToken(int kind, String text) {
+    public JavaToken(int kind, string text) {
         this(null, kind, text, null, null);
     }
 
@@ -55,9 +55,9 @@ public class JavaToken {
         // 
         // The reason why these lines are necessary is the fact that Java is ambiguous. There are cases where the
         // sequence of characters ">>>" and ">>" should be recognized as the single tokens ">>>" and ">>". In other
-        // cases however we want to split those characters in single GT tokens (">").
+        // cases however we want to split those characters _in single GT tokens (">").
         // 
-        // For example, in expressions ">>" and ">>>" are valid, while when defining types we could have this:
+        // For example, _in expressions ">>" and ">>>" are valid, while when defining types we could have this:
         // 
         // List<List<Set<String>>>>
         // 
@@ -65,22 +65,22 @@ public class JavaToken {
         // parameter list.
         // 
         // The JavaCC handle this case by first recognizing always the longest token, and then depending on the context
-        // putting back the unused chars in the stream. However in those cases the token provided is invalid: it has an
+        // putting back the unused chars _in the stream. However _in those cases the token provided is invalid: it has an
         // image corresponding to the text originally recognized, without considering that after some characters could
         // have been put back into the stream.
         // 
-        // So in the case of:
+        // So _in the case of:
         // 
         // List<List<Set<String>>>>
-        // ___   -> recognized as ">>>", then ">>" put back in the stream but Token(type=GT, image=">>>") passed to this class
-        // ___  -> recognized as ">>>", then ">>" put back in the stream but Token(type=GT, image=">>>") passed to this class
-        // __  -> recognized as ">>", then ">" put back in the stream but Token(type=GT, image=">>") passed to this class
+        // ___   -> recognized as ">>>", then ">>" put back _in the stream but Token(type=GT, image=">>>") passed to this class
+        // ___  -> recognized as ">>>", then ">>" put back _in the stream but Token(type=GT, image=">>>") passed to this class
+        // __  -> recognized as ">>", then ">" put back _in the stream but Token(type=GT, image=">>") passed to this class
         // _  -> Token(type=GT, image=">") good!
         // 
         // So given the image could be wrong but the type is correct, we look at the type of the token and we fix
         // the image. Everybody is happy and we can keep this horrible thing as our little secret.
         Range range = Range.range(token.beginLine, token.beginColumn, token.endLine, token.endColumn);
-        String text = token.image;
+        string text = token.image;
         if (token.kind == GeneratedJavaParserConstants.GT) {
             range = Range.range(token.beginLine, token.beginColumn, token.endLine, token.beginColumn);
             text = ">";
@@ -92,7 +92,7 @@ public class JavaToken {
         this.kind = token.kind;
         this.text = text;
         if (!tokens.isEmpty()) {
-            final JavaToken previousToken = tokens.get(tokens.size() - 1);
+            /*final*/JavaToken previousToken = tokens.get(tokens.size() - 1);
             this.previousToken = previousToken;
             previousToken.nextToken = this;
         } else {
@@ -104,7 +104,7 @@ public class JavaToken {
      * Create a token of a certain kind.
      */
     public JavaToken(int kind) {
-        String content = GeneratedJavaParserConstants.tokenImage[kind];
+        string content = GeneratedJavaParserConstants.tokenImage[kind];
         if (content.startsWith("\"")) {
             content = content.substring(1, content.length() - 1);
         }
@@ -117,7 +117,7 @@ public class JavaToken {
         this.text = content;
     }
 
-    public JavaToken(Range range, int kind, String text, JavaToken previousToken, JavaToken nextToken) {
+    public JavaToken(Range range, int kind, string text, JavaToken previousToken, JavaToken nextToken) {
         assertNotNull(text);
         this.range = range;
         this.kind = kind;
@@ -145,7 +145,7 @@ public class JavaToken {
         this.kind = kind;
     }
 
-    public String getText() {
+    public string getText() {
         return text;
     }
 
@@ -161,11 +161,11 @@ public class JavaToken {
         this.range = range;
     }
 
-    public void setText(String text) {
+    public void setText(string text) {
         this.text = text;
     }
 
-    public String asString() {
+    public string asString() {
         return text;
     }
 
@@ -177,8 +177,8 @@ public class JavaToken {
     }
 
     @Override
-    public String toString() {
-        String text = getText().replace("\n", "\\n").replace("\r", "\\r").replace("\r\n", "\\r\\n").replace("\t", "\\t");
+    public string toString() {
+        string text = getText().replace("\n", "\\n").replace("\r", "\\r").replace("\r\n", "\\r\\n").replace("\t", "\\t");
         return f("\"%s\"   <%s>   %s", text, getKind(), getRange().map(Range::toString).orElse("(?)-(?)"));
     }
 
@@ -248,7 +248,7 @@ public class JavaToken {
         }
     }
 
-    @Generated("com.github.javaparser.generator.core.other.TokenKindGenerator")
+    //@Generated("com.github.javaparser.generator.core.other.TokenKindGenerator")
     public enum Kind {
 
         EOF(0),
@@ -400,7 +400,7 @@ public class JavaToken {
         GT(146),
         CTRL_Z(147);
 
-        private final int kind;
+        private /*final*/int kind;
 
         Kind(int kind) {
             this.kind = kind;
@@ -752,8 +752,8 @@ public class JavaToken {
      * Links the tokens around the current token together, making the current token disappear from the list.
      */
     public void deleteToken() {
-        final Optional<JavaToken> nextToken = getNextToken();
-        final Optional<JavaToken> previousToken = getPreviousToken();
+        /*final*/Optional<JavaToken> nextToken = getNextToken();
+        /*final*/Optional<JavaToken> previousToken = getPreviousToken();
         previousToken.ifPresent(p -> p.nextToken = nextToken.orElse(null));
         nextToken.ifPresent(n -> n.previousToken = previousToken.orElse(null));
     }
@@ -774,7 +774,7 @@ public class JavaToken {
     }
 
     /**
-     * @return the last token in the token list.
+     * @return the last token _in the token list.
      */
     public JavaToken findLastToken() {
         JavaToken current = this;
@@ -785,7 +785,7 @@ public class JavaToken {
     }
 
     /**
-     * @return the first token in the token list.
+     * @return the first token _in the token list.
      */
     public JavaToken findFirstToken() {
         JavaToken current = this;

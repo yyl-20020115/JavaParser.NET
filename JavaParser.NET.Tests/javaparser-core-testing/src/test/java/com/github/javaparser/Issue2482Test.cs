@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser;
  * Tests related to https://github.com/javaparser/javaparser/issues/2482.
  */
 public class Issue2482Test {
-    @Test
+    [TestMethod]
     public void commentBeforeLambda() {
         LambdaExpr le = StaticJavaParser.parseExpression(
                 "// a comment before parent" + System.lineSeparator() +
@@ -37,7 +37,7 @@ public class Issue2482Test {
         assertEquals(0, le.getAllContainedComments().size());
     }
 
-    @Test
+    [TestMethod]
     public void commentBeforeBlock() {
         Statement st = StaticJavaParser.parseBlock(
                 "// a comment before parent" + System.lineSeparator() +
@@ -47,7 +47,7 @@ public class Issue2482Test {
         assertEquals(0, st.getAllContainedComments().size());
     }
 
-    @Test
+    [TestMethod]
     public void commentBeforeIfStatement() {
         Statement st = StaticJavaParser.parseStatement(
                 "// a comment before parent" + System.lineSeparator() +
@@ -57,7 +57,7 @@ public class Issue2482Test {
         assertEquals(0, st.getAllContainedComments().size());
     }
 
-    @Test
+    [TestMethod]
     public void commentBeforeAssignment() {
         Statement st = StaticJavaParser.parseStatement(
                 "// a comment" + System.lineSeparator() +

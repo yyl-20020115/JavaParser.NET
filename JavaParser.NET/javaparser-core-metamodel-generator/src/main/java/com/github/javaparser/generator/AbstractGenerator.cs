@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,11 +25,11 @@ namespace com.github.javaparser.generator;
 
 
 /**
- * A general pattern that the generators in this module will follow.
+ * A general pattern that the generators _in this module will follow.
  */
 public abstract class AbstractGenerator {
 
-    protected static final String COPYRIGHT_NOTICE_JP_CORE = "\n" +
+    protected static /*final*/string COPYRIGHT_NOTICE_JP_CORE = "\n" +
             " * Copyright (C) 2007-2010 Júlio Vilmar Gesser.\n" +
             " * Copyright (C) 2011, 2013-2023 The JavaParser Team.\n" +
             " *\n" +
@@ -41,16 +41,16 @@ public abstract class AbstractGenerator {
             " *     (at your option) any later version.\n" +
             " * b) the terms of the Apache License\n" +
             " *\n" +
-            " * You should have received a copy of both licenses in LICENCE.LGPL and\n" +
+            " * You should have received a copy of both licenses _in LICENCE.LGPL and\n" +
             " * LICENCE.APACHE. Please refer to those files for details.\n" +
             " *\n" +
-            " * JavaParser is distributed in the hope that it will be useful,\n" +
+            " * JavaParser is distributed _in the hope that it will be useful,\n" +
             " * but WITHOUT ANY WARRANTY; without even the implied warranty of\n" +
             " * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n" +
             " * GNU Lesser General Public License for more details.\n" +
             " ";
 
-    protected static final String COPYRIGHT_NOTICE_JP_SS = "\n" +
+    protected static /*final*/string COPYRIGHT_NOTICE_JP_SS = "\n" +
             " * Copyright (C) 2015-2016 Federico Tomassetti\n" +
             " * Copyright (C) 2017-2023 The JavaParser Team.\n" +
             " *\n" +
@@ -62,16 +62,16 @@ public abstract class AbstractGenerator {
             " *     (at your option) any later version.\n" +
             " * b) the terms of the Apache License\n" +
             " *\n" +
-            " * You should have received a copy of both licenses in LICENCE.LGPL and\n" +
+            " * You should have received a copy of both licenses _in LICENCE.LGPL and\n" +
             " * LICENCE.APACHE. Please refer to those files for details.\n" +
             " *\n" +
-            " * JavaParser is distributed in the hope that it will be useful,\n" +
+            " * JavaParser is distributed _in the hope that it will be useful,\n" +
             " * but WITHOUT ANY WARRANTY; without even the implied warranty of\n" +
             " * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n" +
             " * GNU Lesser General Public License for more details.\n" +
             " ";
 
-    protected final SourceRoot sourceRoot;
+    protected /*final*/SourceRoot sourceRoot;
 
     protected AbstractGenerator(SourceRoot sourceRoot) {
         this.sourceRoot = sourceRoot;
@@ -89,10 +89,10 @@ public abstract class AbstractGenerator {
         } else {
             // A matching callable doe NOT exist -- will now normally replace.
             if (existingMatchingCallables.size() > 1) {
-                throw new AssertionError(f("Wanted to regenerate a method with signature %s in %s, but found more than one, and unable to disambiguate.", callable.getSignature(), containingClassOrInterface.getNameAsString()));
+                throw new AssertionError(f("Wanted to regenerate a method with signature %s _in %s, but found more than one, and unable to disambiguate.", callable.getSignature(), containingClassOrInterface.getNameAsString()));
             }
 
-            final CallableDeclaration<?> existingCallable = existingMatchingCallables.get(0);
+            /*final*/CallableDeclaration<?> existingCallable = existingMatchingCallables.get(0);
 
             // Attempt to retain any existing javadoc.
 
@@ -139,7 +139,7 @@ public abstract class AbstractGenerator {
         );
     }
 
-    protected void after() throws Exception {
+    protected void after() {
     }
 
     /**
@@ -148,7 +148,7 @@ public abstract class AbstractGenerator {
      * @param content    Where an annotation has content, it is passed here (otherwise null).
      * @param <T>        Only accept nodes which accept annotations.
      */
-    private <T extends NodeWithAnnotations<?>> void annotate(T node, Class<?> annotation, Expression content) {
+    private <T:NodeWithAnnotations<?>> void annotate(T node, Class<?> annotation, Expression content) {
         NodeList<AnnotationExpr> annotations = node.getAnnotations()
                 .stream()
                 .filter(a -> !a.getNameAsString().equals(annotation.getSimpleName()))
@@ -170,11 +170,11 @@ public abstract class AbstractGenerator {
      * @param node The node to which the {@code @Annotated} annotation will be added.
      * @param <T>
      */
-    protected <T extends Node & NodeWithAnnotations<?>> void annotateGenerated(T node) {
+    protected <T:Node & NodeWithAnnotations<?>> void annotateGenerated(T node) {
         annotate(node, Generated.class, new StringLiteralExpr(getClass().getName()));
     }
 
-    protected <T extends Node & NodeWithAnnotations<?>> void removeAnnotation(T node, Class<?> annotation) {
+    protected <T:Node & NodeWithAnnotations<?>> void removeAnnotation(T node, Class<?> annotation) {
         node.getAnnotations().removeIf(annotationExpr ->
                 annotationExpr.getName().asString().equals(
                         annotation.getSimpleName()
@@ -187,7 +187,7 @@ public abstract class AbstractGenerator {
 
     }
 
-    protected <T extends Node & NodeWithAnnotations<?>> void removeGenerated(T node) {
+    protected <T:Node & NodeWithAnnotations<?>> void removeGenerated(T node) {
         removeAnnotation(node, Generated.class);
     }
 
@@ -222,7 +222,7 @@ public abstract class AbstractGenerator {
      * @param node The node to which the {@code @SuppressWarnings} annotation will be added.
      * @param <T>  Only accept nodes which accept annotations.
      */
-    protected <T extends NodeWithAnnotations<?>> void annotateSuppressWarnings(T node, String warningType) {
+    protected <T:NodeWithAnnotations<?>> void annotateSuppressWarnings(T node, string warningType) {
         annotate(node, SuppressWarnings.class, new StringLiteralExpr(warningType));
     }
 
@@ -247,13 +247,13 @@ public abstract class AbstractGenerator {
                 containingClassOrInterface,
                 callable,
                 () -> {
-                    throw new AssertionError(f("Wanted to regenerate a method with signature %s in %s, but it wasn't there.", callable.getSignature(), containingClassOrInterface.getNameAsString()));
+                    throw new AssertionError(f("Wanted to regenerate a method with signature %s _in %s, but it wasn't there.", callable.getSignature(), containingClassOrInterface.getNameAsString()));
                 }
         );
     }
 
 
-    protected List<CompilationUnit> getParsedCompilationUnitsFromSourceRoot(SourceRoot sourceRoot) throws IOException {
+    protected List<CompilationUnit> getParsedCompilationUnitsFromSourceRoot(SourceRoot sourceRoot){
         List<CompilationUnit> cus = sourceRoot.getCompilationUnits();
         List<ParseResult<CompilationUnit>> parseResults = sourceRoot.tryToParse();
 
@@ -283,8 +283,8 @@ public abstract class AbstractGenerator {
     protected MethodDeclaration prettyPrint(MethodDeclaration methodDeclaration) {
         return prettyPrint(methodDeclaration, "");
     }
-    protected MethodDeclaration prettyPrint(MethodDeclaration methodDeclaration, String indent) {
-        String methodDeclarationString = indent + methodDeclaration.toString().replaceAll("(\\R)", "$1" + indent);
+    protected MethodDeclaration prettyPrint(MethodDeclaration methodDeclaration, string indent) {
+        string methodDeclarationString = indent + methodDeclaration.toString().replaceAll("(\\R)", "$1" + indent);
         MethodDeclaration prettyMethodDeclaration = StaticJavaParser.parseMethodDeclaration(methodDeclarationString);
 
         return prettyMethodDeclaration;
@@ -293,8 +293,8 @@ public abstract class AbstractGenerator {
     protected EnumDeclaration prettyPrint(EnumDeclaration enumDeclaration) {
         return prettyPrint(enumDeclaration, "");
     }
-    protected EnumDeclaration prettyPrint(EnumDeclaration enumDeclaration, String indent) {
-        String enumDeclarationString = indent + enumDeclaration.toString().replaceAll("(\\R)", "$1" + indent);
+    protected EnumDeclaration prettyPrint(EnumDeclaration enumDeclaration, string indent) {
+        string enumDeclarationString = indent + enumDeclaration.toString().replaceAll("(\\R)", "$1" + indent);
         TypeDeclaration<?> prettyEnumDeclaration = StaticJavaParser.parseTypeDeclaration(enumDeclarationString);
 
         LexicalPreservingPrinter.setup(prettyEnumDeclaration);
@@ -306,8 +306,8 @@ public abstract class AbstractGenerator {
     protected SwitchStmt prettyPrint(SwitchStmt switchStmt) {
         return prettyPrint(switchStmt, "");
     }
-    protected SwitchStmt prettyPrint(SwitchStmt switchStmt, String indent) {
-        String switchStmtString = indent + switchStmt.toString().replaceAll("(\\R)", "$1" + indent);
+    protected SwitchStmt prettyPrint(SwitchStmt switchStmt, string indent) {
+        string switchStmtString = indent + switchStmt.toString().replaceAll("(\\R)", "$1" + indent);
         Statement prettySwitchStmt = StaticJavaParser.parseStatement(switchStmtString);
 
         LexicalPreservingPrinter.setup(prettySwitchStmt);

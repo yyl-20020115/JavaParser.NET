@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,20 +25,20 @@ namespace com.github.javaparser.ast.body;
 /**
  * @author Julio Vilmar Gesser
  */
-public final class VariableDeclaratorId extends Node implements NamedNode {
+public /*final*/class VariableDeclaratorId:Node implements NamedNode {
 
-    private String name;
+    private string name;
 
     private int arrayCount;
 
     public VariableDeclaratorId() {
     }
 
-    public VariableDeclaratorId(String name) {
+    public VariableDeclaratorId(string name) {
        setName(name);
     }
 
-    public VariableDeclaratorId(int beginLine, int beginColumn, int endLine, int endColumn, String name, int arrayCount) {
+    public VariableDeclaratorId(int beginLine, int beginColumn, int endLine, int endColumn, string name, int arrayCount) {
         super(beginLine, beginColumn, endLine, endColumn);
         setName(name);
         setArrayCount(arrayCount);
@@ -58,7 +58,7 @@ public final class VariableDeclaratorId extends Node implements NamedNode {
         return arrayCount;
     }
 
-    public String getName() {
+    public string getName() {
         return name;
     }
 
@@ -66,7 +66,7 @@ public final class VariableDeclaratorId extends Node implements NamedNode {
         this.arrayCount = arrayCount;
     }
 
-    public void setName(String name) {
+    public void setName(string name) {
         this.name = name;
     }
 

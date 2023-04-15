@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.ast.type;
 /**
  * @author Julio Vilmar Gesser
  */
-public final class PrimitiveType extends Type {
+public /*final*/class PrimitiveType:Type {
 
 	public enum Primitive {
 		Boolean ("Boolean"),
@@ -38,18 +38,18 @@ public final class PrimitiveType extends Type {
 		Float   ("Float"),
 		Double  ("Double");
 
-		final String nameOfBoxedType;
+		/*final*/string nameOfBoxedType;
 
 		public ClassOrInterfaceType toBoxedType() {
 			return new ClassOrInterfaceType(nameOfBoxedType);
 		}
 
-		private Primitive(String nameOfBoxedType) {
+		private Primitive(string nameOfBoxedType) {
 			this.nameOfBoxedType = nameOfBoxedType;
 		}
 	}
 
-	static final HashMap<String, Primitive> unboxMap = new HashMap<String, Primitive>();
+	static /*final*/HashMap<String, Primitive> unboxMap = new HashMap<String, Primitive>();
 	static {
 		for(Primitive unboxedType : Primitive.values()) {
 			unboxMap.put(unboxedType.nameOfBoxedType, unboxedType);
@@ -61,21 +61,21 @@ public final class PrimitiveType extends Type {
 	public PrimitiveType() {
 	}
 
-	public PrimitiveType(final Primitive type) {
+	public PrimitiveType(/*final*/Primitive type) {
 		this.type = type;
 	}
 
-	public PrimitiveType(final int beginLine, final int beginColumn, final int endLine, final int endColumn,
-			final Primitive type) {
+	public PrimitiveType(/*final*/int beginLine, /*final*/int beginColumn, /*final*/int endLine, /*final*/int endColumn,
+			/*final*/Primitive type) {
 		super(beginLine, beginColumn, endLine, endColumn);
 		this.type = type;
 	}
 
-	@Override public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+	@Override public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
 		return v.visit(this, arg);
 	}
 
-	@Override public <A> void accept(final VoidVisitor<A> v, final A arg) {
+	@Override public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
 		v.visit(this, arg);
 	}
 
@@ -87,7 +87,7 @@ public final class PrimitiveType extends Type {
 		return type.toBoxedType();
 	}
 
-	public void setType(final Primitive type) {
+	public void setType(/*final*/Primitive type) {
 		this.type = type;
 	}
 

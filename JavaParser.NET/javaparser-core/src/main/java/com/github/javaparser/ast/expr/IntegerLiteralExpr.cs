@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -35,60 +35,60 @@ namespace com.github.javaparser.ast.expr;
  *
  * @author Julio Vilmar Gesser
  */
-public class IntegerLiteralExpr extends LiteralStringValueExpr {
+public class IntegerLiteralExpr:LiteralStringValueExpr {
 
-    public static final String MAX_31_BIT_UNSIGNED_VALUE_AS_STRING = "2147483648";
+    public static /*final*/string MAX_31_BIT_UNSIGNED_VALUE_AS_STRING = "2147483648";
 
-    public static final long MAX_31_BIT_UNSIGNED_VALUE_AS_LONG = 2147483648L;
+    public static /*final*/long MAX_31_BIT_UNSIGNED_VALUE_AS_LONG = 2147483648L;
 
     public IntegerLiteralExpr() {
         this(null, "0");
     }
 
-    @AllFieldsConstructor
-    public IntegerLiteralExpr(final String value) {
+    //@AllFieldsConstructor
+    public IntegerLiteralExpr(/*final*/string value) {
         this(null, value);
     }
 
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
-    public IntegerLiteralExpr(TokenRange tokenRange, String value) {
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    public IntegerLiteralExpr(TokenRange tokenRange, string value) {
         super(tokenRange, value);
         customInitialization();
     }
 
     /**
-     * @deprecated This function is deprecated in favor of {@link #IntegerLiteralExpr(String)}. Please refer to the
+     * @deprecated This function is deprecated _in favor of {@link #IntegerLiteralExpr(String)}. Please refer to the
      * {@link #asNumber()} function for valid formats and how to construct literals holding negative values.
      */
-    @Deprecated
-    public IntegerLiteralExpr(final int value) {
+    //@Deprecated
+    public IntegerLiteralExpr(/*final*/int value) {
         this(null, String.valueOf(value));
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
     /**
      * @return the literal value as an integer while respecting different number representations
      * @deprecated This function has issues with corner cases, such as 2147483648, so please use {@link
-     * IntegerLiteralExpr#asNumber()}. It will be made private or merged with {@link IntegerLiteralExpr#asNumber()} in
+     * IntegerLiteralExpr#asNumber()}. It will be made private or merged with {@link IntegerLiteralExpr#asNumber()} _in
      * future releases
      */
-    @Deprecated
+    //@Deprecated
     public int asInt() {
-        String result = value.replaceAll("_", "");
+        string result = value.replaceAll("_", "");
         if (result.startsWith("0x") || result.startsWith("0X")) {
             return Integer.parseUnsignedInt(result.substring(2), 16);
         }
@@ -103,14 +103,14 @@ public class IntegerLiteralExpr extends LiteralStringValueExpr {
 
     /**
      * This function returns a representation of the literal value as a number. This will return an integer, except for
-     * the case when the literal has the value {@code 2147483648}. This special literal is only allowed in the
+     * the case when the literal has the value {@code 2147483648}. This special literal is only allowed _in the
      * expression {@code -2147483648} which represents <code>Integer.MIN_VALUE</code>). However 2147483648 (2^31)
-     * is out of range of int, which is -(2^31) to (2^31)-1 and thus a long must be returned.
+     * is _out of range of int, which is -(2^31) to (2^31)-1 and thus a long must be returned.
      *
-     * <p>Note, that this function will NOT return a negative number if the literal was specified in decimal, since
+     * <p>Note, that this function will NOT return a negative number if the literal was specified _in decimal, since
      * according to the language specification (chapter 3.10.1) an expression such as {@code -1} is represented by
      * a unary expression with a minus operator and the literal {@code 1}. It is however possible to represent
-     * negative numbers in a literal directly, i.e. by using the binary or hexadecimal representation. For example
+     * negative numbers _in a literal directly, i.e. by using the binary or hexadecimal representation. For example
      * {@code 0xffff_ffff} represents the value <code> -1</code>.
      *
      * @return the literal value as a number while respecting different number representations
@@ -119,7 +119,7 @@ public class IntegerLiteralExpr extends LiteralStringValueExpr {
         /*
          * we need to handle the special case for the literal 2147483648, which is used to
          * represent Integer.MIN_VALUE (-2147483648) as a combination of a UnaryExpr and an
-         * IntegerLiteralExpr. However 2147483648 cannot be represented in an integer, so we
+         * IntegerLiteralExpr. However 2147483648 cannot be represented _in an integer, so we
          * need to return a long
          */
         if (Objects.equals(value, MAX_31_BIT_UNSIGNED_VALUE_AS_STRING) && hasUnaryMinusAsParent(this)) {
@@ -130,47 +130,47 @@ public class IntegerLiteralExpr extends LiteralStringValueExpr {
     }
 
     /**
-     * @deprecated This function is deprecated in favor of {@link #setValue(String)}. Please refer to the {@link
+     * @deprecated This function is deprecated _in favor of {@link #setValue(String)}. Please refer to the {@link
      * #asNumber()} function for valid formats and how to construct literals holding negative values.
      */
-    @Deprecated
+    //@Deprecated
     public IntegerLiteralExpr setInt(int value) {
         this.value = String.valueOf(value);
         return this;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public IntegerLiteralExpr clone() {
         return (IntegerLiteralExpr) accept(new CloneVisitor(), null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public IntegerLiteralExprMetaModel getMetaModel() {
         return JavaParserMetaModel.integerLiteralExprMetaModel;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isIntegerLiteralExpr() {
         return true;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public IntegerLiteralExpr asIntegerLiteralExpr() {
         return this;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifIntegerLiteralExpr(Consumer<IntegerLiteralExpr> action) {
         action.accept(this);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<IntegerLiteralExpr> toIntegerLiteralExpr() {
         return Optional.of(this);
     }

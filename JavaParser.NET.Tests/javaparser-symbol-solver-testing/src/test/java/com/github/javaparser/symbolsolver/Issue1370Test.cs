@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,31 +28,31 @@ namespace com.github.javaparser.symbolsolver;
  */
 public class Issue1370Test {
 
-    @Test
+    [TestMethod]
     public void test() {
-        final String source = String.join(System.lineSeparator(),
+        /*final*/string source = String.join(System.lineSeparator(),
                                           "package graph;",
                                           "class Vertex<Data> {",
-                                          "    private final Data data;",
+                                          "    private /*final*/Data data;",
                                           "    public Vertex(Data data) { this.data = data; }",
                                           "    public Data getData() { return this.data; }",
                                           "}",
                                           "",
                                           "public class Application {",
                                           "    public static void main(String[] args) {",
-                                          "        System.out.println(new Vertex<>(42).getData().equals(42));",
+                                          "        System._out.println(new Vertex<>(42).getData().equals(42));",
                                           "    }",
                                           "}");
 
-        final JavaParserFacade facade = JavaParserFacade.get(new ReflectionTypeSolver(false));
+        /*final*/JavaParserFacade facade = JavaParserFacade.get(new ReflectionTypeSolver(false));
 
         StaticJavaParser.parse(source).accept(new VoidVisitorAdapter<Void>() {
             @Override
-            public void visit(final MethodCallExpr n, final Void arg) {
+            public void visit(/*final*/MethodCallExpr n, /*final*/Void arg) {
                 super.visit(n, arg);
 
                 try {
-                    System.out.printf("Node: %s, solved Type: %s%n", n, facade.solve(n));
+                    System._out.printf("Node: %s, solved Type: %s%n", n, facade.solve(n));
                 } catch (RuntimeException e) {
                     e.printStackTrace();
                 }

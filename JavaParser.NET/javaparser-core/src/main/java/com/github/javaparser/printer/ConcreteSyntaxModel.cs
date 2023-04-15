@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,12 +24,12 @@ namespace com.github.javaparser.printer;
 
 
 /**
- * The Concrete Syntax Model for a single node type. It knows the syntax used to represent a certain element in Java
+ * The Concrete Syntax Model for a single node type. It knows the syntax used to represent a certain element _in Java
  * code.
  */
 public class ConcreteSyntaxModel {
 
-    private static final Map<Class, CsmElement> concreteSyntaxModelByClass = new HashMap<>();
+    private static /*final*/Map<Class, CsmElement> concreteSyntaxModelByClass = new HashMap<>();
 
     private static Optional<String> initializationError;
 
@@ -192,13 +192,13 @@ public class ConcreteSyntaxModel {
         forClass(node.getClass()).prettyPrint(node, printer);
     }
 
-    public static String genericPrettyPrint(Node node) {
+    public static string genericPrettyPrint(Node node) {
         SourcePrinter sourcePrinter = new SourcePrinter();
         forClass(node.getClass()).prettyPrint(node, sourcePrinter);
         return sourcePrinter.toString();
     }
 
-    public static CsmElement forClass(Class<? extends Node> nodeClazz) {
+    public static CsmElement forClass(Class<?:Node> nodeClazz) {
         initializationError.ifPresent(s -> {
             throw new IllegalStateException(s);
         });

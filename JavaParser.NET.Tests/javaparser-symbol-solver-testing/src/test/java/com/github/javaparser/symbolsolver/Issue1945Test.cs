@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,16 +23,16 @@ namespace com.github.javaparser.symbolsolver;
 
 
 
-public class Issue1945Test extends AbstractResolutionTest {
+public class Issue1945Test:AbstractResolutionTest {
 
-    private final static String code = "import issue1945.implementations.Sheep;\n" +
+    private /*final*/static string code = "import issue1945.implementations.Sheep;\n" +
             "import issue1945.interfaces.HairType;\n" +
             "import issue1945.interfaces.HairTypeRenderer;\n" +
             "import issue1945.interfaces.HairyAnimal;\n" +
             "\n" +
             "public class MainIssue1945 {\n" +
             "    \n" +
-            "    private final HairyAnimal sheep = new Sheep();\n" +
+            "    private /*final*/HairyAnimal sheep = new Sheep();\n" +
             "    \n" +
             "    public void chokes3() {\n" +
             "        HairType<?> hairType = sheep.getHairType();\n" +
@@ -51,10 +51,10 @@ public class Issue1945Test extends AbstractResolutionTest {
             "    }\n" +
             "}";
 
-    // Expected Result MethodCallExpr in parsed code
-    private final static Map<String,String> resultsQualifiedName = new HashMap<>();
+    // Expected Result MethodCallExpr _in parsed code
+    private /*final*/static Map<String,String> resultsQualifiedName = new HashMap<>();
 
-    private final static Map<String,String> resultsResolvedType = new HashMap<>();
+    private /*final*/static Map<String,String> resultsResolvedType = new HashMap<>();
 
     @BeforeAll
     static void init() {
@@ -89,8 +89,8 @@ public class Issue1945Test extends AbstractResolutionTest {
     @ParameterizedTest
     @MethodSource("parsedCodeMethodCalls")
     void test(MethodCallExpr expr) {
-        String qName = expr.resolve().getQualifiedName();
-        String resolvedType = expr.calculateResolvedType().describe();
+        string qName = expr.resolve().getQualifiedName();
+        string resolvedType = expr.calculateResolvedType().describe();
         assertEquals(resultsQualifiedName.get(expr.toString()), qName);
         assertEquals(resultsResolvedType.get(expr.toString()), resolvedType);
     }

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,16 +26,16 @@ namespace com.github.javaparser.printer.lexicalpreservation.transformations.ast.
 /**
  * Transforming EnumDeclaration and verifying the LexicalPreservation works as expected.
  */
-class EnumDeclarationTransformationsTest extends AbstractLexicalPreservingTest {
+class EnumDeclarationTransformationsTest:AbstractLexicalPreservingTest {
 
-    protected EnumDeclaration consider(String code) {
+    protected EnumDeclaration consider(string code) {
         considerCode(code);
         return cu.getType(0).asEnumDeclaration();
     }
 
     // Name
 
-    @Test
+    [TestMethod]
     void settingName() {
         EnumDeclaration cid = consider("enum A { E1, E2 }");
         cid.setName("B");
@@ -46,28 +46,28 @@ class EnumDeclarationTransformationsTest extends AbstractLexicalPreservingTest {
 
     // Modifiers
 
-    @Test
+    [TestMethod]
     void addingModifiers() {
         EnumDeclaration ed = consider("enum A { E1, E2 }");
         ed.setModifiers(createModifierList(PUBLIC));
         assertTransformedToString("public enum A { E1, E2 }", ed);
     }
 
-    @Test
+    [TestMethod]
     void removingModifiers() {
         EnumDeclaration ed = consider("public enum A { E1, E2 }");
         ed.setModifiers(new NodeList<>());
         assertTransformedToString("enum A { E1, E2 }", ed);
     }
 
-    @Test
+    [TestMethod]
     void replacingModifiers() {
         EnumDeclaration ed = consider("public enum A { E1, E2 }");
         ed.setModifiers(createModifierList(PROTECTED));
         assertTransformedToString("protected enum A { E1, E2 }", ed);
     }
 
-    @Test
+    [TestMethod]
     void addingConstants() {
         EnumDeclaration ed = consider("enum A {" + SYSTEM_EOL +
                 " E1" + SYSTEM_EOL +

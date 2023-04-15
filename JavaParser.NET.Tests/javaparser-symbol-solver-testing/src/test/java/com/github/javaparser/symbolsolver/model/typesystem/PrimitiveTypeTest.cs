@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -62,56 +62,56 @@ class PrimitiveTypeTest {
 
     }
 
-    @Test
+    [TestMethod]
     void testIsArray() {
         for (ResolvedPrimitiveType ptu : ResolvedPrimitiveType.values()) {
             assertEquals(false, ptu.isArray());
         }
     }
 
-    @Test
+    [TestMethod]
     void testIsPrimitive() {
         for (ResolvedPrimitiveType ptu : ResolvedPrimitiveType.values()) {
             assertEquals(true, ptu.isPrimitive());
         }
     }
 
-    @Test
+    [TestMethod]
     void testIsNull() {
         for (ResolvedPrimitiveType ptu : ResolvedPrimitiveType.values()) {
             assertEquals(false, ptu.isNull());
         }
     }
 
-    @Test
+    [TestMethod]
     void testIsReference() {
         for (ResolvedPrimitiveType ptu : ResolvedPrimitiveType.values()) {
             assertEquals(false, ptu.isReference());
         }
     }
 
-    @Test
+    [TestMethod]
     void testIsReferenceType() {
         for (ResolvedPrimitiveType ptu : ResolvedPrimitiveType.values()) {
             assertEquals(false, ptu.isReferenceType());
         }
     }
 
-    @Test
+    [TestMethod]
     void testIsVoid() {
         for (ResolvedPrimitiveType ptu : ResolvedPrimitiveType.values()) {
             assertEquals(false, ptu.isVoid());
         }
     }
 
-    @Test
+    [TestMethod]
     void testIsTypeVariable() {
         for (ResolvedPrimitiveType ptu : ResolvedPrimitiveType.values()) {
             assertEquals(false, ptu.isTypeVariable());
         }
     }
 
-    @Test
+    [TestMethod]
     void testAsReferenceTypeUsage() {
         for (ResolvedPrimitiveType ptu : ResolvedPrimitiveType.values()) {
             try {
@@ -122,7 +122,7 @@ class PrimitiveTypeTest {
         }
     }
 
-    @Test
+    [TestMethod]
     void testAsTypeParameter() {
         for (ResolvedPrimitiveType ptu : ResolvedPrimitiveType.values()) {
             try {
@@ -133,7 +133,7 @@ class PrimitiveTypeTest {
         }
     }
 
-    @Test
+    [TestMethod]
     void testAsArrayTypeUsage() {
         for (ResolvedPrimitiveType ptu : ResolvedPrimitiveType.values()) {
             try {
@@ -144,7 +144,7 @@ class PrimitiveTypeTest {
         }
     }
 
-    @Test
+    [TestMethod]
     void testAsDescribe() {
         assertEquals("boolean", ResolvedPrimitiveType.BOOLEAN.describe());
         assertEquals("char", ResolvedPrimitiveType.CHAR.describe());
@@ -156,7 +156,7 @@ class PrimitiveTypeTest {
         assertEquals("double", ResolvedPrimitiveType.DOUBLE.describe());
     }
 
-    @Test
+    [TestMethod]
     void testIsAssignableByOtherPrimitiveTypes() {
         assertEquals(true, ResolvedPrimitiveType.BOOLEAN.isAssignableBy(ResolvedPrimitiveType.BOOLEAN));
         assertEquals(false, ResolvedPrimitiveType.BOOLEAN.isAssignableBy(ResolvedPrimitiveType.CHAR));
@@ -231,7 +231,7 @@ class PrimitiveTypeTest {
         assertEquals(true, ResolvedPrimitiveType.DOUBLE.isAssignableBy(ResolvedPrimitiveType.DOUBLE));
     }
 
-    @Test
+    [TestMethod]
     void testIsAssignableByBoxedTypes() {
         assertEquals(true, ResolvedPrimitiveType.BOOLEAN.isAssignableBy(booleanBox));
         assertEquals(false, ResolvedPrimitiveType.BOOLEAN.isAssignableBy(characterBox));
@@ -306,7 +306,7 @@ class PrimitiveTypeTest {
         assertEquals(true, ResolvedPrimitiveType.DOUBLE.isAssignableBy(doubleBox));
     }
 
-    @Test
+    [TestMethod]
     void testIsAssignableByAnythingElse() {
         for (ResolvedPrimitiveType ptu : ResolvedPrimitiveType.values()) {
             assertEquals(false, ptu.isAssignableBy(OBJECT));
@@ -318,7 +318,7 @@ class PrimitiveTypeTest {
         }
     }
     
-    @Test
+    [TestMethod]
     void testIsNumeric() {
     	assertFalse(ResolvedPrimitiveType.BOOLEAN.isNumeric());
     	assertTrue(ResolvedPrimitiveType.CHAR.isNumeric());

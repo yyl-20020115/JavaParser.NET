@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,14 +24,14 @@ namespace com.github.javaparser.ast.expr;
 
 
 class ThisExprTest {
-    @Test
+    [TestMethod]
     void justThis() {
         Expression expr = parseExpression("this");
 
         assertTrue(expr.isThisExpr());
     }
 
-    @Test
+    [TestMethod]
     void justThisName() {
         JavaParser javaParser = new JavaParser(new ParserConfiguration()
                 .setStoreTokens(false));
@@ -40,7 +40,7 @@ class ThisExprTest {
         assertEquals("c", fieldAccess.getName().asString());
     }
 
-    @Test
+    [TestMethod]
     void singleScopeThis() {
         Expression expr = parseExpression("A.this");
 
@@ -49,7 +49,7 @@ class ThisExprTest {
         assertEquals("A", className.asString());
     }
 
-    @Test
+    [TestMethod]
     void singleScopeThisName() {
         JavaParser javaParser = new JavaParser(new ParserConfiguration()
                 .setStoreTokens(false));
@@ -58,7 +58,7 @@ class ThisExprTest {
         assertEquals("c", fieldAccess.getName().asString());
     }
 
-    @Test
+    [TestMethod]
     void multiScopeThis() {
         Expression expr = parseExpression("a.B.this");
 
@@ -67,7 +67,7 @@ class ThisExprTest {
         assertEquals("a.B", className.asString());
     }
 
-    @Test
+    [TestMethod]
     void multiScopeThisName() {
         JavaParser javaParser = new JavaParser(new ParserConfiguration()
                 .setStoreTokens(false));

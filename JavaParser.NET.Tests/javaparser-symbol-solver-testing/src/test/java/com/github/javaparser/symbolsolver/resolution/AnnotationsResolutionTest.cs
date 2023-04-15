@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -32,7 +32,7 @@ namespace com.github.javaparser.symbolsolver.resolution;
 class AnnotationsResolutionTest extends AbstractResolutionTest {
 
     @BeforeEach
-    void configureSymbolSolver() throws IOException {
+    void configureSymbolSolver(){
         // configure symbol solver before parsing
         CombinedTypeSolver typeSolver = new CombinedTypeSolver();
         typeSolver.add(new ReflectionTypeSolver());
@@ -40,7 +40,7 @@ class AnnotationsResolutionTest extends AbstractResolutionTest {
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(typeSolver));
     }
 
-    @Test
+    [TestMethod]
     void solveJavaParserMarkerAnnotation() {
         // parse compilation unit and get annotation expression
         CompilationUnit cu = parseSample("Annotations");
@@ -56,7 +56,7 @@ class AnnotationsResolutionTest extends AbstractResolutionTest {
         assertEquals("MyAnnotation", resolved.getName());
     }
 
-    @Test
+    [TestMethod]
     void solveJavaParserSingleMemberAnnotation() {
         // parse compilation unit and get annotation expression
         CompilationUnit cu = parseSample("Annotations");
@@ -72,7 +72,7 @@ class AnnotationsResolutionTest extends AbstractResolutionTest {
         assertEquals("MyAnnotationWithSingleValue", resolved.getName());
     }
     
-    @Test
+    [TestMethod]
     void solveJavaParserSingleMemberAnnotationAndDefaultvalue() {
         // parse compilation unit and get annotation expression
         CompilationUnit cu = parseSample("Annotations");
@@ -87,7 +87,7 @@ class AnnotationsResolutionTest extends AbstractResolutionTest {
         assertEquals(IntegerLiteralExpr.class, memberValue.getClass());
     }
 
-    @Test
+    [TestMethod]
     void solveJavaParserNormalAnnotation() {
         // parse compilation unit and get annotation expression
         CompilationUnit cu = parseSample("Annotations");
@@ -103,7 +103,7 @@ class AnnotationsResolutionTest extends AbstractResolutionTest {
         assertEquals("MyAnnotationWithElements", resolved.getName());
     }
 
-    @Test
+    [TestMethod]
     void solveReflectionMarkerAnnotation() {
         // parse compilation unit and get annotation expression
         CompilationUnit cu = parseSample("Annotations");
@@ -120,8 +120,8 @@ class AnnotationsResolutionTest extends AbstractResolutionTest {
         assertEquals("Override", resolved.getName());
     }
     
-    @Test
-    void solveReflectionMarkerAnnotationWithDefault() throws IOException {
+    [TestMethod]
+    void solveReflectionMarkerAnnotationWithDefault(){
         // parse compilation unit and get annotation expression
         CompilationUnit cu = parseSample("Annotations");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "CH");
@@ -142,7 +142,7 @@ class AnnotationsResolutionTest extends AbstractResolutionTest {
         assertEquals("boolean", rt.describe());
     }
 
-    @Test
+    [TestMethod]
     void solveReflectionSingleMemberAnnotation() {
         // parse compilation unit and get annotation expression
         CompilationUnit cu = parseSample("Annotations");
@@ -162,8 +162,8 @@ class AnnotationsResolutionTest extends AbstractResolutionTest {
         assertEquals("SuppressWarnings", resolved.getName());
     }
 
-    @Test
-    void solveJavassistMarkerAnnotation() throws IOException {
+    [TestMethod]
+    void solveJavassistMarkerAnnotation(){
         // parse compilation unit and get annotation expression
         CompilationUnit cu = parseSample("Annotations");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "CA");
@@ -179,8 +179,8 @@ class AnnotationsResolutionTest extends AbstractResolutionTest {
         assertEquals("Before", resolved.getName());
     }
 
-    @Test
-    void solveJavassistSingleMemberAnnotation() throws IOException {
+    [TestMethod]
+    void solveJavassistSingleMemberAnnotation(){
         // parse compilation unit and get annotation expression
         CompilationUnit cu = parseSample("Annotations");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "CC");
@@ -196,8 +196,8 @@ class AnnotationsResolutionTest extends AbstractResolutionTest {
         assertEquals("Ignore", resolved.getName());
     }
 
-    @Test
-    void solveJavassistNormalAnnotation() throws IOException {
+    [TestMethod]
+    void solveJavassistNormalAnnotation(){
         // parse compilation unit and get annotation expression
         CompilationUnit cu = parseSample("Annotations");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "CD");
@@ -213,8 +213,8 @@ class AnnotationsResolutionTest extends AbstractResolutionTest {
         assertEquals("Test", resolved.getName());
     }
     
-    @Test
-    void solveJavassistNormalAnnotationWithDefault() throws IOException {
+    [TestMethod]
+    void solveJavassistNormalAnnotationWithDefault(){
         // parse compilation unit and get annotation expression
         CompilationUnit cu = parseSample("Annotations");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "CG");
@@ -232,7 +232,7 @@ class AnnotationsResolutionTest extends AbstractResolutionTest {
         assertEquals("java.lang.String", rt.describe());
     }
 
-    @Test
+    [TestMethod]
     void solveJavaParserMetaAnnotations() {
         // parse compilation unit and get annotation expression
         CompilationUnit cu = parseSample("Annotations");
@@ -249,7 +249,7 @@ class AnnotationsResolutionTest extends AbstractResolutionTest {
         assertFalse(resolved.hasDirectlyAnnotation("java.lang.annotation.Documented"));
     }
 
-    @Test
+    [TestMethod]
     void solveReflectionMetaAnnotations() {
         // parse compilation unit and get annotation expression
         CompilationUnit cu = parseSample("Annotations");
@@ -267,26 +267,26 @@ class AnnotationsResolutionTest extends AbstractResolutionTest {
         assertFalse(resolved.hasDirectlyAnnotation("java.lang.annotation.Documented"));
     }
 
-    @Test
-    void solveJavassistMetaAnnotation() throws IOException {
+    [TestMethod]
+    void solveJavassistMetaAnnotation(){
         // parse compilation unit and get annotation expression
         CompilationUnit cu = parseSample("Annotations");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "CD");
         MethodDeclaration method = Navigator.demandMethod(clazz, "testSomethingElse");
         AnnotationExpr annotationExpr = method.getAnnotation(0);
 
-        // resolve annotation expression @Test
+        // resolve annotation expression [TestMethod]
         JavassistAnnotationDeclaration resolved = (JavassistAnnotationDeclaration) annotationExpr.resolve();
 
-        // check that the annotation @Test has the annotations @Target and @Retention, but not @Documented
+        // check that the annotation [TestMethod] has the annotations @Target and @Retention, but not @Documented
         assertEquals("org.junit.Test", resolved.getQualifiedName());
         assertTrue(resolved.hasDirectlyAnnotation("java.lang.annotation.Target"));
         assertTrue(resolved.hasDirectlyAnnotation("java.lang.annotation.Retention"));
         assertFalse(resolved.hasDirectlyAnnotation("java.lang.annotation.Documented"));
     }
 
-    @Test
-    void solveQualifiedAnnotation() throws IOException {
+    [TestMethod]
+    void solveQualifiedAnnotation(){
         CompilationUnit cu = parseSample("Annotations");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "CE");
         AnnotationExpr annotationOnClass = clazz.getAnnotation(0);
@@ -300,8 +300,8 @@ class AnnotationsResolutionTest extends AbstractResolutionTest {
         assertEquals("org.junit.Ignore", resolvedAnnotationOnMethod.getQualifiedName());
     }
 
-    @Test
-    void solveQualifiedAnnotationWithReferenceTypeHasAnnotationAsWell() throws IOException {
+    [TestMethod]
+    void solveQualifiedAnnotationWithReferenceTypeHasAnnotationAsWell(){
         CompilationUnit cu = parseSample("Annotations");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "CE");
         ResolvedReferenceTypeDeclaration referenceType = clazz.resolve();
@@ -311,8 +311,8 @@ class AnnotationsResolutionTest extends AbstractResolutionTest {
         assertTrue(hasAnnotation, "org.junit.runner.RunWith not found on reference type");
     }
 
-    @Test
-    void solveAnnotationAncestor() throws IOException {
+    [TestMethod]
+    void solveAnnotationAncestor(){
         CompilationUnit cu = parseSample("Annotations");
         AnnotationDeclaration ad = Navigator.findType(cu, "MyAnnotation").get().asAnnotationDeclaration();
         ResolvedReferenceTypeDeclaration referenceType = ad.resolve();
@@ -322,15 +322,15 @@ class AnnotationsResolutionTest extends AbstractResolutionTest {
         assertEquals(ancestors.get(0).getQualifiedName(), "java.lang.annotation.Annotation");
     }
 
-    @Test
-    void solvePrimitiveAnnotationMember() throws IOException {
+    [TestMethod]
+    void solvePrimitiveAnnotationMember(){
         CompilationUnit cu = parseSample("Annotations");
         AnnotationDeclaration ad = Navigator.findType(cu, "MyAnnotationWithSingleValue").get().asAnnotationDeclaration();
         assertEquals(ad.getMember(0).asAnnotationMemberDeclaration().resolve().getType().asPrimitive().describe(), "int");
     }
 
-    @Test
-    void solveInnerClassAnnotationMember() throws IOException {
+    [TestMethod]
+    void solveInnerClassAnnotationMember(){
         CompilationUnit cu = parseSample("Annotations");
         AnnotationDeclaration ad = Navigator.findType(cu, "MyAnnotationWithInnerClass").get().asAnnotationDeclaration();
         ResolvedAnnotationMemberDeclaration am = ad.getMember(0).asAnnotationMemberDeclaration().resolve();

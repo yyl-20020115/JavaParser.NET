@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,7 +25,7 @@ namespace com.github.javaparser.ast.validator;
 /**
  * A validator that validates a known node type.
  */
-public interface TypedValidator<N extends Node> extends BiConsumer<N, ProblemReporter> {
+public interface TypedValidator<N:Node>:BiConsumer<N, ProblemReporter> {
 
     /**
      * @param node            the node that wants to be validated
@@ -33,12 +33,12 @@ public interface TypedValidator<N extends Node> extends BiConsumer<N, ProblemRep
      */
     void accept(N node, ProblemReporter problemReporter);
 
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     default Processor processor() {
         return new Processor() {
 
             @Override
-            public void postProcess(ParseResult<? extends Node> result, ParserConfiguration configuration) {
+            public void postProcess(ParseResult<?:Node> result, ParserConfiguration configuration) {
                 result.getResult().ifPresent(node -> accept((N) node, new ProblemReporter(problem -> result.getProblems().add(problem))));
             }
         };

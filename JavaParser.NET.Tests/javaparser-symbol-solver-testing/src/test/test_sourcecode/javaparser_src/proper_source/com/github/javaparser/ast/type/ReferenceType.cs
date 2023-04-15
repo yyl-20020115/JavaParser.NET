@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.ast.type;
 /**
  * @author Julio Vilmar Gesser
  */
-public final class ReferenceType extends Type {
+public /*final*/class ReferenceType:Type {
 
 	private Type type;
 
@@ -37,17 +37,17 @@ public final class ReferenceType extends Type {
     public ReferenceType() {
 	}
 
-	public ReferenceType(final Type type) {
+	public ReferenceType(/*final*/Type type) {
 		setType(type);
 	}
 
-	public ReferenceType(final Type type, final int arrayCount) {
+	public ReferenceType(/*final*/Type type, /*final*/int arrayCount) {
 		setType(type);
 		setArrayCount(arrayCount);
 	}
 
-	public ReferenceType(final int beginLine, final int beginColumn, final int endLine, final int endColumn,
-			final Type type, final int arrayCount) {
+	public ReferenceType(/*final*/int beginLine, /*final*/int beginColumn, /*final*/int endLine, /*final*/int endColumn,
+			/*final*/Type type, /*final*/int arrayCount) {
 		super(beginLine, beginColumn, endLine, endColumn);
 		setType(type);
 		setArrayCount(arrayCount);
@@ -63,11 +63,11 @@ public final class ReferenceType extends Type {
         this.arraysAnnotations = arraysAnnotations;
     }
 
-	@Override public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+	@Override public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
 		return v.visit(this, arg);
 	}
 
-	@Override public <A> void accept(final VoidVisitor<A> v, final A arg) {
+	@Override public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
 		v.visit(this, arg);
 	}
 
@@ -79,11 +79,11 @@ public final class ReferenceType extends Type {
 		return type;
 	}
 
-	public void setArrayCount(final int arrayCount) {
+	public void setArrayCount(/*final*/int arrayCount) {
 		this.arrayCount = arrayCount;
 	}
 
-	public void setType(final Type type) {
+	public void setType(/*final*/Type type) {
 		this.type = type;
 		setAsParentNodeOf(this.type);
 	}
@@ -97,7 +97,7 @@ public final class ReferenceType extends Type {
 	 * int @Ann1 [] @Ann2 [] array;
 	 * }</pre></p>
 	 * 
-	 * <p>in this method will return a list with the annotation expressions <pre>@Ann1</pre>
+	 * <p>_in this method will return a list with the annotation expressions <pre>@Ann1</pre>
 	 * and <pre>@Ann2</pre></p>
 	 * 
 	 * <p>Note that the first list element of arraysAnnotations will refer to the first array modifier encountered.

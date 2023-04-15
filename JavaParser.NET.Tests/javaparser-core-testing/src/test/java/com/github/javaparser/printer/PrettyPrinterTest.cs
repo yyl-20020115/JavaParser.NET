@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,12 +26,12 @@ namespace com.github.javaparser.printer;
 
 class PrettyPrinterTest {
 
-    private String prettyPrintField(String code) {
+    private string prettyPrintField(string code) {
         CompilationUnit cu = parse(code);
         return new DefaultPrettyPrinter().print(cu.findFirst(FieldDeclaration.class).get());
     }
 
-    private String prettyPrintVar(String code) {
+    private string prettyPrintVar(string code) {
         CompilationUnit cu = parse(code);
         return new DefaultPrettyPrinter().print(cu.findAll(VariableDeclarationExpr.class).get(0));
     }
@@ -40,9 +40,9 @@ class PrettyPrinterTest {
         return config.get(new DefaultConfigurationOption(cOption));
     }
 
-    @Test
+    [TestMethod]
     void printingArrayFields() {
-        String code;
+        string code;
         code = "class A { int a, b[]; }";
         assertEquals("int a, b[];", prettyPrintField(code));
 
@@ -59,9 +59,9 @@ class PrettyPrinterTest {
         assertEquals("int[] a, b;", prettyPrintField(code));
     }
 
-    @Test
+    [TestMethod]
     void printingArrayVariables() {
-        String code;
+        string code;
         code = "class A { void foo(){ int a, b[]; }}";
         assertEquals("int a, b[]", prettyPrintVar(code));
 
@@ -78,7 +78,7 @@ class PrettyPrinterTest {
         assertEquals("int[] a, b", prettyPrintVar(code));
     }
 
-    private String prettyPrintConfigurable(String code) {
+    private string prettyPrintConfigurable(string code) {
         CompilationUnit cu = parse(code);
         PrinterConfiguration configuration = new DefaultPrinterConfiguration();
         Function<PrinterConfiguration, VoidVisitor<Void>> visitorFactory = (config) -> new TestVisitor(config, new SourcePrinter(config));
@@ -86,20 +86,20 @@ class PrettyPrinterTest {
         return printer.print(cu.findFirst(ClassOrInterfaceDeclaration.class).get());
     }
 
-    @Test
+    [TestMethod]
     void printUseTestVisitor() {
-        String code;
+        string code;
         code = "class A { void foo(){ int a, b[]; }}";
         assertEquals("test", prettyPrintConfigurable(code));
     }
 
-    @Test
+    [TestMethod]
     void prettyColumnAlignParameters_enabled() {
         PrinterConfiguration config = new DefaultPrinterConfiguration().addOption(new DefaultConfigurationOption(ConfigOption.COLUMN_ALIGN_PARAMETERS));
-        final String EOL = getOption(config, ConfigOption.END_OF_LINE_CHARACTER).get().asValue();
+        /*final*/string EOL = getOption(config, ConfigOption.END_OF_LINE_CHARACTER).get().asValue();
         
-        String code = "class Example { void foo(Object arg0,Object arg1){ myMethod(1, 2, 3, 5, Object.class); } }";
-        String expected = "class Example {" + EOL +
+        string code = "class Example { void foo(Object arg0,Object arg1){ myMethod(1, 2, 3, 5, Object.class); } }";
+        string expected = "class Example {" + EOL +
                 "" + EOL +
                 "    void foo(Object arg0, Object arg1) {" + EOL +
                 "        myMethod(1," + EOL +
@@ -114,14 +114,14 @@ class PrettyPrinterTest {
         assertEquals(expected, new DefaultPrettyPrinter(config).print(parse(code)));
     }
 
-    @Test
+    [TestMethod]
     void prettyColumnAlignParameters_disabled() {
         
         PrinterConfiguration config = new DefaultPrinterConfiguration();
-        final String EOL = getOption(config, ConfigOption.END_OF_LINE_CHARACTER).get().asValue();
+        /*final*/string EOL = getOption(config, ConfigOption.END_OF_LINE_CHARACTER).get().asValue();
 
-        String code = "class Example { void foo(Object arg0,Object arg1){ myMethod(1, 2, 3, 5, Object.class); } }";
-        String expected = "class Example {" + EOL +
+        string code = "class Example { void foo(Object arg0,Object arg1){ myMethod(1, 2, 3, 5, Object.class); } }";
+        string expected = "class Example {" + EOL +
                 "" + EOL +
                 "    void foo(Object arg0, Object arg1) {" + EOL +
                 "        myMethod(1, 2, 3, 5, Object.class);" + EOL +
@@ -132,21 +132,21 @@ class PrettyPrinterTest {
         assertEquals(expected, new DefaultPrettyPrinter(config).print(parse(code)));
     }
 
-    @Test
+    [TestMethod]
     void prettyAlignMethodCallChains_enabled() {
         
         PrinterConfiguration config = new DefaultPrinterConfiguration().addOption(new DefaultConfigurationOption(ConfigOption.COLUMN_ALIGN_FIRST_METHOD_CHAIN));
-        final String EOL = getOption(config, ConfigOption.END_OF_LINE_CHARACTER).get().asValue();
+        /*final*/string EOL = getOption(config, ConfigOption.END_OF_LINE_CHARACTER).get().asValue();
 
-        String code = "class Example { void foo() { IntStream.range(0, 10).filter(x -> x % 2 == 0).map(x -> x * IntStream.of(1,3,5,1).sum()).forEach(System.out::println); } }";
-        String expected = "class Example {" + EOL +
+        string code = "class Example { void foo() { IntStream.range(0, 10).filter(x -> x % 2 == 0).map(x -> x * IntStream.of(1,3,5,1).sum()).forEach(System._out::println); } }";
+        string expected = "class Example {" + EOL +
                 "" + EOL +
                 "    void foo() {" + EOL +
                 "        IntStream.range(0, 10)" + EOL +
                 "                 .filter(x -> x % 2 == 0)" + EOL +
                 "                 .map(x -> x * IntStream.of(1, 3, 5, 1)" + EOL +
                 "                                        .sum())" + EOL +
-                "                 .forEach(System.out::println);" + EOL +
+                "                 .forEach(System._out::println);" + EOL +
                 "    }" + EOL +
                 "}" + EOL +
                 "";
@@ -154,39 +154,39 @@ class PrettyPrinterTest {
         assertEquals(expected, new DefaultPrettyPrinter(config).print(parse(code)));
     }
 
-    @Test
+    [TestMethod]
     void prettyAlignMethodCallChains_disabled() {
         
         PrinterConfiguration config = new DefaultPrinterConfiguration();
-        final String EOL = getOption(config, ConfigOption.END_OF_LINE_CHARACTER).get().asValue();
+        /*final*/string EOL = getOption(config, ConfigOption.END_OF_LINE_CHARACTER).get().asValue();
 
-        String code = "class Example { void foo() { IntStream.range(0, 10).filter(x -> x % 2 == 0).map(x -> x * IntStream.of(1,3,5,1).sum()).forEach(System.out::println); } }";
-        String expected = "class Example {" + EOL +
+        string code = "class Example { void foo() { IntStream.range(0, 10).filter(x -> x % 2 == 0).map(x -> x * IntStream.of(1,3,5,1).sum()).forEach(System._out::println); } }";
+        string expected = "class Example {" + EOL +
                 "" + EOL +
                 "    void foo() {" + EOL +
-                "        IntStream.range(0, 10).filter(x -> x % 2 == 0).map(x -> x * IntStream.of(1, 3, 5, 1).sum()).forEach(System.out::println);" + EOL +
+                "        IntStream.range(0, 10).filter(x -> x % 2 == 0).map(x -> x * IntStream.of(1, 3, 5, 1).sum()).forEach(System._out::println);" + EOL +
                 "    }" + EOL +
                 "}" + EOL +
                 "";
 
-        String printed = new DefaultPrettyPrinter(config).print(parse(code));
+        string printed = new DefaultPrettyPrinter(config).print(parse(code));
         
         assertEquals(expected, printed);
     }
 
-    @Test
+    [TestMethod]
     void enumConstantsHorizontally() {
         CompilationUnit cu = parse("enum X{A, B, C, D, E}");
         assertEqualsStringIgnoringEol("enum X {\n\n    A, B, C, D, E\n}\n", new DefaultPrettyPrinter().print(cu));
     }
 
-    @Test
+    [TestMethod]
     void enumConstantsVertically() {
         CompilationUnit cu = parse("enum X{A, B, C, D, E, F}");
         assertEqualsStringIgnoringEol("enum X {\n\n    A,\n    B,\n    C,\n    D,\n    E,\n    F\n}\n", new DefaultPrettyPrinter().print(cu));
     }
 
-    @Test
+    [TestMethod]
     void printingInconsistentVariables() {
         FieldDeclaration fieldDeclaration = parseBodyDeclaration("int a, b;").asFieldDeclaration();
 
@@ -201,7 +201,7 @@ class PrettyPrinterTest {
         assertEquals("double a, b;", fieldDeclaration.toString());
     }
 
-    @Test
+    [TestMethod]
     void prettyAlignMethodCallChainsIndentsArgumentsWithBlocksCorrectly() {
 
         CompilationUnit cu = parse("class Foo { void bar() { a.b.c.d.e; a.b.c().d().e(); a.b.c().d.e(); foo().bar().baz(boo().baa().bee()).bam(); foo().bar().baz(boo().baa().bee()).bam; foo().bar(Long.foo().b.bar(), bam).baz(); foo().bar().baz(foo, () -> { boo().baa().bee(); }).baz(() -> { boo().baa().bee(); }).bam(() -> { boo().baa().bee(); }); } }");
@@ -212,7 +212,7 @@ class PrettyPrinterTest {
                 .addOption(new DefaultConfigurationOption(ConfigOption.COLUMN_ALIGN_PARAMETERS))
                 .addOption(new DefaultConfigurationOption(ConfigOption.INDENTATION, indentation));
         
-        String printed = new DefaultPrettyPrinter(config).print(cu);
+        string printed = new DefaultPrettyPrinter(config).print(cu);
         
         assertEqualsStringIgnoringEol("class Foo {\n" +
                 "\n" +
@@ -249,11 +249,11 @@ class PrettyPrinterTest {
                 "}\n", printed);
     }
 
-    @Test
+    [TestMethod]
     void noChainsIndentsInIf() {
         Statement cu = parseStatement("if (x.y().z()) { boo().baa().bee(); }");
 
-        String printed = new DefaultPrettyPrinter(new DefaultPrinterConfiguration()
+        string printed = new DefaultPrettyPrinter(new DefaultPrinterConfiguration()
                 .addOption(new DefaultConfigurationOption(ConfigOption.COLUMN_ALIGN_FIRST_METHOD_CHAIN)))
                 .print(cu);
 
@@ -263,11 +263,11 @@ class PrettyPrinterTest {
                 "}", printed);
     }
 
-    @Test
+    [TestMethod]
     void noChainsIndentsInFor() {
         Statement cu = parseStatement("for(int x=1; x.y().z(); x.z().z()) { boo().baa().bee(); }");
 
-        String printed = new DefaultPrettyPrinter(new DefaultPrinterConfiguration()
+        string printed = new DefaultPrettyPrinter(new DefaultPrinterConfiguration()
                 .addOption(new DefaultConfigurationOption(ConfigOption.COLUMN_ALIGN_FIRST_METHOD_CHAIN)))
                 .print(cu);
 
@@ -277,11 +277,11 @@ class PrettyPrinterTest {
                 "}", printed);
     }
 
-    @Test
+    [TestMethod]
     void noChainsIndentsInWhile() {
         Statement cu = parseStatement("while(x.y().z()) { boo().baa().bee(); }");
 
-        String printed = new DefaultPrettyPrinter(new DefaultPrinterConfiguration()
+        string printed = new DefaultPrettyPrinter(new DefaultPrinterConfiguration()
                 .addOption(new DefaultConfigurationOption(ConfigOption.COLUMN_ALIGN_FIRST_METHOD_CHAIN)))
                 .print(cu);
 
@@ -291,12 +291,12 @@ class PrettyPrinterTest {
                 "}", printed);
     }
 
-    @Test
+    [TestMethod]
     void indentWithTabsAsFarAsPossible() {
 
         CompilationUnit cu = parse("class Foo { void bar() { foo().bar().baz(() -> { boo().baa().bee(a, b, c); }).bam(); } }");
         Indentation indentation = new Indentation(TABS, 1);
-        String printed = new DefaultPrettyPrinter(new DefaultPrinterConfiguration()
+        string printed = new DefaultPrettyPrinter(new DefaultPrinterConfiguration()
                 .addOption(new DefaultConfigurationOption(ConfigOption.COLUMN_ALIGN_FIRST_METHOD_CHAIN))
                 .addOption(new DefaultConfigurationOption(ConfigOption.COLUMN_ALIGN_PARAMETERS))
                 .addOption(new DefaultConfigurationOption(ConfigOption.INDENTATION, indentation)))
@@ -317,7 +317,7 @@ class PrettyPrinterTest {
                 "}\n", printed);
     }
     
-    @Test
+    [TestMethod]
     void initializeWithSpecificConfiguration() {
         CompilationUnit cu = parse("class Foo { // this is a comment \n"
                 + "}");
@@ -326,18 +326,18 @@ class PrettyPrinterTest {
         
         Printer printer = new DefaultPrettyPrinter(config);
         assertFalse(printer.getConfiguration().get(new DefaultConfigurationOption(ConfigOption.PRINT_COMMENTS)).isPresent());
-        String printed = printer.print(cu);
+        string printed = printer.print(cu);
         assertEqualsStringIgnoringEol("class Foo {\n"
                 + "}\n", printed);
     }
                 
 
-    @Test
+    [TestMethod]
     void indentWithTabsAlignWithSpaces() {
 
         CompilationUnit cu = parse("class Foo { void bar() { foo().bar().baz(() -> { boo().baa().bee(a, b, c); }).baz(() -> { return boo().baa(); }).bam(); } }");
         Indentation indentation = new Indentation(TABS_WITH_SPACE_ALIGN, 1);
-        String printed = new DefaultPrettyPrinter(new DefaultPrinterConfiguration()
+        string printed = new DefaultPrettyPrinter(new DefaultPrinterConfiguration()
                 .addOption(new DefaultConfigurationOption(ConfigOption.COLUMN_ALIGN_FIRST_METHOD_CHAIN))
                 .addOption(new DefaultConfigurationOption(ConfigOption.COLUMN_ALIGN_PARAMETERS))
                 .addOption(new DefaultConfigurationOption(ConfigOption.INDENTATION, indentation)))
@@ -361,7 +361,7 @@ class PrettyPrinterTest {
                 "}\n", printed);
     }
 
-    @Test
+    [TestMethod]
     void printAnnotationsAtPrettyPlaces() {
 
         JavaParser javaParser = new JavaParser(new ParserConfiguration().setLanguageLevel(JAVA_9));
@@ -378,7 +378,7 @@ class PrettyPrinterTest {
                 "\n" +
                 "    @Documented\n" +
                 "    @Repeatable\n" +
-                "    String value();\n" +
+                "    string value();\n" +
                 "}\n" +
                 "\n" +
                 "@Documented\n" +
@@ -400,7 +400,7 @@ class PrettyPrinterTest {
                 "    @Documented\n" +
                 "    @Repeatable\n" +
                 "    void method(@Documented @Repeatable Class this) {\n" +
-                "        for (@Deprecated int i : arr4[0]) {\n" +
+                "        for (//@Deprecated int i : arr4[0]) {\n" +
                 "            x--;\n" +
                 "        }\n" +
                 "    }\n" +
@@ -425,7 +425,7 @@ class PrettyPrinterTest {
             throw new ParseProblemException(parseResult.getProblems());
         }
         CompilationUnit cu = parseResult.getResult().orElseThrow(AssertionError::new);
-        String printed = new DefaultPrettyPrinter().print(cu);
+        string printed = new DefaultPrettyPrinter().print(cu);
 
         assertEqualsStringIgnoringEol("@Documented\n" +
                 "@Repeatable\n" +
@@ -440,7 +440,7 @@ class PrettyPrinterTest {
                 "\n" +
                 "    @Documented\n" +
                 "    @Repeatable\n" +
-                "    String value();\n" +
+                "    string value();\n" +
                 "}\n" +
                 "\n" +
                 "@Documented\n" +
@@ -462,7 +462,7 @@ class PrettyPrinterTest {
                 "    @Documented\n" +
                 "    @Repeatable\n" +
                 "    void method(@Documented @Repeatable Class this) {\n" +
-                "        for (@Deprecated int i : arr4[0]) {\n" +
+                "        for (//@Deprecated int i : arr4[0]) {\n" +
                 "            x--;\n" +
                 "        }\n" +
                 "    }\n" +
@@ -485,9 +485,9 @@ class PrettyPrinterTest {
                 "}\n", printed);
     }
     
-    @Test
+    [TestMethod]
     public void testIssue2578() {
-        String code = 
+        string code = 
                 "class C{\n" +
                 "  //orphan\n" +
                 "  /*orphan*/\n" +
@@ -499,13 +499,13 @@ class PrettyPrinterTest {
         assertEquals(2, td.getAllContainedComments().size()); // the orphaned comments exist
     }
     
-    @Test
+    [TestMethod]
     public void testIssue2535() {
 
-        String code = 
+        string code = 
                 "public class A {\n" +
                 " public static A m() {\n" +
-                "  System.out.println(\"\");\n" +
+                "  System._out.println(\"\");\n" +
                 "  // TODO\n" +
                 "  /* TODO */\n" +
                 "  /** TODO */\n" +
@@ -522,7 +522,7 @@ class PrettyPrinterTest {
 
     }
     
-    @Test
+    [TestMethod]
     public void testIndentationWithDefaultSize() {
         Indentation indentation = new Indentation(IndentType.SPACES);
         assertTrue(indentation.getSize()==4);
@@ -533,14 +533,14 @@ class PrettyPrinterTest {
         assertEquals("  ", indentation.getIndent());
     }
     
-    @Test
+    [TestMethod]
     public void testIndentationWithCustomSize() {
         Indentation indentation = new Indentation(IndentType.TABS,2);
         assertTrue(indentation.getSize()==2);
         assertEquals("\t\t", indentation.getIndent());
     }
     
-    @Test
+    [TestMethod]
     public void testIndentationWithOnTheFlyModifcation() {
         Indentation indentation = new Indentation(IndentType.SPACES);
         // on-the-fly modification

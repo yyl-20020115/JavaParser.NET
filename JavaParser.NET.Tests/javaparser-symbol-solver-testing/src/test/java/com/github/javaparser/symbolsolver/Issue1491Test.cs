@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.symbolsolver;
 
 class Issue1491Test {
 
-    @Test
+    [TestMethod]
     void verifyIssue1491SolvingClassInSameFile() throws FileNotFoundException {
         File aJava = new File("src/test/resources/issue1491/A.java");
         if (!aJava.exists()) {
@@ -50,7 +50,7 @@ class Issue1491Test {
         }, null);
     }
 
-    @Test
+    [TestMethod]
     void verifyIssue1491ResolvingStaticMethodCalls() throws FileNotFoundException {
         File aJava = new File("src/test/resources/issue1491/A.java");
         if (!aJava.exists()) {
@@ -74,7 +74,7 @@ class Issue1491Test {
         }, null);
     }
 
-    @Test
+    [TestMethod]
     void verifyIssue1491Combined() throws FileNotFoundException {
         File aJava = new File("src/test/resources/issue1491/A.java");
         if (!aJava.exists()) {

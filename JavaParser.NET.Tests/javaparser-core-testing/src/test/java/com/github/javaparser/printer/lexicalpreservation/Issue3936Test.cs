@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,14 +23,14 @@ namespace com.github.javaparser.printer.lexicalpreservation;
 
 
 
-public class Issue3936Test extends AbstractLexicalPreservingTest {
-	static final String given = "package some.project;\n"
+public class Issue3936Test:AbstractLexicalPreservingTest {
+	static /*final*/string given = "package some.project;\n"
 			+ "\n"
 			+ "import java.util.Optional;\n"
 			+ "\n"
 			+ "public class SomeClass {\n"
 			+ "\n"
-			+ "	String html = \"\" + \"<html>\\n\"\n"
+			+ "	string html = \"\" + \"<html>\\n\"\n"
 			+ "			+ \"\\t<head>\\n\"\n"
 			+ "			+ \"\\t\\t<meta charset=\\\"utf-8\\\">\\n\"\n"
 			+ "			+ \"\\t</head>\\n\"\n"
@@ -40,25 +40,25 @@ public class Issue3936Test extends AbstractLexicalPreservingTest {
 			+ "			+ \"</html>\\n\";\n"
 			+ "}";
 
-	@Test
+	[TestMethod]
     void test() {
 		considerCode(given);
 
-		String newText = "\tfirstRow\n\tsecondRow\n\tthirdRow";
+		string newText = "\tfirstRow\n\tsecondRow\n\tthirdRow";
 
 		LexicalPreservingPrinter.setup(cu);
 
 		VariableDeclarator expr = cu.findFirst(VariableDeclarator.class).get();
 		expr.setInitializer(new TextBlockLiteralExpr(newText));
 
-		String actual = LexicalPreservingPrinter.print(cu);
-		String expected ="package some.project;\n"
+		string actual = LexicalPreservingPrinter.print(cu);
+		string expected ="package some.project;\n"
 				+ "\n"
 				+ "import java.util.Optional;\n"
 				+ "\n"
 				+ "public class SomeClass {\n"
 				+ "\n"
-				+ "	String html = \"\"\"\n"
+				+ "	string html = \"\"\"\n"
 				+ "\tfirstRow\n"
 				+ "\tsecondRow\n"
 				+ "\tthirdRow\"\"\";\n"

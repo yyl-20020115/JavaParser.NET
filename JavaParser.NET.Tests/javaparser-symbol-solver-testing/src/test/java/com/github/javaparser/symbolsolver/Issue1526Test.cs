@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,17 +26,17 @@ namespace com.github.javaparser.symbolsolver;
 
 
 /**
- * CompilationUnitContext.solveType(String name, TypeSolver typeSolver) checks package and imports in wrong order.
+ * CompilationUnitContext.solveType(string name, TypeSolver typeSolver) checks package and imports _in wrong order.
  * @see <a href="https://github.com/javaparser/javaparser/issues/1526">https://github.com/javaparser/javaparser/issues/1526</a>
  */
-public class Issue1526Test extends AbstractSymbolResolutionTest {
+public class Issue1526Test:AbstractSymbolResolutionTest {
 
-    private final Path testRoot = adaptPath("src/test/resources/issue1526");
-    private final Path rootCompiles = testRoot.resolve("compiles");
-    private final Path rootErrors = testRoot.resolve("errors");
+    private /*final*/Path testRoot = adaptPath("src/test/resources/issue1526");
+    private /*final*/Path rootCompiles = testRoot.resolve("compiles");
+    private /*final*/Path rootErrors = testRoot.resolve("errors");
 
-    @Test
-    public void givenImport_whenCompiles_expectPass() throws IOException {
+    [TestMethod]
+    public void givenImport_whenCompiles_expectPass(){
         Path root = rootCompiles;
         Path file = rootCompiles.resolve("a/b/c/ExampleClass.java");
 
@@ -45,8 +45,8 @@ public class Issue1526Test extends AbstractSymbolResolutionTest {
         });
     }
 
-    @Test
-    public void givenImportCommentOut_whenCompiles_expectFail() throws IOException {
+    [TestMethod]
+    public void givenImportCommentOut_whenCompiles_expectFail(){
         Path root = rootErrors;
         Path file = rootErrors.resolve("a/b/c/ExampleClass.java");
 
@@ -55,7 +55,7 @@ public class Issue1526Test extends AbstractSymbolResolutionTest {
         });
     }
 
-    private void doTest(Path root, Path file) throws IOException {
+    private void doTest(Path root, Path file){
         CombinedTypeSolver typeSolver = new CombinedTypeSolver();
         typeSolver.add(new ReflectionTypeSolver());
         typeSolver.add(new JavaParserTypeSolver(root, new LeanParserConfiguration()));

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,7 +27,7 @@ namespace com.github.javaparser.symbolsolver.resolution;
 /**
  * @author Federico Tomassetti
  */
-class SymbolSolverTest extends AbstractSymbolResolutionTest {
+class SymbolSolverTest:AbstractSymbolResolutionTest {
 
     private TypeSolver typeSolverNewCode;
     private Solver symbolSolver;
@@ -44,41 +44,41 @@ class SymbolSolverTest extends AbstractSymbolResolutionTest {
         symbolSolver = new SymbolSolver(typeSolverNewCode);
     }
 
-    @Test
+    [TestMethod]
     void testSolveSymbolUnexisting() {
         JavaParserClassDeclaration constructorDeclaration = (JavaParserClassDeclaration) typeSolverNewCode.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
 
-        SymbolReference<? extends ResolvedValueDeclaration> res = symbolSolver.solveSymbolInType(constructorDeclaration, "unexisting");
+        SymbolReference<?:ResolvedValueDeclaration> res = symbolSolver.solveSymbolInType(constructorDeclaration, "unexisting");
         assertFalse(res.isSolved());
     }
 
-    @Test
+    [TestMethod]
     void testSolveSymbolToDeclaredField() {
         JavaParserClassDeclaration constructorDeclaration = (JavaParserClassDeclaration) typeSolverNewCode.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
 
-        SymbolReference<? extends ResolvedValueDeclaration> res = symbolSolver.solveSymbolInType(constructorDeclaration, "name");
+        SymbolReference<?:ResolvedValueDeclaration> res = symbolSolver.solveSymbolInType(constructorDeclaration, "name");
         assertTrue(res.isSolved());
         assertTrue(res.getCorrespondingDeclaration().isField());
     }
 
-    @Test
+    [TestMethod]
     void testSolveSymbolToInheritedPublicField() {
         JavaParserClassDeclaration constructorDeclaration = (JavaParserClassDeclaration) typeSolverNewCode.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
 
-        SymbolReference<? extends ResolvedValueDeclaration> res = symbolSolver.solveSymbolInType(constructorDeclaration, "NODE_BY_BEGIN_POSITION");
+        SymbolReference<?:ResolvedValueDeclaration> res = symbolSolver.solveSymbolInType(constructorDeclaration, "NODE_BY_BEGIN_POSITION");
         assertTrue(res.isSolved());
         assertTrue(res.getCorrespondingDeclaration().isField());
     }
 
-    @Test
+    [TestMethod]
     void testSolveSymbolToInheritedPrivateField() {
         JavaParserClassDeclaration constructorDeclaration = (JavaParserClassDeclaration) typeSolverNewCode.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
 
-        SymbolReference<? extends ResolvedValueDeclaration> res = symbolSolver.solveSymbolInType(constructorDeclaration, "parentNode");
+        SymbolReference<?:ResolvedValueDeclaration> res = symbolSolver.solveSymbolInType(constructorDeclaration, "parentNode");
         assertFalse(res.isSolved());
     }
 
-    @Test
+    [TestMethod]
     void testSolvePackageLocalClass() {
         assertTrue(typeSolverNewCode.solveType("com.github.javaparser.FooClass").isClass());
     }

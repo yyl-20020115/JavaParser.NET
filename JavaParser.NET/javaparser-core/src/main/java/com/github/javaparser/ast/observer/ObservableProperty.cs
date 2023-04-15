@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,7 +25,7 @@ namespace com.github.javaparser.ast.observer;
 /**
  * Properties considered by the AstObserver
  */
-@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+//@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
 public enum ObservableProperty {
 
     ANNOTATIONS(Type.MULTIPLE_REFERENCE),
@@ -145,7 +145,7 @@ public enum ObservableProperty {
 
     private boolean derived;
 
-    public static ObservableProperty fromCamelCaseName(String camelCaseName) {
+    public static ObservableProperty fromCamelCaseName(string camelCaseName) {
         Optional<ObservableProperty> observableProperty = Arrays.stream(values()).filter(v -> v.camelCaseName().equals(camelCaseName)).findFirst();
         if (observableProperty.isPresent()) {
             return observableProperty.get();
@@ -188,16 +188,16 @@ public enum ObservableProperty {
         return !isMultiple();
     }
 
-    public String camelCaseName() {
+    public string camelCaseName() {
         return Utils.screamingToCamelCase(name());
     }
 
     public Node getValueAsSingleReference(Node node) {
         Object rawValue = getRawValue(node);
         try {
-            if (rawValue instanceof Node) {
+            if (rawValue is Node) {
                 return (Node) rawValue;
-            } else if (rawValue instanceof Optional) {
+            } else if (rawValue is Optional) {
                 Optional<Node> opt = (Optional<Node>) rawValue;
                 if (opt.isPresent()) {
                     return opt.get();
@@ -212,7 +212,7 @@ public enum ObservableProperty {
         }
     }
 
-    private boolean hasMethod(Node node, String name) {
+    private boolean hasMethod(Node node, string name) {
         try {
             node.getClass().getMethod(name);
             return true;
@@ -221,13 +221,13 @@ public enum ObservableProperty {
         }
     }
 
-    public NodeList<? extends Node> getValueAsMultipleReference(Node node) {
+    public NodeList<?:Node> getValueAsMultipleReference(Node node) {
         Object rawValue = getRawValue(node);
         try {
             if (rawValue == null) {
                 return null;
             }
-            if (rawValue instanceof NodeList) {
+            if (rawValue is NodeList) {
                 return (NodeList) rawValue;
             } else {
                 Optional<NodeList> opt = (Optional<NodeList>) rawValue;
@@ -251,7 +251,7 @@ public enum ObservableProperty {
         }
     }
 
-    public String getValueAsStringAttribute(Node node) {
+    public string getValueAsStringAttribute(Node node) {
         return (String) getRawValue(node);
     }
 
@@ -260,7 +260,7 @@ public enum ObservableProperty {
     }
 
     public Object getRawValue(Node node) {
-        String getterName = "get" + Utils.capitalize(camelCaseName());
+        string getterName = "get" + Utils.capitalize(camelCaseName());
         if (!hasMethod(node, getterName)) {
             getterName = "is" + Utils.capitalize(camelCaseName());
             if (!hasMethod(node, getterName)) {

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,7 +27,7 @@ namespace com.github.javaparser.generator.core.quality;
 /**
  * Generator to process annotations {@link com.github.javaparser.quality.NotNull}.
  */
-public class NotNullGenerator extends CompilationUnitGenerator {
+public class NotNullGenerator:CompilationUnitGenerator {
 
 	public NotNullGenerator(SourceRoot sourceRoot) {
 		super(sourceRoot);
@@ -85,7 +85,7 @@ public class NotNullGenerator extends CompilationUnitGenerator {
 	 *
 	 * @param <N>					The callable declaration type.
 	 */
-	protected <N extends CallableDeclaration<?>>
+	protected <N:CallableDeclaration<?>>
 		void generateQualityForParameter(N callableDeclaration, NodeList<Parameter> parameters, BlockStmt blockStmt) {
 
 		List<Statement> assertions = new ArrayList<>();
@@ -125,7 +125,7 @@ public class NotNullGenerator extends CompilationUnitGenerator {
 	 *
 	 * @param <N>					The callable declaration type.
 	 */
-	private <N extends CallableDeclaration<?>>
+	private <N:CallableDeclaration<?>>
 		void insertAssertionsInBlock(N callableDeclaration, BlockStmt blockStmt, List<Statement> assertions) {
 
 		// If there's nothing to add, just ignore
@@ -142,7 +142,7 @@ public class NotNullGenerator extends CompilationUnitGenerator {
 
 				// Check if the first item is a "super" expr. If it's then we add the assertions after it.
 				Statement firstStatement = optionalFirstStatement.get();
-				if (firstStatement instanceof ExplicitConstructorInvocationStmt) {
+				if (firstStatement is ExplicitConstructorInvocationStmt) {
 					position = 1;
 				}
 			}
@@ -152,7 +152,7 @@ public class NotNullGenerator extends CompilationUnitGenerator {
 		for (int i = 0 ; i < assertions.size() ; i++) {
 			Statement assertion = assertions.get(i);
 
-			Optional<? extends Statement> optOldStmt = getSimilarAssertionInBlock(assertion, blockStmt);
+			Optional<?:Statement> optOldStmt = getSimilarAssertionInBlock(assertion, blockStmt);
 
 			if (optOldStmt.isPresent()) {
 				optOldStmt.get().replace(assertion);
@@ -162,7 +162,7 @@ public class NotNullGenerator extends CompilationUnitGenerator {
 		}
 	}
 
-	private Optional<? extends Statement> getSimilarAssertionInBlock(Statement assertion, BlockStmt blockStmt) {
+	private Optional<?:Statement> getSimilarAssertionInBlock(Statement assertion, BlockStmt blockStmt) {
 
 		MethodCallExpr assertionCall = assertion.asExpressionStmt().getExpression().asMethodCallExpr();
 		List<MethodCallExpr> methodCallExpressions = blockStmt.findAll(MethodCallExpr.class);

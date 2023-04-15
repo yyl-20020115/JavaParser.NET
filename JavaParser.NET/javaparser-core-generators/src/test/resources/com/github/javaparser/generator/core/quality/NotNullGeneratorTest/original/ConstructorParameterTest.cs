@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,12 +24,12 @@ namespace com.example;
 
 class ConstructorParameterTest {
 
-	private final String a;
-	private final String b;
-	private final String c;
+	private /*final*/string a;
+	private /*final*/string b;
+	private /*final*/string c;
 
-	public ConstructorParameterTest(@NotNull String notNullString, @Nullable String nullableString,
-									String otherString) {
+	public ConstructorParameterTest(@NotNull string notNullString, @Nullable string nullableString,
+									string otherString) {
 		this.a = notNullString;
 		this.b = nullableString;
 		this.c = otherString;

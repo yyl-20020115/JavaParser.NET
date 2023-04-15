@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,23 +27,23 @@ namespace com.github.javaparser.ast.type;
 /**
  * @author Julio Vilmar Gesser
  */
-public final class PrimitiveType extends Type<PrimitiveType> implements NodeWithAnnotations<PrimitiveType> {
+public /*final*/class PrimitiveType:Type<PrimitiveType> implements NodeWithAnnotations<PrimitiveType> {
 
-	public static final PrimitiveType BYTE_TYPE = new PrimitiveType(Primitive.Byte);
+	public static /*final*/PrimitiveType BYTE_TYPE = new PrimitiveType(Primitive.Byte);
 
-	public static final PrimitiveType SHORT_TYPE = new PrimitiveType(Primitive.Short);
+	public static /*final*/PrimitiveType SHORT_TYPE = new PrimitiveType(Primitive.Short);
 
-	public static final PrimitiveType INT_TYPE = new PrimitiveType(Primitive.Int);
+	public static /*final*/PrimitiveType INT_TYPE = new PrimitiveType(Primitive.Int);
 
-	public static final PrimitiveType LONG_TYPE = new PrimitiveType(Primitive.Long);
+	public static /*final*/PrimitiveType LONG_TYPE = new PrimitiveType(Primitive.Long);
 
-	public static final PrimitiveType FLOAT_TYPE = new PrimitiveType(Primitive.Float);
+	public static /*final*/PrimitiveType FLOAT_TYPE = new PrimitiveType(Primitive.Float);
 
-	public static final PrimitiveType DOUBLE_TYPE = new PrimitiveType(Primitive.Double);
+	public static /*final*/PrimitiveType DOUBLE_TYPE = new PrimitiveType(Primitive.Double);
 
-	public static final PrimitiveType BOOLEAN_TYPE = new PrimitiveType(Primitive.Boolean);
+	public static /*final*/PrimitiveType BOOLEAN_TYPE = new PrimitiveType(Primitive.Boolean);
 
-	public static final PrimitiveType CHAR_TYPE = new PrimitiveType(Primitive.Char);
+	public static /*final*/PrimitiveType CHAR_TYPE = new PrimitiveType(Primitive.Char);
 
 	public enum Primitive {
 		Boolean ("Boolean"),
@@ -55,18 +55,18 @@ public final class PrimitiveType extends Type<PrimitiveType> implements NodeWith
 		Float   ("Float"),
 		Double  ("Double");
 
-		final String nameOfBoxedType;
+		/*final*/string nameOfBoxedType;
 
 		public ClassOrInterfaceType toBoxedType() {
 			return new ClassOrInterfaceType(nameOfBoxedType);
 		}
 
-		Primitive(String nameOfBoxedType) {
+		Primitive(string nameOfBoxedType) {
 			this.nameOfBoxedType = nameOfBoxedType;
 		}
 	}
 
-	static final HashMap<String, Primitive> unboxMap = new HashMap<>();
+	static /*final*/HashMap<String, Primitive> unboxMap = new HashMap<>();
 	static {
 		for(Primitive unboxedType : Primitive.values()) {
 			unboxMap.put(unboxedType.nameOfBoxedType, unboxedType);
@@ -78,20 +78,20 @@ public final class PrimitiveType extends Type<PrimitiveType> implements NodeWith
 	public PrimitiveType() {
 	}
 
-	public PrimitiveType(final Primitive type) {
+	public PrimitiveType(/*final*/Primitive type) {
 		this.type = type;
 	}
 
-	public PrimitiveType(Range range, final Primitive type) {
+	public PrimitiveType(Range range, /*final*/Primitive type) {
 		super(range);
 		setType(type);
 	}
 
-	@Override public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+	@Override public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
 		return v.visit(this, arg);
 	}
 
-	@Override public <A> void accept(final VoidVisitor<A> v, final A arg) {
+	@Override public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
 		v.visit(this, arg);
 	}
 
@@ -103,7 +103,7 @@ public final class PrimitiveType extends Type<PrimitiveType> implements NodeWith
 		return type.toBoxedType();
 	}
 
-	public PrimitiveType setType(final Primitive type) {
+	public PrimitiveType setType(/*final*/Primitive type) {
 		this.type = type;
 		return this;
 	}

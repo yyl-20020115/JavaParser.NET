@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,13 +24,13 @@ namespace com.github.javaparser.ast;
 
 
 
-class NodeListTest extends AbstractLexicalPreservingTest {
+class NodeListTest:AbstractLexicalPreservingTest {
 
-    @Test
+    [TestMethod]
     void replace() {
-        final NodeList<Name> list = nodeList(new Name("a"), new Name("b"), new Name("c"));
+        /*final*/NodeList<Name> list = nodeList(new Name("a"), new Name("b"), new Name("c"));
 
-        final boolean replaced = list.replace(new Name("b"), new Name("z"));
+        /*final*/boolean replaced = list.replace(new Name("b"), new Name("z"));
 
         assertTrue(replaced);
         assertEquals(3, list.size());
@@ -39,17 +39,17 @@ class NodeListTest extends AbstractLexicalPreservingTest {
         assertEquals("c", list.get(2).asString());
     }
 
-    @Test
+    [TestMethod]
     void toStringTest() {
-        final NodeList<Name> list = nodeList(new Name("abc"), new Name("bcd"), new Name("cde"));
+        /*final*/NodeList<Name> list = nodeList(new Name("abc"), new Name("bcd"), new Name("cde"));
 
         assertEquals(3, list.size());
         assertEquals("[abc, bcd, cde]", list.toString());
     }
 
-    @Test
+    [TestMethod]
     void addFirst() {
-        final NodeList<Name> list = nodeList(new Name("abc"), new Name("bcd"), new Name("cde"));
+        /*final*/NodeList<Name> list = nodeList(new Name("abc"), new Name("bcd"), new Name("cde"));
 
         list.addFirst(new Name("xxx"));
 
@@ -57,9 +57,9 @@ class NodeListTest extends AbstractLexicalPreservingTest {
         assertEquals("[xxx, abc, bcd, cde]", list.toString());
     }
 
-    @Test
+    [TestMethod]
     void addLast() {
-        final NodeList<Name> list = nodeList(new Name("abc"), new Name("bcd"), new Name("cde"));
+        /*final*/NodeList<Name> list = nodeList(new Name("abc"), new Name("bcd"), new Name("cde"));
 
         list.addLast(new Name("xxx"));
 
@@ -67,10 +67,10 @@ class NodeListTest extends AbstractLexicalPreservingTest {
         assertEquals("[abc, bcd, cde, xxx]", list.toString());
     }
 
-    @Test
+    [TestMethod]
     void addBefore() {
         Name n = new Name("bcd");
-        final NodeList<Name> list = nodeList(new Name("abc"), n, new Name("cde"));
+        /*final*/NodeList<Name> list = nodeList(new Name("abc"), n, new Name("cde"));
 
         list.addBefore(new Name("xxx"), n);
 
@@ -78,10 +78,10 @@ class NodeListTest extends AbstractLexicalPreservingTest {
         assertEquals("[abc, xxx, bcd, cde]", list.toString());
     }
 
-    @Test
+    [TestMethod]
     void addAfter() {
         Name n = new Name("bcd");
-        final NodeList<Name> list = nodeList(new Name("abc"), n, new Name("cde"));
+        /*final*/NodeList<Name> list = nodeList(new Name("abc"), n, new Name("cde"));
 
         list.addAfter(new Name("xxx"), n);
 
@@ -89,10 +89,10 @@ class NodeListTest extends AbstractLexicalPreservingTest {
         assertEquals("[abc, bcd, xxx, cde]", list.toString());
     }
 
-    @Test
+    [TestMethod]
     void addBeforeFirst() {
         Name abc = new Name("abc");
-        final NodeList<Name> list = nodeList(abc, new Name("bcd"), new Name("cde"));
+        /*final*/NodeList<Name> list = nodeList(abc, new Name("bcd"), new Name("cde"));
 
         list.addBefore(new Name("xxx"), abc);
 
@@ -100,10 +100,10 @@ class NodeListTest extends AbstractLexicalPreservingTest {
         assertEquals("[xxx, abc, bcd, cde]", list.toString());
     }
 
-    @Test
+    [TestMethod]
     void addAfterLast() {
         Name cde = new Name("cde");
-        final NodeList<Name> list = nodeList(new Name("abc"), new Name("bcd"), cde);
+        /*final*/NodeList<Name> list = nodeList(new Name("abc"), new Name("bcd"), cde);
 
         list.addAfter(new Name("xxx"), cde);
 
@@ -112,9 +112,9 @@ class NodeListTest extends AbstractLexicalPreservingTest {
     }
 
 
-    @Test
+    [TestMethod]
     public void getFirstWhenEmpty() {
-        final NodeList<Name> list = nodeList();
+        /*final*/NodeList<Name> list = nodeList();
 
         Optional<Name> first = list.getFirst();
 
@@ -122,9 +122,9 @@ class NodeListTest extends AbstractLexicalPreservingTest {
         assertEquals("Optional.empty", first.toString());
     }
 
-    @Test
+    [TestMethod]
     public void getFirstWhenNonEmpty() {
-        final NodeList<Name> list = nodeList(new Name("abc"), new Name("bcd"), new Name("cde"));
+        /*final*/NodeList<Name> list = nodeList(new Name("abc"), new Name("bcd"), new Name("cde"));
 
         Optional<Name> first = list.getFirst();
 
@@ -132,9 +132,9 @@ class NodeListTest extends AbstractLexicalPreservingTest {
         assertEquals("Optional[abc]", first.toString());
     }
 
-    @Test
+    [TestMethod]
     public void getLastWhenEmpty() {
-        final NodeList<Name> list = nodeList();
+        /*final*/NodeList<Name> list = nodeList();
 
         Optional<Name> last = list.getLast();
 
@@ -142,9 +142,9 @@ class NodeListTest extends AbstractLexicalPreservingTest {
         assertEquals("Optional.empty", last.toString());
     }
 
-    @Test
+    [TestMethod]
     public void getLastWhenNonEmpty() {
-        final NodeList<Name> list = nodeList(new Name("abc"), new Name("bcd"), new Name("cde"));
+        /*final*/NodeList<Name> list = nodeList(new Name("abc"), new Name("bcd"), new Name("cde"));
 
         Optional<Name> last = list.getLast();
 
@@ -199,7 +199,7 @@ class NodeListTest extends AbstractLexicalPreservingTest {
                 listReplacements = new ArrayList<>();
             }
 
-            @Test
+            [TestMethod]
             void whenAdd() {
                 assertEquals(0, propertyChanges.size());
                 assertEquals(0, parentChanges.size());
@@ -216,7 +216,7 @@ class NodeListTest extends AbstractLexicalPreservingTest {
                 assertEquals("Name ADDITION to/from NodeList at position 0", listChanges.get(0));
             }
 
-            @Test
+            [TestMethod]
             void whenRemove() {
                 iterator.add(new Name("abc"));
 
@@ -237,7 +237,7 @@ class NodeListTest extends AbstractLexicalPreservingTest {
                 assertEquals("Name REMOVAL to/from NodeList at position 0", listChanges.get(1));
             }
 
-            @Test
+            [TestMethod]
             void whenSet() {
                 iterator.add(new Name("abc"));
 
@@ -259,16 +259,16 @@ class NodeListTest extends AbstractLexicalPreservingTest {
             }
 
 
-            @Test
+            [TestMethod]
             void usageTest() {
-                final String REFERENCE_TO_BE_DELETED = "bad";
+                /*final*/string REFERENCE_TO_BE_DELETED = "bad";
                 considerCode("" +
                         "@MyAnnotation(myElements = {\"good\", \"bad\", \"ugly\"})\n" +
-                        "public final class MyClass {\n" +
+                        "public /*final*/class MyClass {\n" +
                         "}");
-                String expected = "" +
+                string expected = "" +
                         "@MyAnnotation(myElements = {\"good\", \"ugly\"})\n" +
-                        "public final class MyClass {\n" +
+                        "public /*final*/class MyClass {\n" +
                         "}";
 
                 List<NormalAnnotationExpr> annotations = cu.findAll(NormalAnnotationExpr.class);
@@ -277,13 +277,13 @@ class NodeListTest extends AbstractLexicalPreservingTest {
                     // testcase, per https://github.com/javaparser/javaparser/issues/2936#issuecomment-731370505
                     MemberValuePair mvp = annotation.getPairs().get(0);
                     Expression value = mvp.getValue();
-                    if ((value instanceof ArrayInitializerExpr)) {
+                    if ((value is ArrayInitializerExpr)) {
                         NodeList<Expression> myElements = ((ArrayInitializerExpr) value).getValues();
 
                         for (Iterator<Expression> iterator = myElements.iterator(); iterator.hasNext(); ) {
                             Node elt = iterator.next();
                             {
-                                String nameAsString = ((StringLiteralExpr) elt).asString();
+                                string nameAsString = ((StringLiteralExpr) elt).asString();
                                 if (REFERENCE_TO_BE_DELETED.equals(nameAsString))
                                     iterator.remove();
                             }
@@ -306,7 +306,7 @@ class NodeListTest extends AbstractLexicalPreservingTest {
                 iterator = list.listIterator();
             }
 
-            @Test
+            [TestMethod]
             void whenAdd() {
                 assertFalse(iterator.hasNext());
                 assertFalse(iterator.hasPrevious());
@@ -329,19 +329,19 @@ class NodeListTest extends AbstractLexicalPreservingTest {
                 iterator = list.listIterator();
             }
 
-            @Test
+            [TestMethod]
             void whenNext() {
                 assertThrows(NoSuchElementException.class, () -> {
                     iterator.next();
                 });
             }
 
-            @Test
+            [TestMethod]
             void whenHasNext() {
                 assertFalse(iterator.hasNext());
             }
 
-            @Test
+            [TestMethod]
             void whenAdd() {
                 assertFalse(iterator.hasNext());
                 assertFalse(iterator.hasPrevious());
@@ -351,7 +351,7 @@ class NodeListTest extends AbstractLexicalPreservingTest {
                 assertTrue(iterator.hasPrevious());
             }
 
-            @Test
+            [TestMethod]
             void whenSet() {
                 assertFalse(iterator.hasNext());
                 assertFalse(iterator.hasPrevious());
@@ -377,18 +377,18 @@ class NodeListTest extends AbstractLexicalPreservingTest {
                 iterator = list.iterator();
             }
 
-            @Test
+            [TestMethod]
             void whenNext() {
                 Name next = iterator.next();
                 assertNotNull(next);
             }
 
-            @Test
+            [TestMethod]
             void whenHasNext() {
                 assertTrue(iterator.hasNext());
             }
 
-            @Test
+            [TestMethod]
             void whenHasNextRepeated() {
                 assertTrue(iterator.hasNext());
                 assertTrue(iterator.hasNext());
@@ -396,7 +396,7 @@ class NodeListTest extends AbstractLexicalPreservingTest {
                 assertTrue(iterator.hasNext());
             }
 
-            @Test
+            [TestMethod]
             void whenHasNextThenNext() {
                 assertTrue(iterator.hasNext());
                 iterator.next();
@@ -406,7 +406,7 @@ class NodeListTest extends AbstractLexicalPreservingTest {
                 });
             }
 
-            @Test
+            [TestMethod]
             void whenRemove() {
                 Name current = iterator.next();
                 iterator.remove();

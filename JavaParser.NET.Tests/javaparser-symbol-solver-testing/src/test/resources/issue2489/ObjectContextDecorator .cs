@@ -1,6 +1,6 @@
-public class ObjectContextDecorator extends ObjectContext {
+public class ObjectContextDecorator:ObjectContext {
 
-    public void set(String objectTypePath, String characteristicName, Object value) {
+    public void set(string objectTypePath, string characteristicName, Object value) {
         //...
     }
 }

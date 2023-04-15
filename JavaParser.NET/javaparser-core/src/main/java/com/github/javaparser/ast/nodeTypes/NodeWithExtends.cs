@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,14 +23,14 @@ namespace com.github.javaparser.ast.nodeTypes;
 
 
 /**
- * A node that explicitly extends other types, using the {@code extends} keyword.
+ * A node that explicitly:other types, using the {@code extends} keyword.
  */
-public interface NodeWithExtends<N extends Node> {
+public interface NodeWithExtends<N:Node> {
 
     /**
      * @return All extended types that have been explicitly added (thus exist within the AST).
      *   Note that this can contain more than one item if this is an interface.
-     *   Note that this will not include {@code java.lang.Object} unless it is explicitly added (e.g. {@code class X extends Object {}})
+     *   Note that this will not include {@code java.lang.Object} unless it is explicitly added (e.g. {@code class X:Object {}})
      *   If you want the implicitly extended types, you will need a resolved reference.
      */
     NodeList<ClassOrInterfaceType> getExtendedTypes();
@@ -43,13 +43,13 @@ public interface NodeWithExtends<N extends Node> {
 
     N setExtendedTypes(NodeList<ClassOrInterfaceType> extendsList);
 
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     default N setExtendedType(int i, ClassOrInterfaceType extend) {
         getExtendedTypes().set(i, extend);
         return (N) this;
     }
 
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     default N addExtendedType(ClassOrInterfaceType extend) {
         getExtendedTypes().add(extend);
         return (N) this;
@@ -58,7 +58,7 @@ public interface NodeWithExtends<N extends Node> {
     /**
      * @deprecated use addExtendedType
      */
-    @Deprecated
+    //@Deprecated
     default N addExtends(Class<?> clazz) {
         return addExtendedType(clazz);
     }
@@ -66,8 +66,8 @@ public interface NodeWithExtends<N extends Node> {
     /**
      * @deprecated use addExtendedType
      */
-    @Deprecated
-    default N addExtends(String name) {
+    //@Deprecated
+    default N addExtends(string name) {
         return addExtendedType(name);
     }
 
@@ -85,11 +85,11 @@ public interface NodeWithExtends<N extends Node> {
     /**
      * Add an "extends" to this
      *
-     * @param name the name of the type to extends from
+     * @param name the name of the type to:from
      * @return this
      */
-    @SuppressWarnings("unchecked")
-    default N addExtendedType(String name) {
+    //@SuppressWarnings("unchecked")
+    default N addExtendedType(string name) {
         getExtendedTypes().add(parseClassOrInterfaceType(name));
         return (N) this;
     }

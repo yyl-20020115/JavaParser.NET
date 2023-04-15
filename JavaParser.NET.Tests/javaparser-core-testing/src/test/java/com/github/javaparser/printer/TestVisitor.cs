@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -22,14 +22,14 @@
 namespace com.github.javaparser.printer;
 
 
-public class TestVisitor extends DefaultPrettyPrinterVisitor {
+public class TestVisitor:DefaultPrettyPrinterVisitor {
 
     public TestVisitor(PrinterConfiguration configuration, SourcePrinter printer) {
         super(configuration, printer);
     }
     
     @Override
-    public void visit(final ClassOrInterfaceDeclaration n, final Void arg) {
+    public void visit(/*final*/ClassOrInterfaceDeclaration n, /*final*/Void arg) {
         printer.print("test");
     }
 }

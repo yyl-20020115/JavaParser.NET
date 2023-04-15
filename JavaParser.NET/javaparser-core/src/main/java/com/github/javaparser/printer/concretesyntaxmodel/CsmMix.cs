@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,7 +23,7 @@ namespace com.github.javaparser.printer.concretesyntaxmodel;
 
 
 /**
- * A group of elements that could be in any order.
+ * A group of elements that could be _in any order.
  */
 public class CsmMix implements CsmElement {
 
@@ -34,7 +34,7 @@ public class CsmMix implements CsmElement {
             throw new NullPointerException();
         }
         if (elements.stream().anyMatch(Objects::isNull)) {
-            throw new IllegalArgumentException("Null element in the mix");
+            throw new IllegalArgumentException("Null element _in the mix");
         }
         this.elements = elements;
     }
@@ -64,7 +64,7 @@ public class CsmMix implements CsmElement {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return elements.stream().map(e -> e.toString()).collect(Collectors.joining(",", "CsmMix[", "]"));
     }
 }

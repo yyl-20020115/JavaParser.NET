@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,7 +24,7 @@ namespace com.github.javaparser.ast.expr;
 
 
 class SwitchExprTest {
-    @Test
+    [TestMethod]
     void jep325Example2() {
         NodeList<Expression> entry2labels = parseStatement("int numLetters = switch (day) {\n" +
                 "    case MONDAY, FRIDAY, SUNDAY -> 6;\n" +
@@ -39,7 +39,7 @@ class SwitchExprTest {
         assertEquals("SUNDAY", entry2labels.get(2).toString());
     }
 
-    @Test
+    [TestMethod]
     void funkyExpressions() {
         parseStatement("int numLetters = switch (day) {\n" +
                 "    case 1+1, 2+2 -> 6;\n" +
@@ -48,19 +48,19 @@ class SwitchExprTest {
                 "};");
     }
 
-    @Test
+    [TestMethod]
     void jep325Example3() {
         parseBodyDeclaration("static void howMany(int k) {\n" +
                 "    switch (k) {\n" +
-                "        case 1 -> System.out.println(\"one\");\n" +
-                "        case 2 -> System.out.println(\"two\");\n" +
-                "        case 3 -> System.out.println(\"many\");\n" +
+                "        case 1 -> System._out.println(\"one\");\n" +
+                "        case 2 -> System._out.println(\"two\");\n" +
+                "        case 3 -> System._out.println(\"many\");\n" +
                 "    }\n" +
                 "}");
     }
 
 
-    @Test
+    [TestMethod]
     void aThrowStatement() {
         SwitchExpr switchExpr = parseExpression("switch (k) {\n" +
                 "        case 1 -> throw new Exception(\"one\");\n" +
@@ -69,7 +69,7 @@ class SwitchExprTest {
         assertEquals(THROWS_STATEMENT, switchExpr.getEntry(0).getType());
     }
 
-    @Test
+    [TestMethod]
     void jep325Example4() {
         SwitchExpr switchExpr = parseStatement("T result = switch (arg) {\n" +
                 "    case L1 -> e1;\n" +
@@ -80,7 +80,7 @@ class SwitchExprTest {
         assertEquals(EXPRESSION, switchExpr.getEntry(0).getType());
     }
 
-    @Test
+    [TestMethod]
     void jep325Example5() {
         SwitchExpr switchExpr = parseStatement("int j = switch (day) {\n" +
                 "    case MONDAY  -> 0;\n" +
@@ -96,7 +96,7 @@ class SwitchExprTest {
         assertEquals(BlockStmt.class, switchExpr.getEntry(2).getStatements().get(0).getClass());
     }
 
-    @Test
+    [TestMethod]
     void jep325Example6() {
         parseStatement("int result = switch (s) {\n" +
                 "    case \"Foo\": \n" +
@@ -104,12 +104,12 @@ class SwitchExprTest {
                 "    case \"Bar\":\n" +
                 "        yield 2;\n" +
                 "    default:\n" +
-                "        System.out.println(\"Neither Foo nor Bar, hmmm...\");\n" +
+                "        System._out.println(\"Neither Foo nor Bar, hmmm...\");\n" +
                 "        yield 0;\n" +
                 "};");
     }
 
-    @Test
+    [TestMethod]
     void yieldMethodCall() {
         parseStatement("int randomNumber = switch (5) {\n" +
                 "    default -> {\n" +
@@ -130,7 +130,7 @@ class SwitchExprTest {
                 "};");
     }
 
-    @Test
+    [TestMethod]
     void yieldExpression1() {
         parseStatement("int randomNumber = switch (5) {\n" +
                 "    default -> {\n" +
@@ -145,7 +145,7 @@ class SwitchExprTest {
                 "};");
     }
 
-    @Test
+    [TestMethod]
     void yieldExpression2() {
         parseStatement("boolean b = switch (5) {\n" +
                 "    case 3 -> {\n" +
@@ -157,7 +157,7 @@ class SwitchExprTest {
                 "};");
     }
 
-    @Test
+    [TestMethod]
     void yieldAssignment() {
         parseStatement("int randomNumber = switch (5) {\n" +
                 "    default -> {\n" +
@@ -171,7 +171,7 @@ class SwitchExprTest {
                 "};");
     }
 
-    @Test
+    [TestMethod]
     void yieldConditional() {
         parseStatement("int randomNumber = switch (5) {\n" +
                 "    default -> {\n" +
@@ -186,7 +186,7 @@ class SwitchExprTest {
                 "};");
     }
 
-    @Test
+    [TestMethod]
     void yieldYield() {
         parseStatement("yield = switch (yield) {\n" +
                 "    default -> {\n" +

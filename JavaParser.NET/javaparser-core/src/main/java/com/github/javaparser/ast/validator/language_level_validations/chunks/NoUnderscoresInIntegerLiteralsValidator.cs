@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -21,7 +21,7 @@
 namespace com.github.javaparser.ast.validator.language_level_validations.chunks;
 
 
-public class NoUnderscoresInIntegerLiteralsValidator extends VisitorValidator {
+public class NoUnderscoresInIntegerLiteralsValidator:VisitorValidator {
 
     @Override
     public void visit(IntegerLiteralExpr n, ProblemReporter arg) {
@@ -37,7 +37,7 @@ public class NoUnderscoresInIntegerLiteralsValidator extends VisitorValidator {
 
     private static void validate(LiteralStringValueExpr n, ProblemReporter arg) {
         if (n.getValue().contains("_")) {
-            arg.report(n, "Underscores in literal values are not supported.");
+            arg.report(n, "Underscores _in literal values are not supported.");
         }
     }
 }

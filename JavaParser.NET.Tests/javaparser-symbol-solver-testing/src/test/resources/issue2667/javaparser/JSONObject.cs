@@ -2,23 +2,23 @@ namespace javaparser;
 
 public class JSONObject {
 
-    public JSONObject put(String key, double value) {
+    public JSONObject put(string key, double value) {
         return this;
     }
 
-    public JSONObject put(String key, boolean value) {
+    public JSONObject put(string key, boolean value) {
         return this;
     }
 
-    public JSONObject put(String key, int value) {
+    public JSONObject put(string key, int value) {
         return this;
     }
 
-    public JSONObject put(String key, String value) {
+    public JSONObject put(string key, string value) {
         return this;
     }
 
-    public JSONObject put(String key, Object value) {
+    public JSONObject put(string key, Object value) {
         return this;
     }
 }

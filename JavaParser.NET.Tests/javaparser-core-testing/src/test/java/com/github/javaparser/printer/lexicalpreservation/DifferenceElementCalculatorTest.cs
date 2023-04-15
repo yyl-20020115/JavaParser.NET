@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,9 +24,9 @@ namespace com.github.javaparser.printer.lexicalpreservation;
 
 
 
-class DifferenceElementCalculatorTest extends AbstractLexicalPreservingTest {
+class DifferenceElementCalculatorTest:AbstractLexicalPreservingTest {
 
-    @Test
+    [TestMethod]
     void calculateDifferenceEmpty() {
         LexicalDifferenceCalculator.CalculatedSyntaxModel a = new LexicalDifferenceCalculator.CalculatedSyntaxModel(Collections.emptyList());
         LexicalDifferenceCalculator.CalculatedSyntaxModel b = new LexicalDifferenceCalculator.CalculatedSyntaxModel(Collections.emptyList());
@@ -34,7 +34,7 @@ class DifferenceElementCalculatorTest extends AbstractLexicalPreservingTest {
         assertEquals(0, differenceElements.size());
     }
 
-    @Test
+    [TestMethod]
     void calculateDifferenceAIsEmpty() {
         Node n1 = new FieldDeclaration();
         Node n2 = new MethodDeclaration();
@@ -53,7 +53,7 @@ class DifferenceElementCalculatorTest extends AbstractLexicalPreservingTest {
         assertEquals(added(new CsmChild(n2)), differenceElements.get(3));
     }
 
-    @Test
+    [TestMethod]
     void calculateDifferenceBIsEmpty() {
         Node n1 = new FieldDeclaration();
         Node n2 = new MethodDeclaration();
@@ -72,7 +72,7 @@ class DifferenceElementCalculatorTest extends AbstractLexicalPreservingTest {
         assertEquals(removed(new CsmChild(n2)), differenceElements.get(3));
     }
 
-    @Test
+    [TestMethod]
     void compilationUnitExampleWithPackageSetDiff() {
         considerCode("class A {}");
         CsmElement element = ConcreteSyntaxModel.forClass(cu.getClass());
@@ -86,8 +86,8 @@ class DifferenceElementCalculatorTest extends AbstractLexicalPreservingTest {
         assertEquals(kept(new CsmToken(eolTokenKind())), differenceElements.get(2));
     }
 
-    @Test
-    void annotationDeclarationExampleWithModifierAdded() throws IOException {
+    [TestMethod]
+    void annotationDeclarationExampleWithModifierAdded(){
         considerExample("AnnotationDeclaration_Example1_original");
         AnnotationDeclaration annotationDeclaration = (AnnotationDeclaration)cu.getType(0);
         CsmElement element = ConcreteSyntaxModel.forClass(annotationDeclaration.getClass());
@@ -121,8 +121,8 @@ class DifferenceElementCalculatorTest extends AbstractLexicalPreservingTest {
         assertEquals(i, differenceElements.size());
     }
 
-    @Test
-    void annotationDeclarationExampleWithNameChanged() throws IOException {
+    [TestMethod]
+    void annotationDeclarationExampleWithNameChanged(){
         considerExample("AnnotationDeclaration_Example1_original");
         AnnotationDeclaration annotationDeclaration = (AnnotationDeclaration)cu.getType(0);
         CsmElement element = ConcreteSyntaxModel.forClass(annotationDeclaration.getClass());
@@ -157,8 +157,8 @@ class DifferenceElementCalculatorTest extends AbstractLexicalPreservingTest {
         assertEquals(i, differenceElements.size());
     }
 
-    @Test
-    void annotationDeclarationExampleWithJavadocAdded() throws IOException {
+    [TestMethod]
+    void annotationDeclarationExampleWithJavadocAdded(){
         considerExample("AnnotationDeclaration_Example3_original");
         AnnotationDeclaration annotationDeclaration = (AnnotationDeclaration)cu.getType(0);
         CsmElement element = ConcreteSyntaxModel.forClass(annotationDeclaration.getClass());
@@ -193,8 +193,8 @@ class DifferenceElementCalculatorTest extends AbstractLexicalPreservingTest {
         assertEquals(i, differenceElements.size());
     }
 
-    @Test
-    void annotationDeclarationExampleWithJavadocRemoved() throws IOException {
+    [TestMethod]
+    void annotationDeclarationExampleWithJavadocRemoved(){
         considerExample("AnnotationDeclaration_Example9_original");
         AnnotationDeclaration annotationDeclaration = (AnnotationDeclaration)cu.getType(0);
         CsmElement element = ConcreteSyntaxModel.forClass(annotationDeclaration.getClass());
@@ -228,8 +228,8 @@ class DifferenceElementCalculatorTest extends AbstractLexicalPreservingTest {
         assertEquals(i, differenceElements.size());
     }
 
-    @Test
-    void annotationDeclarationExampleWithModifierRemoved() throws IOException {
+    [TestMethod]
+    void annotationDeclarationExampleWithModifierRemoved(){
         considerExample("AnnotationDeclaration_Example3_original");
         AnnotationDeclaration annotationDeclaration = (AnnotationDeclaration)cu.getType(0);
         CsmElement element = ConcreteSyntaxModel.forClass(annotationDeclaration.getClass());
@@ -263,7 +263,7 @@ class DifferenceElementCalculatorTest extends AbstractLexicalPreservingTest {
         assertEquals(i, differenceElements.size());
     }
 
-    @Test
+    [TestMethod]
     void removeDefaultValueInAnnotationMemberDeclaration() {
         AnnotationMemberDeclaration md = considerAmd("int foo() default 10;");
         LexicalDifferenceCalculator.CalculatedSyntaxModel csmOriginal = new LexicalDifferenceCalculator().calculatedSyntaxModelForNode(md);
@@ -283,7 +283,7 @@ class DifferenceElementCalculatorTest extends AbstractLexicalPreservingTest {
         assertEquals(i, differenceElements.size());
     }
 
-    @Test
+    [TestMethod]
     void addedDefaultValueInAnnotationMemberDeclaration() {
         AnnotationMemberDeclaration md = considerAmd("int foo();");
         LexicalDifferenceCalculator.CalculatedSyntaxModel csmOriginal = new LexicalDifferenceCalculator().calculatedSyntaxModelForNode(md);
@@ -304,7 +304,7 @@ class DifferenceElementCalculatorTest extends AbstractLexicalPreservingTest {
         assertEquals(i, differenceElements.size());
     }
 
-    @Test
+    [TestMethod]
     void addedModifierToConstructorDeclaration() {
         ConstructorDeclaration cd = considerCd("A(){}");
         LexicalDifferenceCalculator.CalculatedSyntaxModel csmOriginal = new LexicalDifferenceCalculator().calculatedSyntaxModelForNode(cd);
@@ -322,7 +322,7 @@ class DifferenceElementCalculatorTest extends AbstractLexicalPreservingTest {
         assertEquals(i, differenceElements.size());
     }
 
-    @Test
+    [TestMethod]
     void replacingNameForEnumConstantDeclaration() {
         EnumConstantDeclaration ecd = considerEcd("A");
         SimpleName newName = new SimpleName("B");
@@ -336,9 +336,9 @@ class DifferenceElementCalculatorTest extends AbstractLexicalPreservingTest {
         assertEquals(i, differenceElements.size());
     }
 
-    @Test
+    [TestMethod]
     void addingStatementToEmptyMethodBody() {
-        String code = "class A { void foo(char p1, int p2) {} }";
+        string code = "class A { void foo(char p1, int p2) {} }";
         considerCode(code);
 
         Statement s = new ExpressionStmt(new BinaryExpr(
@@ -359,7 +359,7 @@ class DifferenceElementCalculatorTest extends AbstractLexicalPreservingTest {
         assertEquals(i, differenceElements.size());
     }
 
-    @Test
+    [TestMethod]
     void methodDeclarationRemovingParameter() {
         MethodDeclaration md = considerMd("public void foo(float f){}");
         LexicalDifferenceCalculator.CalculatedSyntaxModel csmOriginal = new LexicalDifferenceCalculator().calculatedSyntaxModelForNode(md);
@@ -379,7 +379,7 @@ class DifferenceElementCalculatorTest extends AbstractLexicalPreservingTest {
         assertEquals(i, differenceElements.size());
     }
 
-    @Test
+    [TestMethod]
     void methodDeclarationAddingParameter() {
         MethodDeclaration md = considerMd("public void foo(){}");
         Parameter newParameter = new Parameter(new ArrayType(PrimitiveType.intType()), new SimpleName("foo"));
@@ -400,22 +400,22 @@ class DifferenceElementCalculatorTest extends AbstractLexicalPreservingTest {
         assertEquals(i, differenceElements.size());
     }
 
-    private AnnotationMemberDeclaration considerAmd(String code) {
+    private AnnotationMemberDeclaration considerAmd(string code) {
         considerCode("@interface AD { " + code + " }");
         return (AnnotationMemberDeclaration)cu.getAnnotationDeclarationByName("AD").get().getMember(0);
     }
 
-    private ConstructorDeclaration considerCd(String code) {
+    private ConstructorDeclaration considerCd(string code) {
         considerCode("class A { " + code + " }");
         return (ConstructorDeclaration) cu.getType(0).getMembers().get(0);
     }
 
-    private EnumConstantDeclaration considerEcd(String code) {
+    private EnumConstantDeclaration considerEcd(string code) {
         considerCode("enum A { " + code + " }");
         return ((EnumDeclaration)cu.getType(0)).getEntries().get(0);
     }
 
-    private MethodDeclaration considerMd(String code) {
+    private MethodDeclaration considerMd(string code) {
         considerCode("class A { " + code + " }");
         return (MethodDeclaration) cu.getType(0).getMembers().get(0);
     }

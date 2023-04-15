@@ -3,10 +3,10 @@ namespace com.trigtech.privateme.server.am;
 
 class ActivityStack
 {
-  private static final String b = ActivityStack.class.getSimpleName();
-  final SparseArray<p> a = new SparseArray();
-  private final ActivityManager c;
-  private final TActivityManagerService d;
+  private static /*final*/string b = ActivityStack.class.getSimpleName();
+  /*final*/SparseArray<p> a = new SparseArray();
+  private /*final*/ActivityManager c;
+  private /*final*/TActivityManagerService d;
   private com.trigtech.privateme.helper.utils.a<Integer, p> e = new com.trigtech.privateme.helper.utils.a();
   private com.trigtech.privateme.helper.utils.a<Integer, f> f = new com.trigtech.privateme.helper.utils.a();
   private com.trigtech.privateme.helper.utils.a<Integer, List<c>> g = new com.trigtech.privateme.helper.utils.a();
@@ -79,7 +79,7 @@ class ActivityStack
   }
 
   // ERROR //
-  private static String a(int paramInt, ActivityInfo paramActivityInfo)
+  private static string a(int paramInt, ActivityInfo paramActivityInfo)
   {
     // Byte code:
     //   0: getstatic 214	tbox/com/android/internal/R_Hide$styleable:Window	Ltbox/RefStaticObject;
@@ -313,7 +313,7 @@ class ActivityStack
     }
   }
 
-  private p b(int paramInt, String paramString)
+  private p b(int paramInt, string paramString)
   {
     for (int i = 0; i < this.a.size(); i++)
     {
@@ -406,7 +406,7 @@ class ActivityStack
   }
 
   // ERROR //
-  final int a(int paramInt1, Intent paramIntent, ActivityInfo paramActivityInfo, IBinder paramIBinder, android.os.Bundle paramBundle, String paramString, int paramInt2)
+  /*final*/int a(int paramInt1, Intent paramIntent, ActivityInfo paramActivityInfo, IBinder paramIBinder, android.os.Bundle paramBundle, string paramString, int paramInt2)
   {
     // Byte code:
     //   0: getstatic 31	com/trigtech/privateme/server/am/ActivityStack:b	Ljava/lang/String;
@@ -1116,7 +1116,7 @@ class ActivityStack
     //   1579	1582	1577	finally
   }
 
-  final c a(int paramInt)
+  /*final*/c a(int paramInt)
   {
     List localList = e(paramInt);
     if (!localList.isEmpty())
@@ -1124,7 +1124,7 @@ class ActivityStack
     return null;
   }
 
-  final c a(int paramInt, IBinder paramIBinder)
+  /*final*/c a(int paramInt, IBinder paramIBinder)
   {
     Object localObject1 = null;
     if (paramIBinder != null);
@@ -1157,7 +1157,7 @@ class ActivityStack
     }
   }
 
-  final void a(int paramInt, String paramString)
+  /*final*/void a(int paramInt, string paramString)
   {
     if (paramInt != -1)
       f(paramInt).a(paramString);
@@ -1170,7 +1170,7 @@ class ActivityStack
     }
   }
 
-  final void a(j paramj)
+  /*final*/void a(j paramj)
   {
     while (true)
     {
@@ -1202,7 +1202,7 @@ class ActivityStack
     }
   }
 
-  final void a(j paramj, ComponentName paramComponentName1, ComponentName paramComponentName2, IBinder paramIBinder, Intent paramIntent, String paramString, int paramInt1, int paramInt2, int paramInt3)
+  /*final*/void a(j paramj, ComponentName paramComponentName1, ComponentName paramComponentName2, IBinder paramIBinder, Intent paramIntent, string paramString, int paramInt1, int paramInt2, int paramInt3)
   {
     v.a(b, "onActivityCreated>>>>>>>>>>>>>>>token: %s", new Object[] { paramIBinder });
     while (true)
@@ -1228,7 +1228,7 @@ class ActivityStack
     }
   }
 
-  final List<c> b(int paramInt)
+  /*final*/List<c> b(int paramInt)
   {
     Object localObject = (List)this.h.get(Integer.valueOf(paramInt));
     if (localObject == null)
@@ -1239,7 +1239,7 @@ class ActivityStack
     return localObject;
   }
 
-  final void b(int paramInt, IBinder paramIBinder)
+  /*final*/void b(int paramInt, IBinder paramIBinder)
   {
     v.a(b, "onActivityResumed>>>>>>>>>>>>>>>token: %s", new Object[] { paramIBinder });
     synchronized (this.a)
@@ -1253,7 +1253,7 @@ class ActivityStack
           a.a();
           a.a(localc.b.getPackageName());
           f localf = f(paramInt);
-          String str = localc.b.getPackageName();
+          string str = localc.b.getPackageName();
           localf.a(AppInterface.e().b(str));
         }
       synchronized (localc.a.e)
@@ -1272,12 +1272,12 @@ class ActivityStack
     }
   }
 
-  final List<AppSetting> c(int paramInt)
+  /*final*/List<AppSetting> c(int paramInt)
   {
     return f(paramInt).a();
   }
 
-  final void c(int paramInt, IBinder paramIBinder)
+  /*final*/void c(int paramInt, IBinder paramIBinder)
   {
     v.a(b, "onActivityStarted>>>>>>>>>>>>>>>token: %s", new Object[] { paramIBinder });
     synchronized (this.a)
@@ -1295,7 +1295,7 @@ class ActivityStack
     }
   }
 
-  final AppTaskInfo d(int paramInt)
+  /*final*/AppTaskInfo d(int paramInt)
   {
     synchronized (this.a)
     {
@@ -1315,7 +1315,7 @@ class ActivityStack
     }
   }
 
-  final void d(int paramInt, IBinder paramIBinder)
+  /*final*/void d(int paramInt, IBinder paramIBinder)
   {
     v.a(b, "onActivityPaused>>>>>>>>>>>>>>>token: %s", new Object[] { paramIBinder });
     synchronized (this.a)
@@ -1333,7 +1333,7 @@ class ActivityStack
     }
   }
 
-  final void e(int paramInt, IBinder paramIBinder)
+  /*final*/void e(int paramInt, IBinder paramIBinder)
   {
     v.a(b, "onActivityStopped>>>>>>>>>>>>>>>token: %s", new Object[] { paramIBinder });
     synchronized (this.a)
@@ -1351,7 +1351,7 @@ class ActivityStack
     }
   }
 
-  final boolean f(int paramInt, IBinder paramIBinder)
+  /*final*/boolean f(int paramInt, IBinder paramIBinder)
   {
     v.a(b, "onActivityDestroyed>>>>>>>>>>>>>>>token: %s", new Object[] { paramIBinder });
     synchronized (this.a)
@@ -1380,21 +1380,21 @@ class ActivityStack
     }
   }
 
-  final String g(int paramInt, IBinder paramIBinder)
+  /*final*/string g(int paramInt, IBinder paramIBinder)
   {
     synchronized (this.a)
     {
       c localc = a(paramInt, paramIBinder);
       if (localc != null)
       {
-        String str = localc.b.getPackageName();
+        string str = localc.b.getPackageName();
         return str;
       }
       return null;
     }
   }
 
-  final ComponentName h(int paramInt, IBinder paramIBinder)
+  /*final*/ComponentName h(int paramInt, IBinder paramIBinder)
   {
     synchronized (this.a)
     {
@@ -1408,7 +1408,7 @@ class ActivityStack
     }
   }
 
-  public final String i(int paramInt, IBinder paramIBinder)
+  public /*final*/string i(int paramInt, IBinder paramIBinder)
   {
     synchronized (this.a)
     {
@@ -1416,7 +1416,7 @@ class ActivityStack
       if (localc != null)
       {
         ComponentName localComponentName = localc.c;
-        String str = null;
+        string str = null;
         if (localComponentName != null)
           str = localc.c.getPackageName();
         return str;
@@ -1425,7 +1425,7 @@ class ActivityStack
     }
   }
 
-  final ComponentName j(int paramInt, IBinder paramIBinder)
+  /*final*/ComponentName j(int paramInt, IBinder paramIBinder)
   {
     synchronized (this.a)
     {

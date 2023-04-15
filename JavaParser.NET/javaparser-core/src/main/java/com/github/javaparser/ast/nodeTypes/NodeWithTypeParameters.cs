@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -30,7 +30,7 @@ namespace com.github.javaparser.ast.nodeTypes;
  *     class X&lt;C,D&gt; {}   --&gt; typeParameters = [C,D]
  * </pre>
  */
-public interface NodeWithTypeParameters<N extends Node> {
+public interface NodeWithTypeParameters<N:Node> {
 
     NodeList<TypeParameter> getTypeParameters();
 
@@ -38,22 +38,22 @@ public interface NodeWithTypeParameters<N extends Node> {
         return getTypeParameters().get(i);
     }
 
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     default N setTypeParameter(int i, TypeParameter typeParameter) {
         getTypeParameters().set(i, typeParameter);
         return (N) this;
     }
 
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     default N addTypeParameter(TypeParameter typeParameter) {
         getTypeParameters().add(typeParameter);
         return (N) this;
     }
 
     /**
-     * Adds a type parameter like {@code X extends Serializable}
+     * Adds a type parameter like {@code X:Serializable}
      */
-    default N addTypeParameter(String typeParameter) {
+    default N addTypeParameter(string typeParameter) {
         return addTypeParameter(parseTypeParameter(typeParameter));
     }
 

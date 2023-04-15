@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -34,7 +34,7 @@ namespace com.github.javaparser.ast.stmt;
  * @see ClassOrInterfaceDeclaration
  * @author Julio Vilmar Gesser
  */
-public class LocalClassDeclarationStmt extends Statement {
+public class LocalClassDeclarationStmt:Statement {
 
     private ClassOrInterfaceDeclaration classDeclaration;
 
@@ -42,15 +42,15 @@ public class LocalClassDeclarationStmt extends Statement {
         this(null, new ClassOrInterfaceDeclaration());
     }
 
-    @AllFieldsConstructor
-    public LocalClassDeclarationStmt(final ClassOrInterfaceDeclaration classDeclaration) {
+    //@AllFieldsConstructor
+    public LocalClassDeclarationStmt(/*final*/ClassOrInterfaceDeclaration classDeclaration) {
         this(null, classDeclaration);
     }
 
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public LocalClassDeclarationStmt(TokenRange tokenRange, ClassOrInterfaceDeclaration classDeclaration) {
         super(tokenRange);
         setClassDeclaration(classDeclaration);
@@ -58,24 +58,24 @@ public class LocalClassDeclarationStmt extends Statement {
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public ClassOrInterfaceDeclaration getClassDeclaration() {
         return classDeclaration;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public LocalClassDeclarationStmt setClassDeclaration(final ClassOrInterfaceDeclaration classDeclaration) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public LocalClassDeclarationStmt setClassDeclaration(/*final*/ClassOrInterfaceDeclaration classDeclaration) {
         assertNotNull(classDeclaration);
         if (classDeclaration == this.classDeclaration) {
             return this;
@@ -89,19 +89,19 @@ public class LocalClassDeclarationStmt extends Statement {
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public LocalClassDeclarationStmt clone() {
         return (LocalClassDeclarationStmt) accept(new CloneVisitor(), null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public LocalClassDeclarationStmtMetaModel getMetaModel() {
         return JavaParserMetaModel.localClassDeclarationStmtMetaModel;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public boolean replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
@@ -114,25 +114,25 @@ public class LocalClassDeclarationStmt extends Statement {
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isLocalClassDeclarationStmt() {
         return true;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public LocalClassDeclarationStmt asLocalClassDeclarationStmt() {
         return this;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifLocalClassDeclarationStmt(Consumer<LocalClassDeclarationStmt> action) {
         action.accept(this);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<LocalClassDeclarationStmt> toLocalClassDeclarationStmt() {
         return Optional.of(this);
     }

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,13 +24,13 @@ namespace com.github.javaparser.ast.validator.language_level_validations.chunks;
 /**
  * Contains validations that are valid for every Java version.
  */
-public class CommonValidators extends Validators {
+public class CommonValidators:Validators {
 
     public CommonValidators() {
         super(new SimpleValidator<>(ClassOrInterfaceDeclaration.class, n -> !n.isInterface() && n.getExtendedTypes().size() > 1, (n, reporter) -> reporter.report(n.getExtendedTypes(1), "A class cannot extend more than one other class.")), new SimpleValidator<>(ClassOrInterfaceDeclaration.class, n -> n.isInterface() && !n.getImplementedTypes().isEmpty(), (n, reporter) -> reporter.report(n.getImplementedTypes(0), "An interface cannot implement other interfaces.")), new SingleNodeTypeValidator<>(ClassOrInterfaceDeclaration.class, (n, reporter) -> {
             if (n.isInterface()) {
                 n.getMembers().forEach(mem -> {
-                    if (mem instanceof InitializerDeclaration) {
+                    if (mem is InitializerDeclaration) {
                         reporter.report(mem, "An interface cannot have initializers.");
                     }
                 });
@@ -38,10 +38,10 @@ public class CommonValidators extends Validators {
         }), new SingleNodeTypeValidator<>(AssignExpr.class, (n, reporter) -> {
             // https://docs.oracle.com/javase/specs/jls/se8/html/jls-15.html#jls-15.26
             Expression target = n.getTarget();
-            while (target instanceof EnclosedExpr) {
+            while (target is EnclosedExpr) {
                 target = ((EnclosedExpr) target).getInner();
             }
-            if (target instanceof NameExpr || target instanceof ArrayAccessExpr || target instanceof FieldAccessExpr) {
+            if (target is NameExpr || target is ArrayAccessExpr || target is FieldAccessExpr) {
                 return;
             }
             reporter.report(n.getTarget(), "Illegal left hand side of an assignment.");

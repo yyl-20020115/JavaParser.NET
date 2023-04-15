@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,9 +24,9 @@ namespace com.github.javaparser.symbolsolver;
 
 
 
-public class Issue1817Test extends AbstractSymbolResolutionTest {
+public class Issue1817Test:AbstractSymbolResolutionTest {
 
-    @Test
+    [TestMethod]
     public void test() {
         
         Path testResources= adaptPath("src/test/resources/issue1817");
@@ -37,8 +37,8 @@ public class Issue1817Test extends AbstractSymbolResolutionTest {
 
         StaticJavaParser.setConfiguration(new ParserConfiguration().setSymbolResolver(new JavaSymbolSolver(typeSolver)));
 
-        String s = 
-                "interface A extends X.A {\n" + 
+        string s = 
+                "interface A:X.A {\n" + 
                 "    default void foo() {\n" + 
                 "        X.A xa = null;\n" + 
                 "        xa.bar();\n" + 

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -36,9 +36,9 @@ class Issue2035Test {
         javaParser = new JavaParser(configuration);
     }
 
-    @Test
+    [TestMethod]
     void test() {
-        String x = "" +
+        string x = "" +
                 "class X {\n" +
                 "    \n" +
                 "    private void a(int a){ }\n" +
@@ -64,7 +64,7 @@ class Issue2035Test {
         );
 
         parseResult.getResult().ifPresent(compilationUnit -> {
-            final List<MethodCallExpr> matches = compilationUnit
+            /*final*/List<MethodCallExpr> matches = compilationUnit
                     .findAll(MethodCallExpr.class);
 
             assumeFalse(matches.isEmpty(), "Cannot attempt resolving types if no matches.");
@@ -81,9 +81,9 @@ class Issue2035Test {
     }
 
 
-    @Test
+    [TestMethod]
     void test_int() {
-        String x_int = "" +
+        string x_int = "" +
                 "import java.util.*;\n" +
                 "\n" +
                 "class X {\n" +
@@ -102,7 +102,7 @@ class Issue2035Test {
         );
 
         parseResult.getResult().ifPresent(compilationUnit -> {
-            final List<MethodCallExpr> matches = compilationUnit
+            /*final*/List<MethodCallExpr> matches = compilationUnit
                     .findAll(MethodCallExpr.class)
                     .stream()
                     .filter(methodCallExpr -> methodCallExpr.getNameAsString().equals("get"))
@@ -121,9 +121,9 @@ class Issue2035Test {
 
     }
 
-    @Test
+    [TestMethod]
     void test_Integer() {
-        String x_Integer = "" +
+        string x_Integer = "" +
                 "import java.util.*;\n" +
                 "\n" +
                 "class X {\n" +
@@ -142,7 +142,7 @@ class Issue2035Test {
         );
 
         parseResult.getResult().ifPresent(compilationUnit -> {
-            final List<MethodCallExpr> matches = compilationUnit
+            /*final*/List<MethodCallExpr> matches = compilationUnit
                     .findAll(MethodCallExpr.class)
                     .stream()
                     .filter(methodCallExpr -> methodCallExpr.getNameAsString().equals("get"))

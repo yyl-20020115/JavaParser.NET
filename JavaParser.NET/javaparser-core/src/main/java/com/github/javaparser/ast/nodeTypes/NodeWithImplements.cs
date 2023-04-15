@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,7 +25,7 @@ namespace com.github.javaparser.ast.nodeTypes;
 /**
  * A node that implements other types.
  */
-public interface NodeWithImplements<N extends Node> {
+public interface NodeWithImplements<N:Node> {
 
     NodeList<ClassOrInterfaceType> getImplementedTypes();
 
@@ -37,13 +37,13 @@ public interface NodeWithImplements<N extends Node> {
 
     void tryAddImportToParentCompilationUnit(Class<?> clazz);
 
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     default N setImplementedType(int i, ClassOrInterfaceType implement) {
         getImplementedTypes().set(i, implement);
         return (N) this;
     }
 
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     default N addImplementedType(ClassOrInterfaceType implement) {
         getImplementedTypes().add(implement);
         return (N) this;
@@ -52,7 +52,7 @@ public interface NodeWithImplements<N extends Node> {
     /**
      * @deprecated use addImplementedType instead
      */
-    default N addImplements(String name) {
+    default N addImplements(string name) {
         return addImplementedType(name);
     }
 
@@ -66,11 +66,11 @@ public interface NodeWithImplements<N extends Node> {
     /**
      * Add an implements to this
      *
-     * @param name the name of the type to extends from
+     * @param name the name of the type to:from
      * @return this
      */
-    @SuppressWarnings("unchecked")
-    default N addImplementedType(String name) {
+    //@SuppressWarnings("unchecked")
+    default N addImplementedType(string name) {
         getImplementedTypes().add(parseClassOrInterfaceType(name));
         return (N) this;
     }

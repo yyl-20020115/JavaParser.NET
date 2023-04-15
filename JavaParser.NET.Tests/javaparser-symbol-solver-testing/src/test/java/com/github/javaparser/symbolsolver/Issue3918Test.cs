@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,9 +24,9 @@ namespace com.github.javaparser.symbolsolver;
 
 
 
-public class Issue3918Test extends AbstractResolutionTest {
+public class Issue3918Test:AbstractResolutionTest {
 
-	@Test
+	[TestMethod]
 	void test() {
 
 		// class ancestor is defined like this
@@ -34,10 +34,10 @@ public class Issue3918Test extends AbstractResolutionTest {
 	    //   public static class Iterator {}
 		// }
 
-		String code =
+		string code =
 				"import java.util.ArrayList;\n"
 				+ "import java.util.List;\n" + "\n"
-				+ "public class Descendant extends Ancestor {\n"
+				+ "public class Descendant:Ancestor {\n"
 				+ "    public void doAThing() {\n"
 				+ "        List<Object> list = new ArrayList<>();\n"
 				+ "        java.util.Iterator<Object> iterator = list.iterator();\n"

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,9 +27,9 @@ namespace com.github.javaparser.symbolsolver.resolution;
 /**
  * Tests related to resolved Generics types.
  */
-class GenericsResolutionTest extends AbstractResolutionTest {
+class GenericsResolutionTest:AbstractResolutionTest {
 
-    @Test
+    [TestMethod]
     void resolveFieldWithGenericTypeToString() {
         CompilationUnit cu = parseSample("Generics");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "Generics");
@@ -46,7 +46,7 @@ class GenericsResolutionTest extends AbstractResolutionTest {
         assertEquals("java.lang.String", type.asReferenceType().typeParametersValues().get(0).describe());
     }
 
-    @Test
+    [TestMethod]
     void resolveFieldWithGenericTypeToDeclaredClass() {
         CompilationUnit cu = parseSample("Generics");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "Generics");
@@ -63,7 +63,7 @@ class GenericsResolutionTest extends AbstractResolutionTest {
         assertEquals("me.tomassetti.symbolsolver.javaparser.Generics", type.asReferenceType().typeParametersValues().get(0).describe());
     }
 
-    @Test
+    [TestMethod]
     void resolveFieldWithGenericTypeToInteger() {
         CompilationUnit cu = parseSample("Generics");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "Generics");
@@ -80,7 +80,7 @@ class GenericsResolutionTest extends AbstractResolutionTest {
         assertEquals("java.lang.Integer", type.asReferenceType().typeParametersValues().get(0).describe());
     }
 
-    @Test
+    [TestMethod]
     void resolveFieldOfVariableType() {
         CompilationUnit cu = parseSample("Generics");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "SomeCollection");
@@ -97,7 +97,7 @@ class GenericsResolutionTest extends AbstractResolutionTest {
         assertEquals("A", type.describe());
     }
 
-    @Test
+    [TestMethod]
     void resolveFieldOfGenericReferringToVariableType() {
         CompilationUnit cu = parseSample("Generics");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "SomeCollection");
@@ -118,7 +118,7 @@ class GenericsResolutionTest extends AbstractResolutionTest {
         assertEquals("A", typeParam.describe());
     }
 
-    @Test
+    [TestMethod]
     void resolveUsageOfGenericFieldSimpleCase() {
         CompilationUnit cu = parseSample("Generics");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "SomeCollection");
@@ -134,7 +134,7 @@ class GenericsResolutionTest extends AbstractResolutionTest {
     }
 
     //PRIMA UN TEST CHE DICA CHE IL TIPO DEL CAMPO AS e' LIST<A> NON LIST<E>
-    @Test
+    [TestMethod]
     void resolveUsageOfGenericFieldIntermediateCase() {
         CompilationUnit cu = parseSample("Generics");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "SomeCollection");
@@ -150,7 +150,7 @@ class GenericsResolutionTest extends AbstractResolutionTest {
         assertEquals("A", type.asReferenceType().typeParametersValues().get(0).describe());
     }
 
-    @Test
+    [TestMethod]
     void resolveUsageOfGenericFieldAdvancedCase() {
         CompilationUnit cu = parseSample("Generics");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "SomeCollection");
@@ -168,7 +168,7 @@ class GenericsResolutionTest extends AbstractResolutionTest {
         assertEquals("java.lang.String", type.asReferenceType().typeParametersValues().get(0).describe());
     }
 
-    @Test
+    [TestMethod]
     void resolveUsageOfMethodOfGenericClass() {
         CompilationUnit cu = parseSample("Generics");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "GenericMethodCalls.Derived");
@@ -180,7 +180,7 @@ class GenericsResolutionTest extends AbstractResolutionTest {
         assertEquals("callee", methodUsage.getName());
     }
 
-    @Test
+    [TestMethod]
     void resolveUsageOfMethodOfGenericClassWithGenericReturnType() {
         CompilationUnit cu = parseSample("Generics");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "GenericMethodCalls.Derived");
@@ -193,7 +193,7 @@ class GenericsResolutionTest extends AbstractResolutionTest {
         assertEquals("java.lang.String", methodUsage.returnType().describe());
     }
 
-    @Test
+    [TestMethod]
     void resolveUsageOfMethodOfGenericClassWithUnboundedWildcard() {
         CompilationUnit cu = parseSample("GenericsWildcard");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "GenericsWildcard");
@@ -206,7 +206,7 @@ class GenericsResolutionTest extends AbstractResolutionTest {
         assertEquals("java.lang.Object", methodUsage.declaringType().getQualifiedName());
     }
 
-    @Test
+    [TestMethod]
     void resolveUsageOfMethodOfGenericClassWithExtendsWildcard() {
         CompilationUnit cu = parseSample("GenericsWildcard");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "GenericsWildcard");
@@ -219,7 +219,7 @@ class GenericsResolutionTest extends AbstractResolutionTest {
         assertEquals("GenericsWildcard.Foo", methodUsage.declaringType().getQualifiedName());
     }
 
-    @Test
+    [TestMethod]
     void resolveUsageOfMethodOfGenericClassWithBoxing() {
         CompilationUnit cu = parseSample("Generics");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "GenericMethodBoxing");
@@ -233,7 +233,7 @@ class GenericsResolutionTest extends AbstractResolutionTest {
         assertEquals("java.lang.Long", methodUsage.returnType().describe());
     }
 
-    @Test
+    [TestMethod]
     void resolveElementOfList() {
         CompilationUnit cu = parseSample("ElementOfList");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "ElementOfList");
@@ -247,7 +247,7 @@ class GenericsResolutionTest extends AbstractResolutionTest {
         assertEquals("Comment", type.describe());
     }
 
-    @Test
+    [TestMethod]
     void resolveElementOfListAdvancedExample() {
         CompilationUnit cu = parseSample("ElementOfList");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "ElementOfList");
@@ -261,7 +261,7 @@ class GenericsResolutionTest extends AbstractResolutionTest {
         assertEquals("AnnotationExpr", type.describe());
     }
 
-    @Test
+    [TestMethod]
     void genericsInheritance() {
         CompilationUnit cu = parseSample("MethodTypeParams");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "VoidVisitorAdapter");
@@ -277,7 +277,7 @@ class GenericsResolutionTest extends AbstractResolutionTest {
         assertEquals(2, allAncestors.size());
     }
 
-    @Test
+    [TestMethod]
     void methodTypeParams() {
         CompilationUnit cu = parseSample("MethodTypeParams");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "VoidVisitorAdapter");
@@ -290,7 +290,7 @@ class GenericsResolutionTest extends AbstractResolutionTest {
         assertEquals("void", type.describe());
     }
 
-    @Test
+    [TestMethod]
     void classCastScope() {
         CompilationUnit cu = parseSample("ClassCast");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "ClassCast");
@@ -301,13 +301,13 @@ class GenericsResolutionTest extends AbstractResolutionTest {
         Expression scope = call.getScope().get();
         ResolvedType type = JavaParserFacade.get(typeSolver).getType(scope);
 
-        //System.out.println(typeUsage);
+        //System._out.println(typeUsage);
 
         assertEquals(false, type.isTypeVariable());
         assertEquals("java.lang.Class<N>", type.describe());
     }
 
-    @Test
+    [TestMethod]
     void classCast() {
         CompilationUnit cu = parseSample("ClassCast");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "ClassCast");
@@ -320,7 +320,7 @@ class GenericsResolutionTest extends AbstractResolutionTest {
         assertEquals("N", type.describe());
     }
 
-    @Test
+    [TestMethod]
     void typeParamOnReturnTypeStep1() {
         CompilationUnit cu = parseSample("TypeParamOnReturnType");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "TypeParamOnReturnType");
@@ -333,7 +333,7 @@ class GenericsResolutionTest extends AbstractResolutionTest {
         assertEquals("TypeParamOnReturnType", type.describe());
     }
 
-    @Test
+    [TestMethod]
     void typeParamOnReturnTypeStep2() {
         CompilationUnit cu = parseSample("TypeParamOnReturnType");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "TypeParamOnReturnType");
@@ -346,7 +346,7 @@ class GenericsResolutionTest extends AbstractResolutionTest {
         assertEquals("T", type.describe());
     }
 
-    @Test
+    [TestMethod]
     void typeParamOnReturnTypeStep3() {
         CompilationUnit cu = parseSample("TypeParamOnReturnType");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "TypeParamOnReturnType");
@@ -360,7 +360,7 @@ class GenericsResolutionTest extends AbstractResolutionTest {
         assertEquals("java.lang.Boolean", type.describe());
     }
 
-    @Test
+    [TestMethod]
     void typeParamOnReturnType() {
         CompilationUnit cu = parseSample("TypeParamOnReturnType");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "TypeParamOnReturnType");
@@ -373,7 +373,7 @@ class GenericsResolutionTest extends AbstractResolutionTest {
         assertEquals("boolean", type.describe());
     }
 
-    /*@Test
+    /*[TestMethod]
     public void genericCollectionWithWildcardsAndExtensionsPrep() {
         CompilationUnit cu = parseSample("GenericCollectionWithExtension");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "Foo");
@@ -427,7 +427,7 @@ class GenericsResolutionTest extends AbstractResolutionTest {
 
     }*/
 
-    @Test
+    [TestMethod]
     void genericCollectionWithWildcardsAndExtensions() {
         CompilationUnit cu = parseSample("GenericCollectionWithExtension");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "Foo");
@@ -444,7 +444,7 @@ class GenericsResolutionTest extends AbstractResolutionTest {
         assertEquals("boolean", type.describe());
     }
 
-    @Test
+    [TestMethod]
     void methodWithGenericParameterTypes() {
         CompilationUnit cu = parseSample("GenericCollectionWithExtension");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "Foo");
@@ -459,7 +459,7 @@ class GenericsResolutionTest extends AbstractResolutionTest {
         assertEquals("foo", methodUsage.getName());
     }
 
-    @Test
+    [TestMethod]
     void genericCollectionWithWildcards() {
         CompilationUnit cu = parseSample("GenericCollection");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "Foo");

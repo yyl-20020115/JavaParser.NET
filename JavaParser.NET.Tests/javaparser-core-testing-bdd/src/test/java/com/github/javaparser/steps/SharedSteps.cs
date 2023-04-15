@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.steps;
 
 public class SharedSteps {
 
-    /* Map that maintains shares state across step classes.  If manipulating the objects in the map you must update the state */
+    /* Map that maintains shares state across step classes.  If manipulating the objects _in the map you must update the state */
     private Map<String, Object> state;
 
     public SharedSteps(Map<String, Object> state) {
@@ -52,22 +52,22 @@ public class SharedSteps {
      */
 
     @When("the following source is parsed:$classSrc")
-    public void whenTheFollowingSourceIsParsed(String classSrc) {
+    public void whenTheFollowingSourceIsParsed(string classSrc) {
         state.put("cu1", parse(classSrc.trim()));
     }
 
     @When("the following source is parsed (trimming space):$classSrc")
-    public void whenTheFollowingSourceIsParsedTrimmingSpace(String classSrc) {
+    public void whenTheFollowingSourceIsParsedTrimmingSpace(string classSrc) {
         state.put("cu1", parse(classSrc.trim()));
     }
 
     @When("the following sources is parsed by the second CompilationUnit:$classSrc")
-    public void whenTheFollowingSourcesIsParsedBytTheSecondCompilationUnit(String classSrc) {
+    public void whenTheFollowingSourcesIsParsedBytTheSecondCompilationUnit(string classSrc) {
         state.put("cu2", parse(classSrc.trim()));
     }
 
     @When("file \"$fileName\" is parsed")
-    public void whenTheJavaFileIsParsed(String fileName) throws IOException, URISyntaxException {
+    public void whenTheJavaFileIsParsed(string fileName), URISyntaxException {
         URL url = getClass().getResource("../samples/" + fileName);
         CompilationUnit compilationUnit = parse(new File(url.toURI()));
         state.put("cu1", compilationUnit);
@@ -106,12 +106,12 @@ public class SharedSteps {
     }
 
     @Then("the expected source should be:$classSrc")
-    public void thenTheExpectedSourcesShouldBe(String classSrc) {
+    public void thenTheExpectedSourcesShouldBe(string classSrc) {
         CompilationUnit compilationUnit = (CompilationUnit) state.get("cu1");
         assertThat(compilationUnit.toString(), CoreMatchers.is(equalToCompressingWhiteSpace(classSrc)));
     }
 
-    public static <T extends BodyDeclaration<?>> T getMemberByTypeAndPosition(TypeDeclaration<?> typeDeclaration, int position, Class<T> typeClass) {
+    public static <T:BodyDeclaration<?>> T getMemberByTypeAndPosition(TypeDeclaration<?> typeDeclaration, int position, Class<T> typeClass) {
         int typeCount = 0;
         for (BodyDeclaration<?> declaration : typeDeclaration.getMembers()) {
             if (declaration.getClass().equals(typeClass)) {
@@ -131,7 +131,7 @@ public class SharedSteps {
         int memberCount = 0;
         int methodCount = 0;
         for (BodyDeclaration<?> bodyDeclaration : type.getMembers()) {
-            if (bodyDeclaration instanceof MethodDeclaration) {
+            if (bodyDeclaration is MethodDeclaration) {
                 if (methodCount == methodPosition - 1) {
                     return (MethodDeclaration) type.getMember(memberCount);
                 }
@@ -139,6 +139,6 @@ public class SharedSteps {
             }
             memberCount++;
         }
-        throw new IllegalArgumentException("Method not found at position " + methodPosition + "in class " + classPosition);
+        throw new IllegalArgumentException("Method not found at position " + methodPosition + "_in class " + classPosition);
     }
 }

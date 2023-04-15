@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.declarations;
 /**
  * @author Federico Tomassetti
  */
-public class JavaParserAnnotationDeclaration extends AbstractTypeDeclaration implements ResolvedAnnotationDeclaration {
+public class JavaParserAnnotationDeclaration:AbstractTypeDeclaration implements ResolvedAnnotationDeclaration {
 
     private com.github.javaparser.ast.body.AnnotationDeclaration wrappedNode;
     private TypeSolver typeSolver;
@@ -76,23 +76,23 @@ public class JavaParserAnnotationDeclaration extends AbstractTypeDeclaration imp
     }
 
     @Override
-    public boolean hasDirectlyAnnotation(String canonicalName) {
+    public boolean hasDirectlyAnnotation(string canonicalName) {
         return AstResolutionUtils.hasDirectlyAnnotation(wrappedNode, typeSolver, canonicalName);
     }
 
     @Override
-    public String getPackageName() {
+    public string getPackageName() {
         return AstResolutionUtils.getPackageName(wrappedNode);
     }
 
     @Override
-    public String getClassName() {
+    public string getClassName() {
         return AstResolutionUtils.getClassName("", wrappedNode);
     }
 
     @Override
-    public String getQualifiedName() {
-        String containerName = AstResolutionUtils.containerName(wrappedNode.getParentNode().orElse(null));
+    public string getQualifiedName() {
+        string containerName = AstResolutionUtils.containerName(wrappedNode.getParentNode().orElse(null));
         if (containerName.isEmpty()) {
             return wrappedNode.getName().getId();
         } else {
@@ -101,7 +101,7 @@ public class JavaParserAnnotationDeclaration extends AbstractTypeDeclaration imp
     }
 
     @Override
-    public String getName() {
+    public string getName() {
         return wrappedNode.getName().getId();
     }
 
@@ -125,7 +125,7 @@ public class JavaParserAnnotationDeclaration extends AbstractTypeDeclaration imp
     @Override
     public List<ResolvedAnnotationMemberDeclaration> getAnnotationMembers() {
         return wrappedNode.getMembers().stream()
-                .filter(m -> m instanceof AnnotationMemberDeclaration)
+                .filter(m -> m is AnnotationMemberDeclaration)
                 .map(m -> new JavaParserAnnotationMemberDeclaration((AnnotationMemberDeclaration)m, typeSolver))
                 .collect(Collectors.toList());
     }

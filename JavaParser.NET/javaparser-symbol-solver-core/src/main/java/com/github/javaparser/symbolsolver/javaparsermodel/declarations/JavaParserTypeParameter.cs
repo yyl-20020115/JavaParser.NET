@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,7 +28,7 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.declarations;
 /**
  * @author Federico Tomassetti
  */
-public class JavaParserTypeParameter extends AbstractTypeDeclaration implements ResolvedTypeParameterDeclaration {
+public class JavaParserTypeParameter:AbstractTypeDeclaration implements ResolvedTypeParameterDeclaration {
 
     private com.github.javaparser.ast.type.TypeParameter wrappedNode;
     private TypeSolver typeSolver;
@@ -43,14 +43,14 @@ public class JavaParserTypeParameter extends AbstractTypeDeclaration implements 
         return Collections.emptySet();
     }
 
-    public SymbolReference<ResolvedMethodDeclaration> solveMethod(String name, List<ResolvedType> parameterTypes) {
+    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> parameterTypes) {
         return getContext().solveMethod(name, parameterTypes, false);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof JavaParserTypeParameter)) return false;
+        if (!(o is JavaParserTypeParameter)) return false;
 
         JavaParserTypeParameter that = (JavaParserTypeParameter) o;
 
@@ -67,7 +67,7 @@ public class JavaParserTypeParameter extends AbstractTypeDeclaration implements 
     }
 
     @Override
-    public String getName() {
+    public string getName() {
         return wrappedNode.getName().getId();
     }
 
@@ -77,11 +77,11 @@ public class JavaParserTypeParameter extends AbstractTypeDeclaration implements 
     }
 
     @Override
-    public String getContainerQualifiedName() {
+    public string getContainerQualifiedName() {
         ResolvedTypeParametrizable container = getContainer();
-        if (container instanceof ResolvedReferenceTypeDeclaration) {
+        if (container is ResolvedReferenceTypeDeclaration) {
             return ((ResolvedReferenceTypeDeclaration) container).getQualifiedName();
-        } else if (container instanceof JavaParserConstructorDeclaration) {
+        } else if (container is JavaParserConstructorDeclaration) {
             return ((JavaParserConstructorDeclaration) container).getQualifiedSignature();
         } else {
             return ((JavaParserMethodDeclaration) container).getQualifiedSignature();
@@ -89,11 +89,11 @@ public class JavaParserTypeParameter extends AbstractTypeDeclaration implements 
     }
 
     @Override
-    public String getContainerId() {
+    public string getContainerId() {
         ResolvedTypeParametrizable container = getContainer();
-        if (container instanceof ResolvedReferenceTypeDeclaration) {
+        if (container is ResolvedReferenceTypeDeclaration) {
             return ((ResolvedReferenceTypeDeclaration) container).getId();
-        } else if (container instanceof JavaParserConstructorDeclaration) {
+        } else if (container is JavaParserConstructorDeclaration) {
             return ((JavaParserConstructorDeclaration) container).getQualifiedSignature();
         } else {
             return ((JavaParserMethodDeclaration) container).getQualifiedSignature();
@@ -103,10 +103,10 @@ public class JavaParserTypeParameter extends AbstractTypeDeclaration implements 
     @Override
     public ResolvedTypeParametrizable getContainer() {
         Node parentNode = demandParentNode(wrappedNode);
-        if (parentNode instanceof com.github.javaparser.ast.body.ClassOrInterfaceDeclaration) {
+        if (parentNode is com.github.javaparser.ast.body.ClassOrInterfaceDeclaration) {
             com.github.javaparser.ast.body.ClassOrInterfaceDeclaration jpTypeDeclaration = (com.github.javaparser.ast.body.ClassOrInterfaceDeclaration) parentNode;
             return JavaParserFacade.get(typeSolver).getTypeDeclaration(jpTypeDeclaration);
-        } else if (parentNode instanceof com.github.javaparser.ast.body.ConstructorDeclaration){
+        } else if (parentNode is com.github.javaparser.ast.body.ConstructorDeclaration){
             com.github.javaparser.ast.body.ConstructorDeclaration jpConstructorDeclaration = (com.github.javaparser.ast.body.ConstructorDeclaration) parentNode;
             Optional<ClassOrInterfaceDeclaration> jpTypeDeclaration = jpConstructorDeclaration.findAncestor(com.github.javaparser.ast.body.ClassOrInterfaceDeclaration.class);
             if (jpTypeDeclaration.isPresent()) {
@@ -123,7 +123,7 @@ public class JavaParserTypeParameter extends AbstractTypeDeclaration implements 
     }
 
     @Override
-    public String getQualifiedName() {
+    public string getQualifiedName() {
         return String.format("%s.%s", getContainerQualifiedName(), getName());
     }
 
@@ -151,12 +151,12 @@ public class JavaParserTypeParameter extends AbstractTypeDeclaration implements 
     }
 
     @Override
-    public ResolvedFieldDeclaration getField(String name) {
+    public ResolvedFieldDeclaration getField(string name) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public boolean hasField(String name) {
+    public boolean hasField(string name) {
         return false;
     }
 
@@ -181,7 +181,7 @@ public class JavaParserTypeParameter extends AbstractTypeDeclaration implements 
     }
 
     @Override
-    public boolean hasDirectlyAnnotation(String canonicalName) {
+    public boolean hasDirectlyAnnotation(string canonicalName) {
         throw new UnsupportedOperationException();
     }
 
@@ -200,14 +200,14 @@ public class JavaParserTypeParameter extends AbstractTypeDeclaration implements 
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "JPTypeParameter(" + wrappedNode.getName() + ", bounds=" + wrappedNode.getTypeBound() + ")";
     }
 
     @Override
     public Optional<ResolvedReferenceTypeDeclaration> containerType() {
         ResolvedTypeParametrizable container = getContainer();
-        if (container instanceof ResolvedReferenceTypeDeclaration) {
+        if (container is ResolvedReferenceTypeDeclaration) {
             return Optional.of((ResolvedReferenceTypeDeclaration) container);
         }
         return Optional.empty();

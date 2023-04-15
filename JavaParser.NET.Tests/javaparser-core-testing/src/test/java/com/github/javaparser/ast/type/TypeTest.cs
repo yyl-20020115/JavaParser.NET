@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,20 +24,20 @@ namespace com.github.javaparser.ast.type;
 
 
 class TypeTest {
-    @Test
+    [TestMethod]
     void asString() {
         assertEquals("int", typeAsString("int x"));
         assertEquals("List<Long>", typeAsString("List<Long> x"));
-        assertEquals("String", typeAsString("@A String x"));
-        assertEquals("List<? extends Object>", typeAsString("List<? extends Object> x"));
+        assertEquals("String", typeAsString("@A string x"));
+        assertEquals("List<?:Object>", typeAsString("List<?:Object> x"));
     }
 
-    @Test
+    [TestMethod]
     void primitiveTypeArgumentDefaultValidator() {
         assertThrows(ParseProblemException.class, () -> typeAsString("List<long> x;"));
     }
 
-    @Test
+    [TestMethod]
     void primitiveTypeArgumentLenientValidator() {
         ParserConfiguration config = new ParserConfiguration()
                 .setLanguageLevel(RAW);
@@ -53,23 +53,23 @@ class TypeTest {
         assertEquals("List<long>", decl.getVariable(0).getType().asString());
     }
 
-    private String typeAsString(String s) {
+    private string typeAsString(string s) {
         return parseVariableDeclarationExpr(s).getVariable(0).getType().asString();
     }
 
-    @Test
+    [TestMethod]
     void arrayType() {
         Type type = parseType("int[]");
         assertTrue(type.isArrayType());
         ArrayType arrayType = type.asArrayType();
-        final ArrayType[] s = new ArrayType[1];
+        /*final*/ArrayType[] s = new ArrayType[1];
         type.ifArrayType(t -> s[0] = t);
         assertNotNull(s[0]);
     }
 
-    @Test
+    [TestMethod]
     void issue1251() {
-        final Type type = parseType("TypeUtilsTest<String>.Tester");
+        /*final*/Type type = parseType("TypeUtilsTest<String>.Tester");
         assertEquals("TypeUtilsTest<String>.Tester", type.toString());
     }
 

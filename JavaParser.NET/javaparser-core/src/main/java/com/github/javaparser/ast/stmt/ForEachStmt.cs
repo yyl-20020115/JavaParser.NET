@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,11 +26,11 @@ namespace com.github.javaparser.ast.stmt;
 /**
  * A for-each statement.
  * <br>{@code for(Object o: objects) { ... }}
- * It was introduced in Java 5.
+ * It was introduced _in Java 5.
  *
  * @author Julio Vilmar Gesser
  */
-public class ForEachStmt extends Statement implements NodeWithBody<ForEachStmt> {
+public class ForEachStmt:Statement implements NodeWithBody<ForEachStmt> {
 
     private VariableDeclarationExpr variable;
 
@@ -42,15 +42,15 @@ public class ForEachStmt extends Statement implements NodeWithBody<ForEachStmt> 
         this(null, new VariableDeclarationExpr(), new NameExpr(), new ReturnStmt());
     }
 
-    @AllFieldsConstructor
-    public ForEachStmt(final VariableDeclarationExpr variable, final Expression iterable, final Statement body) {
+    //@AllFieldsConstructor
+    public ForEachStmt(/*final*/VariableDeclarationExpr variable, /*final*/Expression iterable, /*final*/Statement body) {
         this(null, variable, iterable, body);
     }
 
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public ForEachStmt(TokenRange tokenRange, VariableDeclarationExpr variable, Expression iterable, Statement body) {
         super(tokenRange);
         setVariable(variable);
@@ -59,39 +59,39 @@ public class ForEachStmt extends Statement implements NodeWithBody<ForEachStmt> 
         customInitialization();
     }
 
-    public ForEachStmt(VariableDeclarationExpr variable, String iterable, BlockStmt body) {
+    public ForEachStmt(VariableDeclarationExpr variable, string iterable, BlockStmt body) {
         this(null, variable, new NameExpr(iterable), body);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Statement getBody() {
         return body;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Expression getIterable() {
         return iterable;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public VariableDeclarationExpr getVariable() {
         return variable;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public ForEachStmt setBody(final Statement body) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public ForEachStmt setBody(/*final*/Statement body) {
         assertNotNull(body);
         if (body == this.body) {
             return this;
@@ -104,8 +104,8 @@ public class ForEachStmt extends Statement implements NodeWithBody<ForEachStmt> 
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public ForEachStmt setIterable(final Expression iterable) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public ForEachStmt setIterable(/*final*/Expression iterable) {
         assertNotNull(iterable);
         if (iterable == this.iterable) {
             return this;
@@ -118,8 +118,8 @@ public class ForEachStmt extends Statement implements NodeWithBody<ForEachStmt> 
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public ForEachStmt setVariable(final VariableDeclarationExpr variable) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public ForEachStmt setVariable(/*final*/VariableDeclarationExpr variable) {
         assertNotNull(variable);
         if (variable == this.variable) {
             return this;
@@ -162,13 +162,13 @@ public class ForEachStmt extends Statement implements NodeWithBody<ForEachStmt> 
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public ForEachStmt clone() {
         return (ForEachStmt) accept(new CloneVisitor(), null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public boolean replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
@@ -189,31 +189,31 @@ public class ForEachStmt extends Statement implements NodeWithBody<ForEachStmt> 
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isForEachStmt() {
         return true;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public ForEachStmt asForEachStmt() {
         return this;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<ForEachStmt> toForEachStmt() {
         return Optional.of(this);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifForEachStmt(Consumer<ForEachStmt> action) {
         action.accept(this);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public ForEachStmtMetaModel getMetaModel() {
         return JavaParserMetaModel.forEachStmtMetaModel;
     }

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -34,14 +34,14 @@ public interface CollectionStrategy {
 
     default Optional<Path> getRoot(Path file) {
         try {
-            final JavaParser javaParser = new JavaParser(getParserConfiguration());
-            final ParseResult<CompilationUnit> parseResult = javaParser.parse(file);
+            /*final*/JavaParser javaParser = new JavaParser(getParserConfiguration());
+            /*final*/ParseResult<CompilationUnit> parseResult = javaParser.parse(file);
             if (parseResult.isSuccessful()) {
                 if (parseResult.getResult().isPresent()) {
-                    final Optional<CompilationUnit.Storage> storage = parseResult.getResult().flatMap(CompilationUnit::getStorage);
+                    /*final*/Optional<CompilationUnit.Storage> storage = parseResult.getResult().flatMap(CompilationUnit::getStorage);
                     if (storage.isPresent()) {
                         if (storage.get().getFileName().equals("module-info.java")) {
-                            // module-info.java is useless for finding the source root, since it can be placed in any directory.
+                            // module-info.java is useless for finding the source root, since it can be placed _in any directory.
                             return Optional.empty();
                         }
                         return storage.map(CompilationUnit.Storage::getSourceRoot);
@@ -65,7 +65,7 @@ public interface CollectionStrategy {
         return Optional.empty();
     }
 
-    default PathMatcher getPathMatcher(String pattern) {
+    default PathMatcher getPathMatcher(string pattern) {
         return FileSystems.getDefault().getPathMatcher(pattern);
     }
 }

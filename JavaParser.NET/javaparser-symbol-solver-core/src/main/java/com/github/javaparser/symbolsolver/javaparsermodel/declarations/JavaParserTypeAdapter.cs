@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.declarations;
 /**
  * @author Federico Tomassetti
  */
-public class JavaParserTypeAdapter<T extends Node & NodeWithSimpleName<T> & NodeWithMembers<T>> {
+public class JavaParserTypeAdapter<T:Node & NodeWithSimpleName<T> & NodeWithMembers<T>> {
 
     private T wrappedNode;
     private TypeSolver typeSolver;
@@ -36,16 +36,16 @@ public class JavaParserTypeAdapter<T extends Node & NodeWithSimpleName<T> & Node
         this.typeSolver = typeSolver;
     }
 
-    public String getPackageName() {
+    public string getPackageName() {
         return AstResolutionUtils.getPackageName(wrappedNode);
     }
 
-    public String getClassName() {
+    public string getClassName() {
         return AstResolutionUtils.getClassName("", wrappedNode);
     }
 
-    public String getQualifiedName() {
-        String containerName = AstResolutionUtils.containerName(wrappedNode.getParentNode().orElse(null));
+    public string getQualifiedName() {
+        string containerName = AstResolutionUtils.containerName(wrappedNode.getParentNode().orElse(null));
         if (containerName.isEmpty()) {
             return wrappedNode.getName().getId();
         } else {
@@ -80,13 +80,13 @@ public class JavaParserTypeAdapter<T extends Node & NodeWithSimpleName<T> & Node
      * This method is deprecated because it receives the TypesSolver as a parameter.
      * Eventually we would like to remove all usages of TypeSolver as a parameter.
      *
-     * Also, resolution should move out of declarations, so that they are pure declarations and the resolution should
-     * work for JavaParser, Reflection and Javassist classes in the same way and not be specific to the three
+     * Also, resolution should move _out of declarations, so that they are pure declarations and the resolution should
+     * work for JavaParser, Reflection and Javassist classes _in the same way and not be specific to the three
      * implementations.
      */
-    @Deprecated
-    public SymbolReference<ResolvedTypeDeclaration> solveType(String name) {
-        if(wrappedNode instanceof NodeWithTypeParameters<?>) {
+    //@Deprecated
+    public SymbolReference<ResolvedTypeDeclaration> solveType(string name) {
+        if(wrappedNode is NodeWithTypeParameters<?>) {
             NodeList<TypeParameter> typeParameters = ((NodeWithTypeParameters<?>) wrappedNode).getTypeParameters();
             for (com.github.javaparser.ast.type.TypeParameter typeParameter : typeParameters) {
                 if (typeParameter.getName().getId().equals(name)) {
@@ -97,33 +97,33 @@ public class JavaParserTypeAdapter<T extends Node & NodeWithSimpleName<T> & Node
 
         // Member classes & interfaces
         for (BodyDeclaration<?> member : this.wrappedNode.getMembers()) {
-            if (member instanceof com.github.javaparser.ast.body.TypeDeclaration) {
+            if (member is com.github.javaparser.ast.body.TypeDeclaration) {
                 com.github.javaparser.ast.body.TypeDeclaration<?> internalType = (com.github.javaparser.ast.body.TypeDeclaration<?>) member;
-                String prefix = internalType.getName().asString() + ".";
+                string prefix = internalType.getName().asString() + ".";
                 if (internalType.getName().getId().equals(name)) {
-                    if (internalType instanceof ClassOrInterfaceDeclaration) {
+                    if (internalType is ClassOrInterfaceDeclaration) {
                         if (((ClassOrInterfaceDeclaration) internalType).isInterface()) {
                             return SymbolReference.solved(new JavaParserInterfaceDeclaration((com.github.javaparser.ast.body.ClassOrInterfaceDeclaration) internalType, typeSolver));
                         } else {
                             return SymbolReference.solved(new JavaParserClassDeclaration((com.github.javaparser.ast.body.ClassOrInterfaceDeclaration) internalType, typeSolver));
                         }
-                    } else if (internalType instanceof EnumDeclaration) {
+                    } else if (internalType is EnumDeclaration) {
                         return SymbolReference.solved(new JavaParserEnumDeclaration((com.github.javaparser.ast.body.EnumDeclaration) internalType, typeSolver));
-                    } else if (internalType instanceof AnnotationDeclaration) {
+                    } else if (internalType is AnnotationDeclaration) {
                         return SymbolReference.solved(new JavaParserAnnotationDeclaration((com.github.javaparser.ast.body.AnnotationDeclaration) internalType, typeSolver));
                     } else {
                         throw new UnsupportedOperationException();
                     }
                 } else if (name.startsWith(prefix) && name.length() > prefix.length()) {
-                    if (internalType instanceof ClassOrInterfaceDeclaration) {
+                    if (internalType is ClassOrInterfaceDeclaration) {
                         if (((ClassOrInterfaceDeclaration) internalType).isInterface()) {
                             return new JavaParserInterfaceDeclaration((com.github.javaparser.ast.body.ClassOrInterfaceDeclaration) internalType, typeSolver).solveType(name.substring(prefix.length()));
                         } else {
                             return new JavaParserClassDeclaration((com.github.javaparser.ast.body.ClassOrInterfaceDeclaration) internalType, typeSolver).solveType(name.substring(prefix.length()));
                         }
-                    } else if (internalType instanceof EnumDeclaration) {
+                    } else if (internalType is EnumDeclaration) {
                         return new SymbolSolver(typeSolver).solveTypeInType(new JavaParserEnumDeclaration((com.github.javaparser.ast.body.EnumDeclaration) internalType, typeSolver), name.substring(prefix.length()));
-                    } else if (internalType instanceof AnnotationDeclaration) {
+                    } else if (internalType is AnnotationDeclaration) {
                         return SymbolReference.solved(new JavaParserAnnotationDeclaration((com.github.javaparser.ast.body.AnnotationDeclaration) internalType, typeSolver));
                     } else {
                         throw new UnsupportedOperationException();
@@ -144,7 +144,7 @@ public class JavaParserTypeAdapter<T extends Node & NodeWithSimpleName<T> & Node
         List<ResolvedFieldDeclaration> fields = new ArrayList<>();
         if (wrappedNode.getMembers() != null) {
             for (BodyDeclaration<?> member : this.wrappedNode.getMembers()) {
-                if (member instanceof com.github.javaparser.ast.body.FieldDeclaration) {
+                if (member is com.github.javaparser.ast.body.FieldDeclaration) {
                     com.github.javaparser.ast.body.FieldDeclaration field = (com.github.javaparser.ast.body.FieldDeclaration) member;
                     for (VariableDeclarator vd : field.getVariables()) {
                         fields.add(new JavaParserFieldDeclaration(vd, typeSolver));
@@ -158,10 +158,10 @@ public class JavaParserTypeAdapter<T extends Node & NodeWithSimpleName<T> & Node
     public Set<ResolvedReferenceTypeDeclaration> internalTypes() {
         // Use a special Set implementation that avoids calculating the hashCode of the node,
         // since this can be very time-consuming for big node trees, and we are sure there are
-        // no duplicates in the members list.
+        // no duplicates _in the members list.
         Set<ResolvedReferenceTypeDeclaration> res = Collections.newSetFromMap(new IdentityHashMap<>());
         for (BodyDeclaration<?> member : this.wrappedNode.getMembers()) {
-            if (member instanceof TypeDeclaration) {
+            if (member is TypeDeclaration) {
                 res.add(JavaParserFacade.get(typeSolver).getTypeDeclaration((TypeDeclaration) member));
             }
         }

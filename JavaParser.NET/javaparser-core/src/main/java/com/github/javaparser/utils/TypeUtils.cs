@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -30,7 +30,7 @@ public class TypeUtils {
      * is {@code (IDLjava/lang/Thread;)Ljava/lang/Object;}
      * Note that the internal forms of the binary names of Thread and Object are used.
      */
-    public static String getMethodDescriptor(Method method) {
+    public static string getMethodDescriptor(Method method) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("(");
         for (Class<?> parameter : method.getParameterTypes()) {
@@ -41,25 +41,25 @@ public class TypeUtils {
         return stringBuilder.toString();
     }
 
-    private static void appendDescriptor(final Class<?> clazz, final StringBuilder stringBuilder) {
+    private static void appendDescriptor(/*final*/Class<?> clazz, /*final*/StringBuilder stringBuilder) {
         Class<?> currentClass = clazz;
         while (currentClass.isArray()) {
             stringBuilder.append("[");
             currentClass = currentClass.getComponentType();
         }
         if (currentClass.isPrimitive()) {
-            String descriptor = getPrimitiveTypeDescriptor(currentClass);
+            string descriptor = getPrimitiveTypeDescriptor(currentClass);
             stringBuilder.append(descriptor);
         } else {
             stringBuilder.append("L").append(currentClass.getName().replace(".", "/")).append(";");
         }
     }
 
-    public static String getPrimitiveTypeDescriptor(final Class<?> clazz) {
+    public static string getPrimitiveTypeDescriptor(/*final*/Class<?> clazz) {
         if (clazz == Void.TYPE || clazz == Void.class) {
             return new VoidType().toDescriptor();
         }
-        String className = clazz.getSimpleName();
+        string className = clazz.getSimpleName();
         Optional<Primitive> prim = Primitive.byTypeName(className);
         if (prim.isPresent()) {
             return prim.get().toDescriptor();

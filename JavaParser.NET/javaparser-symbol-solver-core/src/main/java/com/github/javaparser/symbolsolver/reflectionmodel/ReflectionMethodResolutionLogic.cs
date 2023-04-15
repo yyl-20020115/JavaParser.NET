@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,7 +28,7 @@ namespace com.github.javaparser.symbolsolver.reflectionmodel;
  */
 class ReflectionMethodResolutionLogic {
 
-    static SymbolReference<ResolvedMethodDeclaration> solveMethod(String name, List<ResolvedType> parameterTypes, boolean staticOnly,
+    static SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> parameterTypes, boolean staticOnly,
                                                                   TypeSolver typeSolver, ResolvedReferenceTypeDeclaration scopeType,
                                                                   Class clazz){
         List<ResolvedMethodDeclaration> methods = new ArrayList<>();
@@ -60,7 +60,7 @@ class ReflectionMethodResolutionLogic {
         return MethodResolutionLogic.findMostApplicable(methods, name, parameterTypes, typeSolver);
     }
 
-    static Optional<MethodUsage> solveMethodAsUsage(String name, List<ResolvedType> argumentsTypes, TypeSolver typeSolver,
+    static Optional<MethodUsage> solveMethodAsUsage(string name, List<ResolvedType> argumentsTypes, TypeSolver typeSolver,
                                                     Context invokationContext, List<ResolvedType> typeParameterValues,
                                                     ResolvedReferenceTypeDeclaration scopeType, Class clazz) {
         if (typeParameterValues.size() != scopeType.getTypeParameters().size()) {
@@ -108,7 +108,7 @@ class ReflectionMethodResolutionLogic {
             }
         }
 
-        final List<ResolvedType> finalTypeParameterValues = typeParameterValues;
+        /*final*/List<ResolvedType> finalTypeParameterValues = typeParameterValues;
         argumentsTypes = argumentsTypes.stream().map((pt) -> {
             int i = 0;
             for (ResolvedTypeParameterDeclaration tp : scopeType.getTypeParameters()) {

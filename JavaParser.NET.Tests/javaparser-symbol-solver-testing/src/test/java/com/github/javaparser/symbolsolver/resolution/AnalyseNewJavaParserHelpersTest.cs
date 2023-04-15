@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,9 +27,9 @@ namespace com.github.javaparser.symbolsolver.resolution;
 /**
  * We analize a more recent version of JavaParser, after the project moved to Java 8.
  */
-class AnalyseNewJavaParserHelpersTest extends AbstractResolutionTest {
+class AnalyseNewJavaParserHelpersTest:AbstractResolutionTest {
 
-    private static final Path src = adaptPath("src/test/test_sourcecode/javaparser_new_src/javaparser-core");
+    private static /*final*/Path src = adaptPath("src/test/test_sourcecode/javaparser_new_src/javaparser-core");
 
     private static TypeSolver TYPESOLVER = typeSolver();
 
@@ -41,35 +41,35 @@ class AnalyseNewJavaParserHelpersTest extends AbstractResolutionTest {
         return combinedTypeSolver;
     }
 
-    private CompilationUnit parse(String fileName) throws IOException {
+    private CompilationUnit parse(string fileName){
         Path sourceFile = src.resolve(fileName + ".java");
         return StaticJavaParser.parse(sourceFile);
     }
 
-//    @Test
-//    public void o1TypeIsCorrect() throws IOException, ParseException {
+//    [TestMethod]
+//    public void o1TypeIsCorrect(), ParseException {
 //        CompilationUnit cu = parse("com/github/javaparser/utils/PositionUtils");
 //        NameExpr o1 = Navigator.findAllNodesOfGivenClass(cu, NameExpr.class).stream().filter(it -> it.getName()!=null && it.getName().equals("o1")).findFirst().get();
-//        System.out.println(JavaParserFacade.get(TYPESOLVER).solve(o1).getCorrespondingDeclaration().getType());
+//        System._out.println(JavaParserFacade.get(TYPESOLVER).solve(o1).getCorrespondingDeclaration().getType());
 //    }
 //
-//    @Test
-//    public void o2TypeIsCorrect() throws IOException, ParseException {
+//    [TestMethod]
+//    public void o2TypeIsCorrect(), ParseException {
 //        CompilationUnit cu = parse("com/github/javaparser/utils/PositionUtils");
 //        NameExpr o2 = Navigator.findAllNodesOfGivenClass(cu, NameExpr.class).stream().filter(it -> it.getName()!=null && it.getName().equals("o2")).findFirst().get();
-//        System.out.println(JavaParserFacade.get(TYPESOLVER).solve(o2).getCorrespondingDeclaration().getType());
+//        System._out.println(JavaParserFacade.get(TYPESOLVER).solve(o2).getCorrespondingDeclaration().getType());
 //    }
 //
 //    // To calculate the type of o1 and o2 I need to first calculate the type of the lambda
-//    @Test
-//    public void lambdaTypeIsCorrect() throws IOException, ParseException {
+//    [TestMethod]
+//    public void lambdaTypeIsCorrect(), ParseException {
 //        CompilationUnit cu = parse("com/github/javaparser/utils/PositionUtils");
 //        LambdaExpr lambda = Navigator.findAllNodesOfGivenClass(cu, LambdaExpr.class).stream().filter(it -> it.getRange().begin.line == 50).findFirst().get();
-//        System.out.println(JavaParserFacade.get(TYPESOLVER).getType(lambda));
+//        System._out.println(JavaParserFacade.get(TYPESOLVER).getType(lambda));
 //    }
 
-    @Test
-    void nodesTypeIsCorrect() throws IOException {
+    [TestMethod]
+    void nodesTypeIsCorrect(){
         CompilationUnit cu = parse("com/github/javaparser/utils/PositionUtils");
         NameExpr nodes = cu.findAll(NameExpr.class).stream().filter(it -> it.getName() != null && it.getName().getId().equals("nodes")).findFirst().get();
         ResolvedType type = JavaParserFacade.get(TYPESOLVER).solve(nodes).getCorrespondingDeclaration().getType();

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,19 +25,19 @@ namespace com.github.javaparser.ast.validator.postprocessors;
 /**
  * Processes the generic AST into a Java 10 AST and validates it.
  */
-public class Java10PostProcessor extends PostProcessors {
+public class Java10PostProcessor:PostProcessors {
     
-    // List of parent contexts in which a var type must not be detected.
-    // for example: in this statement var.class.getCanonicalName(), var must not be considered as a VarType
+    // List of parent contexts _in which a var type must not be detected.
+    // for example: _in this statement var.class.getCanonicalName(), var must not be considered as a VarType
     private static List<Class> FORBIDEN_PARENT_CONTEXT_TO_DETECT_POTENTIAL_VAR_TYPE = new ArrayList<>();
     static {
         FORBIDEN_PARENT_CONTEXT_TO_DETECT_POTENTIAL_VAR_TYPE.addAll(Arrays.asList(ClassExpr.class));
     }
 
-    protected final Processor varNodeCreator = new Processor() {
+    protected /*final*/Processor varNodeCreator = new Processor() {
 
         @Override
-        public void postProcess(ParseResult<? extends Node> result, ParserConfiguration configuration) {
+        public void postProcess(ParseResult<?:Node> result, ParserConfiguration configuration) {
             result.getResult().ifPresent(node -> {
                 node.findAll(ClassOrInterfaceType.class)
                     .forEach(n -> {

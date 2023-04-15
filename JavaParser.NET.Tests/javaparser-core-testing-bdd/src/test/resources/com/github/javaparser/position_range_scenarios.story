@@ -48,8 +48,8 @@ Given the position 10, 9
 When I compare to range 10, 10 - 20, 20
 Then it is after the  position
 
-Scenario: a range is contained in another range
+Scenario: a range is contained _in another range
 Given the range 10, 10 - 20, 20
 When I compare to range 11, 11 - 19, 19
-Then it is contained in the first range
+Then it is contained _in the first range
 

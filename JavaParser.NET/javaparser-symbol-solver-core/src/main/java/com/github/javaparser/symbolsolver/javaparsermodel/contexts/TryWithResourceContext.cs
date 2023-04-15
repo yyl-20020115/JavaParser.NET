@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,16 +24,16 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.contexts;
 
 
 
-public class TryWithResourceContext extends AbstractJavaParserContext<TryStmt> {
+public class TryWithResourceContext:AbstractJavaParserContext<TryStmt> {
 
     public TryWithResourceContext(TryStmt wrappedNode, TypeSolver typeSolver) {
         super(wrappedNode, typeSolver);
     }
 
     @Override
-    public Optional<Value> solveSymbolAsValue(String name) {
+    public Optional<Value> solveSymbolAsValue(string name) {
         for (Expression expr : wrappedNode.getResources()) {
-            if (expr instanceof VariableDeclarationExpr) {
+            if (expr is VariableDeclarationExpr) {
                 for (VariableDeclarator v : ((VariableDeclarationExpr)expr).getVariables()) {
                     if (v.getName().getIdentifier().equals(name)) {
                         ResolvedValueDeclaration decl = JavaParserSymbolDeclaration.localVar(v, typeSolver);
@@ -43,7 +43,7 @@ public class TryWithResourceContext extends AbstractJavaParserContext<TryStmt> {
             }
         }
 
-        if (demandParentNode(wrappedNode) instanceof BlockStmt) {
+        if (demandParentNode(wrappedNode) is BlockStmt) {
             return StatementContext.solveInBlockAsValue(name, typeSolver, wrappedNode);
         } else {
             return solveSymbolAsValueInParentContext(name);
@@ -51,9 +51,9 @@ public class TryWithResourceContext extends AbstractJavaParserContext<TryStmt> {
     }
 
     @Override
-    public SymbolReference<? extends ResolvedValueDeclaration> solveSymbol(String name) {
+    public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name) {
         for (Expression expr : wrappedNode.getResources()) {
-            if (expr instanceof VariableDeclarationExpr) {
+            if (expr is VariableDeclarationExpr) {
                 for (VariableDeclarator v : ((VariableDeclarationExpr)expr).getVariables()) {
                     if (v.getName().getIdentifier().equals(name)) {
                         return SymbolReference.solved(JavaParserSymbolDeclaration.localVar(v, typeSolver));
@@ -62,7 +62,7 @@ public class TryWithResourceContext extends AbstractJavaParserContext<TryStmt> {
             }
         }
 
-        if (demandParentNode(wrappedNode) instanceof BlockStmt) {
+        if (demandParentNode(wrappedNode) is BlockStmt) {
             return StatementContext.solveInBlock(name, typeSolver, wrappedNode);
         } else {
             return solveSymbolInParentContext(name);
@@ -70,7 +70,7 @@ public class TryWithResourceContext extends AbstractJavaParserContext<TryStmt> {
     }
 
     @Override
-    public SymbolReference<ResolvedMethodDeclaration> solveMethod(String name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
+    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
         // TODO: Document why staticOnly is forced to be false.
         return solveMethodInParentContext(name, argumentsTypes, false);
     }
@@ -81,7 +81,7 @@ public class TryWithResourceContext extends AbstractJavaParserContext<TryStmt> {
         for (int i=0;i<resources.size();i++) {
             if (child == resources.get(i)) {
                 return resources.subList(0, i).stream()
-                        .map(e -> e instanceof VariableDeclarationExpr ? ((VariableDeclarationExpr) e).getVariables()
+                        .map(e -> e is VariableDeclarationExpr ? ((VariableDeclarationExpr) e).getVariables()
                                 : Collections.<VariableDeclarator>emptyList())
                         .flatMap(List::stream)
                         .collect(Collectors.toList());
@@ -90,7 +90,7 @@ public class TryWithResourceContext extends AbstractJavaParserContext<TryStmt> {
         if (child == wrappedNode.getTryBlock()) {
             List<VariableDeclarator> res = new LinkedList<>();
             for (Expression expr : resources) {
-                if (expr instanceof VariableDeclarationExpr) {
+                if (expr is VariableDeclarationExpr) {
                     res.addAll(((VariableDeclarationExpr)expr).getVariables());
                 }
             }

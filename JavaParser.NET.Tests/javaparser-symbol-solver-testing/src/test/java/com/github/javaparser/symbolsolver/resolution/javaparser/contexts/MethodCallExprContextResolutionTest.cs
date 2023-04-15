@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,8 +27,8 @@ namespace com.github.javaparser.symbolsolver.resolution.javaparser.contexts;
 /**
  * @author Malte Langkabel
  */
-class MethodCallExprContextResolutionTest extends AbstractResolutionTest {
-	private MethodCallExpr getMethodCallExpr(String methodName, String callingMethodName) {
+class MethodCallExprContextResolutionTest:AbstractResolutionTest {
+	private MethodCallExpr getMethodCallExpr(string methodName, string callingMethodName) {
 		CompilationUnit cu = parseSample("MethodCalls");
 
 		com.github.javaparser.ast.body.ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "MethodCalls");
@@ -44,7 +44,7 @@ class MethodCallExprContextResolutionTest extends AbstractResolutionTest {
 		return combinedTypeSolver;
 	}
 
-	@Test
+	[TestMethod]
 	void solveNestedMethodCallExprContextWithoutScope() {
 		MethodCallExpr methodCallExpr = getMethodCallExpr("bar1", "foo");
 		CombinedTypeSolver typeSolver = createTypeSolver();
@@ -56,17 +56,17 @@ class MethodCallExprContextResolutionTest extends AbstractResolutionTest {
 		assertEquals("MethodCalls", ref.get().declaringType().getQualifiedName());
 	}
 
-	@Test
+	[TestMethod]
 	void solveGenericMethodCallMustUseProvidedTypeArgs() {
 		assertCanSolveGenericMethodCallMustUseProvidedTypeArgs("genericMethod0");
 	}
 
-	@Test
+	[TestMethod]
 	void solveStaticGenericMethodCallMustUseProvidedTypeArgs() {
 		assertCanSolveGenericMethodCallMustUseProvidedTypeArgs("staticGenericMethod0");
 	}
 
-	private void assertCanSolveGenericMethodCallMustUseProvidedTypeArgs(String callMethodName) {
+	private void assertCanSolveGenericMethodCallMustUseProvidedTypeArgs(string callMethodName) {
 		MethodCallExpr methodCallExpr = getMethodCallExpr("genericMethodTest", callMethodName);
 		CombinedTypeSolver typeSolver = createTypeSolver();
 
@@ -79,17 +79,17 @@ class MethodCallExprContextResolutionTest extends AbstractResolutionTest {
 				.map(ty -> ty.asReferenceType().describe()).collect(Collectors.toList()));
 	}
 
-	@Test
+	[TestMethod]
 	void solveGenericMethodCallCanInferFromArguments() {
 		assertCanSolveGenericMethodCallCanInferFromArguments("genericMethod1");
 	}
 
-	@Test
+	[TestMethod]
 	void solveStaticGenericMethodCallCanInferFromArguments() {
 		assertCanSolveGenericMethodCallCanInferFromArguments("staticGenericMethod1");
 	}
 
-	private void assertCanSolveGenericMethodCallCanInferFromArguments(String callMethodName) {
+	private void assertCanSolveGenericMethodCallCanInferFromArguments(string callMethodName) {
 		MethodCallExpr methodCallExpr = getMethodCallExpr("genericMethodTest", callMethodName);
 		CombinedTypeSolver typeSolver = createTypeSolver();
 
@@ -107,7 +107,7 @@ class MethodCallExprContextResolutionTest extends AbstractResolutionTest {
 				.map(ty -> ty.asReferenceType().describe()).collect(Collectors.toList()));
 	}
 
-	@Test
+	[TestMethod]
 	public void test() {
 		ParserConfiguration config = new ParserConfiguration()
 				.setSymbolResolver(new JavaSymbolSolver(createTypeSolver()));
@@ -119,7 +119,7 @@ class MethodCallExprContextResolutionTest extends AbstractResolutionTest {
 		assertTrue(ResolvedVoidType.class.isAssignableFrom(r.getClass()));
 	}
 
-	@Test
+	[TestMethod]
 	public void testGenericParameter() {
 		ParserConfiguration config = new ParserConfiguration()
 				.setSymbolResolver(new JavaSymbolSolver(createTypeSolver()));
@@ -131,8 +131,8 @@ class MethodCallExprContextResolutionTest extends AbstractResolutionTest {
 		assertTrue(ReferenceTypeImpl.class.isAssignableFrom(r.getClass()));
 	}
 
-	@Test
-	public void testResolveChainedCallOnReflectionType() throws Exception {
+	[TestMethod]
+	public void testResolveChainedCallOnReflectionType() {
 		Path pathToJar = adaptPath("src/test/resources/issue2667/jsonobject.jar");
 
 		CombinedTypeSolver typeSolver = createTypeSolver();
@@ -157,7 +157,7 @@ class MethodCallExprContextResolutionTest extends AbstractResolutionTest {
 		assertEquals(0, errorCount, "Expected zero UnsolvedSymbolException s");
 	}
 	
-	@Test
+	[TestMethod]
 	void solveVariadicStaticGenericMethodCallCanInferFromArguments() {
 		ParserConfiguration config = new ParserConfiguration()
 				.setSymbolResolver(new JavaSymbolSolver(createTypeSolver()));
@@ -169,7 +169,7 @@ class MethodCallExprContextResolutionTest extends AbstractResolutionTest {
 	}
 	
 	// Related to issue #3195
-	@Test
+	[TestMethod]
 	void solveVariadicStaticGenericMethodCallCanInferFromArguments2() {
 		ParserConfiguration config = new ParserConfiguration()
 				.setSymbolResolver(new JavaSymbolSolver(createTypeSolver()));

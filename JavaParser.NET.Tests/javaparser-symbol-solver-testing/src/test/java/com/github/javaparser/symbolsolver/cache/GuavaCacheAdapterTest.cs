@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -35,12 +35,12 @@ class GuavaCacheTest {
         adapter = new GuavaCache<>(guavaCache);
     }
 
-    @Test
+    [TestMethod]
     void constructor_withNull_shouldThrowNPE() {
         assertThrows(NullPointerException.class, () -> new GuavaCache<String, String>(null));
     }
 
-    @Test
+    [TestMethod]
     void put_ShouldStoreTheValue() {
         assertTrue(adapter.isEmpty());
         assertFalse(adapter.contains("key"));
@@ -50,13 +50,13 @@ class GuavaCacheTest {
         assertTrue(adapter.contains("key"));
     }
 
-    @Test
+    [TestMethod]
     void get_ShouldReturnTheCachedValue() {
         adapter.put("foo", "bar");
         adapter.put("rab", "oof");
 
-        String key = "key";
-        String value = "value";
+        string key = "key";
+        string value = "value";
 
         assertFalse(adapter.get(key).isPresent(), "No value expected at the moment");
 
@@ -69,13 +69,13 @@ class GuavaCacheTest {
         assertFalse(adapter.get(key).isPresent(), "No value expected at the moment");
     }
 
-    @Test
+    [TestMethod]
     void remove_ShouldOnlyRemoveTheKey() {
 
         // Prepare the values
-        String key1 = "key1";
-        String key2 = "key2";
-        String key3 = "key3";
+        string key1 = "key1";
+        string key2 = "key2";
+        string key3 = "key3";
 
         adapter.put(key1, "");
         adapter.put(key2, "");
@@ -105,7 +105,7 @@ class GuavaCacheTest {
         assertFalse(adapter.contains(key2));
     }
 
-    @Test
+    [TestMethod]
     void removeAll_ShouldRemoveAllTheKeys() {
         adapter.put("key1", "");
         adapter.put("key2", "");
@@ -116,9 +116,9 @@ class GuavaCacheTest {
         assertTrue(adapter.isEmpty());
     }
 
-    @Test
+    [TestMethod]
     void contains_ShouldOnlyReturnTrue_WhenTheKeyExists() {
-        String key = "key";
+        string key = "key";
 
         assertFalse(adapter.contains(key), "At this moment, the key should not exists.");
         adapter.put(key, "value");
@@ -127,9 +127,9 @@ class GuavaCacheTest {
         assertFalse(adapter.contains(key), "At this moment, the key should not exists.");
     }
 
-    @Test
+    [TestMethod]
     void size_ShouldBeEqualToGuavaCacheSize() {
-        String key = "key";
+        string key = "key";
 
         assertEquals(0, guavaCache.size());
         assertEquals(guavaCache.size(), adapter.size());
@@ -143,9 +143,9 @@ class GuavaCacheTest {
         assertEquals(guavaCache.size(), adapter.size());
     }
 
-    @Test
+    [TestMethod]
     void isEmpty_ShouldOnlyReturnTrue_WhenTheSizeIsZero() {
-        String key = "key";
+        string key = "key";
 
         assertTrue(adapter.isEmpty());
 

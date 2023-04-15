@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,9 +24,9 @@ namespace com.github.javaparser.ast.modules;
 
 
 /**
- * A require directive in module-info.java. {@code require a.b.C;}
+ * A require directive _in module-info.java. {@code require a.b.C;}
  */
-public class ModuleRequiresDirective extends ModuleDirective implements NodeWithStaticModifier<ModuleRequiresDirective>, NodeWithName<ModuleRequiresDirective> {
+public class ModuleRequiresDirective:ModuleDirective implements NodeWithStaticModifier<ModuleRequiresDirective>, NodeWithName<ModuleRequiresDirective> {
 
     private NodeList<Modifier> modifiers;
 
@@ -36,7 +36,7 @@ public class ModuleRequiresDirective extends ModuleDirective implements NodeWith
         this(null, new NodeList<>(), new Name());
     }
 
-    @AllFieldsConstructor
+    //@AllFieldsConstructor
     public ModuleRequiresDirective(NodeList<Modifier> modifiers, Name name) {
         this(null, modifiers, name);
     }
@@ -44,7 +44,7 @@ public class ModuleRequiresDirective extends ModuleDirective implements NodeWith
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public ModuleRequiresDirective(TokenRange tokenRange, NodeList<Modifier> modifiers, Name name) {
         super(tokenRange);
         setModifiers(modifiers);
@@ -53,24 +53,24 @@ public class ModuleRequiresDirective extends ModuleDirective implements NodeWith
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public NodeList<Modifier> getModifiers() {
         return modifiers;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public ModuleRequiresDirective setModifiers(final NodeList<Modifier> modifiers) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public ModuleRequiresDirective setModifiers(/*final*/NodeList<Modifier> modifiers) {
         assertNotNull(modifiers);
         if (modifiers == this.modifiers) {
             return this;
@@ -83,13 +83,13 @@ public class ModuleRequiresDirective extends ModuleDirective implements NodeWith
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Name getName() {
         return name;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public ModuleRequiresDirective setName(final Name name) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public ModuleRequiresDirective setName(/*final*/Name name) {
         assertNotNull(name);
         if (name == this.name) {
             return this;
@@ -122,7 +122,7 @@ public class ModuleRequiresDirective extends ModuleDirective implements NodeWith
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
     public boolean remove(Node node) {
         if (node == null) {
             return false;
@@ -137,13 +137,13 @@ public class ModuleRequiresDirective extends ModuleDirective implements NodeWith
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public ModuleRequiresDirective clone() {
         return (ModuleRequiresDirective) accept(new CloneVisitor(), null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public boolean replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
@@ -162,54 +162,54 @@ public class ModuleRequiresDirective extends ModuleDirective implements NodeWith
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isModuleRequiresStmt() {
         return true;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public ModuleRequiresDirective asModuleRequiresStmt() {
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifModuleRequiresStmt(Consumer<ModuleRequiresDirective> action) {
         action.accept(this);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<ModuleRequiresDirective> toModuleRequiresStmt() {
         return Optional.of(this);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isModuleRequiresDirective() {
         return true;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public ModuleRequiresDirective asModuleRequiresDirective() {
         return this;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<ModuleRequiresDirective> toModuleRequiresDirective() {
         return Optional.of(this);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifModuleRequiresDirective(Consumer<ModuleRequiresDirective> action) {
         action.accept(this);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public ModuleRequiresDirectiveMetaModel getMetaModel() {
         return JavaParserMetaModel.moduleRequiresDirectiveMetaModel;
     }

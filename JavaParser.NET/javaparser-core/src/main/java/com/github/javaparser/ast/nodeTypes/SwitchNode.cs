@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -46,7 +46,7 @@ public interface SwitchNode {
     Optional<Comment> getComment();
 
     /**
-     * @return true if there are no labels or anything contained in this switch.
+     * @return true if there are no labels or anything contained _in this switch.
      */
     default boolean isEmpty() {
         return getEntries().isEmpty();

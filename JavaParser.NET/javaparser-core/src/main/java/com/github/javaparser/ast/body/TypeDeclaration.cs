@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,7 +28,7 @@ namespace com.github.javaparser.ast.body;
  *
  * @author Julio Vilmar Gesser
  */
-public abstract class TypeDeclaration<T extends TypeDeclaration<?>> extends BodyDeclaration<T> implements NodeWithSimpleName<T>, NodeWithJavadoc<T>, NodeWithMembers<T>, NodeWithAccessModifiers<T>, NodeWithStaticModifier<T>, NodeWithStrictfpModifier<T> {
+public abstract class TypeDeclaration<T:TypeDeclaration<?>>:BodyDeclaration<T> implements NodeWithSimpleName<T>, NodeWithJavadoc<T>, NodeWithMembers<T>, NodeWithAccessModifiers<T>, NodeWithStaticModifier<T>, NodeWithStrictfpModifier<T> {
 
     private SimpleName name;
 
@@ -40,11 +40,11 @@ public abstract class TypeDeclaration<T extends TypeDeclaration<?>> extends Body
         this(null, new NodeList<>(), new NodeList<>(), new SimpleName(), new NodeList<>());
     }
 
-    public TypeDeclaration(NodeList<Modifier> modifiers, String name) {
+    public TypeDeclaration(NodeList<Modifier> modifiers, string name) {
         this(null, modifiers, new NodeList<>(), new SimpleName(name), new NodeList<>());
     }
 
-    @AllFieldsConstructor
+    //@AllFieldsConstructor
     public TypeDeclaration(NodeList<Modifier> modifiers, NodeList<AnnotationExpr> annotations, SimpleName name, NodeList<BodyDeclaration<?>> members) {
         this(null, modifiers, annotations, name, members);
     }
@@ -52,7 +52,7 @@ public abstract class TypeDeclaration<T extends TypeDeclaration<?>> extends Body
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public TypeDeclaration(TokenRange tokenRange, NodeList<Modifier> modifiers, NodeList<AnnotationExpr> annotations, SimpleName name, NodeList<BodyDeclaration<?>> members) {
         super(tokenRange, annotations);
         setModifiers(modifiers);
@@ -72,7 +72,7 @@ public abstract class TypeDeclaration<T extends TypeDeclaration<?>> extends Body
         return (T) this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public NodeList<BodyDeclaration<?>> getMembers() {
         return members;
     }
@@ -83,14 +83,14 @@ public abstract class TypeDeclaration<T extends TypeDeclaration<?>> extends Body
      * @return modifiers
      * @see Modifier
      */
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public NodeList<Modifier> getModifiers() {
         return modifiers;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    @SuppressWarnings("unchecked")
-    public T setMembers(final NodeList<BodyDeclaration<?>> members) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@SuppressWarnings("unchecked")
+    public T setMembers(/*final*/NodeList<BodyDeclaration<?>> members) {
         assertNotNull(members);
         if (members == this.members) {
             return (T) this;
@@ -103,9 +103,9 @@ public abstract class TypeDeclaration<T extends TypeDeclaration<?>> extends Body
         return (T) this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    @SuppressWarnings("unchecked")
-    public T setModifiers(final NodeList<Modifier> modifiers) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@SuppressWarnings("unchecked")
+    public T setModifiers(/*final*/NodeList<Modifier> modifiers) {
         assertNotNull(modifiers);
         if (modifiers == this.modifiers) {
             return (T) this;
@@ -118,9 +118,9 @@ public abstract class TypeDeclaration<T extends TypeDeclaration<?>> extends Body
         return (T) this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    @SuppressWarnings("unchecked")
-    public T setName(final SimpleName name) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@SuppressWarnings("unchecked")
+    public T setName(/*final*/SimpleName name) {
         assertNotNull(name);
         if (name == this.name) {
             return (T) this;
@@ -133,13 +133,13 @@ public abstract class TypeDeclaration<T extends TypeDeclaration<?>> extends Body
         return (T) this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public SimpleName getName() {
         return name;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
     public boolean remove(Node node) {
         if (node == null) {
             return false;
@@ -163,21 +163,21 @@ public abstract class TypeDeclaration<T extends TypeDeclaration<?>> extends Body
      * @return is this type's parent a CompilationUnit?
      */
     public boolean isTopLevelType() {
-        return getParentNode().map(p -> p instanceof CompilationUnit).orElse(false);
+        return getParentNode().map(p -> p is CompilationUnit).orElse(false);
     }
 
     /**
      * @return methods or constructors whose signatures match the passed signature.
      */
     public List<CallableDeclaration<?>> getCallablesWithSignature(CallableDeclaration.Signature signature) {
-        return getMembers().stream().filter(m -> m instanceof CallableDeclaration).map(m -> ((CallableDeclaration<?>) m)).filter(m -> m.getSignature().equals(signature)).collect(toList());
+        return getMembers().stream().filter(m -> m is CallableDeclaration).map(m -> ((CallableDeclaration<?>) m)).filter(m -> m.getSignature().equals(signature)).collect(toList());
     }
 
     /**
-     * Returns the fully qualified name of this type, derived only from information available in this compilation unit. (So no symbol solving happens.)
+     * Returns the fully qualified name of this type, derived only from information available _in this compilation unit. (So no symbol solving happens.)
      * If the declared type is a local class declaration, it will return Optional.empty().
      * If the declared type is a local record declaration, it will return Optional.empty().
-     * If the declared type is not contained in a compilation unit, it will return Optional.empty().
+     * If the declared type is not contained _in a compilation unit, it will return Optional.empty().
      * @see com.github.javaparser.ast.stmt.LocalClassDeclarationStmt
      * @see com.github.javaparser.ast.stmt.LocalRecordDeclarationStmt
      */
@@ -193,23 +193,23 @@ public abstract class TypeDeclaration<T extends TypeDeclaration<?>> extends Body
      * NOTE: many people are confused over terminology. Refer to https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html .
      */
     public boolean isNestedType() {
-        return getParentNode().map(p -> p instanceof TypeDeclaration).orElse(false);
+        return getParentNode().map(p -> p is TypeDeclaration).orElse(false);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public TypeDeclaration<?> clone() {
         return (TypeDeclaration<?>) accept(new CloneVisitor(), null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public TypeDeclarationMetaModel getMetaModel() {
         return JavaParserMetaModel.typeDeclarationMetaModel;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public boolean replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
@@ -234,25 +234,25 @@ public abstract class TypeDeclaration<T extends TypeDeclaration<?>> extends Body
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isTypeDeclaration() {
         return true;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public TypeDeclaration asTypeDeclaration() {
         return this;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifTypeDeclaration(Consumer<TypeDeclaration> action) {
         action.accept(this);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<TypeDeclaration> toTypeDeclaration() {
         return Optional.of(this);
     }

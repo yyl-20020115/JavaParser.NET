@@ -8,10 +8,10 @@ namespace com.github.javaparser;
  * The results given when parsing with an instance of JavaParser.
  */
 public class ParseResult<T> {
-    private final Optional<T> result;
-    private final List<Problem> problems;
-    private final Optional<List<Token>> tokens;
-    private final Optional<CommentsCollection> commentsCollection;
+    private /*final*/Optional<T> result;
+    private /*final*/List<Problem> problems;
+    private /*final*/Optional<List<Token>> tokens;
+    private /*final*/Optional<CommentsCollection> commentsCollection;
 
     /**
      * General constructor.
@@ -69,7 +69,7 @@ public class ParseResult<T> {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         if (isSuccessful()) {
             return "Parsing successful";
         }

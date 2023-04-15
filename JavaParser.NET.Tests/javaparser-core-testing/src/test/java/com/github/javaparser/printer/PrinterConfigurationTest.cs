@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -29,7 +29,7 @@ class PrinterConfigurationTest {
         return config.get(new DefaultConfigurationOption(cOption));
     }
 
-    @Test
+    [TestMethod]
     void testDefaultConfigurationAndValue() {
         PrinterConfiguration config = new DefaultPrinterConfiguration();
         assertTrue(getOption(config, ConfigOption.PRINT_COMMENTS).isPresent());
@@ -48,7 +48,7 @@ class PrinterConfigurationTest {
         assertEquals(getOption(config, ConfigOption.END_OF_LINE_CHARACTER).get().asString(), Utils.SYSTEM_EOL);
     }
 
-    @Test
+    [TestMethod]
     void testConfigurationError() {
         PrinterConfiguration config = new DefaultPrinterConfiguration();
         // verify configuration error case
@@ -62,7 +62,7 @@ class PrinterConfigurationTest {
         });
     }
     
-    @Test
+    [TestMethod]
     void testUpdatedConfigurationOption() {
         PrinterConfiguration config = new DefaultPrinterConfiguration();
         // change the default currentValue of the MAX_ENUM_CONSTANTS_TO_ALIGN_HORIZONTALLY option
@@ -71,7 +71,7 @@ class PrinterConfigurationTest {
         assertEquals(getOption(config, ConfigOption.MAX_ENUM_CONSTANTS_TO_ALIGN_HORIZONTALLY).get().asValue(), Integer.valueOf(2));
     }
     
-    @Test
+    [TestMethod]
     void testRemoveOption() {
         PrinterConfiguration config = new DefaultPrinterConfiguration();
         assertTrue(getOption(config, ConfigOption.PRINT_COMMENTS).isPresent());

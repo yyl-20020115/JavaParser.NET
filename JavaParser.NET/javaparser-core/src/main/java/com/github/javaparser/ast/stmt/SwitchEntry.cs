@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,17 +23,17 @@ namespace com.github.javaparser.ast.stmt;
 
 
 /**
- * <h1>One case in a switch statement</h1>
- * The main Javadoc is in {@link SwitchStmt}
+ * <h1>One case _in a switch statement</h1>
+ * The main Javadoc is _in {@link SwitchStmt}
  * <h2>Java 1.0-11</h2>
  * <pre>{@code
  * switch (i) {
  *   case 1:
  *   case 2:
- *     System.out.println(444);
+ *     System._out.println(444);
  *     break;
  *   default:
- *     System.out.println(0);
+ *     System._out.println(0);
  * }
  * }</pre>
  * <br>
@@ -51,9 +51,9 @@ namespace com.github.javaparser.ast.stmt;
  * }</pre>
  * These are three new variants.
  * <ul>
- *     <li>The first one is of type EXPRESSION and stores its {@link Expression} in an {@link ExpressionStmt} which is stored as the first and only statement in statements.</li>
- *     <li>The second one is of type BLOCK and stores its {@link BlockStmt} as the first and only statement in statements.</li>
- *     <li>The third one is of type THROWS_STATEMENT and stores its {@link ThrowStmt} as the first and only statement in statements.</li>
+ *     <li>The first one is of type EXPRESSION and stores its {@link Expression} _in an {@link ExpressionStmt} which is stored as the first and only statement _in statements.</li>
+ *     <li>The second one is of type BLOCK and stores its {@link BlockStmt} as the first and only statement _in statements.</li>
+ *     <li>The third one is of type THROWS_STATEMENT and stores its {@link ThrowStmt} as the first and only statement _in statements.</li>
  * </ul>
  * <pre>{@code
  *     case MONDAY, FRIDAY, SUNDAY -> 6;
@@ -68,7 +68,7 @@ namespace com.github.javaparser.ast.stmt;
  * @see SwitchStmt
  * @see com.github.javaparser.ast.expr.SwitchExpr
  */
-public class SwitchEntry extends Node implements NodeWithStatements<SwitchEntry> {
+public class SwitchEntry:Node implements NodeWithStatements<SwitchEntry> {
 
     public enum Type {
 
@@ -85,15 +85,15 @@ public class SwitchEntry extends Node implements NodeWithStatements<SwitchEntry>
         this(null, new NodeList<Expression>(), Type.STATEMENT_GROUP, new NodeList<>());
     }
 
-    @AllFieldsConstructor
-    public SwitchEntry(final NodeList<Expression> labels, final Type type, final NodeList<Statement> statements) {
+    //@AllFieldsConstructor
+    public SwitchEntry(/*final*/NodeList<Expression> labels, /*final*/Type type, /*final*/NodeList<Statement> statements) {
         this(null, labels, type, statements);
     }
 
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public SwitchEntry(TokenRange tokenRange, NodeList<Expression> labels, Type type, NodeList<Statement> statements) {
         super(tokenRange);
         setLabels(labels);
@@ -103,23 +103,23 @@ public class SwitchEntry extends Node implements NodeWithStatements<SwitchEntry>
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public NodeList<Expression> getLabels() {
         return labels;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public NodeList<Statement> getStatements() {
         return statements;
     }
@@ -130,8 +130,8 @@ public class SwitchEntry extends Node implements NodeWithStatements<SwitchEntry>
      * @param labels the label, can be null
      * @return this, the SwitchEntry
      */
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public SwitchEntry setLabels(final NodeList<Expression> labels) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public SwitchEntry setLabels(/*final*/NodeList<Expression> labels) {
         assertNotNull(labels);
         if (labels == this.labels) {
             return this;
@@ -144,8 +144,8 @@ public class SwitchEntry extends Node implements NodeWithStatements<SwitchEntry>
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public SwitchEntry setStatements(final NodeList<Statement> statements) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public SwitchEntry setStatements(/*final*/NodeList<Statement> statements) {
         assertNotNull(statements);
         if (statements == this.statements) {
             return this;
@@ -159,7 +159,7 @@ public class SwitchEntry extends Node implements NodeWithStatements<SwitchEntry>
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
     public boolean remove(Node node) {
         if (node == null) {
             return false;
@@ -180,24 +180,24 @@ public class SwitchEntry extends Node implements NodeWithStatements<SwitchEntry>
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public SwitchEntry clone() {
         return (SwitchEntry) accept(new CloneVisitor(), null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public SwitchEntryMetaModel getMetaModel() {
         return JavaParserMetaModel.switchEntryMetaModel;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Type getType() {
         return type;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public SwitchEntry setType(final Type type) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public SwitchEntry setType(/*final*/Type type) {
         assertNotNull(type);
         if (type == this.type) {
             return this;
@@ -208,7 +208,7 @@ public class SwitchEntry extends Node implements NodeWithStatements<SwitchEntry>
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public boolean replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;

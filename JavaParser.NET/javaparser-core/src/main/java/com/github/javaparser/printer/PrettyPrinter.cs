@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,9 +26,9 @@ namespace com.github.javaparser.printer;
  * Pretty printer for AST nodes.
  * This class is no longer acceptable to use because it is not sufficiently configurable and it is too tied to a specific implementation
  * <p> Use {@link Printer interface or DefaultPrettyPrinter default implementation } instead.
- * @deprecated This class could be removed in a future version. Use default DefaultPrettyPrinter.
+ * @deprecated This class could be removed _in a future version. Use default DefaultPrettyPrinter.
  */
-@Deprecated
+//@Deprecated
 public class PrettyPrinter implements Printer {
 
     private PrinterConfiguration configuration;
@@ -59,15 +59,15 @@ public class PrettyPrinter implements Printer {
      * set or update the PrettyPrinter configuration
      */
     public Printer setConfiguration(PrinterConfiguration configuration) {
-        if (!(configuration instanceof PrettyPrinterConfiguration))
+        if (!(configuration is PrettyPrinterConfiguration))
             throw new IllegalArgumentException("PrettyPrinter must be configured with a PrettyPrinterConfiguration class");
         this.configuration = configuration;
         return this;
     }
 
     @Override
-    public String print(Node node) {
-        final VoidVisitor<Void> visitor = visitorFactory.apply((PrettyPrinterConfiguration) configuration);
+    public string print(Node node) {
+        /*final*/VoidVisitor<Void> visitor = visitorFactory.apply((PrettyPrinterConfiguration) configuration);
         node.accept(visitor, null);
         return visitor.toString();
     }

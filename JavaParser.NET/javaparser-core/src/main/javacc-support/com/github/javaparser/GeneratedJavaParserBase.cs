@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -38,7 +38,7 @@ abstract class GeneratedJavaParserBase {
 
     abstract Token getNextToken();
 
-    abstract Token getToken(final int index);
+    abstract Token getToken(/*final*/int index);
 
     ////
 
@@ -69,8 +69,8 @@ abstract class GeneratedJavaParserBase {
     }
 
     /* Reports a problem to the user */
-    void addProblem(String message) {
-        // TODO tokenRange only takes the final token. Need all the tokens.
+    void addProblem(string message) {
+        // TODO tokenRange only takes the /*final*/token. Need all the tokens.
         problems.add(new Problem(message, tokenRange(), null));
     }
 
@@ -228,14 +228,14 @@ abstract class GeneratedJavaParserBase {
     /**
      * Quickly create a new, empty, NodeList
      */
-    <T extends Node> NodeList<T> emptyNodeList() {
+    <T:Node> NodeList<T> emptyNodeList() {
         return new NodeList<>();
     }
 
     /**
      * Add obj to list and return it. Create a new list if list is null
      */
-    <T extends Node> NodeList<T> add(NodeList<T> list, T obj) {
+    <T:Node> NodeList<T> add(NodeList<T> list, T obj) {
         if (list == null) {
             list = new NodeList<>();
         }
@@ -246,7 +246,7 @@ abstract class GeneratedJavaParserBase {
     /**
      * Add obj to list only when list is not null
      */
-    <T extends Node> NodeList<T> addWhenNotNull(NodeList<T> list, T obj) {
+    <T:Node> NodeList<T> addWhenNotNull(NodeList<T> list, T obj) {
         if (obj == null) {
             return list;
         }
@@ -256,7 +256,7 @@ abstract class GeneratedJavaParserBase {
     /**
      * Add obj to list at position pos
      */
-    <T extends Node> NodeList<T> prepend(NodeList<T> list, T obj) {
+    <T:Node> NodeList<T> prepend(NodeList<T> list, T obj) {
         if (list == null) {
             list = new NodeList<>();
         }
@@ -296,19 +296,19 @@ abstract class GeneratedJavaParserBase {
      * Workaround for rather complex ambiguity that lambda's create
      */
     Expression generateLambda(Expression ret, Statement lambdaBody) {
-        if (ret instanceof EnclosedExpr) {
+        if (ret is EnclosedExpr) {
             Expression inner = ((EnclosedExpr) ret).getInner();
             SimpleName id = ((NameExpr) inner).getName();
             NodeList<Parameter> params = add(new NodeList<>(), new Parameter(ret.getTokenRange().orElse(null), new NodeList<>(), new NodeList<>(), new UnknownType(), false, new NodeList<>(), id));
             ret = new LambdaExpr(range(ret, lambdaBody), params, lambdaBody, true);
-        } else if (ret instanceof NameExpr) {
+        } else if (ret is NameExpr) {
             SimpleName id = ((NameExpr) ret).getName();
             NodeList<Parameter> params = add(new NodeList<>(), new Parameter(ret.getTokenRange().orElse(null), new NodeList<>(), new NodeList<>(), new UnknownType(), false, new NodeList<>(), id));
             ret = new LambdaExpr(range(ret, lambdaBody), params, lambdaBody, false);
-        } else if (ret instanceof LambdaExpr) {
+        } else if (ret is LambdaExpr) {
             ((LambdaExpr) ret).setBody(lambdaBody);
             propagateRangeGrowthOnRight(ret, lambdaBody);
-        } else if (ret instanceof CastExpr) {
+        } else if (ret is CastExpr) {
             CastExpr castExpr = (CastExpr) ret;
             Expression inner = generateLambda(castExpr.getExpression(), lambdaBody);
             castExpr.setExpression(inner);
@@ -343,9 +343,9 @@ abstract class GeneratedJavaParserBase {
     /**
      * This is the code from ParseException.initialise, modified to be more horizontal.
      */
-    private String makeMessageForParseException(ParseException exception) {
-        final StringBuilder sb = new StringBuilder("Parse error. Found ");
-        final StringBuilder expected = new StringBuilder();
+    private string makeMessageForParseException(ParseException exception) {
+        /*final*/StringBuilder sb = new StringBuilder("Parse error. Found ");
+        /*final*/StringBuilder expected = new StringBuilder();
 
         int maxExpectedTokenSequenceLength = 0;
         TreeSet<String> sortedOptions = new TreeSet<>();
@@ -358,14 +358,14 @@ abstract class GeneratedJavaParserBase {
             }
         }
 
-        for (String option : sortedOptions) {
+        for (string option : sortedOptions) {
             expected.append(" ").append(option);
         }
 
         Token token = exception.currentToken.next;
         for (int i = 0; i < maxExpectedTokenSequenceLength; i++) {
-            String tokenText = token.image;
-            String escapedTokenText = ParseException.add_escapes(tokenText);
+            string tokenText = token.image;
+            string escapedTokenText = ParseException.add_escapes(tokenText);
             if (i != 0) {
                 sb.append(" ");
             }
@@ -374,7 +374,7 @@ abstract class GeneratedJavaParserBase {
                 break;
             }
             escapedTokenText = "\"" + escapedTokenText + "\"";
-            String image = exception.tokenImage[token.kind];
+            string image = exception.tokenImage[token.kind];
             if (image.equals(escapedTokenText)) {
                 sb.append(image);
             } else {
@@ -411,11 +411,11 @@ abstract class GeneratedJavaParserBase {
         throw new IllegalStateException("Unexpected expression type: " + scope.getClass().getSimpleName());
     }
 
-    String unquote(String s) {
+    string unquote(string s) {
         return s.substring(1, s.length() - 1);
     }
 
-    String unTripleQuote(String s) {
+    string unTripleQuote(string s) {
         int start = 3;
         // Skip over the first end of line too:
         if (s.charAt(start) == '\r') {

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,7 +23,7 @@ namespace com.github.javaparser.generator.core.visitor;
 
 
 
-public class NoCommentEqualsVisitorGenerator extends VisitorGenerator {
+public class NoCommentEqualsVisitorGenerator:VisitorGenerator {
 
     public NoCommentEqualsVisitorGenerator(SourceRoot sourceRoot) {
         super(sourceRoot, "com.github.javaparser.ast.visitor", "NoCommentEqualsVisitor", "Boolean", "Visitable", true);
@@ -41,10 +41,10 @@ public class NoCommentEqualsVisitorGenerator extends VisitorGenerator {
                 || node.equals(JavaParserMetaModel.blockCommentMetaModel)
                 || node.equals(JavaParserMetaModel.javadocCommentMetaModel))) {
 
-            body.addStatement(f("final %s n2 = (%s) arg;", node.getTypeName(), node.getTypeName()));
+            body.addStatement(f("/*final*/%s n2 = (%s) arg;", node.getTypeName(), node.getTypeName()));
 
             for (PropertyMetaModel field : node.getAllPropertyMetaModels()) {
-                final String getter = field.getGetterMethodName() + "()";
+                /*final*/string getter = field.getGetterMethodName() + "()";
                 if (field.equals(JavaParserMetaModel.nodeMetaModel.commentPropertyMetaModel))
                     continue;
                 if (field.getNodeReference().isPresent()) {

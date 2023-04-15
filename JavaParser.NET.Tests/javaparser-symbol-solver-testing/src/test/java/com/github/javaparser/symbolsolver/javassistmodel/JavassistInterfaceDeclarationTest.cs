@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,14 +24,14 @@ namespace com.github.javaparser.symbolsolver.javassistmodel;
 
 
 
-class JavassistInterfaceDeclarationTest extends AbstractSymbolResolutionTest {
+class JavassistInterfaceDeclarationTest:AbstractSymbolResolutionTest {
 
     private TypeSolver typeSolver;
 
     private TypeSolver anotherTypeSolver;
 
     @BeforeEach
-    void setup() throws IOException {
+    void setup(){
         Path pathToJar = adaptPath("src/test/resources/javaparser-core-3.0.0-alpha.2.jar");
         typeSolver = new CombinedTypeSolver(new JarTypeSolver(pathToJar), new ReflectionTypeSolver());
 
@@ -43,43 +43,43 @@ class JavassistInterfaceDeclarationTest extends AbstractSymbolResolutionTest {
     /// Test misc
     ///
 
-    @Test
+    [TestMethod]
     void testIsClass() {
         JavassistInterfaceDeclaration nodeWithAnnotations = (JavassistInterfaceDeclaration) typeSolver.solveType("com.github.javaparser.ast.nodeTypes.NodeWithAnnotations");
         assertEquals(false, nodeWithAnnotations.isClass());
     }
 
-    @Test
+    [TestMethod]
     void testIsInterface() {
         JavassistInterfaceDeclaration nodeWithAnnotations = (JavassistInterfaceDeclaration) typeSolver.solveType("com.github.javaparser.ast.nodeTypes.NodeWithAnnotations");
         assertEquals(true, nodeWithAnnotations.isInterface());
     }
 
-    @Test
+    [TestMethod]
     void testIsEnum() {
         JavassistInterfaceDeclaration nodeWithAnnotations = (JavassistInterfaceDeclaration) typeSolver.solveType("com.github.javaparser.ast.nodeTypes.NodeWithAnnotations");
         assertEquals(false, nodeWithAnnotations.isEnum());
     }
 
-    @Test
+    [TestMethod]
     void testIsTypeVariable() {
         JavassistInterfaceDeclaration nodeWithAnnotations = (JavassistInterfaceDeclaration) typeSolver.solveType("com.github.javaparser.ast.nodeTypes.NodeWithAnnotations");
         assertEquals(false, nodeWithAnnotations.isTypeParameter());
     }
 
-    @Test
+    [TestMethod]
     void testIsType() {
         JavassistInterfaceDeclaration nodeWithAnnotations = (JavassistInterfaceDeclaration) typeSolver.solveType("com.github.javaparser.ast.nodeTypes.NodeWithAnnotations");
         assertEquals(true, nodeWithAnnotations.isType());
     }
 
-    @Test
+    [TestMethod]
     void testAsType() {
         JavassistInterfaceDeclaration nodeWithAnnotations = (JavassistInterfaceDeclaration) typeSolver.solveType("com.github.javaparser.ast.nodeTypes.NodeWithAnnotations");
         assertEquals(nodeWithAnnotations, nodeWithAnnotations.asType());
     }
 
-    @Test
+    [TestMethod]
     void testAsClass() {
         assertThrows(UnsupportedOperationException.class, () -> {
             JavassistInterfaceDeclaration nodeWithAnnotations = (JavassistInterfaceDeclaration) typeSolver.solveType("com.github.javaparser.ast.nodeTypes.NodeWithAnnotations");
@@ -87,13 +87,13 @@ class JavassistInterfaceDeclarationTest extends AbstractSymbolResolutionTest {
     });
 }
 
-    @Test
+    [TestMethod]
     void testAsInterface() {
         JavassistInterfaceDeclaration nodeWithAnnotations = (JavassistInterfaceDeclaration) typeSolver.solveType("com.github.javaparser.ast.nodeTypes.NodeWithAnnotations");
         assertEquals(nodeWithAnnotations, nodeWithAnnotations.asInterface());
     }
 
-    @Test
+    [TestMethod]
     void testAsEnum() {
         assertThrows(UnsupportedOperationException.class, () -> {
             JavassistInterfaceDeclaration nodeWithAnnotations = (JavassistInterfaceDeclaration) typeSolver.solveType("com.github.javaparser.ast.nodeTypes.NodeWithAnnotations");
@@ -101,31 +101,31 @@ class JavassistInterfaceDeclarationTest extends AbstractSymbolResolutionTest {
     });
 }
 
-    @Test
+    [TestMethod]
     void testGetPackageName() {
         JavassistInterfaceDeclaration nodeWithAnnotations = (JavassistInterfaceDeclaration) typeSolver.solveType("com.github.javaparser.ast.nodeTypes.NodeWithAnnotations");
         assertEquals("com.github.javaparser.ast.nodeTypes", nodeWithAnnotations.getPackageName());
     }
 
-    @Test
+    [TestMethod]
     void testGetClassName() {
         JavassistInterfaceDeclaration nodeWithAnnotations = (JavassistInterfaceDeclaration) typeSolver.solveType("com.github.javaparser.ast.nodeTypes.NodeWithAnnotations");
         assertEquals("NodeWithAnnotations", nodeWithAnnotations.getClassName());
     }
 
-    @Test
+    [TestMethod]
     void testGetQualifiedName() {
         JavassistInterfaceDeclaration nodeWithAnnotations = (JavassistInterfaceDeclaration) typeSolver.solveType("com.github.javaparser.ast.nodeTypes.NodeWithAnnotations");
         assertEquals("com.github.javaparser.ast.nodeTypes.NodeWithAnnotations", nodeWithAnnotations.getQualifiedName());
     }
 
-    @Test
+    [TestMethod]
     void testHasDirectlyAnnotation(){
         JavassistInterfaceDeclaration compilationUnit = (JavassistInterfaceDeclaration) anotherTypeSolver.solveType("com.github.javaparser.test.TestInterface");
         assertTrue(compilationUnit.hasDirectlyAnnotation("com.github.javaparser.test.TestAnnotation"));
     }
 
-    @Test
+    [TestMethod]
     void testHasAnnotation(){
         JavassistInterfaceDeclaration compilationUnit = (JavassistInterfaceDeclaration) anotherTypeSolver.solveType("com.github.javaparser.test.TestChildInterface");
         assertTrue(compilationUnit.hasAnnotation("com.github.javaparser.test.TestAnnotation"));
@@ -134,34 +134,34 @@ class JavassistInterfaceDeclarationTest extends AbstractSymbolResolutionTest {
     @Nested
     class TestIsAssignableBy {
 
-        private static final String CLASS_TO_SOLVE = "com.github.javaparser.ast.nodeTypes.NodeWithImplements";
+        private static /*final*/string CLASS_TO_SOLVE = "com.github.javaparser.ast.nodeTypes.NodeWithImplements";
 
-        @Test
+        [TestMethod]
         void whenNullTypeIsProvided() {
             JavassistInterfaceDeclaration nodeWithImplements = (JavassistInterfaceDeclaration) typeSolver.solveType(CLASS_TO_SOLVE);
             assertTrue(nodeWithImplements.isAssignableBy(NullType.INSTANCE));
         }
 
-        @Test
+        [TestMethod]
         void whenLambdaArgumentTypePlaceholderIsProvided() {
             JavassistInterfaceDeclaration nodeWithImplements = (JavassistInterfaceDeclaration) typeSolver.solveType(CLASS_TO_SOLVE);
             assertFalse(nodeWithImplements.isAssignableBy(new LambdaArgumentTypePlaceholder(0)));
         }
 
-        @Test
+        [TestMethod]
         void whenEqualTypeIsProvided() {
             JavassistInterfaceDeclaration nodeWithImplements = (JavassistInterfaceDeclaration) typeSolver.solveType(CLASS_TO_SOLVE);
             assertTrue(nodeWithImplements.isAssignableBy(nodeWithImplements));
         }
 
-        @Test
+        [TestMethod]
         void whenOtherTypeIsProvided() {
             ResolvedReferenceTypeDeclaration consumer = new ReflectionTypeSolver().solveType(Consumer.class.getCanonicalName());
             JavassistInterfaceDeclaration nodeWithImplements = (JavassistInterfaceDeclaration) typeSolver.solveType(CLASS_TO_SOLVE);
             assertFalse(nodeWithImplements.isAssignableBy(consumer));
         }
 
-        @Test
+        [TestMethod]
         void whenSameClassButWithDifferentTypeParametersIsProvided() {
             ReflectionTypeSolver reflectionTypeSolver = new ReflectionTypeSolver();
 
@@ -173,12 +173,12 @@ class JavassistInterfaceDeclarationTest extends AbstractSymbolResolutionTest {
             ResolvedType typeB = new ReferenceTypeImpl(nodeWithImplements, Collections.singletonList(javaLangObject));
 
             assertFalse(typeB.isAssignableBy(typeA), "This should not be allowed:" +
-                    " NodeWithImplements<Object> node = new NodeWithImplements<? extends Object>()");
+                    " NodeWithImplements<Object> node = new NodeWithImplements<?:Object>()");
             assertTrue(typeA.isAssignableBy(typeB), "This should be allowed:" +
-                    " NodeWithImplements<? extends Object> node = new NodeWithImplements<Object>()");
+                    " NodeWithImplements<?:Object> node = new NodeWithImplements<Object>()");
         }
 
-        @Test
+        [TestMethod]
         void whenInterfaceIsProvided() {
             MemoryTypeSolver memoryTypeSolver = new MemoryTypeSolver();
             CombinedTypeSolver combinedTypeSolver = new CombinedTypeSolver(
@@ -195,7 +195,7 @@ class JavassistInterfaceDeclarationTest extends AbstractSymbolResolutionTest {
             memoryTypeSolver.addDeclaration("A", declarationA);
             memoryTypeSolver.addDeclaration("B", declarationB);
 
-            // Knowing that B extends A we expect:
+            // Knowing that B:A we expect:
             assertFalse(declarationA.isAssignableBy(declarationB), "This should not be allowed: B variable = new A()");
             assertTrue(declarationB.isAssignableBy(declarationA), "This should be allowed: A variable = new B()");
         }
@@ -205,7 +205,7 @@ class JavassistInterfaceDeclarationTest extends AbstractSymbolResolutionTest {
     /// Test ancestors
     ///
 
-    @Test
+    [TestMethod]
     void testGetAncestorsWithGenericAncestors() {
         JavassistInterfaceDeclaration compilationUnit = (JavassistInterfaceDeclaration) anotherTypeSolver.solveType("com.github.javaparser.test.GenericChildInterface");
         List<ResolvedReferenceType> ancestors = compilationUnit.getAncestors();

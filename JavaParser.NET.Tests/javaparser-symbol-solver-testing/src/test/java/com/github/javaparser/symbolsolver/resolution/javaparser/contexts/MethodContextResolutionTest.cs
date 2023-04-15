@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.symbolsolver.resolution.javaparser.contexts;
 /**
  * @author Malte Langkabel
  */
-class MethodContextResolutionTest extends AbstractResolutionTest {
+class MethodContextResolutionTest:AbstractResolutionTest {
 
     private TypeSolver typeSolver;
 
@@ -35,7 +35,7 @@ class MethodContextResolutionTest extends AbstractResolutionTest {
         typeSolver = new ReflectionTypeSolver();
     }
 
-    @Test
+    [TestMethod]
     void solveTypeRefToLocalClass() {
         CompilationUnit cu = parseSample("MethodWithTypes");
         ClassOrInterfaceDeclaration cd = Navigator.demandClass(cu, "Main");

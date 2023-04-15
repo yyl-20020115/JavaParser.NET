@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -29,66 +29,66 @@ namespace com.github.javaparser.symbolsolver.resolution;
  *
  * @author Takeshi D. Itoh
  */
-class CompilationUnitContextResolutionTest extends AbstractResolutionTest {
+class CompilationUnitContextResolutionTest:AbstractResolutionTest {
 
     @AfterEach
     void unConfigureSymbolSolver() {
-        // unconfigure symbol solver so as not to potentially disturb tests in other classes
+        // unconfigure symbol solver so as not to potentially disturb tests _in other classes
         StaticJavaParser.getConfiguration().setSymbolResolver(null);
     }
 
-    // in each case, the name itself doesn't matter -- we just want to assert that StackOverflowError wouldn't occur.
+    // _in each case, the name itself doesn't matter -- we just want to assert that StackOverflowError wouldn't occur.
 
-    @Test
-    void solveMethodInReceiver() throws IOException {
+    [TestMethod]
+    void solveMethodInReceiver(){
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(new CombinedTypeSolver(
             new ReflectionTypeSolver(),
             new JavaParserTypeSolver(adaptPath("src/test/resources/CompilationUnitContextResolutionTest/00_receiver")))));
 
         CompilationUnit cu = StaticJavaParser.parse(adaptPath("src/test/resources/CompilationUnitContextResolutionTest/00_receiver/main/Main.java"));
         MethodCallExpr mce = Navigator.findMethodCall(cu, "method").get();
-        String actual = mce.resolve().getQualifiedName();
+        string actual = mce.resolve().getQualifiedName();
         assertEquals("main.Child.method", actual);
     }
 
-    @Test
-    void solveMethodInParent() throws IOException {
+    [TestMethod]
+    void solveMethodInParent(){
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(new CombinedTypeSolver(
             new ReflectionTypeSolver(),
             new JavaParserTypeSolver(adaptPath("src/test/resources/CompilationUnitContextResolutionTest/01_parent")))));
 
         CompilationUnit cu = StaticJavaParser.parse(adaptPath("src/test/resources/CompilationUnitContextResolutionTest/01_parent/main/Main.java"));
         MethodCallExpr mce = Navigator.findMethodCall(cu, "method").get();
-        String actual = mce.resolve().getQualifiedName();
+        string actual = mce.resolve().getQualifiedName();
         assertEquals("main.Parent.method", actual);
     }
 
-    @Test
-    void solveMethodInNested() throws IOException {
+    [TestMethod]
+    void solveMethodInNested(){
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(new CombinedTypeSolver(
             new ReflectionTypeSolver(),
             new JavaParserTypeSolver(adaptPath("src/test/resources/CompilationUnitContextResolutionTest/02_nested")))));
 
         CompilationUnit cu = StaticJavaParser.parse(adaptPath("src/test/resources/CompilationUnitContextResolutionTest/02_nested/main/Main.java"));
         MethodCallExpr mce = Navigator.findMethodCall(cu, "method").get();
-        String actual = mce.resolve().getQualifiedName();
+        string actual = mce.resolve().getQualifiedName();
         assertEquals("main.Child.method", actual);
     }
 
-    @Test
-    void solveSymbol() throws IOException {
+    [TestMethod]
+    void solveSymbol(){
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(new CombinedTypeSolver(
             new ReflectionTypeSolver(),
             new JavaParserTypeSolver(adaptPath("src/test/resources/CompilationUnitContextResolutionTest/03_symbol")))));
 
         CompilationUnit cu = StaticJavaParser.parse(adaptPath("src/test/resources/CompilationUnitContextResolutionTest/03_symbol/main/Main.java"));
         NameExpr ne = Navigator.findNameExpression(cu, "A").get();
-        String actual = ne.resolve().getType().describe();
+        string actual = ne.resolve().getType().describe();
         assertEquals("main.Clazz.MyEnum", actual);
     }
 
-    @Test
-    void solveMyself() throws IOException {
+    [TestMethod]
+    void solveMyself(){
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(new CombinedTypeSolver(
             new ReflectionTypeSolver(),
             new JavaParserTypeSolver(adaptPath("src/test/resources/CompilationUnitContextResolutionTest/04_reviewComment")))));
@@ -96,7 +96,7 @@ class CompilationUnitContextResolutionTest extends AbstractResolutionTest {
         CompilationUnit cu = StaticJavaParser.parse(adaptPath("src/test/resources/CompilationUnitContextResolutionTest/04_reviewComment/main/Main.java"));
 
         MethodCallExpr mce = Navigator.findMethodCall(cu, "foo").get();
-        String actual = mce.resolve().getQualifiedName();
+        string actual = mce.resolve().getQualifiedName();
         assertEquals("main.Main.NestedEnum.foo", actual);
 
         mce = Navigator.findMethodCall(cu, "bar").get();

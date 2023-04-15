@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,19 +24,19 @@ namespace com.github.javaparser.printer.lexicalpreservation;
 
 
 
-public class Issue2620Test extends AbstractLexicalPreservingTest {
+public class Issue2620Test:AbstractLexicalPreservingTest {
 
-    @Test
+    [TestMethod]
     public void testWithCr() {
         doTest(LineSeparator.CR);
     }
 
-    @Test
+    [TestMethod]
     public void testWithLf() {
         doTest(LineSeparator.LF);
     }
 
-    @Test
+    [TestMethod]
     public void testWithCrLf() {
         doTest(LineSeparator.CRLF);
     }
@@ -49,22 +49,22 @@ public class Issue2620Test extends AbstractLexicalPreservingTest {
 
         considerCode("" +
                 "    public class Foo { //comment" + eol +
-                "        private String a;" + eol +
-                "        private String b;" + eol +
-                "        private String c;" + eol +
-                "        private String d;" + eol +
+                "        private string a;" + eol +
+                "        private string b;" + eol +
+                "        private string c;" + eol +
+                "        private string d;" + eol +
                 "    }");
 
         // Note: Expect the platform's EOL character when printing
         // FIXME: Indentation is bad here.
-        String expected = "" +
+        string expected = "" +
                 "    public class Foo { //comment" + eol +
-                "        private String newField;" + eol +
+                "        private string newField;" + eol +
                 "        " + eol +
-                "        private String a;" + eol +
-                "        private String b;" + eol +
-                "        private String c;" + eol +
-                "        private String d;" + eol +
+                "        private string a;" + eol +
+                "        private string b;" + eol +
+                "        private string c;" + eol +
+                "        private string d;" + eol +
                 "    }";
 
 
@@ -77,12 +77,12 @@ public class Issue2620Test extends AbstractLexicalPreservingTest {
         cd.get().getMembers().addFirst(fd);
 
         // should be printed like this
-//        System.out.println("\n\nOriginal:\n" + original);
-//        System.out.println("\n\nExpected:\n" + expected);
+//        System._out.println("\n\nOriginal:\n" + original);
+//        System._out.println("\n\nExpected:\n" + expected);
 
         // but the result is
-        final String actual = LexicalPreservingPrinter.print(cu);
-//        System.out.println("\n\nActual:\n" + actual);
+        /*final*/string actual = LexicalPreservingPrinter.print(cu);
+//        System._out.println("\n\nActual:\n" + actual);
 
         LineSeparator detectedLineSeparator = LineSeparator.detect(actual);
 
@@ -91,18 +91,18 @@ public class Issue2620Test extends AbstractLexicalPreservingTest {
 
         assertEquals(normaliseNewlines(expected), normaliseNewlines(actual));
 
-        // Commented out until #2661 is fixed (re: EOL characters of injected code)
+        // Commented _out until #2661 is fixed (re: EOL characters of injected code)
         assertEqualsStringIgnoringEol(escapeNewlines(expected), escapeNewlines(actual));
         assertEquals(expected, actual, "Failed due to EOL differences.");
     }
 
-    private String escapeNewlines(String input) {
+    private string escapeNewlines(string input) {
         return input
                 .replaceAll("\\r", "\\\\r")
                 .replaceAll("\\n", "\\\\n");
     }
 
-    private String normaliseNewlines(String input) {
+    private string normaliseNewlines(string input) {
         return input.replaceAll("\\r\\n|\\r|\\n", "\\\\n");
     }
 }

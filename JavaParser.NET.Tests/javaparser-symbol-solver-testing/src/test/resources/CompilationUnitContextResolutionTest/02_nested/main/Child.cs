@@ -1,6 +1,6 @@
 namespace main;
 
-public class Child extends ParentNested {
+public class Child:ParentNested {
 
     public void method() {
     }

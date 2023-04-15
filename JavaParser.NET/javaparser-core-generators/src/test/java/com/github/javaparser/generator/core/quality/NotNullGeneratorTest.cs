@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,13 +26,13 @@ namespace com.github.javaparser.generator.core.quality;
 
 class NotNullGeneratorTest {
 
-	@Test
-	void testExecutionOfGenerator() throws Exception {
+	[TestMethod]
+	void testExecutionOfGenerator() {
 
 		// Setup the
-		String resourcesFolderPath = getClass().getCanonicalName().replace(".", File.separator);
+		string resourcesFolderPath = getClass().getCanonicalName().replace(".", File.separator);
 
-		String basePath = Paths.get("src", "test", "resources").toString();
+		string basePath = Paths.get("src", "test", "resources").toString();
 		Path originalFile = Paths.get(basePath, resourcesFolderPath, "original");
 		Path expectedFile = Paths.get(basePath, resourcesFolderPath, "expected");
 
@@ -51,18 +51,18 @@ class NotNullGeneratorTest {
 		for (int i = 0 ; i < editedSourceCus.size() ; i++) {
 
 			DefaultPrettyPrinter printer = new DefaultPrettyPrinter();
-			String expectedCode = printer.print(expectedSourcesCus.get(i));
-			String editedCode = printer.print(editedSourceCus.get(i));
+			string expectedCode = printer.print(expectedSourcesCus.get(i));
+			string editedCode = printer.print(editedSourceCus.get(i));
 
 			if (!expectedCode.equals(editedCode)) {
-				System.out.println("Expected:");
-				System.out.println("####");
-				System.out.println(expectedSourcesCus.get(i));
-				System.out.println("####");
-				System.out.println("Actual:");
-				System.out.println("####");
-				System.out.println(editedSourceCus.get(i));
-				System.out.println("####");
+				System._out.println("Expected:");
+				System._out.println("####");
+				System._out.println(expectedSourcesCus.get(i));
+				System._out.println("####");
+				System._out.println("Actual:");
+				System._out.println("####");
+				System._out.println(editedSourceCus.get(i));
+				System._out.println("####");
 				fail("Actual code doesn't match with the expected code.");
 			}
 		}

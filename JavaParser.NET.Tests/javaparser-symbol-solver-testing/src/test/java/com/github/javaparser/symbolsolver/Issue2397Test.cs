@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -22,12 +22,12 @@ namespace com.github.javaparser.symbolsolver;
 
 
 
-public class Issue2397Test extends AbstractSymbolResolutionTest {
+public class Issue2397Test:AbstractSymbolResolutionTest {
 
-    @Test
+    [TestMethod]
     public void testProvided1() {
-        String sourceCode = "static final class ConstantFuture<T> implements Future<T> {\n" +
-                "        private final T value;\n" +
+        string sourceCode = "static /*final*/class ConstantFuture<T> implements Future<T> {\n" +
+                "        private /*final*/T value;\n" +
                 "      \n" +
                 "        @Override\n" +
                 "        public T get() {\n" +
@@ -37,17 +37,17 @@ public class Issue2397Test extends AbstractSymbolResolutionTest {
         testIssue(sourceCode);
     }
 
-    @Test
+    [TestMethod]
     public void testProvided2() {
-        String sourceCode = "class A {\n" +
-                "  public static <T> T[] toArray(final T... items) {\n" +
+        string sourceCode = "class A {\n" +
+                "  public static <T> T[] toArray(/*final*/T... items) {\n" +
                 "    return items;\n" +
                 "  }\n" +
                 "}";
         testIssue(sourceCode);
     }
 
-    public void testIssue(String sourceCode) {
+    public void testIssue(string sourceCode) {
         TypeSolver solver = new ReflectionTypeSolver();
         ParserConfiguration parserConfiguration = new ParserConfiguration();
         parserConfiguration.setSymbolResolver(new JavaSymbolSolver(solver));

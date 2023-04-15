@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,9 +25,9 @@ namespace com.github.javaparser.printer.lexicalpreservation.transformations.ast;
 /**
  * Transforming ArrayCreationLevel and verifying the LexicalPreservation works as expected.
  */
-class ArrayCreationLevelTransformationsTest extends AbstractLexicalPreservingTest {
+class ArrayCreationLevelTransformationsTest:AbstractLexicalPreservingTest {
 
-    protected ArrayCreationLevel consider(String code) {
+    protected ArrayCreationLevel consider(string code) {
         considerExpression("new int" + code);
         ArrayCreationExpr arrayCreationExpr = expression.asArrayCreationExpr();
         return arrayCreationExpr.getLevels().get(0);
@@ -35,21 +35,21 @@ class ArrayCreationLevelTransformationsTest extends AbstractLexicalPreservingTes
 
     // Dimension
 
-    @Test
+    [TestMethod]
     void addingDimension() {
         ArrayCreationLevel it = consider("[]");
         it.setDimension(new IntegerLiteralExpr("10"));
         assertTransformedToString("[10]", it);
     }
 
-    @Test
+    [TestMethod]
     void removingDimension() {
         ArrayCreationLevel it = consider("[10]");
         it.removeDimension();
         assertTransformedToString("[]", it);
     }
 
-    @Test
+    [TestMethod]
     void replacingDimension() {
         ArrayCreationLevel it = consider("[10]");
         it.setDimension(new IntegerLiteralExpr("12"));
@@ -58,21 +58,21 @@ class ArrayCreationLevelTransformationsTest extends AbstractLexicalPreservingTes
 
     // Annotations
 
-    @Test
+    [TestMethod]
     void addingAnnotation() {
         ArrayCreationLevel it = consider("[]");
         it.addAnnotation("myAnno");
         assertTransformedToString("@myAnno"+ Utils.SYSTEM_EOL +"[]", it);
     }
 
-    @Test
+    [TestMethod]
     void removingAnnotation() {
         ArrayCreationLevel it = consider("@myAnno []");
         it.getAnnotations().remove(0);
         assertTransformedToString("[]", it);
     }
 
-    @Test
+    [TestMethod]
     void replacingAnnotation() {
         ArrayCreationLevel it = consider("@myAnno []");
         it.getAnnotations().set(0, new NormalAnnotationExpr(new Name("myOtherAnno"), new NodeList<>()));

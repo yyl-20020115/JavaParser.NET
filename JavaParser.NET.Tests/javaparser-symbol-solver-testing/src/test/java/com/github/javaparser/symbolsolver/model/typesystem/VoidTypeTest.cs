@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -43,62 +43,62 @@ class VoidTypeTest {
                 ImmutableList.of(new ResolvedTypeVariable(ResolvedTypeParameterDeclaration.onType("A", "foo.Bar", Collections.emptyList())))));
     }
 
-    @Test
+    [TestMethod]
     void testIsArray() {
         assertEquals(false, ResolvedVoidType.INSTANCE.isArray());
     }
 
-    @Test
+    [TestMethod]
     void testIsPrimitive() {
         assertEquals(false, ResolvedVoidType.INSTANCE.isPrimitive());
     }
 
-    @Test
+    [TestMethod]
     void testIsNull() {
         assertEquals(false, ResolvedVoidType.INSTANCE.isNull());
     }
 
-    @Test
+    [TestMethod]
     void testIsReference() {
         assertEquals(false, ResolvedVoidType.INSTANCE.isReference());
     }
 
-    @Test
+    [TestMethod]
     void testIsReferenceType() {
         assertEquals(false, ResolvedVoidType.INSTANCE.isReferenceType());
     }
 
-    @Test
+    [TestMethod]
     void testIsVoid() {
         assertEquals(true, ResolvedVoidType.INSTANCE.isVoid());
     }
 
-    @Test
+    [TestMethod]
     void testIsTypeVariable() {
         assertEquals(false, ResolvedVoidType.INSTANCE.isTypeVariable());
     }
 
-    @Test
+    [TestMethod]
     void testAsReferenceTypeUsage() {
         assertThrows(UnsupportedOperationException.class, () -> ResolvedVoidType.INSTANCE.asReferenceType());
     }
 
-    @Test
+    [TestMethod]
     void testAsTypeParameter() {
         assertThrows(UnsupportedOperationException.class, () -> ResolvedVoidType.INSTANCE.asTypeParameter());
     }
 
-    @Test
+    [TestMethod]
     void testAsArrayTypeUsage() {
         assertThrows(UnsupportedOperationException.class, () -> ResolvedVoidType.INSTANCE.asArrayType());
     }
 
-    @Test
+    [TestMethod]
     void testAsDescribe() {
         assertEquals("void", ResolvedVoidType.INSTANCE.describe());
     }
 
-    @Test
+    [TestMethod]
     void testIsAssignableBy() {
         assertFalse(ResolvedVoidType.INSTANCE.isAssignableBy(NullType.INSTANCE));
         assertFalse(ResolvedVoidType.INSTANCE.isAssignableBy(OBJECT));

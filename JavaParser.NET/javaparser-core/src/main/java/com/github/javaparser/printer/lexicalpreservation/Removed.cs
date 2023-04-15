@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,14 +23,14 @@ namespace com.github.javaparser.printer.lexicalpreservation;
 
 public class Removed implements DifferenceElement {
 
-    private final CsmElement element;
+    private /*final*/CsmElement element;
 
     Removed(CsmElement element) {
         this.element = element;
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "Removed{" + element + '}';
     }
 
@@ -86,13 +86,13 @@ public class Removed implements DifferenceElement {
     }
 
     public boolean isToken() {
-        return element instanceof CsmToken;
+        return element is CsmToken;
     }
 
     public boolean isPrimitiveType() {
         if (isChild()) {
             LexicalDifferenceCalculator.CsmChild csmChild = (LexicalDifferenceCalculator.CsmChild) element;
-            return csmChild.getChild() instanceof PrimitiveType;
+            return csmChild.getChild() is PrimitiveType;
         }
         return false;
     }

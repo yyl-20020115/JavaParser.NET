@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,20 +27,20 @@ namespace com.github.javaparser.ast.body;
 /**
  * @author Julio Vilmar Gesser
  */
-public final class VariableDeclaratorId extends Node implements NodeWithName<VariableDeclaratorId> {
+public /*final*/class VariableDeclaratorId:Node implements NodeWithName<VariableDeclaratorId> {
 
-    private String name;
+    private string name;
 
     private List<ArrayBracketPair> arrayBracketPairsAfterId;
 
     public VariableDeclaratorId() {
     }
 
-    public VariableDeclaratorId(String name) {
+    public VariableDeclaratorId(string name) {
        setName(name);
     }
 
-    public VariableDeclaratorId(Range range, String name, List<ArrayBracketPair> arrayBracketPairsAfterId) {
+    public VariableDeclaratorId(Range range, string name, List<ArrayBracketPair> arrayBracketPairsAfterId) {
         super(range);
         setName(name);
         setArrayBracketPairsAfterId(arrayBracketPairsAfterId);
@@ -57,12 +57,12 @@ public final class VariableDeclaratorId extends Node implements NodeWithName<Var
     }
 
     @Override
-    public String getName() {
+    public string getName() {
         return name;
     }
 
     @Override
-    public VariableDeclaratorId setName(String name) {
+    public VariableDeclaratorId setName(string name) {
         this.name = name;
         return this;
     }

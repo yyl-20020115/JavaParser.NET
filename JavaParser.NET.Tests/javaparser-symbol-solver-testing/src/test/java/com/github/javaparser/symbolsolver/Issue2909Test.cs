@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -22,16 +22,16 @@ namespace com.github.javaparser.symbolsolver;
 
 
 
-
+[TestClass]
 public class Issue2909Test extends AbstractResolutionTest {
 
-    @Test
+    [TestMethod]
     void testResolvingLocallyFromCompleteReferenceToInnerClass() {
         ParserConfiguration config = new ParserConfiguration();
         config.setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver(false)));
         StaticJavaParser.setConfiguration(config);
 
-        String s = 
+        string s = 
                 "public class Program {\n" + 
                 "\n" + 
                 "    public class OuterClass {\n" + 
@@ -53,13 +53,13 @@ public class Issue2909Test extends AbstractResolutionTest {
         });
     }
     
-    @Test
+    [TestMethod]
     void testResolvingLocallyFromPartialReferenceToInnerClass() {
         ParserConfiguration config = new ParserConfiguration();
         config.setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver(false)));
         StaticJavaParser.setConfiguration(config);
 
-        String s = 
+        string s = 
                 "public class Program {\n" +
                         "\n" +
                         "    public class OuterClass {\n" +
@@ -81,7 +81,7 @@ public class Issue2909Test extends AbstractResolutionTest {
         });
     }
     
-    @Test
+    [TestMethod]
     void testInDepth() {
         Path rootSourceDir = adaptPath("src/test/resources/issue2909");
         
@@ -90,7 +90,7 @@ public class Issue2909Test extends AbstractResolutionTest {
         config.setSymbolResolver(new JavaSymbolSolver(cts));
         StaticJavaParser.setConfiguration(config);
 
-        String s = "package test;\n" +
+        string s = "package test;\n" +
                 "\n" +
                 "public class Program {\n" +
 //                "\n" +

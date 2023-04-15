@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,7 +28,7 @@ namespace com.github.javaparser.symbolsolver.resolution.typeinference.constraint
  *
  * @author Federico Tomassetti
  */
-public class MethodReferenceThrowsCompatibleWithType extends ConstraintFormula {
+public class MethodReferenceThrowsCompatibleWithType:ConstraintFormula {
     private MethodReferenceExpr methodReference;
     private ResolvedType T;
 
@@ -42,11 +42,11 @@ public class MethodReferenceThrowsCompatibleWithType extends ConstraintFormula {
         //
         // - Otherwise, if the method reference is inexact and the function type's result is neither void nor a proper type, the constraint reduces to false.
         //
-        // - Otherwise, let E1, ..., En be the types in the function type's throws clause that are not proper types. Let X1, ..., Xm be the checked exceptions in the throws clause of the invocation type of the method reference's compile-time declaration (§15.13.2) (as derived from the function type's parameter types and return type). Then there are two cases:
+        // - Otherwise, let E1, ..., En be the types _in the function type's throws clause that are not proper types. Let X1, ..., Xm be the checked exceptions _in the throws clause of the invocation type of the method reference's compile-time declaration (§15.13.2) (as derived from the function type's parameter types and return type). Then there are two cases:
         //
-        //   - If n = 0 (the function type's throws clause consists only of proper types), then if there exists some i (1 ≤ i ≤ m) such that Xi is not a subtype of any proper type in the throws clause, the constraint reduces to false; otherwise, the constraint reduces to true.
+        //   - If n = 0 (the function type's throws clause consists only of proper types), then if there exists some i (1 ≤ i ≤ m) such that Xi is not a subtype of any proper type _in the throws clause, the constraint reduces to false; otherwise, the constraint reduces to true.
         //
-        //   - If n > 0, the constraint reduces to a set of subtyping constraints: for all i (1 ≤ i ≤ m), if Xi is not a subtype of any proper type in the throws clause, then the constraints include, for all j (1 ≤ j ≤ n), ‹Xi <: Ej›. In addition, for all j (1 ≤ j ≤ n), the constraint reduces to the bound throws Ej.
+        //   - If n > 0, the constraint reduces to a set of subtyping constraints: for all i (1 ≤ i ≤ m), if Xi is not a subtype of any proper type _in the throws clause, then the constraints include, for all j (1 ≤ j ≤ n), ‹Xi <: Ej›. In addition, for all j (1 ≤ j ≤ n), the constraint reduces to the bound throws Ej.
 
         throw new UnsupportedOperationException();
     }
@@ -70,7 +70,7 @@ public class MethodReferenceThrowsCompatibleWithType extends ConstraintFormula {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "MethodReferenceThrowsCompatibleWithType{" +
                 "methodReference=" + methodReference +
                 ", T=" + T +

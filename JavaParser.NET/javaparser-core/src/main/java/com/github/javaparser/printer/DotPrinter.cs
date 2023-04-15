@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -30,13 +30,13 @@ public class DotPrinter {
 
     private int nodeCount;
 
-    private final boolean outputNodeType;
+    private /*final*/boolean outputNodeType;
 
     public DotPrinter(boolean outputNodeType) {
         this.outputNodeType = outputNodeType;
     }
 
-    public String output(Node node) {
+    public string output(Node node) {
         nodeCount = 0;
         StringBuilder output = new StringBuilder();
         output.append("digraph {");
@@ -45,14 +45,14 @@ public class DotPrinter {
         return output.toString();
     }
 
-    public void output(Node node, String parentNodeName, String name, StringBuilder builder) {
+    public void output(Node node, string parentNodeName, string name, StringBuilder builder) {
         assertNotNull(node);
         NodeMetaModel metaModel = node.getMetaModel();
         List<PropertyMetaModel> allPropertyMetaModels = metaModel.getAllPropertyMetaModels();
         List<PropertyMetaModel> attributes = allPropertyMetaModels.stream().filter(PropertyMetaModel::isAttribute).filter(PropertyMetaModel::isSingular).collect(toList());
         List<PropertyMetaModel> subNodes = allPropertyMetaModels.stream().filter(PropertyMetaModel::isNode).filter(PropertyMetaModel::isSingular).collect(toList());
         List<PropertyMetaModel> subLists = allPropertyMetaModels.stream().filter(PropertyMetaModel::isNodeList).collect(toList());
-        String ndName = nextNodeName();
+        string ndName = nextNodeName();
         if (outputNodeType)
             builder.append(SYSTEM_EOL + ndName + " [label=\"" + escape(name) + " (" + metaModel.getTypeName() + ")\"];");
         else
@@ -60,7 +60,7 @@ public class DotPrinter {
         if (parentNodeName != null)
             builder.append(SYSTEM_EOL + parentNodeName + " -> " + ndName + ";");
         for (PropertyMetaModel a : attributes) {
-            String attrName = nextNodeName();
+            string attrName = nextNodeName();
             builder.append(SYSTEM_EOL + attrName + " [label=\"" + escape(a.getName()) + "='" + escape(a.getValue(node).toString()) + "'\"];");
             builder.append(SYSTEM_EOL + ndName + " -> " + attrName + ";");
         }
@@ -70,22 +70,22 @@ public class DotPrinter {
                 output(nd, ndName, sn.getName(), builder);
         }
         for (PropertyMetaModel sl : subLists) {
-            NodeList<? extends Node> nl = (NodeList<? extends Node>) sl.getValue(node);
+            NodeList<?:Node> nl = (NodeList<?:Node>) sl.getValue(node);
             if (nl != null && nl.isNonEmpty()) {
-                String ndLstName = nextNodeName();
+                string ndLstName = nextNodeName();
                 builder.append(SYSTEM_EOL + ndLstName + " [label=\"" + escape(sl.getName()) + "\"];");
                 builder.append(SYSTEM_EOL + ndName + " -> " + ndLstName + ";");
-                String slName = sl.getName().substring(0, sl.getName().length() - 1);
+                string slName = sl.getName().substring(0, sl.getName().length() - 1);
                 for (Node nd : nl) output(nd, ndLstName, slName, builder);
             }
         }
     }
 
-    private String nextNodeName() {
+    private string nextNodeName() {
         return "n" + (nodeCount++);
     }
 
-    private static String escape(String value) {
+    private static string escape(string value) {
         return value.replace("\"", "\\\"");
     }
 }

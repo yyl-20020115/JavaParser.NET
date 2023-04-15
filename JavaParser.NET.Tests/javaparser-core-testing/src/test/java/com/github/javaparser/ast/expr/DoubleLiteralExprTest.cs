@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,35 +24,35 @@ namespace com.github.javaparser.ast.expr;
 
 
 class DoubleLiteralExprTest {
-    @Test
+    [TestMethod]
     void test1() {
         float x = 0x0.00_00_02p-126f;
         DoubleLiteralExpr e = parseExpression("0x0.00_00_02p-126f");
         Assertions.assertEquals(x, e.asDouble());
     }
 
-    @Test
+    [TestMethod]
     void test2() {
         double x = 0x0.000_000_000_000_1p-1_022;
         DoubleLiteralExpr e = parseExpression("0x0.000_000_000_000_1p-1_022");
         Assertions.assertEquals(x, e.asDouble());
     }
 
-    @Test
+    [TestMethod]
     void test3() {
         double a = 0x1.p+1;
         DoubleLiteralExpr e = parseExpression("0x1.p+1");
         Assertions.assertEquals(a, e.asDouble());
     }
 
-    @Test
+    [TestMethod]
     void test4() {
         double a = 0x.0p0;
         DoubleLiteralExpr e = parseExpression("0x.0p0");
         Assertions.assertEquals(a, e.asDouble());
     }
 
-    @Test
+    [TestMethod]
     void test5() {
         double x = 0x0_0.0_0p-1_0;
         DoubleLiteralExpr e = parseExpression("0x0_0.0_0p-1_0");

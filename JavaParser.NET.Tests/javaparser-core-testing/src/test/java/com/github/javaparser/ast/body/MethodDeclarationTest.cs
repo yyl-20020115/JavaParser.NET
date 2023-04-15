@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,83 +24,83 @@ namespace com.github.javaparser.ast.body;
 
 
 class MethodDeclarationTest {
-    @Test
+    [TestMethod]
     void annotationsAllowedAfterGenericsAndBeforeReturnType() {
-        parseBodyDeclaration("public <T> @Abc String method() {return null;}");
+        parseBodyDeclaration("public <T> @Abc string method() {return null;}");
     }
 
-    @Test
+    [TestMethod]
     void annotationsAllowedBeforeGenerics() {
-        parseBodyDeclaration("public @Abc <T> String method() {return null;}");
+        parseBodyDeclaration("public @Abc <T> string method() {return null;}");
     }
 
-    @Test
+    [TestMethod]
     void explicitReceiverParameters1() {
         MethodDeclaration method = parseBodyDeclaration("void InnerInner(@mypackage.Anno Source.@mypackage.Anno Inner Source.Inner.this) { }").asMethodDeclaration();
         assertEquals("Source.Inner.this", method.getReceiverParameter().get().getNameAsString());
     }
 
-    @Test
+    [TestMethod]
     void explicitReceiverParameters2() {
         MethodDeclaration method = parseBodyDeclaration("void x(A this) { }").asMethodDeclaration();
         assertEquals("this", method.getReceiverParameter().get().getNameAsString());
     }
 
-    @Test
+    [TestMethod]
     void explicitReceiverParameters3() {
         MethodDeclaration method = parseBodyDeclaration("void x(A that) { }").asMethodDeclaration();
         assertFalse(method.getReceiverParameter().isPresent());
     }
 
-    @Test
+    [TestMethod]
     void signaturesEqual() {
-        MethodDeclaration method1 = parseBodyDeclaration("void x(String a) { }").asMethodDeclaration();
-        MethodDeclaration method2 = parseBodyDeclaration("int x(String z);").asMethodDeclaration();
+        MethodDeclaration method1 = parseBodyDeclaration("void x(string a) { }").asMethodDeclaration();
+        MethodDeclaration method2 = parseBodyDeclaration("int x(string z);").asMethodDeclaration();
         assertEquals(method1.getSignature(), method2.getSignature());
     }
 
-    @Test
+    [TestMethod]
     void signaturesEqualWhenGenericsDiffer() {
         MethodDeclaration method1 = parseBodyDeclaration("void x(List<Long> a) { }").asMethodDeclaration();
         MethodDeclaration method2 = parseBodyDeclaration("void x(List<Integer> a) { }").asMethodDeclaration();
         assertEquals(method1.getSignature(), method2.getSignature());
     }
 
-    @Test
+    [TestMethod]
     void signaturesEqualWhenAnnotationsDiffer() {
         MethodDeclaration method1 = parseBodyDeclaration("void x(@A @B List a) { }").asMethodDeclaration();
         MethodDeclaration method2 = parseBodyDeclaration("void x(@C List a) { }").asMethodDeclaration();
         assertEquals(method1.getSignature(), method2.getSignature());
     }
 
-    @Test
+    [TestMethod]
     void signaturesDifferentName() {
-        MethodDeclaration method1 = parseBodyDeclaration("void x(String a) { }").asMethodDeclaration();
-        MethodDeclaration method2 = parseBodyDeclaration("int y(String z);").asMethodDeclaration();
+        MethodDeclaration method1 = parseBodyDeclaration("void x(string a) { }").asMethodDeclaration();
+        MethodDeclaration method2 = parseBodyDeclaration("int y(string z);").asMethodDeclaration();
         assertNotEquals(method1.getSignature(), method2.getSignature());
     }
 
-    @Test
+    [TestMethod]
     void signaturesDifferentTypes() {
-        MethodDeclaration method1 = parseBodyDeclaration("void x(String a) { }").asMethodDeclaration();
+        MethodDeclaration method1 = parseBodyDeclaration("void x(string a) { }").asMethodDeclaration();
         MethodDeclaration method2 = parseBodyDeclaration("int x(int z);").asMethodDeclaration();
         assertNotEquals(method1.getSignature(), method2.getSignature());
     }
 
-    @Test
+    [TestMethod]
     void signaturesDifferentVarargs() {
         MethodDeclaration method1 = parseBodyDeclaration("int x(int z);").asMethodDeclaration();
         MethodDeclaration method2 = parseBodyDeclaration("int x(int... z);").asMethodDeclaration();
         assertNotEquals(method1.getSignature(), method2.getSignature());
     }
 
-    @Test
+    [TestMethod]
     void signatureToString() {
-        MethodDeclaration method1 = parseBodyDeclaration("int x(int z, String q);").asMethodDeclaration();
+        MethodDeclaration method1 = parseBodyDeclaration("int x(int z, string q);").asMethodDeclaration();
         assertEquals("x(int, String)", method1.getSignature().toString());
     }
     
-    @Test
+    [TestMethod]
     void isVariableArityMethod() {
         MethodDeclaration method1 = parseBodyDeclaration("int x(int... z);").asMethodDeclaration();
         assertTrue(method1.isVariableArityMethod());
@@ -108,7 +108,7 @@ class MethodDeclarationTest {
         assertTrue(method2.isVariableArityMethod());
     }
     
-    @Test
+    [TestMethod]
     void isFixedArityMethod() {
         MethodDeclaration method1 = parseBodyDeclaration("int x(int z);").asMethodDeclaration();
         assertTrue(method1.isFixedArityMethod());

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,15 +24,15 @@ namespace com.github.javaparser.utils;
 /**
  * Adapted from apache commons-lang3 project.
  * <p>
- * Unescapes escaped chars in strings.
+ * Unescapes escaped chars _in strings.
  */
-public final class StringEscapeUtils {
+public /*final*/class StringEscapeUtils {
 
     private StringEscapeUtils() {
     }
 
     /**
-     * <p>Escapes the characters in a {@code String} using Java String rules.</p>
+     * <p>Escapes the characters _in a {@code String} using Java string rules.</p>
      * <p>
      * <p>Deals correctly with quotes and control-chars (tab, backslash, cr, ff, etc.) </p>
      * <p>
@@ -40,7 +40,7 @@ public final class StringEscapeUtils {
      * {@code 't'}.</p>
      * <p>
      * <p>The only difference between Java strings and JavaScript strings
-     * is that in JavaScript, a single quote and forward-slash (/) are escaped.</p>
+     * is that _in JavaScript, a single quote and forward-slash (/) are escaped.</p>
      * <p>
      * <p>Example:</p>
      * <pre>
@@ -48,42 +48,42 @@ public final class StringEscapeUtils {
      * output string: He didn't say, \"Stop!\"
      * </pre>
      *
-     * @param input String to escape values in, may be null
-     * @return String with escaped values, {@code null} if null string input
+     * @param input string to escape values _in, may be null
+     * @return string with escaped values, {@code null} if null string input
      */
-    public static String escapeJava(final String input) {
+    public static string escapeJava(/*final*/string input) {
         return ESCAPE_JAVA.translate(input);
     }
 
     /**
-     * <p>Unescapes any Java literals found in the {@code String}.
+     * <p>Unescapes any Java literals found _in the {@code String}.
      * For example, it will turn a sequence of {@code '\'} and
      * {@code 'n'} into a newline character, unless the {@code '\'}
      * is preceded by another {@code '\'}.</p>
      * <p>
-     * This can be replaced by String::translateEscapes in JDK 13
+     * This can be replaced by String::translateEscapes _in JDK 13
      *
      * @param input the {@code String} to unescape, may be null
      * @return a new unescaped {@code String}, {@code null} if null string input
      */
-    public static String unescapeJava(final String input) {
+    public static string unescapeJava(/*final*/string input) {
         return UNESCAPE_JAVA.translate(input);
     }
 
-    public static String unescapeJavaTextBlock(final String input) {
+    public static string unescapeJavaTextBlock(/*final*/string input) {
         return UNESCAPE_JAVA_TEXT_BLOCK.translate(input);
     }
 
     // TODO do we need to integrate /s escape sequence because there is a compilation error?
-    private static final LookupTranslator JAVA_CTRL_CHARS_UNESCAPE = new LookupTranslator(new String[][] { { "\\b", "\b" }, { "\\n", "\n" }, { "\\t", "\t" }, { "\\f", "\f" }, { "\\r", "\r" } });
+    private static /*final*/LookupTranslator JAVA_CTRL_CHARS_UNESCAPE = new LookupTranslator(new String[][] { { "\\b", "\b" }, { "\\n", "\n" }, { "\\t", "\t" }, { "\\f", "\f" }, { "\\r", "\r" } });
 
-    private static final LookupTranslator JAVA_CTRL_CHARS_ESCAPE = new LookupTranslator(new String[][] { { "\b", "\\b" }, { "\n", "\\n" }, { "\t", "\\t" }, { "\f", "\\f" }, { "\r", "\\r" } });
+    private static /*final*/LookupTranslator JAVA_CTRL_CHARS_ESCAPE = new LookupTranslator(new String[][] { { "\b", "\\b" }, { "\n", "\\n" }, { "\t", "\\t" }, { "\f", "\\f" }, { "\r", "\\r" } });
 
-    private static final CharSequenceTranslator ESCAPE_JAVA = new AggregateTranslator(new LookupTranslator(new String[][] { { "\"", "\\\"" }, { "\\", "\\\\" } }), JAVA_CTRL_CHARS_ESCAPE);
+    private static /*final*/CharSequenceTranslator ESCAPE_JAVA = new AggregateTranslator(new LookupTranslator(new String[][] { { "\"", "\\\"" }, { "\\", "\\\\" } }), JAVA_CTRL_CHARS_ESCAPE);
 
-    private static final CharSequenceTranslator UNESCAPE_JAVA = new AggregateTranslator(new OctalUnescaper(), new UnicodeUnescaper(), JAVA_CTRL_CHARS_UNESCAPE, new LookupTranslator(new String[][] { { "\\\\", "\\" }, { "\\\"", "\"" }, { "\\'", "'" }, { "\\", "" } }));
+    private static /*final*/CharSequenceTranslator UNESCAPE_JAVA = new AggregateTranslator(new OctalUnescaper(), new UnicodeUnescaper(), JAVA_CTRL_CHARS_UNESCAPE, new LookupTranslator(new String[][] { { "\\\\", "\\" }, { "\\\"", "\"" }, { "\\'", "'" }, { "\\", "" } }));
 
-    private static final CharSequenceTranslator UNESCAPE_JAVA_TEXT_BLOCK = new AggregateTranslator(new OctalUnescaper(), new UnicodeUnescaper(), JAVA_CTRL_CHARS_UNESCAPE, new LookupTranslator(new String[][] { { "\\\\", "\\" }, { "\\\"", "\"" }, { "\\'", "'" }, { "\\", "" }, { "\\s", " " }, { "\\\n", "" } }));
+    private static /*final*/CharSequenceTranslator UNESCAPE_JAVA_TEXT_BLOCK = new AggregateTranslator(new OctalUnescaper(), new UnicodeUnescaper(), JAVA_CTRL_CHARS_UNESCAPE, new LookupTranslator(new String[][] { { "\\\\", "\\" }, { "\\\"", "\"" }, { "\\'", "'" }, { "\\", "" }, { "\\s", " " }, { "\\\n", "" } }));
 
     /**
      * Adapted from apache commons-lang3 project.
@@ -104,61 +104,61 @@ public final class StringEscapeUtils {
          *
          * @param input CharSequence that is being translated
          * @param index int representing the current point of translation
-         * @param out Writer to translate the text to
+         * @param _out Writer to translate the text to
          * @return int count of codepoints consumed
          * @throws IOException if and only if the Writer produces an IOException
          */
-        protected abstract int translate(CharSequence input, int index, Writer out) throws IOException;
+        protected abstract int translate(CharSequence input, int index, Writer _out);
 
         /**
          * Helper for non-Writer usage.
          *
          * @param input CharSequence to be translated
-         * @return String output of translation
+         * @return string output of translation
          */
-        private String translate(final CharSequence input) {
+        private string translate(/*final*/CharSequence input) {
             if (input == null) {
                 return null;
             }
             try {
-                final StringWriter writer = new StringWriter(input.length() * 2);
+                /*final*/StringWriter writer = new StringWriter(input.length() * 2);
                 translate(input, writer);
                 return writer.toString();
-            } catch (final IOException ioe) {
+            } catch (/*final*/IOException ioe) {
                 // this should never ever happen while writing to a StringWriter
                 throw new RuntimeException(ioe);
             }
         }
 
         /**
-         * Translate an input onto a Writer. This is intentionally final as its algorithm is
+         * Translate an input onto a Writer. This is intentionally /*final*/as its algorithm is
          * tightly coupled with the abstract method of this class.
          *
          * @param input CharSequence that is being translated
-         * @param out Writer to translate the text to
+         * @param _out Writer to translate the text to
          * @throws IOException if and only if the Writer produces an IOException
          */
-        private void translate(final CharSequence input, final Writer out) throws IOException {
-            if (out == null) {
+        private void translate(/*final*/CharSequence input, /*final*/Writer _out){
+            if (_out == null) {
                 throw new IllegalArgumentException("The Writer must not be null");
             }
             if (input == null) {
                 return;
             }
             int pos = 0;
-            final int len = input.length();
+            /*final*/int len = input.length();
             while (pos < len) {
-                final int consumed = translate(input, pos, out);
+                /*final*/int consumed = translate(input, pos, _out);
                 if (consumed == 0) {
                     // inlined implementation of Character.toChars(Character.codePointAt(input, pos))
                     // avoids allocating temp char arrays and duplicate checks
                     char c1 = input.charAt(pos);
-                    out.write(c1);
+                    _out.write(c1);
                     pos++;
                     if (Character.isHighSurrogate(c1) && pos < len) {
                         char c2 = input.charAt(pos);
                         if (Character.isLowSurrogate(c2)) {
-                            out.write(c2);
+                            _out.write(c2);
                             pos++;
                         }
                     }
@@ -180,18 +180,18 @@ public final class StringEscapeUtils {
      *
      * @since 3.0
      */
-    private static class LookupTranslator extends CharSequenceTranslator {
+    private static class LookupTranslator:CharSequenceTranslator {
 
-        private final HashMap<String, String> lookupMap;
+        private /*final*/HashMap<String, String> lookupMap;
 
-        private final HashSet<Character> prefixSet;
+        private /*final*/HashSet<Character> prefixSet;
 
-        private final int shortest;
+        private /*final*/int shortest;
 
-        private final int longest;
+        private /*final*/int longest;
 
         /**
-         * Define the lookup table to be used in translation
+         * Define the lookup table to be used _in translation
          * <p>
          * Note that, as of Lang 3.1, the key to the lookup table is converted to a
          * java.lang.String. This is because we need the key to support hashCode and
@@ -199,16 +199,16 @@ public final class StringEscapeUtils {
          *
          * @param lookup CharSequence[][] table of size [*][2]
          */
-        private LookupTranslator(final CharSequence[]... lookup) {
+        private LookupTranslator(/*final*/CharSequence[]... lookup) {
             lookupMap = new HashMap<>();
             prefixSet = new HashSet<>();
             int _shortest = Integer.MAX_VALUE;
             int _longest = 0;
             if (lookup != null) {
-                for (final CharSequence[] seq : lookup) {
+                for (/*final*/CharSequence[] seq : lookup) {
                     this.lookupMap.put(seq[0].toString(), seq[1].toString());
                     this.prefixSet.add(seq[0].charAt(0));
-                    final int sz = seq[0].length();
+                    /*final*/int sz = seq[0].length();
                     if (sz < _shortest) {
                         _shortest = sz;
                     }
@@ -225,7 +225,7 @@ public final class StringEscapeUtils {
          * {@inheritDoc}
          */
         @Override
-        protected int translate(final CharSequence input, final int index, final Writer out) throws IOException {
+        protected int translate(/*final*/CharSequence input, /*final*/int index, /*final*/Writer _out){
             // check if translation exists for the input at position index
             if (prefixSet.contains(input.charAt(index))) {
                 int max = longest;
@@ -234,10 +234,10 @@ public final class StringEscapeUtils {
                 }
                 // implement greedy algorithm by trying maximum match first
                 for (int i = max; i >= shortest; i--) {
-                    final CharSequence subSeq = input.subSequence(index, index + i);
-                    final String result = lookupMap.get(subSeq.toString());
+                    /*final*/CharSequence subSeq = input.subSequence(index, index + i);
+                    /*final*/string result = lookupMap.get(subSeq.toString());
                     if (result != null) {
-                        out.write(result);
+                        _out.write(result);
                         return i;
                     }
                 }
@@ -254,16 +254,16 @@ public final class StringEscapeUtils {
      *
      * @since 3.0
      */
-    private static class AggregateTranslator extends CharSequenceTranslator {
+    private static class AggregateTranslator:CharSequenceTranslator {
 
-        private final CharSequenceTranslator[] translators;
+        private /*final*/CharSequenceTranslator[] translators;
 
         /**
          * Specify the translators to be used at creation time.
          *
          * @param translators CharSequenceTranslator array to aggregate
          */
-        private AggregateTranslator(final CharSequenceTranslator... translators) {
+        private AggregateTranslator(/*final*/CharSequenceTranslator... translators) {
             this.translators = translators == null ? null : translators.clone();
         }
 
@@ -273,9 +273,9 @@ public final class StringEscapeUtils {
          * {@inheritDoc}
          */
         @Override
-        protected int translate(final CharSequence input, final int index, final Writer out) throws IOException {
-            for (final CharSequenceTranslator translator : translators) {
-                final int consumed = translator.translate(input, index, out);
+        protected int translate(/*final*/CharSequence input, /*final*/int index, /*final*/Writer _out){
+            for (/*final*/CharSequenceTranslator translator : translators) {
+                /*final*/int consumed = translator.translate(input, index, _out);
                 if (consumed != 0) {
                     return consumed;
                 }
@@ -296,21 +296,21 @@ public final class StringEscapeUtils {
      *
      * @since 3.0
      */
-    private static class OctalUnescaper extends CharSequenceTranslator {
+    private static class OctalUnescaper:CharSequenceTranslator {
 
         /**
          * {@inheritDoc}
          */
         @Override
-        protected int translate(final CharSequence input, final int index, final Writer out) throws IOException {
+        protected int translate(/*final*/CharSequence input, /*final*/int index, /*final*/Writer _out){
             // how many characters left, ignoring the first \
-            final int remaining = input.length() - index - 1;
-            final StringBuilder builder = new StringBuilder();
+            /*final*/int remaining = input.length() - index - 1;
+            /*final*/StringBuilder builder = new StringBuilder();
             if (input.charAt(index) == '\\' && remaining > 0 && isOctalDigit(input.charAt(index + 1))) {
-                final int next = index + 1;
-                final int next2 = index + 2;
-                final int next3 = index + 3;
-                // we know this is good as we checked it in the if block above
+                /*final*/int next = index + 1;
+                /*final*/int next2 = index + 2;
+                /*final*/int next3 = index + 3;
+                // we know this is good as we checked it _in the if block above
                 builder.append(input.charAt(next));
                 if (remaining > 1 && isOctalDigit(input.charAt(next2))) {
                     builder.append(input.charAt(next2));
@@ -318,7 +318,7 @@ public final class StringEscapeUtils {
                         builder.append(input.charAt(next3));
                     }
                 }
-                out.write(Integer.parseInt(builder.toString(), 8));
+                _out.write(Integer.parseInt(builder.toString(), 8));
                 return 1 + builder.length();
             }
             return 0;
@@ -331,7 +331,7 @@ public final class StringEscapeUtils {
          * @param ch the char to check
          * @return true if the given char is the character representation of one of the digits from 0 to 7
          */
-        private boolean isOctalDigit(final char ch) {
+        private boolean isOctalDigit(/*final*/char ch) {
             return ch >= '0' && ch <= '7';
         }
 
@@ -341,7 +341,7 @@ public final class StringEscapeUtils {
          * @param ch the char to check
          * @return true if the given char is the character representation of one of the digits from 0 to 3
          */
-        private boolean isZeroToThree(final char ch) {
+        private boolean isZeroToThree(/*final*/char ch) {
             return ch >= '0' && ch <= '3';
         }
     }
@@ -355,13 +355,13 @@ public final class StringEscapeUtils {
      *
      * @since 3.0
      */
-    private static class UnicodeUnescaper extends CharSequenceTranslator {
+    private static class UnicodeUnescaper:CharSequenceTranslator {
 
         /**
          * {@inheritDoc}
          */
         @Override
-        protected int translate(final CharSequence input, final int index, final Writer out) throws IOException {
+        protected int translate(/*final*/CharSequence input, /*final*/int index, /*final*/Writer _out){
             if (input.charAt(index) == '\\' && index + 1 < input.length() && input.charAt(index + 1) == 'u') {
                 // consume optional additional 'u' chars
                 int i = 2;
@@ -373,16 +373,16 @@ public final class StringEscapeUtils {
                 }
                 if (index + i + 4 <= input.length()) {
                     // Get 4 hex digits
-                    final CharSequence unicode = input.subSequence(index + i, index + i + 4);
+                    /*final*/CharSequence unicode = input.subSequence(index + i, index + i + 4);
                     try {
-                        final int value = Integer.parseInt(unicode.toString(), 16);
-                        out.write((char) value);
-                    } catch (final NumberFormatException nfe) {
+                        /*final*/int value = Integer.parseInt(unicode.toString(), 16);
+                        _out.write((char) value);
+                    } catch (/*final*/NumberFormatException nfe) {
                         throw new IllegalArgumentException("Unable to parse unicode value: " + unicode, nfe);
                     }
                     return i + 4;
                 }
-                throw new IllegalArgumentException("Less than 4 hex digits in unicode value: '" + input.subSequence(index, input.length()) + "' due to end of CharSequence");
+                throw new IllegalArgumentException("Less than 4 hex digits _in unicode value: '" + input.subSequence(index, input.length()) + "' due to end of CharSequence");
             }
             return 0;
         }

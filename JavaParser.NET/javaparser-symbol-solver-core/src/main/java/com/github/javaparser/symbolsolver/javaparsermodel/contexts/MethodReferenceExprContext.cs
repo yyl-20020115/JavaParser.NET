@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,7 +24,7 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.contexts;
 
 
 
-public class MethodReferenceExprContext extends AbstractJavaParserContext<MethodReferenceExpr> {
+public class MethodReferenceExprContext:AbstractJavaParserContext<MethodReferenceExpr> {
 
     ///
     /// Constructors
@@ -39,7 +39,7 @@ public class MethodReferenceExprContext extends AbstractJavaParserContext<Method
     ///
 
     @Override
-    public SymbolReference<ResolvedMethodDeclaration> solveMethod(String name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
+    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
         if ("new".equals(name)) {
             throw new UnsupportedOperationException("Constructor calls not yet resolvable");
         }
@@ -50,8 +50,8 @@ public class MethodReferenceExprContext extends AbstractJavaParserContext<Method
 
         if (rrtds.isEmpty()) {
             // if the bounds of a type parameter are empty, then the bound is implicitly "extends Object"
-            // we don't make this _ex_plicit in the data representation because that would affect codegen
-            // and make everything generate like <T extends Object> instead of <T>
+            // we don't make this _ex_plicit _in the data representation because that would affect codegen
+            // and make everything generate like <T:Object> instead of <T>
             // https://github.com/javaparser/javaparser/issues/2044
             rrtds = Collections.singleton(typeSolver.getSolvedJavaLangObject());
         }
@@ -78,13 +78,13 @@ public class MethodReferenceExprContext extends AbstractJavaParserContext<Method
     ///
 
     private List<ResolvedType> inferArgumentTypes() {
-        if (demandParentNode(wrappedNode) instanceof MethodCallExpr) {
+        if (demandParentNode(wrappedNode) is MethodCallExpr) {
             MethodCallExpr methodCallExpr = (MethodCallExpr) demandParentNode(wrappedNode);
             MethodUsage methodUsage = JavaParserFacade.get(typeSolver).solveMethodAsUsage(methodCallExpr);
             int pos = pos(methodCallExpr, wrappedNode);
             ResolvedType lambdaType = methodUsage.getParamTypes().get(pos);
 
-            // Get the functional method in order for us to resolve it's type arguments properly
+            // Get the functional method _in order for us to resolve it's type arguments properly
             Optional<MethodUsage> functionalMethodOpt = FunctionalInterfaceLogic.getFunctionalMethod(lambdaType);
             if (functionalMethodOpt.isPresent()) {
                 MethodUsage functionalMethod = functionalMethodOpt.get();
@@ -115,7 +115,7 @@ public class MethodReferenceExprContext extends AbstractJavaParserContext<Method
             } else {
                 throw new UnsupportedOperationException();
             }
-        } else if (demandParentNode(wrappedNode) instanceof VariableDeclarator) {
+        } else if (demandParentNode(wrappedNode) is VariableDeclarator) {
             VariableDeclarator variableDeclarator = (VariableDeclarator) demandParentNode(wrappedNode);
             ResolvedType t = JavaParserFacade.get(typeSolver).convertToUsage(variableDeclarator.getType());
             Optional<MethodUsage> functionalMethod = FunctionalInterfaceLogic.getFunctionalMethod(t);
@@ -141,7 +141,7 @@ public class MethodReferenceExprContext extends AbstractJavaParserContext<Method
             } else {
                 throw new UnsupportedOperationException();
             }
-        } else if (demandParentNode(wrappedNode) instanceof ReturnStmt) {
+        } else if (demandParentNode(wrappedNode) is ReturnStmt) {
             ReturnStmt returnStmt = (ReturnStmt) demandParentNode(wrappedNode);
             Optional<MethodDeclaration> optDeclaration = returnStmt.findAncestor(MethodDeclaration.class);
             if (optDeclaration.isPresent()) {

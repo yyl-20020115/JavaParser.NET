@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,9 +25,9 @@ namespace com.github.javaparser.symbolsolver.resolution.typesolvers;
 
 
 
-class JarTypeSolverTest extends AbstractTypeSolverTest<JarTypeSolver> {
+class JarTypeSolverTest:AbstractTypeSolverTest<JarTypeSolver> {
 
-    private static final Supplier<JarTypeSolver> JAR_TYPE_PROVIDER = () -> {
+    private static /*final*/Supplier<JarTypeSolver> JAR_TYPE_PROVIDER = () -> {
         try {
             Path pathToJar = adaptPath("src/test/resources/javaparser-core-2.1.0.jar");
             return new JarTypeSolver(pathToJar);
@@ -40,8 +40,8 @@ class JarTypeSolverTest extends AbstractTypeSolverTest<JarTypeSolver> {
         super(JAR_TYPE_PROVIDER);
     }
 
-    @Test
-    void initial() throws IOException {
+    [TestMethod]
+    void initial(){
         Path pathToJar = adaptPath("src/test/resources/javaparser-core-2.1.0.jar");
         JarTypeSolver jarTypeSolver = new JarTypeSolver(pathToJar);
         assertEquals(true, jarTypeSolver.tryToSolveType("com.github.javaparser.SourcesHelper").isSolved());
@@ -52,8 +52,8 @@ class JarTypeSolverTest extends AbstractTypeSolverTest<JarTypeSolver> {
         assertEquals(false, jarTypeSolver.tryToSolveType("Foo").isSolved());
     }
 
-    @Test
-    void dependenciesBetweenJarsNotTriggeringReferences() throws IOException {
+    [TestMethod]
+    void dependenciesBetweenJarsNotTriggeringReferences(){
         Path pathToJar1 = adaptPath("src/test/resources/jar1.jar");
         JarTypeSolver jarTypeSolver1 = new JarTypeSolver(pathToJar1);
         assertEquals(true, jarTypeSolver1.tryToSolveType("foo.bar.A").isSolved());
@@ -63,8 +63,8 @@ class JarTypeSolverTest extends AbstractTypeSolverTest<JarTypeSolver> {
         assertEquals(true, jarTypeSolver2.tryToSolveType("foo.zum.B").isSolved());
     }
 
-    @Test
-    void dependenciesBetweenJarsTriggeringReferencesThatCannotBeResolved() throws IOException {
+    [TestMethod]
+    void dependenciesBetweenJarsTriggeringReferencesThatCannotBeResolved(){
         assertThrows(UnsolvedSymbolException.class, () -> {
                 Path pathToJar2 = adaptPath("src/test/resources/jar2.jar");
             JarTypeSolver jarTypeSolver2 = new JarTypeSolver(pathToJar2);
@@ -73,8 +73,8 @@ class JarTypeSolverTest extends AbstractTypeSolverTest<JarTypeSolver> {
         });
     }
 
-    @Test
-    void dependenciesBetweenJarsTriggeringReferencesThatCanBeResolved() throws IOException {
+    [TestMethod]
+    void dependenciesBetweenJarsTriggeringReferencesThatCanBeResolved(){
         Path pathToJar1 = adaptPath("src/test/resources/jar1.jar");
         JarTypeSolver jarTypeSolver1 = new JarTypeSolver(pathToJar1);
 
@@ -94,30 +94,30 @@ class JarTypeSolverTest extends AbstractTypeSolverTest<JarTypeSolver> {
      *
      * @throws IOException If an I/O exception occur.
      */
-    @Test
-    void whenJarTypeSolverShouldNotSolveJREType() throws IOException {
+    [TestMethod]
+    void whenJarTypeSolverShouldNotSolveJREType(){
         Path pathToJar = adaptPath("src/test/resources/javaparser-core-2.1.0.jar");
         JarTypeSolver typeSolver = new JarTypeSolver(pathToJar);
         assertFalse(typeSolver.tryToSolveType("java.lang.Object").isSolved());
     }
 
-    @Test
-    void solveTypeShouldReturnTheCorrespondingDeclarationWhenAvailable() throws IOException {
+    [TestMethod]
+    void solveTypeShouldReturnTheCorrespondingDeclarationWhenAvailable(){
         Path pathToJar = adaptPath("src/test/resources/javaparser-core-2.1.0.jar");
         JarTypeSolver typeSolver = new JarTypeSolver(pathToJar);
         ResolvedReferenceTypeDeclaration nodeType = typeSolver.solveType("com.github.javaparser.ast.Node");
         assertEquals("com.github.javaparser.ast.Node", nodeType.getQualifiedName());
     }
 
-    @Test
-    void solveTypeShouldThrowUnsolvedSymbolWhenNotAvailable() throws IOException {
+    [TestMethod]
+    void solveTypeShouldThrowUnsolvedSymbolWhenNotAvailable(){
         Path pathToJar = adaptPath("src/test/resources/javaparser-core-2.1.0.jar");
         JarTypeSolver typeSolver = new JarTypeSolver(pathToJar);
         assertThrows(UnsolvedSymbolException.class, () -> typeSolver.solveType("java.lang.Object"));
     }
 
-    @Test
-    void createTypeSolverFromInputStream() throws IOException {
+    [TestMethod]
+    void createTypeSolverFromInputStream(){
         Path pathToJar = adaptPath("src/test/resources/javaparser-core-2.1.0.jar");
         try (FileInputStream fileInputStream = new FileInputStream(pathToJar.toFile())) {
             JarTypeSolver typeSolver = new JarTypeSolver(fileInputStream);
@@ -125,16 +125,16 @@ class JarTypeSolverTest extends AbstractTypeSolverTest<JarTypeSolver> {
         }
     }
 
-    @Test
+    [TestMethod]
     void whenTheJarIsNotFoundShouldThrowAFileNotFoundException(@TempDir Path tempDirectory) {
         Path pathToJar = tempDirectory.resolve("a_non_existing_file.jar");
         assertThrows(FileNotFoundException.class, () -> new JarTypeSolver(pathToJar));
     }
 
-    @Test
-    void theJarTypeShouldCacheTheListOfKnownTypes() throws IOException {
-        String typeA = "foo.bar.A";
-        String typeB = "foo.zum.B";
+    [TestMethod]
+    void theJarTypeShouldCacheTheListOfKnownTypes(){
+        string typeA = "foo.bar.A";
+        string typeB = "foo.zum.B";
 
         Path pathToJar1 = adaptPath("src/test/resources/jar1.jar");
         JarTypeSolver jarTypeSolver1 = new JarTypeSolver(pathToJar1);

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,20 +26,20 @@ namespace com.github.javaparser.symbolsolver.resolution.javaparser.contexts;
 /**
  *
  */
-class BlockStmtContextResolutionTest extends AbstractResolutionTest {
+class BlockStmtContextResolutionTest:AbstractResolutionTest {
 
     @BeforeEach
     void setup() {
     }
 
     // issue #3526
-    @Test
+    [TestMethod]
     void must_be_resolved_from_previous_declaration(){
-        String src = "public class Example {\n"
+        string src = "public class Example {\n"
                 + "    int a = 3;\n"
                 + "    public void bla() {\n"
                 + "        a = 7; // 'a' must be resolved as int not String\n"
-                + "        String a = \"\";\n"
+                + "        string a = \"\";\n"
                 + "        a = \"test\";\n"
                 + "    }\n"
                 + "}";
@@ -52,13 +52,13 @@ class BlockStmtContextResolutionTest extends AbstractResolutionTest {
         assertEquals("int", rt.describe());
     }
     
-    @Test
+    [TestMethod]
     void must_be_resolved_from_previous_declaration_second_declaration_of_the_same_field_name(){
-        String src = "public class Example {\n"
+        string src = "public class Example {\n"
                 + "    int a = 3;\n"
                 + "    public void bla() {\n"
                 + "        a = 7; // 'a' must be resolved as int not String\n"
-                + "        String a = \"\";\n"
+                + "        string a = \"\";\n"
                 + "        a = \"test\";\n"
                 + "    }\n"
                 + "}";

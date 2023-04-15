@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,13 +24,13 @@ namespace com.github.javaparser.symbolsolver;
 
 
 
-class Issue1599Test extends AbstractResolutionTest {
+class Issue1599Test:AbstractResolutionTest {
 
-    @Test()
-    void test() throws IOException {
+    [TestMethod]()
+    void test(){
         Path rootSourceDir = adaptPath("src/test/resources/issue1599");
 
-        String src =
+        string src =
                 "public class Foo {\n" +
                 "  public void m() {\n" + 
                 "    A myVar = new A() {\n" + 

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,49 +28,49 @@ namespace com.github.javaparser.ast.expr;
  *
  * @see Name
  */
-public class SimpleName extends Node implements NodeWithIdentifier<SimpleName> {
+public class SimpleName:Node implements NodeWithIdentifier<SimpleName> {
 
     @NonEmptyProperty
-    private String identifier;
+    private string identifier;
 
     public SimpleName() {
         this(null, "empty");
     }
 
-    @AllFieldsConstructor
-    public SimpleName(final String identifier) {
+    //@AllFieldsConstructor
+    public SimpleName(/*final*/string identifier) {
         this(null, identifier);
     }
 
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
-    public SimpleName(TokenRange tokenRange, String identifier) {
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    public SimpleName(TokenRange tokenRange, string identifier) {
         super(tokenRange);
         setIdentifier(identifier);
         customInitialization();
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public String getIdentifier() {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public string getIdentifier() {
         return identifier;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public SimpleName setIdentifier(final String identifier) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public SimpleName setIdentifier(/*final*/string identifier) {
         assertNonEmpty(identifier);
         if (identifier == this.identifier) {
             return this;
@@ -80,18 +80,18 @@ public class SimpleName extends Node implements NodeWithIdentifier<SimpleName> {
         return this;
     }
 
-    public String asString() {
+    public string asString() {
         return identifier;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public SimpleName clone() {
         return (SimpleName) accept(new CloneVisitor(), null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public SimpleNameMetaModel getMetaModel() {
         return JavaParserMetaModel.simpleNameMetaModel;
     }

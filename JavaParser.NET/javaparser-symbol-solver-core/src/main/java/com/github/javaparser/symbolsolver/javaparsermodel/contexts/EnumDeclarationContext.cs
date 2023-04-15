@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.contexts;
 /**
  * @author Federico Tomassetti
  */
-public class EnumDeclarationContext extends AbstractJavaParserContext<EnumDeclaration> {
+public class EnumDeclarationContext:AbstractJavaParserContext<EnumDeclaration> {
 
     private JavaParserTypeDeclarationAdapter javaParserTypeDeclarationAdapter;
 
@@ -37,7 +37,7 @@ public class EnumDeclarationContext extends AbstractJavaParserContext<EnumDeclar
     }
 
     @Override
-    public SymbolReference<? extends ResolvedValueDeclaration> solveSymbol(String name) {
+    public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name) {
         if (typeSolver == null) throw new IllegalArgumentException();
 
         // among constants
@@ -56,12 +56,12 @@ public class EnumDeclarationContext extends AbstractJavaParserContext<EnumDeclar
     }
 
     @Override
-    public SymbolReference<ResolvedTypeDeclaration> solveType(String name, List<ResolvedType> resolvedTypes) {
+    public SymbolReference<ResolvedTypeDeclaration> solveType(string name, List<ResolvedType> resolvedTypes) {
         return javaParserTypeDeclarationAdapter.solveType(name, resolvedTypes);
     }
 
     @Override
-    public SymbolReference<ResolvedMethodDeclaration> solveMethod(String name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
+    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
         return javaParserTypeDeclarationAdapter.solveMethod(name, argumentsTypes, staticOnly);
     }
 

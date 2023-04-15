@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,7 +27,7 @@ namespace com.github.javaparser.symbolsolver.resolution.javaparser.contexts;
 /**
  * @author Federico Tomassetti
  */
-class EnumDeclarationContextResolutionTest extends AbstractResolutionTest {
+class EnumDeclarationContextResolutionTest:AbstractResolutionTest {
 
     private TypeSolver typeSolver;
 
@@ -36,40 +36,40 @@ class EnumDeclarationContextResolutionTest extends AbstractResolutionTest {
         typeSolver = new ReflectionTypeSolver();
     }
 
-    @Test
+    [TestMethod]
     void solveSymbolReferringToDeclaredInstanceField() {
         CompilationUnit cu = parseSample("AnEnum");
         com.github.javaparser.ast.body.EnumDeclaration enumDeclaration = Navigator.demandEnum(cu, "MyEnum");
         Context context = new EnumDeclarationContext(enumDeclaration, typeSolver);
 
-        SymbolReference<? extends ResolvedValueDeclaration> ref = context.solveSymbol("i");
+        SymbolReference<?:ResolvedValueDeclaration> ref = context.solveSymbol("i");
         assertTrue(ref.isSolved());
         assertEquals("int", ref.getCorrespondingDeclaration().getType().describe());
     }
 
-    @Test
+    [TestMethod]
     void solveSymbolReferringToDeclaredStaticField() {
         CompilationUnit cu = parseSample("AnEnum");
         com.github.javaparser.ast.body.EnumDeclaration enumDeclaration = Navigator.demandEnum(cu, "MyEnum");
         Context context = new EnumDeclarationContext(enumDeclaration, typeSolver);
 
-        SymbolReference<? extends ResolvedValueDeclaration> ref = context.solveSymbol("j");
+        SymbolReference<?:ResolvedValueDeclaration> ref = context.solveSymbol("j");
         assertTrue(ref.isSolved());
         assertEquals("long", ref.getCorrespondingDeclaration().getType().describe());
     }
 
-    @Test
+    [TestMethod]
     void solveSymbolReferringToValue() {
         CompilationUnit cu = parseSample("AnEnum");
         com.github.javaparser.ast.body.EnumDeclaration enumDeclaration = Navigator.demandEnum(cu, "MyEnum");
         Context context = new EnumDeclarationContext(enumDeclaration, new MemoryTypeSolver());
 
-        SymbolReference<? extends ResolvedValueDeclaration> ref = context.solveSymbol("E1");
+        SymbolReference<?:ResolvedValueDeclaration> ref = context.solveSymbol("E1");
         assertTrue(ref.isSolved());
         assertEquals("MyEnum", ref.getCorrespondingDeclaration().getType().describe());
     }
 
-    @Test
+    [TestMethod]
     void solveSymbolAsValueReferringToDeclaredInstanceField() {
         CompilationUnit cu = parseSample("AnEnum");
         com.github.javaparser.ast.body.EnumDeclaration enumDeclaration = Navigator.demandEnum(cu, "MyEnum");
@@ -80,7 +80,7 @@ class EnumDeclarationContextResolutionTest extends AbstractResolutionTest {
         assertEquals("int", ref.get().getType().describe());
     }
 
-    @Test
+    [TestMethod]
     void solveSymbolAsValueReferringToDeclaredStaticField() {
         CompilationUnit cu = parseSample("AnEnum");
         com.github.javaparser.ast.body.EnumDeclaration enumDeclaration = Navigator.demandEnum(cu, "MyEnum");
@@ -91,7 +91,7 @@ class EnumDeclarationContextResolutionTest extends AbstractResolutionTest {
         assertEquals("long", ref.get().getType().describe());
     }
 
-    @Test
+    [TestMethod]
     void solveSymbolAsValueReferringToValue() {
         CompilationUnit cu = parseSample("AnEnum");
         com.github.javaparser.ast.body.EnumDeclaration enumDeclaration = Navigator.demandEnum(cu, "MyEnum");

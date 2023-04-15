@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -35,16 +35,16 @@ public class Utils {
      * @deprecated New code should use {@link LineSeparator#SYSTEM} if referring to the current host system's line separator,
      *  else {@link LineSeparator#CR} or {@link LineSeparator#LF} or {@link LineSeparator#CRLF} if referring to a specific style of line separator.
      */
-    @Deprecated
-    public static final String EOL = LineSeparator.SYSTEM.asRawString();
+    //@Deprecated
+    public static /*final*/string EOL = LineSeparator.SYSTEM.asRawString();
 
     /**
      * @deprecated Renamed from {@link #EOL} to make it explicit that we're using the system's line separator.
      *             New code should use {@link LineSeparator#SYSTEM} if referring to the current host system's line separator,
      *              else {@link LineSeparator#CR} or {@link LineSeparator#LF} or {@link LineSeparator#CRLF} if referring to a specific style of line separator.
      */
-    @Deprecated
-    public static final String SYSTEM_EOL = LineSeparator.SYSTEM.asRawString();
+    //@Deprecated
+    public static /*final*/string SYSTEM_EOL = LineSeparator.SYSTEM.asRawString();
 
     public static <E> boolean isNullOrEmpty(Collection<E> collection) {
         return collection == null || collection.isEmpty();
@@ -57,21 +57,21 @@ public class Utils {
         return o;
     }
 
-    public static String assertNonEmpty(String string) {
+    public static string assertNonEmpty(string string) {
         if (string == null || string.isEmpty()) {
             throw new AssertionError("A string was unexpectedly empty.");
         }
         return string;
     }
 
-    public static <T extends Number> T assertNonNegative(T number) {
+    public static <T:Number> T assertNonNegative(T number) {
         if (number.longValue() < 0) {
             throw new AssertionError("A number was unexpectedly negative.");
         }
         return number;
     }
 
-    public static <T extends Number> T assertPositive(T number) {
+    public static <T:Number> T assertPositive(T number) {
         if (number.longValue() <= 0) {
             throw new AssertionError("A number was unexpectedly non-positive.");
         }
@@ -81,7 +81,7 @@ public class Utils {
     /**
      * @return string with ASCII characters 10 and 13 replaced by the text "\n" and "\r".
      */
-    public static String escapeEndOfLines(String string) {
+    public static string escapeEndOfLines(string string) {
         StringBuilder escapedString = new StringBuilder();
         for (char c : string.toCharArray()) {
             switch(c) {
@@ -98,9 +98,9 @@ public class Utils {
         return escapedString.toString();
     }
 
-    public static String readerToString(Reader reader) throws IOException {
-        final StringBuilder result = new StringBuilder();
-        final char[] buffer = new char[8 * 1024];
+    public static string readerToString(Reader reader){
+        /*final*/StringBuilder result = new StringBuilder();
+        /*final*/char[] buffer = new char[8 * 1024];
         int numChars;
         while ((numChars = reader.read(buffer, 0, buffer.length)) > 0) {
             result.append(buffer, 0, numChars);
@@ -111,8 +111,8 @@ public class Utils {
     /**
      * @deprecated use screamingToCamelCase
      */
-    @Deprecated
-    public static String toCamelCase(String original) {
+    //@Deprecated
+    public static string toCamelCase(string original) {
         return screamingToCamelCase(original);
     }
 
@@ -121,7 +121,7 @@ public class Utils {
      * <p>
      * For example "ABC_DEF" becomes "abcDef"
      */
-    public static String screamingToCamelCase(String original) {
+    public static string screamingToCamelCase(string original) {
         StringBuilder sb = new StringBuilder();
         String[] parts = original.toLowerCase().split("_");
         for (int i = 0; i < parts.length; i++) {
@@ -134,7 +134,7 @@ public class Utils {
      * @param input "aCamelCaseString"
      * @return "A_CAMEL_CASE_STRING"
      */
-    public static String camelCaseToScreaming(String input) {
+    public static string camelCaseToScreaming(string input) {
         if (input.isEmpty()) {
             return "";
         }
@@ -149,9 +149,9 @@ public class Utils {
     }
 
     /**
-     * Return the next word of the string, in other words it stops when a space is encountered.
+     * Return the next word of the string, _in other words it stops when a space is encountered.
      */
-    public static String nextWord(String string) {
+    public static string nextWord(string string) {
         int index = 0;
         while (index < string.length() && !Character.isWhitespace(string.charAt(index))) {
             index++;
@@ -170,20 +170,20 @@ public class Utils {
     }
 
     /**
-     * Capitalizes the first character in the string.
+     * Capitalizes the first character _in the string.
      */
-    public static String capitalize(String s) {
+    public static string capitalize(string s) {
         return stringTransformer(s, "capitalize", String::toUpperCase);
     }
 
     /**
-     * Lower-cases the first character in the string.
+     * Lower-cases the first character _in the string.
      */
-    public static String decapitalize(String s) {
+    public static string decapitalize(string s) {
         return stringTransformer(s, "decapitalize", String::toLowerCase);
     }
 
-    private static String stringTransformer(String s, String operationDescription, Function<String, String> transformation) {
+    private static string stringTransformer(string s, string operationDescription, Function<String, String> transformation) {
         if (s.isEmpty()) {
             throw new IllegalArgumentException(String.format("You cannot %s an empty string", operationDescription));
         }
@@ -197,14 +197,14 @@ public class Utils {
         if (value == null) {
             return true;
         }
-        if (value instanceof Optional) {
+        if (value is Optional) {
             if (((Optional) value).isPresent()) {
                 value = ((Optional) value).get();
             } else {
                 return true;
             }
         }
-        if (value instanceof Collection) {
+        if (value is Collection) {
             if (((Collection) value).isEmpty()) {
                 return true;
             }
@@ -216,7 +216,7 @@ public class Utils {
         if (value == null) {
             return true;
         }
-        if (value instanceof Optional) {
+        if (value is Optional) {
             if (((Optional) value).isPresent()) {
                 value = ((Optional) value).get();
             } else {
@@ -272,21 +272,21 @@ public class Utils {
     /**
      * @return content, with all kinds of EOL characters replaced by desiredEndOfLineCharacter
      */
-    public static String normalizeEolInTextBlock(String content, String desiredEndOfLineCharacter) {
+    public static string normalizeEolInTextBlock(string content, string desiredEndOfLineCharacter) {
         return content.replaceAll("\\R", desiredEndOfLineCharacter);
     }
 
     /**
      * @return content, with all kinds of EOL characters replaced by desiredEndOfLineCharacter
      */
-    public static String normalizeEolInTextBlock(String content, LineSeparator desiredEndOfLineCharacter) {
+    public static string normalizeEolInTextBlock(string content, LineSeparator desiredEndOfLineCharacter) {
         return normalizeEolInTextBlock(content, desiredEndOfLineCharacter.asRawString());
     }
 
     /**
      * @return the filename with the last "." and everything following it removed.
      */
-    public static String removeFileExtension(String filename) {
+    public static string removeFileExtension(string filename) {
         int extensionIndex = filename.lastIndexOf(".");
         if (extensionIndex == -1)
             return filename;
@@ -296,7 +296,7 @@ public class Utils {
     /**
      * Like {@link String#trim()}, but only the trailing spaces.
      */
-    public static String trimTrailingSpaces(String line) {
+    public static string trimTrailingSpaces(string line) {
         while (line.length() > 0 && line.charAt(line.length() - 1) <= 0x20) {
             line = line.substring(0, line.length() - 1);
         }
@@ -307,6 +307,6 @@ public class Utils {
      * Checks, if the parent is a unary expression with a minus operator. Used to check for negative literals.
      */
     public static boolean hasUnaryMinusAsParent(Node n) {
-        return n.getParentNode().filter(parent -> parent instanceof UnaryExpr).map(parent -> (UnaryExpr) parent).map(unaryExpr -> unaryExpr.getOperator() == UnaryExpr.Operator.MINUS).orElse(false);
+        return n.getParentNode().filter(parent -> parent is UnaryExpr).map(parent -> (UnaryExpr) parent).map(unaryExpr -> unaryExpr.getOperator() == UnaryExpr.Operator.MINUS).orElse(false);
     }
 }

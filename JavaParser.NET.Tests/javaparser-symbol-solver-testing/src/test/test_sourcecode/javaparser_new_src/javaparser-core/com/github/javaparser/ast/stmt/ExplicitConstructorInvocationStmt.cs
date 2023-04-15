@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,7 +27,7 @@ namespace com.github.javaparser.ast.stmt;
 /**
  * @author Julio Vilmar Gesser
  */
-public final class ExplicitConstructorInvocationStmt extends Statement implements NodeWithTypeArguments<ExplicitConstructorInvocationStmt> {
+public /*final*/class ExplicitConstructorInvocationStmt:Statement implements NodeWithTypeArguments<ExplicitConstructorInvocationStmt> {
 
     private List<Type<?>> typeArguments;
 
@@ -40,16 +40,16 @@ public final class ExplicitConstructorInvocationStmt extends Statement implement
 	public ExplicitConstructorInvocationStmt() {
 	}
 
-	public ExplicitConstructorInvocationStmt(final boolean isThis,
-			final Expression expr, final List<Expression> args) {
+	public ExplicitConstructorInvocationStmt(/*final*/boolean isThis,
+			/*final*/Expression expr, /*final*/List<Expression> args) {
 		setThis(isThis);
 		setExpr(expr);
 		setArgs(args);
 	}
 
 	public ExplicitConstructorInvocationStmt(Range range,
-	                                         final List<Type<?>> typeArguments, final boolean isThis,
-	                                         final Expression expr, final List<Expression> args) {
+	                                         /*final*/List<Type<?>> typeArguments, /*final*/boolean isThis,
+	                                         /*final*/Expression expr, /*final*/List<Expression> args) {
 		super(range);
 		setTypeArguments(typeArguments);
 		setThis(isThis);
@@ -58,12 +58,12 @@ public final class ExplicitConstructorInvocationStmt extends Statement implement
 	}
 
 	@Override
-	public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+	public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
 		return v.visit(this, arg);
 	}
 
 	@Override
-	public <A> void accept(final VoidVisitor<A> v, final A arg) {
+	public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
 		v.visit(this, arg);
 	}
 
@@ -80,19 +80,19 @@ public final class ExplicitConstructorInvocationStmt extends Statement implement
 		return isThis;
 	}
 
-	public ExplicitConstructorInvocationStmt setArgs(final List<Expression> args) {
+	public ExplicitConstructorInvocationStmt setArgs(/*final*/List<Expression> args) {
 		this.args = args;
 		setAsParentNodeOf(this.args);
 		return this;
 	}
 
-	public ExplicitConstructorInvocationStmt setExpr(final Expression expr) {
+	public ExplicitConstructorInvocationStmt setExpr(/*final*/Expression expr) {
 		this.expr = expr;
 		setAsParentNodeOf(this.expr);
 		return this;
 	}
 
-	public ExplicitConstructorInvocationStmt setThis(final boolean isThis) {
+	public ExplicitConstructorInvocationStmt setThis(/*final*/boolean isThis) {
 		this.isThis = isThis;
 		return this;
 	}
@@ -103,7 +103,7 @@ public final class ExplicitConstructorInvocationStmt extends Statement implement
     }
 
     @Override
-    public ExplicitConstructorInvocationStmt setTypeArguments(final List<Type<?>> types) {
+    public ExplicitConstructorInvocationStmt setTypeArguments(/*final*/List<Type<?>> types) {
         this.typeArguments = types;
         setAsParentNodeOf(this.typeArguments);
         return this;

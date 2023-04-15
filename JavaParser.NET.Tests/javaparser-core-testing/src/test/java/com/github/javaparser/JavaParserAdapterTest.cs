@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,18 +26,18 @@ namespace com.github.javaparser;
 
 class JavaParserAdapterTest {
 
-    private final JavaParser javaParser = Mockito.spy(JavaParser.class);
+    private /*final*/JavaParser javaParser = Mockito.spy(JavaParser.class);
 
-    private final JavaParserAdapter adapter = new JavaParserAdapter(javaParser);
+    private /*final*/JavaParserAdapter adapter = new JavaParserAdapter(javaParser);
 
-    @Test
+    [TestMethod]
     void of_withValidParser() {
         JavaParserAdapter actualAdapter = JavaParserAdapter.of(javaParser);
         assertSame(javaParser, actualAdapter.getParser());
         assertSame(javaParser.getParserConfiguration(), adapter.getParserConfiguration());
     }
 
-    @Test
+    [TestMethod]
     void parse_withSourceCode() {
 
         CompilationUnit cu = adapter.parse("class A {}");
@@ -49,12 +49,12 @@ class JavaParserAdapterTest {
         Mockito.verify(javaParser).parse("class A {}");
     }
 
-    @Test
+    [TestMethod]
     void parse_withInvalidSourceCode() {
         assertThrows(ParseProblemException.class, () -> adapter.parse("class A"));
     }
 
-    @Test
+    [TestMethod]
     void parse_withSourceCodeFromInputStream() {
 
         InputStream is = new ByteArrayInputStream("class A {}".getBytes(StandardCharsets.UTF_8));
@@ -68,7 +68,7 @@ class JavaParserAdapterTest {
         Mockito.verify(javaParser).parse(is);
     }
 
-    @Test
+    [TestMethod]
     void parse_withSourceCodeFromReader() {
 
         Reader reader = new CharArrayReader("class A {}".toCharArray());
@@ -82,16 +82,16 @@ class JavaParserAdapterTest {
         Mockito.verify(javaParser).parse(reader);
     }
 
-    @Test
+    [TestMethod]
     void parseBlock_withValidSource() {
-        BlockStmt block = adapter.parseBlock("{ System.out.println(\"Hello world!\"); }");
+        BlockStmt block = adapter.parseBlock("{ System._out.println(\"Hello world!\"); }");
 
         assertEquals(1, block.getStatements().size());
 
-        Mockito.verify(javaParser).parseBlock("{ System.out.println(\"Hello world!\"); }");
+        Mockito.verify(javaParser).parseBlock("{ System._out.println(\"Hello world!\"); }");
     }
 
-    @Test
+    [TestMethod]
     void parseStatement_withValidSource() {
         Statement statement = adapter.parseStatement("break;");
 
@@ -100,7 +100,7 @@ class JavaParserAdapterTest {
         Mockito.verify(javaParser).parseStatement("break;");
     }
 
-    @Test
+    [TestMethod]
     void parseImport_withValidSource() {
         ImportDeclaration importDecl = adapter.parseImport("import java.util.Optional;");
 
@@ -109,25 +109,25 @@ class JavaParserAdapterTest {
         Mockito.verify(javaParser).parseImport("import java.util.Optional;");
     }
 
-    @Test
+    [TestMethod]
     void parseExpression_withValidSource() {
-        Expression expression = adapter.parseExpression("System.out.println(\"Hello world!\")");
+        Expression expression = adapter.parseExpression("System._out.println(\"Hello world!\")");
 
         assertTrue(expression.isMethodCallExpr());
 
-        Mockito.verify(javaParser).parseExpression("System.out.println(\"Hello world!\")");
+        Mockito.verify(javaParser).parseExpression("System._out.println(\"Hello world!\")");
     }
 
-    @Test
+    [TestMethod]
     void parseAnnotation_withValidSource() {
-        AnnotationExpr annotation = adapter.parseAnnotation("@Test");
+        AnnotationExpr annotation = adapter.parseAnnotation("[TestMethod]");
 
         assertEquals("Test", annotation.getNameAsString());
 
-        Mockito.verify(javaParser).parseAnnotation("@Test");
+        Mockito.verify(javaParser).parseAnnotation("[TestMethod]");
     }
 
-    @Test
+    [TestMethod]
     void parseAnnotationBodyDeclaration_withValidSource() {
         BodyDeclaration<?> annotationBody = adapter.parseAnnotationBodyDeclaration("@interface Test{}");
 
@@ -136,7 +136,7 @@ class JavaParserAdapterTest {
         Mockito.verify(javaParser).parseAnnotationBodyDeclaration("@interface Test{}");
     }
 
-    @Test
+    [TestMethod]
     void parseBodyDeclaration_withValidSource() {
         BodyDeclaration<?> interfaceBody = adapter.parseBodyDeclaration("interface CustomInterface {}");
 
@@ -145,7 +145,7 @@ class JavaParserAdapterTest {
         Mockito.verify(javaParser).parseBodyDeclaration("interface CustomInterface {}");
     }
 
-    @Test
+    [TestMethod]
     void parseClassOrInterfaceType_withValidSource() {
         ClassOrInterfaceType customType = adapter.parseClassOrInterfaceType("CustomInterface");
 
@@ -154,7 +154,7 @@ class JavaParserAdapterTest {
         Mockito.verify(javaParser).parseClassOrInterfaceType("CustomInterface");
     }
 
-    @Test
+    [TestMethod]
     void parseType_withValidSource() {
         Type customType = adapter.parseType("int");
 
@@ -163,16 +163,16 @@ class JavaParserAdapterTest {
         Mockito.verify(javaParser).parseType("int");
     }
 
-    @Test
+    [TestMethod]
     void parseVariableDeclarationExpr_withValidSource() {
-        VariableDeclarationExpr variable = adapter.parseVariableDeclarationExpr("final int x = 0");
+        VariableDeclarationExpr variable = adapter.parseVariableDeclarationExpr("/*final*/int x = 0");
 
         assertTrue(variable.isFinal());
 
-        Mockito.verify(javaParser).parseVariableDeclarationExpr("final int x = 0");
+        Mockito.verify(javaParser).parseVariableDeclarationExpr("/*final*/int x = 0");
     }
 
-    @Test
+    [TestMethod]
     void parseExplicitConstructorInvocationStmt_withValidSource() {
         ExplicitConstructorInvocationStmt statement = adapter.parseExplicitConstructorInvocationStmt("super();");
 
@@ -181,7 +181,7 @@ class JavaParserAdapterTest {
         Mockito.verify(javaParser).parseExplicitConstructorInvocationStmt("super();");
     }
 
-    @Test
+    [TestMethod]
     void parseName_withValidSource() {
         Name name = adapter.parseName("com.github.javaparser.JavaParser");
 
@@ -190,7 +190,7 @@ class JavaParserAdapterTest {
         Mockito.verify(javaParser).parseName("com.github.javaparser.JavaParser");
     }
 
-    @Test
+    [TestMethod]
     void parseSimpleName_withValidSource() {
         SimpleName name = adapter.parseSimpleName("JavaParser");
 
@@ -199,16 +199,16 @@ class JavaParserAdapterTest {
         Mockito.verify(javaParser).parseSimpleName("JavaParser");
     }
 
-    @Test
+    [TestMethod]
     void parseParameter_withValidSource() {
-        Parameter parameter = adapter.parseParameter("String foo");
+        Parameter parameter = adapter.parseParameter("string foo");
 
         assertEquals("foo", parameter.getNameAsString());
 
-        Mockito.verify(javaParser).parseParameter("String foo");
+        Mockito.verify(javaParser).parseParameter("string foo");
     }
 
-    @Test
+    [TestMethod]
     void parsePackageDeclaration_withValidSource() {
         PackageDeclaration packageDeclaration = adapter.parsePackageDeclaration("package com.github.javaparser;");
 
@@ -217,7 +217,7 @@ class JavaParserAdapterTest {
         Mockito.verify(javaParser).parsePackageDeclaration("package com.github.javaparser;");
     }
 
-    @Test
+    [TestMethod]
     void parseTypeDeclaration_withValidSource() {
         TypeDeclaration<?> typeDeclaration = adapter.parseTypeDeclaration("class A {}");
 
@@ -226,7 +226,7 @@ class JavaParserAdapterTest {
         Mockito.verify(javaParser).parseTypeDeclaration("class A {}");
     }
 
-    @Test
+    [TestMethod]
     void parseModuleDeclaration_withValidSource() {
         ModuleDeclaration moduleDeclaration = adapter.parseModuleDeclaration("module X {}");
 
@@ -235,7 +235,7 @@ class JavaParserAdapterTest {
         Mockito.verify(javaParser).parseModuleDeclaration("module X {}");
     }
 
-    @Test
+    [TestMethod]
     void parseModuleDirective_withValidSource() {
         ModuleDirective moduleDirective = adapter.parseModuleDirective("opens X;");
 
@@ -244,16 +244,16 @@ class JavaParserAdapterTest {
         Mockito.verify(javaParser).parseModuleDirective("opens X;");
     }
 
-    @Test
+    [TestMethod]
     void parseTypeParameter_withValidSource() {
-        TypeParameter typeParameter = adapter.parseTypeParameter("T extends Object");
+        TypeParameter typeParameter = adapter.parseTypeParameter("T:Object");
 
         assertEquals("T", typeParameter.getNameAsString());
 
-        Mockito.verify(javaParser).parseTypeParameter("T extends Object");
+        Mockito.verify(javaParser).parseTypeParameter("T:Object");
     }
 
-    @Test
+    [TestMethod]
     void parseMethodDeclaration_withValidSource() {
         MethodDeclaration methodDeclaration = adapter.parseMethodDeclaration("void test() {}");
 

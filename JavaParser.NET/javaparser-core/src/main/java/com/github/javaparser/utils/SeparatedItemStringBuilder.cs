@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,15 +27,15 @@ namespace com.github.javaparser.utils;
  */
 public class SeparatedItemStringBuilder {
 
-    private final String separator;
+    private /*final*/string separator;
 
-    private final String postfix;
+    private /*final*/string postfix;
 
     private boolean hasItems = false;
 
     private StringBuilder builder;
 
-    public SeparatedItemStringBuilder(String prefix, String separator, String postfix) {
+    public SeparatedItemStringBuilder(string prefix, string separator, string postfix) {
         builder = new StringBuilder(prefix);
         this.separator = separator;
         this.postfix = postfix;
@@ -58,10 +58,10 @@ public class SeparatedItemStringBuilder {
     }
 
     /**
-     * Convert the builder into its final string representation.
+     * Convert the builder into its /*final*/string representation.
      */
     @Override
-    public String toString() {
+    public string toString() {
         // This order of toStringing avoids debuggers from making a mess.
         return builder.toString() + postfix;
     }

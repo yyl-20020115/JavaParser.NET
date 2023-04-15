@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,7 +24,7 @@ namespace com.github.javaparser.printer.lexicalpreservation;
 
 /**
  * This class represents a group of {@link Removed} elements.
- * The {@link Removed} elements are ideally consecutive for the methods in this class to work correctly.
+ * The {@link Removed} elements are ideally consecutive for the methods _in this class to work correctly.
  *
  * This class consists of methods that calculate information to better handle the difference application for the
  * containing {@link Removed} elements.
@@ -33,11 +33,11 @@ namespace com.github.javaparser.printer.lexicalpreservation;
  *
  * @author ThLeu
  */
-final class RemovedGroup implements Iterable<Removed> {
+/*final*/class RemovedGroup implements Iterable<Removed> {
 
-    private final Integer firstElementIndex;
+    private /*final*/Integer firstElementIndex;
 
-    private final List<Removed> removedList;
+    private /*final*/List<Removed> removedList;
 
     private boolean isProcessed = false;
 
@@ -67,7 +67,7 @@ final class RemovedGroup implements Iterable<Removed> {
     /**
      * Marks the RemovedGroup as processed which indicates that it should not be processed again
      */
-    final void processed() {
+    /*final*/void processed() {
         isProcessed = true;
     }
 
@@ -76,7 +76,7 @@ final class RemovedGroup implements Iterable<Removed> {
      *
      * @return wheter the RemovedGroup was already processed
      */
-    final boolean isProcessed() {
+    /*final*/boolean isProcessed() {
         return isProcessed;
     }
 
@@ -89,7 +89,7 @@ final class RemovedGroup implements Iterable<Removed> {
      *
      * @return the last difference incex of this RemovedGroup
      */
-    final Integer getLastElementIndex() {
+    /*final*/Integer getLastElementIndex() {
         List<Integer> indicesBeingRemoved = getIndicesBeingRemoved();
         return indicesBeingRemoved.get(indicesBeingRemoved.size() - 1);
     }
@@ -99,7 +99,7 @@ final class RemovedGroup implements Iterable<Removed> {
      *
      * @return the first element of this RemovedGroup
      */
-    final Removed getFirstElement() {
+    /*final*/Removed getFirstElement() {
         return removedList.get(0);
     }
 
@@ -108,7 +108,7 @@ final class RemovedGroup implements Iterable<Removed> {
      *
      * @return the last element of this RemovedGroup
      */
-    final Removed getLastElement() {
+    /*final*/Removed getLastElement() {
         return removedList.get(removedList.size() - 1);
     }
     
@@ -116,7 +116,7 @@ final class RemovedGroup implements Iterable<Removed> {
      * Returns true if the specified element is the last element of this RemovedGroup
      *
      */
-    final boolean isLastElement(Removed element) {
+    /*final*/boolean isLastElement(Removed element) {
         return getLastElement().equals(element);
     }
 
@@ -133,17 +133,17 @@ final class RemovedGroup implements Iterable<Removed> {
      *
      * @return true if the RemovedGroup equates to a complete line
      */
-    final boolean isACompleteLine() {
+    /*final*/boolean isACompleteLine() {
         return hasOnlyWhitespace(getFirstElement(), hasOnlyWhitespaceInFrontFunction) && hasOnlyWhitespace(getLastElement(), hasOnlyWhitespaceBehindFunction);
     }
 
-    private final Function<JavaToken, Boolean> hasOnlyWhitespaceJavaTokenInFrontFunction = begin -> hasOnlyWhiteSpaceForTokenFunction(begin, token -> token.getPreviousToken());
+    private /*final*/Function<JavaToken, Boolean> hasOnlyWhitespaceJavaTokenInFrontFunction = begin -> hasOnlyWhiteSpaceForTokenFunction(begin, token -> token.getPreviousToken());
 
-    private final Function<JavaToken, Boolean> hasOnlyWhitespaceJavaTokenBehindFunction = end -> hasOnlyWhiteSpaceForTokenFunction(end, token -> token.getNextToken());
+    private /*final*/Function<JavaToken, Boolean> hasOnlyWhitespaceJavaTokenBehindFunction = end -> hasOnlyWhiteSpaceForTokenFunction(end, token -> token.getNextToken());
 
-    private final Function<TokenRange, Boolean> hasOnlyWhitespaceInFrontFunction = tokenRange -> hasOnlyWhitespaceJavaTokenInFrontFunction.apply(tokenRange.getBegin());
+    private /*final*/Function<TokenRange, Boolean> hasOnlyWhitespaceInFrontFunction = tokenRange -> hasOnlyWhitespaceJavaTokenInFrontFunction.apply(tokenRange.getBegin());
 
-    private final Function<TokenRange, Boolean> hasOnlyWhitespaceBehindFunction = tokenRange -> hasOnlyWhitespaceJavaTokenBehindFunction.apply(tokenRange.getEnd());
+    private /*final*/Function<TokenRange, Boolean> hasOnlyWhitespaceBehindFunction = tokenRange -> hasOnlyWhitespaceJavaTokenBehindFunction.apply(tokenRange.getEnd());
 
     private boolean hasOnlyWhitespace(Removed startElement, Function<TokenRange, Boolean> hasOnlyWhitespaceFunction) {
         boolean hasOnlyWhitespace = false;
@@ -178,7 +178,7 @@ final class RemovedGroup implements Iterable<Removed> {
     }
 
     /**
-     * Returns the indentation in front of this RemovedGroup if possible.
+     * Returns the indentation _in front of this RemovedGroup if possible.
      * Sometimes the first deleted element may be a line break because the <code>ConcreteSyntaxModel</code> generates a line break before the members (for example FieldDeclaration).
      * In this case a remove operation on the member will generate the deletion of the first line break.
      * It is therefore necessary to avoid taking this element into account so we're looking for the first element that isn't a line break..
@@ -186,11 +186,11 @@ final class RemovedGroup implements Iterable<Removed> {
      * class Foo {
      *     int x;
      * }
-     * If there is something else than whitespace in front this element, Optional.empty() is returned.
+     * If there is something else than whitespace _in front this element, Optional.empty() is returned.
      *
-     * @return the indentation in front of this RemovedGroup or Optional.empty()
+     * @return the indentation _in front of this RemovedGroup or Optional.empty()
      */
-    final Optional<Integer> getIndentation() {
+    /*final*/Optional<Integer> getIndentation() {
         Removed firstElement = null;
         int indentation = 0;
         // search for the first element which is not a new line
@@ -229,7 +229,7 @@ final class RemovedGroup implements Iterable<Removed> {
     }
 
     @Override
-    public final Iterator<Removed> iterator() {
+    public /*final*/Iterator<Removed> iterator() {
         return new Iterator<Removed>() {
 
             private int currentIndex = 0;

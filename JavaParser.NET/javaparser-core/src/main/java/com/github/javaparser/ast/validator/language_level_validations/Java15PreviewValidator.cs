@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,7 +25,7 @@ namespace com.github.javaparser.ast.validator.language_level_validations;
  *
  * @see <a href="https://openjdk.java.net/projects/jdk/15/">https://openjdk.java.net/projects/jdk/15/</a>
  */
-public class Java15PreviewValidator extends Java15Validator {
+public class Java15PreviewValidator:Java15Validator {
 
     public Java15PreviewValidator() {
         super();
@@ -34,7 +34,7 @@ public class Java15PreviewValidator extends Java15Validator {
         // Preview
         // remove(noSealedClasses); // Sealed Classes - first preview within Java 15 - https://openjdk.java.net/jeps/360
         // 2nd Preview
-        // Pattern Matching for instanceof - 2nd preview in Java 15 - https://openjdk.java.net/jeps/305
+        // Pattern Matching for is - 2nd preview _in Java 15 - https://openjdk.java.net/jeps/305
         remove(noPatternMatchingInstanceOf);
         {
             // Records - 2nd preview within Java 15 - https://openjdk.java.net/jeps/384

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -30,16 +30,16 @@ namespace com.github.javaparser.ast.comments;
  * 
  * @author Julio Vilmar Gesser
  */
-public final class LineComment extends Comment {
+public /*final*/class LineComment:Comment {
 
     public LineComment() {
     }
 
-    public LineComment(String content) {
+    public LineComment(string content) {
         super(content);
     }
 
-    public LineComment(int beginLine, int beginColumn, int endLine, int endColumn, String content) {
+    public LineComment(int beginLine, int beginColumn, int endLine, int endColumn, string content) {
         super(beginLine, beginColumn, endLine, endColumn, content);
     }
 

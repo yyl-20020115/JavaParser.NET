@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,12 +24,12 @@ namespace com.github.javaparser.utils;
 
 
 /**
- * A collection of Java source files and its sub-directories located in a ZIP or JAR file on the file system.
+ * A collection of Java source files and its sub-directories located _in a ZIP or JAR file on the file system.
  * Files can be parsed with a callback.
  */
 public class SourceZip {
 
-    private final Path zipPath;
+    private /*final*/Path zipPath;
 
     private ParserConfiguration parserConfiguration;
 
@@ -59,14 +59,14 @@ public class SourceZip {
     }
 
     /**
-     * Tries to parse all '.java' files in the ZIP located at this <i>SourceZip</i>'s path and returns the parse
-     * results in a list.
+     * Tries to parse all '.java' files _in the ZIP located at this <i>SourceZip</i>'s path and returns the parse
+     * results _in a list.
      *
      * @return A list of path-compilation unit pairs.
      *
      * @throws IOException If an error occurs while trying to parse the given source.
      */
-    public List<Pair<Path, ParseResult<CompilationUnit>>> parse() throws IOException {
+    public List<Pair<Path, ParseResult<CompilationUnit>>> parse(){
         Log.info("Parsing zip at \"%s\"", () -> zipPath);
         List<Pair<Path, ParseResult<CompilationUnit>>> results = new ArrayList<>();
         parse((path, result) -> results.add(new Pair<>(path, result)));
@@ -74,21 +74,21 @@ public class SourceZip {
     }
 
     /**
-     * Tries to parse all '.java' files in the ZIP located at this <i>SourceZip</i>'s path and returns the parse
-     * results in a list.
+     * Tries to parse all '.java' files _in the ZIP located at this <i>SourceZip</i>'s path and returns the parse
+     * results _in a list.
      *
      * @return A list of path-compilation unit pairs.
      *
      * @throws IOException If an error occurs while trying to parse the given source.
      */
-    public SourceZip parse(Callback callback) throws IOException {
+    public SourceZip parse(Callback callback){
         Log.info("Parsing zip at \"%s\"", () -> zipPath);
         JavaParser javaParser = new JavaParser(parserConfiguration);
         try (ZipFile zipFile = new ZipFile(zipPath.toFile())) {
             for (ZipEntry entry : Collections.list(zipFile.entries())) {
                 if (!entry.isDirectory() && entry.getName().endsWith(".java")) {
                     Log.info("Parsing zip entry \"%s\"", () -> entry.getName());
-                    final ParseResult<CompilationUnit> result = javaParser.parse(COMPILATION_UNIT, provider(zipFile.getInputStream(entry)));
+                    /*final*/ParseResult<CompilationUnit> result = javaParser.parse(COMPILATION_UNIT, provider(zipFile.getInputStream(entry)));
                     callback.process(Paths.get(entry.getName()), result);
                 }
             }
@@ -105,7 +105,7 @@ public class SourceZip {
         /**
          * Process the given parse result.
          *
-         * @param relativeZipEntryPath The relative path of the entry in the ZIP file that was parsed.
+         * @param relativeZipEntryPath The relative path of the entry _in the ZIP file that was parsed.
          * @param result The parse result of file located at <i>absolutePath</i>.
          */
         void process(Path relativeZipEntryPath, ParseResult<CompilationUnit> result);

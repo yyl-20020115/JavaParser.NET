@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -29,9 +29,9 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
 
 	private static Pattern RTRIM = Pattern.compile("\\s+$");
 
-    protected final PrinterConfiguration configuration;
+    protected /*final*/PrinterConfiguration configuration;
 
-    protected final SourcePrinter printer;
+    protected /*final*/SourcePrinter printer;
 
     public DefaultPrettyPrinterVisitor(PrinterConfiguration configuration) {
         this(configuration, new SourcePrinter(configuration));
@@ -43,35 +43,35 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return printer.toString();
     }
 
-    protected void printModifiers(final NodeList<Modifier> modifiers) {
+    protected void printModifiers(/*final*/NodeList<Modifier> modifiers) {
         if (modifiers.size() > 0) {
             printer.print(modifiers.stream().map(Modifier::getKeyword).map(Modifier.Keyword::asString).collect(joining(" ")) + " ");
         }
     }
 
-    protected void printMembers(final NodeList<BodyDeclaration<?>> members, final Void arg) {
-        for (final BodyDeclaration<?> member : members) {
+    protected void printMembers(/*final*/NodeList<BodyDeclaration<?>> members, /*final*/Void arg) {
+        for (/*final*/BodyDeclaration<?> member : members) {
             printer.println();
             member.accept(this, arg);
             printer.println();
         }
     }
 
-    protected void printMemberAnnotations(final NodeList<AnnotationExpr> annotations, final Void arg) {
+    protected void printMemberAnnotations(/*final*/NodeList<AnnotationExpr> annotations, /*final*/Void arg) {
         if (annotations.isEmpty()) {
             return;
         }
-        for (final AnnotationExpr a : annotations) {
+        for (/*final*/AnnotationExpr a : annotations) {
             a.accept(this, arg);
             printer.println();
         }
     }
 
-    protected void printAnnotations(final NodeList<AnnotationExpr> annotations, boolean prefixWithASpace, final Void arg) {
+    protected void printAnnotations(/*final*/NodeList<AnnotationExpr> annotations, boolean prefixWithASpace, /*final*/Void arg) {
         if (annotations.isEmpty()) {
             return;
         }
@@ -84,12 +84,12 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
         }
     }
 
-    protected void printTypeArgs(final NodeWithTypeArguments<?> nodeWithTypeArguments, final Void arg) {
+    protected void printTypeArgs(/*final*/NodeWithTypeArguments<?> nodeWithTypeArguments, /*final*/Void arg) {
         NodeList<Type> typeArguments = nodeWithTypeArguments.getTypeArguments().orElse(null);
         if (!isNullOrEmpty(typeArguments)) {
             printer.print("<");
-            for (final Iterator<Type> i = typeArguments.iterator(); i.hasNext(); ) {
-                final Type t = i.next();
+            for (/*final*/Iterator<Type> i = typeArguments.iterator(); i.hasNext(); ) {
+                /*final*/Type t = i.next();
                 t.accept(this, arg);
                 if (i.hasNext()) {
                     printer.print(", ");
@@ -99,11 +99,11 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
         }
     }
 
-    protected void printTypeParameters(final NodeList<TypeParameter> args, final Void arg) {
+    protected void printTypeParameters(/*final*/NodeList<TypeParameter> args, /*final*/Void arg) {
         if (!isNullOrEmpty(args)) {
             printer.print("<");
-            for (final Iterator<TypeParameter> i = args.iterator(); i.hasNext(); ) {
-                final TypeParameter t = i.next();
+            for (/*final*/Iterator<TypeParameter> i = args.iterator(); i.hasNext(); ) {
+                /*final*/TypeParameter t = i.next();
                 t.accept(this, arg);
                 if (i.hasNext()) {
                     printer.print(", ");
@@ -113,15 +113,15 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
         }
     }
 
-    protected void printArguments(final NodeList<Expression> args, final Void arg) {
+    protected void printArguments(/*final*/NodeList<Expression> args, /*final*/Void arg) {
         printer.print("(");
         if (!isNullOrEmpty(args)) {
             boolean columnAlignParameters = (args.size() > 1) && getOption(ConfigOption.COLUMN_ALIGN_PARAMETERS).isPresent();
             if (columnAlignParameters) {
                 printer.indentWithAlignTo(printer.getCursor().column);
             }
-            for (final Iterator<Expression> i = args.iterator(); i.hasNext(); ) {
-                final Expression e = i.next();
+            for (/*final*/Iterator<Expression> i = args.iterator(); i.hasNext(); ) {
+                /*final*/Expression e = i.next();
                 e.accept(this, arg);
                 if (i.hasNext()) {
                     printer.print(",");
@@ -139,11 +139,11 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
         printer.print(")");
     }
 
-    protected void printPrePostFixOptionalList(final NodeList<? extends Visitable> args, final Void arg, String prefix, String separator, String postfix) {
+    protected void printPrePostFixOptionalList(/*final*/NodeList<?:Visitable> args, /*final*/Void arg, string prefix, string separator, string postfix) {
         if (!args.isEmpty()) {
             printer.print(prefix);
-            for (final Iterator<? extends Visitable> i = args.iterator(); i.hasNext(); ) {
-                final Visitable v = i.next();
+            for (/*final*/Iterator<?:Visitable> i = args.iterator(); i.hasNext(); ) {
+                /*final*/Visitable v = i.next();
                 v.accept(this, arg);
                 if (i.hasNext()) {
                     printer.print(separator);
@@ -153,11 +153,11 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
         }
     }
 
-    protected void printPrePostFixRequiredList(final NodeList<? extends Visitable> args, final Void arg, String prefix, String separator, String postfix) {
+    protected void printPrePostFixRequiredList(/*final*/NodeList<?:Visitable> args, /*final*/Void arg, string prefix, string separator, string postfix) {
         printer.print(prefix);
         if (!args.isEmpty()) {
-            for (final Iterator<? extends Visitable> i = args.iterator(); i.hasNext(); ) {
-                final Visitable v = i.next();
+            for (/*final*/Iterator<?:Visitable> i = args.iterator(); i.hasNext(); ) {
+                /*final*/Visitable v = i.next();
                 v.accept(this, arg);
                 if (i.hasNext()) {
                     printer.print(separator);
@@ -167,12 +167,12 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
         printer.print(postfix);
     }
 
-    protected void printComment(final Optional<Comment> comment, final Void arg) {
+    protected void printComment(/*final*/Optional<Comment> comment, /*final*/Void arg) {
         comment.ifPresent(c -> c.accept(this, arg));
     }
 
     @Override
-    public void visit(final CompilationUnit n, final Void arg) {
+    public void visit(/*final*/CompilationUnit n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         if (n.getParsed() == UNPARSABLE) {
@@ -185,7 +185,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
 
         printImports(n.getImports(), arg);
 
-        for (final Iterator<TypeDeclaration<?>> i = n.getTypes().iterator(); i.hasNext(); ) {
+        for (/*final*/Iterator<TypeDeclaration<?>> i = n.getTypes().iterator(); i.hasNext(); ) {
             i.next().accept(this, arg);
             printer.println();
             if (i.hasNext()) {
@@ -197,7 +197,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final PackageDeclaration n, final Void arg) {
+    public void visit(/*final*/PackageDeclaration n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printMemberAnnotations(n.getAnnotations(), arg);
@@ -209,7 +209,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final NameExpr n, final Void arg) {
+    public void visit(/*final*/NameExpr n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         n.getName().accept(this, arg);
@@ -217,7 +217,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final Name n, final Void arg) {
+    public void visit(/*final*/Name n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         if (n.getQualifier().isPresent()) {
@@ -236,7 +236,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final ClassOrInterfaceDeclaration n, final Void arg) {
+    public void visit(/*final*/ClassOrInterfaceDeclaration n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printMemberAnnotations(n.getAnnotations(), arg);
@@ -249,9 +249,9 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
         n.getName().accept(this, arg);
         printTypeParameters(n.getTypeParameters(), arg);
         if (!n.getExtendedTypes().isEmpty()) {
-            printer.print(" extends ");
-            for (final Iterator<ClassOrInterfaceType> i = n.getExtendedTypes().iterator(); i.hasNext(); ) {
-                final ClassOrInterfaceType c = i.next();
+            printer.print(":");
+            for (/*final*/Iterator<ClassOrInterfaceType> i = n.getExtendedTypes().iterator(); i.hasNext(); ) {
+                /*final*/ClassOrInterfaceType c = i.next();
                 c.accept(this, arg);
                 if (i.hasNext()) {
                     printer.print(", ");
@@ -260,8 +260,8 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
         }
         if (!n.getImplementedTypes().isEmpty()) {
             printer.print(" implements ");
-            for (final Iterator<ClassOrInterfaceType> i = n.getImplementedTypes().iterator(); i.hasNext(); ) {
-                final ClassOrInterfaceType c = i.next();
+            for (/*final*/Iterator<ClassOrInterfaceType> i = n.getImplementedTypes().iterator(); i.hasNext(); ) {
+                /*final*/ClassOrInterfaceType c = i.next();
                 c.accept(this, arg);
                 if (i.hasNext()) {
                     printer.print(", ");
@@ -289,8 +289,8 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
         printTypeParameters(n.getTypeParameters(), arg);
         printer.print("(");
         if (!isNullOrEmpty(n.getParameters())) {
-            for (final Iterator<Parameter> i = n.getParameters().iterator(); i.hasNext(); ) {
-                final Parameter p = i.next();
+            for (/*final*/Iterator<Parameter> i = n.getParameters().iterator(); i.hasNext(); ) {
+                /*final*/Parameter p = i.next();
                 p.accept(this, arg);
                 if (i.hasNext()) {
                     printer.print(", ");
@@ -300,8 +300,8 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
         printer.print(")");
         if (!n.getImplementedTypes().isEmpty()) {
             printer.print(" implements ");
-            for (final Iterator<ClassOrInterfaceType> i = n.getImplementedTypes().iterator(); i.hasNext(); ) {
-                final ClassOrInterfaceType c = i.next();
+            for (/*final*/Iterator<ClassOrInterfaceType> i = n.getImplementedTypes().iterator(); i.hasNext(); ) {
+                /*final*/ClassOrInterfaceType c = i.next();
                 c.accept(this, arg);
                 if (i.hasNext()) {
                     printer.print(", ");
@@ -319,15 +319,15 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final JavadocComment n, final Void arg) {
+    public void visit(/*final*/JavadocComment n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         if (getOption(ConfigOption.PRINT_COMMENTS).isPresent() && getOption(ConfigOption.PRINT_JAVADOC).isPresent()) {
             printer.println(n.getHeader());
-            final String commentContent = normalizeEolInTextBlock(n.getContent(), getOption(ConfigOption.END_OF_LINE_CHARACTER).get().asString());
+            /*final*/string commentContent = normalizeEolInTextBlock(n.getContent(), getOption(ConfigOption.END_OF_LINE_CHARACTER).get().asString());
             String[] lines = commentContent.split("\\R");
             List<String> strippedLines = new ArrayList<>();
-            for (String line : lines) {
-                final String trimmedLine = line.trim();
+            for (string line : lines) {
+                /*final*/string trimmedLine = line.trim();
                 if (trimmedLine.startsWith("*")) {
                     line = trimmedLine.substring(1);
                 }
@@ -337,7 +337,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
             boolean skippingLeadingEmptyLines = true;
             boolean prependEmptyLine = false;
             boolean prependSpace = strippedLines.stream().anyMatch(line -> !line.isEmpty() && !line.startsWith(" "));
-            for (String line : strippedLines) {
+            for (string line : strippedLines) {
                 if (line.isEmpty()) {
                     if (!skippingLeadingEmptyLines) {
                         prependEmptyLine = true;
@@ -360,7 +360,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final ClassOrInterfaceType n, final Void arg) {
+    public void visit(/*final*/ClassOrInterfaceType n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         if (n.getScope().isPresent()) {
@@ -377,15 +377,15 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final TypeParameter n, final Void arg) {
+    public void visit(/*final*/TypeParameter n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printAnnotations(n.getAnnotations(), false, arg);
         n.getName().accept(this, arg);
         if (!isNullOrEmpty(n.getTypeBound())) {
-            printer.print(" extends ");
-            for (final Iterator<ClassOrInterfaceType> i = n.getTypeBound().iterator(); i.hasNext(); ) {
-                final ClassOrInterfaceType c = i.next();
+            printer.print(":");
+            for (/*final*/Iterator<ClassOrInterfaceType> i = n.getTypeBound().iterator(); i.hasNext(); ) {
+                /*final*/ClassOrInterfaceType c = i.next();
                 c.accept(this, arg);
                 if (i.hasNext()) {
                     printer.print(" & ");
@@ -395,7 +395,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final PrimitiveType n, final Void arg) {
+    public void visit(/*final*/PrimitiveType n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printAnnotations(n.getAnnotations(), true, arg);
@@ -403,11 +403,11 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final ArrayType n, final Void arg) {
-        final List<ArrayType> arrayTypeBuffer = new LinkedList<>();
+    public void visit(/*final*/ArrayType n, /*final*/Void arg) {
+        /*final*/List<ArrayType> arrayTypeBuffer = new LinkedList<>();
         Type type = n;
-        while (type instanceof ArrayType) {
-            final ArrayType arrayType = (ArrayType) type;
+        while (type is ArrayType) {
+            /*final*/ArrayType arrayType = (ArrayType) type;
             arrayTypeBuffer.add(arrayType);
             type = arrayType.getComponentType();
         }
@@ -419,7 +419,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final ArrayCreationLevel n, final Void arg) {
+    public void visit(/*final*/ArrayCreationLevel n, /*final*/Void arg) {
         printAnnotations(n.getAnnotations(), true, arg);
         printer.print("[");
         if (n.getDimension().isPresent()) {
@@ -429,7 +429,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final IntersectionType n, final Void arg) {
+    public void visit(/*final*/IntersectionType n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printAnnotations(n.getAnnotations(), false, arg);
@@ -445,7 +445,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final UnionType n, final Void arg) {
+    public void visit(/*final*/UnionType n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printAnnotations(n.getAnnotations(), true, arg);
@@ -461,13 +461,13 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final WildcardType n, final Void arg) {
+    public void visit(/*final*/WildcardType n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printAnnotations(n.getAnnotations(), false, arg);
         printer.print("?");
         if (n.getExtendedType().isPresent()) {
-            printer.print(" extends ");
+            printer.print(":");
             n.getExtendedType().get().accept(this, arg);
         }
         if (n.getSuperType().isPresent()) {
@@ -477,12 +477,12 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final UnknownType n, final Void arg) {
+    public void visit(/*final*/UnknownType n, /*final*/Void arg) {
         // Nothing to print
     }
 
     @Override
-    public void visit(final FieldDeclaration n, final Void arg) {
+    public void visit(/*final*/FieldDeclaration n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printMemberAnnotations(n.getAnnotations(), arg);
@@ -495,8 +495,8 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
             }
         }
         printer.print(" ");
-        for (final Iterator<VariableDeclarator> i = n.getVariables().iterator(); i.hasNext(); ) {
-            final VariableDeclarator var = i.next();
+        for (/*final*/Iterator<VariableDeclarator> i = n.getVariables().iterator(); i.hasNext(); ) {
+            /*final*/VariableDeclarator var = i.next();
             var.accept(this, arg);
             if (i.hasNext()) {
                 printer.print(", ");
@@ -506,12 +506,12 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final VariableDeclarator n, final Void arg) {
+    public void visit(/*final*/VariableDeclarator n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         n.getName().accept(this, arg);
         n.findAncestor(NodeWithVariables.class).ifPresent(ancestor -> ((NodeWithVariables<?>) ancestor).getMaximumCommonType().ifPresent(commonType -> {
-            final Type type = n.getType();
+            /*final*/Type type = n.getType();
             ArrayType arrayType = null;
             for (int i = commonType.getArrayLevel(); i < type.getArrayLevel(); i++) {
                 if (arrayType == null) {
@@ -530,14 +530,14 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final ArrayInitializerExpr n, final Void arg) {
+    public void visit(/*final*/ArrayInitializerExpr n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printer.print("{");
         if (!isNullOrEmpty(n.getValues())) {
             printer.print(" ");
-            for (final Iterator<Expression> i = n.getValues().iterator(); i.hasNext(); ) {
-                final Expression expr = i.next();
+            for (/*final*/Iterator<Expression> i = n.getValues().iterator(); i.hasNext(); ) {
+                /*final*/Expression expr = i.next();
                 expr.accept(this, arg);
                 if (i.hasNext()) {
                     printer.print(", ");
@@ -550,7 +550,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final VoidType n, final Void arg) {
+    public void visit(/*final*/VoidType n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printAnnotations(n.getAnnotations(), false, arg);
@@ -558,7 +558,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final VarType n, final Void arg) {
+    public void visit(/*final*/VarType n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printAnnotations(n.getAnnotations(), false, arg);
@@ -572,7 +572,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final ArrayAccessExpr n, final Void arg) {
+    public void visit(/*final*/ArrayAccessExpr n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         n.getName().accept(this, arg);
@@ -582,7 +582,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final ArrayCreationExpr n, final Void arg) {
+    public void visit(/*final*/ArrayCreationExpr n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printer.print("new ");
@@ -597,7 +597,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final AssignExpr n, final Void arg) {
+    public void visit(/*final*/AssignExpr n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         n.getTarget().accept(this, arg);
@@ -612,10 +612,10 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     /**
-     * work in progress for issue-545
+     * work _in progress for issue-545
      */
     @Override
-    public void visit(final BinaryExpr n, final Void arg) {
+    public void visit(/*final*/BinaryExpr n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         n.getLeft().accept(this, arg);
@@ -630,7 +630,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final CastExpr n, final Void arg) {
+    public void visit(/*final*/CastExpr n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printer.print("(");
@@ -640,7 +640,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final ClassExpr n, final Void arg) {
+    public void visit(/*final*/ClassExpr n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         n.getType().accept(this, arg);
@@ -648,7 +648,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final ConditionalExpr n, final Void arg) {
+    public void visit(/*final*/ConditionalExpr n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         n.getCondition().accept(this, arg);
@@ -659,7 +659,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final EnclosedExpr n, final Void arg) {
+    public void visit(/*final*/EnclosedExpr n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printer.print("(");
@@ -668,7 +668,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final FieldAccessExpr n, final Void arg) {
+    public void visit(/*final*/FieldAccessExpr n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         n.getScope().accept(this, arg);
@@ -677,11 +677,11 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final InstanceOfExpr n, final Void arg) {
+    public void visit(/*final*/InstanceOfExpr n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         n.getExpression().accept(this, arg);
-        printer.print(" instanceof ");
+        printer.print(" is ");
         if (n.getPattern().isPresent()) {
             n.getPattern().get().accept(this, arg);
         } else {
@@ -690,7 +690,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final PatternExpr n, final Void arg) {
+    public void visit(/*final*/PatternExpr n, /*final*/Void arg) {
         printModifiers(n.getModifiers());
         n.getType().accept(this, arg);
         printer.print(" ");
@@ -698,7 +698,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final CharLiteralExpr n, final Void arg) {
+    public void visit(/*final*/CharLiteralExpr n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printer.print("'");
@@ -707,28 +707,28 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final DoubleLiteralExpr n, final Void arg) {
+    public void visit(/*final*/DoubleLiteralExpr n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printer.print(n.getValue());
     }
 
     @Override
-    public void visit(final IntegerLiteralExpr n, final Void arg) {
+    public void visit(/*final*/IntegerLiteralExpr n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printer.print(n.getValue());
     }
 
     @Override
-    public void visit(final LongLiteralExpr n, final Void arg) {
+    public void visit(/*final*/LongLiteralExpr n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printer.print(n.getValue());
     }
 
     @Override
-    public void visit(final StringLiteralExpr n, final Void arg) {
+    public void visit(/*final*/StringLiteralExpr n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printer.print("\"");
@@ -737,7 +737,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final TextBlockLiteralExpr n, final Void arg) {
+    public void visit(/*final*/TextBlockLiteralExpr n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printer.print("\"\"\"");
@@ -751,21 +751,21 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final BooleanLiteralExpr n, final Void arg) {
+    public void visit(/*final*/BooleanLiteralExpr n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printer.print(String.valueOf(n.getValue()));
     }
 
     @Override
-    public void visit(final NullLiteralExpr n, final Void arg) {
+    public void visit(/*final*/NullLiteralExpr n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printer.print("null");
     }
 
     @Override
-    public void visit(final ThisExpr n, final Void arg) {
+    public void visit(/*final*/ThisExpr n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         if (n.getTypeName().isPresent()) {
@@ -776,7 +776,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final SuperExpr n, final Void arg) {
+    public void visit(/*final*/SuperExpr n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         if (n.getTypeName().isPresent()) {
@@ -787,13 +787,13 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final MethodCallExpr n, final Void arg) {
+    public void visit(/*final*/MethodCallExpr n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         // determine whether we do reindenting for aligmnent at all
         // - is it enabled?
-        // - are we in a statement where we want the alignment?
-        // - are we not directly in the argument list of a method call expression?
+        // - are we _in a statement where we want the alignment?
+        // - are we not directly _in the argument list of a method call expression?
         AtomicBoolean columnAlignFirstMethodChain = new AtomicBoolean();
         if (getOption(ConfigOption.COLUMN_ALIGN_FIRST_METHOD_CHAIN).isPresent()) {
             // pick the kind of expressions where vertically aligning method calls is okay.
@@ -805,7 +805,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
                     c = p.get();
                     p = c.getParentNode();
                 }
-                // check if the parent is a method call and thus we are in an argument list
+                // check if the parent is a method call and thus we are _in an argument list
                 columnAlignFirstMethodChain.set(!p.filter(MethodCallExpr.class::isInstance).isPresent());
             }
         }
@@ -816,13 +816,13 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
             Node node = n;
             while (node.getParentNode().filter(NodeWithTraversableScope.class::isInstance).map(NodeWithTraversableScope.class::cast).flatMap(NodeWithTraversableScope::traverseScope).map(node::equals).orElse(false)) {
                 node = node.getParentNode().orElseThrow(AssertionError::new);
-                if (node instanceof MethodCallExpr) {
+                if (node is MethodCallExpr) {
                     lastMethodInCallChain.set(false);
                     break;
                 }
             }
         }
-        // search whether there is a method call with scope in the scope already
+        // search whether there is a method call with scope _in the scope already
         // this means that we probably started reindenting for alignment there
         AtomicBoolean methodCallWithScopeInScope = new AtomicBoolean();
         if (columnAlignFirstMethodChain.get()) {
@@ -837,23 +837,23 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
             }
         }
         // we have a scope
-        // this means we are not the first method in the chain
+        // this means we are not the first method _in the chain
         n.getScope().ifPresent(scope -> {
             scope.accept(this, arg);
             if (columnAlignFirstMethodChain.get()) {
                 if (methodCallWithScopeInScope.get()) {
                     /* We're a method call on the result of something (method call, property access, ...) that is not stand alone,
                        and not the first one with scope, like:
-                       we're x() in a.b().x(), or in a=b().c[15].d.e().x().
-                       That means that the "else" has been executed by one of the methods in the scope chain, so that the alignment
+                       we're x() _in a.b().x(), or _in a=b().c[15].d.e().x().
+                       That means that the "else" has been executed by one of the methods _in the scope chain, so that the alignment
                        is set to the "." of that method.
                        That means we will align to that "." when we start a new line: */
                     printer.println();
                 } else if (!lastMethodInCallChain.get()) {
-                    /* We're the first method call on the result of something in the chain (method call, property access, ...),
-                       but we are not at the same time the last method call in that chain, like:
-                       we're x() in a().x().y(), or in Long.x().y.z(). That means we get to dictate the indent of following method
-                       calls in this chain by setting the cursor to where we are now: just before the "."
+                    /* We're the first method call on the result of something _in the chain (method call, property access, ...),
+                       but we are not at the same time the last method call _in that chain, like:
+                       we're x() _in a().x().y(), or _in Long.x().y.z(). That means we get to dictate the indent of following method
+                       calls _in this chain by setting the cursor to where we are now: just before the "."
                        that start this method call. */
                     printer.reindentWithAlignToCursor();
                 }
@@ -872,7 +872,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final ObjectCreationExpr n, final Void arg) {
+    public void visit(/*final*/ObjectCreationExpr n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         if (n.hasScope()) {
@@ -896,7 +896,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final UnaryExpr n, final Void arg) {
+    public void visit(/*final*/UnaryExpr n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         if (n.getOperator().isPrefix()) {
@@ -909,7 +909,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final ConstructorDeclaration n, final Void arg) {
+    public void visit(/*final*/ConstructorDeclaration n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printMemberAnnotations(n.getAnnotations(), arg);
@@ -927,8 +927,8 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
             }
         });
         if (!n.getParameters().isEmpty()) {
-            for (final Iterator<Parameter> i = n.getParameters().iterator(); i.hasNext(); ) {
-                final Parameter p = i.next();
+            for (/*final*/Iterator<Parameter> i = n.getParameters().iterator(); i.hasNext(); ) {
+                /*final*/Parameter p = i.next();
                 p.accept(this, arg);
                 if (i.hasNext()) {
                     printer.print(", ");
@@ -938,8 +938,8 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
         printer.print(")");
         if (!isNullOrEmpty(n.getThrownExceptions())) {
             printer.print(" throws ");
-            for (final Iterator<ReferenceType> i = n.getThrownExceptions().iterator(); i.hasNext(); ) {
-                final ReferenceType name = i.next();
+            for (/*final*/Iterator<ReferenceType> i = n.getThrownExceptions().iterator(); i.hasNext(); ) {
+                /*final*/ReferenceType name = i.next();
                 name.accept(this, arg);
                 if (i.hasNext()) {
                     printer.print(", ");
@@ -951,7 +951,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final CompactConstructorDeclaration n, final Void arg) {
+    public void visit(/*final*/CompactConstructorDeclaration n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printMemberAnnotations(n.getAnnotations(), arg);
@@ -963,8 +963,8 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
         n.getName().accept(this, arg);
         if (!isNullOrEmpty(n.getThrownExceptions())) {
             printer.print(" throws ");
-            for (final Iterator<ReferenceType> i = n.getThrownExceptions().iterator(); i.hasNext(); ) {
-                final ReferenceType name = i.next();
+            for (/*final*/Iterator<ReferenceType> i = n.getThrownExceptions().iterator(); i.hasNext(); ) {
+                /*final*/ReferenceType name = i.next();
                 name.accept(this, arg);
                 if (i.hasNext()) {
                     printer.print(", ");
@@ -976,7 +976,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final MethodDeclaration n, final Void arg) {
+    public void visit(/*final*/MethodDeclaration n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printMemberAnnotations(n.getAnnotations(), arg);
@@ -996,8 +996,8 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
             }
         });
         if (!isNullOrEmpty(n.getParameters())) {
-            for (final Iterator<Parameter> i = n.getParameters().iterator(); i.hasNext(); ) {
-                final Parameter p = i.next();
+            for (/*final*/Iterator<Parameter> i = n.getParameters().iterator(); i.hasNext(); ) {
+                /*final*/Parameter p = i.next();
                 p.accept(this, arg);
                 if (i.hasNext()) {
                     printer.print(", ");
@@ -1007,8 +1007,8 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
         printer.print(")");
         if (!isNullOrEmpty(n.getThrownExceptions())) {
             printer.print(" throws ");
-            for (final Iterator<ReferenceType> i = n.getThrownExceptions().iterator(); i.hasNext(); ) {
-                final ReferenceType name = i.next();
+            for (/*final*/Iterator<ReferenceType> i = n.getThrownExceptions().iterator(); i.hasNext(); ) {
+                /*final*/ReferenceType name = i.next();
                 name.accept(this, arg);
                 if (i.hasNext()) {
                     printer.print(", ");
@@ -1024,7 +1024,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final Parameter n, final Void arg) {
+    public void visit(/*final*/Parameter n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printAnnotations(n.getAnnotations(), false, arg);
@@ -1034,14 +1034,14 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
             printAnnotations(n.getVarArgsAnnotations(), false, arg);
             printer.print("...");
         }
-        if (!(n.getType() instanceof UnknownType)) {
+        if (!(n.getType() is UnknownType)) {
             printer.print(" ");
         }
         n.getName().accept(this, arg);
     }
 
     @Override
-    public void visit(final ReceiverParameter n, final Void arg) {
+    public void visit(/*final*/ReceiverParameter n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printAnnotations(n.getAnnotations(), false, arg);
@@ -1051,7 +1051,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final ExplicitConstructorInvocationStmt n, final Void arg) {
+    public void visit(/*final*/ExplicitConstructorInvocationStmt n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         if (n.isThis()) {
@@ -1070,7 +1070,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final VariableDeclarationExpr n, final Void arg) {
+    public void visit(/*final*/VariableDeclarationExpr n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         if (n.getParentNode().map(ExpressionStmt.class::isInstance).orElse(false)) {
@@ -1083,8 +1083,8 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
             n.getMaximumCommonType().ifPresent(t -> t.accept(this, arg));
         }
         printer.print(" ");
-        for (final Iterator<VariableDeclarator> i = n.getVariables().iterator(); i.hasNext(); ) {
-            final VariableDeclarator v = i.next();
+        for (/*final*/Iterator<VariableDeclarator> i = n.getVariables().iterator(); i.hasNext(); ) {
+            /*final*/VariableDeclarator v = i.next();
             v.accept(this, arg);
             if (i.hasNext()) {
                 printer.print(", ");
@@ -1093,21 +1093,21 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final LocalClassDeclarationStmt n, final Void arg) {
+    public void visit(/*final*/LocalClassDeclarationStmt n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         n.getClassDeclaration().accept(this, arg);
     }
 
     @Override
-    public void visit(final LocalRecordDeclarationStmt n, final Void arg) {
+    public void visit(/*final*/LocalRecordDeclarationStmt n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         n.getRecordDeclaration().accept(this, arg);
     }
 
     @Override
-    public void visit(final AssertStmt n, final Void arg) {
+    public void visit(/*final*/AssertStmt n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printer.print("assert ");
@@ -1120,13 +1120,13 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final BlockStmt n, final Void arg) {
+    public void visit(/*final*/BlockStmt n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printer.println("{");
         if (n.getStatements() != null) {
             printer.indent();
-            for (final Statement s : n.getStatements()) {
+            for (/*final*/Statement s : n.getStatements()) {
                 s.accept(this, arg);
                 printer.println();
             }
@@ -1137,7 +1137,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final LabeledStmt n, final Void arg) {
+    public void visit(/*final*/LabeledStmt n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         n.getLabel().accept(this, arg);
@@ -1146,14 +1146,14 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final EmptyStmt n, final Void arg) {
+    public void visit(/*final*/EmptyStmt n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printer.print(";");
     }
 
     @Override
-    public void visit(final ExpressionStmt n, final Void arg) {
+    public void visit(/*final*/ExpressionStmt n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         n.getExpression().accept(this, arg);
@@ -1161,7 +1161,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final SwitchStmt n, final Void arg) {
+    public void visit(/*final*/SwitchStmt n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printSwitchNode(n, arg);
     }
@@ -1179,7 +1179,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
         printer.println(") {");
         if (n.getEntries() != null) {
             indentIf(getOption(ConfigOption.INDENT_CASE_IN_SWITCH).isPresent());
-            for (final SwitchEntry e : n.getEntries()) {
+            for (/*final*/SwitchEntry e : n.getEntries()) {
                 e.accept(this, arg);
             }
             unindentIf(getOption(ConfigOption.INDENT_CASE_IN_SWITCH).isPresent());
@@ -1188,17 +1188,17 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final SwitchEntry n, final Void arg) {
+    public void visit(/*final*/SwitchEntry n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         // old/new switch
-        final String separator = (n.getType() == SwitchEntry.Type.STATEMENT_GROUP) ? ":" : " ->";
+        /*final*/string separator = (n.getType() == SwitchEntry.Type.STATEMENT_GROUP) ? ":" : " ->";
         if (isNullOrEmpty(n.getLabels())) {
             printer.print("default" + separator);
         } else {
             printer.print("case ");
-            for (final Iterator<Expression> i = n.getLabels().iterator(); i.hasNext(); ) {
-                final Expression label = i.next();
+            for (/*final*/Iterator<Expression> i = n.getLabels().iterator(); i.hasNext(); ) {
+                /*final*/Expression label = i.next();
                 label.accept(this, arg);
                 if (i.hasNext()) {
                     printer.print(", ");
@@ -1209,7 +1209,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
         printer.println();
         printer.indent();
         if (n.getStatements() != null) {
-            for (final Statement s : n.getStatements()) {
+            for (/*final*/Statement s : n.getStatements()) {
                 s.accept(this, arg);
                 printer.println();
             }
@@ -1218,7 +1218,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final BreakStmt n, final Void arg) {
+    public void visit(/*final*/BreakStmt n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printer.print("break");
@@ -1227,7 +1227,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final YieldStmt n, final Void arg) {
+    public void visit(/*final*/YieldStmt n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printer.print("yield ");
@@ -1236,7 +1236,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final ReturnStmt n, final Void arg) {
+    public void visit(/*final*/ReturnStmt n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printer.print("return");
@@ -1248,7 +1248,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final EnumDeclaration n, final Void arg) {
+    public void visit(/*final*/EnumDeclaration n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printMemberAnnotations(n.getAnnotations(), arg);
@@ -1257,8 +1257,8 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
         n.getName().accept(this, arg);
         if (!n.getImplementedTypes().isEmpty()) {
             printer.print(" implements ");
-            for (final Iterator<ClassOrInterfaceType> i = n.getImplementedTypes().iterator(); i.hasNext(); ) {
-                final ClassOrInterfaceType c = i.next();
+            for (/*final*/Iterator<ClassOrInterfaceType> i = n.getImplementedTypes().iterator(); i.hasNext(); ) {
+                /*final*/ClassOrInterfaceType c = i.next();
                 c.accept(this, arg);
                 if (i.hasNext()) {
                     printer.print(", ");
@@ -1268,12 +1268,12 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
         printer.println(" {");
         printer.indent();
         if (n.getEntries().isNonEmpty()) {
-            final boolean alignVertically = // Either we hit the constant amount limit in the configurations, or...
+            /*final*/boolean alignVertically = // Either we hit the constant amount limit _in the configurations, or...
             n.getEntries().size() > getOption(ConfigOption.MAX_ENUM_CONSTANTS_TO_ALIGN_HORIZONTALLY).get().asInteger() || // any of the constants has a comment.
             n.getEntries().stream().anyMatch(e -> e.getComment().isPresent());
             printer.println();
-            for (final Iterator<EnumConstantDeclaration> i = n.getEntries().iterator(); i.hasNext(); ) {
-                final EnumConstantDeclaration e = i.next();
+            for (/*final*/Iterator<EnumConstantDeclaration> i = n.getEntries().iterator(); i.hasNext(); ) {
+                /*final*/EnumConstantDeclaration e = i.next();
                 e.accept(this, arg);
                 if (i.hasNext()) {
                     if (alignVertically) {
@@ -1297,7 +1297,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final EnumConstantDeclaration n, final Void arg) {
+    public void visit(/*final*/EnumConstantDeclaration n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printMemberAnnotations(n.getAnnotations(), arg);
@@ -1315,7 +1315,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final InitializerDeclaration n, final Void arg) {
+    public void visit(/*final*/InitializerDeclaration n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         if (n.isStatic()) {
@@ -1325,12 +1325,12 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final IfStmt n, final Void arg) {
+    public void visit(/*final*/IfStmt n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printer.print("if (");
         n.getCondition().accept(this, arg);
-        final boolean thenBlock = n.getThenStmt() instanceof BlockStmt;
+        /*final*/boolean thenBlock = n.getThenStmt() is BlockStmt;
         if (// block statement should start on the same line
         thenBlock)
             printer.print(") ");
@@ -1346,8 +1346,8 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
                 printer.print(" ");
             else
                 printer.println();
-            final boolean elseIf = n.getElseStmt().orElse(null) instanceof IfStmt;
-            final boolean elseBlock = n.getElseStmt().orElse(null) instanceof BlockStmt;
+            /*final*/boolean elseIf = n.getElseStmt().orElse(null) is IfStmt;
+            /*final*/boolean elseBlock = n.getElseStmt().orElse(null) is BlockStmt;
             if (// put chained if and start of block statement on a same level
             elseIf || elseBlock)
                 printer.print("else ");
@@ -1363,7 +1363,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final WhileStmt n, final Void arg) {
+    public void visit(/*final*/WhileStmt n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printer.print("while (");
@@ -1373,7 +1373,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final ContinueStmt n, final Void arg) {
+    public void visit(/*final*/ContinueStmt n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printer.print("continue");
@@ -1382,7 +1382,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final DoStmt n, final Void arg) {
+    public void visit(/*final*/DoStmt n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printer.print("do ");
@@ -1393,7 +1393,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final ForEachStmt n, final Void arg) {
+    public void visit(/*final*/ForEachStmt n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printer.print("for (");
@@ -1405,13 +1405,13 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final ForStmt n, final Void arg) {
+    public void visit(/*final*/ForStmt n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printer.print("for (");
         if (n.getInitialization() != null) {
-            for (final Iterator<Expression> i = n.getInitialization().iterator(); i.hasNext(); ) {
-                final Expression e = i.next();
+            for (/*final*/Iterator<Expression> i = n.getInitialization().iterator(); i.hasNext(); ) {
+                /*final*/Expression e = i.next();
                 e.accept(this, arg);
                 if (i.hasNext()) {
                     printer.print(", ");
@@ -1424,8 +1424,8 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
         }
         printer.print("; ");
         if (n.getUpdate() != null) {
-            for (final Iterator<Expression> i = n.getUpdate().iterator(); i.hasNext(); ) {
-                final Expression e = i.next();
+            for (/*final*/Iterator<Expression> i = n.getUpdate().iterator(); i.hasNext(); ) {
+                /*final*/Expression e = i.next();
                 e.accept(this, arg);
                 if (i.hasNext()) {
                     printer.print(", ");
@@ -1437,7 +1437,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final ThrowStmt n, final Void arg) {
+    public void visit(/*final*/ThrowStmt n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printer.print("throw ");
@@ -1446,7 +1446,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final SynchronizedStmt n, final Void arg) {
+    public void visit(/*final*/SynchronizedStmt n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printer.print("synchronized (");
@@ -1456,7 +1456,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final TryStmt n, final Void arg) {
+    public void visit(/*final*/TryStmt n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printer.print("try ");
@@ -1481,7 +1481,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
             printer.print(") ");
         }
         n.getTryBlock().accept(this, arg);
-        for (final CatchClause c : n.getCatchClauses()) {
+        for (/*final*/CatchClause c : n.getCatchClauses()) {
             c.accept(this, arg);
         }
         if (n.getFinallyBlock().isPresent()) {
@@ -1491,7 +1491,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final CatchClause n, final Void arg) {
+    public void visit(/*final*/CatchClause n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printer.print(" catch (");
@@ -1501,7 +1501,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final AnnotationDeclaration n, final Void arg) {
+    public void visit(/*final*/AnnotationDeclaration n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printMemberAnnotations(n.getAnnotations(), arg);
@@ -1518,7 +1518,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final AnnotationMemberDeclaration n, final Void arg) {
+    public void visit(/*final*/AnnotationMemberDeclaration n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printMemberAnnotations(n.getAnnotations(), arg);
@@ -1535,7 +1535,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final MarkerAnnotationExpr n, final Void arg) {
+    public void visit(/*final*/MarkerAnnotationExpr n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printer.print("@");
@@ -1543,7 +1543,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final SingleMemberAnnotationExpr n, final Void arg) {
+    public void visit(/*final*/SingleMemberAnnotationExpr n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printer.print("@");
@@ -1554,15 +1554,15 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final NormalAnnotationExpr n, final Void arg) {
+    public void visit(/*final*/NormalAnnotationExpr n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printer.print("@");
         n.getName().accept(this, arg);
         printer.print("(");
         if (n.getPairs() != null) {
-            for (final Iterator<MemberValuePair> i = n.getPairs().iterator(); i.hasNext(); ) {
-                final MemberValuePair m = i.next();
+            for (/*final*/Iterator<MemberValuePair> i = n.getPairs().iterator(); i.hasNext(); ) {
+                /*final*/MemberValuePair m = i.next();
                 m.accept(this, arg);
                 if (i.hasNext()) {
                     printer.print(", ");
@@ -1573,7 +1573,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final MemberValuePair n, final Void arg) {
+    public void visit(/*final*/MemberValuePair n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         n.getName().accept(this, arg);
@@ -1582,7 +1582,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final LineComment n, final Void arg) {
+    public void visit(/*final*/LineComment n, /*final*/Void arg) {
         if (!getOption(ConfigOption.PRINT_COMMENTS).isPresent()) {
             return;
         }
@@ -1590,17 +1590,17 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final BlockComment n, final Void arg) {
+    public void visit(/*final*/BlockComment n, /*final*/Void arg) {
         if (!getOption(ConfigOption.PRINT_COMMENTS).isPresent()) {
             return;
         }
-        final String commentContent = normalizeEolInTextBlock(n.getContent(), getOption(ConfigOption.END_OF_LINE_CHARACTER).get().asString());
+        /*final*/string commentContent = normalizeEolInTextBlock(n.getContent(), getOption(ConfigOption.END_OF_LINE_CHARACTER).get().asString());
         // as BlockComment should not be formatted, -1 to preserve any trailing empty line if present
         String[] lines = commentContent.split("\\R", -1);
         printer.print(n.getHeader());
         for (int i = 0; i < (lines.length - 1); i++) {
             printer.print(lines[i]);
-            // Avoids introducing indentation in blockcomments. ie: do not use println() as it would trigger indentation at the next print call.
+            // Avoids introducing indentation _in blockcomments. ie: do not use println() as it would trigger indentation at the next print call.
             printer.print(getOption(ConfigOption.END_OF_LINE_CHARACTER).get().asValue());
         }
         // last line is not followed by a newline, and simply terminated with `*/`
@@ -1612,8 +1612,8 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     public void visit(LambdaExpr n, Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
-        final NodeList<Parameter> parameters = n.getParameters();
-        final boolean printPar = n.isEnclosingParameters();
+        /*final*/NodeList<Parameter> parameters = n.getParameters();
+        /*final*/boolean printPar = n.isEnclosingParameters();
         if (printPar) {
             printer.print("(");
         }
@@ -1628,8 +1628,8 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
             printer.print(")");
         }
         printer.print(" -> ");
-        final Statement body = n.getBody();
-        if (body instanceof ExpressionStmt) {
+        /*final*/Statement body = n.getBody();
+        if (body is ExpressionStmt) {
             // Print the expression directly
             ((ExpressionStmt) body).getExpression().accept(this, arg);
         } else {
@@ -1642,7 +1642,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         Expression scope = n.getScope();
-        String identifier = n.getIdentifier();
+        string identifier = n.getIdentifier();
         if (scope != null) {
             n.getScope().accept(this, arg);
         }
@@ -1670,7 +1670,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     }
 
     @Override
-    public void visit(final ImportDeclaration n, final Void arg) {
+    public void visit(/*final*/ImportDeclaration n, /*final*/Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printer.print("import ");
@@ -1771,10 +1771,10 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
         }
     }
 
-    private void printOrphanCommentsBeforeThisChildNode(final Node node) {
+    private void printOrphanCommentsBeforeThisChildNode(/*final*/Node node) {
         if (!getOption(ConfigOption.PRINT_COMMENTS).isPresent())
             return;
-        if (node instanceof Comment)
+        if (node is Comment)
             return;
         Node parent = node.getParentNode().orElse(null);
         if (parent == null)
@@ -1794,18 +1794,18 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
         }
         int positionOfPreviousChild = -1;
         for (int i = positionOfTheChild - 1; i >= 0 && positionOfPreviousChild == -1; i--) {
-            if (!(everything.get(i) instanceof Comment))
+            if (!(everything.get(i) is Comment))
                 positionOfPreviousChild = i;
         }
         for (int i = positionOfPreviousChild + 1; i < positionOfTheChild; i++) {
             Node nodeToPrint = everything.get(i);
-            if (!(nodeToPrint instanceof Comment))
+            if (!(nodeToPrint is Comment))
                 throw new RuntimeException("Expected comment, instead " + nodeToPrint.getClass() + ". Position of previous child: " + positionOfPreviousChild + ", position of child " + positionOfTheChild);
             nodeToPrint.accept(this, null);
         }
     }
 
-    private void printOrphanCommentsEnding(final Node node) {
+    private void printOrphanCommentsEnding(/*final*/Node node) {
         if (!getOption(ConfigOption.PRINT_COMMENTS).isPresent())
             return;
         List<Node> everything = new ArrayList<>(node.getChildNodes());
@@ -1817,7 +1817,7 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
         boolean findingComments = true;
         while (findingComments && commentsAtEnd < everything.size()) {
             Node last = everything.get(everything.size() - 1 - commentsAtEnd);
-            findingComments = (last instanceof Comment);
+            findingComments = (last is Comment);
             if (findingComments) {
                 commentsAtEnd++;
             }

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -29,7 +29,7 @@ namespace com.github.javaparser.symbolsolver.resolution.typeinference.constraint
  *
  * @author Federico Tomassetti
  */
-public class TypeSameAsType extends ConstraintFormula {
+public class TypeSameAsType:ConstraintFormula {
     private ResolvedType S;
     private ResolvedType T;
 
@@ -112,11 +112,11 @@ public class TypeSameAsType extends ConstraintFormula {
         //
         // - If S has the form ? and T has the form ?, the constraint reduces to true.
         //
-        // - If S has the form ? and T has the form ? extends T', the constraint reduces to ‹Object = T'›.
+        // - If S has the form ? and T has the form ?:T', the constraint reduces to ‹Object = T'›.
         //
-        // - If S has the form ? extends S' and T has the form ?, the constraint reduces to ‹S' = Object›.
+        // - If S has the form ?:S' and T has the form ?, the constraint reduces to ‹S' = Object›.
         //
-        // - If S has the form ? extends S' and T has the form ? extends T', the constraint reduces to ‹S' = T'›.
+        // - If S has the form ?:S' and T has the form ?:T', the constraint reduces to ‹S' = T'›.
         //
         // - If S has the form ? super S' and T has the form ? super T', the constraint reduces to ‹S' = T'›.
         //
@@ -145,7 +145,7 @@ public class TypeSameAsType extends ConstraintFormula {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "TypeSameAsType{" +
                 "S=" + S +
                 ", T=" + T +

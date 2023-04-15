@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -29,15 +29,15 @@ namespace com.github.javaparser.symbolsolver.resolution;
  *
  * @author Takeshi D. Itoh
  */
-class ImplementedOrExtendedTypeResolutionTest extends AbstractResolutionTest {
+class ImplementedOrExtendedTypeResolutionTest:AbstractResolutionTest {
 
     @AfterEach
     void unConfigureSymbolSolver() {
-        // unconfigure symbol solver so as not to potentially disturb tests in other classes
+        // unconfigure symbol solver so as not to potentially disturb tests _in other classes
         StaticJavaParser.getConfiguration().setSymbolResolver(null);
     }
 
-    @Test
+    [TestMethod]
     void solveImplementedTypes() {
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver()));
 
@@ -48,7 +48,7 @@ class ImplementedOrExtendedTypeResolutionTest extends AbstractResolutionTest {
         assertEquals(clazz.getFieldByName("field_i3").get().resolve().getType().describe(), "I3.I3_1.I3_1_1");
     }
 
-    @Test
+    [TestMethod]
     void solveExtendedType1() {
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver()));
 
@@ -57,7 +57,7 @@ class ImplementedOrExtendedTypeResolutionTest extends AbstractResolutionTest {
         assertEquals(clazz.getFieldByName("field_c1").get().resolve().getType().describe(), "C1");
     }
 
-    @Test
+    [TestMethod]
     void solveExtendedType2() {
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver()));
 
@@ -66,7 +66,7 @@ class ImplementedOrExtendedTypeResolutionTest extends AbstractResolutionTest {
         assertEquals(clazz.getFieldByName("field_c2").get().resolve().getType().describe(), "C2.C2_1");
     }
 
-    @Test
+    [TestMethod]
     void solveExtendedType3() {
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver()));
 
@@ -75,14 +75,14 @@ class ImplementedOrExtendedTypeResolutionTest extends AbstractResolutionTest {
         assertEquals(clazz.getFieldByName("field_c3").get().resolve().getType().describe(), "C3.C3_1.C3_1_1");
     }
 
-    @Test
-    void solveImplementedTypeWithSameName() throws IOException {
+    [TestMethod]
+    void solveImplementedTypeWithSameName(){
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(
             new JavaParserTypeSolver(adaptPath("src/test/resources/ImplementedOrExtendedTypeResolution/pkg"))));
 
         CompilationUnit cu = StaticJavaParser.parse(adaptPath("src/test/resources/ImplementedOrExtendedTypeResolution/pkg/main/A.java"));
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "A");
-        String actual = clazz.getFieldByName("field_a").get().resolve().getType().describe();
+        string actual = clazz.getFieldByName("field_a").get().resolve().getType().describe();
         assertEquals("main.A", actual);
         assertNotEquals("another.A", actual);
     }

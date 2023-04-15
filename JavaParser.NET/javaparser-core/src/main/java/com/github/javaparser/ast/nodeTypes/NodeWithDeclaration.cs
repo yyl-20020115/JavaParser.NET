@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -32,9 +32,9 @@ public interface NodeWithDeclaration {
      * As {@link NodeWithDeclaration#getDeclarationAsString(boolean, boolean, boolean)} including
      * the modifiers, the throws clause and the parameters with both type and name.
      *
-     * @return String representation of declaration
+     * @return string representation of declaration
      */
-    default String getDeclarationAsString() {
+    default string getDeclarationAsString() {
         return getDeclarationAsString(true, true, true);
     }
 
@@ -42,11 +42,11 @@ public interface NodeWithDeclaration {
      * As {@link NodeWithDeclaration#getDeclarationAsString(boolean, boolean, boolean)} including
      * the parameters with both type and name.
      *
-     * @param includingModifiers flag to include the modifiers (if present) in the string produced
-     * @param includingThrows flag to include the throws clause (if present) in the string produced
-     * @return String representation of declaration based on parameter flags
+     * @param includingModifiers flag to include the modifiers (if present) _in the string produced
+     * @param includingThrows flag to include the throws clause (if present) _in the string produced
+     * @return string representation of declaration based on parameter flags
      */
-    default String getDeclarationAsString(boolean includingModifiers, boolean includingThrows) {
+    default string getDeclarationAsString(boolean includingModifiers, boolean includingThrows) {
         return getDeclarationAsString(includingModifiers, includingThrows, true);
     }
 
@@ -54,11 +54,11 @@ public interface NodeWithDeclaration {
      * A simple representation of the element declaration.
      * It should fit one string.
      *
-     * @param includingModifiers flag to include the modifiers (if present) in the string produced
-     * @param includingThrows flag to include the throws clause (if present) in the string produced
-     * @param includingParameterName flag to include the parameter name (while the parameter type is always included) in
+     * @param includingModifiers flag to include the modifiers (if present) _in the string produced
+     * @param includingThrows flag to include the throws clause (if present) _in the string produced
+     * @param includingParameterName flag to include the parameter name (while the parameter type is always included) _in
      * the string produced
-     * @return String representation of declaration based on parameter flags
+     * @return string representation of declaration based on parameter flags
      */
-    String getDeclarationAsString(boolean includingModifiers, boolean includingThrows, boolean includingParameterName);
+    string getDeclarationAsString(boolean includingModifiers, boolean includingThrows, boolean includingParameterName);
 }

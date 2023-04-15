@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,14 +27,14 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.contexts;
 /**
  * @author Federico Tomassetti
  */
-public class LambdaExprContext extends AbstractJavaParserContext<LambdaExpr> {
+public class LambdaExprContext:AbstractJavaParserContext<LambdaExpr> {
     
     public LambdaExprContext(LambdaExpr wrappedNode, TypeSolver typeSolver) {
         super(wrappedNode, typeSolver);
     }
 
     @Override
-    public Optional<Value> solveSymbolAsValue(String name) {
+    public Optional<Value> solveSymbolAsValue(string name) {
         int index = -1;
         for (Parameter parameter : wrappedNode.getParameters()) {
             index++;
@@ -42,13 +42,13 @@ public class LambdaExprContext extends AbstractJavaParserContext<LambdaExpr> {
             for (ResolvedValueDeclaration decl : sb.getSymbolDeclarations()) {
                 if (decl.getName().equals(name)) {
                     Node parentNode = demandParentNode(wrappedNode, IS_NOT_ENCLOSED_EXPR);
-                    if (parentNode instanceof MethodCallExpr) {
+                    if (parentNode is MethodCallExpr) {
                         MethodCallExpr methodCallExpr = (MethodCallExpr) parentNode;
                         MethodUsage methodUsage = JavaParserFacade.get(typeSolver).solveMethodAsUsage(methodCallExpr);
                         int i = methodCallExpr.getArgumentPosition(wrappedNode, EXCLUDE_ENCLOSED_EXPR);
                         ResolvedType lambdaType = methodUsage.getParamTypes().get(i);
 
-                        // Get the functional method in order for us to resolve it's type arguments properly
+                        // Get the functional method _in order for us to resolve it's type arguments properly
                         Optional<MethodUsage> functionalMethodOpt = FunctionalInterfaceLogic.getFunctionalMethod(lambdaType);
                         if (functionalMethodOpt.isPresent()){
                             MethodUsage functionalMethod = functionalMethodOpt.get();
@@ -88,7 +88,7 @@ public class LambdaExprContext extends AbstractJavaParserContext<LambdaExpr> {
                         } else{
                             return Optional.empty();
                         }
-                    } else if (parentNode instanceof VariableDeclarator) {
+                    } else if (parentNode is VariableDeclarator) {
                         VariableDeclarator variableDeclarator = (VariableDeclarator) parentNode;
                         ResolvedType t = JavaParserFacade.get(typeSolver).convertToUsage(variableDeclarator.getType());
                         Optional<MethodUsage> functionalMethod = FunctionalInterfaceLogic.getFunctionalMethod(t);
@@ -113,7 +113,7 @@ public class LambdaExprContext extends AbstractJavaParserContext<LambdaExpr> {
                         } else {
                             throw new UnsupportedOperationException();
                         }
-                    } else if (parentNode instanceof ReturnStmt) {
+                    } else if (parentNode is ReturnStmt) {
                         ReturnStmt returnStmt = (ReturnStmt) parentNode;
                         Optional<MethodDeclaration> optDeclaration = returnStmt.findAncestor(MethodDeclaration.class);
                         if (optDeclaration.isPresent()) {
@@ -142,7 +142,7 @@ public class LambdaExprContext extends AbstractJavaParserContext<LambdaExpr> {
                                 throw new UnsupportedOperationException();
                             }
                         }
-                    } else if (parentNode instanceof CastExpr) {
+                    } else if (parentNode is CastExpr) {
                         CastExpr castExpr = (CastExpr) parentNode;
                         ResolvedType t = JavaParserFacade.get(typeSolver).convertToUsage(castExpr.getType());
                         Optional<MethodUsage> functionalMethod = FunctionalInterfaceLogic.getFunctionalMethod(t);
@@ -180,7 +180,7 @@ public class LambdaExprContext extends AbstractJavaParserContext<LambdaExpr> {
     }
 
     @Override
-    public SymbolReference<? extends ResolvedValueDeclaration> solveSymbol(String name) {
+    public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name) {
         for (Parameter parameter : wrappedNode.getParameters()) {
             SymbolDeclarator sb = JavaParserFactory.getSymbolDeclarator(parameter, typeSolver);
             SymbolReference<ResolvedValueDeclaration> symbolReference = solveWith(sb, name);
@@ -194,7 +194,7 @@ public class LambdaExprContext extends AbstractJavaParserContext<LambdaExpr> {
     }
 
     @Override
-    public SymbolReference<ResolvedMethodDeclaration> solveMethod(String name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
+    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
         // TODO: Document why staticOnly is forced to be false.
         return solveMethodInParentContext(name, argumentsTypes, false);
     }
@@ -212,7 +212,7 @@ public class LambdaExprContext extends AbstractJavaParserContext<LambdaExpr> {
     /// Protected methods
     ///
 
-    protected final Optional<Value> solveWithAsValue(SymbolDeclarator symbolDeclarator, String name) {
+    protected /*final*/Optional<Value> solveWithAsValue(SymbolDeclarator symbolDeclarator, string name) {
         for (ResolvedValueDeclaration decl : symbolDeclarator.getSymbolDeclarations()) {
             if (decl.getName().equals(name)) {
 

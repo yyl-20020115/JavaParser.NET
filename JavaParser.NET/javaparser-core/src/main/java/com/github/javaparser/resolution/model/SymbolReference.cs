@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -29,12 +29,12 @@ namespace com.github.javaparser.resolution.model;
  *
  * @author Federico Tomassetti
  */
-public class SymbolReference<S extends ResolvedDeclaration> {
+public class SymbolReference<S:ResolvedDeclaration> {
 
     /**
      * Create a solve reference to the given symbol.
      */
-    public static <S extends ResolvedDeclaration, S2 extends S> SymbolReference<S> solved(S2 symbolDeclaration) {
+    public static <S:ResolvedDeclaration, S2:S> SymbolReference<S> solved(S2 symbolDeclaration) {
         return new SymbolReference<>(symbolDeclaration);
     }
 
@@ -45,7 +45,7 @@ public class SymbolReference<S extends ResolvedDeclaration> {
      *
      * @param <S> The symbol reference type.
      */
-    public static <S extends ResolvedDeclaration> SymbolReference<S> unsolved() {
+    public static <S:ResolvedDeclaration> SymbolReference<S> unsolved() {
         return new SymbolReference<>(null);
     }
 
@@ -54,8 +54,8 @@ public class SymbolReference<S extends ResolvedDeclaration> {
      *
      * @deprecated Consider using {@link #unsolved()} instead.
      */
-    @Deprecated
-    public static <S extends ResolvedDeclaration, S2 extends S> SymbolReference<S> unsolved(Class<S2> clazz) {
+    //@Deprecated
+    public static <S:ResolvedDeclaration, S2:S> SymbolReference<S> unsolved(Class<S2> clazz) {
         return unsolved();
     }
 
@@ -63,14 +63,14 @@ public class SymbolReference<S extends ResolvedDeclaration> {
      * Adapt a {@link SymbolReference} into another {@link SymbolReference}.
      *
      * @param ref   The reference to be adapted.
-     * @param clazz The final type to be used.
+     * @param clazz The /*final*/type to be used.
      *
      * @return The adapted symbol reference.
      *
      * @param <I> The Symbol Reference before adapting.
      * @param <O> The Symbol Reference after adapting.
      */
-    public static <I extends ResolvedDeclaration, O extends ResolvedDeclaration> SymbolReference<O> adapt(SymbolReference<I> ref, Class<O> clazz) {
+    public static <I:ResolvedDeclaration, O:ResolvedDeclaration> SymbolReference<O> adapt(SymbolReference<I> ref, Class<O> clazz) {
 
         Optional<I> declaration = ref.getDeclaration();
         if (declaration.isPresent()) {
@@ -85,7 +85,7 @@ public class SymbolReference<S extends ResolvedDeclaration> {
         return unsolved();
     }
 
-    private final S correspondingDeclaration;
+    private /*final*/S correspondingDeclaration;
 
     private SymbolReference(@Nullable S correspondingDeclaration) {
         this.correspondingDeclaration = correspondingDeclaration;
@@ -121,7 +121,7 @@ public class SymbolReference<S extends ResolvedDeclaration> {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "SymbolReference{" + correspondingDeclaration + "}";
     }
 

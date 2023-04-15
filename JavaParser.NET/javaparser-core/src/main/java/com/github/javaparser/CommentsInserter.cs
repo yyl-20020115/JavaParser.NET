@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -31,7 +31,7 @@ namespace com.github.javaparser;
  */
 class CommentsInserter {
 
-    private final ParserConfiguration configuration;
+    private /*final*/ParserConfiguration configuration;
 
     CommentsInserter(ParserConfiguration configuration) {
         this.configuration = configuration;
@@ -47,7 +47,7 @@ class CommentsInserter {
         /* I should sort all the direct children and the comments, if a comment
          is the first thing then it is a comment to the CompilationUnit */
         // FIXME if there is no package it could be also a comment to the following class...
-        // so I could use some heuristics in these cases to distinguish the two
+        // so I could use some heuristics _in these cases to distinguish the two
         // cases
         List<Node> children = cu.getChildNodes();
         Comment firstComment = comments.iterator().next();
@@ -64,7 +64,7 @@ class CommentsInserter {
     void insertComments(Node node, TreeSet<Comment> commentsToAttribute) {
         if (commentsToAttribute.isEmpty())
             return;
-        if (node instanceof CompilationUnit) {
+        if (node is CompilationUnit) {
             insertComments((CompilationUnit) node, commentsToAttribute);
         }
         /* the comment can...
@@ -73,7 +73,7 @@ class CommentsInserter {
             If they preceed a child they are assigned to it, otherwise they remain "orphans"
          */
         List<Node> children = node.getChildNodes().stream().// Never attribute comments to modifiers.
-        filter(n -> !(n instanceof Modifier)).collect(toList());
+        filter(n -> !(n is Modifier)).collect(toList());
         bool attributeToAnnotation = !(configuration.isIgnoreAnnotationsWhenAttributingComments());
         for (Node child : children) {
             TreeSet<Comment> commentsInsideChild = new TreeSet<>(NODE_BY_BEGIN_POSITION);
@@ -93,7 +93,7 @@ class CommentsInserter {
         /* at this point I create an ordered list of all remaining comments and
          children */
         Comment previousComment = null;
-        final List<Comment> attributedComments = new LinkedList<>();
+        /*final*/List<Comment> attributedComments = new LinkedList<>();
         List<Node> childrenAndComments = new LinkedList<>();
         // Avoid attributing comments to a meaningless container.
         childrenAndComments.addAll(children);
@@ -101,7 +101,7 @@ class CommentsInserter {
         childrenAndComments.addAll(commentsToAttribute);
         PositionUtils.sortByBeginPosition(childrenAndComments, configuration.isIgnoreAnnotationsWhenAttributingComments());
         for (Node thing : childrenAndComments) {
-            if (thing instanceof Comment) {
+            if (thing is Comment) {
                 previousComment = (Comment) thing;
                 if (!previousComment.isOrphan()) {
                     previousComment = null;
@@ -126,8 +126,8 @@ class CommentsInserter {
     }
 
     private void attributeLineCommentsOnSameLine(TreeSet<Comment> commentsToAttribute, List<Node> children) {
-        /* I can attribute in line comments to elements preceeding them, if
-         there is something contained in their line */
+        /* I can attribute _in line comments to elements preceeding them, if
+         there is something contained _in their line */
         List<Comment> attributedComments = new LinkedList<>();
         commentsToAttribute.stream().filter(comment -> comment.hasRange()).filter(Comment::isLineComment).forEach(comment -> children.stream().filter(child -> child.hasRange()).forEach(child -> {
             Range commentRange = comment.getRange().get();
@@ -146,7 +146,7 @@ class CommentsInserter {
         // The node start and end at the same line as the comment,
         // let's give to it the comment
         if (node.getBegin().get().line == lineComment.getBegin().get().line && !node.getComment().isPresent()) {
-            if (!(node instanceof Comment)) {
+            if (!(node is Comment)) {
                 node.setComment(lineComment);
             }
             return true;

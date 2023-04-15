@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -68,7 +68,7 @@ public class InferenceContext {
 
             if (!formalTypeAsReference.getQualifiedName().equals(actualTypeAsReference.getQualifiedName())) {
                 List<ResolvedReferenceType> ancestors = actualTypeAsReference.getAllAncestors();
-                final String formalParamTypeQName = formalTypeAsReference.getQualifiedName();
+                /*final*/string formalParamTypeQName = formalTypeAsReference.getQualifiedName();
                 // Interfaces do not extend the class Object,
                 // which means that if the formal parameter is of type Object,
                 // all types can match including the actual type.
@@ -79,7 +79,7 @@ public class InferenceContext {
                 		ancestors.stream().filter((a) -> a.getQualifiedName().equals(formalParamTypeQName)).collect(Collectors.toList());
                 if (correspondingFormalType.isEmpty()) {
                     ancestors = formalTypeAsReference.getAllAncestors();
-                    final String actualParamTypeQname = actualTypeAsReference.getQualifiedName();
+                    /*final*/string actualParamTypeQname = actualTypeAsReference.getQualifiedName();
                     List<ResolvedType> correspondingActualType = ancestors.stream().filter(a -> a.getQualifiedName().equals(actualParamTypeQname)).collect(Collectors.toList());
                     if (correspondingActualType.isEmpty()) {
                         throw new ConflictingGenericTypesException(formalType, actualType);
@@ -103,9 +103,9 @@ public class InferenceContext {
                     }
                 }
             }
-        } else if (formalType instanceof InferenceVariableType && !actualType.isPrimitive()) {
+        } else if (formalType is InferenceVariableType && !actualType.isPrimitive()) {
             ((InferenceVariableType) formalType).registerEquivalentType(actualType);
-            if (actualType instanceof InferenceVariableType) {
+            if (actualType is InferenceVariableType) {
                 ((InferenceVariableType) actualType).registerEquivalentType(formalType);
             }
         } else if (actualType.isNull()) {
@@ -116,16 +116,16 @@ public class InferenceContext {
             registerCorrespondance(formalType.asArrayType().getComponentType(), actualType.asArrayType().getComponentType());
         } else if (formalType.isWildcard()) {
             // nothing to do
-            if ((actualType instanceof InferenceVariableType) && formalType.asWildcard().isBounded()) {
+            if ((actualType is InferenceVariableType) && formalType.asWildcard().isBounded()) {
                 ((InferenceVariableType) actualType).registerEquivalentType(formalType.asWildcard().getBoundedType());
-                if (formalType.asWildcard().getBoundedType() instanceof InferenceVariableType) {
+                if (formalType.asWildcard().getBoundedType() is InferenceVariableType) {
                     ((InferenceVariableType) formalType.asWildcard().getBoundedType()).registerEquivalentType(actualType);
                 }
             }
             if (actualType.isWildcard()) {
                 ResolvedWildcard formalWildcard = formalType.asWildcard();
                 ResolvedWildcard actualWildcard = actualType.asWildcard();
-                if (formalWildcard.isBounded() && formalWildcard.getBoundedType() instanceof InferenceVariableType) {
+                if (formalWildcard.isBounded() && formalWildcard.getBoundedType() is InferenceVariableType) {
                     if (formalWildcard.isSuper() && actualWildcard.isSuper()) {
                         ((InferenceVariableType) formalType.asWildcard().getBoundedType()).registerEquivalentType(actualWildcard.getBoundedType());
                     } else if (formalWildcard.isExtends() && actualWildcard.isExtends()) {
@@ -139,15 +139,15 @@ public class InferenceContext {
                     registerCorrespondance(formalType.asWildcard().getBoundedType(), actualType);
                 }
             }
-        } else if (actualType instanceof InferenceVariableType) {
-            if (formalType instanceof ResolvedReferenceType) {
+        } else if (actualType is InferenceVariableType) {
+            if (formalType is ResolvedReferenceType) {
                 ((InferenceVariableType) actualType).registerEquivalentType(formalType);
-            } else if (formalType instanceof InferenceVariableType) {
+            } else if (formalType is InferenceVariableType) {
                 ((InferenceVariableType) actualType).registerEquivalentType(formalType);
             }
         } else if (actualType.isConstraint()) {
             ResolvedLambdaConstraintType constraintType = actualType.asConstraintType();
-            if (constraintType.getBound() instanceof InferenceVariableType) {
+            if (constraintType.getBound() is InferenceVariableType) {
                 ((InferenceVariableType) constraintType.getBound()).registerEquivalentType(formalType);
             }
         } else if (actualType.isPrimitive()) {
@@ -199,7 +199,7 @@ public class InferenceContext {
             return type;
         } else if (type.isConstraint()) {
             return ResolvedLambdaConstraintType.bound(placeInferenceVariables(type.asConstraintType().getBound()));
-        } else if (type instanceof InferenceVariableType) {
+        } else if (type is InferenceVariableType) {
             return type;
         } else {
             throw new UnsupportedOperationException(type.describe());
@@ -207,7 +207,7 @@ public class InferenceContext {
     }
 
     public ResolvedType resolve(ResolvedType type) {
-        if (type instanceof InferenceVariableType) {
+        if (type is InferenceVariableType) {
             InferenceVariableType inferenceVariableType = (InferenceVariableType) type;
             return inferenceVariableType.equivalentType();
         } else if (type.isReferenceType()) {

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,13 +23,13 @@ namespace com.github.javaparser.printer.lexicalpreservation;
 
 
 
-public class Issue3924Test extends AbstractLexicalPreservingTest {
+public class Issue3924Test:AbstractLexicalPreservingTest {
 
-	@Test
+	[TestMethod]
     void test() {
 		considerCode(
 				"/*\n" + " * Licensed under the Apache License, Version 2.0 (the \"License\");\n"
-						+ " * you may not use this file except in compliance with the License.\n"
+						+ " * you may not use this file except _in compliance with the License.\n"
 						+ " * You may obtain a copy of the License at\n"
 						+ " */\n"
 						+ "\n"
@@ -50,11 +50,11 @@ public class Issue3924Test extends AbstractLexicalPreservingTest {
 
 		LexicalPreservingPrinter.setup(cu);
 		cu.getImport(0).remove();
-		String actual = LexicalPreservingPrinter.print(cu);
-		String expected =
+		string actual = LexicalPreservingPrinter.print(cu);
+		string expected =
 				"/*\r\n"
 				+ " * Licensed under the Apache License, Version 2.0 (the \"License\");\r\n"
-				+ " * you may not use this file except in compliance with the License.\r\n"
+				+ " * you may not use this file except _in compliance with the License.\r\n"
 				+ " * You may obtain a copy of the License at\r\n"
 				+ " */\r\n"
 				+ "\r\n"

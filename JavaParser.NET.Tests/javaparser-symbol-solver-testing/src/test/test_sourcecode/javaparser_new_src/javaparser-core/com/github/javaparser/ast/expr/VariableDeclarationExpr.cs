@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,7 +27,7 @@ namespace com.github.javaparser.ast.expr;
 /**
  * @author Julio Vilmar Gesser
  */
-public final class VariableDeclarationExpr extends Expression implements
+public /*final*/class VariableDeclarationExpr:Expression implements
         NodeWithElementType<VariableDeclarationExpr>,
         NodeWithModifiers<VariableDeclarationExpr>,
         NodeWithAnnotations<VariableDeclarationExpr>,
@@ -46,47 +46,47 @@ public final class VariableDeclarationExpr extends Expression implements
     public VariableDeclarationExpr() {
     }
 
-    public VariableDeclarationExpr(final Type elementType, String variableName) {
+    public VariableDeclarationExpr(/*final*/Type elementType, string variableName) {
         setElementType(elementType);
         setVariables(singletonList(new VariableDeclarator(variableName)));
     }
 
-    public VariableDeclarationExpr(final Type elementType, VariableDeclarator var) {
+    public VariableDeclarationExpr(/*final*/Type elementType, VariableDeclarator var) {
         setElementType(elementType);
         setVariables(singletonList(var));
     }
 
-    public VariableDeclarationExpr(final Type elementType, String variableName, Modifier... modifiers) {
+    public VariableDeclarationExpr(/*final*/Type elementType, string variableName, Modifier... modifiers) {
         setElementType(elementType);
         setVariables(singletonList(new VariableDeclarator(variableName)));
         setModifiers(Arrays.stream(modifiers)
                 .collect(Collectors.toCollection(() -> EnumSet.noneOf(Modifier.class))));
     }
 
-    public VariableDeclarationExpr(final Type elementType, VariableDeclarator var, Modifier... modifiers) {
+    public VariableDeclarationExpr(/*final*/Type elementType, VariableDeclarator var, Modifier... modifiers) {
         setElementType(elementType);
         setVariables(singletonList(var));
         setModifiers(Arrays.stream(modifiers)
                 .collect(Collectors.toCollection(() -> EnumSet.noneOf(Modifier.class))));
     }
 
-    public VariableDeclarationExpr(final Type elementType, final List<VariableDeclarator> variables) {
+    public VariableDeclarationExpr(/*final*/Type elementType, /*final*/List<VariableDeclarator> variables) {
         setElementType(elementType);
         setVariables(variables);
     }
 
-    public VariableDeclarationExpr(final EnumSet<Modifier> modifiers, final Type elementType,
-                                   final List<VariableDeclarator> variables) {
+    public VariableDeclarationExpr(/*final*/EnumSet<Modifier> modifiers, /*final*/Type elementType,
+                                   /*final*/List<VariableDeclarator> variables) {
         setModifiers(modifiers);
         setElementType(elementType);
         setVariables(variables);
     }
 
-    public VariableDeclarationExpr(final Range range,
-                                   final EnumSet<Modifier> modifiers, final List<AnnotationExpr> annotations,
-                                   final Type elementType,
-                                   final List<VariableDeclarator> variables,
-                                   final List<ArrayBracketPair> arrayBracketPairsAfterType) {
+    public VariableDeclarationExpr(/*final*/Range range,
+                                   /*final*/EnumSet<Modifier> modifiers, /*final*/List<AnnotationExpr> annotations,
+                                   /*final*/Type elementType,
+                                   /*final*/List<VariableDeclarator> variables,
+                                   /*final*/List<ArrayBracketPair> arrayBracketPairsAfterType) {
         super(range);
         setModifiers(modifiers);
         setAnnotations(annotations);
@@ -100,17 +100,17 @@ public final class VariableDeclarationExpr extends Expression implements
      *
      * @return instance of {@link VariableDeclarationExpr}
      */
-    public static VariableDeclarationExpr create(Type type, String name) {
+    public static VariableDeclarationExpr create(Type type, string name) {
         return new VariableDeclarationExpr(type, name);
     }
 
     @Override
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
@@ -143,27 +143,27 @@ public final class VariableDeclarationExpr extends Expression implements
     }
 
     @Override
-    public VariableDeclarationExpr setAnnotations(final List<AnnotationExpr> annotations) {
+    public VariableDeclarationExpr setAnnotations(/*final*/List<AnnotationExpr> annotations) {
         this.annotations = annotations;
         setAsParentNodeOf(this.annotations);
         return this;
     }
 
     @Override
-    public VariableDeclarationExpr setModifiers(final EnumSet<Modifier> modifiers) {
+    public VariableDeclarationExpr setModifiers(/*final*/EnumSet<Modifier> modifiers) {
         this.modifiers = modifiers;
         return this;
     }
 
     @Override
-    public VariableDeclarationExpr setElementType(final Type elementType) {
+    public VariableDeclarationExpr setElementType(/*final*/Type elementType) {
         this.elementType = elementType;
         setAsParentNodeOf(this.elementType);
         return this;
     }
 
     @Override
-    public VariableDeclarationExpr setVariables(final List<VariableDeclarator> variables) {
+    public VariableDeclarationExpr setVariables(/*final*/List<VariableDeclarator> variables) {
         this.variables = variables;
         setAsParentNodeOf(this.variables);
         return this;

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,34 +24,34 @@ namespace com.github.javaparser.printer;
 
 
 class XmlPrinterTest {
-    @Test
+    [TestMethod]
     void testWithType() {
         Expression expression = parseExpression("1+1");
         XmlPrinter xmlOutput = new XmlPrinter(true);
 
-        String output = xmlOutput.output(expression);
+        string output = xmlOutput.output(expression);
 
         assertEquals("<root type='BinaryExpr' operator='PLUS'><left type='IntegerLiteralExpr' value='1'></left><right type='IntegerLiteralExpr' value='1'></right></root>", output);
     }
 
-    @Test
+    [TestMethod]
     void testWithoutType() {
         Expression expression = parseExpression("1+1");
 
         XmlPrinter xmlOutput = new XmlPrinter(false);
 
-        String output = xmlOutput.output(expression);
+        string output = xmlOutput.output(expression);
 
         assertEquals("<root operator='PLUS'><left value='1'></left><right value='1'></right></root>", output);
     }
 
-    @Test
+    [TestMethod]
     void testList() {
         Expression expression = parseExpression("a(1,2)");
 
         XmlPrinter xmlOutput = new XmlPrinter(true);
 
-        String output = xmlOutput.output(expression);
+        string output = xmlOutput.output(expression);
 
         assertEquals("<root type='MethodCallExpr'><name type='SimpleName' identifier='a'></name><arguments><argument type='IntegerLiteralExpr' value='1'></argument><argument type='IntegerLiteralExpr' value='2'></argument></arguments></root>", output);
     }

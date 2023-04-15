@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.ast.body;
 /**
  * @author Julio Vilmar Gesser
  */
-public final class MethodDeclaration extends BodyDeclaration implements DocumentableNode, WithDeclaration, NamedNode {
+public /*final*/class MethodDeclaration:BodyDeclaration implements DocumentableNode, WithDeclaration, NamedNode {
 
 	private int modifiers;
 
@@ -49,22 +49,22 @@ public final class MethodDeclaration extends BodyDeclaration implements Document
     public MethodDeclaration() {
 	}
 
-	public MethodDeclaration(final int modifiers, final Type type, final String name) {
+	public MethodDeclaration(/*final*/int modifiers, /*final*/Type type, /*final*/string name) {
 		setModifiers(modifiers);
 		setType(type);
 		setName(name);
 	}
 
-	public MethodDeclaration(final int modifiers, final Type type, final String name, final List<Parameter> parameters) {
+	public MethodDeclaration(/*final*/int modifiers, /*final*/Type type, /*final*/string name, /*final*/List<Parameter> parameters) {
 		setModifiers(modifiers);
 		setType(type);
 		setName(name);
 		setParameters(parameters);
 	}
 
-	public MethodDeclaration(final int modifiers, final List<AnnotationExpr> annotations,
-			final List<TypeParameter> typeParameters, final Type type, final String name,
-			final List<Parameter> parameters, final int arrayCount, final List<NameExpr> throws_, final BlockStmt block) {
+	public MethodDeclaration(/*final*/int modifiers, /*final*/List<AnnotationExpr> annotations,
+			/*final*/List<TypeParameter> typeParameters, /*final*/Type type, /*final*/string name,
+			/*final*/List<Parameter> parameters, /*final*/int arrayCount, /*final*/List<NameExpr> throws_, /*final*/BlockStmt block) {
 		super(annotations);
 		setModifiers(modifiers);
 		setTypeParameters(typeParameters);
@@ -76,10 +76,10 @@ public final class MethodDeclaration extends BodyDeclaration implements Document
 		setBody(block);
 	}
 
-	public MethodDeclaration(final int beginLine, final int beginColumn, final int endLine, final int endColumn,
-			final int modifiers, final List<AnnotationExpr> annotations,
-			final List<TypeParameter> typeParameters, final Type type, final String name,
-			final List<Parameter> parameters, final int arrayCount, final List<NameExpr> throws_, final BlockStmt block) {
+	public MethodDeclaration(/*final*/int beginLine, /*final*/int beginColumn, /*final*/int endLine, /*final*/int endColumn,
+			/*final*/int modifiers, /*final*/List<AnnotationExpr> annotations,
+			/*final*/List<TypeParameter> typeParameters, /*final*/Type type, /*final*/string name,
+			/*final*/List<Parameter> parameters, /*final*/int arrayCount, /*final*/List<NameExpr> throws_, /*final*/BlockStmt block) {
 		super(beginLine, beginColumn, endLine, endColumn, annotations);
 		setModifiers(modifiers);
 		setTypeParameters(typeParameters);
@@ -91,11 +91,11 @@ public final class MethodDeclaration extends BodyDeclaration implements Document
 		setBody(block);
 	}
 
-	@Override public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+	@Override public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
 		return v.visit(this, arg);
 	}
 
-	@Override public <A> void accept(final VoidVisitor<A> v, final A arg) {
+	@Override public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
 		v.visit(this, arg);
 	}
 
@@ -103,7 +103,7 @@ public final class MethodDeclaration extends BodyDeclaration implements Document
 		return arrayCount;
 	}
 
-	// FIXME this is called "Block" in the constructor. Pick one.
+	// FIXME this is called "Block" _in the constructor. Pick one.
 	public BlockStmt getBody() {
 		return body;
 	}
@@ -118,7 +118,7 @@ public final class MethodDeclaration extends BodyDeclaration implements Document
 		return modifiers;
 	}
 
-	public String getName() {
+	public string getName() {
 		return name.getName();
 	}
 
@@ -148,43 +148,43 @@ public final class MethodDeclaration extends BodyDeclaration implements Document
 		return typeParameters;
 	}
 
-	public void setArrayCount(final int arrayCount) {
+	public void setArrayCount(/*final*/int arrayCount) {
 		this.arrayCount = arrayCount;
 	}
 
-	public void setBody(final BlockStmt body) {
+	public void setBody(/*final*/BlockStmt body) {
 		this.body = body;
 		setAsParentNodeOf(this.body);
 	}
 
-	public void setModifiers(final int modifiers) {
+	public void setModifiers(/*final*/int modifiers) {
 		this.modifiers = modifiers;
 	}
 
-	public void setName(final String name) {
+	public void setName(/*final*/string name) {
 		this.name = new NameExpr(name);
 	}
 
-    public void setNameExpr(final NameExpr name) {
+    public void setNameExpr(/*final*/NameExpr name) {
         this.name = name;
     }
 
-    public void setParameters(final List<Parameter> parameters) {
+    public void setParameters(/*final*/List<Parameter> parameters) {
 		this.parameters = parameters;
 		setAsParentNodeOf(this.parameters);
 	}
 
-	public void setThrows(final List<NameExpr> throws_) {
+	public void setThrows(/*final*/List<NameExpr> throws_) {
 		this.throws_ = throws_;
 		setAsParentNodeOf(this.throws_);
 	}
 
-	public void setType(final Type type) {
+	public void setType(/*final*/Type type) {
 		this.type = type;
 		setAsParentNodeOf(this.type);
 	}
 
-	public void setTypeParameters(final List<TypeParameter> typeParameters) {
+	public void setTypeParameters(/*final*/List<TypeParameter> typeParameters) {
 		this.typeParameters = typeParameters;
 		setAsParentNodeOf(typeParameters);
 	}
@@ -200,12 +200,12 @@ public final class MethodDeclaration extends BodyDeclaration implements Document
 
 
     @Override
-    public String getDeclarationAsString() {
+    public string getDeclarationAsString() {
         return getDeclarationAsString(true, true, true);
     }
 
     @Override
-    public String getDeclarationAsString(boolean includingModifiers, boolean includingThrows) {
+    public string getDeclarationAsString(boolean includingModifiers, boolean includingThrows) {
         return getDeclarationAsString(includingModifiers, includingThrows, true);
     }
     
@@ -218,7 +218,7 @@ public final class MethodDeclaration extends BodyDeclaration implements Document
      * @return method declaration as String
      */
     @Override
-    public String getDeclarationAsString(boolean includingModifiers, boolean includingThrows, boolean includingParameterName) {
+    public string getDeclarationAsString(boolean includingModifiers, boolean includingThrows, boolean includingParameterName) {
         StringBuffer sb = new StringBuffer();
         if (includingModifiers) {
             AccessSpecifier accessSpecifier = ModifierSet.getAccessSpecifier(getModifiers());
@@ -231,7 +231,7 @@ public final class MethodDeclaration extends BodyDeclaration implements Document
                 sb.append("abstract ");
             }
             if (ModifierSet.isFinal(getModifiers())){
-                sb.append("final ");
+                sb.append("/*final*/");
             }
             if (ModifierSet.isNative(getModifiers())){
                 sb.append("native ");

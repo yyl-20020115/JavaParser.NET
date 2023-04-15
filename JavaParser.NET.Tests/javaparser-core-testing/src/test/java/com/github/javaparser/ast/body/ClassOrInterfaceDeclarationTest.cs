@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,7 +24,7 @@ namespace com.github.javaparser.ast.body;
 
 
 class ClassOrInterfaceDeclarationTest {
-    @Test
+    [TestMethod]
     void staticNestedClass() {
         CompilationUnit cu = parse("class X{static class Y{}}");
         ClassOrInterfaceDeclaration y = cu.getClassByName("X").get().getMembers().get(0).asClassOrInterfaceDeclaration();
@@ -34,7 +34,7 @@ class ClassOrInterfaceDeclarationTest {
         assertFalse(y.isLocalClassDeclaration());
     }
 
-    @Test
+    [TestMethod]
     void nestedInterface() {
         CompilationUnit cu = parse("class X{interface Y{}}");
         ClassOrInterfaceDeclaration y = cu.getClassByName("X").get().getMembers().get(0).asClassOrInterfaceDeclaration();
@@ -44,7 +44,7 @@ class ClassOrInterfaceDeclarationTest {
         assertFalse(y.isLocalClassDeclaration());
     }
 
-    @Test
+    [TestMethod]
     void nonStaticNestedClass() {
         CompilationUnit cu = parse("class X{class Y{}}");
         ClassOrInterfaceDeclaration y = cu.getClassByName("X").get().getMembers().get(0).asClassOrInterfaceDeclaration();
@@ -54,7 +54,7 @@ class ClassOrInterfaceDeclarationTest {
         assertFalse(y.isLocalClassDeclaration());
     }
 
-    @Test
+    [TestMethod]
     void topClass() {
         CompilationUnit cu = parse("class X{}");
         ClassOrInterfaceDeclaration y = cu.getClassByName("X").get();
@@ -64,7 +64,7 @@ class ClassOrInterfaceDeclarationTest {
         assertFalse(y.isLocalClassDeclaration());
     }
 
-    @Test
+    [TestMethod]
     void localClass() {
         MethodDeclaration method = parseBodyDeclaration("void x(){class X{};}").asMethodDeclaration();
         ClassOrInterfaceDeclaration x = method.findFirst(ClassOrInterfaceDeclaration.class).get();

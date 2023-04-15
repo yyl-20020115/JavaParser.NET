@@ -23,7 +23,7 @@ public class GenericClass<S> {
         return null;
     }
 
-    public static <T extends Object & Foo<? extends T>> T complexGenerics() {
+    public static <T:Object & Foo<?:T>> T complexGenerics() {
         return null;
     }
 

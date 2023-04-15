@@ -17,27 +17,27 @@ namespace com.github.javaparser;
 /**
  * This exception is thrown when parse errors are encountered.
  * You can explicitly create objects of this exception type by
- * calling the method generateParseException in the generated
+ * calling the method generateParseException _in the generated
  * parser.
  *
  * You can modify this class to customize your error reporting
  * mechanisms so long as you retain the public fields.
  */
-public class ParseException extends Exception {
+public class ParseException:Exception {
 
   /**
    * The version identifier for this Serializable class.
    * Increment only if the <i>serialized</i> form of the
    * class changes.
    */
-  private static final long serialVersionUID = 1L;
+  private static /*final*/long serialVersionUID = 1L;
 
-  private static final String INDENT = "    ";
+  private static /*final*/string INDENT = "    ";
   
   /**
    * The end of line string (we do not use System.getProperty("") so that we are compatible with Android/GWT);
    */
-  protected static String EOL = "\n";
+  protected static string EOL = "\n";
 
   
   public ParseException(Token currentTokenVal,
@@ -51,14 +51,14 @@ public class ParseException extends Exception {
   
   /**
    * This constructor is used by the method "generateParseException"
-   * in the generated parser.  Calling this constructor generates
+   * _in the generated parser.  Calling this constructor generates
    * a new object of this type with the fields "currentToken",
    * "expectedTokenSequences", and "tokenImage" set.
    */
   public ParseException(Token currentTokenVal,
                         int[][] expectedTokenSequencesVal,
                         String[] tokenImageVal,
-                        String lexicalStateName
+                        string lexicalStateName
                        )
   {
     super(initialise(currentTokenVal, expectedTokenSequencesVal, tokenImageVal, lexicalStateName));
@@ -69,9 +69,9 @@ public class ParseException extends Exception {
 
   /**
    * The following constructors are for use by you for whatever
-   * purpose you can think of.  Constructing the exception in this
-   * manner makes the exception behave in the normal way - i.e., as
-   * documented in the class "Throwable".  The fields "errorToken",
+   * purpose you can think of.  Constructing the exception _in this
+   * manner makes the exception behave _in the normal way - i.e., as
+   * documented _in the class "Throwable".  The fields "errorToken",
    * "expectedTokenSequences", and "tokenImage" do not contain
    * relevant information.  The JavaCC generated code does not use
    * these constructors.
@@ -82,7 +82,7 @@ public class ParseException extends Exception {
   }
 
   /** Constructor with message. */
-  public ParseException(String message) {
+  public ParseException(string message) {
     super(message);
   }
 
@@ -95,7 +95,7 @@ public class ParseException extends Exception {
   public Token currentToken;
 
   /**
-   * Each entry in this array is an array of integers.  Each array
+   * Each entry _in this array is an array of integers.  Each array
    * of integers represents a sequence of tokens (by their ordinal
    * values) that is expected at this point of the parse.
    */
@@ -104,7 +104,7 @@ public class ParseException extends Exception {
   /**
    * This is a reference to the "tokenImage" array of the generated
    * parser within which the parse error occurred.  This array is
-   * defined in the generated ...Constants interface.
+   * defined _in the generated ...Constants interface.
    */
   public String[] tokenImage;
 
@@ -115,10 +115,10 @@ public class ParseException extends Exception {
    * from the parser) the correct error message
    * gets displayed.
    */
-  private static String initialise(Token currentToken,
+  private static string initialise(Token currentToken,
                            int[][] expectedTokenSequences,
                            String[] tokenImage,
-                           String lexicalStateName) {
+                           string lexicalStateName) {
 	StringBuilder sb = new StringBuilder();
     StringBuffer expected = new StringBuffer();
     
@@ -133,7 +133,7 @@ public class ParseException extends Exception {
       }
     }
     
-    for (String option : sortedOptions) {
+    for (string option : sortedOptions) {
         expected.append(INDENT).append(option).append(EOL);
       }
     
@@ -141,8 +141,8 @@ public class ParseException extends Exception {
     
     Token tok = currentToken.next;
     for (int i = 0; i < maxSize; i++) {
-      String tokenText = tok.image;
-  	  String escapedTokenText = add_escapes(tokenText);
+      string tokenText = tok.image;
+  	  string escapedTokenText = add_escapes(tokenText);
       if (i != 0) {
       	sb.append(" ");
       }
@@ -180,7 +180,7 @@ public class ParseException extends Exception {
    * when these raw version cannot be used as part of an ASCII
    * string literal.
    */
-  static String add_escapes(String str) {
+  static string add_escapes(string str) {
       StringBuffer retval = new StringBuffer();
       char ch;
       for (int i = 0; i < str.length(); i++) {
@@ -212,7 +212,7 @@ public class ParseException extends Exception {
               continue;
            default:
               if ((ch = str.charAt(i)) < 0x20 || ch > 0x7e) {
-                 String s = "0000" + Integer.toString(ch, 16);
+                 string s = "0000" + Integer.toString(ch, 16);
                  retval.append("\\u" + s.substring(s.length() - 4, s.length()));
               } else {
                  retval.append(ch);

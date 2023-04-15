@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.contexts;
 /**
  * @author Federico Tomassetti
  */
-public class ClassOrInterfaceDeclarationContext extends AbstractJavaParserContext<ClassOrInterfaceDeclaration> {
+public class ClassOrInterfaceDeclarationContext:AbstractJavaParserContext<ClassOrInterfaceDeclaration> {
 
     private JavaParserTypeDeclarationAdapter javaParserTypeDeclarationAdapter;
 
@@ -45,7 +45,7 @@ public class ClassOrInterfaceDeclarationContext extends AbstractJavaParserContex
     ///
 
     //@Override
-    public SymbolReference<? extends ResolvedValueDeclaration> solveSymbol(String name) {
+    public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name) {
         if (typeSolver == null) throw new IllegalArgumentException();
 
         if (this.getDeclaration().hasVisibleField(name)) {
@@ -57,7 +57,7 @@ public class ClassOrInterfaceDeclarationContext extends AbstractJavaParserContex
     }
 
     //@Override
-    public Optional<Value> solveSymbolAsValue(String name) {
+    public Optional<Value> solveSymbolAsValue(string name) {
         if (typeSolver == null) throw new IllegalArgumentException();
 
         if (this.getDeclaration().hasField(name)) {
@@ -69,7 +69,7 @@ public class ClassOrInterfaceDeclarationContext extends AbstractJavaParserContex
     }
 
     //@Override
-    public Optional<ResolvedType> solveGenericType(String name) {
+    public Optional<ResolvedType> solveGenericType(string name) {
         // First check if the method-like declaration has type parameters defined.
         // For example: {@code public <T> boolean containsAll(Collection<T> c);}
         for (TypeParameter tp : wrappedNode.getTypeParameters()) {
@@ -83,12 +83,12 @@ public class ClassOrInterfaceDeclarationContext extends AbstractJavaParserContex
     }
 
     //@Override
-    public SymbolReference<ResolvedTypeDeclaration> solveType(String name, List<ResolvedType> typeArguments) {
+    public SymbolReference<ResolvedTypeDeclaration> solveType(string name, List<ResolvedType> typeArguments) {
         return javaParserTypeDeclarationAdapter.solveType(name, typeArguments);
     }
 
     //@Override
-    public SymbolReference<ResolvedMethodDeclaration> solveMethod(String name, List<ResolvedType> argumentsTypes, bool staticOnly) {
+    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, bool staticOnly) {
         return javaParserTypeDeclarationAdapter.solveMethod(name, argumentsTypes, staticOnly);
     }
 

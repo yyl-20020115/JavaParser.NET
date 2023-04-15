@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,15 +24,15 @@ namespace com.github.javaparser.ast.validator;
 
 
 class Java5ValidatorTest {
-    public static final JavaParser javaParser = new JavaParser(new ParserConfiguration().setLanguageLevel(JAVA_5));
+    public static /*final*/JavaParser javaParser = new JavaParser(new ParserConfiguration().setLanguageLevel(JAVA_5));
 
-    @Test
+    [TestMethod]
     void genericsWithoutDiamond() {
         ParseResult<CompilationUnit> result = javaParser.parse(COMPILATION_UNIT, provider("class X<A>{List<String> b = new ArrayList<>();}"));
         assertProblems(result, "(line 1,col 33) The diamond operator is not supported.");
     }
 
-    @Test
+    [TestMethod]
     void topAnnotationDeclaration() {
         ParseResult<CompilationUnit> result = javaParser.parse(COMPILATION_UNIT, provider(allModifiers + "@interface X{}"));
         assertProblems(result,
@@ -52,7 +52,7 @@ class Java5ValidatorTest {
         );
     }
 
-    @Test
+    [TestMethod]
     void nestedAnnotationDeclaration() {
         ParseResult<CompilationUnit> result = javaParser.parse(COMPILATION_UNIT, provider("class X{" + allModifiers + "@interface I{}}"));
         assertProblems(result,
@@ -69,7 +69,7 @@ class Java5ValidatorTest {
         );
     }
 
-    @Test
+    [TestMethod]
     void annotationMember() {
         ParseResult<CompilationUnit> result = javaParser.parse(COMPILATION_UNIT, provider("@interface X{" + allModifiers + "int x();}"));
         assertProblems(result,
@@ -90,7 +90,7 @@ class Java5ValidatorTest {
         );
     }
 
-    @Test
+    [TestMethod]
     void topEnum() {
         ParseResult<CompilationUnit> result = javaParser.parse(COMPILATION_UNIT, provider(allModifiers + "enum X{}"));
         assertProblems(result,
@@ -111,7 +111,7 @@ class Java5ValidatorTest {
         );
     }
 
-    @Test
+    [TestMethod]
     void nestedEnum() {
         ParseResult<CompilationUnit> result = javaParser.parse(COMPILATION_UNIT, provider("class X{" + allModifiers + "enum I{}}"));
         assertProblems(result,
@@ -129,51 +129,51 @@ class Java5ValidatorTest {
         );
     }
 
-    @Test
+    [TestMethod]
     void varargs() {
         ParseResult<Parameter> result = javaParser.parse(PARAMETER, provider("String... x"));
         assertNoProblems(result);
     }
 
-    @Test
+    [TestMethod]
     void foreach() {
         ParseResult<Statement> result = javaParser.parse(STATEMENT, provider("for(X x: xs){}"));
         assertNoProblems(result);
     }
 
-    @Test
+    [TestMethod]
     void noMultipleVariablesInForEach() {
         ParseResult<Statement> result = javaParser.parse(STATEMENT, provider("for(int i, j : nums){}"));
         assertProblems(result,
                 "(line 1,col 1) A foreach statement's variable declaration must have exactly one variable declarator. Given: 2.");
     }
 
-    @Test
+    [TestMethod]
     void noModifiersInForEachBesideFinal() {
         ParseResult<Statement> result = javaParser.parse(STATEMENT, provider("for(static transient int i : nums){}"));
         assertProblems(result,
                 "(line 1,col 5) 'static' is not allowed here.", "(line 1,col 5) 'transient' is not allowed here.");
     }
 
-    @Test
+    [TestMethod]
     void staticImport() {
         ParseResult<CompilationUnit> result = javaParser.parse(COMPILATION_UNIT, provider("import static x;import static x.*;import x.X;import x.*;"));
         assertNoProblems(result);
     }
 
-    @Test
+    [TestMethod]
     void noPrimitiveTypeArguments() {
-        ParseResult<CompilationUnit> result = javaParser.parse(COMPILATION_UNIT, provider("class X extends Y<int> {}"));
+        ParseResult<CompilationUnit> result = javaParser.parse(COMPILATION_UNIT, provider("class X:Y<int> {}"));
         assertProblems(result, "(line 1,col 17) Type arguments may not be primitive.");
     }
 
-    @Test
+    [TestMethod]
     void enumAllowedAsIdentifier() {
         ParseResult<Statement> result = javaParser.parse(STATEMENT, provider("int enum;"));
         assertProblems(result, "(line 1,col 5) 'enum' cannot be used as an identifier as it is a keyword.");
     }
 
-    @Test
+    [TestMethod]
     void enumAllowedInSwitch() {
         ParseResult<Statement> result = javaParser.parse(STATEMENT, provider("switch(x){case GREEN: ;}"));
         assertNoProblems(result);

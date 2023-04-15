@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.ast.body;
 /**
  * @author Julio Vilmar Gesser
  */
-public final class ClassOrInterfaceDeclaration extends TypeDeclaration implements DocumentableNode {
+public /*final*/class ClassOrInterfaceDeclaration:TypeDeclaration implements DocumentableNode {
 
 	private bool interface_;
 
@@ -40,15 +40,15 @@ public final class ClassOrInterfaceDeclaration extends TypeDeclaration implement
 	public ClassOrInterfaceDeclaration() {
 	}
 
-	public ClassOrInterfaceDeclaration(final int modifiers, final bool isInterface, final String name) {
+	public ClassOrInterfaceDeclaration(/*final*/int modifiers, /*final*/bool isInterface, /*final*/string name) {
 		super(modifiers, name);
 		setInterface(isInterface);
 	}
 
-	public ClassOrInterfaceDeclaration(final int modifiers,
-			final List<AnnotationExpr> annotations, final bool isInterface, final String name,
-			final List<TypeParameter> typeParameters, final List<ClassOrInterfaceType> extendsList,
-			final List<ClassOrInterfaceType> implementsList, final List<BodyDeclaration> members) {
+	public ClassOrInterfaceDeclaration(/*final*/int modifiers,
+			/*final*/List<AnnotationExpr> annotations, /*final*/bool isInterface, /*final*/string name,
+			/*final*/List<TypeParameter> typeParameters, /*final*/List<ClassOrInterfaceType> extendsList,
+			/*final*/List<ClassOrInterfaceType> implementsList, /*final*/List<BodyDeclaration> members) {
 		super(annotations, modifiers, name, members);
 		setInterface(isInterface);
 		setTypeParameters(typeParameters);
@@ -56,11 +56,11 @@ public final class ClassOrInterfaceDeclaration extends TypeDeclaration implement
 		setImplements(implementsList);
 	}
 
-	public ClassOrInterfaceDeclaration(final int beginLine, final int beginColumn, final int endLine,
-			final int endColumn, final int modifiers,
-			final List<AnnotationExpr> annotations, final bool isInterface, final String name,
-			final List<TypeParameter> typeParameters, final List<ClassOrInterfaceType> extendsList,
-			final List<ClassOrInterfaceType> implementsList, final List<BodyDeclaration> members) {
+	public ClassOrInterfaceDeclaration(/*final*/int beginLine, /*final*/int beginColumn, /*final*/int endLine,
+			/*final*/int endColumn, /*final*/int modifiers,
+			/*final*/List<AnnotationExpr> annotations, /*final*/bool isInterface, /*final*/string name,
+			/*final*/List<TypeParameter> typeParameters, /*final*/List<ClassOrInterfaceType> extendsList,
+			/*final*/List<ClassOrInterfaceType> implementsList, /*final*/List<BodyDeclaration> members) {
 		super(beginLine, beginColumn, endLine, endColumn, annotations, modifiers, name, members);
 		setInterface(isInterface);
 		setTypeParameters(typeParameters);
@@ -68,11 +68,11 @@ public final class ClassOrInterfaceDeclaration extends TypeDeclaration implement
 		setImplements(implementsList);
 	}
 
-	//@Override public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+	//@Override public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
 		return v.visit(this, arg);
 	}
 
-	//@Override public <A> void accept(final VoidVisitor<A> v, final A arg) {
+	//@Override public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
 		v.visit(this, arg);
 	}
 
@@ -92,21 +92,21 @@ public final class ClassOrInterfaceDeclaration extends TypeDeclaration implement
 		return interface_;
 	}
 
-	public void setExtends(final List<ClassOrInterfaceType> extendsList) {
+	public void setExtends(/*final*/List<ClassOrInterfaceType> extendsList) {
 		this.extendsList = extendsList;
 		setAsParentNodeOf(this.extendsList);
 	}
 
-	public void setImplements(final List<ClassOrInterfaceType> implementsList) {
+	public void setImplements(/*final*/List<ClassOrInterfaceType> implementsList) {
 		this.implementsList = implementsList;
 		setAsParentNodeOf(this.implementsList);
 	}
 
-	public void setInterface(final bool interface_) {
+	public void setInterface(/*final*/bool interface_) {
 		this.interface_ = interface_;
 	}
 
-	public void setTypeParameters(final List<TypeParameter> typeParameters) {
+	public void setTypeParameters(/*final*/List<TypeParameter> typeParameters) {
 		this.typeParameters = typeParameters;
 		setAsParentNodeOf(this.typeParameters);
 	}

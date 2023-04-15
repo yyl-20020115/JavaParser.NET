@@ -12,27 +12,27 @@ namespace com.github.javaparser.printer.lexicalpreservation;
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  */
 
 
-public class Issue1467Test extends AbstractLexicalPreservingTest {
+public class Issue1467Test:AbstractLexicalPreservingTest {
     
-    @Test
+    [TestMethod]
     public void test() {
         considerCode(
                 "public class Bar {\n" + 
                         "    public void foo() {\n" + 
-                        "        System.out.print(\"Hello\");\n" + 
+                        "        System._out.print(\"Hello\");\n" + 
                         "    }\n" + 
                         "}");
-        String expected = 
+        string expected = 
                 "public void f() {\n" + 
                 "        throw new UnsupportedOperationException(\"Not supported yet.\");\n" +
                 "    }" ;
@@ -51,7 +51,7 @@ public class Issue1467Test extends AbstractLexicalPreservingTest {
         // set body to the method declaration
         decl.setBody(body);
         // print the result from LexicalPreservingPrinter
-        String actual = LexicalPreservingPrinter.print(decl);
+        string actual = LexicalPreservingPrinter.print(decl);
         TestUtils.assertEqualsStringIgnoringEol(expected, actual);
     }
 }

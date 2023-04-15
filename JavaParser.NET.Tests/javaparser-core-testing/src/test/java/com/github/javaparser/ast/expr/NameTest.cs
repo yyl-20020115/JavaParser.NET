@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,24 +25,24 @@ namespace com.github.javaparser.ast.expr;
 
 class NameTest {
 
-    @Test
+    [TestMethod]
     void outerNameExprIsTheRightMostIdentifier() {
         Name name = parseName("a.b.c");
         assertEquals("c", name.getIdentifier());
     }
 
-    @Test
+    [TestMethod]
     void parsingAndUnparsingWorks() {
         Name name = parseName("a.b.c");
         assertEquals("a.b.c", name.asString());
     }
 
-    @Test
+    [TestMethod]
     void parsingEmptyNameThrowsException() {
         assertThrows(ParseProblemException.class, () -> parseName(""));
     }
 
-    @Test
+    [TestMethod]
     void importName() {
         ImportDeclaration importDeclaration = parseImport("import java.util.List;");
 
@@ -50,7 +50,7 @@ class NameTest {
         assertEquals("import java.util.List;" , ConcreteSyntaxModel.genericPrettyPrint(importDeclaration));
     }
 
-    @Test
+    [TestMethod]
     void packageName() {
         CompilationUnit cu = parse("package p1.p2;");
 
@@ -58,13 +58,13 @@ class NameTest {
         assertEquals("package p1.p2;" + SYSTEM_EOL + SYSTEM_EOL, ConcreteSyntaxModel.genericPrettyPrint(cu));
     }
 
-    @Test
+    [TestMethod]
     void isInternalNegative() {
         Name name = parseName("a.b.c");
         assertFalse(name.isInternal());
     }
 
-    @Test
+    [TestMethod]
     void isInternalPositive() {
         Name name = parseName("a.b.c");
         assertTrue(name
@@ -74,7 +74,7 @@ class NameTest {
                 .getQualifier().get().isInternal());
     }
 
-    @Test
+    [TestMethod]
     void isTopLevelNegative() {
         Name name = parseName("a.b.c");
         assertFalse(name
@@ -84,7 +84,7 @@ class NameTest {
                 .getQualifier().get().isTopLevel());
     }
 
-    @Test
+    [TestMethod]
     void isTopLevelPositive() {
         Name name = parseName("a.b.c");
         assertTrue(name.isTopLevel());

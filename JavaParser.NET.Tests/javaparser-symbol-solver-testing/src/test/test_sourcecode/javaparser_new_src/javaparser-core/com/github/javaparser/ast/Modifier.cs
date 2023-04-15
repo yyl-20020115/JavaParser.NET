@@ -14,16 +14,16 @@ public enum Modifier {
 	NATIVE("native"),
 	STRICTFP("strictfp");
 
-    String lib;
+    string lib;
 
-    private Modifier(String lib) {
+    private Modifier(string lib) {
         this.lib = lib;
     }
 
     /**
      * @return the lib
      */
-    public String getLib() {
+    public string getLib() {
         return lib;
     }
 

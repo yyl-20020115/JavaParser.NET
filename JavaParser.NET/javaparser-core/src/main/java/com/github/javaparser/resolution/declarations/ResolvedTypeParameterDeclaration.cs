@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,23 +26,23 @@ namespace com.github.javaparser.resolution.declarations;
  * Declaration of a type parameter.
  * For example:
  * <p>
- * class A&lt;E extends String&gt;{}
+ * class A&lt;E:String&gt;{}
  * </p>
  * <p>
  * In this case <b>E</b> would be a type parameter.
  *
  * @author Federico Tomassetti
  */
-public interface ResolvedTypeParameterDeclaration extends ResolvedTypeDeclaration {
+public interface ResolvedTypeParameterDeclaration:ResolvedTypeDeclaration {
 
     /**
      * Instantiate a TypeParameter defined on a Type with the given data.
      */
-    static ResolvedTypeParameterDeclaration onType(final String name, String classQName, List<Bound> bounds) {
+    static ResolvedTypeParameterDeclaration onType(/*final*/string name, string classQName, List<Bound> bounds) {
         return new ResolvedTypeParameterDeclaration() {
 
             @Override
-            public String getName() {
+            public string getName() {
                 return name;
             }
 
@@ -62,12 +62,12 @@ public interface ResolvedTypeParameterDeclaration extends ResolvedTypeDeclaratio
             }
 
             @Override
-            public String getContainerQualifiedName() {
+            public string getContainerQualifiedName() {
                 return classQName;
             }
 
             @Override
-            public String getContainerId() {
+            public string getContainerId() {
                 return classQName;
             }
 
@@ -82,7 +82,7 @@ public interface ResolvedTypeParameterDeclaration extends ResolvedTypeDeclaratio
             }
 
             @Override
-            public String toString() {
+            public string toString() {
                 return "TypeParameter onType " + name;
             }
 
@@ -103,27 +103,27 @@ public interface ResolvedTypeParameterDeclaration extends ResolvedTypeDeclaratio
      * Name of the type parameter.
      */
     @Override
-	String getName();
+	string getName();
 
     /**
      * Is the type parameter been defined on a type?
      */
     default boolean declaredOnType() {
-        return (getContainer() instanceof ResolvedReferenceTypeDeclaration);
+        return (getContainer() is ResolvedReferenceTypeDeclaration);
     }
 
     /**
      * Is the type parameter been defined on a method?
      */
     default boolean declaredOnMethod() {
-        return (getContainer() instanceof ResolvedMethodDeclaration);
+        return (getContainer() is ResolvedMethodDeclaration);
     }
 
     /**
      * Is the type parameter been defined on a constructor?
      */
     default boolean declaredOnConstructor() {
-        return (getContainer() instanceof ResolvedConstructorDeclaration);
+        return (getContainer() is ResolvedConstructorDeclaration);
     }
 
     /**
@@ -131,7 +131,7 @@ public interface ResolvedTypeParameterDeclaration extends ResolvedTypeDeclaratio
      * This is unsupported because there is no package for a Type Parameter, only for its container.
      */
     @Override
-	default String getPackageName() {
+	default string getPackageName() {
         throw new UnsupportedOperationException();
     }
 
@@ -140,7 +140,7 @@ public interface ResolvedTypeParameterDeclaration extends ResolvedTypeDeclaratio
      * This is unsupported because there is no class for a Type Parameter, only for its container.
      */
     @Override
-	default String getClassName() {
+	default string getClassName() {
         throw new UnsupportedOperationException();
     }
 
@@ -150,19 +150,19 @@ public interface ResolvedTypeParameterDeclaration extends ResolvedTypeDeclaratio
      * The qualified name of a method is its qualified signature.
      */
     @Override
-	default String getQualifiedName() {
+	default string getQualifiedName() {
         return String.format("%s.%s", getContainerId(), getName());
     }
 
     /**
      * The qualified name of the container.
      */
-    String getContainerQualifiedName();
+    string getContainerQualifiedName();
 
     /**
      * The ID of the container. See TypeContainer.getId
      */
-    String getContainerId();
+    string getContainerId();
 
     /**
      * The TypeParametrizable of the container. Can be either a ReferenceTypeDeclaration or a MethodLikeDeclaration
@@ -279,9 +279,9 @@ public interface ResolvedTypeParameterDeclaration extends ResolvedTypeDeclaratio
         }
 
         /**
-         * Create an extends bound with the given type:
+         * Create an:bound with the given type:
          * <p>
-         * extends "given type"
+         *:"given type"
          * </p>
          */
         public static Bound extendsBound(ResolvedType type) {
@@ -299,14 +299,14 @@ public interface ResolvedTypeParameterDeclaration extends ResolvedTypeDeclaratio
         }
 
         /**
-         * Get the type used in the Bound.
+         * Get the type used _in the Bound.
          */
         public ResolvedType getType() {
             return type;
         }
 
         /**
-         * Is this an extends bound?
+         * Is this an:bound?
          */
         public boolean isExtends() {
             return extendsBound;
@@ -320,7 +320,7 @@ public interface ResolvedTypeParameterDeclaration extends ResolvedTypeDeclaratio
         }
 
         @Override
-        public String toString() {
+        public string toString() {
             return "Bound{" + "extendsBound=" + extendsBound + ", type=" + type + '}';
         }
 

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,7 +23,7 @@ namespace com.github.javaparser.symbolsolver;
 
 
 
-class Issue314Test extends AbstractResolutionTest{
+class Issue314Test:AbstractResolutionTest{
 
     private TypeSolver typeResolver;
     private JavaParserFacade javaParserFacade;
@@ -38,9 +38,9 @@ class Issue314Test extends AbstractResolutionTest{
         javaParserFacade = JavaParserFacade.get(typeResolver);
     }
 
-    @Test
+    [TestMethod]
     void resolveReferenceToFieldInheritedByInterface() {
-        String code = "package foo.bar;\n"+
+        string code = "package foo.bar;\n"+
                 "interface  A {\n" +
                 "        int a = 0;\n" +
                 "    }\n" +
@@ -52,7 +52,7 @@ class Issue314Test extends AbstractResolutionTest{
                 "    }";
         CompilationUnit cu = parse(code);
         NameExpr refToA = Navigator.findNameExpression(Navigator.demandClass(cu, "B"), "a").get();
-        SymbolReference<? extends ResolvedValueDeclaration> symbolReference = javaParserFacade.solve(refToA);
+        SymbolReference<?:ResolvedValueDeclaration> symbolReference = javaParserFacade.solve(refToA);
         assertEquals(true, symbolReference.isSolved());
         assertEquals(true, symbolReference.getCorrespondingDeclaration().isField());
         assertEquals("a", symbolReference.getCorrespondingDeclaration().getName());

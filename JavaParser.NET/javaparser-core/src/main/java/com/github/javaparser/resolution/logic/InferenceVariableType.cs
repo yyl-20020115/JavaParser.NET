@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -30,7 +30,7 @@ namespace com.github.javaparser.resolution.logic;
  */
 public class InferenceVariableType implements ResolvedType {
     @Override
-    public String toString() {
+    public string toString() {
         return "InferenceVariableType{" +
                 "id=" + id +
                 '}';
@@ -53,7 +53,7 @@ public class InferenceVariableType implements ResolvedType {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof InferenceVariableType)) return false;
+        if (!(o is InferenceVariableType)) return false;
 
         InferenceVariableType that = (InferenceVariableType) o;
 
@@ -74,7 +74,7 @@ public class InferenceVariableType implements ResolvedType {
     }
 
     @Override
-    public String describe() {
+    public string describe() {
         return "InferenceVariable_" + id;
     }
 
@@ -86,8 +86,8 @@ public class InferenceVariableType implements ResolvedType {
     private Set<ResolvedType> concreteEquivalentTypesAlsoIndirectly(Set<InferenceVariableType> considered, InferenceVariableType inferenceVariableType) {
         considered.add(inferenceVariableType);
         Set<ResolvedType> result = new HashSet<>();
-        result.addAll(inferenceVariableType.equivalentTypes.stream().filter(t -> !t.isTypeVariable() && !(t instanceof InferenceVariableType)).collect(Collectors.toSet()));
-        inferenceVariableType.equivalentTypes.stream().filter(t -> t instanceof InferenceVariableType).forEach(t -> {
+        result.addAll(inferenceVariableType.equivalentTypes.stream().filter(t -> !t.isTypeVariable() && !(t is InferenceVariableType)).collect(Collectors.toSet()));
+        inferenceVariableType.equivalentTypes.stream().filter(t -> t is InferenceVariableType).forEach(t -> {
             InferenceVariableType ivt = (InferenceVariableType)t;
             if (!considered.contains(ivt)) {
                 result.addAll(concreteEquivalentTypesAlsoIndirectly(considered, ivt));
@@ -125,7 +125,7 @@ public class InferenceVariableType implements ResolvedType {
     }
 
     private boolean hasInferenceVariables(ResolvedType type){
-        if (type instanceof InferenceVariableType){
+        if (type is InferenceVariableType){
             return true;
         }
 

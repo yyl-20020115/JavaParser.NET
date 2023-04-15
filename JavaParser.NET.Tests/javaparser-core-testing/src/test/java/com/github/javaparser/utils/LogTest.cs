@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.utils;
 
 class LogTest {
     private static class TestAdapter implements Log.Adapter {
-        String output = "";
+        string output = "";
 
         @Override
         public void info(Supplier<String> messageSupplier) {
@@ -41,7 +41,7 @@ class LogTest {
         @Override
         public void error(Supplier<Throwable> throwableSupplier, Supplier<String> messageSupplier) {
             Throwable throwable = throwableSupplier.get();
-            String s = messageSupplier.get();
+            string s = messageSupplier.get();
             output += "E" + s + "M" + (throwable == null ? "null" : throwable.getMessage());
         }
     }
@@ -58,21 +58,21 @@ class LogTest {
         Log.setAdapter(new Log.SilentAdapter());
     }
 
-    @Test
+    [TestMethod]
     void testTrace() {
         Log.trace("abc");
         Log.trace("a%sc%s", () -> "b", () -> "d");
         assertEquals("TabcTabcd", testAdapter.output);
     }
 
-    @Test
+    [TestMethod]
     void testInfo() {
         Log.info("abc");
         Log.info("a%sc", () -> "b");
         assertEquals("IabcIabc", testAdapter.output);
     }
 
-    @Test
+    [TestMethod]
     void testError() {
         Log.error("abc");
         Log.error("a%sc", () -> "b");

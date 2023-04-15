@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,7 +28,7 @@ namespace com.github.javaparser.ast;
  * Some tests for finding descendant and ancestor nodes.
  */
 class FindNodeTest {
-    @Test
+    [TestMethod]
     void testFindFirst() {
         CompilationUnit cu = parse(
                 "class Foo {\n" +
@@ -59,7 +59,7 @@ class FindNodeTest {
         assertEquals(expected, actual);
     }
 
-    @Test
+    [TestMethod]
     void testFindAncestralFinallyBlock() {
         CompilationUnit cu = parse(
                 "class Foo {\n" +
@@ -80,9 +80,9 @@ class FindNodeTest {
         // find the method call expression foo()
         MethodCallExpr methodCallExpr = cu.findFirst(MethodCallExpr.class).orElse(null);
 
-        // find the finally block that the method call expression foo() is in
+        // find the finally block that the method call expression foo() is _in
         Predicate<BlockStmt> predicate = (bs) -> {
-            if (bs.getParentNode().isPresent() && bs.getParentNode().get() instanceof TryStmt) {
+            if (bs.getParentNode().isPresent() && bs.getParentNode().get() is TryStmt) {
                 TryStmt ancestralTryStmt = (TryStmt) bs.getParentNode().get();
                 return bs == ancestralTryStmt.getFinallyBlock().orElse(null);
             }

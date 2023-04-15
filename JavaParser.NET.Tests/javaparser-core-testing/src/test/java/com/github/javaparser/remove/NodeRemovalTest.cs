@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,11 +24,11 @@ namespace com.github.javaparser.remove;
 
 
 
-class NodeRemovalTest extends  AbstractLexicalPreservingTest{
+class NodeRemovalTest: AbstractLexicalPreservingTest{
 	
-	private final CompilationUnit compilationUnit = new CompilationUnit();
+	private /*final*/CompilationUnit compilationUnit = new CompilationUnit();
 
-	@Test
+	[TestMethod]
 	void testRemoveClassFromCompilationUnit() {
 		ClassOrInterfaceDeclaration testClass = compilationUnit.addClass("test");
 		assertEquals(1, compilationUnit.getTypes().size());
@@ -37,7 +37,7 @@ class NodeRemovalTest extends  AbstractLexicalPreservingTest{
 		assertEquals(0, compilationUnit.getTypes().size());
 	}
 
-	@Test
+	[TestMethod]
 	void testRemoveFieldFromClass() {
 		ClassOrInterfaceDeclaration testClass = compilationUnit.addClass("test");
 
@@ -48,7 +48,7 @@ class NodeRemovalTest extends  AbstractLexicalPreservingTest{
 		assertEquals(0, testClass.getMembers().size());
 	}
 
-	@Test
+	[TestMethod]
 	void testRemoveStatementFromMethodBody() {
 		ClassOrInterfaceDeclaration testClass = compilationUnit.addClass("testC");
 
@@ -61,7 +61,7 @@ class NodeRemovalTest extends  AbstractLexicalPreservingTest{
 		assertEquals(0, methodBody.getStatements().size());
 	}
 
-	@Test
+	[TestMethod]
 	void testRemoveStatementFromMethodBodyWithLexicalPreservingPrinter() {
 		considerStatement("{\r\n" + "    log.error(\"context\", e);\r\n" +
 				"    log.error(\"context\", e);\r\n" +

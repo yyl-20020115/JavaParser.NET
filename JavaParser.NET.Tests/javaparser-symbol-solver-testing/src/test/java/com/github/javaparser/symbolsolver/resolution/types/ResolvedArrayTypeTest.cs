@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,7 +25,7 @@ namespace com.github.javaparser.symbolsolver.resolution.types;
 
 
 
-class ResolvedArrayTypeTest extends AbstractResolutionTest {
+class ResolvedArrayTypeTest:AbstractResolutionTest {
 
 	JavaParserAdapter parser = JavaParserAdapter.of(createParserWithResolver(defaultTypeSolver()));
 
@@ -36,14 +36,14 @@ class ResolvedArrayTypeTest extends AbstractResolutionTest {
 	ResolvedType rLong = getType("class A {java.lang.Long x;}");
 	ResolvedType rFloat = getType("class A {java.lang.Float x;}");
 	ResolvedType rDouble = getType("class A {java.lang.Double x;}");
-	ResolvedType rString = getType("class A {java.lang.String x;}");
+	ResolvedType rString = getType("class A {java.lang.string x;}");
 	ResolvedType rCharSequence = getType("class A {java.lang.CharSequence x;}");
 	ResolvedType rObject = getType("class A {java.lang.Object x;}");
 	ResolvedType rCloneable = getType("class A {java.lang.Cloneable x;}");
 	ResolvedType rSerializable = getType("class A {java.io.Serializable x;}");
 	ResolvedType rArrayList = getType("class A {java.util.ArrayList x;}");
 
-	@Test
+	[TestMethod]
 	// An array of primitive type can be assigned another array of primitive type
 	// if primitive type are the same.
 	void arrayOfPrimitiveIsAssignableByArrayOfSamePrimitiveType() {
@@ -56,7 +56,7 @@ class ResolvedArrayTypeTest extends AbstractResolutionTest {
 		assertTrue(array(ResolvedPrimitiveType.CHAR).isAssignableBy(array(ResolvedPrimitiveType.CHAR)));
 	}
 
-	@Test
+	[TestMethod]
 	void arrayOfPrimitiveIsNotAssignableByArrayOfDifferentPrimitiveType() {
 		assertFalse(isAssignableBy(array(ResolvedPrimitiveType.DOUBLE),
 				arrays(ResolvedPrimitiveType.FLOAT, ResolvedPrimitiveType.LONG, ResolvedPrimitiveType.INT,
@@ -81,7 +81,7 @@ class ResolvedArrayTypeTest extends AbstractResolutionTest {
 						ResolvedPrimitiveType.INT, ResolvedPrimitiveType.BYTE, ResolvedPrimitiveType.SHORT)));
 	}
 
-	@Test
+	[TestMethod]
 	// An array of primitive type cannot be assigned to a Boxed type variable,
 	// because Boxed type is a class type other than Object
 	void arrayOfPrimitiveIsNotAssignableByArrayOfBoxedType() {
@@ -94,7 +94,7 @@ class ResolvedArrayTypeTest extends AbstractResolutionTest {
 		assertFalse(array(ResolvedPrimitiveType.CHAR).isAssignableBy(array(rChar)));
 	}
 
-	@Test
+	[TestMethod]
 	void arrayOfPrimitiveIsAssignableByNullType() {
 		assertTrue(array(ResolvedPrimitiveType.DOUBLE).isAssignableBy(NullType.INSTANCE));
 		assertTrue(array(ResolvedPrimitiveType.FLOAT).isAssignableBy(NullType.INSTANCE));
@@ -105,7 +105,7 @@ class ResolvedArrayTypeTest extends AbstractResolutionTest {
 		assertTrue(array(ResolvedPrimitiveType.CHAR).isAssignableBy(NullType.INSTANCE));
 	}
 
-	@Test
+	[TestMethod]
 	// An array can be assigned only to a variable of a compatible array type, or to
 	// a variable of type Object, Cloneable or java.io.Serializable.
 	void objectIsAssignableByAnyArrayOfPrimitiveTypeOrReference() {
@@ -119,7 +119,7 @@ class ResolvedArrayTypeTest extends AbstractResolutionTest {
 		assertTrue(rObject.isAssignableBy(array(rString)));
 	}
 
-	@Test
+	[TestMethod]
 	void cloneableIsAssignableByAnyArrayOfPrimitiveTypeOrReference() {
 		assertTrue(rCloneable.isAssignableBy(array(ResolvedPrimitiveType.DOUBLE)));
 		assertTrue(rCloneable.isAssignableBy(array(ResolvedPrimitiveType.FLOAT)));
@@ -131,7 +131,7 @@ class ResolvedArrayTypeTest extends AbstractResolutionTest {
 		assertTrue(rCloneable.isAssignableBy(array(rString)));
 	}
 
-	@Test
+	[TestMethod]
 	void serializableIsAssignableByAnyArrayOfPrimitiveTypeOrReference() {
 		assertTrue(rSerializable.isAssignableBy(array(ResolvedPrimitiveType.DOUBLE)));
 		assertTrue(rSerializable.isAssignableBy(array(ResolvedPrimitiveType.FLOAT)));
@@ -143,22 +143,22 @@ class ResolvedArrayTypeTest extends AbstractResolutionTest {
 		assertTrue(rSerializable.isAssignableBy(array(rString)));
 	}
 
-	@Test
+	[TestMethod]
 	void arrayOfSubTypeIsAssignableByArrayOfSuperType() {
 		assertTrue(array(rCharSequence).isAssignableBy(array(rString)));
 	}
 
-	@Test
+	[TestMethod]
 	void arrayOfReferenceIsNotAssignableByArrayOfOtherReference() {
 		assertFalse(array(rString).isAssignableBy(array(rCharSequence)));
 	}
 
-	@Test
+	[TestMethod]
 	void arrayOfObjectIsAssignableByArrayOfReference() {
 		assertTrue(array(rObject).isAssignableBy(array(rLong)));
 	}
 
-	@Test
+	[TestMethod]
 	void arrayOfObjectIsNotAssignableByArrayOfPrimitiveType() {
 		assertFalse(array(rObject).isAssignableBy(array(ResolvedPrimitiveType.LONG)));
 	}
@@ -175,7 +175,7 @@ class ResolvedArrayTypeTest extends AbstractResolutionTest {
 		return new ResolvedArrayType(type);
 	}
 
-	private ResolvedType getType(String code) {
+	private ResolvedType getType(string code) {
 		return parser.parse(code).findFirst(FieldDeclaration.class).get().resolve().getType();
 	}
 

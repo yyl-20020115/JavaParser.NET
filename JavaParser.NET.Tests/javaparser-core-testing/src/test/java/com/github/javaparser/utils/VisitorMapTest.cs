@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,7 +25,7 @@ namespace com.github.javaparser.utils;
 
 
 class VisitorMapTest {
-    @Test
+    [TestMethod]
     void normalEqualsDoesDeepCompare() {
         CompilationUnit x1 = parse("class X{}");
         CompilationUnit x2 = parse("class X{}");
@@ -36,7 +36,7 @@ class VisitorMapTest {
         assertEquals(1, map.size());
     }
 
-    @Test
+    [TestMethod]
     void objectIdentityEqualsDoesShallowCompare() {
         CompilationUnit x1 = parse("class X{}");
         CompilationUnit x2 = parse("class X{}");
@@ -47,7 +47,7 @@ class VisitorMapTest {
         assertEquals(2, map.size());
     }
     
-    @Test
+    [TestMethod]
     void visitorMapGet(){
     	CompilationUnit x1 = parse("class X{}");
 
@@ -56,7 +56,7 @@ class VisitorMapTest {
         assertEquals(1, (int)map.get(x1));
     }
     
-    @Test
+    [TestMethod]
     void visitorMapContainsKey(){
     	CompilationUnit x1 = parse("class X{}");
 
@@ -65,7 +65,7 @@ class VisitorMapTest {
         assertTrue(map.containsKey(x1));
     }
     
-    @Test
+    [TestMethod]
     void visitorMapPutAll(){
     	CompilationUnit x1 = parse("class X{}");
     	CompilationUnit x2 = parse("class Y{}");
@@ -77,7 +77,7 @@ class VisitorMapTest {
         assertEquals(2, visitorMap.size());
     }
     
-    @Test
+    [TestMethod]
     void remove(){
         CompilationUnit x1 = parse("class X{}");
         VisitorMap<CompilationUnit, Integer> map = new VisitorMap<>(new ObjectIdentityHashCodeVisitor(), new ObjectIdentityEqualsVisitor());

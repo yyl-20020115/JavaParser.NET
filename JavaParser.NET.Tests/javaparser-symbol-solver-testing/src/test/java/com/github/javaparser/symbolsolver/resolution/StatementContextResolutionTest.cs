@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,45 +23,45 @@ namespace com.github.javaparser.symbolsolver.resolution;
 
 
 
-class StatementContextResolutionTest extends AbstractResolutionTest {
+class StatementContextResolutionTest:AbstractResolutionTest {
 
-    @Test
+    [TestMethod]
     void resolveLocalVariableInParentOfParent() {
         CompilationUnit cu = parseSample("LocalVariableInParent");
         com.github.javaparser.ast.body.ClassOrInterfaceDeclaration referencesToField = Navigator.demandClass(cu, "LocalVariableInParent");
         MethodDeclaration method = Navigator.demandMethod(referencesToField, "foo1");
         NameExpr nameExpr = Navigator.findNameExpression(method, "s").get();
 
-        SymbolReference<? extends ResolvedValueDeclaration> ref = JavaParserFacade.get(new ReflectionTypeSolver()).solve(nameExpr);
+        SymbolReference<?:ResolvedValueDeclaration> ref = JavaParserFacade.get(new ReflectionTypeSolver()).solve(nameExpr);
         assertTrue(ref.isSolved());
         assertEquals("java.lang.String", ref.getCorrespondingDeclaration().getType().asReferenceType().getQualifiedName());
     }
 
-    @Test
+    [TestMethod]
     void resolveLocalVariableInParent() {
         CompilationUnit cu = parseSample("LocalVariableInParent");
         com.github.javaparser.ast.body.ClassOrInterfaceDeclaration referencesToField = Navigator.demandClass(cu, "LocalVariableInParent");
         MethodDeclaration method = Navigator.demandMethod(referencesToField, "foo3");
         NameExpr nameExpr = Navigator.findNameExpression(method, "s").get();
 
-        SymbolReference<? extends ResolvedValueDeclaration> ref = JavaParserFacade.get(new ReflectionTypeSolver()).solve(nameExpr);
+        SymbolReference<?:ResolvedValueDeclaration> ref = JavaParserFacade.get(new ReflectionTypeSolver()).solve(nameExpr);
         assertTrue(ref.isSolved());
         assertEquals("java.lang.String", ref.getCorrespondingDeclaration().getType().asReferenceType().getQualifiedName());
     }
 
-    @Test
+    [TestMethod]
     void resolveLocalVariableInSameParent() {
         CompilationUnit cu = parseSample("LocalVariableInParent");
         com.github.javaparser.ast.body.ClassOrInterfaceDeclaration referencesToField = Navigator.demandClass(cu, "LocalVariableInParent");
         MethodDeclaration method = Navigator.demandMethod(referencesToField, "foo2");
         NameExpr nameExpr = Navigator.findNameExpression(method, "s").get();
 
-        SymbolReference<? extends ResolvedValueDeclaration> ref = JavaParserFacade.get(new ReflectionTypeSolver()).solve(nameExpr);
+        SymbolReference<?:ResolvedValueDeclaration> ref = JavaParserFacade.get(new ReflectionTypeSolver()).solve(nameExpr);
         assertTrue(ref.isSolved());
         assertEquals("java.lang.String", ref.getCorrespondingDeclaration().getType().asReferenceType().getQualifiedName());
     }
 
-    @Test
+    [TestMethod]
     void resolveLocalAndSeveralAnnidatedLevels() {
         CompilationUnit cu = parseSample("LocalVariableInParent");
         com.github.javaparser.ast.body.ClassOrInterfaceDeclaration referencesToField = Navigator.demandClass(cu, "LocalVariableInParent");
@@ -70,7 +70,7 @@ class StatementContextResolutionTest extends AbstractResolutionTest {
 
         TypeSolver typeSolver = new ReflectionTypeSolver();
 
-        SymbolReference<? extends ResolvedValueDeclaration> ref = JavaParserFacade.get(typeSolver).solve(call.getScope().get());
+        SymbolReference<?:ResolvedValueDeclaration> ref = JavaParserFacade.get(typeSolver).solve(call.getScope().get());
         assertTrue(ref.isSolved());
         assertEquals("java.util.List<Comment>", ref.getCorrespondingDeclaration().getType().describe());
 
@@ -78,7 +78,7 @@ class StatementContextResolutionTest extends AbstractResolutionTest {
         assertEquals("add", methodUsage.getName());
     }
 
-    @Test
+    [TestMethod]
     void resolveMethodOnGenericClass() {
         CompilationUnit cu = parseSample("LocalVariableInParent");
         com.github.javaparser.ast.body.ClassOrInterfaceDeclaration referencesToField = Navigator.demandClass(cu, "LocalVariableInParent");
@@ -87,7 +87,7 @@ class StatementContextResolutionTest extends AbstractResolutionTest {
 
         TypeSolver typeSolver = new ReflectionTypeSolver();
 
-        SymbolReference<? extends ResolvedValueDeclaration> ref = JavaParserFacade.get(typeSolver).solve(call.getScope().get());
+        SymbolReference<?:ResolvedValueDeclaration> ref = JavaParserFacade.get(typeSolver).solve(call.getScope().get());
         assertTrue(ref.isSolved());
         assertEquals("java.util.List<Comment>", ref.getCorrespondingDeclaration().getType().describe());
 

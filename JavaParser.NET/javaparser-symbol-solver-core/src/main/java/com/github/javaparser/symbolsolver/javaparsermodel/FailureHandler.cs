@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -29,7 +29,7 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel;
  */
 public class FailureHandler {
 
-    private static final Map<Class<? extends Throwable>, Function<Throwable, ? extends RuntimeException>> FAILURE_CONVERTER = new HashMap<>();
+    private static /*final*/Map<Class<?:Throwable>, Function<Throwable, ?:RuntimeException>> FAILURE_CONVERTER = new HashMap<>();
     static {
         FAILURE_CONVERTER.put(UnsolvedSymbolException.class,
                 (Throwable th) -> (RuntimeException)th);
@@ -39,9 +39,9 @@ public class FailureHandler {
         return handle(th, null);
     }
                                    
-    public RuntimeException handle(Throwable th, String message) {
+    public RuntimeException handle(Throwable th, string message) {
         // searching for exact mapping
-        Function<Throwable, ? extends RuntimeException> converter = FAILURE_CONVERTER.get(findRootCause(th).getClass());
+        Function<Throwable, ?:RuntimeException> converter = FAILURE_CONVERTER.get(findRootCause(th).getClass());
         if (converter != null) {
             return converter.apply(th);
         }
@@ -52,7 +52,7 @@ public class FailureHandler {
         return getRuntimeExceptionFrom(findRootCause(th), message);
     }
 
-    protected final <E extends Throwable> E findRootCause(Throwable failure) {
+    protected /*final*/<E:Throwable> E findRootCause(Throwable failure) {
         while (failure != null) {
             if (isRootCause(failure)) {
                 return (E) failure;
@@ -66,7 +66,7 @@ public class FailureHandler {
         return th.getCause() == null;
     }
     
-    private RuntimeException getRuntimeExceptionFrom(Throwable th, String message) {
+    private RuntimeException getRuntimeExceptionFrom(Throwable th, string message) {
         if (message == null || message.isEmpty())
             return new RuntimeException(findRootCause(th));
         return new RuntimeException(message, findRootCause(th));

@@ -13,13 +13,13 @@ public class InnerClassFieldContainer {
 
 class FieldContainer {
     FieldContainer containerField = new FieldContainer();
-    public String firstContainerMethod() {
+    public string firstContainerMethod() {
         return "firstContainerMethod()";
     }
-    public String secondContainerMethod() {
+    public string secondContainerMethod() {
         return "secondContainerMethod()";
     }
-    public String thirdContainerMethod() {
+    public string thirdContainerMethod() {
         return "thirdContainerMethod()";
     }
 }

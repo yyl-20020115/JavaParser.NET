@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.utils;
 
 class UtilsTest {
 
-    @Test
+    [TestMethod]
     void testIsNullOrEmpty() {
         assertTrue(isNullOrEmpty(null));
         assertTrue(isNullOrEmpty(new ArrayList<>()));
@@ -35,13 +35,13 @@ class UtilsTest {
                 new ArrayList<>(Arrays.asList("foo", "bar"))));
     }
 
-    @Test
+    [TestMethod]
     void testAssertNotNull() {
         assertEquals("foo", assertNotNull("foo"));
         assertThrows(AssertionError.class, () -> assertNotNull(null));
     }
 
-    @Test
+    [TestMethod]
     void testAssertNonEmpty() {
         assertEquals("foo", assertNonEmpty("foo"));
         assertThrows(AssertionError.class, () -> assertNonEmpty(""));
@@ -49,39 +49,39 @@ class UtilsTest {
 
     }
 
-    @Test
+    [TestMethod]
     void testAssertNonNegative() {
         assertEquals((Number) 2, assertNonNegative(2));
         assertThrows(AssertionError.class, () -> assertNonNegative(-2));
     }
 
-    @Test
+    [TestMethod]
     void testAssertPositive() {
         assertEquals((Number) 2, assertPositive(2));
         assertThrows(AssertionError.class, () -> assertPositive(-2));
     }
 
-    @Test
+    [TestMethod]
     void testEscapeEndOfLines() {
         assertEquals("f\\no\\ro", escapeEndOfLines("f\no\ro"));
     }
 
-    @Test
-    void testReaderToString() throws IOException {
+    [TestMethod]
+    void testReaderToString(){
         Reader reader = new Reader() {
             @Override
-            public int read(char[] chars, int i, int i1) throws IOException {
+            public int read(char[] chars, int i, int i1){
                 return 0;
             }
 
             @Override
-            public void close() throws IOException {
+            public void close(){
             }
         };
         assertEquals("", readerToString(reader));
     }
 
-    @Test
+    [TestMethod]
     void testToCamelCase() {
         assertEquals("foo", toCamelCase("foo"));
         assertEquals("foo", toCamelCase("Foo"));
@@ -89,14 +89,14 @@ class UtilsTest {
         assertEquals("foo", toCamelCase("fOo"));
     }
 
-    @Test
+    [TestMethod]
     void testScreamingToCamelCase() {
         assertEquals("abc", screamingToCamelCase("ABC"));
         assertEquals("abcDef", screamingToCamelCase("ABC_DEF"));
         assertEquals("abc", screamingToCamelCase("ABC_"));
     }
 
-    @Test
+    [TestMethod]
     void screamingEmptyString() {
         assertEquals("", camelCaseToScreaming(""));
         assertEquals("ABC", camelCaseToScreaming("abc"));
@@ -104,14 +104,14 @@ class UtilsTest {
         assertEquals("APE_TAIL", camelCaseToScreaming("apeTail"));
     }
 
-    @Test
+    [TestMethod]
     void testNextWord() {
         assertEquals("foo", nextWord("foo"));
         assertEquals("foo", nextWord("foo bar"));
         assertEquals("foo", nextWord("foo bar Baz"));
     }
 
-    @Test
+    [TestMethod]
     void testIndent() {
         assertEquals("foo",
                 indent(new StringBuilder("foo"), 0).toString());
@@ -123,37 +123,37 @@ class UtilsTest {
                 indent(new StringBuilder("foo"), 3).toString());
     }
 
-    @Test
+    [TestMethod]
     void capitalizeOnEmptyString() {
         assertThrows(IllegalArgumentException.class, () -> capitalize(""));
     }
 
-    @Test
+    [TestMethod]
     void capitalizeOnStringOfOneCharacter() {
         assertEquals("F", capitalize("f"));
     }
 
-    @Test
+    [TestMethod]
     void capitalizeOnStringOfTwoCharacters() {
         assertEquals("Fo", capitalize("fo"));
     }
 
-    @Test
+    [TestMethod]
     void decapitalizeOnEmptyString() {
         assertThrows(IllegalArgumentException.class, () -> decapitalize(""));
     }
 
-    @Test
+    [TestMethod]
     void decapitalizeOnStringOfOneCharacter() {
         assertEquals("f", decapitalize("F"));
     }
 
-    @Test
+    [TestMethod]
     void decapitalizeOnStringOfTwoCharacters() {
         assertEquals("fo", decapitalize("Fo"));
     }
 
-    @Test
+    [TestMethod]
     void testValueIsNullOrEmpty() {
         assertTrue(valueIsNullOrEmpty(null));
         assertTrue(valueIsNullOrEmpty(Optional.empty()));
@@ -165,7 +165,7 @@ class UtilsTest {
                 new ArrayList<>(Arrays.asList("foo", "bar"))));
     }
 
-    @Test
+    [TestMethod]
     void testValueIsNullOrEmptyStringOrOptional() {
         assertTrue(valueIsNullOrEmptyStringOrOptional(null));
         assertTrue(valueIsNullOrEmptyStringOrOptional(
@@ -176,7 +176,7 @@ class UtilsTest {
                 Optional.ofNullable("foo")));
     }
 
-    @Test
+    [TestMethod]
     void testIndexOfElementByObjectIdentity() {
         assertEquals(-1, indexOfElementByObjectIdentity(
                 new ArrayList<>(), "bar"));
@@ -184,25 +184,25 @@ class UtilsTest {
                 new ArrayList<>(Arrays.asList("foo", "bar")), "bar"));
     }
 
-    @Test
+    [TestMethod]
     void testSet() {
         assertEquals(new HashSet<>(Arrays.asList("bar", "foo", "baz")),
                 set("foo", "bar", "baz"));
     }
 
-    @Test
+    [TestMethod]
     void normalizeEolInTextBlock() {
-        String result = Utils.normalizeEolInTextBlock("\r\n \r \n", "Q");
+        string result = Utils.normalizeEolInTextBlock("\r\n \r \n", "Q");
         assertEquals("Q Q Q", result);
     }
 
-    @Test
+    [TestMethod]
     void testRemoveFileExtension() {
         assertEquals("foo", removeFileExtension("foo"));
         assertEquals("foo", removeFileExtension("foo.txt"));
     }
 
-    @Test
+    [TestMethod]
     void testTrimTrailingSpaces() {
         assertEquals("abc", trimTrailingSpaces("abc"));
         assertEquals("  abc", trimTrailingSpaces("  abc"));

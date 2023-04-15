@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,7 +27,7 @@ namespace com.github.javaparser.generator.core.visitor;
 /**
  * Generates JavaParser's HashCodeVisitor.
  */
-public class HashCodeVisitorGenerator extends VisitorGenerator {
+public class HashCodeVisitorGenerator:VisitorGenerator {
     public HashCodeVisitorGenerator(SourceRoot sourceRoot) {
         super(sourceRoot, "com.github.javaparser.ast.visitor", "HashCodeVisitor", "Integer", "Void", true);
     }
@@ -36,16 +36,16 @@ public class HashCodeVisitorGenerator extends VisitorGenerator {
     protected void generateVisitMethodBody(BaseNodeMetaModel node, MethodDeclaration visitMethod, CompilationUnit compilationUnit) {
         visitMethod.getParameters().forEach(p -> p.setFinal(true));
 
-        final BlockStmt body = visitMethod.getBody().get();
+        /*final*/BlockStmt body = visitMethod.getBody().get();
         body.getStatements().clear();
 
-        final SeparatedItemStringBuilder builder = new SeparatedItemStringBuilder("return ", "* 31 +", ";");
-        final List<PropertyMetaModel> propertyMetaModels= node.getAllPropertyMetaModels();
+        /*final*/SeparatedItemStringBuilder builder = new SeparatedItemStringBuilder("return ", "* 31 +", ";");
+        /*final*/List<PropertyMetaModel> propertyMetaModels= node.getAllPropertyMetaModels();
         if (propertyMetaModels.isEmpty()) {
             builder.append("0");
         } else {
             for (PropertyMetaModel field : propertyMetaModels) {
-                final String getter = field.getGetterMethodName() + "()";
+                /*final*/string getter = field.getGetterMethodName() + "()";
                 // Is this field another AST node? Visit it.
                 if (field.getNodeReference().isPresent()) {
                     if (field.isOptional()) {

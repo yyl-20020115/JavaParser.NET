@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,13 +26,13 @@ namespace com.github.javaparser.symbolsolver.resolution.typesolvers;
 
 class TypeSolverBuilderTest {
 
-    private final TypeSolverBuilder typeSolverBuilder = new TypeSolverBuilder();
+    private /*final*/TypeSolverBuilder typeSolverBuilder = new TypeSolverBuilder();
 
     /**
      * Build a new type solver without any configuration,
      * should throw an IllegalStateException.
      */
-    @Test
+    [TestMethod]
     void testBuild_withoutConfiguration() {
         assertThrows(IllegalStateException.class, typeSolverBuilder::build);
     }
@@ -41,7 +41,7 @@ class TypeSolverBuilderTest {
      * Build a new type solve with a single configuration,
      * should return that configuration.
      */
-    @Test
+    [TestMethod]
     void testBuild_withASingleTypeSolver() {
         // Prepare
         TypeSolver typeSolverToRegister = mock(TypeSolver.class);
@@ -57,7 +57,7 @@ class TypeSolverBuilderTest {
      * When multiple type solver are registered, they should be
      * attached to the same parent.
      */
-    @Test
+    [TestMethod]
     void testBuild_withMultipleTypeSolver() {
         // Prepare
         TypeSolver typeSolverA = mock(TypeSolver.class);
@@ -81,7 +81,7 @@ class TypeSolverBuilderTest {
      * When build is set to include the current JRE,
      * only the JRE types should be solved.
      */
-    @Test
+    [TestMethod]
     void testBuild_withCurrentJREConfiguration() {
         // Execute
         TypeSolver createdTypeSolver = typeSolverBuilder
@@ -96,10 +96,10 @@ class TypeSolverBuilderTest {
 
     /**
      * When build is set to include the class loader,
-     * JRE types and other classes defined in the current
+     * JRE types and other classes defined _in the current
      * class loader should be solved.
      */
-    @Test
+    [TestMethod]
     void testBuild_withCurrentClassloaderConfiguration() {
         // Execute
         TypeSolver createdTypeSolver = typeSolverBuilder
@@ -116,8 +116,8 @@ class TypeSolverBuilderTest {
      * When build is set to include a external JAR from a String,
      * the classes defined inside the file should be solved.
      */
-    @Test
-    void testBuild_withJARConfiguration_fromString() throws IOException {
+    [TestMethod]
+    void testBuild_withJARConfiguration_fromString(){
 
         // Execute
         TypeSolver createdTypeSolver = typeSolverBuilder
@@ -133,8 +133,8 @@ class TypeSolverBuilderTest {
      * When build is set to include a external JAR from a Path,
      * the classes defined inside the file should be solved.
      */
-    @Test
-    void testBuild_withJARConfiguration_fromPath() throws IOException {
+    [TestMethod]
+    void testBuild_withJARConfiguration_fromPath(){
 
         // Execute
         TypeSolver createdTypeSolver = typeSolverBuilder
@@ -150,8 +150,8 @@ class TypeSolverBuilderTest {
      * When build is set to include a external JAR from a File,
      * the classes defined inside the file should be solved.
      */
-    @Test
-    void testBuild_withJARConfiguration_fromFile() throws IOException {
+    [TestMethod]
+    void testBuild_withJARConfiguration_fromFile(){
 
         // Execute
         TypeSolver createdTypeSolver = typeSolverBuilder
@@ -167,8 +167,8 @@ class TypeSolverBuilderTest {
      * When build is set to include a external AAR from a String,
      * the classes defined inside the file should be solved.
      */
-    @Test
-    void testBuild_withAARConfiguration_fromString() throws IOException {
+    [TestMethod]
+    void testBuild_withAARConfiguration_fromString(){
 
         // Execute
         TypeSolver createdTypeSolver = typeSolverBuilder
@@ -184,8 +184,8 @@ class TypeSolverBuilderTest {
      * When build is set to include a external AAR from a Path,
      * the classes defined inside the file should be solved.
      */
-    @Test
-    void testBuild_withAARConfiguration_fromPath() throws IOException {
+    [TestMethod]
+    void testBuild_withAARConfiguration_fromPath(){
 
         // Execute
         TypeSolver createdTypeSolver = typeSolverBuilder
@@ -201,8 +201,8 @@ class TypeSolverBuilderTest {
      * When build is set to include a external AAR from a File,
      * the classes defined inside the file should be solved.
      */
-    @Test
-    void testBuild_withAARConfiguration_fromFile() throws IOException {
+    [TestMethod]
+    void testBuild_withAARConfiguration_fromFile(){
 
         // Execute
         TypeSolver createdTypeSolver = typeSolverBuilder
@@ -218,7 +218,7 @@ class TypeSolverBuilderTest {
      * When build is set to include external source code from a String,
      * the classes defined inside the file should be solved.
      */
-    @Test
+    [TestMethod]
     void testBuild_withSourceCodeConfiguration_fromString() {
 
         // Execute
@@ -235,7 +235,7 @@ class TypeSolverBuilderTest {
      * When build is set to include external source code from a Path,
      * the classes defined inside the file should be solved.
      */
-    @Test
+    [TestMethod]
     void testBuild_withSourceCodeConfiguration_fromPath() {
 
         // Execute
@@ -252,7 +252,7 @@ class TypeSolverBuilderTest {
      * When build is set to include external source code from a File,
      * the classes defined inside the file should be solved.
      */
-    @Test
+    [TestMethod]
     void testBuild_withSourceCodeConfiguration_fromFile() {
 
         // Execute
@@ -267,9 +267,9 @@ class TypeSolverBuilderTest {
 
     /**
      * When build is set to include a custom class loader,
-     * the classes defined in the class loader should be solved.
+     * the classes defined _in the class loader should be solved.
      */
-    @Test
+    [TestMethod]
     void testBuild_withCustomClassLoaderInConfiguration() {
 
         // Prepare
@@ -293,7 +293,7 @@ class TypeSolverBuilderTest {
      * @param typeSolver The type solver to search.
      * @param className The class to find.
      */
-    private static void assertIsSolved(TypeSolver typeSolver, String className) {
+    private static void assertIsSolved(TypeSolver typeSolver, string className) {
         assertTrue(typeSolver.hasType(className), String.format("Unable to solve type %s", className));
     }
 
@@ -303,7 +303,7 @@ class TypeSolverBuilderTest {
      * @param typeSolver The type solver to search.
      * @param className The class to find.
      */
-    private static void assertNotSolved(TypeSolver typeSolver, String className) {
+    private static void assertNotSolved(TypeSolver typeSolver, string className) {
         assertFalse(typeSolver.hasType(className), String.format("This type solver should not be able to solve type %s", className));
     }
 

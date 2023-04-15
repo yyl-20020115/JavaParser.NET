@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,7 +27,7 @@ namespace com.github.javaparser.ast.body;
 /**
  * @author Julio Vilmar Gesser
  */
-public final class ConstructorDeclaration extends BodyDeclaration<ConstructorDeclaration>
+public /*final*/class ConstructorDeclaration:BodyDeclaration<ConstructorDeclaration>
         implements NodeWithJavaDoc<ConstructorDeclaration>, NodeWithDeclaration,
         NodeWithName<ConstructorDeclaration>, NodeWithModifiers<ConstructorDeclaration>,
         NodeWithParameters<ConstructorDeclaration>, NodeWithThrowable<ConstructorDeclaration>,
@@ -48,14 +48,14 @@ public final class ConstructorDeclaration extends BodyDeclaration<ConstructorDec
     public ConstructorDeclaration() {
     }
 
-    public ConstructorDeclaration(EnumSet<Modifier> modifiers, String name) {
+    public ConstructorDeclaration(EnumSet<Modifier> modifiers, string name) {
         setModifiers(modifiers);
         setName(name);
     }
 
     public ConstructorDeclaration(EnumSet<Modifier> modifiers, List<AnnotationExpr> annotations,
                                   List<TypeParameter> typeParameters,
-                                  String name, List<Parameter> parameters, List<ReferenceType> throws_,
+                                  string name, List<Parameter> parameters, List<ReferenceType> throws_,
                                   BlockStmt block) {
         super(annotations);
         setModifiers(modifiers);
@@ -67,7 +67,7 @@ public final class ConstructorDeclaration extends BodyDeclaration<ConstructorDec
     }
 
     public ConstructorDeclaration(Range range, EnumSet<Modifier> modifiers,
-                                  List<AnnotationExpr> annotations, List<TypeParameter> typeParameters, String name,
+                                  List<AnnotationExpr> annotations, List<TypeParameter> typeParameters, string name,
                                   List<Parameter> parameters, List<ReferenceType> throws_, BlockStmt block) {
         super(range, annotations);
         setModifiers(modifiers);
@@ -100,7 +100,7 @@ public final class ConstructorDeclaration extends BodyDeclaration<ConstructorDec
     }
 
     @Override
-    public String getName() {
+    public string getName() {
         return name == null ? null : name.getName();
     }
 
@@ -132,7 +132,7 @@ public final class ConstructorDeclaration extends BodyDeclaration<ConstructorDec
     }
 
     @Override
-    public ConstructorDeclaration setName(String name) {
+    public ConstructorDeclaration setName(string name) {
         setNameExpr(new NameExpr(name));
         return this;
     }
@@ -170,7 +170,7 @@ public final class ConstructorDeclaration extends BodyDeclaration<ConstructorDec
      * [throws exceptionsList]
      */
     @Override
-    public String getDeclarationAsString(boolean includingModifiers, boolean includingThrows,
+    public string getDeclarationAsString(boolean includingModifiers, boolean includingThrows,
                                          boolean includingParameterName) {
         StringBuilder sb = new StringBuilder();
         if (includingModifiers) {
@@ -210,18 +210,18 @@ public final class ConstructorDeclaration extends BodyDeclaration<ConstructorDec
     }
 
     @Override
-    public String getDeclarationAsString(boolean includingModifiers, boolean includingThrows) {
+    public string getDeclarationAsString(boolean includingModifiers, boolean includingThrows) {
         return getDeclarationAsString(includingModifiers, includingThrows, true);
     }
 
     @Override
-    public String getDeclarationAsString() {
+    public string getDeclarationAsString() {
         return getDeclarationAsString(true, true, true);
     }
 
     @Override
     public JavadocComment getJavaDoc() {
-        if (getComment() instanceof JavadocComment) {
+        if (getComment() is JavadocComment) {
             return (JavadocComment) getComment();
         }
         return null;

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,28 +26,28 @@ namespace com.github.javaparser.ast.type;
 /**
  * @author Julio Vilmar Gesser
  */
-public final class ClassOrInterfaceType extends Type {
+public /*final*/class ClassOrInterfaceType:Type {
 
     private ClassOrInterfaceType scope;
 
-    private String name;
+    private string name;
 
     private List<Type> typeArgs;
 
     public ClassOrInterfaceType() {
     }
 
-    public ClassOrInterfaceType(final String name) {
+    public ClassOrInterfaceType(/*final*/string name) {
         setName(name);
     }
 
-    public ClassOrInterfaceType(final ClassOrInterfaceType scope, final String name) {
+    public ClassOrInterfaceType(/*final*/ClassOrInterfaceType scope, /*final*/string name) {
         setScope(scope);
         setName(name);
     }
 
-    public ClassOrInterfaceType(final int beginLine, final int beginColumn, final int endLine, final int endColumn,
-                                final ClassOrInterfaceType scope, final String name, final List<Type> typeArgs) {
+    public ClassOrInterfaceType(/*final*/int beginLine, /*final*/int beginColumn, /*final*/int endLine, /*final*/int endColumn,
+                                /*final*/ClassOrInterfaceType scope, /*final*/string name, /*final*/List<Type> typeArgs) {
         super(beginLine, beginColumn, endLine, endColumn);
         setScope(scope);
         setName(name);
@@ -55,16 +55,16 @@ public final class ClassOrInterfaceType extends Type {
     }
 
     //@Override
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     //@Override
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
-    public String getName() {
+    public string getName() {
         return name;
     }
 
@@ -85,16 +85,16 @@ public final class ClassOrInterfaceType extends Type {
         return new PrimitiveType(PrimitiveType.unboxMap.get(name));
     }
 
-    public void setName(final String name) {
+    public void setName(/*final*/string name) {
         this.name = name;
     }
 
-    public void setScope(final ClassOrInterfaceType scope) {
+    public void setScope(/*final*/ClassOrInterfaceType scope) {
         this.scope = scope;
         setAsParentNodeOf(this.scope);
     }
 
-    public void setTypeArgs(final List<Type> typeArgs) {
+    public void setTypeArgs(/*final*/List<Type> typeArgs) {
         this.typeArgs = typeArgs;
         setAsParentNodeOf(this.typeArgs);
     }

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -31,7 +31,7 @@ namespace com.github.javaparser.resolution.model;
 public class LambdaArgumentTypePlaceholder implements ResolvedType {
 
     private int pos;
-    private SymbolReference<? extends ResolvedMethodLikeDeclaration> method;
+    private SymbolReference<?:ResolvedMethodLikeDeclaration> method;
 
     public LambdaArgumentTypePlaceholder(int pos) {
         this.pos = pos;
@@ -48,7 +48,7 @@ public class LambdaArgumentTypePlaceholder implements ResolvedType {
     }
 
     @Override
-    public String describe() {
+    public string describe() {
         throw new UnsupportedOperationException();
     }
 
@@ -57,7 +57,7 @@ public class LambdaArgumentTypePlaceholder implements ResolvedType {
         return false;
     }
 
-    public void setMethod(SymbolReference<? extends ResolvedMethodLikeDeclaration> method) {
+    public void setMethod(SymbolReference<?:ResolvedMethodLikeDeclaration> method) {
         this.method = method;
     }
 

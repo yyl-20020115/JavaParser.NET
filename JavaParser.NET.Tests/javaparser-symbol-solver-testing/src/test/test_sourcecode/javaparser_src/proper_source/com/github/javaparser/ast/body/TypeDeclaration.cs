@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.ast.body;
 /**
  * @author Julio Vilmar Gesser
  */
-public abstract class TypeDeclaration extends BodyDeclaration implements NamedNode {
+public abstract class TypeDeclaration:BodyDeclaration implements NamedNode {
 
 	private NameExpr name;
 
@@ -37,13 +37,13 @@ public abstract class TypeDeclaration extends BodyDeclaration implements NamedNo
 	public TypeDeclaration() {
 	}
 
-	public TypeDeclaration(int modifiers, String name) {
+	public TypeDeclaration(int modifiers, string name) {
 		setName(name);
 		setModifiers(modifiers);
 	}
 
 	public TypeDeclaration(List<AnnotationExpr> annotations,
-			int modifiers, String name,
+			int modifiers, string name,
 			List<BodyDeclaration> members) {
 		super(annotations);
 		setName(name);
@@ -53,7 +53,7 @@ public abstract class TypeDeclaration extends BodyDeclaration implements NamedNo
 
 	public TypeDeclaration(int beginLine, int beginColumn, int endLine,
 			int endColumn, List<AnnotationExpr> annotations,
-			int modifiers, String name,
+			int modifiers, string name,
 			List<BodyDeclaration> members) {
 		super(beginLine, beginColumn, endLine, endColumn, annotations);
 		setName(name);
@@ -61,7 +61,7 @@ public abstract class TypeDeclaration extends BodyDeclaration implements NamedNo
 		setMembers(members);
 	}
 
-	public final List<BodyDeclaration> getMembers() {
+	public /*final*/List<BodyDeclaration> getMembers() {
 		return members;
 	}
 
@@ -71,11 +71,11 @@ public abstract class TypeDeclaration extends BodyDeclaration implements NamedNo
 	 * @see ModifierSet
 	 * @return modifiers
 	 */
-	public final int getModifiers() {
+	public /*final*/int getModifiers() {
 		return modifiers;
 	}
 
-	public final String getName() {
+	public /*final*/string getName() {
 		return name.getName();
 	}
 
@@ -84,19 +84,19 @@ public abstract class TypeDeclaration extends BodyDeclaration implements NamedNo
 		setAsParentNodeOf(this.members);
 	}
 
-	public final void setModifiers(int modifiers) {
+	public /*final*/void setModifiers(int modifiers) {
 		this.modifiers = modifiers;
 	}
 
-	public final void setName(String name) {
+	public /*final*/void setName(string name) {
 		this.name = new NameExpr(name);
 	}
 
-    public final void setNameExpr(NameExpr nameExpr) {
+    public /*final*/void setNameExpr(NameExpr nameExpr) {
       this.name = nameExpr;
     }
 
-    public final NameExpr getNameExpr() {
+    public /*final*/NameExpr getNameExpr() {
       return name;
     }
 }

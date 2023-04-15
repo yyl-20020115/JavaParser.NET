@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,9 +26,9 @@ namespace com.github.javaparser.printer.lexicalpreservation.transformations.ast.
 /**
  * Transforming FieldDeclaration and verifying the LexicalPreservation works as expected.
  */
-class FieldDeclarationTransformationsTest extends AbstractLexicalPreservingTest {
+class FieldDeclarationTransformationsTest:AbstractLexicalPreservingTest {
 
-    protected FieldDeclaration consider(String code) {
+    protected FieldDeclaration consider(string code) {
         considerCode("class A { " + code + " }");
         return cu.getType(0).getMembers().get(0).asFieldDeclaration();
     }
@@ -37,35 +37,35 @@ class FieldDeclarationTransformationsTest extends AbstractLexicalPreservingTest 
 
     // Modifiers
 
-    @Test
+    [TestMethod]
     void addingModifiers() {
         FieldDeclaration it = consider("int A;");
         it.setModifiers(createModifierList(PUBLIC));
         assertTransformedToString("public int A;", it);
     }
     
-    @Test
+    [TestMethod]
     void removingModifiers() {
         FieldDeclaration it = consider("public int A;");
         it.setModifiers(new NodeList<>());
         assertTransformedToString("int A;", it);
     }
     
-    @Test
+    [TestMethod]
     void removingModifiersFromNonPrimitiveType() {
-        FieldDeclaration it = consider("public String A;");
+        FieldDeclaration it = consider("public string A;");
         it.setModifiers(new NodeList<>());
-        assertTransformedToString("String A;", it);
+        assertTransformedToString("string A;", it);
     }
 
-    @Test
+    [TestMethod]
     void replacingModifiers() {
         FieldDeclaration it = consider("int A;");
         it.setModifiers(createModifierList(PROTECTED));
         assertTransformedToString("protected int A;", it);
     }
 
-    @Test
+    [TestMethod]
     void changingTypes() {
         FieldDeclaration it = consider("int a, b;");
         assertTransformedToString("int a, b;", it);
@@ -75,15 +75,15 @@ class FieldDeclarationTransformationsTest extends AbstractLexicalPreservingTest 
         assertTransformedToString("Xyz a, b;", it);
     }
 
-    @Test
+    [TestMethod]
     public void changingNonePrimitiveTypes() {
-        FieldDeclaration it = consider("String a;");
+        FieldDeclaration it = consider("string a;");
         it.getVariable(0).setType("Xyz");
         assertTransformedToString("Xyz a;", it);
     }
 
     // Annotations
-    @Test
+    [TestMethod]
     void removingAnnotations() {
         FieldDeclaration it = consider( SYSTEM_EOL +
                 "@Annotation" + SYSTEM_EOL +
@@ -92,7 +92,7 @@ class FieldDeclarationTransformationsTest extends AbstractLexicalPreservingTest 
         assertTransformedToString("public int A;", it);
     }
 
-    @Test
+    [TestMethod]
     void removingAnnotationsWithSpaces() {
         FieldDeclaration it = consider( SYSTEM_EOL +
                 "  @Annotation " + SYSTEM_EOL +

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,11 +24,11 @@ namespace com.github.javaparser.ast.comments;
 
 
 /**
- * The comments contained in a certain parsed piece of source code.
+ * The comments contained _in a certain parsed piece of source code.
  */
 public class CommentsCollection {
 
-    private final TreeSet<Comment> comments = new TreeSet<>(NODE_BY_BEGIN_POSITION);
+    private /*final*/TreeSet<Comment> comments = new TreeSet<>(NODE_BY_BEGIN_POSITION);
 
     public CommentsCollection() {
     }
@@ -38,15 +38,15 @@ public class CommentsCollection {
     }
 
     public Set<LineComment> getLineComments() {
-        return comments.stream().filter(comment -> comment instanceof LineComment).map(comment -> (LineComment) comment).collect(Collectors.toCollection(() -> new TreeSet<>(NODE_BY_BEGIN_POSITION)));
+        return comments.stream().filter(comment -> comment is LineComment).map(comment -> (LineComment) comment).collect(Collectors.toCollection(() -> new TreeSet<>(NODE_BY_BEGIN_POSITION)));
     }
 
     public Set<BlockComment> getBlockComments() {
-        return comments.stream().filter(comment -> comment instanceof BlockComment).map(comment -> (BlockComment) comment).collect(Collectors.toCollection(() -> new TreeSet<>(NODE_BY_BEGIN_POSITION)));
+        return comments.stream().filter(comment -> comment is BlockComment).map(comment -> (BlockComment) comment).collect(Collectors.toCollection(() -> new TreeSet<>(NODE_BY_BEGIN_POSITION)));
     }
 
     public Set<JavadocComment> getJavadocComments() {
-        return comments.stream().filter(comment -> comment instanceof JavadocComment).map(comment -> (JavadocComment) comment).collect(Collectors.toCollection(() -> new TreeSet<>(NODE_BY_BEGIN_POSITION)));
+        return comments.stream().filter(comment -> comment is JavadocComment).map(comment -> (JavadocComment) comment).collect(Collectors.toCollection(() -> new TreeSet<>(NODE_BY_BEGIN_POSITION)));
     }
 
     public void addComment(Comment comment) {
@@ -63,7 +63,7 @@ public class CommentsCollection {
                 return false;
             }
             Range cRange = c.getRange().get();
-            // we tolerate a difference of one element in the end column:
+            // we tolerate a difference of one element _in the end column:
             // it depends how \r and \n are calculated...
             if (cRange.begin.equals(commentRange.begin) && cRange.end.line == commentRange.end.line && Math.abs(cRange.end.column - commentRange.end.column) < 2) {
                 return true;

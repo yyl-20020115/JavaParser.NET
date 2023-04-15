@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -22,7 +22,7 @@ namespace com.github.javaparser.symbolsolver.resolution;
 
 
 
-public class ReferenceTypeResolutionTest extends AbstractResolutionTest {
+public class ReferenceTypeResolutionTest:AbstractResolutionTest {
 
     @BeforeEach
     void setup() {
@@ -31,58 +31,58 @@ public class ReferenceTypeResolutionTest extends AbstractResolutionTest {
         StaticJavaParser.setConfiguration(config);
     }
     
-	@Test
+	[TestMethod]
 	void enumTest() {
-	    String code = "enum DAY { MONDAY }";
+	    string code = "enum DAY { MONDAY }";
         ResolvedEnumConstantDeclaration rt = StaticJavaParser.parse(code).findFirst(EnumConstantDeclaration.class).get().resolve();
         assertTrue(rt.isEnumConstant());
 	}
 	
-	@Test
+	[TestMethod]
     void objectTest() {
-        String code = "class A { Object o; }";
+        string code = "class A { Object o; }";
         ResolvedReferenceType rt = StaticJavaParser.parse(code).findFirst(FieldDeclaration.class).get().resolve().getType().asReferenceType();
         assertTrue(rt.isJavaLangObject());
     }
 	
-	@Test
+	[TestMethod]
     void cannotUnboxReferenceTypeTest() {
-        String code = "class A { Object o; }";
+        string code = "class A { Object o; }";
         ResolvedReferenceType rt = StaticJavaParser.parse(code).findFirst(FieldDeclaration.class).get().resolve().getType().asReferenceType();
         assertFalse(rt.isUnboxable());
     }
 	
-	@Test
+	[TestMethod]
     void unboxableTypeTest() {
-        String code = "class A { Integer o; }";
+        string code = "class A { Integer o; }";
         ResolvedReferenceType rt = StaticJavaParser.parse(code).findFirst(FieldDeclaration.class).get().resolve().getType().asReferenceType();
         assertTrue(rt.asReferenceType().isUnboxable());
     }
 	
-	@Test
+	[TestMethod]
     void cannotUnboxTypeToSpecifiedPrimitiveTypeTest() {
-        String code = "class A { Object o; }";
+        string code = "class A { Object o; }";
         ResolvedReferenceType rt = StaticJavaParser.parse(code).findFirst(FieldDeclaration.class).get().resolve().getType().asReferenceType();
         assertFalse(rt.isUnboxableTo(ResolvedPrimitiveType.INT));
     }
 	
-	@Test
+	[TestMethod]
     void unboxTypeToSpecifiedPrimitiveTypeTest() {
-        String code = "class A { Integer o; }";
+        string code = "class A { Integer o; }";
         ResolvedReferenceType rt = StaticJavaParser.parse(code).findFirst(FieldDeclaration.class).get().resolve().getType().asReferenceType();
         assertTrue(rt.isUnboxableTo(ResolvedPrimitiveType.INT));
     }
 	
-	@Test
+	[TestMethod]
     void cannotUnboxTypeToPrimitiveTypeTest() {
-        String code = "class A { Object o; }";
+        string code = "class A { Object o; }";
         ResolvedReferenceType rt = StaticJavaParser.parse(code).findFirst(FieldDeclaration.class).get().resolve().getType().asReferenceType();
         assertFalse(rt.toUnboxedType().isPresent());
     }
 	
-	@Test
+	[TestMethod]
     void unboxTypeToPrimitiveTypeTest() {
-        String code = "class A { Integer o; }";
+        string code = "class A { Integer o; }";
         ResolvedReferenceType rt = StaticJavaParser.parse(code).findFirst(FieldDeclaration.class).get().resolve().getType().asReferenceType();
         assertTrue(rt.toUnboxedType().isPresent());
     }

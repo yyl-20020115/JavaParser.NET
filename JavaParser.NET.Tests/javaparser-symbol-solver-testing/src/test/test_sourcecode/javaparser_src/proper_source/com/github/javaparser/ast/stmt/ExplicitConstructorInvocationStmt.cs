@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.ast.stmt;
 /**
  * @author Julio Vilmar Gesser
  */
-public final class ExplicitConstructorInvocationStmt extends Statement {
+public /*final*/class ExplicitConstructorInvocationStmt:Statement {
 
 	private List<Type> typeArgs;
 
@@ -39,17 +39,17 @@ public final class ExplicitConstructorInvocationStmt extends Statement {
 	public ExplicitConstructorInvocationStmt() {
 	}
 
-	public ExplicitConstructorInvocationStmt(final boolean isThis,
-			final Expression expr, final List<Expression> args) {
+	public ExplicitConstructorInvocationStmt(/*final*/boolean isThis,
+			/*final*/Expression expr, /*final*/List<Expression> args) {
 		setThis(isThis);
 		setExpr(expr);
 		setArgs(args);
 	}
 
-	public ExplicitConstructorInvocationStmt(final int beginLine,
-			final int beginColumn, final int endLine, final int endColumn,
-			final List<Type> typeArgs, final boolean isThis,
-			final Expression expr, final List<Expression> args) {
+	public ExplicitConstructorInvocationStmt(/*final*/int beginLine,
+			/*final*/int beginColumn, /*final*/int endLine, /*final*/int endColumn,
+			/*final*/List<Type> typeArgs, /*final*/boolean isThis,
+			/*final*/Expression expr, /*final*/List<Expression> args) {
 		super(beginLine, beginColumn, endLine, endColumn);
 		setTypeArgs(typeArgs);
 		setThis(isThis);
@@ -58,12 +58,12 @@ public final class ExplicitConstructorInvocationStmt extends Statement {
 	}
 
 	@Override
-	public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+	public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
 		return v.visit(this, arg);
 	}
 
 	@Override
-	public <A> void accept(final VoidVisitor<A> v, final A arg) {
+	public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
 		v.visit(this, arg);
 	}
 
@@ -83,21 +83,21 @@ public final class ExplicitConstructorInvocationStmt extends Statement {
 		return isThis;
 	}
 
-	public void setArgs(final List<Expression> args) {
+	public void setArgs(/*final*/List<Expression> args) {
 		this.args = args;
 		setAsParentNodeOf(this.args);
 	}
 
-	public void setExpr(final Expression expr) {
+	public void setExpr(/*final*/Expression expr) {
 		this.expr = expr;
 		setAsParentNodeOf(this.expr);
 	}
 
-	public void setThis(final boolean isThis) {
+	public void setThis(/*final*/boolean isThis) {
 		this.isThis = isThis;
 	}
 
-	public void setTypeArgs(final List<Type> typeArgs) {
+	public void setTypeArgs(/*final*/List<Type> typeArgs) {
 		this.typeArgs = typeArgs;
 		setAsParentNodeOf(this.typeArgs);
 	}

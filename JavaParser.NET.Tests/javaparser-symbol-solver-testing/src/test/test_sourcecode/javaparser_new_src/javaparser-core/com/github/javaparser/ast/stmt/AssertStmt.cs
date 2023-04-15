@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,7 +25,7 @@ namespace com.github.javaparser.ast.stmt;
 /**
  * @author Julio Vilmar Gesser
  */
-public final class AssertStmt extends Statement {
+public /*final*/class AssertStmt:Statement {
 
 	private Expression check;
 
@@ -34,16 +34,16 @@ public final class AssertStmt extends Statement {
 	public AssertStmt() {
 	}
 
-	public AssertStmt(final Expression check) {
+	public AssertStmt(/*final*/Expression check) {
 		setCheck(check);
 	}
 
-	public AssertStmt(final Expression check, final Expression msg) {
+	public AssertStmt(/*final*/Expression check, /*final*/Expression msg) {
 		setCheck(check);
 		setMessage(msg);
 	}
 
-	public AssertStmt(final Range range, final Expression check, final Expression msg) {
+	public AssertStmt(/*final*/Range range, /*final*/Expression check, /*final*/Expression msg) {
 		super(range);
 		
 		setCheck(check);
@@ -52,12 +52,12 @@ public final class AssertStmt extends Statement {
 	}
 
 	//@Override 
-	public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+	public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
 		return v.visit(this, arg);
 	}
 
 	//@Override 
-	public <A> void accept(final VoidVisitor<A> v, final A arg) {
+	public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
 		v.visit(this, arg);
 	}
 
@@ -69,13 +69,13 @@ public final class AssertStmt extends Statement {
 		return msg;
 	}
 
-	public AssertStmt setCheck(final Expression check) {
+	public AssertStmt setCheck(/*final*/Expression check) {
 		this.check = check;
 		setAsParentNodeOf(this.check);
 		return this;
 	}
 
-	public AssertStmt setMessage(final Expression msg) {
+	public AssertStmt setMessage(/*final*/Expression msg) {
 		this.msg = msg;
 		setAsParentNodeOf(this.msg);
 		return this;

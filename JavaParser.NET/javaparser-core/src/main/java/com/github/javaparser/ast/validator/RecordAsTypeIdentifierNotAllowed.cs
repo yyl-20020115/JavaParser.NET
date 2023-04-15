@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,9 +25,9 @@ namespace com.github.javaparser.ast.validator;
  * Validates that "record" cannot be used as identifier for type declarations (e.g., classes, enums, and records).
  * For details, see <a href="https://openjdk.java.net/jeps/395">JEP 395</a>
  */
-public class RecordAsTypeIdentifierNotAllowed extends VisitorValidator {
+public class RecordAsTypeIdentifierNotAllowed:VisitorValidator {
 
-    private final String error;
+    private /*final*/string error;
 
     public RecordAsTypeIdentifierNotAllowed() {
         error = "'record' is a restricted identifier and cannot be used for type declarations";
@@ -54,6 +54,6 @@ public class RecordAsTypeIdentifierNotAllowed extends VisitorValidator {
             return true;
         }
         Node parent = node.getParentNode().get();
-        return !(parent instanceof TypeDeclaration);
+        return !(parent is TypeDeclaration);
     }
 }

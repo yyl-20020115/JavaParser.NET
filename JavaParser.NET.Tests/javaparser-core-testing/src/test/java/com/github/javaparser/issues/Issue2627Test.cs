@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,12 +25,12 @@ namespace com.github.javaparser.issues;
 
 public class Issue2627Test {
 
-    private static final String RESOURCE_PATH_STRING_CR = "com/github/javaparser/issue_samples/issue_2627/Ops_cr.java";
-    private static final String RESOURCE_PATH_STRING_LF = "com/github/javaparser/issue_samples/issue_2627/Ops_lf.java";
-    private static final String RESOURCE_PATH_STRING_CRLF = "com/github/javaparser/issue_samples/issue_2627/Ops_crlf.java";
-    private static final String RESOURCE_PATH_STRING_MINIMAL = "com/github/javaparser/issue_samples/issue_2627/Ops_minimal.java";
-    private static final String RESOURCE_PATH_STRING_ORIGINAL = "com/github/javaparser/issue_samples/issue_2627/Ops.java";
-    private static final String RESOURCE_PATH_GROOVY_ORIGINAL = "com/github/javaparser/issue_samples/issue_2627/DefaultStrategy.java";
+    private static /*final*/string RESOURCE_PATH_STRING_CR = "com/github/javaparser/issue_samples/issue_2627/Ops_cr.java";
+    private static /*final*/string RESOURCE_PATH_STRING_LF = "com/github/javaparser/issue_samples/issue_2627/Ops_lf.java";
+    private static /*final*/string RESOURCE_PATH_STRING_CRLF = "com/github/javaparser/issue_samples/issue_2627/Ops_crlf.java";
+    private static /*final*/string RESOURCE_PATH_STRING_MINIMAL = "com/github/javaparser/issue_samples/issue_2627/Ops_minimal.java";
+    private static /*final*/string RESOURCE_PATH_STRING_ORIGINAL = "com/github/javaparser/issue_samples/issue_2627/Ops.java";
+    private static /*final*/string RESOURCE_PATH_GROOVY_ORIGINAL = "com/github/javaparser/issue_samples/issue_2627/DefaultStrategy.java";
 
     private static Stream<Arguments> arguments_minimal() {
         return Stream.of(
@@ -54,7 +54,7 @@ public class Issue2627Test {
         );
     }
 
-    private void assertMethodInExpectedLines(CompilationUnit cu, String name, int expectedStartLine, int expectedEndLine) {
+    private void assertMethodInExpectedLines(CompilationUnit cu, string name, int expectedStartLine, int expectedEndLine) {
         MethodDeclaration node = getFirstMethodDeclarationByName(cu, name);
         assertNodeInExpectedLines(node, expectedStartLine, expectedEndLine);
     }
@@ -66,25 +66,25 @@ public class Issue2627Test {
         assertEquals(expectedEndLine, range.end.line);
     }
 
-    private MethodDeclaration getFirstMethodDeclarationByName(CompilationUnit cu, String name) {
+    private MethodDeclaration getFirstMethodDeclarationByName(CompilationUnit cu, string name) {
         return cu.findAll(MethodDeclaration.class).stream()
                 .filter(n -> name.equals(n.getNameAsString()))
                 .findFirst()
                 .get();
     }
 
-//    @Test
-//    public void cuLength_minimal() throws IOException {
+//    [TestMethod]
+//    public void cuLength_minimal(){
 //        CompilationUnit cu = StaticJavaParser.parseResource(RESOURCE_PATH_STRING_MINIMAL);
 //
-//        final Range cuRange = cu.getRange().get();
+//        /*final*/Range cuRange = cu.getRange().get();
 //
 //        int lineCount = cuRange.end.line - cuRange.begin.line;
 //
 //    }
 
-//    @Test
-//    public void commentPositions_minimal() throws IOException {
+//    [TestMethod]
+//    public void commentPositions_minimal(){
 //        CompilationUnit cu = StaticJavaParser.parseResource(RESOURCE_PATH_STRING_MINIMAL);
 //
 //        List<Comment> allComments = cu.getAllComments();
@@ -93,13 +93,13 @@ public class Issue2627Test {
 //            Optional<Range> optionalRange = comment.getRange();
 //            if (optionalRange.isPresent()) {
 //                Range range = optionalRange.get();
-//                final TokenRange tokens = comment.getTokenRange().get();
+//                /*final*/TokenRange tokens = comment.getTokenRange().get();
 //                int tokenIndex = 0;
 //                for (JavaToken token : tokens) {
-//                    System.out.println("token " + tokenIndex + " = " + token);
+//                    System._out.println("token " + tokenIndex + " = " + token);
 //                    tokenIndex++;
 //                }
-//                System.out.println(tokens);
+//                System._out.println(tokens);
 //            }
 //        }
 //
@@ -109,7 +109,7 @@ public class Issue2627Test {
 
     @ParameterizedTest
     @MethodSource("arguments_minimal")
-    public void method_minimal(String name, int expectedStart, int expectedEnd) throws IOException {
+    public void method_minimal(string name, int expectedStart, int expectedEnd){
         CompilationUnit cu = StaticJavaParser.parseResource(RESOURCE_PATH_STRING_MINIMAL);
         assertMethodInExpectedLines(cu, name, expectedStart, expectedEnd);
     }
@@ -117,28 +117,28 @@ public class Issue2627Test {
 
     @ParameterizedTest
     @MethodSource("arguments_original")
-    public void method_original(String name, int expectedStart, int expectedEnd) throws IOException {
+    public void method_original(string name, int expectedStart, int expectedEnd){
         CompilationUnit cu = StaticJavaParser.parseResource(RESOURCE_PATH_STRING_ORIGINAL);
         assertMethodInExpectedLines(cu, name, expectedStart, expectedEnd);
     }
 
     @ParameterizedTest
     @MethodSource("arguments_original")
-    public void method_original_cr(String name, int expectedStart, int expectedEnd) throws IOException {
+    public void method_original_cr(string name, int expectedStart, int expectedEnd){
         CompilationUnit cu = StaticJavaParser.parseResource(RESOURCE_PATH_STRING_CR);
         assertMethodInExpectedLines(cu, name, expectedStart, expectedEnd);
     }
 
     @ParameterizedTest
     @MethodSource("arguments_original")
-    public void method_original_crlf(String name, int expectedStart, int expectedEnd) throws IOException {
+    public void method_original_crlf(string name, int expectedStart, int expectedEnd){
         CompilationUnit cu = StaticJavaParser.parseResource(RESOURCE_PATH_STRING_CRLF);
         assertMethodInExpectedLines(cu, name, expectedStart, expectedEnd);
     }
 
     @ParameterizedTest
     @MethodSource("arguments_original")
-    public void method_original_lf(String name, int expectedStart, int expectedEnd) throws IOException {
+    public void method_original_lf(string name, int expectedStart, int expectedEnd){
         CompilationUnit cu = StaticJavaParser.parseResource(RESOURCE_PATH_STRING_LF);
         assertMethodInExpectedLines(cu, name, expectedStart, expectedEnd);
     }
@@ -146,7 +146,7 @@ public class Issue2627Test {
 
     @ParameterizedTest
     @MethodSource("arguments_groovy_original")
-    public void method_groovy_original(String name, int expectedStart, int expectedEnd) throws IOException {
+    public void method_groovy_original(string name, int expectedStart, int expectedEnd){
         CompilationUnit cu = StaticJavaParser.parseResource(RESOURCE_PATH_GROOVY_ORIGINAL);
         assertMethodInExpectedLines(cu, name, expectedStart, expectedEnd);
     }

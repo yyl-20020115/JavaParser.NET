@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,7 +25,7 @@ namespace com.github.javaparser.ast;
 
 public class ListObservationTest {
 
-    private FieldDeclaration createIntField(String name) {
+    private FieldDeclaration createIntField(string name) {
         return new FieldDeclaration(new NodeList<>(), PrimitiveType.intType(), name);
     }
 
@@ -43,93 +43,93 @@ public class ListObservationTest {
 
             @Override
             public void listChange(NodeList<?> observedNode, ListChangeType type, int index, Node nodeAddedOrRemoved) {
-                changes.add(String.format("'%s' %s in list at %d", nodeAddedOrRemoved, type, index));
+                changes.add(String.format("'%s' %s _in list at %d", nodeAddedOrRemoved, type, index));
             }
 
             @Override
             public void listReplacement(NodeList<?> observedNode, int index, Node oldNode, Node newNode) {
-                changes.add(String.format("'%s' %s in list at %d", oldNode, ListChangeType.REMOVAL, index));
-                changes.add(String.format("'%s' %s in list at %d", newNode, ListChangeType.ADDITION, index));
+                changes.add(String.format("'%s' %s _in list at %d", oldNode, ListChangeType.REMOVAL, index));
+                changes.add(String.format("'%s' %s _in list at %d", newNode, ListChangeType.ADDITION, index));
             }
         };
     }
-    @Test
+    [TestMethod]
     void addAllWithoutIndex() {
         List<String> changes = new LinkedList<>();
-        String code = "class A { void foo(int p) { }}";
+        string code = "class A { void foo(int p) { }}";
         CompilationUnit cu = parse(code);
         ClassOrInterfaceDeclaration cd = cu.getClassByName("A").get();
         cd.getMembers().register(createObserver(changes));
 
         cd.getMembers().addAll(Arrays.asList(createIntField("a"), createIntField("b"), createIntField("c")));
-        assertEquals(Arrays.asList("'int a;' ADDITION in list at 1",
-                "'int b;' ADDITION in list at 2",
-                "'int c;' ADDITION in list at 3"), changes);
+        assertEquals(Arrays.asList("'int a;' ADDITION _in list at 1",
+                "'int b;' ADDITION _in list at 2",
+                "'int c;' ADDITION _in list at 3"), changes);
     }
 
-    @Test
+    [TestMethod]
     void addAllWithIndex() {
         List<String> changes = new LinkedList<>();
-        String code = "class A { void foo(int p) { }}";
+        string code = "class A { void foo(int p) { }}";
         CompilationUnit cu = parse(code);
         ClassOrInterfaceDeclaration cd = cu.getClassByName("A").get();
         cd.getMembers().register(createObserver(changes));
 
         cd.getMembers().addAll(0, Arrays.asList(createIntField("a"), createIntField("b"), createIntField("c")));
-        assertEquals(Arrays.asList("'int a;' ADDITION in list at 0",
-                "'int b;' ADDITION in list at 1",
-                "'int c;' ADDITION in list at 2"), changes);
+        assertEquals(Arrays.asList("'int a;' ADDITION _in list at 0",
+                "'int b;' ADDITION _in list at 1",
+                "'int c;' ADDITION _in list at 2"), changes);
     }
 
-    @Test
+    [TestMethod]
     void clear() {
         List<String> changes = new LinkedList<>();
-        String code = "class A { int a; int b; int c; }";
+        string code = "class A { int a; int b; int c; }";
         CompilationUnit cu = parse(code);
         ClassOrInterfaceDeclaration cd = cu.getClassByName("A").get();
         cd.getMembers().register(createObserver(changes));
 
         cd.getMembers().clear();
-        assertEquals(Arrays.asList("'int a;' REMOVAL in list at 0",
-                "'int b;' REMOVAL in list at 0",
-                "'int c;' REMOVAL in list at 0"), changes);
+        assertEquals(Arrays.asList("'int a;' REMOVAL _in list at 0",
+                "'int b;' REMOVAL _in list at 0",
+                "'int c;' REMOVAL _in list at 0"), changes);
     }
 
-    @Test
+    [TestMethod]
     void set() {
         List<String> changes = new LinkedList<>();
-        String code = "class A { int a; int b; int c; }";
+        string code = "class A { int a; int b; int c; }";
         CompilationUnit cu = parse(code);
         ClassOrInterfaceDeclaration cd = cu.getClassByName("A").get();
         cd.getMembers().register(createObserver(changes));
 
         cd.getMembers().set(1, createIntField("d"));
-        assertEquals(Arrays.asList("'int b;' REMOVAL in list at 1",
-                "'int d;' ADDITION in list at 1"), changes);
+        assertEquals(Arrays.asList("'int b;' REMOVAL _in list at 1",
+                "'int d;' ADDITION _in list at 1"), changes);
     }
 
-    @Test
+    [TestMethod]
     void removeNode() {
         List<String> changes = new LinkedList<>();
-        String code = "class A { int a; int b; int c; int d; int e; }";
+        string code = "class A { int a; int b; int c; int d; int e; }";
         CompilationUnit cu = parse(code);
         ClassOrInterfaceDeclaration cd = cu.getClassByName("A").get();
         cd.getMembers().register(createObserver(changes));
 
         cd.getMembers().remove(cd.getFieldByName("c").get());
-        assertThat(changes).containsExactlyInAnyOrder("'int c;' REMOVAL in list at 2");
+        assertThat(changes).containsExactlyInAnyOrder("'int c;' REMOVAL _in list at 2");
     }
 
-    @Test
+    [TestMethod]
     void removeFirstNode() {
         List<String> changes = new LinkedList<>();
-        String code = "class A { int a; int b; int c; int d; int e; }";
+        string code = "class A { int a; int b; int c; int d; int e; }";
         CompilationUnit cu = parse(code);
         ClassOrInterfaceDeclaration cd = cu.getClassByName("A").get();
         cd.getMembers().register(createObserver(changes));
 
         cd.getMembers().removeFirst();
-        assertThat(changes).containsExactlyInAnyOrder("'int a;' REMOVAL in list at 0");
+        assertThat(changes).containsExactlyInAnyOrder("'int a;' REMOVAL _in list at 0");
         assertEquals(cd.getMembers().size(), 4);
 
         for (int i = 3; i >= 0; i--) {
@@ -140,16 +140,16 @@ public class ListObservationTest {
         assertEquals(cd.getMembers().size(), 0);
     }
 
-    @Test
+    [TestMethod]
     void removeLastNode() {
         List<String> changes = new LinkedList<>();
-        String code = "class A { int a; int b; int c; int d; int e; }";
+        string code = "class A { int a; int b; int c; int d; int e; }";
         CompilationUnit cu = parse(code);
         ClassOrInterfaceDeclaration cd = cu.getClassByName("A").get();
         cd.getMembers().register(createObserver(changes));
 
         cd.getMembers().removeLast();
-        assertThat(changes).containsExactlyInAnyOrder("'int e;' REMOVAL in list at 4");
+        assertThat(changes).containsExactlyInAnyOrder("'int e;' REMOVAL _in list at 4");
         assertEquals(cd.getMembers().size(), 4);
 
         for (int i = 3; i >= 0; i--) {
@@ -160,10 +160,10 @@ public class ListObservationTest {
         assertEquals(cd.getMembers().size(), 0);
     }
 
-    @Test
+    [TestMethod]
     void removeObject() {
         List<String> changes = new LinkedList<>();
-        String code = "class A { int a; int b; int c; int d; int e; }";
+        string code = "class A { int a; int b; int c; int d; int e; }";
         CompilationUnit cu = parse(code);
         ClassOrInterfaceDeclaration cd = cu.getClassByName("A").get();
         cd.getMembers().register(createObserver(changes));
@@ -172,39 +172,39 @@ public class ListObservationTest {
         assertThat(changes).isEmpty();
     }
 
-    @Test
+    [TestMethod]
     void removeAll() {
         List<String> changes = new LinkedList<>();
-        String code = "class A { int a; int b; int c; int d; int e; }";
+        string code = "class A { int a; int b; int c; int d; int e; }";
         CompilationUnit cu = parse(code);
         ClassOrInterfaceDeclaration cd = cu.getClassByName("A").get();
         cd.getMembers().register(createObserver(changes));
 
         cd.getMembers().removeAll(Arrays.asList(cd.getFieldByName("b").get(), "foo", cd.getFieldByName("d").get()));
         assertThat(changes).containsExactlyInAnyOrder(
-                "'int b;' REMOVAL in list at 1",
-                "'int d;' REMOVAL in list at 2");
+                "'int b;' REMOVAL _in list at 1",
+                "'int d;' REMOVAL _in list at 2");
     }
 
-    @Test
+    [TestMethod]
     void retainAll() {
         List<String> changes = new LinkedList<>();
-        String code = "class A { int a; int b; int c; int d; int e; }";
+        string code = "class A { int a; int b; int c; int d; int e; }";
         CompilationUnit cu = parse(code);
         ClassOrInterfaceDeclaration cd = cu.getClassByName("A").get();
         cd.getMembers().register(createObserver(changes));
 
         cd.getMembers().retainAll(Arrays.asList(cd.getFieldByName("b").get(), "foo", cd.getFieldByName("d").get()));
         assertThat(changes).containsExactlyInAnyOrder(
-                "'int a;' REMOVAL in list at 0",
-                "'int c;' REMOVAL in list at 1",
-                "'int e;' REMOVAL in list at 2");
+                "'int a;' REMOVAL _in list at 0",
+                "'int c;' REMOVAL _in list at 1",
+                "'int e;' REMOVAL _in list at 2");
     }
 
-    @Test
+    [TestMethod]
     void replaceAll() {
         List<String> changes = new LinkedList<>();
-        String code = "class A { int a; int b; int c; }";
+        string code = "class A { int a; int b; int c; }";
         CompilationUnit cu = parse(code);
         ClassOrInterfaceDeclaration cd = cu.getClassByName("A").get();
         cd.getMembers().register(createObserver(changes));
@@ -216,21 +216,21 @@ public class ListObservationTest {
             return clone;
         });
         assertThat(changes).containsExactlyInAnyOrder(
-                "'int a;' REMOVAL in list at 0", "'int A;' ADDITION in list at 0",
-                "'int b;' REMOVAL in list at 1", "'int B;' ADDITION in list at 1",
-                "'int c;' REMOVAL in list at 2", "'int C;' ADDITION in list at 2");
+                "'int a;' REMOVAL _in list at 0", "'int A;' ADDITION _in list at 0",
+                "'int b;' REMOVAL _in list at 1", "'int B;' ADDITION _in list at 1",
+                "'int c;' REMOVAL _in list at 2", "'int C;' ADDITION _in list at 2");
     }
 
-    @Test
+    [TestMethod]
     void removeIf() {
         List<String> changes = new LinkedList<>();
-        String code = "class A { int a; int longName; int c; }";
+        string code = "class A { int a; int longName; int c; }";
         CompilationUnit cu = parse(code);
         ClassOrInterfaceDeclaration cd = cu.getClassByName("A").get();
         cd.getMembers().register(createObserver(changes));
 
         cd.getMembers().removeIf(m -> ((FieldDeclaration) m).getVariable(0).getName().getIdentifier().length() > 3);
-        assertThat(changes).containsExactlyInAnyOrder("'int longName;' REMOVAL in list at 1");
+        assertThat(changes).containsExactlyInAnyOrder("'int longName;' REMOVAL _in list at 1");
     }
 
 }

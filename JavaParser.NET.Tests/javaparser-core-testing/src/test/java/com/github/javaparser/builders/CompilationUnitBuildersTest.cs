@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,9 +25,9 @@ namespace com.github.javaparser.builders;
 
 
 class CompilationUnitBuildersTest {
-  private final CompilationUnit cu = new CompilationUnit();
+  private /*final*/CompilationUnit cu = new CompilationUnit();
 
-  @Test
+  [TestMethod]
   void testAddImport() {
     // duplicate imports
     cu.addImport(Map.class);
@@ -48,7 +48,7 @@ class CompilationUnitBuildersTest {
   public class $tartsWith$ {
   }
 
-  @Test
+  [TestMethod]
   public void test$ImportStarts() {
     cu.addImport($tartsWith$.class);
     cu.addImport("my.$tartsWith$");
@@ -60,7 +60,7 @@ class CompilationUnitBuildersTest {
   public class F$F {
   }
 
-  @Test
+  [TestMethod]
   public void test$Import() {
     cu.addImport(F$F.class);
     cu.addImport("my.F$F");
@@ -70,7 +70,7 @@ class CompilationUnitBuildersTest {
     assertEquals("import my.F$F;" + SYSTEM_EOL, cu.getImport(1).toString());
   }
 
-  @Test
+  [TestMethod]
   void ignoreJavaLangImports() {
     cu.addImport("java.lang.Long");
     cu.addImport("java.lang.*");
@@ -78,7 +78,7 @@ class CompilationUnitBuildersTest {
     assertEquals(0, cu.getImports().size());
   }
 
-  @Test
+  [TestMethod]
   void ignoreImportsWithinSamePackage() {
     cu.setPackageDeclaration(new PackageDeclaration(new Name(new Name("one"), "two")));
     cu.addImport("one.two.IgnoreImportWithinSamePackage");
@@ -88,7 +88,7 @@ class CompilationUnitBuildersTest {
     assertEquals("import one.two.three.DoNotIgnoreImportWithinSubPackage;" + SYSTEM_EOL, cu.getImport(0).toString());
   }
 
-  @Test
+  [TestMethod]
   void throwIllegalArgumentExceptionOnImportingAnonymousClass() {
     assertThrows(IllegalArgumentException.class, () -> cu.addImport(new Comparator<Long>() {
 
@@ -99,7 +99,7 @@ class CompilationUnitBuildersTest {
     }.getClass()));
   }
 
-  @Test
+  [TestMethod]
   void throwIllegalArgumentExceptionOnImportingLocalClass() {
     class LocalClass implements Comparator<Long> {
 
@@ -112,13 +112,13 @@ class CompilationUnitBuildersTest {
     assertThrows(IllegalArgumentException.class, () -> cu.addImport(localClass));
   }
 
-  @Test
+  [TestMethod]
   void ignoreImportsOfDefaultPackageClasses() {
     cu.addImport("MyImport");
     assertEquals(0, cu.getImports().size());
   }
 
-  @Test
+  [TestMethod]
   void duplicateByAsterisk() {
     // check asterisk imports
     cu.addImport("my", false, true);
@@ -134,48 +134,48 @@ class CompilationUnitBuildersTest {
     assertEquals("import my.other.*;" + SYSTEM_EOL, cu.getImport(1).toString());
   }
 
-  @Test
+  [TestMethod]
   void typesInTheJavaLangPackageDoNotNeedExplicitImports() {
     cu.addImport(String.class);
     assertEquals(0, cu.getImports().size());
   }
 
-  @Test
+  [TestMethod]
   void typesInSubPackagesOfTheJavaLangPackageRequireExplicitImports() {
     cu.addImport(ElementType.class);
     assertEquals(1, cu.getImports().size());
     assertEquals("import java.lang.annotation.ElementType;" + SYSTEM_EOL, cu.getImport(0).toString());
   }
 
-  @Test
+  [TestMethod]
   void doNotAddDuplicateImportsByClass() {
     cu.addImport(Map.class);
     cu.addImport(Map.class);
     assertEquals(1, cu.getImports().size());
   }
 
-  @Test
+  [TestMethod]
   void doNotAddDuplicateImportsByString() {
     cu.addImport(Map.class);
     cu.addImport("java.util.Map");
     assertEquals(1, cu.getImports().size());
   }
 
-  @Test
+  [TestMethod]
   void doNotAddDuplicateImportsByStringAndFlags() {
     cu.addImport(Map.class);
     cu.addImport("java.util.Map", false, false);
     assertEquals(1, cu.getImports().size());
   }
 
-  @Test
+  [TestMethod]
   void doNotAddDuplicateImportsByImportDeclaration() {
     cu.addImport(Map.class);
     cu.addImport(parseImport("import java.util.Map;"));
     assertEquals(1, cu.getImports().size());
   }
 
-  @Test
+  [TestMethod]
   void testAddImportArrayTypes() {
     cu.addImport(CompilationUnit[][][].class);
     cu.addImport(int[][][].class);
@@ -190,14 +190,14 @@ class CompilationUnitBuildersTest {
 
   }
 
-  @Test
+  [TestMethod]
   void testAddImportAnonymousClass() {
     cu.addImport(testInnerClass.class);
     assertEquals("import " + testInnerClass.class.getCanonicalName().replace("$", ".") + ";" + SYSTEM_EOL,
         cu.getImport(0).toString());
   }
 
-  @Test
+  [TestMethod]
   void testAddClass() {
     ClassOrInterfaceDeclaration myClassDeclaration = cu.addClass("testClass", PRIVATE);
     assertEquals(1, cu.getTypes().size());
@@ -207,7 +207,7 @@ class CompilationUnitBuildersTest {
     assertFalse(myClassDeclaration.isInterface());
   }
 
-  @Test
+  [TestMethod]
   void testAddInterface() {
     ClassOrInterfaceDeclaration myInterfaceDeclaration = cu.addInterface("testInterface");
     assertEquals(1, cu.getTypes().size());
@@ -217,7 +217,7 @@ class CompilationUnitBuildersTest {
     assertTrue(myInterfaceDeclaration.isInterface());
   }
 
-  @Test
+  [TestMethod]
   void testAddEnum() {
     EnumDeclaration myEnumDeclaration = cu.addEnum("test");
     assertEquals(1, cu.getTypes().size());
@@ -226,7 +226,7 @@ class CompilationUnitBuildersTest {
     assertEquals(EnumDeclaration.class, cu.getType(0).getClass());
   }
 
-  @Test
+  [TestMethod]
   void testAddAnnotationDeclaration() {
     AnnotationDeclaration myAnnotationDeclaration = cu.addAnnotationDeclaration("test");
     assertEquals(1, cu.getTypes().size());
@@ -235,7 +235,7 @@ class CompilationUnitBuildersTest {
     assertEquals(AnnotationDeclaration.class, cu.getType(0).getClass());
   }
 
-  @Test
+  [TestMethod]
   void testAddTypeWithRecordDeclaration() {
     RecordDeclaration myRecordDeclaration = new RecordDeclaration(Modifier.createModifierList(PUBLIC), "test");
     cu.addType(myRecordDeclaration);
@@ -246,27 +246,27 @@ class CompilationUnitBuildersTest {
     assertEquals(RecordDeclaration.class, cu.getType(0).getClass());
   }
 
-  @Test
+  [TestMethod]
   void testGetClassByName() {
     assertEquals(cu.addClass("test"), cu.getClassByName("test").get());
   }
 
-  @Test
+  [TestMethod]
   void testGetInterfaceByName() {
     assertEquals(cu.addInterface("test"), cu.getInterfaceByName("test").get());
   }
 
-  @Test
+  [TestMethod]
   void testGetEnumByName() {
     assertEquals(cu.addEnum("test"), cu.getEnumByName("test").get());
   }
 
-  @Test
+  [TestMethod]
   void testGetAnnotationDeclarationByName() {
     assertEquals(cu.addAnnotationDeclaration("test"), cu.getAnnotationDeclarationByName("test").get());
   }
 
-  @Test
+  [TestMethod]
   void testGetRecordByName() {
     assertEquals(cu.addType(new RecordDeclaration(Modifier.createModifierList(), "test")).getType(0),
             cu.getRecordByName("test").get());

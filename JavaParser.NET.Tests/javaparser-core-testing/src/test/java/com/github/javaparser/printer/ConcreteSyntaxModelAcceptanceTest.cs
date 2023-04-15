@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,24 +25,24 @@ namespace com.github.javaparser.printer;
 
 
 class ConcreteSyntaxModelAcceptanceTest {
-    private final Path rootDir = CodeGenerationUtils.mavenModuleRoot(ConcreteSyntaxModelAcceptanceTest.class).resolve("src/test/test_sourcecode");
+    private /*final*/Path rootDir = CodeGenerationUtils.mavenModuleRoot(ConcreteSyntaxModelAcceptanceTest.class).resolve("src/test/test_sourcecode");
 
-    private String prettyPrint(Node node) {
+    private string prettyPrint(Node node) {
         return ConcreteSyntaxModel.genericPrettyPrint(node);
     }
 
-    private String prettyPrintedExpectation(String name) throws IOException {
+    private string prettyPrintedExpectation(string name){
         return TestUtils.readResource("com/github/javaparser/printer/" + name + "_prettyprinted");
     }
 
-    @Test
-    void printingExamplePrettyPrintVisitor() throws IOException {
+    [TestMethod]
+    void printingExamplePrettyPrintVisitor(){
         CompilationUnit cu = parse(rootDir.resolve("com/github/javaparser/printer/PrettyPrintVisitor.java"));
         TestUtils.assertEqualsStringIgnoringEol(prettyPrintedExpectation("PrettyPrintVisitor"), prettyPrint(cu));
     }
 
-    @Test
-    void printingExampleJavaConcepts() throws IOException {
+    [TestMethod]
+    void printingExampleJavaConcepts(){
         CompilationUnit cu = parse(rootDir.resolve("com/github/javaparser/printer/JavaConcepts.java"));
         TestUtils.assertEqualsStringIgnoringEol(prettyPrintedExpectation("JavaConcepts"), prettyPrint(cu));
     }

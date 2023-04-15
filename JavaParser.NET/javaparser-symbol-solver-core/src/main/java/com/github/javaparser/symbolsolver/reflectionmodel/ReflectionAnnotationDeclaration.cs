@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.symbolsolver.reflectionmodel;
 /**
  * @author Malte Skoruppa
  */
-public class ReflectionAnnotationDeclaration extends AbstractTypeDeclaration implements ResolvedAnnotationDeclaration,
+public class ReflectionAnnotationDeclaration:AbstractTypeDeclaration implements ResolvedAnnotationDeclaration,
                                                                                         MethodUsageResolutionCapability,
                                                                                         MethodResolutionCapability {
 
@@ -57,7 +57,7 @@ public class ReflectionAnnotationDeclaration extends AbstractTypeDeclaration imp
     ///
 
     @Override
-    public String getPackageName() {
+    public string getPackageName() {
         if (clazz.getPackage() != null) {
             return clazz.getPackage().getName();
         }
@@ -65,8 +65,8 @@ public class ReflectionAnnotationDeclaration extends AbstractTypeDeclaration imp
     }
 
     @Override
-    public String getClassName() {
-        String qualifiedName = getQualifiedName();
+    public string getClassName() {
+        string qualifiedName = getQualifiedName();
         if(qualifiedName.contains(".")) {
             return qualifiedName.substring(qualifiedName.lastIndexOf(".") + 1);
         } else {
@@ -75,12 +75,12 @@ public class ReflectionAnnotationDeclaration extends AbstractTypeDeclaration imp
     }
 
     @Override
-    public String getQualifiedName() {
+    public string getQualifiedName() {
         return clazz.getCanonicalName();
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return getClass().getSimpleName() + "{" +
                "clazz=" + clazz.getCanonicalName() +
                '}';
@@ -89,7 +89,7 @@ public class ReflectionAnnotationDeclaration extends AbstractTypeDeclaration imp
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ReflectionAnnotationDeclaration)) return false;
+        if (!(o is ReflectionAnnotationDeclaration)) return false;
 
         ReflectionAnnotationDeclaration that = (ReflectionAnnotationDeclaration) o;
 
@@ -113,7 +113,7 @@ public class ReflectionAnnotationDeclaration extends AbstractTypeDeclaration imp
     }
 
     @Override
-    public boolean hasDirectlyAnnotation(String canonicalName) {
+    public boolean hasDirectlyAnnotation(string canonicalName) {
         return reflectionClassAdapter.hasDirectlyAnnotation(canonicalName);
     }
 
@@ -124,7 +124,7 @@ public class ReflectionAnnotationDeclaration extends AbstractTypeDeclaration imp
 
     @Override
     public List<ResolvedReferenceType> getAncestors(boolean acceptIncompleteList) {
-        // we do not attempt to perform any symbol solving when analyzing ancestors in the reflection model, so we can
+        // we do not attempt to perform any symbol solving when analyzing ancestors _in the reflection model, so we can
         // simply ignore the boolean parameter here; an UnsolvedSymbolException cannot occur
         return reflectionClassAdapter.getAncestors();
     }
@@ -136,7 +136,7 @@ public class ReflectionAnnotationDeclaration extends AbstractTypeDeclaration imp
     }
 
     @Override
-    public String getName() {
+    public string getName() {
         return clazz.getSimpleName();
     }
 
@@ -177,10 +177,10 @@ public class ReflectionAnnotationDeclaration extends AbstractTypeDeclaration imp
     }
 
     @Override
-    public Optional<MethodUsage> solveMethodAsUsage(final String name,
-                                                    final List<ResolvedType> parameterTypes,
-                                                    final Context invokationContext,
-                                                    final List<ResolvedType> typeParameterValues) {
+    public Optional<MethodUsage> solveMethodAsUsage(/*final*/string name,
+                                                    /*final*/List<ResolvedType> parameterTypes,
+                                                    /*final*/Context invokationContext,
+                                                    /*final*/List<ResolvedType> typeParameterValues) {
         Optional<MethodUsage> res = ReflectionMethodResolutionLogic.solveMethodAsUsage(name, parameterTypes, typeSolver, invokationContext,
             typeParameterValues, this, clazz);
         if (res.isPresent()) {
@@ -212,9 +212,9 @@ public class ReflectionAnnotationDeclaration extends AbstractTypeDeclaration imp
     }
 
     @Override
-    public SymbolReference<ResolvedMethodDeclaration> solveMethod(final String name,
-                                                                  final List<ResolvedType> argumentsTypes,
-                                                                  final boolean staticOnly) {
+    public SymbolReference<ResolvedMethodDeclaration> solveMethod(/*final*/string name,
+                                                                  /*final*/List<ResolvedType> argumentsTypes,
+                                                                  /*final*/boolean staticOnly) {
         return ReflectionMethodResolutionLogic.solveMethod(name, argumentsTypes, staticOnly,
             typeSolver,this, clazz);
     }

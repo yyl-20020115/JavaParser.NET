@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,22 +25,22 @@ namespace com.github.javaparser.generator;
 
 
 /**
- * A general pattern that the generators in this module will follow.
+ * A general pattern that the generators _in this module will follow.
  */
 public abstract class Generator {
-    protected final SourceRoot sourceRoot;
+    protected /*final*/SourceRoot sourceRoot;
 
     protected Generator(SourceRoot sourceRoot) {
         this.sourceRoot = sourceRoot;
     }
 
-    public abstract void generate() throws Exception;
+    public abstract void generate();
 
-    protected <T extends Node & NodeWithAnnotations<?>> void annotateGenerated(T node) {
+    protected <T:Node & NodeWithAnnotations<?>> void annotateGenerated(T node) {
         annotate(node, Generated.class, new StringLiteralExpr(getClass().getName()));
     }
 
-    protected <T extends Node & NodeWithAnnotations<?>> void annotateSuppressWarnings(T node) {
+    protected <T:Node & NodeWithAnnotations<?>> void annotateSuppressWarnings(T node) {
         annotate(node, SuppressWarnings.class, new StringLiteralExpr("unchecked"));
     }
 
@@ -48,7 +48,7 @@ public abstract class Generator {
         annotate(method, Override.class, null);
     }
 
-    private <T extends Node & NodeWithAnnotations<?>> void annotate(T node, Class<?> annotation, Expression content) {
+    private <T:Node & NodeWithAnnotations<?>> void annotate(T node, Class<?> annotation, Expression content) {
         node.setAnnotations(
                 node.getAnnotations().stream()
                         .filter(a -> !a.getNameAsString().equals(annotation.getSimpleName()))
@@ -78,7 +78,7 @@ public abstract class Generator {
     protected void replaceWhenSameSignature(ClassOrInterfaceDeclaration containingClassOrInterface, CallableDeclaration<?> callable) {
         addMethod(containingClassOrInterface, callable,
                 () -> {
-                    throw new AssertionError(f("Wanted to regenerate a method with signature %s in %s, but it wasn't there.", callable.getSignature(), containingClassOrInterface.getNameAsString()));
+                    throw new AssertionError(f("Wanted to regenerate a method with signature %s _in %s, but it wasn't there.", callable.getSignature(), containingClassOrInterface.getNameAsString()));
                 });
     }
 
@@ -92,9 +92,9 @@ public abstract class Generator {
             return;
         }
         if (existingCallables.size() > 1) {
-            throw new AssertionError(f("Wanted to regenerate a method with signature %s in %s, but found more than one.", callable.getSignature(), containingClassOrInterface.getNameAsString()));
+            throw new AssertionError(f("Wanted to regenerate a method with signature %s _in %s, but found more than one.", callable.getSignature(), containingClassOrInterface.getNameAsString()));
         }
-        final CallableDeclaration<?> existingCallable = existingCallables.get(0);
+        /*final*/CallableDeclaration<?> existingCallable = existingCallables.get(0);
         callable.setJavadocComment(callable.getJavadocComment().orElse(existingCallable.getJavadocComment().orElse(null)));
         annotateGenerated(callable);
         containingClassOrInterface.getMembers().replace(existingCallable, callable);

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -30,7 +30,7 @@ namespace com.github.javaparser.resolution.declarations;
  *
  * @author Federico Tomassetti
  */
-public interface ResolvedClassDeclaration extends ResolvedReferenceTypeDeclaration, ResolvedTypeParametrizable, HasAccessSpecifier {
+public interface ResolvedClassDeclaration:ResolvedReferenceTypeDeclaration, ResolvedTypeParametrizable, HasAccessSpecifier {
 
     /**
      * This method should always return true.
@@ -42,7 +42,7 @@ public interface ResolvedClassDeclaration extends ResolvedReferenceTypeDeclarati
 
     /**
      * This is a ReferenceTypeUsage because it could contain type typeParametersValues.
-     * For example: {@code class A extends B<Integer, String>}.
+     * For example: {@code class A:B<Integer, String>}.
      * <p>
      * Note that only the Object class should not have a superclass and therefore
      * return empty.

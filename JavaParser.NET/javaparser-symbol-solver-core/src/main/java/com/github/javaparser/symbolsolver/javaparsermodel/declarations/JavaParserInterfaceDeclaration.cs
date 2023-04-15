@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.declarations;
 /**
  * @author Federico Tomassetti
  */
-public class JavaParserInterfaceDeclaration extends AbstractTypeDeclaration
+public class JavaParserInterfaceDeclaration:AbstractTypeDeclaration
         implements ResolvedInterfaceDeclaration, MethodResolutionCapability, MethodUsageResolutionCapability,
         SymbolResolutionCapability {
 
@@ -47,7 +47,7 @@ public class JavaParserInterfaceDeclaration extends AbstractTypeDeclaration
     public Set<ResolvedMethodDeclaration> getDeclaredMethods() {
         Set<ResolvedMethodDeclaration> methods = new HashSet<>();
         for (BodyDeclaration<?> member : wrappedNode.getMembers()) {
-            if (member instanceof com.github.javaparser.ast.body.MethodDeclaration) {
+            if (member is com.github.javaparser.ast.body.MethodDeclaration) {
                 methods.add(new JavaParserMethodDeclaration((com.github.javaparser.ast.body.MethodDeclaration) member, typeSolver));
             }
         }
@@ -80,7 +80,7 @@ public class JavaParserInterfaceDeclaration extends AbstractTypeDeclaration
     }
 
     @Override
-    public String getName() {
+    public string getName() {
         return wrappedNode.getName().getId();
     }
 
@@ -90,7 +90,7 @@ public class JavaParserInterfaceDeclaration extends AbstractTypeDeclaration
     }
 
     @Override
-    public boolean hasDirectlyAnnotation(String canonicalName) {
+    public boolean hasDirectlyAnnotation(string canonicalName) {
         return AstResolutionUtils.hasDirectlyAnnotation(wrappedNode, typeSolver, canonicalName);
     }
 
@@ -110,17 +110,17 @@ public class JavaParserInterfaceDeclaration extends AbstractTypeDeclaration
     }
 
     @Override
-    public String getPackageName() {
+    public string getPackageName() {
         return javaParserTypeAdapter.getPackageName();
     }
 
     @Override
-    public String getClassName() {
+    public string getClassName() {
         return javaParserTypeAdapter.getClassName();
     }
 
     @Override
-    public String getQualifiedName() {
+    public string getQualifiedName() {
         return javaParserTypeAdapter.getQualifiedName();
     }
 
@@ -185,7 +185,7 @@ public class JavaParserInterfaceDeclaration extends AbstractTypeDeclaration
                                 }
 
                                 @Override
-                                public String getName() {
+                                public string getName() {
                                     return f.getName();
                                 }
 
@@ -222,7 +222,7 @@ public class JavaParserInterfaceDeclaration extends AbstractTypeDeclaration
 
 
     @Override
-    public String toString() {
+    public string toString() {
         return "JavaParserInterfaceDeclaration{" +
                 "wrappedNode=" + wrappedNode +
                 '}';
@@ -232,12 +232,12 @@ public class JavaParserInterfaceDeclaration extends AbstractTypeDeclaration
      * This method is deprecated because it receives the TypesSolver as a parameter.
      * Eventually we would like to remove all usages of TypeSolver as a parameter.
      *
-     * Also, resolution should move out of declarations, so that they are pure declarations and the resolution should
-     * work for JavaParser, Reflection and Javassist classes in the same way and not be specific to the three
+     * Also, resolution should move _out of declarations, so that they are pure declarations and the resolution should
+     * work for JavaParser, Reflection and Javassist classes _in the same way and not be specific to the three
      * implementations.
      */
-    @Deprecated
-    public SymbolReference<ResolvedTypeDeclaration> solveType(String name) {
+    //@Deprecated
+    public SymbolReference<ResolvedTypeDeclaration> solveType(string name) {
         if (this.wrappedNode.getName().getId().equals(name)) {
             return SymbolReference.solved(this);
         }
@@ -246,7 +246,7 @@ public class JavaParserInterfaceDeclaration extends AbstractTypeDeclaration
             return ref;
         }
 
-        String prefix = wrappedNode.getName().asString() + ".";
+        string prefix = wrappedNode.getName().asString() + ".";
         if (name.startsWith(prefix) && name.length() > prefix.length()) {
             return new JavaParserInterfaceDeclaration(this.wrappedNode, typeSolver).solveType(name.substring(prefix.length()));
         }
@@ -257,19 +257,19 @@ public class JavaParserInterfaceDeclaration extends AbstractTypeDeclaration
     }
 
     @Override
-    public SymbolReference<ResolvedMethodDeclaration> solveMethod(String name, List<ResolvedType> argumentsTypes,
+    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes,
                                                                   boolean staticOnly) {
         return getContext().solveMethod(name, argumentsTypes, staticOnly);
     }
 
     @Override
-    public Optional<MethodUsage> solveMethodAsUsage(String name, List<ResolvedType> argumentTypes,
+    public Optional<MethodUsage> solveMethodAsUsage(string name, List<ResolvedType> argumentTypes,
                                                     Context invocationContext, List<ResolvedType> typeParameters) {
         return getContext().solveMethodAsUsage(name, argumentTypes);
     }
 
     @Override
-    public SymbolReference<? extends ResolvedValueDeclaration> solveSymbol(String name, TypeSolver typeSolver) {
+    public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name, TypeSolver typeSolver) {
         return getContext().solveSymbol(name);
     }
 
@@ -355,8 +355,8 @@ public class JavaParserInterfaceDeclaration extends AbstractTypeDeclaration
     ///
 
     private ResolvedReferenceType toReferenceType(ClassOrInterfaceType classOrInterfaceType) {
-        SymbolReference<? extends ResolvedTypeDeclaration> ref = null;
-        String typeName = classOrInterfaceType.getName().getId();
+        SymbolReference<?:ResolvedTypeDeclaration> ref = null;
+        string typeName = classOrInterfaceType.getName().getId();
         if (classOrInterfaceType.getScope().isPresent()) {
             typeName = classOrInterfaceType.getScope().get().asString() + "." + typeName;
         }

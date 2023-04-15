@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -22,15 +22,15 @@ namespace com.github.javaparser.printer.lexicalpreservation;
 
 
 
-class TokenTextElement extends TextElement {
+class TokenTextElement:TextElement {
 
-    private final JavaToken token;
+    private /*final*/JavaToken token;
 
     TokenTextElement(JavaToken token) {
         this.token = token;
     }
 
-    TokenTextElement(int tokenKind, String text) {
+    TokenTextElement(int tokenKind, string text) {
         this(new JavaToken(tokenKind, text));
     }
 
@@ -39,12 +39,12 @@ class TokenTextElement extends TextElement {
     }
 
     @Override
-    String expand() {
+    string expand() {
         return token.getText();
     }
 
     // Visible for testing
-    String getText() {
+    string getText() {
         return token.getText();
     }
 
@@ -72,7 +72,7 @@ class TokenTextElement extends TextElement {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return token.toString();
     }
 
@@ -112,7 +112,7 @@ class TokenTextElement extends TextElement {
     }
 
     @Override
-    public boolean isChildOfClass(Class<? extends Node> nodeClass) {
+    public boolean isChildOfClass(Class<?:Node> nodeClass) {
         return false;
     }
 

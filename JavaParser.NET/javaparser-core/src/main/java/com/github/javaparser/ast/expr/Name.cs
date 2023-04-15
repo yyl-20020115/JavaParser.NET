@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -30,15 +30,15 @@ namespace com.github.javaparser.ast.expr;
  * The rightmost identifier is "identifier",
  * The one to the left of it is "qualifier.identifier", etc.
  * <p>
- * You can construct one from a String with the name(...) method.
+ * You can construct one from a string with the name(...) method.
  *
  * @author Julio Vilmar Gesser
  * @see SimpleName
  */
-public class Name extends Node implements NodeWithIdentifier<Name> {
+public class Name:Node implements NodeWithIdentifier<Name> {
 
     @NonEmptyProperty
-    private String identifier;
+    private string identifier;
 
     @OptionalProperty
     private Name qualifier;
@@ -47,20 +47,20 @@ public class Name extends Node implements NodeWithIdentifier<Name> {
         this(null, null, "empty");
     }
 
-    public Name(final String identifier) {
+    public Name(/*final*/string identifier) {
         this(null, null, identifier);
     }
 
-    @AllFieldsConstructor
-    public Name(Name qualifier, final String identifier) {
+    //@AllFieldsConstructor
+    public Name(Name qualifier, /*final*/string identifier) {
         this(null, qualifier, identifier);
     }
 
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
-    public Name(TokenRange tokenRange, Name qualifier, String identifier) {
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    public Name(TokenRange tokenRange, Name qualifier, string identifier) {
         super(tokenRange);
         setQualifier(qualifier);
         setIdentifier(identifier);
@@ -68,24 +68,24 @@ public class Name extends Node implements NodeWithIdentifier<Name> {
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public String getIdentifier() {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public string getIdentifier() {
         return identifier;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public Name setIdentifier(final String identifier) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public Name setIdentifier(/*final*/string identifier) {
         assertNonEmpty(identifier);
         if (identifier == this.identifier) {
             return this;
@@ -98,20 +98,20 @@ public class Name extends Node implements NodeWithIdentifier<Name> {
     /**
      * @return the complete qualified name. Only the identifiers and the dots, so no comments or whitespace.
      */
-    public String asString() {
+    public string asString() {
         if (qualifier != null) {
             return qualifier.asString() + "." + identifier;
         }
         return identifier;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Optional<Name> getQualifier() {
         return Optional.ofNullable(qualifier);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public Name setQualifier(final Name qualifier) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public Name setQualifier(/*final*/Name qualifier) {
         if (qualifier == this.qualifier) {
             return this;
         }
@@ -124,7 +124,7 @@ public class Name extends Node implements NodeWithIdentifier<Name> {
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
     public boolean remove(Node node) {
         if (node == null) {
             return false;
@@ -138,25 +138,25 @@ public class Name extends Node implements NodeWithIdentifier<Name> {
         return super.remove(node);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
     public Name removeQualifier() {
         return setQualifier((Name) null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public Name clone() {
         return (Name) accept(new CloneVisitor(), null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public NameMetaModel getMetaModel() {
         return JavaParserMetaModel.nameMetaModel;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public boolean replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
@@ -171,7 +171,7 @@ public class Name extends Node implements NodeWithIdentifier<Name> {
     }
 
     /**
-     * A top level name is a name that is not contained in a larger Name instance.
+     * A top level name is a name that is not contained _in a larger Name instance.
      */
     public boolean isTopLevel() {
         return !isInternal();
@@ -181,6 +181,6 @@ public class Name extends Node implements NodeWithIdentifier<Name> {
      * An internal name is a name that constitutes a part of a larger Name instance.
      */
     public boolean isInternal() {
-        return getParentNode().filter(parent -> parent instanceof Name).isPresent();
+        return getParentNode().filter(parent -> parent is Name).isPresent();
     }
 }

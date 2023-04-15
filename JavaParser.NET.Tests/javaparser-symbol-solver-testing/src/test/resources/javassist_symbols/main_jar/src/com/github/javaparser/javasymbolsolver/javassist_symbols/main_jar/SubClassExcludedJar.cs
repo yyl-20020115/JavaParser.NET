@@ -1,6 +1,6 @@
 namespace com.github.javaparser.javasymbolsolver.javassist_symbols.main_jar;
 
 
-public class SubClassExcludedJar extends SuperClassExcludedJar {
-    public static final String OWN_FIELD = "ThisIsAString";
+public class SubClassExcludedJar:SuperClassExcludedJar {
+    public static /*final*/string OWN_FIELD = "ThisIsAString";
 }

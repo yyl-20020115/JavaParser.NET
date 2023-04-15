@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,17 +27,17 @@ namespace com.github.javaparser.printer;
  */
 public class SourcePrinter {
 
-    private String endOfLineCharacter;
+    private string endOfLineCharacter;
 
     private Indentation indentation;
 
-    private final Deque<String> indents = new LinkedList<>();
+    private /*final*/Deque<String> indents = new LinkedList<>();
 
-    private final Deque<String> reindentedIndents = new LinkedList<>();
+    private /*final*/Deque<String> reindentedIndents = new LinkedList<>();
 
-    private String lastPrintedIndent = "";
+    private string lastPrintedIndent = "";
 
-    private final StringBuilder buf = new StringBuilder();
+    private /*final*/StringBuilder buf = new StringBuilder();
 
     // Start before the first column
     private Position cursor = new Position(Position.FIRST_LINE, Position.FIRST_COLUMN - 1);
@@ -48,15 +48,15 @@ public class SourcePrinter {
         this(new DefaultPrinterConfiguration());
     }
 
-    SourcePrinter(final PrettyPrinterConfiguration configuration) {
+    SourcePrinter(/*final*/PrettyPrinterConfiguration configuration) {
         this(configuration.getIndentation(), configuration.getEndOfLineCharacter());
     }
 
-    SourcePrinter(final PrinterConfiguration configuration) {
+    SourcePrinter(/*final*/PrinterConfiguration configuration) {
         this(configuration.get(new DefaultConfigurationOption(ConfigOption.INDENTATION)).get().asValue(), configuration.get(new DefaultConfigurationOption(ConfigOption.END_OF_LINE_CHARACTER)).get().asString());
     }
 
-    SourcePrinter(Indentation indentation, String eol) {
+    SourcePrinter(Indentation indentation, string eol) {
         this.indentation = indentation;
         this.endOfLineCharacter = eol;
         indents.push("");
@@ -67,7 +67,7 @@ public class SourcePrinter {
      * Does not actually output anything.
      */
     public SourcePrinter indent() {
-        String currentIndent = indents.peek();
+        string currentIndent = indents.peek();
         switch(indentation.getType()) {
             case SPACES:
             case TABS_WITH_SPACE_ALIGN:
@@ -91,7 +91,7 @@ public class SourcePrinter {
         return this;
     }
 
-    private String calculateIndentWithAlignTo(int column) {
+    private string calculateIndentWithAlignTo(int column) {
         if (column < lastPrintedIndent.length()) {
             throw new IllegalStateException("Attempt to indent less than the previous indent.");
         }
@@ -118,7 +118,7 @@ public class SourcePrinter {
                 for (int i = 0; i < currentIndentType.getWidth(); i++) {
                     fullTab.append(IndentType.SPACES.getCar());
                 }
-                String fullTabString = fullTab.toString();
+                string fullTabString = fullTab.toString();
                 if ((newIndent.length() >= currentIndentType.getWidth()) && newIndent.substring(newIndent.length() - currentIndentType.getWidth()).equals(fullTabString)) {
                     int i = newIndent.indexOf(fullTabString);
                     newIndent.replace(i, i + currentIndentType.getWidth(), currentIndentType.getCar().toString());
@@ -136,7 +136,7 @@ public class SourcePrinter {
      */
     public SourcePrinter unindent() {
         if (indents.isEmpty()) {
-            // Since we start out with an empty indent on the stack, this will only occur
+            // Since we start _out with an empty indent on the stack, this will only occur
             // the second time we over-unindent.
             throw new IllegalStateException("Indent/unindent calls are not well-balanced.");
         }
@@ -144,7 +144,7 @@ public class SourcePrinter {
         return this;
     }
 
-    private void append(String arg) {
+    private void append(string arg) {
         buf.append(arg);
         cursor = cursor.withColumn(cursor.column + arg.length());
     }
@@ -162,7 +162,7 @@ public class SourcePrinter {
      * @return this instance, for nesting calls to method as fluent interface
      * @see SourcePrinter#println(String)
      */
-    public SourcePrinter print(final String arg) {
+    public SourcePrinter print(/*final*/string arg) {
         if (!indented) {
             lastPrintedIndent = indents.peek();
             append(lastPrintedIndent);
@@ -183,7 +183,7 @@ public class SourcePrinter {
      * @param arg source line to be printed (should not contain newline/carriage-return characters)
      * @return this instance, for nesting calls to method as fluent interface
      */
-    public SourcePrinter println(final String arg) {
+    public SourcePrinter println(/*final*/string arg) {
         print(arg);
         println();
         return this;
@@ -203,9 +203,9 @@ public class SourcePrinter {
     }
 
     /**
-     * Return the current cursor position (line, column) in the source printer buffer.
+     * Return the current cursor position (line, column) _in the source printer buffer.
      * <p>
-     * Please notice in order to guarantee a correct computation of the cursor position,
+     * Please notice _in order to guarantee a correct computation of the cursor position,
      * this printer expect the contracts of the methods {@link #print(String)} and {@link #println(String)}
      * has been respected through all method calls, meaning the source string passed as argument to those method
      * calls did not contain newline/carriage-return characters.
@@ -220,8 +220,8 @@ public class SourcePrinter {
      * @return the currently printed source code.
      * @deprecated use toString()
      */
-    @Deprecated
-    public String getSource() {
+    //@Deprecated
+    public string getSource() {
         return toString();
     }
 
@@ -229,23 +229,23 @@ public class SourcePrinter {
      * @return the currently printed source code.
      */
     @Override
-    public String toString() {
+    public string toString() {
         return buf.toString();
     }
 
     /**
-     * Changes all EOL characters in "content" to the EOL character this SourcePrinter is using.
+     * Changes all EOL characters _in "content" to the EOL character this SourcePrinter is using.
      */
-    public String normalizeEolInTextBlock(String content) {
+    public string normalizeEolInTextBlock(string content) {
         return Utils.normalizeEolInTextBlock(content, endOfLineCharacter);
     }
 
     /**
-     * Set the top-most indent to the column the cursor is currently in, can be undone with
+     * Set the top-most indent to the column the cursor is currently _in, can be undone with
      * {@link #reindentToPreviousLevel()}. Does not actually output anything.
      */
     public void reindentWithAlignToCursor() {
-        String newIndent = calculateIndentWithAlignTo(cursor.column);
+        string newIndent = calculateIndentWithAlignTo(cursor.column);
         reindentedIndents.push(indents.pop());
         indents.push(newIndent);
     }

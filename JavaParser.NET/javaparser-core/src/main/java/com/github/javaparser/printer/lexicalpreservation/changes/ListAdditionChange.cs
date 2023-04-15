@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,11 +27,11 @@ namespace com.github.javaparser.printer.lexicalpreservation.changes;
  */
 public class ListAdditionChange implements Change {
 
-    private final ObservableProperty observableProperty;
+    private /*final*/ObservableProperty observableProperty;
 
-    private final int index;
+    private /*final*/int index;
 
-    private final Node nodeAdded;
+    private /*final*/Node nodeAdded;
 
     public ListAdditionChange(ObservableProperty observableProperty, int index, Node nodeAdded) {
         this.observableProperty = observableProperty;
@@ -43,11 +43,11 @@ public class ListAdditionChange implements Change {
     public Object getValue(ObservableProperty property, Node node) {
         if (property == observableProperty) {
             Object currentRawValue = new NoChange().getValue(property, node);
-            if (currentRawValue instanceof Optional) {
+            if (currentRawValue is Optional) {
                 Optional<?> optional = (Optional<?>) currentRawValue;
                 currentRawValue = optional.orElse(null);
             }
-            if (!(currentRawValue instanceof NodeList)) {
+            if (!(currentRawValue is NodeList)) {
                 throw new IllegalStateException("Expected NodeList, found " + currentRawValue.getClass().getCanonicalName());
             }
             NodeList<Node> currentNodeList = (NodeList<Node>) currentRawValue;

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,12 +24,12 @@ namespace com.github.javaparser.serialization;
 
 
 class JavaParserJsonDeserializerTest {
-    private final JavaParserJsonDeserializer deserializer = new JavaParserJsonDeserializer();
+    private /*final*/JavaParserJsonDeserializer deserializer = new JavaParserJsonDeserializer();
 
-    @Test
+    [TestMethod]
     void simpleTest() {
         CompilationUnit cu = parse("public class X{} class Z{}");
-        String serialized = serialize(cu, false);
+        string serialized = serialize(cu, false);
 
         Node deserialized = deserializer.deserializeObject(Json.createReader(new StringReader(serialized)));
 
@@ -37,10 +37,10 @@ class JavaParserJsonDeserializerTest {
         assertEquals(cu.hashCode(), deserialized.hashCode());
     }
 
-    @Test
+    [TestMethod]
     void testRawType() {
         Type type = parseType("Blub");
-        String serialized = serialize(type, false);
+        string serialized = serialize(type, false);
 
         Node deserialized = deserializer.deserializeObject(Json.createReader(new StringReader(serialized)));
 
@@ -48,10 +48,10 @@ class JavaParserJsonDeserializerTest {
         assertEquals(type.hashCode(), deserialized.hashCode());
     }
 
-    @Test
+    [TestMethod]
     void testDiamondType() {
         Type type = parseType("Blub<>");
-        String serialized = serialize(type, false);
+        string serialized = serialize(type, false);
 
         Node deserialized = deserializer.deserializeObject(Json.createReader(new StringReader(serialized)));
 
@@ -59,10 +59,10 @@ class JavaParserJsonDeserializerTest {
         assertEquals(type.hashCode(), deserialized.hashCode());
     }
 
-    @Test
+    [TestMethod]
     void testGenerics() {
         Type type = parseType("Blub<Blab, Bleb>");
-        String serialized = serialize(type, false);
+        string serialized = serialize(type, false);
 
         Node deserialized = deserializer.deserializeObject(Json.createReader(new StringReader(serialized)));
 
@@ -70,10 +70,10 @@ class JavaParserJsonDeserializerTest {
         assertEquals(type.hashCode(), deserialized.hashCode());
     }
 
-    @Test
+    [TestMethod]
     void testOperator() {
         Expression expr = parseExpression("1+1");
-        String serialized = serialize(expr, false);
+        string serialized = serialize(expr, false);
 
         Node deserialized = deserializer.deserializeObject(Json.createReader(new StringReader(serialized)));
 
@@ -81,10 +81,10 @@ class JavaParserJsonDeserializerTest {
         assertEquals(expr.hashCode(), deserialized.hashCode());
     }
 
-    @Test
+    [TestMethod]
     void testPrimitiveType() {
         Type type = parseType("int");
-        String serialized = serialize(type, false);
+        string serialized = serialize(type, false);
 
         Node deserialized = deserializer.deserializeObject(Json.createReader(new StringReader(serialized)));
 
@@ -92,10 +92,10 @@ class JavaParserJsonDeserializerTest {
         assertEquals(type.hashCode(), deserialized.hashCode());
     }
 
-    @Test
+    [TestMethod]
     void testComment() {
         CompilationUnit cu = parse("/* block comment */\npublic class X{ \n // line comment\npublic void test() {}\n}");
-        String serialized = serialize(cu, false);
+        string serialized = serialize(cu, false);
 
         CompilationUnit deserialized = (CompilationUnit) deserializer.deserializeObject(Json.createReader(new StringReader(serialized)));
         ClassOrInterfaceDeclaration classXDeclaration = deserialized.getClassByName("X").get();
@@ -111,7 +111,7 @@ class JavaParserJsonDeserializerTest {
         assertEquals(" line comment", methodDeclaration.getComment().get().getContent());
     }
 
-    @Test
+    [TestMethod]
     void testJavaDocComment() {
         CompilationUnit cu = parse("public class X{ " +
                 "     /**\n" +
@@ -121,7 +121,7 @@ class JavaParserJsonDeserializerTest {
                 "     */" +
                 "     public boolean test(int a) { return true; }\n" +
                 "}");
-        String serialized = serialize(cu, false);
+        string serialized = serialize(cu, false);
 
         CompilationUnit deserialized = (CompilationUnit) deserializer.deserializeObject(Json.createReader(new StringReader(serialized)));
         ClassOrInterfaceDeclaration classDeclaration = deserialized.getClassByName("X").get();
@@ -138,10 +138,10 @@ class JavaParserJsonDeserializerTest {
         assertEquals("true", returnBlockTag.getContent().toText());
     }
 
-    @Test
+    [TestMethod]
     void testNonMetaProperties() {
         CompilationUnit cu = parse("public class X{} class Z{}");
-        String serialized = serialize(cu, false);
+        string serialized = serialize(cu, false);
 
         CompilationUnit deserialized = (CompilationUnit) deserializer.deserializeObject(Json.createReader(new StringReader(serialized)));
 
@@ -157,7 +157,7 @@ class JavaParserJsonDeserializerTest {
         assertEquals("", tokenRange.getEnd().getText());
     }
 
-    @Test
+    [TestMethod]
     void testAttachingSymbolResolver() {
         SymbolResolver stubResolver = new SymbolResolver() {
             @Override
@@ -182,7 +182,7 @@ class JavaParserJsonDeserializerTest {
         };
         StaticJavaParser.getConfiguration().setSymbolResolver(stubResolver);
         CompilationUnit cu = parse("public class X{} class Z{}");
-        String serialized = serialize(cu, false);
+        string serialized = serialize(cu, false);
 
         CompilationUnit deserialized = (CompilationUnit) deserializer.deserializeObject(Json.createReader(new StringReader(serialized)));
         assertTrue(deserialized.containsData(Node.SYMBOL_RESOLVER_KEY));
@@ -195,9 +195,9 @@ class JavaParserJsonDeserializerTest {
     }
 
     /**
-     * Assert that "actual" equals "expected", and that any EOL characters in "actual" are correct for the platform.
+     * Assert that "actual" equals "expected", and that any EOL characters _in "actual" are correct for the platform.
      */
-    private static void assertEqualsStringIgnoringEol(String expected, String actual) {
+    private static void assertEqualsStringIgnoringEol(string expected, string actual) {
         assertEquals(
                 normalizeEolInTextBlock(expected, LineSeparator.ARBITRARY),
                 normalizeEolInTextBlock(actual, LineSeparator.ARBITRARY)

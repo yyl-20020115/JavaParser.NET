@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,27 +25,27 @@ namespace com.github.javaparser.ast.expr;
 /**
  * @author Julio Vilmar Gesser
  */
-public final class EnclosedExpr extends Expression {
+public /*final*/class EnclosedExpr:Expression {
 
 	private Expression inner;
 
 	public EnclosedExpr() {
 	}
 
-	public EnclosedExpr(final Expression inner) {
+	public EnclosedExpr(/*final*/Expression inner) {
 		setInner(inner);
 	}
 
-	public EnclosedExpr(final Range range, final Expression inner) {
+	public EnclosedExpr(/*final*/Range range, /*final*/Expression inner) {
 		super(range);
 		setInner(inner);
 	}
 
-	@Override public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+	@Override public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
 		return v.visit(this, arg);
 	}
 
-	@Override public <A> void accept(final VoidVisitor<A> v, final A arg) {
+	@Override public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
 		v.visit(this, arg);
 	}
 
@@ -53,7 +53,7 @@ public final class EnclosedExpr extends Expression {
 		return inner;
 	}
 
-	public EnclosedExpr setInner(final Expression inner) {
+	public EnclosedExpr setInner(/*final*/Expression inner) {
 		this.inner = inner;
 		setAsParentNodeOf(this.inner);
 		return this;

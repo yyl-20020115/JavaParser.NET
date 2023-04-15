@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.symbolsolver.reflectionmodel;
 /**
  * @author Federico Tomassetti
  */
-public class ReflectionInterfaceDeclaration extends AbstractTypeDeclaration
+public class ReflectionInterfaceDeclaration:AbstractTypeDeclaration
         implements ResolvedInterfaceDeclaration, MethodResolutionCapability, MethodUsageResolutionCapability,
         SymbolResolutionCapability {
 
@@ -62,7 +62,7 @@ public class ReflectionInterfaceDeclaration extends AbstractTypeDeclaration
     }
 
     @Override
-    public String getPackageName() {
+    public string getPackageName() {
         if (clazz.getPackage() != null) {
             return clazz.getPackage().getName();
         }
@@ -70,8 +70,8 @@ public class ReflectionInterfaceDeclaration extends AbstractTypeDeclaration
     }
 
     @Override
-    public String getClassName() {
-        String canonicalName = clazz.getCanonicalName();
+    public string getClassName() {
+        string canonicalName = clazz.getCanonicalName();
         if (canonicalName != null && getPackageName() != null) {
             return canonicalName.substring(getPackageName().length() + 1);
         }
@@ -79,19 +79,19 @@ public class ReflectionInterfaceDeclaration extends AbstractTypeDeclaration
     }
 
     @Override
-    public String getQualifiedName() {
+    public string getQualifiedName() {
         return clazz.getCanonicalName();
     }
 
     @Override
-    @Deprecated
-    public SymbolReference<ResolvedMethodDeclaration> solveMethod(String name, List<ResolvedType> parameterTypes, boolean staticOnly) {
+    //@Deprecated
+    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> parameterTypes, boolean staticOnly) {
         return ReflectionMethodResolutionLogic.solveMethod(name, parameterTypes, staticOnly,
                 typeSolver,this, clazz);
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "ReflectionInterfaceDeclaration{" +
                 "clazz=" + clazz.getCanonicalName() +
                 '}';
@@ -104,7 +104,7 @@ public class ReflectionInterfaceDeclaration extends AbstractTypeDeclaration
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ReflectionInterfaceDeclaration)) return false;
+        if (!(o is ReflectionInterfaceDeclaration)) return false;
 
         ReflectionInterfaceDeclaration that = (ReflectionInterfaceDeclaration) o;
 
@@ -122,7 +122,7 @@ public class ReflectionInterfaceDeclaration extends AbstractTypeDeclaration
         return clazz.hashCode();
     }
 
-    public Optional<MethodUsage> solveMethodAsUsage(String name, List<ResolvedType> parameterTypes,
+    public Optional<MethodUsage> solveMethodAsUsage(string name, List<ResolvedType> parameterTypes,
                                                     Context invokationContext, List<ResolvedType> typeParameterValues) {
         Optional<MethodUsage> res = ReflectionMethodResolutionLogic.solveMethodAsUsage(name, parameterTypes, typeSolver, invokationContext,
                 typeParameterValues, this, clazz);
@@ -156,7 +156,7 @@ public class ReflectionInterfaceDeclaration extends AbstractTypeDeclaration
 
     @Override
     public boolean canBeAssignedTo(ResolvedReferenceTypeDeclaration other) {
-        if (other instanceof LambdaArgumentTypePlaceholder) {
+        if (other is LambdaArgumentTypePlaceholder) {
             return isFunctionalInterface();
         }
         if (other.getQualifiedName().equals(getQualifiedName())) {
@@ -182,10 +182,10 @@ public class ReflectionInterfaceDeclaration extends AbstractTypeDeclaration
 
     @Override
     public boolean isAssignableBy(ResolvedType type) {
-        if (type instanceof NullType) {
+        if (type is NullType) {
             return true;
         }
-        if (type instanceof LambdaArgumentTypePlaceholder) {
+        if (type is LambdaArgumentTypePlaceholder) {
             return isFunctionalInterface();
         }
         if (type.isArray()) {
@@ -197,7 +197,7 @@ public class ReflectionInterfaceDeclaration extends AbstractTypeDeclaration
         if (type.describe().equals(getQualifiedName())) {
             return true;
         }
-        if (type instanceof ReferenceTypeImpl) {
+        if (type is ReferenceTypeImpl) {
             ReferenceTypeImpl otherTypeDeclaration = (ReferenceTypeImpl) type;
             if(otherTypeDeclaration.getTypeDeclaration().isPresent()) {
                 return otherTypeDeclaration.getTypeDeclaration().get().canBeAssignedTo(this);
@@ -213,7 +213,7 @@ public class ReflectionInterfaceDeclaration extends AbstractTypeDeclaration
     }
 
     @Override
-    public ResolvedFieldDeclaration getField(String name) {
+    public ResolvedFieldDeclaration getField(string name) {
         return reflectionClassAdapter.getField(name);
     }
 
@@ -223,7 +223,7 @@ public class ReflectionInterfaceDeclaration extends AbstractTypeDeclaration
     }
 
     @Override
-    public SymbolReference<? extends ResolvedValueDeclaration> solveSymbol(String name, TypeSolver typeSolver) {
+    public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name, TypeSolver typeSolver) {
         for (Field field : clazz.getFields()) {
             if (field.getName().equals(name)) {
                 return SymbolReference.solved(new ReflectionFieldDeclaration(field, typeSolver));
@@ -234,7 +234,7 @@ public class ReflectionInterfaceDeclaration extends AbstractTypeDeclaration
 
     @Override
     public List<ResolvedReferenceType> getAncestors(boolean acceptIncompleteList) {
-        // we do not attempt to perform any symbol solving when analyzing ancestors in the reflection model, so we can
+        // we do not attempt to perform any symbol solving when analyzing ancestors _in the reflection model, so we can
         // simply ignore the boolean parameter here; an UnsolvedSymbolException cannot occur
         return reflectionClassAdapter.getAncestors();
     }
@@ -245,12 +245,12 @@ public class ReflectionInterfaceDeclaration extends AbstractTypeDeclaration
     }
 
     @Override
-    public boolean hasField(String name) {
+    public boolean hasField(string name) {
         return reflectionClassAdapter.hasField(name);
     }
 
     @Override
-    public String getName() {
+    public string getName() {
         return clazz.getSimpleName();
     }
 
@@ -286,7 +286,7 @@ public class ReflectionInterfaceDeclaration extends AbstractTypeDeclaration
     }
 
     @Override
-    public boolean hasDirectlyAnnotation(String canonicalName) {
+    public boolean hasDirectlyAnnotation(string canonicalName) {
         return reflectionClassAdapter.hasDirectlyAnnotation(canonicalName);
     }
 

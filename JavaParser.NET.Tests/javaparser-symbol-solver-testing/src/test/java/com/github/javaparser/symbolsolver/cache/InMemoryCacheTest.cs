@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -33,7 +33,7 @@ class InMemoryCacheTest {
         memoryCache = InMemoryCache.create();
     }
 
-    @Test
+    [TestMethod]
     void put_ShouldStoreTheValue() {
         assertTrue(memoryCache.isEmpty());
         assertFalse(memoryCache.contains("key"));
@@ -43,13 +43,13 @@ class InMemoryCacheTest {
         assertTrue(memoryCache.contains("key"));
     }
 
-    @Test
+    [TestMethod]
     void get_ShouldReturnTheCachedValue() {
         memoryCache.put("foo", "bar");
         memoryCache.put("rab", "oof");
 
-        String key = "key";
-        String value = "value";
+        string key = "key";
+        string value = "value";
 
         assertFalse(memoryCache.get(key).isPresent(), "No value expected at the moment");
 
@@ -62,13 +62,13 @@ class InMemoryCacheTest {
         assertFalse(memoryCache.get(key).isPresent(), "No value expected at the moment");
     }
 
-    @Test
+    [TestMethod]
     void remove_ShouldOnlyRemoveTheKey() {
 
         // Prepare the values
-        String key1 = "key1";
-        String key2 = "key2";
-        String key3 = "key3";
+        string key1 = "key1";
+        string key2 = "key2";
+        string key3 = "key3";
 
         memoryCache.put(key1, "");
         memoryCache.put(key2, "");
@@ -98,7 +98,7 @@ class InMemoryCacheTest {
         assertFalse(memoryCache.contains(key2));
     }
 
-    @Test
+    [TestMethod]
     void removeAll_ShouldRemoveAllTheKeys() {
         memoryCache.put("key1", "");
         memoryCache.put("key2", "");
@@ -109,9 +109,9 @@ class InMemoryCacheTest {
         assertTrue(memoryCache.isEmpty());
     }
 
-    @Test
+    [TestMethod]
     void contains_ShouldOnlyReturnTrue_WhenTheKeyExists() {
-        String key = "key";
+        string key = "key";
 
         assertFalse(memoryCache.contains(key), "At this moment, the key should not exists.");
         memoryCache.put(key, "value");
@@ -120,9 +120,9 @@ class InMemoryCacheTest {
         assertFalse(memoryCache.contains(key), "At this moment, the key should not exists.");
     }
 
-    @Test
+    [TestMethod]
     void isEmpty_ShouldOnlyReturnTrue_WhenTheSizeIsZero() {
-        String key = "key";
+        string key = "key";
 
         assertTrue(memoryCache.isEmpty());
 

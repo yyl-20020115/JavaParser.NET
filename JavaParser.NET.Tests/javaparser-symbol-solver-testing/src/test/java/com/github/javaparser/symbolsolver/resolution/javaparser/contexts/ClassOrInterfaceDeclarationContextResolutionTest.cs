@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,7 +27,7 @@ namespace com.github.javaparser.symbolsolver.resolution.javaparser.contexts;
 /**
  * @author Federico Tomassetti
  */
-class ClassOrInterfaceDeclarationContextResolutionTest extends AbstractResolutionTest {
+class ClassOrInterfaceDeclarationContextResolutionTest:AbstractResolutionTest {
 
     private TypeSolver typeSolver;
 
@@ -36,7 +36,7 @@ class ClassOrInterfaceDeclarationContextResolutionTest extends AbstractResolutio
         typeSolver = new ReflectionTypeSolver();
     }
 
-    @Test
+    [TestMethod]
     void getParentForTopClass() {
         CompilationUnit cu = parseSample("ClassWithTypeVariables");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
@@ -46,7 +46,7 @@ class ClassOrInterfaceDeclarationContextResolutionTest extends AbstractResolutio
         assertEquals(new CompilationUnitContext(cu, typeSolver), context.getParent().get());
     }
 
-    @Test
+    [TestMethod]
     void solveExistingGenericType() {
         CompilationUnit cu = parseSample("ClassWithTypeVariables");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
@@ -66,7 +66,7 @@ class ClassOrInterfaceDeclarationContextResolutionTest extends AbstractResolutio
         assertEquals(true, c.get().isTypeVariable());
     }
 
-    @Test
+    [TestMethod]
     void solveUnexistingGenericType() {
         CompilationUnit cu = parseSample("ClassWithTypeVariables");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
@@ -77,72 +77,72 @@ class ClassOrInterfaceDeclarationContextResolutionTest extends AbstractResolutio
         assertEquals(false, d.isPresent());
     }
 
-    @Test
+    [TestMethod]
     void solveSymbolReferringToDeclaredInstanceField() {
         CompilationUnit cu = parseSample("ClassWithSymbols");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
         Context context = new ClassOrInterfaceDeclarationContext(classOrInterfaceDeclaration, typeSolver);
 
-        SymbolReference<? extends ResolvedValueDeclaration> ref = context.solveSymbol("i");
+        SymbolReference<?:ResolvedValueDeclaration> ref = context.solveSymbol("i");
         assertEquals(true, ref.isSolved());
         assertEquals("int", ref.getCorrespondingDeclaration().getType().describe());
     }
 
-    @Test
+    [TestMethod]
     void solveSymbolReferringToDeclaredStaticField() {
         CompilationUnit cu = parseSample("ClassWithSymbols");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
         Context context = new ClassOrInterfaceDeclarationContext(classOrInterfaceDeclaration, typeSolver);
 
-        SymbolReference<? extends ResolvedValueDeclaration> ref = context.solveSymbol("j");
+        SymbolReference<?:ResolvedValueDeclaration> ref = context.solveSymbol("j");
         assertEquals(true, ref.isSolved());
         assertEquals("long", ref.getCorrespondingDeclaration().getType().describe());
     }
 
-    @Test
+    [TestMethod]
     void solveSymbolReferringToInheritedInstanceField() {
         CompilationUnit cu = parseSample("ClassWithSymbols");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
         Context context = new ClassOrInterfaceDeclarationContext(classOrInterfaceDeclaration, typeSolver);
 
-        SymbolReference<? extends ResolvedValueDeclaration> ref = context.solveSymbol("k");
+        SymbolReference<?:ResolvedValueDeclaration> ref = context.solveSymbol("k");
         assertEquals(true, ref.isSolved());
         assertEquals("boolean", ref.getCorrespondingDeclaration().getType().describe());
     }
 
-    @Test
+    [TestMethod]
     void solveSymbolReferringToInterfaceInheritedInstanceField() {
         CompilationUnit cu = parseSample("ClassWithSymbols");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
         Context context = new ClassOrInterfaceDeclarationContext(classOrInterfaceDeclaration, typeSolver);
 
-        SymbolReference<? extends ResolvedValueDeclaration> ref = context.solveSymbol("o");
+        SymbolReference<?:ResolvedValueDeclaration> ref = context.solveSymbol("o");
         assertEquals(true, ref.isSolved());
         assertEquals("int", ref.getCorrespondingDeclaration().getType().describe());
     }
 
-    @Test
+    [TestMethod]
     void solveSymbolReferringToInheritedStaticField() {
         CompilationUnit cu = parseSample("ClassWithSymbols");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
         Context context = new ClassOrInterfaceDeclarationContext(classOrInterfaceDeclaration, typeSolver);
 
-        SymbolReference<? extends ResolvedValueDeclaration> ref = context.solveSymbol("m");
+        SymbolReference<?:ResolvedValueDeclaration> ref = context.solveSymbol("m");
         assertEquals(true, ref.isSolved());
         assertEquals("char", ref.getCorrespondingDeclaration().getType().describe());
     }
 
-    @Test
+    [TestMethod]
     void solveSymbolReferringToUnknownElement() {
         CompilationUnit cu = parseSample("ClassWithSymbols");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
         Context context = new ClassOrInterfaceDeclarationContext(classOrInterfaceDeclaration, typeSolver);
 
-        SymbolReference<? extends ResolvedValueDeclaration> ref = context.solveSymbol("zzz");
+        SymbolReference<?:ResolvedValueDeclaration> ref = context.solveSymbol("zzz");
         assertEquals(false, ref.isSolved());
     }
 
-    @Test
+    [TestMethod]
     void solveSymbolAsValueReferringToDeclaredInstanceField() {
         CompilationUnit cu = parseSample("ClassWithSymbols");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
@@ -153,7 +153,7 @@ class ClassOrInterfaceDeclarationContextResolutionTest extends AbstractResolutio
         assertEquals("int", ref.get().getType().describe());
     }
 
-    @Test
+    [TestMethod]
     void solveSymbolAsValueReferringToDeclaredStaticField() {
         CompilationUnit cu = parseSample("ClassWithSymbols");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
@@ -164,7 +164,7 @@ class ClassOrInterfaceDeclarationContextResolutionTest extends AbstractResolutio
         assertEquals("long", ref.get().getType().describe());
     }
 
-    @Test
+    [TestMethod]
     void solveSymbolAsValueReferringToInheritedInstanceField() {
         CompilationUnit cu = parseSample("ClassWithSymbols");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
@@ -175,7 +175,7 @@ class ClassOrInterfaceDeclarationContextResolutionTest extends AbstractResolutio
         assertEquals("boolean", ref.get().getType().describe());
     }
 
-    @Test
+    [TestMethod]
     void solveSymbolAsValueReferringToInterfaceInheritedInstanceField() {
         CompilationUnit cu = parseSample("ClassWithSymbols");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
@@ -186,7 +186,7 @@ class ClassOrInterfaceDeclarationContextResolutionTest extends AbstractResolutio
         assertEquals("int", ref.get().getType().describe());
     }
 
-    @Test
+    [TestMethod]
     void solveSymbolAsValueReferringToInheritedStaticField() {
         CompilationUnit cu = parseSample("ClassWithSymbols");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
@@ -197,7 +197,7 @@ class ClassOrInterfaceDeclarationContextResolutionTest extends AbstractResolutio
         assertEquals("char", ref.get().getType().describe());
     }
 
-    @Test
+    [TestMethod]
     void solveSymbolAsValueReferringToUnknownElement() {
         CompilationUnit cu = parseSample("ClassWithSymbols");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
@@ -207,7 +207,7 @@ class ClassOrInterfaceDeclarationContextResolutionTest extends AbstractResolutio
         assertEquals(false, ref.isPresent());
     }
 
-    @Test
+    [TestMethod]
     void solveTypeRefToItself() {
         CompilationUnit cu = parseSample("ClassWithTypes");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
@@ -217,7 +217,7 @@ class ClassOrInterfaceDeclarationContextResolutionTest extends AbstractResolutio
         assertEquals(true, ref.isSolved());
     }
 
-    @Test
+    [TestMethod]
     void solveTypeRefToUnexisting() {
         CompilationUnit cu = parseSample("ClassWithTypes");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
@@ -227,7 +227,7 @@ class ClassOrInterfaceDeclarationContextResolutionTest extends AbstractResolutio
         assertEquals(false, ref.isSolved());
     }
 
-    @Test
+    [TestMethod]
     void solveTypeRefToObject() {
         CompilationUnit cu = parseSample("ClassWithTypes");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
@@ -237,7 +237,7 @@ class ClassOrInterfaceDeclarationContextResolutionTest extends AbstractResolutio
         assertEquals(true, ref.isSolved());
     }
 
-    @Test
+    [TestMethod]
     void solveTypeRefToJavaLangObject() {
         CompilationUnit cu = parseSample("ClassWithTypes");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
@@ -247,7 +247,7 @@ class ClassOrInterfaceDeclarationContextResolutionTest extends AbstractResolutio
         assertEquals(true, ref.isSolved());
     }
 
-    @Test
+    [TestMethod]
     void solveTypeRefToInternalClass() {
         CompilationUnit cu = parseSample("ClassWithTypes");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
@@ -257,7 +257,7 @@ class ClassOrInterfaceDeclarationContextResolutionTest extends AbstractResolutio
         assertEquals(true, ref.isSolved());
     }
 
-    @Test
+    [TestMethod]
     void solveTypeRefToInternalEnum() {
         CompilationUnit cu = parseSample("ClassWithTypes");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
@@ -267,7 +267,7 @@ class ClassOrInterfaceDeclarationContextResolutionTest extends AbstractResolutio
         assertEquals(true, ref.isSolved());
     }
 
-    @Test
+    [TestMethod]
     void solveTypeRefToInternalOfInternalClass() {
         CompilationUnit cu = parseSample("ClassWithTypes");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
@@ -277,7 +277,7 @@ class ClassOrInterfaceDeclarationContextResolutionTest extends AbstractResolutio
         assertEquals(false, ref.isSolved());
     }
 
-    @Test
+    [TestMethod]
     void solveTypeRefToAnotherClassInFile() {
         CompilationUnit cu = parseSample("ClassWithTypes");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
@@ -287,7 +287,7 @@ class ClassOrInterfaceDeclarationContextResolutionTest extends AbstractResolutio
         assertEquals(true, ref.isSolved());
     }
 
-    @Test
+    [TestMethod]
     void solveTypeRefToQualifiedInternalClass() {
         CompilationUnit cu = parseSample("ClassWithTypes");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
@@ -297,7 +297,7 @@ class ClassOrInterfaceDeclarationContextResolutionTest extends AbstractResolutio
         assertEquals(true, ref.isSolved());
     }
 
-    @Test
+    [TestMethod]
     void solveTypeRefToQualifiedInternalOfInternalClass() {
         CompilationUnit cu = parseSample("ClassWithTypes");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
@@ -307,7 +307,7 @@ class ClassOrInterfaceDeclarationContextResolutionTest extends AbstractResolutio
         assertEquals(true, ref.isSolved());
     }
 
-    @Test
+    [TestMethod]
     void solveTypeRefToMoreQualifiedInternalOfInternalClass() {
         CompilationUnit cu = parseSample("ClassWithTypes");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
@@ -317,7 +317,7 @@ class ClassOrInterfaceDeclarationContextResolutionTest extends AbstractResolutio
         assertEquals(true, ref.isSolved());
     }
 
-    @Test
+    [TestMethod]
     void solveMethodSimpleCase() {
         CompilationUnit cu = parseSample("ClassWithMethods");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
@@ -329,7 +329,7 @@ class ClassOrInterfaceDeclarationContextResolutionTest extends AbstractResolutio
         assertEquals(0, ref.getCorrespondingDeclaration().getNumberOfParams());
     }
 
-    @Test
+    [TestMethod]
     void solveMethodOverrideCase() {
         CompilationUnit cu = parseSample("ClassWithMethods");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
@@ -341,7 +341,7 @@ class ClassOrInterfaceDeclarationContextResolutionTest extends AbstractResolutio
         assertEquals(0, ref.getCorrespondingDeclaration().getNumberOfParams());
     }
 
-    @Test
+    [TestMethod]
     void solveMethodInheritedCase() {
         CompilationUnit cu = parseSample("ClassWithMethods");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
@@ -353,7 +353,7 @@ class ClassOrInterfaceDeclarationContextResolutionTest extends AbstractResolutio
         assertEquals(0, ref.getCorrespondingDeclaration().getNumberOfParams());
     }
 
-    @Test
+    [TestMethod]
     void solveMethodWithPrimitiveParameters() {
         CompilationUnit cu = parseSample("ClassWithMethods");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
@@ -367,7 +367,7 @@ class ClassOrInterfaceDeclarationContextResolutionTest extends AbstractResolutio
         assertEquals(1, ref.getCorrespondingDeclaration().getNumberOfParams());
     }
 
-    @Test
+    [TestMethod]
     void solveMethodWithMoreSpecializedParameter() {
         CompilationUnit cu = parseSample("ClassWithMethods");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
@@ -381,7 +381,7 @@ class ClassOrInterfaceDeclarationContextResolutionTest extends AbstractResolutio
         assertEquals(1, ref.getCorrespondingDeclaration().getNumberOfParams());
     }
 
-    @Test
+    [TestMethod]
     void solveMethodWithAmbiguosCall() {
         assertThrows(MethodAmbiguityException.class, () -> {
             CompilationUnit cu = parseSample("ClassWithMethods");
@@ -392,7 +392,7 @@ class ClassOrInterfaceDeclarationContextResolutionTest extends AbstractResolutio
                 
 }
 
-    @Test
+    [TestMethod]
     void solveMethodAsUsageSimpleCase() {
         CompilationUnit cu = parseSample("ClassWithMethods");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
@@ -405,7 +405,7 @@ class ClassOrInterfaceDeclarationContextResolutionTest extends AbstractResolutio
         assertEquals(0, ref.get().getNoParams());
     }
 
-    @Test
+    [TestMethod]
     void solveMethodAsUsageOverrideCase() {
         CompilationUnit cu = parseSample("ClassWithMethods");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
@@ -418,7 +418,7 @@ class ClassOrInterfaceDeclarationContextResolutionTest extends AbstractResolutio
         assertEquals(0, ref.get().getNoParams());
     }
 
-    @Test
+    [TestMethod]
     void solveMethodAsUsageInheritedCase() {
         CompilationUnit cu = parseSample("ClassWithMethods");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
@@ -431,7 +431,7 @@ class ClassOrInterfaceDeclarationContextResolutionTest extends AbstractResolutio
         assertEquals(0, ref.get().getNoParams());
     }
 
-    @Test
+    [TestMethod]
     void solveMethodAsUsageWithPrimitiveParameters() {
         CompilationUnit cu = parseSample("ClassWithMethods");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
@@ -446,7 +446,7 @@ class ClassOrInterfaceDeclarationContextResolutionTest extends AbstractResolutio
         assertEquals(1, ref.get().getNoParams());
     }
 
-    @Test
+    [TestMethod]
     void solveMethodAsUsageWithMoreSpecializedParameter() {
         CompilationUnit cu = parseSample("ClassWithMethods");
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = Navigator.demandClass(cu, "A");
@@ -461,7 +461,7 @@ class ClassOrInterfaceDeclarationContextResolutionTest extends AbstractResolutio
         assertEquals(1, ref.get().getNoParams());
     }
 
-    @Test
+    [TestMethod]
     void solveMethodAsUsageWithAmbiguosCall() {
         assertThrows(MethodAmbiguityException.class, () -> {
             CompilationUnit cu = parseSample("ClassWithMethods");

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,20 +26,20 @@ namespace com.github.javaparser.ast.body;
 /**
  * @author Julio Vilmar Gesser
  */
-public final class AnnotationDeclaration extends TypeDeclaration implements DocumentableNode {
+public /*final*/class AnnotationDeclaration:TypeDeclaration implements DocumentableNode {
 
     public AnnotationDeclaration() {
     }
 
-    public AnnotationDeclaration(int modifiers, String name) {
+    public AnnotationDeclaration(int modifiers, string name) {
         super(modifiers, name);
     }
 
-    public AnnotationDeclaration(int modifiers, List<AnnotationExpr> annotations, String name, List<BodyDeclaration> members) {
+    public AnnotationDeclaration(int modifiers, List<AnnotationExpr> annotations, string name, List<BodyDeclaration> members) {
         super(annotations, modifiers, name, members);
     }
 
-    public AnnotationDeclaration(int beginLine, int beginColumn, int endLine, int endColumn, int modifiers, List<AnnotationExpr> annotations, String name, List<BodyDeclaration> members) {
+    public AnnotationDeclaration(int beginLine, int beginColumn, int endLine, int endColumn, int modifiers, List<AnnotationExpr> annotations, string name, List<BodyDeclaration> members) {
         super(beginLine, beginColumn, endLine, endColumn, annotations, modifiers, name, members);
     }
 

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,21 +25,21 @@ namespace com.github.javaparser.builders;
 
 
 class FieldDeclarationBuildersTest {
-    private final CompilationUnit cu = new CompilationUnit();
+    private /*final*/CompilationUnit cu = new CompilationUnit();
     private ClassOrInterfaceDeclaration testClass = cu.addClass("testClass");
     private EnumDeclaration testEnum = cu.addEnum("testEnum");
 
-    @Test
+    [TestMethod]
     void testOrphanFieldGetter() {
         assertThrows(IllegalStateException.class, () -> new FieldDeclaration().createGetter());
     }
 
-    @Test
+    [TestMethod]
     void testOrphanFieldSetter() {
         assertThrows(IllegalStateException.class, () -> new FieldDeclaration().createSetter());
     }
 
-    @Test
+    [TestMethod]
     void testCreateGetterInAClass() {
         testClass.addPrivateField(int.class, "myField").createGetter();
         assertEquals(2, testClass.getMembers().size());
@@ -52,7 +52,7 @@ class FieldDeclarationBuildersTest {
         assertEquals(ReturnStmt.class, getter.getBody().get().getStatement(0).getClass());
     }
 
-    @Test
+    [TestMethod]
     void testCreateSetterInAClass() {
         testClass.addPrivateField(int.class, "myField").createSetter();
         assertEquals(2, testClass.getMembers().size());
@@ -66,7 +66,7 @@ class FieldDeclarationBuildersTest {
         assertEquals("this.myField = myField;", setter.getBody().get().getStatement(0).toString());
     }
 
-    @Test
+    [TestMethod]
     void testCreateGetterInEnum() {
         testEnum.addPrivateField(int.class, "myField").createGetter();
         assertEquals(2, testEnum.getMembers().size());
@@ -79,7 +79,7 @@ class FieldDeclarationBuildersTest {
         assertEquals(ReturnStmt.class, getter.getBody().get().getStatement(0).getClass());
     }
 
-    @Test
+    [TestMethod]
     void testCreateSetterInEnum() {
         testEnum.addPrivateField(int.class, "myField").createSetter();
         assertEquals(2, testEnum.getMembers().size());
@@ -93,7 +93,7 @@ class FieldDeclarationBuildersTest {
         assertEquals("this.myField = myField;", setter.getBody().get().getStatement(0).toString());
     }
 
-    @Test
+    [TestMethod]
     void testCreateGetterWithANonValidField() {
         assertThrows(IllegalStateException.class, () -> {
             FieldDeclaration myPrivateField = testClass.addPrivateField(int.class, "myField");
@@ -102,7 +102,7 @@ class FieldDeclarationBuildersTest {
     });
         }
 
-    @Test
+    [TestMethod]
     void testCreateSetterWithANonValidField() {
         assertThrows(IllegalStateException.class, () -> {
             FieldDeclaration myPrivateField = testClass.addPrivateField(int.class, "myField");

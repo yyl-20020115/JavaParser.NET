@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.symbolsolver.javassistmodel;
 /**
  * @author Federico Tomassetti
  */
-public class JavassistEnumDeclaration extends AbstractTypeDeclaration
+public class JavassistEnumDeclaration:AbstractTypeDeclaration
         implements ResolvedEnumDeclaration, MethodResolutionCapability, MethodUsageResolutionCapability,
         SymbolResolutionCapability {
 
@@ -52,13 +52,13 @@ public class JavassistEnumDeclaration extends AbstractTypeDeclaration
     }
 
     @Override
-    public String getPackageName() {
+    public string getPackageName() {
         return ctClass.getPackageName();
     }
 
     @Override
-    public String getClassName() {
-        String name = ctClass.getName().replace('$', '.');
+    public string getClassName() {
+        string name = ctClass.getName().replace('$', '.');
         if (getPackageName() != null) {
             return name.substring(getPackageName().length() + 1);
         }
@@ -66,7 +66,7 @@ public class JavassistEnumDeclaration extends AbstractTypeDeclaration
     }
 
     @Override
-    public String getQualifiedName() {
+    public string getQualifiedName() {
         return ctClass.getName().replace('$', '.');
     }
 
@@ -76,14 +76,14 @@ public class JavassistEnumDeclaration extends AbstractTypeDeclaration
     }
 
     @Override
-    public ResolvedFieldDeclaration getField(String name) {
+    public ResolvedFieldDeclaration getField(string name) {
         Optional<ResolvedFieldDeclaration> field = javassistTypeDeclarationAdapter.getDeclaredFields().stream().filter(f -> f.getName().equals(name)).findFirst();
 
-        return field.orElseThrow(() -> new RuntimeException("Field " + name + " does not exist in " + ctClass.getName() + "."));
+        return field.orElseThrow(() -> new RuntimeException("Field " + name + " does not exist _in " + ctClass.getName() + "."));
     }
 
     @Override
-    public boolean hasField(String name) {
+    public boolean hasField(string name) {
         return javassistTypeDeclarationAdapter.getDeclaredFields().stream().anyMatch(f -> f.getName().equals(name));
     }
 
@@ -108,12 +108,12 @@ public class JavassistEnumDeclaration extends AbstractTypeDeclaration
     }
 
     @Override
-    public boolean hasDirectlyAnnotation(String canonicalName) {
+    public boolean hasDirectlyAnnotation(string canonicalName) {
         return ctClass.hasAnnotation(canonicalName);
     }
 
     @Override
-    public String getName() {
+    public string getName() {
         String[] nameElements = ctClass.getSimpleName().replace('$', '.').split("\\.");
         return nameElements[nameElements.length - 1];
     }
@@ -129,11 +129,11 @@ public class JavassistEnumDeclaration extends AbstractTypeDeclaration
     }
 
     @Override
-    public SymbolReference<ResolvedMethodDeclaration> solveMethod(String name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
+    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
         return JavassistUtils.solveMethod(name, argumentsTypes, staticOnly, typeSolver, this, ctClass);
     }
 
-    public Optional<MethodUsage> solveMethodAsUsage(String name, List<ResolvedType> argumentsTypes,
+    public Optional<MethodUsage> solveMethodAsUsage(string name, List<ResolvedType> argumentsTypes,
                                                     Context invokationContext, List<ResolvedType> typeParameterValues) {
         return JavassistUtils.solveMethodAsUsage(name, argumentsTypes, typeSolver, invokationContext, typeParameterValues, this, ctClass);
     }
@@ -144,9 +144,9 @@ public class JavassistEnumDeclaration extends AbstractTypeDeclaration
     }
 
     @Override
-    public ResolvedReferenceTypeDeclaration getInternalType(String name) {
+    public ResolvedReferenceTypeDeclaration getInternalType(string name) {
         /*
-        The name of the ReferenceTypeDeclaration could be composed on the internal class and the outer class, e.g. A$B. That's why we search the internal type in the ending part.
+        The name of the ReferenceTypeDeclaration could be composed on the internal class and the outer class, e.g. A$B. That's why we search the internal type _in the ending part.
         In case the name is composed of the internal type only, i.e. f.getName() returns B, it will also works.
          */
         Optional<ResolvedReferenceTypeDeclaration> type =
@@ -156,16 +156,16 @@ public class JavassistEnumDeclaration extends AbstractTypeDeclaration
     }
 
     @Override
-    public boolean hasInternalType(String name) {
+    public boolean hasInternalType(string name) {
         /*
-        The name of the ReferenceTypeDeclaration could be composed on the internal class and the outer class, e.g. A$B. That's why we search the internal type in the ending part.
+        The name of the ReferenceTypeDeclaration could be composed on the internal class and the outer class, e.g. A$B. That's why we search the internal type _in the ending part.
         In case the name is composed of the internal type only, i.e. f.getName() returns B, it will also works.
          */
         return this.internalTypes().stream().anyMatch(f -> f.getName().endsWith(name));
     }
 
     @Override
-    public SymbolReference<? extends ResolvedValueDeclaration> solveSymbol(String name, TypeSolver typeSolver) {
+    public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name, TypeSolver typeSolver) {
         for (CtField field : ctClass.getDeclaredFields()) {
             if (field.getName().equals(name)) {
                 return SymbolReference.solved(new JavassistFieldDeclaration(field, typeSolver));
@@ -173,8 +173,8 @@ public class JavassistEnumDeclaration extends AbstractTypeDeclaration
         }
 
         String[] interfaceFQNs = getInterfaceFQNs();
-        for (String interfaceFQN : interfaceFQNs) {
-            SymbolReference<? extends ResolvedValueDeclaration> interfaceRef = solveSymbolForFQN(name, interfaceFQN);
+        for (string interfaceFQN : interfaceFQNs) {
+            SymbolReference<?:ResolvedValueDeclaration> interfaceRef = solveSymbolForFQN(name, interfaceFQN);
             if (interfaceRef.isSolved()) {
                 return interfaceRef;
             }
@@ -183,7 +183,7 @@ public class JavassistEnumDeclaration extends AbstractTypeDeclaration
         return SymbolReference.unsolved();
     }
 
-    private SymbolReference<? extends ResolvedValueDeclaration> solveSymbolForFQN(String symbolName, String fqn) {
+    private SymbolReference<?:ResolvedValueDeclaration> solveSymbolForFQN(string symbolName, string fqn) {
         if (fqn == null) {
             return SymbolReference.unsolved();
         }
@@ -210,7 +210,7 @@ public class JavassistEnumDeclaration extends AbstractTypeDeclaration
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return getClass().getSimpleName() + "{" +
                 "ctClass=" + ctClass.getName() +
                 ", typeSolver=" + typeSolver +

@@ -5,7 +5,7 @@ public class ArrayListGenericDemo {
 
     public static void main(String[] args) {
         ArrayList<String> data = new ArrayList();
-        data.forEach( s -> System.out.println(s));
+        data.forEach( s -> System._out.println(s));
     }
 }
 Given the second class:
@@ -13,7 +13,7 @@ public class ArrayListGenericDemo {
 
     public static void main(String[] args) {
         ArrayList<String> data = new ArrayList();
-        data.forEach( s -> System.out.println(s));
+        data.forEach( s -> System._out.println(s));
     }
 }
 Then they are equals

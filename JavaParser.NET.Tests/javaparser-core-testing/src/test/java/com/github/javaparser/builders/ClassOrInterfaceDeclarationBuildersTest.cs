@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -37,7 +37,7 @@ class ClassOrInterfaceDeclarationBuildersTest {
         cu = null;
     }
 
-    @Test
+    [TestMethod]
     void testAddExtends() {
         ClassOrInterfaceDeclaration testClass = cu.addClass("test");
         testClass.addExtendedType(List.class);
@@ -48,7 +48,7 @@ class ClassOrInterfaceDeclarationBuildersTest {
         assertEquals(List.class.getSimpleName(), testClass.getExtendedTypes(0).getNameAsString());
     }
 
-    @Test
+    [TestMethod]
     void testAddImplements() {
         ClassOrInterfaceDeclaration testClass = cu.addClass("test");
         testClass.addImplementedType(Function.class);

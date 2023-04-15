@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,7 +23,7 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel;
 
 
 
-class DifferentiateDotExpressionTest extends AbstractResolutionTest {
+class DifferentiateDotExpressionTest:AbstractResolutionTest {
 
     private TypeSolver typeSolver;
 
@@ -35,7 +35,7 @@ class DifferentiateDotExpressionTest extends AbstractResolutionTest {
         typeSolver = combinedTypeSolver;
     }
 
-    @Test
+    [TestMethod]
     void methodCallsFromFieldObjects() {
         ClassOrInterfaceDeclaration clazz = ((JavaParserClassDeclaration) typeSolver.solveType("FieldDotExpressions")).getWrappedNode();
         MethodDeclaration mainMethod = Navigator.demandMethod(clazz, "main");
@@ -50,7 +50,7 @@ class DifferentiateDotExpressionTest extends AbstractResolutionTest {
         assertEquals(true, javaParserFacade.solve(thirdFieldMethodCall).isSolved());
     }
 
-    @Test
+    [TestMethod]
     void staticMethodCallsFromInnerClasses() {
         ClassOrInterfaceDeclaration clazz = ((JavaParserClassDeclaration) typeSolver.solveType("InnerClassDotExpressions")).getWrappedNode();
         MethodDeclaration mainMethod = Navigator.demandMethod(clazz, "main");
@@ -65,7 +65,7 @@ class DifferentiateDotExpressionTest extends AbstractResolutionTest {
         assertEquals(true, javaParserFacade.solve(innerInnerMethodCall).isSolved());
     }
 
-    @Test
+    [TestMethod]
     void staticFieldCallsFromInnerClasses() {
         ClassOrInterfaceDeclaration clazz = ((JavaParserClassDeclaration) typeSolver.solveType("InnerStaticClassFieldDotExpressions")).getWrappedNode();
         MethodDeclaration mainMethod = Navigator.demandMethod(clazz, "main");
@@ -76,7 +76,7 @@ class DifferentiateDotExpressionTest extends AbstractResolutionTest {
         assertEquals(true, javaParserFacade.solve(methodCallWithNestedStaticFieldParam).isSolved());
     }
 
-    @Test
+    [TestMethod]
     void packageStaticMethodCalls() {
         ClassOrInterfaceDeclaration clazz = ((JavaParserClassDeclaration) typeSolver.solveType("PackageDotExpressions")).getWrappedNode();
         MethodDeclaration mainMethod = Navigator.demandMethod(clazz, "main");

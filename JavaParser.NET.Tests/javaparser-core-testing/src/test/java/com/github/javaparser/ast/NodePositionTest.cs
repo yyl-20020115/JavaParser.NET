@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -33,42 +33,42 @@ class NodePositionTest {
         return nodes;
     }
 
-    @Test
-    void packageProtectedClassShouldHavePositionSet() throws IOException {
+    [TestMethod]
+    void packageProtectedClassShouldHavePositionSet(){
         ensureAllNodesHaveValidBeginPosition("class A { }");
     }
 
-    @Test
-    void packageProtectedInterfaceShouldHavePositionSet() throws IOException {
+    [TestMethod]
+    void packageProtectedInterfaceShouldHavePositionSet(){
         ensureAllNodesHaveValidBeginPosition("interface A { }");
     }
 
-    @Test
-    void packageProtectedEnumShouldHavePositionSet() throws IOException {
+    [TestMethod]
+    void packageProtectedEnumShouldHavePositionSet(){
         ensureAllNodesHaveValidBeginPosition("enum A { }");
     }
 
-    @Test
-    void packageProtectedAnnotationShouldHavePositionSet() throws IOException {
+    [TestMethod]
+    void packageProtectedAnnotationShouldHavePositionSet(){
         ensureAllNodesHaveValidBeginPosition("@interface A { }");
     }
 
-    @Test
-    void packageProtectedFieldShouldHavePositionSet() throws IOException {
+    [TestMethod]
+    void packageProtectedFieldShouldHavePositionSet(){
         ensureAllNodesHaveValidBeginPosition("public class A { int i; }");
     }
 
-    @Test
-    void packageProtectedMethodShouldHavePositionSet() throws IOException {
+    [TestMethod]
+    void packageProtectedMethodShouldHavePositionSet(){
       ensureAllNodesHaveValidBeginPosition("public class A { void foo() {} }");
     }
 
-    @Test
-    void packageProtectedConstructorShouldHavePositionSet() throws IOException {
+    [TestMethod]
+    void packageProtectedConstructorShouldHavePositionSet(){
       ensureAllNodesHaveValidBeginPosition("public class A { A() {} }");
     }
 
-    private void ensureAllNodesHaveValidBeginPosition(final String code) {
+    private void ensureAllNodesHaveValidBeginPosition(/*final*/string code) {
         ParseResult<CompilationUnit> res = new JavaParser().parse(ParseStart.COMPILATION_UNIT, Providers.provider(code));
         assertTrue(res.getProblems().isEmpty());
 

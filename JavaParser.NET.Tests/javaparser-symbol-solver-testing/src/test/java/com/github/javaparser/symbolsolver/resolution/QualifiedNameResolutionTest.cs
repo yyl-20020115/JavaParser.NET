@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,16 +23,16 @@ namespace com.github.javaparser.symbolsolver.resolution;
 
 
 
-class QualifiedNameResolutionTest extends AbstractResolutionTest {
+class QualifiedNameResolutionTest:AbstractResolutionTest {
 
-    @Test
+    [TestMethod]
     void resolveLocalVariableInParentOfParent() {
         CompilationUnit cu = parseSample("QualifiedNameTest");
         com.github.javaparser.ast.body.ClassOrInterfaceDeclaration referencesToField = Navigator.demandClass(cu, "QualifiedNameTest");
         MethodDeclaration method = Navigator.demandMethod(referencesToField, "foo1");
         NameExpr nameExpr = Navigator.findNameExpression(method, "s").get();
 
-        SymbolReference<? extends ResolvedValueDeclaration> ref = JavaParserFacade.get(new ReflectionTypeSolver()).solve(nameExpr);
+        SymbolReference<?:ResolvedValueDeclaration> ref = JavaParserFacade.get(new ReflectionTypeSolver()).solve(nameExpr);
         assertTrue(ref.isSolved());
         assertEquals("java.util.Scanner", ref.getCorrespondingDeclaration().getType().asReferenceType().getQualifiedName());
     }

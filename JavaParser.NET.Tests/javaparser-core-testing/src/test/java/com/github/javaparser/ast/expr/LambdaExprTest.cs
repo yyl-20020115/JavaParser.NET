@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,61 +24,61 @@ namespace com.github.javaparser.ast.expr;
 
 
 class LambdaExprTest {
-    @Test
+    [TestMethod]
     void lambdaRange1() {
         Expression expression = parseExpression("x -> y");
         assertRange("x", "y", expression);
     }
 
-    @Test
+    [TestMethod]
     void lambdaRange2() {
         Expression expression = parseExpression("(x) -> y");
         assertRange("(", "y", expression);
     }
 
-    private void assertRange(String startToken, String endToken, Node node) {
+    private void assertRange(string startToken, string endToken, Node node) {
         TokenRange tokenRange = node.getTokenRange().get();
         assertEquals(startToken, tokenRange.getBegin().asString());
         assertEquals(endToken, tokenRange.getEnd().asString());
     }
 
-    @Test
+    [TestMethod]
     void getExpressionBody() {
         LambdaExpr lambdaExpr = parseExpression("x -> y").asLambdaExpr();
         assertEquals("Optional[y]", lambdaExpr.getExpressionBody().toString());
     }
 
-    @Test
+    [TestMethod]
     void getNoExpressionBody() {
         LambdaExpr lambdaExpr = parseExpression("x -> {y;}").asLambdaExpr();
         assertEquals("Optional.empty", lambdaExpr.getExpressionBody().toString());
     }
 
-    @Test
+    [TestMethod]
     void oneParameterAndExpressionUtilityConstructor() {
         LambdaExpr expr = new LambdaExpr(new Parameter(new UnknownType(), "a"), parseExpression("5"));
         assertEquals("a -> 5", expr.toString());
     }
 
-    @Test
+    [TestMethod]
     void oneParameterAndStatementUtilityConstructor() {
         LambdaExpr expr = new LambdaExpr(new Parameter(new UnknownType(), "a"), parseBlock("{return 5;}"));
         assertEqualsStringIgnoringEol("a -> {\n    return 5;\n}", expr.toString());
     }
 
-    @Test
+    [TestMethod]
     void multipleParametersAndExpressionUtilityConstructor() {
         LambdaExpr expr = new LambdaExpr(new NodeList<>(new Parameter(new UnknownType(), "a"), new Parameter(new UnknownType(), "b")), parseExpression("5"));
         assertEquals("(a, b) -> 5", expr.toString());
     }
 
-    @Test
+    [TestMethod]
     void multipleParametersAndStatementUtilityConstructor() {
         LambdaExpr expr = new LambdaExpr(new NodeList<>(new Parameter(new UnknownType(), "a"), new Parameter(new UnknownType(), "b")), parseBlock("{return 5;}"));
         assertEqualsStringIgnoringEol("(a, b) -> {\n    return 5;\n}", expr.toString());
     }
 
-    @Test
+    [TestMethod]
     void zeroParametersAndStatementUtilityConstructor() {
         LambdaExpr expr = new LambdaExpr(new NodeList<>(), parseBlock("{return 5;}"));
         assertEqualsStringIgnoringEol("() -> {\n    return 5;\n}", expr.toString());

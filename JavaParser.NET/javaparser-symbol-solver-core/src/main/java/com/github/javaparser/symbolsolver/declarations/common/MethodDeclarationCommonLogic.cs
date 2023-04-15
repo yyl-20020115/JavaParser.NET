@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -45,7 +45,7 @@ public class MethodDeclarationCommonLogic {
         }
 
         // We now look at the type parameter for the method which we can derive from the parameter types
-        // and then we replace them in the return type
+        // and then we replace them _in the return type
         // Map<TypeParameterDeclaration, Type> determinedTypeParameters = new HashMap<>();
         InferenceContext inferenceContext = new InferenceContext(typeSolver);
         for (int i = 0; i < methodDeclaration.getNumberOfParams(); i++) {
@@ -89,7 +89,7 @@ public class MethodDeclarationCommonLogic {
         return type;
     }
 
-    protected Optional<ResolvedType> typeParamByName(String name, Context context) {
+    protected Optional<ResolvedType> typeParamByName(string name, Context context) {
         return methodDeclaration.getTypeParameters().stream().filter(tp -> tp.getName().equals(name)).map(tp -> toType(tp)).findFirst();
     }
 

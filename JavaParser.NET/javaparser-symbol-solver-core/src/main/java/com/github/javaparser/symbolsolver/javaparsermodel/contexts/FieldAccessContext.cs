@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,18 +27,18 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.contexts;
 /**
  * @author Federico Tomassetti
  */
-public class FieldAccessContext extends AbstractJavaParserContext<FieldAccessExpr> {
+public class FieldAccessContext:AbstractJavaParserContext<FieldAccessExpr> {
 
-    private static final String ARRAY_LENGTH_FIELD_NAME = "length";
+    private static /*final*/string ARRAY_LENGTH_FIELD_NAME = "length";
 
     public FieldAccessContext(FieldAccessExpr wrappedNode, TypeSolver typeSolver) {
         super(wrappedNode, typeSolver);
     }
 
     @Override
-    public SymbolReference<? extends ResolvedValueDeclaration> solveSymbol(String name) {
+    public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name) {
         if (wrappedNode.getName().toString().equals(name)) {
-            if (wrappedNode.getScope() instanceof ThisExpr) {
+            if (wrappedNode.getScope() is ThisExpr) {
                 ResolvedType typeOfThis = JavaParserFacade.get(typeSolver).getTypeOfThisIn(wrappedNode);
                 if(typeOfThis.asReferenceType().getTypeDeclaration().isPresent()) {
                     return new SymbolSolver(typeSolver).solveSymbolInType(
@@ -52,17 +52,17 @@ public class FieldAccessContext extends AbstractJavaParserContext<FieldAccessExp
     }
 
     @Override
-    public SymbolReference<ResolvedTypeDeclaration> solveType(String name, List<ResolvedType> typeArguments) {
+    public SymbolReference<ResolvedTypeDeclaration> solveType(string name, List<ResolvedType> typeArguments) {
         return JavaParserFactory.getContext(demandParentNode(wrappedNode), typeSolver).solveType(name, typeArguments);
     }
 
     @Override
-    public SymbolReference<ResolvedMethodDeclaration> solveMethod(String name, List<ResolvedType> parameterTypes, boolean staticOnly) {
+    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> parameterTypes, boolean staticOnly) {
         return JavaParserFactory.getContext(demandParentNode(wrappedNode), typeSolver).solveMethod(name, parameterTypes, false);
     }
 
     @Override
-    public Optional<Value> solveSymbolAsValue(String name) {
+    public Optional<Value> solveSymbolAsValue(string name) {
         Expression scope = wrappedNode.getScope();
         if (wrappedNode.getName().toString().equals(name)) {
             ResolvedType typeOfScope = JavaParserFacade.get(typeSolver).getType(scope);
@@ -84,7 +84,7 @@ public class FieldAccessContext extends AbstractJavaParserContext<FieldAccessExp
     /*
      * Try to resolve the name parameter as a field of the reference type
      */
-    private Optional<Value> solveSymbolAsValue(String name, ResolvedReferenceType type) {
+    private Optional<Value> solveSymbolAsValue(string name, ResolvedReferenceType type) {
         Optional<ResolvedReferenceTypeDeclaration> optionalTypeDeclaration = type.getTypeDeclaration();
         if (optionalTypeDeclaration.isPresent()) {
             ResolvedReferenceTypeDeclaration typeDeclaration = optionalTypeDeclaration.get();
@@ -99,7 +99,7 @@ public class FieldAccessContext extends AbstractJavaParserContext<FieldAccessExp
         return typeUsage.map(resolvedType -> new Value(resolvedType, name));
     }
 
-    public SymbolReference<ResolvedValueDeclaration> solveField(String name) {
+    public SymbolReference<ResolvedValueDeclaration> solveField(string name) {
         Collection<ResolvedReferenceTypeDeclaration> rrtds = findTypeDeclarations(Optional.of(wrappedNode.getScope()));
         for (ResolvedReferenceTypeDeclaration rrtd : rrtds) {
             if (rrtd.isEnum()) {

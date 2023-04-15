@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,30 +26,30 @@ namespace com.github.javaparser.ast.stmt;
 /**
  * @author Julio Vilmar Gesser
  */
-public final class BlockStmt extends Statement {
+public /*final*/class BlockStmt:Statement {
 
 	private List<Statement> stmts;
 
 	public BlockStmt() {
 	}
 
-	public BlockStmt(final List<Statement> stmts) {
+	public BlockStmt(/*final*/List<Statement> stmts) {
 		setStmts(stmts);
 	}
 
-	public BlockStmt(final int beginLine, final int beginColumn,
-			final int endLine, final int endColumn, final List<Statement> stmts) {
+	public BlockStmt(/*final*/int beginLine, /*final*/int beginColumn,
+			/*final*/int endLine, /*final*/int endColumn, /*final*/List<Statement> stmts) {
 		super(beginLine, beginColumn, endLine, endColumn);
 		setStmts(stmts);
 	}
 
 	//@Override
-	public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+	public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
 		return v.visit(this, arg);
 	}
 
 	//@Override
-	public <A> void accept(final VoidVisitor<A> v, final A arg) {
+	public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
 		v.visit(this, arg);
 	}
 
@@ -57,7 +57,7 @@ public final class BlockStmt extends Statement {
 		return stmts;
 	}
 
-	public void setStmts(final List<Statement> stmts) {
+	public void setStmts(/*final*/List<Statement> stmts) {
 		this.stmts = stmts;
 		setAsParentNodeOf(this.stmts);
 	}

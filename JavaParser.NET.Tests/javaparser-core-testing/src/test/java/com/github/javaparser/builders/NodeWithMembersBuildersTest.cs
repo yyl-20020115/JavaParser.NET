@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,10 +25,10 @@ namespace com.github.javaparser.builders;
 
 
 class NodeWithMembersBuildersTest {
-    private final CompilationUnit cu = new CompilationUnit();
-    private final ClassOrInterfaceDeclaration classDeclaration = cu.addClass("test");
+    private /*final*/CompilationUnit cu = new CompilationUnit();
+    private /*final*/ClassOrInterfaceDeclaration classDeclaration = cu.addClass("test");
 
-    @Test
+    [TestMethod]
     void testAddField() {
         FieldDeclaration addField = classDeclaration.addField(int.class, "fieldName", PRIVATE);
         assertEquals(1, classDeclaration.getMembers().size());
@@ -36,7 +36,7 @@ class NodeWithMembersBuildersTest {
         assertEquals("fieldName", addField.getVariable(0).getNameAsString());
     }
 
-    @Test
+    [TestMethod]
     void testAddMethod() {
         MethodDeclaration addMethod = classDeclaration.addMethod("foo", PUBLIC);
         assertEquals(1, classDeclaration.getMembers().size());
@@ -44,7 +44,7 @@ class NodeWithMembersBuildersTest {
         assertEquals("foo", addMethod.getNameAsString());
     }
 
-    @Test
+    [TestMethod]
     void testAddCtor() {
         ConstructorDeclaration addCtor = classDeclaration.addConstructor(PUBLIC);
         assertEquals(1, classDeclaration.getMembers().size());
@@ -52,7 +52,7 @@ class NodeWithMembersBuildersTest {
         assertEquals(classDeclaration.getName(), addCtor.getName());
     }
 
-    @Test
+    [TestMethod]
     void testAddInitializers() {
         classDeclaration.addInitializer();
         assertEquals(1, classDeclaration.getMembers().size());
@@ -63,7 +63,7 @@ class NodeWithMembersBuildersTest {
         assertEquals(InitializerDeclaration.class, classDeclaration.getMember(0).getClass());
     }
 
-    @Test
+    [TestMethod]
     void testGetMethodsWithName() {
         MethodDeclaration addMethod = classDeclaration.addMethod("foo", PUBLIC);
         MethodDeclaration addMethod2 = classDeclaration.addMethod("foo", PUBLIC).addParameter(int.class, "overload");
@@ -73,7 +73,7 @@ class NodeWithMembersBuildersTest {
         assertTrue(methodsByName.contains(addMethod2));
     }
 
-    @Test
+    [TestMethod]
     void testGetMethods() {
         MethodDeclaration addMethod = classDeclaration.addMethod("foo", PUBLIC);
         MethodDeclaration addMethod2 = classDeclaration.addMethod("foo", PUBLIC).addParameter(int.class, "overload");
@@ -85,7 +85,7 @@ class NodeWithMembersBuildersTest {
         assertTrue(methods.contains(addMethod2));
     }
 
-    @Test
+    [TestMethod]
     void testGetMethodsWithParameterTypes() {
         MethodDeclaration mFoo = classDeclaration.addMethod("foo", PUBLIC); // foo()
         MethodDeclaration mFooInt = classDeclaration.addMethod("foo", PUBLIC).addParameter(int.class, "i"); // foo(int)
@@ -121,7 +121,7 @@ class NodeWithMembersBuildersTest {
         assertTrue(methodsWithIntAndIntParams.contains(mFoo2IntInt));
     }
 
-    @Test
+    [TestMethod]
     void testGetConstructors() {
         ConstructorDeclaration addConstructor = classDeclaration.addConstructor(PUBLIC);
         ConstructorDeclaration addConstructor2 = classDeclaration.addConstructor(PUBLIC).addParameter(int.class, "overload");
@@ -133,7 +133,7 @@ class NodeWithMembersBuildersTest {
         assertTrue(constructors.contains(addConstructor2));
     }
 
-    @Test
+    [TestMethod]
     void testGetConstructorsWithParameterTypes() {
         ConstructorDeclaration c = classDeclaration.addConstructor(PUBLIC); // Foo()
         ConstructorDeclaration cInt = classDeclaration.addConstructor(PUBLIC).addParameter(int.class, "i"); // Foo(int)
@@ -167,7 +167,7 @@ class NodeWithMembersBuildersTest {
         assertSame(cIntInt, constructorWithIntAndIntParams.get());
     }
 
-    @Test
+    [TestMethod]
     void testGetFieldWithName() {
         FieldDeclaration addField = classDeclaration.addField(int.class, "fieldName", PRIVATE);
         classDeclaration.addField(float.class, "secondField", PRIVATE);
@@ -175,7 +175,7 @@ class NodeWithMembersBuildersTest {
         assertEquals(addField, fieldByName);
     }
 
-    @Test
+    [TestMethod]
     void testGetFields() {
         FieldDeclaration firstField = classDeclaration.addField(int.class, "fieldName", PRIVATE);
         FieldDeclaration secondField = classDeclaration.addField(float.class, "secondField", PRIVATE);
@@ -186,7 +186,7 @@ class NodeWithMembersBuildersTest {
         assertTrue(fields.contains(secondField));
     }
 
-    @Test
+    [TestMethod]
     void testAddPrivateFieldWithType(){
         CompilationUnit compilationUnit = new CompilationUnit();
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = compilationUnit.addClass("Person");
@@ -201,7 +201,7 @@ class NodeWithMembersBuildersTest {
         assertEquals("name",fieldDeclaration.getVariables().get(0).getName().toString());
     }
 
-    @Test
+    [TestMethod]
     void testAddPublicFieldWithType(){
         CompilationUnit compilationUnit = new CompilationUnit();
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = compilationUnit.addClass("Person");
@@ -216,7 +216,7 @@ class NodeWithMembersBuildersTest {
         assertEquals("name",fieldDeclaration.getVariables().get(0).getName().toString());
     }
 
-    @Test
+    [TestMethod]
     void testAddProtectedFieldWithType(){
         CompilationUnit compilationUnit = new CompilationUnit();
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = compilationUnit.addClass("Person");
@@ -231,7 +231,7 @@ class NodeWithMembersBuildersTest {
         assertEquals("name",fieldDeclaration.getVariables().get(0).getName().toString());
     }
 
-    @Test
+    [TestMethod]
     void testClassWithInitializersWithString(){
         CompilationUnit compilationUnit = new CompilationUnit();
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = compilationUnit.addClass("Person");
@@ -250,7 +250,7 @@ class NodeWithMembersBuildersTest {
         assertEquals("John",fieldDeclaration.getVariables().get(0).getInitializer().get().toString());
     }
 
-    @Test
+    [TestMethod]
     void testClassWithInitializersWithClass(){
         CompilationUnit compilationUnit = new CompilationUnit();
         ClassOrInterfaceDeclaration classOrInterfaceDeclaration = compilationUnit.addClass("Person");

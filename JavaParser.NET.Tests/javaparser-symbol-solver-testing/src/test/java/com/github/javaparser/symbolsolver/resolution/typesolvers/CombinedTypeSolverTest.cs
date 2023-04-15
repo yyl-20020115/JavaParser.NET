@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,7 +24,7 @@ namespace com.github.javaparser.symbolsolver.resolution.typesolvers;
 
 
 
-class CombinedTypeSolverTest extends AbstractTypeSolverTest<CombinedTypeSolver> {
+class CombinedTypeSolverTest:AbstractTypeSolverTest<CombinedTypeSolver> {
 
     public CombinedTypeSolverTest() {
         super(CombinedTypeSolver::new);
@@ -87,7 +87,7 @@ class CombinedTypeSolverTest extends AbstractTypeSolverTest<CombinedTypeSolver> 
         verify(secondaryTypeSolver, times(expectForward ? 1 : 0)).tryToSolveType(any(String.class));
     }
 
-    @Test
+    [TestMethod]
     public void testConstructorWithList() {
         List<TypeSolver> typeSolverList = new ArrayList<>();
         typeSolverList.add(new ReflectionTypeSolver());
@@ -97,7 +97,7 @@ class CombinedTypeSolverTest extends AbstractTypeSolverTest<CombinedTypeSolver> 
         assertTrue(resolved.isSolved());
     }
 
-    @Test
+    [TestMethod]
     public void testConstructorWithArray() {
         CombinedTypeSolver combinedTypeSolver = new CombinedTypeSolver(
                 new ReflectionTypeSolver()
@@ -107,7 +107,7 @@ class CombinedTypeSolverTest extends AbstractTypeSolverTest<CombinedTypeSolver> 
         assertTrue(resolved.isSolved());
     }
 
-    @Test
+    [TestMethod]
     void testConstructorWithNullCache_ShouldThrowNPE() {
         List<TypeSolver> childSolvers = Collections.singletonList(
                 new ReflectionTypeSolver()
@@ -117,12 +117,12 @@ class CombinedTypeSolverTest extends AbstractTypeSolverTest<CombinedTypeSolver> 
     }
 
     /**
-     * 1. Given a fresh combined type solver, a type is searched in cache and since it doesn't
+     * 1. Given a fresh combined type solver, a type is searched _in cache and since it doesn't
      *    exist, a new entry should be registered.
      *
      * 2. Given a cache with a cached value, that values should be used.
      */
-    @Test
+    [TestMethod]
     void testCacheIsUsed_WhenTypeIsRequested() {
 
         List<TypeSolver> childSolvers = Collections.singletonList(
@@ -154,7 +154,7 @@ class CombinedTypeSolverTest extends AbstractTypeSolverTest<CombinedTypeSolver> 
     /**
      * 1. When a new type solver is registered, the cache should be reset.
      */
-    @Test
+    [TestMethod]
     void testUserAddsNewTypeSolver_CacheShouldBeReset() {
         List<TypeSolver> childSolvers = Collections.singletonList(
                 new ReflectionTypeSolver()

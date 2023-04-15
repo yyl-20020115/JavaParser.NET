@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -34,11 +34,11 @@ public class ReflectionTypeParameter implements ResolvedTypeParameterDeclaration
 
     public ReflectionTypeParameter(TypeVariable typeVariable, boolean declaredOnClass, TypeSolver typeSolver) {
         GenericDeclaration genericDeclaration = typeVariable.getGenericDeclaration();
-        if (genericDeclaration instanceof Class) {
+        if (genericDeclaration is Class) {
             container = ReflectionFactory.typeDeclarationFor((Class) genericDeclaration, typeSolver);
-        } else if (genericDeclaration instanceof Method) {
+        } else if (genericDeclaration is Method) {
             container = new ReflectionMethodDeclaration((Method) genericDeclaration, typeSolver);
-        } else if (genericDeclaration instanceof Constructor) {
+        } else if (genericDeclaration is Constructor) {
             container = new ReflectionConstructorDeclaration((Constructor) genericDeclaration, typeSolver);
         }
         this.typeVariable = typeVariable;
@@ -48,7 +48,7 @@ public class ReflectionTypeParameter implements ResolvedTypeParameterDeclaration
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ResolvedTypeParameterDeclaration)) return false;
+        if (!(o is ResolvedTypeParameterDeclaration)) return false;
 
         ResolvedTypeParameterDeclaration that = (ResolvedTypeParameterDeclaration) o;
 
@@ -73,13 +73,13 @@ public class ReflectionTypeParameter implements ResolvedTypeParameterDeclaration
     }
 
     @Override
-    public String getName() {
+    public string getName() {
         return typeVariable.getName();
     }
 
     @Override
-    public String getContainerQualifiedName() {
-        if (container instanceof ResolvedReferenceTypeDeclaration) {
+    public string getContainerQualifiedName() {
+        if (container is ResolvedReferenceTypeDeclaration) {
             return ((ResolvedReferenceTypeDeclaration) container).getQualifiedName();
         } else {
             return ((ResolvedMethodLikeDeclaration) container).getQualifiedSignature();
@@ -87,8 +87,8 @@ public class ReflectionTypeParameter implements ResolvedTypeParameterDeclaration
     }
 
     @Override
-    public String getContainerId() {
-        if (container instanceof ResolvedReferenceTypeDeclaration) {
+    public string getContainerId() {
+        if (container is ResolvedReferenceTypeDeclaration) {
             return ((ResolvedReferenceTypeDeclaration) container).getId();
         } else {
             return ((ResolvedMethodLikeDeclaration) container).getQualifiedSignature();
@@ -106,7 +106,7 @@ public class ReflectionTypeParameter implements ResolvedTypeParameterDeclaration
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "ReflectionTypeParameter{" +
                 "typeVariable=" + typeVariable +
                 '}';
@@ -114,7 +114,7 @@ public class ReflectionTypeParameter implements ResolvedTypeParameterDeclaration
 
     @Override
     public Optional<ResolvedReferenceTypeDeclaration> containerType() {
-        if (container instanceof ResolvedReferenceTypeDeclaration) {
+        if (container is ResolvedReferenceTypeDeclaration) {
             return Optional.of((ResolvedReferenceTypeDeclaration) container);
         }
         return Optional.empty();

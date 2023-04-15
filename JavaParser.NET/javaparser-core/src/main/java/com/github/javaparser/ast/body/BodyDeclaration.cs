@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,7 +28,8 @@ namespace com.github.javaparser.ast.body;
  *
  * @author Julio Vilmar Gesser
  */
-public abstract class BodyDeclaration<T extends BodyDeclaration<?>> extends Node implements NodeWithAnnotations<T> {
+public abstract class BodyDeclaration<T> : Node, NodeWithAnnotations<T> where T: BodyDeclaration<T>
+{
 
     private NodeList<AnnotationExpr> annotations;
 
@@ -36,7 +37,7 @@ public abstract class BodyDeclaration<T extends BodyDeclaration<?>> extends Node
         this(null, new NodeList<>());
     }
 
-    @AllFieldsConstructor
+    ////@AllFieldsConstructor
     public BodyDeclaration(NodeList<AnnotationExpr> annotations) {
         this(null, annotations);
     }
@@ -44,7 +45,7 @@ public abstract class BodyDeclaration<T extends BodyDeclaration<?>> extends Node
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    ////@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public BodyDeclaration(TokenRange tokenRange, NodeList<AnnotationExpr> annotations) {
         super(tokenRange);
         setAnnotations(annotations);
@@ -55,14 +56,14 @@ public abstract class BodyDeclaration<T extends BodyDeclaration<?>> extends Node
         this(range, new NodeList<>());
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    ////@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public NodeList<AnnotationExpr> getAnnotations() {
         return annotations;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    @SuppressWarnings("unchecked")
-    public T setAnnotations(final NodeList<AnnotationExpr> annotations) {
+    ////@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    ////@SuppressWarnings("unchecked")
+    public T setAnnotations(/*final*/NodeList<AnnotationExpr> annotations) {
         assertNotNull(annotations);
         if (annotations == this.annotations) {
             return (T) this;
@@ -76,7 +77,7 @@ public abstract class BodyDeclaration<T extends BodyDeclaration<?>> extends Node
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
+    ////@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
     public bool remove(Node node) {
         if (node == null) {
             return false;
@@ -91,19 +92,19 @@ public abstract class BodyDeclaration<T extends BodyDeclaration<?>> extends Node
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    ////@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public BodyDeclaration<?> clone() {
         return (BodyDeclaration<?>) accept(new CloneVisitor(), null);
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    ////@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public BodyDeclarationMetaModel getMetaModel() {
         return JavaParserMetaModel.bodyDeclarationMetaModel;
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
+    ////@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
@@ -117,249 +118,249 @@ public abstract class BodyDeclaration<T extends BodyDeclaration<?>> extends Node
         return super.replace(node, replacementNode);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    ////@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public bool isAnnotationDeclaration() {
         return false;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    ////@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public AnnotationDeclaration asAnnotationDeclaration() {
         throw new IllegalStateException(f("%s is not AnnotationDeclaration, it is %s", this, this.getClass().getSimpleName()));
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    ////@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public bool isAnnotationMemberDeclaration() {
         return false;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    ////@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public AnnotationMemberDeclaration asAnnotationMemberDeclaration() {
         throw new IllegalStateException(f("%s is not AnnotationMemberDeclaration, it is %s", this, this.getClass().getSimpleName()));
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    ////@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public bool isCallableDeclaration() {
         return false;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    ////@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public CallableDeclaration asCallableDeclaration() {
         throw new IllegalStateException(f("%s is not CallableDeclaration, it is %s", this, this.getClass().getSimpleName()));
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    ////@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public bool isClassOrInterfaceDeclaration() {
         return false;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    ////@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public ClassOrInterfaceDeclaration asClassOrInterfaceDeclaration() {
         throw new IllegalStateException(f("%s is not ClassOrInterfaceDeclaration, it is %s", this, this.getClass().getSimpleName()));
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    ////@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public bool isConstructorDeclaration() {
         return false;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    ////@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public ConstructorDeclaration asConstructorDeclaration() {
         throw new IllegalStateException(f("%s is not ConstructorDeclaration, it is %s", this, this.getClass().getSimpleName()));
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    ////@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public bool isCompactConstructorDeclaration() {
         return false;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    ////@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public CompactConstructorDeclaration asCompactConstructorDeclaration() {
         throw new IllegalStateException(f("%s is not CompactConstructorDeclaration, it is %s", this, this.getClass().getSimpleName()));
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public bool isEnumConstantDeclaration() {
         return false;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public EnumConstantDeclaration asEnumConstantDeclaration() {
         throw new IllegalStateException(f("%s is not EnumConstantDeclaration, it is %s", this, this.getClass().getSimpleName()));
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public bool isEnumDeclaration() {
         return false;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public EnumDeclaration asEnumDeclaration() {
         throw new IllegalStateException(f("%s is not EnumDeclaration, it is %s", this, this.getClass().getSimpleName()));
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public bool isFieldDeclaration() {
         return false;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public FieldDeclaration asFieldDeclaration() {
         throw new IllegalStateException(f("%s is not FieldDeclaration, it is %s", this, this.getClass().getSimpleName()));
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public bool isInitializerDeclaration() {
         return false;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public InitializerDeclaration asInitializerDeclaration() {
         throw new IllegalStateException(f("%s is not InitializerDeclaration, it is %s", this, this.getClass().getSimpleName()));
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public bool isMethodDeclaration() {
         return false;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public MethodDeclaration asMethodDeclaration() {
         throw new IllegalStateException(f("%s is not MethodDeclaration, it is %s", this, this.getClass().getSimpleName()));
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public bool isTypeDeclaration() {
         return false;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public TypeDeclaration asTypeDeclaration() {
         throw new IllegalStateException(f("%s is not TypeDeclaration, it is %s", this, this.getClass().getSimpleName()));
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifAnnotationDeclaration(Consumer<AnnotationDeclaration> action) {
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifAnnotationMemberDeclaration(Consumer<AnnotationMemberDeclaration> action) {
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifCallableDeclaration(Consumer<CallableDeclaration> action) {
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifClassOrInterfaceDeclaration(Consumer<ClassOrInterfaceDeclaration> action) {
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifConstructorDeclaration(Consumer<ConstructorDeclaration> action) {
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifEnumConstantDeclaration(Consumer<EnumConstantDeclaration> action) {
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifEnumDeclaration(Consumer<EnumDeclaration> action) {
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifFieldDeclaration(Consumer<FieldDeclaration> action) {
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifInitializerDeclaration(Consumer<InitializerDeclaration> action) {
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifMethodDeclaration(Consumer<MethodDeclaration> action) {
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifTypeDeclaration(Consumer<TypeDeclaration> action) {
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifRecordDeclaration(Consumer<RecordDeclaration> action) {
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifCompactConstructorDeclaration(Consumer<CompactConstructorDeclaration> action) {
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<AnnotationDeclaration> toAnnotationDeclaration() {
         return Optional.empty();
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<AnnotationMemberDeclaration> toAnnotationMemberDeclaration() {
         return Optional.empty();
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<CallableDeclaration> toCallableDeclaration() {
         return Optional.empty();
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<ClassOrInterfaceDeclaration> toClassOrInterfaceDeclaration() {
         return Optional.empty();
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<ConstructorDeclaration> toConstructorDeclaration() {
         return Optional.empty();
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<EnumConstantDeclaration> toEnumConstantDeclaration() {
         return Optional.empty();
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<EnumDeclaration> toEnumDeclaration() {
         return Optional.empty();
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<FieldDeclaration> toFieldDeclaration() {
         return Optional.empty();
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<InitializerDeclaration> toInitializerDeclaration() {
         return Optional.empty();
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<MethodDeclaration> toMethodDeclaration() {
         return Optional.empty();
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<TypeDeclaration> toTypeDeclaration() {
         return Optional.empty();
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public bool isRecordDeclaration() {
         return false;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public RecordDeclaration asRecordDeclaration() {
         throw new IllegalStateException(f("%s is not RecordDeclaration, it is %s", this, this.getClass().getSimpleName()));
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<RecordDeclaration> toRecordDeclaration() {
         return Optional.empty();
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<CompactConstructorDeclaration> toCompactConstructorDeclaration() {
         return Optional.empty();
     }

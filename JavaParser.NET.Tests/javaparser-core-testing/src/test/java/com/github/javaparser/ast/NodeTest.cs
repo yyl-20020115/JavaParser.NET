@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,7 +24,7 @@ namespace com.github.javaparser.ast;
 
 
 class NodeTest {
-    @Test
+    [TestMethod]
     void removeOrphanCommentPositiveCase() {
         ClassOrInterfaceDeclaration decl = new ClassOrInterfaceDeclaration(new NodeList<>(), false, "A");
         Comment c = new LineComment("A comment");
@@ -36,7 +36,7 @@ class NodeTest {
         assertFalse(c.getParentNode().isPresent());
     }
 
-    @Test
+    [TestMethod]
     void removeOrphanCommentNegativeCase() {
         ClassOrInterfaceDeclaration aClass = new ClassOrInterfaceDeclaration(new NodeList<>(), false, "A");
         FieldDeclaration aField = new FieldDeclaration(new NodeList<>(), new VariableDeclarator(PrimitiveType.intType(), "f"));
@@ -49,41 +49,41 @@ class NodeTest {
         assertTrue(c.getParentNode().isPresent());
     }
 
-    @Test
+    [TestMethod]
     void hasJavaDocCommentPositiveCaseWithSetJavaDocComment() {
         ClassOrInterfaceDeclaration decl = new ClassOrInterfaceDeclaration(new NodeList<>(), false, "Foo");
         decl.setJavadocComment("A comment");
         assertTrue(decl.hasJavaDocComment());
     }
 
-    @Test
+    [TestMethod]
     void hasJavaDocCommentPositiveCaseWithSetComment() {
         ClassOrInterfaceDeclaration decl = new ClassOrInterfaceDeclaration(new NodeList<>(), false, "Foo");
         decl.setComment(new JavadocComment("A comment"));
         assertTrue(decl.hasJavaDocComment());
     }
 
-    @Test
+    [TestMethod]
     void hasJavaDocCommentNegativeCaseNoComment() {
         ClassOrInterfaceDeclaration decl = new ClassOrInterfaceDeclaration(new NodeList<>(), false, "Foo");
         assertFalse(decl.hasJavaDocComment());
     }
 
-    @Test
+    [TestMethod]
     void hasJavaDocCommentNegativeCaseLineComment() {
         ClassOrInterfaceDeclaration decl = new ClassOrInterfaceDeclaration(new NodeList<>(), false, "Foo");
         decl.setComment(new LineComment("foo"));
         assertFalse(decl.hasJavaDocComment());
     }
 
-    @Test
+    [TestMethod]
     void hasJavaDocCommentNegativeCaseBlockComment() {
         ClassOrInterfaceDeclaration decl = new ClassOrInterfaceDeclaration(new NodeList<>(), false, "Foo");
         decl.setComment(new BlockComment("foo"));
         assertFalse(decl.hasJavaDocComment());
     }
 
-    @Test
+    [TestMethod]
     void findCompilationUnitOfCommentNode() {
         CompilationUnit cu = parse("class X {\n" +
                 "  void x() {\n" +
@@ -99,7 +99,7 @@ class NodeTest {
         assertTrue(comment.findCompilationUnit().isPresent());
     }
 
-    @Test
+    [TestMethod]
     void findCompilationUnitOfOrphanCommentNode() {
         CompilationUnit cu = parse("class X {\n" +
                 "  void x() {\n" +
@@ -114,7 +114,7 @@ class NodeTest {
         assertTrue(comment.findCompilationUnit().isPresent());
     }
 
-    @Test
+    [TestMethod]
     void removeAllOnRequiredProperty() {
         CompilationUnit cu = parse("class X{ void x(){}}");
         MethodDeclaration methodDeclaration = cu.getType(0).getMethods().get(0);
@@ -123,7 +123,7 @@ class NodeTest {
         assertEquals(String.format("class X {%1$s}%1$s", SYSTEM_EOL), cu.toString());
     }
 
-    @Test
+    [TestMethod]
     void removingTheSecondOfAListOfIdenticalStatementsDoesNotMessUpTheParents() {
         CompilationUnit unit = parse(String.format("public class Example {%1$s" +
                 "  public static void example() {%1$s" +

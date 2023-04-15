@@ -11,10 +11,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,25 +24,25 @@ namespace com.github.javaparser.printer.lexicalpreservation;
 
 
 
-class Issue2806Test extends AbstractLexicalPreservingTest{
+class Issue2806Test:AbstractLexicalPreservingTest{
 
     private JavaParser javaParser;
 
-    @Test
+    [TestMethod]
     void importIsAddedOnTheSameLine() {
         considerCode("import java.lang.IllegalArgumentException;\n" +
                 "\n" +
                 "public class A {\n" +
                 "}");
-        String junit5 = "import java.lang.IllegalArgumentException;\n" +
+        string junit5 = "import java.lang.IllegalArgumentException;\n" +
                 "import java.nio.file.Paths;\n" +
                 "\n" +
                 "public class A {\n" +
                 "}";
         ImportDeclaration importDeclaration = new ImportDeclaration("java.nio.file.Paths", false, false);
         CompilationUnit compilationUnit = cu.addImport(importDeclaration);
-        String out = LexicalPreservingPrinter.print(compilationUnit);
-        assertThat(out, equalTo(junit5));
+        string _out = LexicalPreservingPrinter.print(compilationUnit);
+        assertThat(_out, equalTo(junit5));
     }
 
 }

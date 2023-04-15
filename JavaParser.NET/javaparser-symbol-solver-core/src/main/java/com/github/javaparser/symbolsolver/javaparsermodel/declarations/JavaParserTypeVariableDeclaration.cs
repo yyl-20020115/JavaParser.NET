@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.declarations;
 /**
  * @author Federico Tomassetti
  */
-public class JavaParserTypeVariableDeclaration extends AbstractTypeDeclaration {
+public class JavaParserTypeVariableDeclaration:AbstractTypeDeclaration {
 
     private TypeParameter wrappedNode;
     private TypeSolver typeSolver;
@@ -42,17 +42,17 @@ public class JavaParserTypeVariableDeclaration extends AbstractTypeDeclaration {
     }
 
     @Override
-    public String getPackageName() {
+    public string getPackageName() {
         return AstResolutionUtils.getPackageName(wrappedNode);
     }
 
     @Override
-    public String getClassName() {
+    public string getClassName() {
         return AstResolutionUtils.getClassName("", wrappedNode);
     }
 
     @Override
-    public String getQualifiedName() {
+    public string getQualifiedName() {
         return getName();
     }
 
@@ -61,13 +61,13 @@ public class JavaParserTypeVariableDeclaration extends AbstractTypeDeclaration {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "JavaParserTypeVariableDeclaration{" +
                 wrappedNode.getName() +
                 '}';
     }
 
-    public SymbolReference<ResolvedMethodDeclaration> solveMethod(String name, List<ResolvedType> parameterTypes) {
+    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> parameterTypes) {
         throw new UnsupportedOperationException();
     }
 
@@ -90,12 +90,12 @@ public class JavaParserTypeVariableDeclaration extends AbstractTypeDeclaration {
     }
 
     @Override
-    public ResolvedFieldDeclaration getField(String name) {
+    public ResolvedFieldDeclaration getField(string name) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public boolean hasField(String name) {
+    public boolean hasField(string name) {
         return false;
     }
 
@@ -134,7 +134,7 @@ public class JavaParserTypeVariableDeclaration extends AbstractTypeDeclaration {
     }
 
     @Override
-    public String getName() {
+    public string getName() {
         return wrappedNode.getName().getId();
     }
 
@@ -144,7 +144,7 @@ public class JavaParserTypeVariableDeclaration extends AbstractTypeDeclaration {
     }
 
     @Override
-    public boolean hasDirectlyAnnotation(String canonicalName) {
+    public boolean hasDirectlyAnnotation(string canonicalName) {
         throw new UnsupportedOperationException();
     }
 

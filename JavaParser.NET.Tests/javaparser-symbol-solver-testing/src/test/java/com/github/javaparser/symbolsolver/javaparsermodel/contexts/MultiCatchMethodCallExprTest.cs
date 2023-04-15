@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,15 +26,15 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.contexts;
  * Test for issue 1482: https://github.com/javaparser/javaparser/issues/1482
  * When trying to resolve a MethodCallExpr within a multi catch, an UnsupportedOperationException is thrown.
  */
-class MultiCatchMethodCallExprTest extends AbstractResolutionTest {
+class MultiCatchMethodCallExprTest:AbstractResolutionTest {
 
-    @Test
+    [TestMethod]
     void issue1482() {
         CompilationUnit cu = parseSample("Issue1482");
         cu.accept(new Visitor(), null);
     }
 
-    private static class Visitor extends VoidVisitorAdapter<Void> {
+    private static class Visitor:VoidVisitorAdapter<Void> {
         @Override
         public void visit(MethodCallExpr n, Void arg) {
             if (n.getArguments().size() != 0) {

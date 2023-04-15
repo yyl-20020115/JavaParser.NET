@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -44,7 +44,7 @@ class ReflectionClassAdapter {
             return Optional.empty();
         }
         java.lang.reflect.Type superType = clazz.getGenericSuperclass();
-        if (superType instanceof ParameterizedType) {
+        if (superType is ParameterizedType) {
             ParameterizedType parameterizedType = (ParameterizedType) superType;
             List<ResolvedType> typeParameters = Arrays.stream(parameterizedType.getActualTypeArguments())
                     .map((t) -> ReflectionFactory.typeUsageFor(t, typeSolver))
@@ -57,7 +57,7 @@ class ReflectionClassAdapter {
     public List<ResolvedReferenceType> getInterfaces() {
         List<ResolvedReferenceType> interfaces = new ArrayList<>();
         for (java.lang.reflect.Type superInterface : clazz.getGenericInterfaces()) {
-            if (superInterface instanceof ParameterizedType) {
+            if (superInterface is ParameterizedType) {
                 ParameterizedType parameterizedType = (ParameterizedType) superInterface;
                 List<ResolvedType> typeParameters = Arrays.stream(parameterizedType.getActualTypeArguments())
                         .map((t) -> ReflectionFactory.typeUsageFor(t, typeSolver))
@@ -77,7 +77,7 @@ class ReflectionClassAdapter {
 				ReferenceTypeImpl superClass = getSuperClass().get();
 				ancestors.add(superClass);
 			} else {
-				// Inject the implicitly added extends java.lang.Object
+				// Inject the implicitly added:java.lang.Object
 				ReferenceTypeImpl object = new ReferenceTypeImpl(
 						new ReflectionClassDeclaration(Object.class, typeSolver));
 				ancestors.add(object);
@@ -87,7 +87,7 @@ class ReflectionClassAdapter {
         return ancestors;
     }
 
-    public ResolvedFieldDeclaration getField(String name) {
+    public ResolvedFieldDeclaration getField(string name) {
         for (Field field : clazz.getDeclaredFields()) {
             if (field.getName().equals(name)) {
                 return new ReflectionFieldDeclaration(field, typeSolver);
@@ -102,10 +102,10 @@ class ReflectionClassAdapter {
                 }
             }
         }
-        throw new UnsolvedSymbolException(name, "Field in " + this);
+        throw new UnsolvedSymbolException(name, "Field _in " + this);
     }
 
-    public boolean hasField(String name) {
+    public boolean hasField(string name) {
         // First consider fields declared on this class
         for (Field field : clazz.getDeclaredFields()) {
             if (field.getName().equals(name)) {
@@ -157,10 +157,10 @@ class ReflectionClassAdapter {
     }
 
     public boolean isAssignableBy(ResolvedType type) {
-        if (type instanceof NullType) {
+        if (type is NullType) {
             return true;
         }
-        if (type instanceof LambdaArgumentTypePlaceholder) {
+        if (type is LambdaArgumentTypePlaceholder) {
             return isFunctionalInterface();
         }
         if (type.isArray()) {
@@ -172,7 +172,7 @@ class ReflectionClassAdapter {
         if (type.describe().equals(typeDeclaration.getQualifiedName())) {
             return true;
         }
-        if (type instanceof ReferenceTypeImpl) {
+        if (type is ReferenceTypeImpl) {
             ReferenceTypeImpl otherTypeDeclaration = (ReferenceTypeImpl) type;
             if(otherTypeDeclaration.getTypeDeclaration().isPresent()) {
                 return otherTypeDeclaration.getTypeDeclaration().get().canBeAssignedTo(typeDeclaration);
@@ -182,7 +182,7 @@ class ReflectionClassAdapter {
         return false;
     }
 
-    public boolean hasDirectlyAnnotation(String canonicalName) {
+    public boolean hasDirectlyAnnotation(string canonicalName) {
         for (Annotation a : clazz.getDeclaredAnnotations()) {
             if (a.annotationType().getCanonicalName().equals(canonicalName)) {
                 return true;
@@ -191,7 +191,7 @@ class ReflectionClassAdapter {
         return false;
     }
 
-    private final boolean isFunctionalInterface() {
+    private /*final*/boolean isFunctionalInterface() {
         return FunctionalInterfaceLogic.getFunctionalMethod(typeDeclaration).isPresent();
     }
 

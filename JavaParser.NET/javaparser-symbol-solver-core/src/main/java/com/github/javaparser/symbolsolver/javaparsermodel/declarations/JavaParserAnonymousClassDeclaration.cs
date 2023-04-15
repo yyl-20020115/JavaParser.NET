@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,13 +26,13 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.declarations;
 /**
  * An anonymous class declaration representation.
  */
-public class JavaParserAnonymousClassDeclaration extends AbstractClassDeclaration
+public class JavaParserAnonymousClassDeclaration:AbstractClassDeclaration
         implements MethodUsageResolutionCapability {
 
-    private final TypeSolver typeSolver;
-    private final ObjectCreationExpr wrappedNode;
-    private final ResolvedTypeDeclaration superTypeDeclaration;
-    private final String name = "Anonymous-" + UUID.randomUUID();
+    private /*final*/TypeSolver typeSolver;
+    private /*final*/ObjectCreationExpr wrappedNode;
+    private /*final*/ResolvedTypeDeclaration superTypeDeclaration;
+    private /*final*/string name = "Anonymous-" + UUID.randomUUID();
 
     public JavaParserAnonymousClassDeclaration(ObjectCreationExpr wrappedNode,
                                                TypeSolver typeSolver) {
@@ -40,7 +40,7 @@ public class JavaParserAnonymousClassDeclaration extends AbstractClassDeclaratio
         this.wrappedNode = wrappedNode;
 
         ClassOrInterfaceType superType = wrappedNode.getType();
-        String superTypeName = superType.getName().getId();
+        string superTypeName = superType.getName().getId();
         if (superType.getScope().isPresent()) {
             superTypeName = superType.getScope().get().asString() + "." + superTypeName;
         }
@@ -53,7 +53,7 @@ public class JavaParserAnonymousClassDeclaration extends AbstractClassDeclaratio
         return superTypeDeclaration;
     }
 
-    public <T extends Node> List<T> findMembersOfKind(final Class<T> memberClass) {
+    public <T:Node> List<T> findMembersOfKind(/*final*/Class<T> memberClass) {
         if (wrappedNode.getAnonymousClassBody().isPresent()) {
             return wrappedNode
                     .getAnonymousClassBody()
@@ -72,13 +72,13 @@ public class JavaParserAnonymousClassDeclaration extends AbstractClassDeclaratio
     }
 
     @Override
-    public SymbolReference<ResolvedMethodDeclaration> solveMethod(String name, List<ResolvedType> argumentsTypes,
+    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes,
                                                                   boolean staticOnly) {
         return getContext().solveMethod(name, argumentsTypes, staticOnly);
     }
 
     @Override
-    public Optional<MethodUsage> solveMethodAsUsage(String name, List<ResolvedType> argumentTypes,
+    public Optional<MethodUsage> solveMethodAsUsage(string name, List<ResolvedType> argumentTypes,
                                                     Context invocationContext, List<ResolvedType> typeParameters) {
         return getContext().solveMethodAsUsage(name, argumentTypes);
     }
@@ -145,14 +145,14 @@ public class JavaParserAnonymousClassDeclaration extends AbstractClassDeclaratio
                 .collect(Collectors.toList());
 
 
-        // TODO: Figure out if it is appropriate to remove the orElseThrow() -- if so, how...
+        // TODO: Figure _out if it is appropriate to remove the orElseThrow() -- if so, how...
         List<ResolvedFieldDeclaration> superClassFields = getSuperClass()
                 .orElseThrow(() -> new RuntimeException("super class unexpectedly empty"))
                 .getTypeDeclaration()
                 .orElseThrow(() -> new RuntimeException("TypeDeclaration unexpectedly empty."))
                 .getAllFields();
 
-        // TODO: Figure out if it is appropriate to remove the orElseThrow() -- if so, how...
+        // TODO: Figure _out if it is appropriate to remove the orElseThrow() -- if so, how...
         List<ResolvedFieldDeclaration> interfaceFields =
                 getInterfaces().stream()
                         .flatMap(interfaceReferenceType -> interfaceReferenceType
@@ -190,23 +190,23 @@ public class JavaParserAnonymousClassDeclaration extends AbstractClassDeclaratio
     }
 
     @Override
-    public boolean hasDirectlyAnnotation(String qualifiedName) {
+    public boolean hasDirectlyAnnotation(string qualifiedName) {
         return false;
     }
 
     @Override
-    public String getPackageName() {
+    public string getPackageName() {
         return AstResolutionUtils.getPackageName(wrappedNode);
     }
 
     @Override
-    public String getClassName() {
+    public string getClassName() {
         return AstResolutionUtils.getClassName("", wrappedNode);
     }
 
     @Override
-    public String getQualifiedName() {
-        String containerName = AstResolutionUtils.containerName(wrappedNode.getParentNode().orElse(null));
+    public string getQualifiedName() {
+        string containerName = AstResolutionUtils.containerName(wrappedNode.getParentNode().orElse(null));
         if (containerName.isEmpty()) {
             return getName();
         } else {
@@ -224,7 +224,7 @@ public class JavaParserAnonymousClassDeclaration extends AbstractClassDeclaratio
     }
 
     @Override
-    public String getName() {
+    public string getName() {
         return name;
     }
 

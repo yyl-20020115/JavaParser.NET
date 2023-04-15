@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,9 +25,9 @@ namespace com.github.javaparser.symbolsolver.model.resolution;
 
 class SymbolReferenceTest {
 
-    private final TypeSolver typeSolver = new ReflectionTypeSolver();
+    private /*final*/TypeSolver typeSolver = new ReflectionTypeSolver();
 
-    @Test
+    [TestMethod]
     void testResolvedSymbol() {
         ResolvedDeclaration resolvedDeclaration = new ReflectionClassDeclaration(String.class, typeSolver);
         SymbolReference<ResolvedDeclaration> symbol = SymbolReference.solved(resolvedDeclaration);
@@ -37,7 +37,7 @@ class SymbolReferenceTest {
         assertTrue(symbol.getDeclaration().isPresent());
     }
 
-    @Test
+    [TestMethod]
     void testUnresolvedSymbol() {
         SymbolReference<ResolvedDeclaration> symbol = SymbolReference.unsolved();
 
@@ -46,7 +46,7 @@ class SymbolReferenceTest {
         assertFalse(symbol.getDeclaration().isPresent());
     }
 
-    @Test
+    [TestMethod]
     void testAdaptSymbolForSubClass() {
         ResolvedDeclaration resolvedDeclaration = new ReflectionClassDeclaration(String.class, typeSolver);
         SymbolReference<ResolvedDeclaration> symbol = SymbolReference.solved(resolvedDeclaration);
@@ -57,7 +57,7 @@ class SymbolReferenceTest {
         assertTrue(adaptedSymbol.getDeclaration().isPresent());
     }
 
-    @Test
+    [TestMethod]
     void testAdaptSymbolForInvalidSubClass() {
         ResolvedClassDeclaration resolvedDeclaration = new ReflectionClassDeclaration(String.class, typeSolver);
         SymbolReference<ResolvedClassDeclaration> symbol = SymbolReference.solved(resolvedDeclaration);
@@ -68,7 +68,7 @@ class SymbolReferenceTest {
         assertFalse(adaptedSymbol.getDeclaration().isPresent());
     }
 
-    @Test
+    [TestMethod]
     void testAdaptSymbolForSuperClass() {
         ResolvedClassDeclaration resolvedDeclaration = new ReflectionClassDeclaration(String.class, typeSolver);
         SymbolReference<ResolvedClassDeclaration> symbol = SymbolReference.solved(resolvedDeclaration);
@@ -79,7 +79,7 @@ class SymbolReferenceTest {
         assertTrue(adaptedSymbol.getDeclaration().isPresent());
     }
 
-    @Test
+    [TestMethod]
     void testIsSolvedWithResolvedSymbol() {
         ResolvedClassDeclaration resolvedDeclaration = new ReflectionClassDeclaration(String.class, typeSolver);
         SymbolReference<ResolvedClassDeclaration> symbol = SymbolReference.solved(resolvedDeclaration);
@@ -89,7 +89,7 @@ class SymbolReferenceTest {
         assertEquals(resolvedDeclaration, symbol.getCorrespondingDeclaration());
     }
 
-    @Test
+    [TestMethod]
     void testIsSolvedWithUnresolvedSymbol() {
         SymbolReference<ResolvedClassDeclaration> symbol = SymbolReference.unsolved();
 

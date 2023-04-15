@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -43,62 +43,62 @@ class NullTypeTest {
                 ImmutableList.of(new ResolvedTypeVariable(ResolvedTypeParameterDeclaration.onType("A", "foo.Bar", Collections.emptyList())))));
     }
 
-    @Test
+    [TestMethod]
     void testIsArray() {
         assertEquals(false, NullType.INSTANCE.isArray());
     }
 
-    @Test
+    [TestMethod]
     void testIsPrimitive() {
         assertEquals(false, NullType.INSTANCE.isPrimitive());
     }
 
-    @Test
+    [TestMethod]
     void testIsNull() {
         assertEquals(true, NullType.INSTANCE.isNull());
     }
 
-    @Test
+    [TestMethod]
     void testIsReference() {
         assertEquals(true, NullType.INSTANCE.isReference());
     }
 
-    @Test
+    [TestMethod]
     void testIsReferenceType() {
         assertEquals(false, NullType.INSTANCE.isReferenceType());
     }
 
-    @Test
+    [TestMethod]
     void testIsVoid() {
         assertEquals(false, NullType.INSTANCE.isVoid());
     }
 
-    @Test
+    [TestMethod]
     void testIsTypeVariable() {
         assertEquals(false, NullType.INSTANCE.isTypeVariable());
     }
 
-    @Test
+    [TestMethod]
     void testAsReferenceTypeUsage() {
         assertThrows(UnsupportedOperationException.class, () -> NullType.INSTANCE.asReferenceType());
     }
 
-    @Test
+    [TestMethod]
     void testAsTypeParameter() {
         assertThrows(UnsupportedOperationException.class, () -> NullType.INSTANCE.asTypeParameter());
     }
 
-    @Test
+    [TestMethod]
     void testAsArrayTypeUsage() {
         assertThrows(UnsupportedOperationException.class, () -> NullType.INSTANCE.asArrayType());
     }
 
-    @Test
+    [TestMethod]
     void testAsDescribe() {
         assertEquals("null", NullType.INSTANCE.describe());
     }
 
-    @Test
+    [TestMethod]
     void testIsAssignableBy() {
         try {
             assertEquals(false, NullType.INSTANCE.isAssignableBy(NullType.INSTANCE));

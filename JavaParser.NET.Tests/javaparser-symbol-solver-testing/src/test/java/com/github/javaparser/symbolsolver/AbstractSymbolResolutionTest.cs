@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -40,10 +40,10 @@ public abstract class AbstractSymbolResolutionTest {
     }
 
     /**
-     * An initial attempt at allowing JDK-specific test cases. It is a work-in-progress, and subject to change.
+     * An initial attempt at allowing JDK-specific test cases. It is a work-_in-progress, and subject to change.
      * @deprecated <strong>Note that use of TestJdk should be a last-resort, preferably implementing JDK-agnostic tests.</strong>
      */
-    @Deprecated
+    //@Deprecated
     protected enum TestJdk {
         JDK8(8),
         JDK9(9),
@@ -56,12 +56,12 @@ public abstract class AbstractSymbolResolutionTest {
         JDK16(16),
         JDK17(17);
 
-        private final Integer major;
+        private /*final*/Integer major;
 
         /**
          * @deprecated <strong>Note that use of TestJdk should be a last-resort, preferably implementing JDK-agnostic tests.</strong>
          */
-        @Deprecated
+        //@Deprecated
         TestJdk(Integer major) {
             this.major = major;
         }
@@ -69,7 +69,7 @@ public abstract class AbstractSymbolResolutionTest {
         /**
          * @deprecated <strong>Note that use of TestJdk should be a last-resort, preferably implementing JDK-agnostic tests.</strong>
          */
-        @Deprecated
+        //@Deprecated
         public int getMajorVersion() {
             return this.major;
         }
@@ -77,9 +77,9 @@ public abstract class AbstractSymbolResolutionTest {
         /**
          * @deprecated <strong>Note that use of TestJdk should be a last-resort, preferably implementing JDK-agnostic tests.</strong>
          */
-        @Deprecated
+        //@Deprecated
         public static TestJdk getCurrentHostJdk() {
-            String javaVersion = System.getProperty("java.version");
+            string javaVersion = System.getProperty("java.version");
 
             // JavaParser explicitly requires a minimum of JDK8 to build.
             if("8".equals(javaVersion) || javaVersion.startsWith("1.8") || javaVersion.startsWith("8")) {
@@ -110,9 +110,9 @@ public abstract class AbstractSymbolResolutionTest {
         /**
          * @deprecated <strong>Note that use of TestJdk should be a last-resort, preferably implementing JDK-agnostic tests.</strong>
          */
-        @Deprecated
+        //@Deprecated
         //@Override
-        public String toString() {
+        public string toString() {
             return "TestJdk{" +
                     "System.getProperty(\"java.version\")=" + System.getProperty("java.version") +
                     ",major=" + major +
@@ -132,7 +132,7 @@ public abstract class AbstractSymbolResolutionTest {
         }
     }
 
-    protected static Path adaptPath(String path) {
+    protected static Path adaptPath(string path) {
         return adaptPath(Paths.get(path));
     }
 

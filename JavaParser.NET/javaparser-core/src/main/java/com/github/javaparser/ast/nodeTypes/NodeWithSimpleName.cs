@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,19 +27,19 @@ namespace com.github.javaparser.ast.nodeTypes;
  * <p>
  * The main reason for this interface is to permit users to manipulate homogeneously all nodes with a getName method.
  */
-public interface NodeWithSimpleName<N extends Node> {
+public interface NodeWithSimpleName<N:Node> {
 
     SimpleName getName();
 
     N setName(SimpleName name);
 
-    @SuppressWarnings("unchecked")
-    default N setName(String name) {
+    //@SuppressWarnings("unchecked")
+    default N setName(string name) {
         assertNonEmpty(name);
         return setName(new SimpleName(name));
     }
 
-    default String getNameAsString() {
+    default string getNameAsString() {
         return getName().getIdentifier();
     }
 

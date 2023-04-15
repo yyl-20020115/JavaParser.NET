@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser;
 
 class ExpectedTokensTest {
 
-    @Test
+    [TestMethod]
     void testCharEscapeSequences() {
         CompilationUnit compilationUnit = parseFile("/com/github/javaparser/EscapeSequences.java");
         List<CharLiteralExpr> chars = ExtractingVisitors.extractCharLiteralExprs(compilationUnit);
@@ -57,7 +57,7 @@ class ExpectedTokensTest {
         assertTokenValue(chars, 21, 34, "\\u005C\"");
     }
 
-    private void assertTokenValue(List<CharLiteralExpr> chars, int line, int col, String expectedTokenValue) {
+    private void assertTokenValue(List<CharLiteralExpr> chars, int line, int col, string expectedTokenValue) {
         CharLiteralExpr expr = getNodeStartingAtPosition(chars, line, col);
         assertEquals(expectedTokenValue, expr.getValue(), "Node at " + line + "," + col);
     }

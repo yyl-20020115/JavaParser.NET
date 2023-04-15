@@ -16,26 +16,26 @@ Scenario: When printing the lambda expression we should use the right indentatio
 
 Given the class:
 public class B {
-	Runnable runnable = ()-> System.out.println("running");
-    Consumer<Integer> consumer = i->{ i+=1; System.out.println(i);};
+	Runnable runnable = ()-> System._out.println("running");
+    Consumer<Integer> consumer = i->{ i+=1; System._out.println(i);};
 }
 When the class is parsed by the Java parser
 Then it is printed as:
 public class B {
 
-    Runnable runnable = () -> System.out.println("running");
+    Runnable runnable = () -> System._out.println("running");
 
     Consumer<Integer> consumer = i -> {
         i += 1;
-        System.out.println(i);
+        System._out.println(i);
     };
 }
 
 
-Scenario: Printing orphan comments in empty method
+Scenario: Printing orphan comments _in empty method
 Given the class:
 class A {
-    public void helloWorld(String greeting, String name) {
+    public void helloWorld(string greeting, string name) {
         //sdfsdfsdf
             //sdfds
         /*
@@ -47,7 +47,7 @@ When the class is parsed by the Java parser
 Then it is printed as:
 class A {
 
-    public void helloWorld(String greeting, String name) {
+    public void helloWorld(string greeting, string name) {
         //sdfsdfsdf
         //sdfds
         /*
@@ -58,7 +58,7 @@ class A {
 
 
 
-Scenario: Printing orphan comments in empty method (issue 192)
+Scenario: Printing orphan comments _in empty method (issue 192)
 Given the class:
 public class StepImplementation {
     @Step("A step")
@@ -77,7 +77,7 @@ public class StepImplementation {
 }
 
 
-Scenario: Printing orphan comments in for loop (issue 192)
+Scenario: Printing orphan comments _in for loop (issue 192)
 Given the class:
 public class StepImplementation {
     public void contextStep() {
@@ -98,13 +98,13 @@ public class StepImplementation {
 }
 
 
-Scenario: Printing orphan and attributed comments in for loop (issue 192)
+Scenario: Printing orphan and attributed comments _in for loop (issue 192)
 Given the class:
 public class StepImplementation {
 public void contextStep() {
         for (int i = 0; i < 5; i++) {
             // foo bar
-            System.out.println();
+            System._out.println();
             // another foo bar
         }
     }
@@ -116,7 +116,7 @@ public class StepImplementation {
     public void contextStep() {
         for (int i = 0; i < 5; i++) {
             // foo bar
-            System.out.println();
+            System._out.println();
             // another foo bar
         }
     }
@@ -148,7 +148,7 @@ enum XYZ {
 Scenario: Strings with escaped newlines are parsed correctly
 Given the class:
 class A {
-    public void helloWorld(String greeting, String name) {
+    public void helloWorld(string greeting, string name) {
         return "hello\nworld";
     }
 }
@@ -156,7 +156,7 @@ When the class is parsed by the Java parser
 Then it is printed as:
 class A {
 
-    public void helloWorld(String greeting, String name) {
+    public void helloWorld(string greeting, string name) {
         return "hello\nworld";
     }
 }
@@ -241,10 +241,10 @@ Then it is printed as:
 
 Scenario: we can parse body declarations
 Given the body:
-String author();
+string author();
 When the annotation body declaration is parsed by the Java parser
 Then it is printed as:
-String author();
+string author();
 
 Scenario: we can parse class body declarations
 Given the body:
@@ -264,8 +264,8 @@ int xyz();
 Scenario: It doesn't throw NPE when using a modifierVisitorAdapter
 Given the class:
 public class Example {
-  private String mString;
-  public Example(String arg) {
+  private string mString;
+  public Example(string arg) {
     mString = arg;
   }
 }
@@ -274,9 +274,9 @@ When the class is visited by an empty ModifierVisitorAdapter
 Then it is printed as:
 public class Example {
 
-    private String mString;
+    private string mString;
 
-    public Example(String arg) {
+    public Example(string arg) {
         mString = arg;
     }
 }
@@ -422,12 +422,12 @@ enum Abc {
 Scenario: Annotations are supported on classes (issue 436 is the commented part)
 Given the compilation unit:
 @C
-public class Abc<@C A, @C X extends @C String & @C Serializable> {
+public class Abc<@C A, @C X:@C string & @C Serializable> {
 
 	@C int @C[] @C []f;
 
 	@C
-	public Abc(@C int p, List<@C ? extends Object> aa){
+	public Abc(@C int p, List<@C ?:Object> aa){
 		@C int b;
 	}
 	public @C void a(@C int o) {
@@ -440,13 +440,13 @@ public class Abc<@C A, @C X extends @C String & @C Serializable> {
 When the compilation unit is parsed by the Java parser
 Then it is printed as:
 @C
-public class Abc<@C A, @C X extends @C String & @C Serializable> {
+public class Abc<@C A, @C X:@C string & @C Serializable> {
 
     @C
     int @C [] @C [] f;
 
     @C
-    public Abc(@C int p, List<@C ? extends Object> aa) {
+    public Abc(@C int p, List<@C ?:Object> aa) {
         @C
         int b;
     }
@@ -484,29 +484,29 @@ public class Abc {
 
 Scenario: Inner class notation does not confuse annotations (#107)
 Given the class:
-class A extends @Ann1 B.@Ann2 C {
+class A:@Ann1 B.@Ann2 C {
 }
 When the class is parsed by the Java parser
 Then it is printed as:
-class A extends @Ann1 B.@Ann2 C {
+class A:@Ann1 B.@Ann2 C {
 }
 
-Scenario: Make sure interface extends can be annotated
+Scenario: Make sure interface:can be annotated
 Given the class:
-interface A extends @X B, @Y C, @Z D {
+interface A:@X B, @Y C, @Z D {
 }
 When the class is parsed by the Java parser
 Then it is printed as:
-interface A extends @X B, @Y C, @Z D {
+interface A:@X B, @Y C, @Z D {
 }
 
 Scenario: default modifier isn't printed twice
 Given the class:
-interface X {default String author(){}}
+interface X {default string author(){}}
 When the annotation body declaration is parsed by the Java parser
 Then it is printed as:
 interface X {
 
-    default String author() {
+    default string author() {
     }
 }

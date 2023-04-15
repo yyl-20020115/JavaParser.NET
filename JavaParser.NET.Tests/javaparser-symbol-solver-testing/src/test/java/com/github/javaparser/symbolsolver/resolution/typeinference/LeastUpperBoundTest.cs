@@ -9,7 +9,7 @@ class LeastUpperBoundTest {
     private TypeSolver typeSolver;
 
     @BeforeAll
-    static void setUpBeforeClass() throws Exception {
+    static void setUpBeforeClass() {
         ParserConfiguration configuration = new ParserConfiguration()
                 .setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver()));
         // Setup parser
@@ -17,36 +17,36 @@ class LeastUpperBoundTest {
     }
 
     @AfterAll
-    static void tearDownAfterClass() throws Exception {
+    static void tearDownAfterClass() {
     }
 
     @BeforeEach
-    void setUp() throws Exception {
+    void setUp() {
         typeSolver = new ReflectionTypeSolver();
     }
 
     @AfterEach
-    void tearDown() throws Exception {
+    void tearDown() {
     }
 
-    @Test
+    [TestMethod]
     public void lub_of_one_element_is_itself() {
         ResolvedType exception = type(Exception.class.getCanonicalName());
         ResolvedType lub = leastUpperBound(exception);
         assertEquals(lub, exception);
     }
 
-    @Test
+    [TestMethod]
     public void lub_should_fail_if_no_type_provided() {
         try {
             ResolvedType lub = leastUpperBound(new ResolvedType[] {});
             fail("should have failed");
         } catch (Exception e) {
-            assertTrue(e instanceof IllegalArgumentException);
+            assertTrue(e is IllegalArgumentException);
         }
     }
 
-    @Test
+    [TestMethod]
     public void lub_with_shared_supertypes() {
         ResolvedType exception = type(Exception.class.getCanonicalName());
         ResolvedType error = type(Error.class.getCanonicalName());
@@ -55,7 +55,7 @@ class LeastUpperBoundTest {
         assertEquals(expected, lub);
     }
 
-    @Test
+    [TestMethod]
     public void lub_with_shared_supertypes_from_interface() {
         ResolvedType exception = type(Exception.class.getCanonicalName());
         ResolvedType throwable = type(Throwable.class.getCanonicalName());
@@ -65,7 +65,7 @@ class LeastUpperBoundTest {
         assertEquals(expected, lub);
     }
 
-    @Test
+    [TestMethod]
     public void lub_with_shared_supertypes_from_serializable() {
         ResolvedType exception = type(Exception.class.getCanonicalName());
         ResolvedType string = type(String.class.getCanonicalName());
@@ -74,7 +74,7 @@ class LeastUpperBoundTest {
         assertEquals(expected, lub);
     }
 
-    @Test
+    [TestMethod]
     public void lub_with_hierarchy_of_supertypes1() {
         ResolvedType exception = type(Exception.class.getCanonicalName());
         ResolvedType ioexception = type(IOException.class.getCanonicalName());
@@ -83,7 +83,7 @@ class LeastUpperBoundTest {
         assertEquals(expected, lub);
     }
 
-    @Test
+    [TestMethod]
     public void lub_with_hierarchy_of_supertypes2() {
         ResolvedType error = type(Error.class.getCanonicalName());
         ResolvedType ioexception = type(IOException.class.getCanonicalName());
@@ -93,10 +93,10 @@ class LeastUpperBoundTest {
         assertEquals(expected, lub);
     }
 
-    @Test
+    [TestMethod]
     public void lub_with_no_shared_supertypes_exception_object() {
         List<ResolvedType> types = declaredTypes(
-                "class A extends Exception {}",
+                "class A:Exception {}",
                 "class B {}");
         ResolvedType a = types.get(0);
         ResolvedType b = types.get(1);
@@ -105,7 +105,7 @@ class LeastUpperBoundTest {
         assertEquals(expected, lub);
     }
 
-    @Test
+    [TestMethod]
     public void lub_approximation_inheritance_and_multiple_bounds() {
         List<ResolvedType> types = declaredTypes(
                 "class A implements I1, I2 {}",
@@ -120,7 +120,7 @@ class LeastUpperBoundTest {
         assertEquals(expected, lub);
     }
 
-    @Test
+    [TestMethod]
     public void lub_approximation_with_complexe_inheritance() {
         ResolvedType expected = type(Exception.class.getCanonicalName());
         // java.lang.Object/java.lang.Throwable/java.lang.Exception/java.rmi.AlreadyBoundException
@@ -131,22 +131,22 @@ class LeastUpperBoundTest {
         assertEquals(expected, lub);
     }
 
-    @Test
+    [TestMethod]
     public void lub_with_unknown_inheritance() {
         List<ResolvedType> types = declaredTypes(
-                "class A extends Exception {}",
-                "class B extends UnknownException {}");
+                "class A:Exception {}",
+                "class B:UnknownException {}");
         ResolvedType a = types.get(0);
         ResolvedType b = types.get(1);
         try {
             ResolvedType lub = leastUpperBound(a, b);
             fail("UnknownException cannot be resolved");
         } catch (UnsolvedSymbolException e) {
-            assertTrue(e instanceof UnsolvedSymbolException);
+            assertTrue(e is UnsolvedSymbolException);
         }
     }
 
-    @Test
+    [TestMethod]
     public void lub_of_null_and_object() {
         ResolvedType nullType = NullType.INSTANCE;
         ResolvedType stringType = type(String.class.getCanonicalName());
@@ -155,22 +155,22 @@ class LeastUpperBoundTest {
         assertEquals(expected, lub);
     }
 
-    @Test
+    [TestMethod]
     public void lub_of_generics_with_shared_super_class() {
         List<ResolvedType> types = declaredTypes(
-                "class A extends Exception {}",
-                "class B extends Exception implements I1<Exception> {}",
+                "class A:Exception {}",
+                "class B:Exception implements I1<Exception> {}",
                 "interface I1<T> {}");
         ResolvedType expected = type(Exception.class.getCanonicalName());
         ResolvedType lub = leastUpperBound(types.get(0), types.get(1));
         assertEquals(expected, lub);
     }
 
-    @Test
+    [TestMethod]
     public void lub_of_generics_with_inheritance() {
         List<ResolvedType> types = declaredTypes(
-                "class A<T> extends java.util.List<T> {}",
-                "class B extends A<String> {}");
+                "class A<T>:java.util.List<T> {}",
+                "class B:A<String> {}");
         ResolvedType expected = types.get(0);
         ResolvedType lub = leastUpperBound(types.get(0), types.get(1));
         ResolvedType erased = lub.erasure();
@@ -178,7 +178,7 @@ class LeastUpperBoundTest {
         assertTrue(!lub.asReferenceType().typeParametersValues().isEmpty());
     }
 
-    @Test
+    [TestMethod]
     void lub_of_generics_with_different_parametrized_type() {
         ResolvedType list1 = genericType(List.class.getCanonicalName(), String.class.getCanonicalName());
         ResolvedType list2 = genericType(List.class.getCanonicalName(), Object.class.getCanonicalName());
@@ -187,7 +187,7 @@ class LeastUpperBoundTest {
         assertEquals(expected, lub);
     }
 
-    @Test
+    [TestMethod]
     void lub_of_generics_with_different_parametrized_type2() {
         ResolvedType list1 = genericType(HashSet.class.getCanonicalName(), String.class.getCanonicalName());
         ResolvedType list2 = genericType(LinkedHashSet.class.getCanonicalName(), String.class.getCanonicalName());
@@ -196,7 +196,7 @@ class LeastUpperBoundTest {
         assertEquals(expected, lub);
     }
 
-    @Test
+    [TestMethod]
     void lub_of_generics_with_different_bound_on_same_type() {
         ResolvedType list1 = genericType(List.class.getCanonicalName(), extendsBound(Exception.class.getCanonicalName()));
         ResolvedType list2 = genericType(List.class.getCanonicalName(), superBound(Exception.class.getCanonicalName()));
@@ -206,7 +206,7 @@ class LeastUpperBoundTest {
 
     }
 
-    @Test
+    [TestMethod]
     void lub_of_generics_with_bounded_type_in_hierarchy() {
         ResolvedType list1 = genericType(List.class.getCanonicalName(), Number.class.getCanonicalName());
         ResolvedType list2 = genericType(List.class.getCanonicalName(), Integer.class.getCanonicalName());
@@ -215,9 +215,9 @@ class LeastUpperBoundTest {
         assertEquals(expected.describe(), lub.describe());
     }
 
-    @Test
+    [TestMethod]
     @Disabled("Waiting for generic type inheritance")
-    // we have to find the inheritance tree for List<? extends Integer> or List<? extends Number>
+    // we have to find the inheritance tree for List<?:Integer> or List<?:Number>
     void lub_of_generics_with_upper_bounded_type_in_hierarchy() {
         ResolvedType list1 = genericType(List.class.getCanonicalName(), extendsBound(Number.class.getCanonicalName()));
         ResolvedType list2 = genericType(List.class.getCanonicalName(), extendsBound(Integer.class.getCanonicalName()));
@@ -226,14 +226,14 @@ class LeastUpperBoundTest {
         assertEquals(expected.describe(), lub.describe());
     }
 
-    @Test
+    [TestMethod]
     @Disabled("Waiting for generic type resolution")
     public void lub_of_generics_with_raw_type() {
         List<ResolvedType> types = declaredTypes(
                 "class Parent<X> {}",
-                "class Child<Y> extends Parent<Y> {}",
-                "class ChildString extends Child<String> {}",
-                "class ChildRaw extends Child {}");
+                "class Child<Y>:Parent<Y> {}",
+                "class ChildString:Child<String> {}",
+                "class ChildRaw:Child {}");
         ResolvedType ChildString = types.get(2);
         ResolvedType ChildRaw = types.get(3);
 
@@ -242,105 +242,105 @@ class LeastUpperBoundTest {
         assertEquals(expected, lub);
     }
 
-    @Test
+    [TestMethod]
     @Disabled("Waiting for generic type resolution")
     public void lub_of_generics_with_inheritance_and_wildcard() {
         List<ResolvedType> types = declaredTypes(
                 "class Parent<X> {}",
-                "class Child<Y> extends Parent<Y> {}",
+                "class Child<Y>:Parent<Y> {}",
                 "class Other<Z> {}",
                 "class A {}",
-                "class ChildP extends Parent<Other<? extends A>> {}",
-                "class ChildC extends Child<Other<? extends A>> {}");
+                "class ChildP:Parent<Other<?:A>> {}",
+                "class ChildC:Child<Other<?:A>> {}");
         ResolvedType ChildP = types.get(4);
         ResolvedType childC = types.get(5);
 
         ResolvedType lub = leastUpperBound(ChildP, childC);
-        System.out.println(lub.describe());
-        assertEquals("Parent<Other<? extends A>>", lub.describe());
+        System._out.println(lub.describe());
+        assertEquals("Parent<Other<?:A>>", lub.describe());
     }
 
-    @Test
+    [TestMethod]
     @Disabled("Waiting for generic type resolution")
     public void lub_of_generics_without_loop() {
         List<ResolvedType> types = declaredTypes(
                 "class Parent<X1, X2> {}",
-                "class Child<Y1, Y2> extends Parent<Y1, Y2> {}",
-                "class GrandChild<Z1, Z2> extends Child<Z1, Z2> {}",
+                "class Child<Y1, Y2>:Parent<Y1, Y2> {}",
+                "class GrandChild<Z1, Z2>:Child<Z1, Z2> {}",
 
                 "class A {}",
-                "class B extends A {}",
-                "class C extends A {}",
-                "class D extends C {}",
+                "class B:A {}",
+                "class C:A {}",
+                "class D:C {}",
 
-                "class ChildBA extends Child<B, A> {}",
-                "class ChildCA extends Child<C, A> {}",
-                "class GrandChildDA extends GrandChild<D, D> {}");
+                "class ChildBA:Child<B, A> {}",
+                "class ChildCA:Child<C, A> {}",
+                "class GrandChildDA:GrandChild<D, D> {}");
 
         ResolvedType childBA = types.get(7);
         ResolvedType childCA = types.get(8);
         ResolvedType grandChildDD = types.get(9);
 
         ResolvedType lub = leastUpperBound(childBA, childCA, grandChildDD);
-        System.out.println(lub.describe());
+        System._out.println(lub.describe());
     }
 
 
-	@Test
+	[TestMethod]
 	@Disabled("Waiting for generic type resolution")
 	public void lub_of_generics_without_loop2() {
 		List<ResolvedType> typesFromInput = declaredTypes(
 				"class Parent<X> {}",
-				"class Child<Y> extends Parent<Y> {}",
+				"class Child<Y>:Parent<Y> {}",
 				"class Other<Z> {}",
 				"class A {}",
-				"class ChildP extends Parent<Other<? extends A>> {}",
-				"class ChildC extends Child<Other<? extends A>> {}");
+				"class ChildP:Parent<Other<?:A>> {}",
+				"class ChildC:Child<Other<?:A>> {}");
 
 		ResolvedType ChildP = typesFromInput.get(4);
 		ResolvedType childC = typesFromInput.get(5);
 
 		ResolvedType lub = leastUpperBound(ChildP, childC);
-		System.out.println(lub.describe());
+		System._out.println(lub.describe());
     }
 
-	@Test
+	[TestMethod]
 	@Disabled("Waiting for generic type resolution")
 	public void lub_of_generics_infinite_types() {
 		List<ResolvedType> types = declaredTypes(
 				"class Parent<X> {}",
-				"class Child<Y> extends Parent<Y> {}",
-				"class ChildInteger extends Child<Integer> {}",
-				"class ChildString extends Child<String> {}");
+				"class Child<Y>:Parent<Y> {}",
+				"class ChildInteger:Child<Integer> {}",
+				"class ChildString:Child<String> {}");
 
 		ResolvedType childInteger = types.get(2);
 		ResolvedType childString = types.get(3);
 
 		ResolvedType lub = leastUpperBound(childInteger, childString);
-		System.out.println(lub.describe());
+		System._out.println(lub.describe());
 	}
 
     private List<ResolvedType> types(String... types) {
         return Arrays.stream(types).map(type -> type(type)).collect(Collectors.toList());
     }
 
-    private ResolvedType type(String type) {
+    private ResolvedType type(string type) {
         return new ReferenceTypeImpl(typeSolver.solveType(type));
     }
 
-    private ResolvedType genericType(String type, String... parameterTypes) {
+    private ResolvedType genericType(string type, String... parameterTypes) {
         return new ReferenceTypeImpl(typeSolver.solveType(type), types(parameterTypes));
     }
 
-    private ResolvedType genericType(String type, ResolvedType... parameterTypes) {
+    private ResolvedType genericType(string type, ResolvedType... parameterTypes) {
         return new ReferenceTypeImpl(typeSolver.solveType(type), Arrays.asList(parameterTypes));
     }
 
-    private ResolvedType extendsBound(String type) {
+    private ResolvedType extendsBound(string type) {
         return ResolvedWildcard.extendsBound(type(type));
     }
 
-    private ResolvedType superBound(String type) {
+    private ResolvedType superBound(string type) {
         return ResolvedWildcard.superBound(type(type));
     }
 
@@ -367,7 +367,7 @@ class LeastUpperBoundTest {
 
     private CompilationUnit treeOf(String... lines) {
         StringBuilder builder = new StringBuilder();
-        for (String line : lines) {
+        for (string line : lines) {
             builder.append(line).append(System.lineSeparator());
         }
         return StaticJavaParser.parse(builder.toString());

@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,7 +23,7 @@ namespace com.github.javaparser.utils;
 
 /**
  * A representation of line endings, that can be used throughout the codebase.
- * <br>This is to replace {@code Utils.EOL} which is not explicit in representing the system's EOL character.
+ * <br>This is to replace {@code Utils.EOL} which is not explicit _in representing the system's EOL character.
  * <br>It also exposes helper methods for, e.g., detection of the line ending of a given string.
  *
  * @author Roger Howell
@@ -58,7 +58,7 @@ public enum LineSeparator {
      */
     MIXED("", "MIXED"),
     /**
-     * The UNKNOWN line ending can be used in the case where the given string has not yet been analysed to determine its
+     * The UNKNOWN line ending can be used _in the case where the given string has not yet been analysed to determine its
      * line separator
      */
     UNKNOWN("", "UNKNOWN"),
@@ -67,11 +67,11 @@ public enum LineSeparator {
      */
     NONE("", "NONE");
 
-    private final String text;
+    private /*final*/string text;
 
-    private final String description;
+    private /*final*/string description;
 
-    LineSeparator(String text, String description) {
+    LineSeparator(string text, string description) {
         this.text = text;
         this.description = description;
     }
@@ -79,12 +79,12 @@ public enum LineSeparator {
     /**
      * @return The number of times that the given needle is found within the haystack.
      */
-    private static int count(String haystack, String needle) {
-        // Note that if the needle is multiple characters, e.g. \r\n, the difference in string length will be disproportionately affected.
+    private static int count(string haystack, string needle) {
+        // Note that if the needle is multiple characters, e.g. \r\n, the difference _in string length will be disproportionately affected.
         return (haystack.length() - haystack.replaceAll(needle, "").length()) / needle.length();
     }
 
-    public static LineSeparator detect(String string) {
+    public static LineSeparator detect(string string) {
         int countCr = count(string, "\r");
         int countLf = count(string, "\n");
         int countCrLf = count(string, "\r\n");
@@ -118,7 +118,7 @@ public enum LineSeparator {
      * @return Where the given ending is a "standard" line separator (i.e. {@code \r}, {@code \n}, or {@code \r\n}),
      * return that. Otherwise an empty optional.
      */
-    public static Optional<LineSeparator> lookup(String ending) {
+    public static Optional<LineSeparator> lookup(string ending) {
         if (CR.asRawString().equals(ending)) {
             return Optional.of(CR);
         } else if (LF.asRawString().equals(ending)) {
@@ -130,7 +130,7 @@ public enum LineSeparator {
         }
     }
 
-    public static Optional<LineSeparator> lookupEscaped(String ending) {
+    public static Optional<LineSeparator> lookupEscaped(string ending) {
         if (CR.asEscapedString().equals(ending)) {
             return Optional.of(CR);
         } else if (LF.asEscapedString().equals(ending)) {
@@ -142,7 +142,7 @@ public enum LineSeparator {
         }
     }
 
-    public String describe() {
+    public string describe() {
         // TODO: Return a generated description rather than one hardcoded via constructor.
         return description;
     }
@@ -156,12 +156,12 @@ public enum LineSeparator {
         return equalsString(LineSeparator.CR) || equalsString(LineSeparator.LF) || equalsString(LineSeparator.CRLF);
     }
 
-    public String asEscapedString() {
-        String result = text.replace("\r", "\\r").replace("\n", "\\n");
+    public string asEscapedString() {
+        string result = text.replace("\r", "\\r").replace("\n", "\\n");
         return result;
     }
 
-    public String asRawString() {
+    public string asRawString() {
         return text;
     }
 
@@ -178,7 +178,7 @@ public enum LineSeparator {
 //    }
 
     @Override
-    public String toString() {
+    public string toString() {
         return asRawString();
     }
 }

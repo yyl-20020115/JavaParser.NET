@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,7 +24,7 @@ namespace com.github.javaparser.symbolsolver;
 
 
 
-class Issue113Test extends AbstractSymbolResolutionTest {
+class Issue113Test:AbstractSymbolResolutionTest {
 
     private TypeSolver typeSolver;
 
@@ -33,8 +33,8 @@ class Issue113Test extends AbstractSymbolResolutionTest {
         typeSolver = new CombinedTypeSolver(new ReflectionTypeSolver(), new JavaParserTypeSolver(adaptPath("src/test/resources/issue113"), new LeanParserConfiguration()));
     }
 
-    @Test
-    void issue113providedCodeDoesNotCrash() throws IOException {
+    [TestMethod]
+    void issue113providedCodeDoesNotCrash(){
         Path pathToSourceFile = adaptPath("src/test/resources/issue113/com/foo/Widget.java");
         CompilationUnit cu = parse(pathToSourceFile);
 
@@ -44,8 +44,8 @@ class Issue113Test extends AbstractSymbolResolutionTest {
         methodDeclaration.findAll(MethodCallExpr.class).forEach(parserFacade::solve);
     }
 
-    @Test
-    void issue113superClassIsResolvedCorrectly() throws IOException {
+    [TestMethod]
+    void issue113superClassIsResolvedCorrectly(){
         Path pathToSourceFile = adaptPath("src/test/resources/issue113/com/foo/Widget.java");
         CompilationUnit cu = parse(pathToSourceFile);
 

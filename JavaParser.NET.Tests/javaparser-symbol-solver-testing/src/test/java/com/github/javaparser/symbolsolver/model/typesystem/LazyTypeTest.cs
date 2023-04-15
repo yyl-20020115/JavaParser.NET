@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,7 +23,7 @@ namespace com.github.javaparser.symbolsolver.model.typesystem;
 
 
 
-class LazyTypeTest extends AbstractSymbolResolutionTest {
+class LazyTypeTest:AbstractSymbolResolutionTest {
 
     private ResolvedType foo;
     private ResolvedType bar;
@@ -37,7 +37,7 @@ class LazyTypeTest extends AbstractSymbolResolutionTest {
     
     class Bar {}
 
-    class Baz extends Foo {}
+    class Baz:Foo {}
 
     @BeforeEach
     void setup() {
@@ -54,7 +54,7 @@ class LazyTypeTest extends AbstractSymbolResolutionTest {
         return new LazyType(v -> type);
     }
     
-    @Test
+    [TestMethod]
     void testIsAssignable() {
         assertEquals(true, foo.isAssignableBy(foo));
         assertEquals(true, foo.isAssignableBy(baz));

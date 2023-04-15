@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,9 +24,9 @@ namespace com.github.javaparser.printer;
 
 
 class DotPrinterTest {
-    @Test
+    [TestMethod]
     void testWithType() {
-        String expectedOutput = "digraph {" + System.lineSeparator();
+        string expectedOutput = "digraph {" + System.lineSeparator();
         expectedOutput += "n0 [label=\"root (MethodCallExpr)\"];" + System.lineSeparator();
         expectedOutput += "n1 [label=\"name (SimpleName)\"];" + System.lineSeparator();
         expectedOutput += "n0 -> n1;" + System.lineSeparator();
@@ -46,13 +46,13 @@ class DotPrinterTest {
 
         DotPrinter dotPrinter = new DotPrinter(true);
         Expression expression = parseExpression("x(1,1)");
-        String output = dotPrinter.output(expression);
+        string output = dotPrinter.output(expression);
         assertEquals(expectedOutput, output);
     }
 
-    @Test
+    [TestMethod]
     void testWithoutType() {
-        String expectedOutput = "digraph {" + System.lineSeparator();
+        string expectedOutput = "digraph {" + System.lineSeparator();
         expectedOutput += "n0 [label=\"root\"];" + System.lineSeparator();
         expectedOutput += "n1 [label=\"operator='PLUS'\"];" + System.lineSeparator();
         expectedOutput += "n0 -> n1;" + System.lineSeparator();
@@ -68,15 +68,15 @@ class DotPrinterTest {
 
         DotPrinter dotPrinter = new DotPrinter(false);
         Expression expression = parseExpression("1+1");
-        String output = dotPrinter.output(expression);
+        string output = dotPrinter.output(expression);
         assertEquals(expectedOutput, output);
     }
 
-    @Test
+    [TestMethod]
     void testIssue1871() {
         DotPrinter printer = new DotPrinter(false);
         CompilationUnit cu = parse("//q\"q\nclass X{}");
-        String output = printer.output(cu);
+        string output = printer.output(cu);
         assertEqualsStringIgnoringEol("digraph {\n" +
                 "n0 [label=\"root\"];\n" +
                 "n1 [label=\"types\"];\n" +

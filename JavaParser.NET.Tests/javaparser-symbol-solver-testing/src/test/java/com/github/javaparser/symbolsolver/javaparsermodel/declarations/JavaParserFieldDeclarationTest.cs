@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,16 +26,16 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.declarations;
 
 class JavaParserFieldDeclarationTest implements ResolvedFieldDeclarationTest {
 
-    @Test
+    [TestMethod]
     void whenTypeSolverIsNullShouldThrowIllegalArgumentException() {
-        CompilationUnit compilationUnit = StaticJavaParser.parse("class A {String s;}");
+        CompilationUnit compilationUnit = StaticJavaParser.parse("class A {string s;}");
         VariableDeclarator variableDeclarator = compilationUnit.findFirst(FieldDeclaration.class).get()
                 .getVariable(0);
         assertThrows(IllegalArgumentException.class,
                 () -> new JavaParserFieldDeclaration(variableDeclarator, null));
     }
     
-    @Test
+    [TestMethod]
     void verifyIsVolatileVariableDeclarationFromJavaParser() {
         CompilationUnit compilationUnit = StaticJavaParser.parse("class A {volatile int counter = 0;}");
         FieldDeclaration fieldDeclaration = compilationUnit.findFirst(FieldDeclaration.class).get();
@@ -44,7 +44,7 @@ class JavaParserFieldDeclarationTest implements ResolvedFieldDeclarationTest {
         assertTrue(rfd.isVolatile());
     }
     
-    @Test
+    [TestMethod]
     void verifyIsNotVolatileVariableDeclarationFromJavaParser() {
         CompilationUnit compilationUnit = StaticJavaParser.parse("class A {int counter = 0;}");
         FieldDeclaration fieldDeclaration = compilationUnit.findFirst(FieldDeclaration.class).get();
@@ -58,7 +58,7 @@ class JavaParserFieldDeclarationTest implements ResolvedFieldDeclarationTest {
     //
 
     private static ResolvedFieldDeclaration createResolvedFieldDeclaration(boolean isStatic) {
-        String code = isStatic ? "class A {static String s;}" : "class A {String s;}";
+        string code = isStatic ? "class A {static string s;}" : "class A {string s;}";
         FieldDeclaration fieldDeclaration = StaticJavaParser.parse(code)
                 .findFirst(FieldDeclaration.class).get();
         ReflectionTypeSolver reflectionTypeSolver = new ReflectionTypeSolver();
@@ -83,7 +83,7 @@ class JavaParserFieldDeclarationTest implements ResolvedFieldDeclarationTest {
     }
 
     @Override
-    public String getCanonicalNameOfExpectedType(ResolvedValueDeclaration resolvedDeclaration) {
+    public string getCanonicalNameOfExpectedType(ResolvedValueDeclaration resolvedDeclaration) {
         return String.class.getCanonicalName();
     }
 

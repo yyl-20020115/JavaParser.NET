@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -21,14 +21,14 @@
 namespace com.github.javaparser.symbolsolver;
 
 
-public class Issue3083Test extends AbstractResolutionTest {
+public class Issue3083Test:AbstractResolutionTest {
 
-    @Test
+    [TestMethod]
     void test() {
-        String code = 
+        string code = 
                 "class A {\n" + 
                 "        public void getFromMap() {\n" + 
-                "            final java.util.Map<String, String> expected = new java.util.HashMap<>();\n" + 
+                "            /*final*/java.util.Map<String, String> expected = new java.util.HashMap<>();\n" + 
                 "            java.util.Map.Entry<String, String> entry = get(expected, 0);\n" + 
                 "        }\n" + 
                 "        <V, K> java.util.Map.Entry<K,V> get(java.util.Map<K,V> map, int index) {\n" + 

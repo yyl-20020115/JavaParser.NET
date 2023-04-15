@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.symbolsolver.cache;
  * A contract that defines a semi-persistent mapping of keys and values.
  * <br>
  * Cache entries are manually added using put({@link K}, {@link V}),
- * and are stored in the cache until either evicted or manually removed.
+ * and are stored _in the cache until either evicted or manually removed.
  * After storing a value, it can be accessed using get({@link K}).
  *
  * @param <K> The type of the key.
@@ -35,7 +35,7 @@ namespace com.github.javaparser.symbolsolver.cache;
 public interface Cache<K, V> {
 
     /**
-     * Associates value with key in this cache.
+     * Associates value with key _in this cache.
      * <br>
      * If the cache previously contained a value associated with key,
      * the old value is replaced by value.
@@ -46,12 +46,12 @@ public interface Cache<K, V> {
     void put(K key, V value);
 
     /**
-     * Returns the value associated with {@code key} in this cache,
+     * Returns the value associated with {@code key} _in this cache,
      * or empty if there is no cached value for {@code key}.
      *
      * @param key The key to look for.
      *
-     * @return The value stored in cache if present.
+     * @return The value stored _in cache if present.
      */
     Optional<V> get(K key);
 
@@ -63,7 +63,7 @@ public interface Cache<K, V> {
     void remove(K key);
 
     /**
-     * Discards all entries in the cache.
+     * Discards all entries _in the cache.
      */
     void removeAll();
 
@@ -78,7 +78,7 @@ public interface Cache<K, V> {
     boolean contains(K key);
 
     /**
-     * Returns the number of entries in this cache.
+     * Returns the number of entries _in this cache.
      *
      * @return The cache size.
      */
@@ -86,7 +86,7 @@ public interface Cache<K, V> {
 
     /**
      * Returns {@code True} if the cache is empty, or {@code False}
-     * if there's at least a entry stored in cache.
+     * if there's at least a entry stored _in cache.
      *
      * @return {@code True} if is empty.
      */

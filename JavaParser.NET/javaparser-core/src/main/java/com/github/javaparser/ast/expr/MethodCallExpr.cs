@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,11 +25,11 @@ namespace com.github.javaparser.ast.expr;
 
 /**
  * A method call on an object or a class. <br>{@code circle.circumference()} <br>In {@code a.<String>bb(15);}, a
- * is the scope, String is a type argument, bb is the name and 15 is an argument.
+ * is the scope, string is a type argument, bb is the name and 15 is an argument.
  *
  * @author Julio Vilmar Gesser
  */
-public class MethodCallExpr extends Expression implements NodeWithTypeArguments<MethodCallExpr>, NodeWithArguments<MethodCallExpr>, NodeWithSimpleName<MethodCallExpr>, NodeWithOptionalScope<MethodCallExpr>, Resolvable<ResolvedMethodDeclaration> {
+public class MethodCallExpr:Expression implements NodeWithTypeArguments<MethodCallExpr>, NodeWithArguments<MethodCallExpr>, NodeWithSimpleName<MethodCallExpr>, NodeWithOptionalScope<MethodCallExpr>, Resolvable<ResolvedMethodDeclaration> {
 
     @OptionalProperty
     private Expression scope;
@@ -45,39 +45,39 @@ public class MethodCallExpr extends Expression implements NodeWithTypeArguments<
         this(null, null, null, new SimpleName(), new NodeList<>());
     }
 
-    public MethodCallExpr(String name, Expression... arguments) {
+    public MethodCallExpr(string name, Expression... arguments) {
         this(null, null, null, new SimpleName(name), new NodeList<>(arguments));
     }
 
-    public MethodCallExpr(final Expression scope, final String name) {
+    public MethodCallExpr(/*final*/Expression scope, /*final*/string name) {
         this(null, scope, null, new SimpleName(name), new NodeList<>());
     }
 
-    public MethodCallExpr(final Expression scope, final SimpleName name) {
+    public MethodCallExpr(/*final*/Expression scope, /*final*/SimpleName name) {
         this(null, scope, null, name, new NodeList<>());
     }
 
-    public MethodCallExpr(final Expression scope, final String name, final NodeList<Expression> arguments) {
+    public MethodCallExpr(/*final*/Expression scope, /*final*/string name, /*final*/NodeList<Expression> arguments) {
         this(null, scope, null, new SimpleName(name), arguments);
     }
 
-    public MethodCallExpr(final Expression scope, final NodeList<Type> typeArguments, final String name, final NodeList<Expression> arguments) {
+    public MethodCallExpr(/*final*/Expression scope, /*final*/NodeList<Type> typeArguments, /*final*/string name, /*final*/NodeList<Expression> arguments) {
         this(null, scope, typeArguments, new SimpleName(name), arguments);
     }
 
-    public MethodCallExpr(final Expression scope, final SimpleName name, final NodeList<Expression> arguments) {
+    public MethodCallExpr(/*final*/Expression scope, /*final*/SimpleName name, /*final*/NodeList<Expression> arguments) {
         this(null, scope, null, name, arguments);
     }
 
-    @AllFieldsConstructor
-    public MethodCallExpr(final Expression scope, final NodeList<Type> typeArguments, final SimpleName name, final NodeList<Expression> arguments) {
+    //@AllFieldsConstructor
+    public MethodCallExpr(/*final*/Expression scope, /*final*/NodeList<Type> typeArguments, /*final*/SimpleName name, /*final*/NodeList<Expression> arguments) {
         this(null, scope, typeArguments, name, arguments);
     }
 
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public MethodCallExpr(TokenRange tokenRange, Expression scope, NodeList<Type> typeArguments, SimpleName name, NodeList<Expression> arguments) {
         super(tokenRange);
         setScope(scope);
@@ -88,34 +88,34 @@ public class MethodCallExpr extends Expression implements NodeWithTypeArguments<
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public NodeList<Expression> getArguments() {
         return arguments;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public SimpleName getName() {
         return name;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Optional<Expression> getScope() {
         return Optional.ofNullable(scope);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public MethodCallExpr setArguments(final NodeList<Expression> arguments) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public MethodCallExpr setArguments(/*final*/NodeList<Expression> arguments) {
         assertNotNull(arguments);
         if (arguments == this.arguments) {
             return this;
@@ -128,8 +128,8 @@ public class MethodCallExpr extends Expression implements NodeWithTypeArguments<
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public MethodCallExpr setName(final SimpleName name) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public MethodCallExpr setName(/*final*/SimpleName name) {
         assertNotNull(name);
         if (name == this.name) {
             return this;
@@ -142,8 +142,8 @@ public class MethodCallExpr extends Expression implements NodeWithTypeArguments<
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public MethodCallExpr setScope(final Expression scope) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public MethodCallExpr setScope(/*final*/Expression scope) {
         if (scope == this.scope) {
             return this;
         }
@@ -155,7 +155,7 @@ public class MethodCallExpr extends Expression implements NodeWithTypeArguments<
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Optional<NodeList<Type>> getTypeArguments() {
         return Optional.ofNullable(typeArguments);
     }
@@ -166,8 +166,8 @@ public class MethodCallExpr extends Expression implements NodeWithTypeArguments<
      * @param typeArguments the typeArguments, can be null
      * @return this, the MethodCallExpr
      */
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public MethodCallExpr setTypeArguments(final NodeList<Type> typeArguments) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public MethodCallExpr setTypeArguments(/*final*/NodeList<Type> typeArguments) {
         if (typeArguments == this.typeArguments) {
             return this;
         }
@@ -180,7 +180,7 @@ public class MethodCallExpr extends Expression implements NodeWithTypeArguments<
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
     public boolean remove(Node node) {
         if (node == null) {
             return false;
@@ -208,25 +208,25 @@ public class MethodCallExpr extends Expression implements NodeWithTypeArguments<
         return super.remove(node);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
     public MethodCallExpr removeScope() {
         return setScope((Expression) null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public MethodCallExpr clone() {
         return (MethodCallExpr) accept(new CloneVisitor(), null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public MethodCallExprMetaModel getMetaModel() {
         return JavaParserMetaModel.methodCallExprMetaModel;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public boolean replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
@@ -259,19 +259,19 @@ public class MethodCallExpr extends Expression implements NodeWithTypeArguments<
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isMethodCallExpr() {
         return true;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public MethodCallExpr asMethodCallExpr() {
         return this;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifMethodCallExpr(Consumer<MethodCallExpr> action) {
         action.accept(this);
     }
@@ -295,14 +295,14 @@ public class MethodCallExpr extends Expression implements NodeWithTypeArguments<
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<MethodCallExpr> toMethodCallExpr() {
         return Optional.of(this);
     }
 
     /*
      * A method invocation expression is a poly expression if all of the following are true:
-     * 1. The invocation appears in an assignment context or an invocation context (§5.2, §5.3).
+     * 1. The invocation appears _in an assignment context or an invocation context (§5.2, §5.3).
      * 2. If the invocation is qualified (that is, any form of MethodInvocation except for the first), then
      *    the invocation elides TypeArguments to the left of the Identifier.
      * 3. The method to be invoked, as determined by the following subsections, is generic (§8.4.4) and has a
@@ -313,7 +313,7 @@ public class MethodCallExpr extends Expression implements NodeWithTypeArguments<
     public boolean isPolyExpression() {
         // A method invocation expression is a poly expression if all of the following are true:
         // 
-        // 1. The invocation appears in an assignment context or an invocation context (§5.2, §5.3).
+        // 1. The invocation appears _in an assignment context or an invocation context (§5.2, §5.3).
         if (!(appearsInAssignmentContext() || appearsInInvocationContext())) {
             return false;
         }

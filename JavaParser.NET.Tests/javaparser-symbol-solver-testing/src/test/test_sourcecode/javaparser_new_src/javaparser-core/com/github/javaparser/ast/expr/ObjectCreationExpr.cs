@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -33,7 +33,7 @@ namespace com.github.javaparser.ast.expr;
  *
  * @author Julio Vilmar Gesser
  */
-public final class ObjectCreationExpr extends Expression implements 
+public /*final*/class ObjectCreationExpr:Expression implements 
         NodeWithTypeArguments<ObjectCreationExpr>,
         NodeWithType<ObjectCreationExpr> {
 
@@ -58,15 +58,15 @@ public final class ObjectCreationExpr extends Expression implements
      * @param type this is the class that the constructor is being called for.
      * @param args Any arguments to pass to the constructor
      */
-    public ObjectCreationExpr(final Expression scope, final ClassOrInterfaceType type, final List<Expression> args) {
+    public ObjectCreationExpr(/*final*/Expression scope, /*final*/ClassOrInterfaceType type, /*final*/List<Expression> args) {
         setScope(scope);
         setType(type);
         setArgs(args);
     }
 
-	public ObjectCreationExpr(final Range range,
-			final Expression scope, final ClassOrInterfaceType type, final List<Type<?>> typeArguments,
-                              final List<Expression> args, final List<BodyDeclaration<?>> anonymousBody) {
+	public ObjectCreationExpr(/*final*/Range range,
+			/*final*/Expression scope, /*final*/ClassOrInterfaceType type, /*final*/List<Type<?>> typeArguments,
+                              /*final*/List<Expression> args, /*final*/List<BodyDeclaration<?>> anonymousBody) {
 		super(range);
 		setScope(scope);
 		setType(type);
@@ -76,12 +76,12 @@ public final class ObjectCreationExpr extends Expression implements
 	}
 
     @Override
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
@@ -113,27 +113,27 @@ public final class ObjectCreationExpr extends Expression implements
         return type;
     }
 
-    public ObjectCreationExpr setAnonymousClassBody(final List<BodyDeclaration<?>> anonymousClassBody) {
+    public ObjectCreationExpr setAnonymousClassBody(/*final*/List<BodyDeclaration<?>> anonymousClassBody) {
         this.anonymousClassBody = anonymousClassBody;
         setAsParentNodeOf(this.anonymousClassBody);
         return this;
     }
 
-    public ObjectCreationExpr setArgs(final List<Expression> args) {
+    public ObjectCreationExpr setArgs(/*final*/List<Expression> args) {
         this.args = args;
         setAsParentNodeOf(this.args);
         return this;
     }
 
-    public ObjectCreationExpr setScope(final Expression scope) {
+    public ObjectCreationExpr setScope(/*final*/Expression scope) {
         this.scope = scope;
         setAsParentNodeOf(this.scope);
         return this;
     }
 
     @Override
-    public ObjectCreationExpr setType(final Type<?> type) {
-        if (!(type instanceof ClassOrInterfaceType))// needed so we can use NodeWithType
+    public ObjectCreationExpr setType(/*final*/Type<?> type) {
+        if (!(type is ClassOrInterfaceType))// needed so we can use NodeWithType
             throw new RuntimeException("You can only add ClassOrInterfaceType to an ObjectCreationExpr");
         this.type = (ClassOrInterfaceType) type;
         setAsParentNodeOf(this.type);
@@ -146,7 +146,7 @@ public final class ObjectCreationExpr extends Expression implements
     }
 
     @Override
-    public ObjectCreationExpr setTypeArguments(final List<Type<?>> types) {
+    public ObjectCreationExpr setTypeArguments(/*final*/List<Type<?>> types) {
         this.typeArguments = types;
         setAsParentNodeOf(this.typeArguments);
         return this;

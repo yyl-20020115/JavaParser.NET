@@ -34,14 +34,14 @@ class InterfaceTest implements I1, I2.I2_1, I3.I3_1.I3_1_1 {
     I3_1_1 field_i3;
 }
 
-class ClassTest1 extends C1 {
+class ClassTest1:C1 {
     C1 field_c1;
 }
 
-class ClassTest2 extends C2.C2_1 {
+class ClassTest2:C2.C2_1 {
     C2_1 field_c2;
 }
 
-class ClassTest3 extends C3.C3_1.C3_1_1 {
+class ClassTest3:C3.C3_1.C3_1_1 {
     C3_1_1 field_c3;
 }

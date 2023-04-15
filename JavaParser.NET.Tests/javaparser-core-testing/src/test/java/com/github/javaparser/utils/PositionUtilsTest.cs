@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,7 +23,7 @@ namespace com.github.javaparser.utils;
 
 
 public class PositionUtilsTest {
-    @Test
+    [TestMethod]
     public void nodeContains_NoAnnotationsAnywhere_IgnoringAnnotations() {
         CompilationUnit cu = StaticJavaParser.parse("class X { int a; }");
         FieldDeclaration field = cu.findFirst(FieldDeclaration.class).get();
@@ -32,7 +32,7 @@ public class PositionUtilsTest {
         assertTrue(contains);
     }
 
-    @Test
+    [TestMethod]
     public void nodeDoesNotContain_NoAnnotationsAnywhere_IgnoringAnnotations() {
         CompilationUnit cu = StaticJavaParser.parse("class X { int a; }");
         FieldDeclaration field = cu.findFirst(FieldDeclaration.class).get();
@@ -44,7 +44,7 @@ public class PositionUtilsTest {
         assertFalse(contains);
     }
 
-    @Test
+    [TestMethod]
     public void nodeContains_NoAnnotationsAnywhere_IncludeAnnotations() {
         CompilationUnit cu = StaticJavaParser.parse("class X { int a; }");
         FieldDeclaration field = cu.findFirst(FieldDeclaration.class).get();
@@ -53,7 +53,7 @@ public class PositionUtilsTest {
         assertTrue(contains);
     }
 
-    @Test
+    [TestMethod]
     public void nodeDoesNotContain_NoAnnotationsAnywhere_IncludeAnnotations() {
         CompilationUnit cu = StaticJavaParser.parse("class X { int a; }");
         FieldDeclaration field = cu.findFirst(FieldDeclaration.class).get();
@@ -65,7 +65,7 @@ public class PositionUtilsTest {
         assertFalse(contains, "Type and Name are separate branches of the AST, thus should not contain each other.");
     }
 
-    @Test
+    [TestMethod]
     public void nodeContainsAnnotations_IgnoringAnnotations() {
         CompilationUnit cu = StaticJavaParser.parse("@A class X {} class Y {}");
         ClassOrInterfaceDeclaration x = cu.getClassByName("X").get();
@@ -75,9 +75,9 @@ public class PositionUtilsTest {
         assertFalse(contains);
     }
 
-    @Test
+    [TestMethod]
     public void nodeContainsAnnotations_WithCommentNodeInTheMiddle_IgnoringAnnotations() {
-        String code = "" +
+        string code = "" +
                 "@A\n" +
                 "/*o*/\n" +
                 "@B\n" +
@@ -100,9 +100,9 @@ public class PositionUtilsTest {
     }
 
 
-    @Test
+    [TestMethod]
     public void nodeContainsAnnotations_WithAnnotationNodeInTheMiddle() {
-        String code = "" +
+        string code = "" +
                 "@A\n" +
                 "@B\n" +
                 "@C\n" +
@@ -112,10 +112,10 @@ public class PositionUtilsTest {
         CompilationUnit cu = StaticJavaParser.parse(code);
         assertEqualsStringIgnoringEol(code, cu.toString(), "Issue with the parsing of the code, not this test.");
 
-        final ClassOrInterfaceDeclaration x = cu.getClassByName("X").get();
-        final AnnotationExpr annotationA = x.getAnnotationByName("A").get();
-        final AnnotationExpr annotationB = x.getAnnotationByName("B").get();
-        final AnnotationExpr annotationC = x.getAnnotationByName("C").get();
+        /*final*/ClassOrInterfaceDeclaration x = cu.getClassByName("X").get();
+        /*final*/AnnotationExpr annotationA = x.getAnnotationByName("A").get();
+        /*final*/AnnotationExpr annotationB = x.getAnnotationByName("B").get();
+        /*final*/AnnotationExpr annotationC = x.getAnnotationByName("C").get();
 
         // If including annotations (i.e. NOT ignoring them), all nodes should be included
         assertTrue(nodeContains(x, annotationA, false), formatRangeCompareResult(x, annotationA, "X", "A"));
@@ -131,8 +131,8 @@ public class PositionUtilsTest {
 
     }
 
-    private String formatRangeCompareResult(Node x, Node annotationA, String containerId, String otherId) {
-        return String.format("container range in detected as NOT containing other range: " +
+    private string formatRangeCompareResult(Node x, Node annotationA, string containerId, string otherId) {
+        return String.format("container range _in detected as NOT containing other range: " +
                         "\n - container (%s): %s" +
                         "\n -     other (%s): %s",
                 containerId,
@@ -142,7 +142,7 @@ public class PositionUtilsTest {
         );
     }
 
-    @Test
+    [TestMethod]
     public void nodeContainsAnnotations_WithCommentAtTheEndOfAnnotations_IgnoringAnnotations() {
         CompilationUnit cu = StaticJavaParser.parse("@A @B /*o*/ public class X {}");
         ClassOrInterfaceDeclaration x = cu.getClassByName("X").get();
@@ -171,7 +171,7 @@ public class PositionUtilsTest {
 
     }
 
-    @Test
+    [TestMethod]
     public void nodeContainsAnnotations_WithCommentAfterTheEnd_IgnoringAnnotations() {
         CompilationUnit cu = StaticJavaParser.parse("@A @B public /*o*/ class X {}");
         ClassOrInterfaceDeclaration x = cu.getClassByName("X").get();
@@ -199,7 +199,7 @@ public class PositionUtilsTest {
 
     }
 
-    @Test
+    [TestMethod]
     public void nodeContainsAnnotations_WithCommentAfterTheEnd_IgnoringAnnotations2() {
         CompilationUnit cu = StaticJavaParser.parse("@A @B public class /*o*/ X {}");
         ClassOrInterfaceDeclaration x = cu.getClassByName("X").get();
@@ -229,7 +229,7 @@ public class PositionUtilsTest {
 
     }
 
-    @Test
+    [TestMethod]
     public void nodeContainsAnnotations_WithCommentAfterTheEnd_IgnoringAnnotations3() {
         CompilationUnit cu = StaticJavaParser.parse("@A @B public class X /*o*/ {}");
         ClassOrInterfaceDeclaration x = cu.getClassByName("X").get();

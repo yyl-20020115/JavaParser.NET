@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -31,7 +31,7 @@ class NodeWithAnnotationsBuildersTest {
 
     }
 
-    @Test
+    [TestMethod]
     void testAddAnnotation() {
         NormalAnnotationExpr annotation = testClass.addAndGetAnnotation(hey.class);
         assertEquals("import com.github.javaparser.builders.NodeWithAnnotationsBuildersTest.hey;", cu.getImport(0).toString().trim());
@@ -40,39 +40,39 @@ class NodeWithAnnotationsBuildersTest {
         assertEquals(NormalAnnotationExpr.class, testClass.getAnnotation(0).getClass());
     }
 
-    @Test
+    [TestMethod]
     void testAddMarkerAnnotation() {
         testClass.addMarkerAnnotation("test");
         assertEquals(1, testClass.getAnnotations().size());
     }
 
-    @Test
+    [TestMethod]
     void testAddSingleMemberAnnotation() {
         testClass.addSingleMemberAnnotation("test", "value");
         assertEquals(1, testClass.getAnnotations().size());
         assertEquals("value", testClass.getAnnotation(0).asSingleMemberAnnotationExpr().getMemberValue().toString());
     }
 
-    @Test
+    [TestMethod]
     void testAddSingleMemberAnnotation2() {
         testClass.addSingleMemberAnnotation(hey.class, new NameExpr(new SimpleName("value")));
         assertEquals(1, testClass.getAnnotations().size());
         assertEquals("value", testClass.getAnnotation(0).asSingleMemberAnnotationExpr().getMemberValue().toString());
     }
 
-    @Test
+    [TestMethod]
     void testIsAnnotationPresent() {
         testClass.addMarkerAnnotation(hey.class);
         assertTrue(testClass.isAnnotationPresent(hey.class));
     }
 
-    @Test
+    [TestMethod]
     void testGetAnnotationByName() {
         NormalAnnotationExpr annotation = testClass.addAndGetAnnotation(hey.class);
         assertEquals(annotation, testClass.getAnnotationByName("hey").get());
     }
 
-    @Test
+    [TestMethod]
     void testGetAnnotationByClass() {
         NormalAnnotationExpr annotation = testClass.addAndGetAnnotation(hey.class);
         assertEquals(annotation, testClass.getAnnotationByClass(hey.class).get());

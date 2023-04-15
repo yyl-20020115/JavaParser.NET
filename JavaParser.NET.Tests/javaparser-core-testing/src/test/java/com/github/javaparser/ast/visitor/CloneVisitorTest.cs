@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -37,7 +37,7 @@ class CloneVisitorTest {
         cu = null;
     }
 
-    @Test
+    [TestMethod]
     void cloneJavaDocTest() {
         NodeList<BodyDeclaration<?>> bodyDeclarationList = new NodeList<>();
         bodyDeclarationList.add(new AnnotationMemberDeclaration().setJavadocComment("javadoc"));
@@ -88,10 +88,10 @@ class CloneVisitorTest {
         }
     }
     
-    @Test
+    [TestMethod]
     void cloneAnnotationOnWildcardTypeArgument() {
-        Type type = parseType("List<@C ? extends Object>").clone();
-        assertEquals("List<@C ? extends Object>", type.toString());
+        Type type = parseType("List<@C ?:Object>").clone();
+        assertEquals("List<@C ?:Object>", type.toString());
     }
 
 }

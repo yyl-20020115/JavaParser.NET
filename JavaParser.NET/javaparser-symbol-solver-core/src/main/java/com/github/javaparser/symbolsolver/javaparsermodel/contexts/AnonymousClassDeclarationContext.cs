@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,9 +26,9 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.contexts;
 /**
  * A symbol resolution context for an object creation node.
  */
-public class AnonymousClassDeclarationContext extends AbstractJavaParserContext<ObjectCreationExpr> {
+public class AnonymousClassDeclarationContext:AbstractJavaParserContext<ObjectCreationExpr> {
 
-  private final JavaParserAnonymousClassDeclaration myDeclaration =
+  private /*final*/JavaParserAnonymousClassDeclaration myDeclaration =
       new JavaParserAnonymousClassDeclaration(wrappedNode, typeSolver);
 
   public AnonymousClassDeclarationContext(ObjectCreationExpr node, TypeSolver typeSolver) {
@@ -38,7 +38,7 @@ public class AnonymousClassDeclarationContext extends AbstractJavaParserContext<
   }
 
   //@Override
-  public SymbolReference<ResolvedMethodDeclaration> solveMethod(String name,
+  public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name,
                                                                 List<ResolvedType> argumentsTypes,
                                                                 bool staticOnly) {
     List<ResolvedMethodDeclaration> candidateMethods = myDeclaration
@@ -59,7 +59,7 @@ public class AnonymousClassDeclarationContext extends AbstractJavaParserContext<
 
           // consider methods from superclasses and only default methods from interfaces :
           // not true, we should keep abstract as a valid candidate
-          // abstract are removed in MethodResolutionLogic.isApplicable is necessary
+          // abstract are removed _in MethodResolutionLogic.isApplicable is necessary
           if (res.isSolved()) {
             candidateMethods.add(res.getCorrespondingDeclaration());
           }
@@ -99,7 +99,7 @@ public class AnonymousClassDeclarationContext extends AbstractJavaParserContext<
   }
 
   //@Override
-  public SymbolReference<ResolvedTypeDeclaration> solveType(String name, List<ResolvedType> typeArguments) {
+  public SymbolReference<ResolvedTypeDeclaration> solveType(string name, List<ResolvedType> typeArguments) {
     List<TypeDeclaration> typeDeclarations = myDeclaration.findMembersOfKind(TypeDeclaration.class);
 
     Optional<SymbolReference<ResolvedTypeDeclaration>> exactMatch =
@@ -150,7 +150,7 @@ public class AnonymousClassDeclarationContext extends AbstractJavaParserContext<
 
     // Look into extended classes and implemented interfaces
     for (ResolvedReferenceType ancestor : myDeclaration.getAncestors()) {
-      // look at names of extended classes and implemented interfaces (this may not be important because they are checked in CompilationUnitContext)
+      // look at names of extended classes and implemented interfaces (this may not be important because they are checked _in CompilationUnitContext)
       Optional<ResolvedReferenceTypeDeclaration> optionalTypeDeclaration = ancestor.getTypeDeclaration();
       if (optionalTypeDeclaration.isPresent()) {
         ResolvedReferenceTypeDeclaration typeDeclaration = optionalTypeDeclaration.get();
@@ -174,7 +174,7 @@ public class AnonymousClassDeclarationContext extends AbstractJavaParserContext<
   }
 
   //@Override
-  public SymbolReference<? extends ResolvedValueDeclaration> solveSymbol(String name) {
+  public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name) {
     Preconditions.checkArgument(typeSolver != null);
 
     if (myDeclaration.hasField(name)) {

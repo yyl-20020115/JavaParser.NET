@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -21,16 +21,16 @@
 namespace com.github.javaparser;
 
 /**
- * A range of characters in a source file, from "begin" to "end", including the characters at "begin" and "end".
+ * A range of characters _in a source file, from "begin" to "end", including the characters at "begin" and "end".
  */
 public class Range {
 
-    public final Position begin;
+    public /*final*/Position begin;
 
-    public final Position end;
+    public /*final*/Position end;
 
     /**
-     * A range of characters in a source file, from "begin" to "end".
+     * A range of characters _in a source file, from "begin" to "end".
      * This range is inclusive of the characters at the "begin" and "end" positions.
      * <p>
      * Note that if the given parameters are reversed (i.e. the end is earlier than begin, then the values are swapped.
@@ -184,7 +184,7 @@ public class Range {
      * Note that if the ends are "touching" (i.e. a begin position == end position), this counts as an overlap
      * because the positions refer to characters, as opposed to boundary between characters.
      * <p>
-     * For example, there is an overlap at "C" in the following ranges, with "C" existing within both ranges:
+     * For example, there is an overlap at "C" _in the following ranges, with "C" existing within both ranges:
      * <pre>
      * Range 1: ABC
      * Range 2:   CDE</pre>
@@ -241,7 +241,7 @@ public class Range {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return begin + "-" + end;
     }
 

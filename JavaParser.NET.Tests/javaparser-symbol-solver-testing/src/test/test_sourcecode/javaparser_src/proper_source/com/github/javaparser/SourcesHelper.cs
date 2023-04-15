@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,26 +24,26 @@ namespace com.github.javaparser;
 
 public class SourcesHelper {
 
-    static String streamToString(InputStream in, String encoding){
+    static string streamToString(InputStream _in, string encoding){
         if (encoding == null) {
-            return streamToString(in);
+            return streamToString(_in);
         } else {
-            java.util.Scanner s = new java.util.Scanner(in, encoding).useDelimiter("\\A");
+            java.util.Scanner s = new java.util.Scanner(_in, encoding).useDelimiter("\\A");
             return s.hasNext() ? s.next() : "";
         }
     }
 
-    static String streamToString(InputStream in){
-        java.util.Scanner s = new java.util.Scanner(in).useDelimiter("\\A");
+    static string streamToString(InputStream _in){
+        java.util.Scanner s = new java.util.Scanner(_in).useDelimiter("\\A");
         return s.hasNext() ? s.next() : "";
     }
 
-    static InputStream stringToStream(String s, String encoding) throws UnsupportedEncodingException {
+    static InputStream stringToStream(string s, string encoding){
         byte[] rawData = encoding != null ? s.getBytes(encoding) : s.getBytes();
         return new ByteArrayInputStream(rawData);
     }
 
-    static String readerToString(Reader reader) throws IOException {
+    static string readerToString(Reader reader){
         char[] arr = new char[8*1024]; // 8K at a time
         StringBuilder buf = new StringBuilder();
         int numChars;
@@ -55,7 +55,7 @@ public class SourcesHelper {
         return buf.toString();
     }
 
-    static Reader stringToReader(String s){
+    static Reader stringToReader(string s){
         return new StringReader(s);
     }
 

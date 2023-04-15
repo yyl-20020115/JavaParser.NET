@@ -1,5 +1,5 @@
 class A {
     public void someMethod() {
-        String test = "";
+        string test = "";
     }
 }

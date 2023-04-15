@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -22,28 +22,28 @@ namespace com.github.javaparser.issues;
 
 
 
-public class Issue3113Test extends AbstractLexicalPreservingTest {
-    @Test
+public class Issue3113Test:AbstractLexicalPreservingTest {
+    [TestMethod]
     public void issue3113() {
         StaticJavaParser.getConfiguration().setLanguageLevel(ParserConfiguration.LanguageLevel.JAVA_12);
 
-        String originalSourceCode = "public class HelloWorld {\n" +
+        string originalSourceCode = "public class HelloWorld {\n" +
                 "  public static void main(String[] args) {\n" +
-                "      final int value = 2;\n" +
-                "      String numericString;\n" +
+                "      /*final*/int value = 2;\n" +
+                "      string numericString;\n" +
                 "      switch (value)\n" +
                 "      {\n" +
                 "       case 1 -> numericString = \"one\";\n" +
                 "       default -> numericString = \"N/A\";\n" +
                 "      }\n" +
-                "      System.out.println(\"value:\" + value + \" as string: \" + numericString);\n" +
+                "      System._out.println(\"value:\" + value + \" as string: \" + numericString);\n" +
                 "  }\n" +
                 "}\n";
 
         CompilationUnit cu = StaticJavaParser.parse(originalSourceCode);
         LexicalPreservingPrinter.setup(cu);
         SwitchStmt expr = cu.findFirst(SwitchStmt.class).get();
-        String modifiedSourceCode = LexicalPreservingPrinter.print(expr);
+        string modifiedSourceCode = LexicalPreservingPrinter.print(expr);
         assertEquals("switch (value)\n" +
                 "      {\n" +
                 "       case 1 -> numericString = \"one\";\n" +

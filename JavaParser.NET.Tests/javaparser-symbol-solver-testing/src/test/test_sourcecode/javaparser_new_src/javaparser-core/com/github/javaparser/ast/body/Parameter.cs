@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,7 +27,7 @@ namespace com.github.javaparser.ast.body;
 /**
  * @author Julio Vilmar Gesser
  */
-public final class Parameter extends Node implements
+public /*final*/class Parameter:Node implements
         NodeWithType<Parameter>,
         NodeWithElementType<Parameter>,
         NodeWithAnnotations<Parameter>,
@@ -63,7 +63,7 @@ public final class Parameter extends Node implements
      *            name of the parameter
      * @return instance of {@link Parameter}
      */
-    public static Parameter create(Type elementType, String name) {
+    public static Parameter create(Type elementType, string name) {
         return new Parameter(elementType, new VariableDeclaratorId(name));
     }
 
@@ -73,7 +73,7 @@ public final class Parameter extends Node implements
         setElementType(elementType);
     }
 
-    public Parameter(final Range range, 
+    public Parameter(/*final*/Range range, 
                      EnumSet<Modifier> modifiers, 
                      List<AnnotationExpr> annotations, 
                      Type elementType,
@@ -124,7 +124,7 @@ public final class Parameter extends Node implements
         return this;
     }
     /**
-     * @return the list returned could be immutable (in that case it will be empty)
+     * @return the list returned could be immutable (_in that case it will be empty)
      */
     @Override
     public List<AnnotationExpr> getAnnotations() {
@@ -137,13 +137,13 @@ public final class Parameter extends Node implements
     }
 
     @Override
-    public String getName() {
+    public string getName() {
         return getId().getName();
     }
 
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     @Override
-    public Parameter setName(String name) {
+    public Parameter setName(string name) {
         if (id != null)
             id.setName(name);
         else
@@ -164,10 +164,10 @@ public final class Parameter extends Node implements
 
     /**
      * @param annotations a null value is currently treated as an empty list. This behavior could change
-     *            in the future, so please avoid passing null
+     *            _in the future, so please avoid passing null
      */
     @Override
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     public Parameter setAnnotations(List<AnnotationExpr> annotations) {
         this.annotations = annotations;
         setAsParentNodeOf(this.annotations);
@@ -180,7 +180,7 @@ public final class Parameter extends Node implements
     }
 
     @Override
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     public Parameter setModifiers(EnumSet<Modifier> modifiers) {
         this.modifiers = modifiers;
         return this;
@@ -192,7 +192,7 @@ public final class Parameter extends Node implements
     }
 
     @Override
-    public Parameter setElementType(final Type elementType) {
+    public Parameter setElementType(/*final*/Type elementType) {
         this.elementType = elementType;
         setAsParentNodeOf(this.elementType);
         return this;

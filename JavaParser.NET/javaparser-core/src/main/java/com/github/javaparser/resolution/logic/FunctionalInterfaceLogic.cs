@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,9 +26,9 @@ namespace com.github.javaparser.resolution.logic;
 /**
  * @author Federico Tomassetti
  */
-public final class FunctionalInterfaceLogic {
+public /*final*/class FunctionalInterfaceLogic {
 
-    private static String JAVA_LANG_FUNCTIONAL_INTERFACE = FunctionalInterface.class.getCanonicalName();
+    private static string JAVA_LANG_FUNCTIONAL_INTERFACE = FunctionalInterface.class.getCanonicalName();
 
     private FunctionalInterfaceLogic() {
         // prevent instantiation
@@ -95,11 +95,11 @@ public final class FunctionalInterfaceLogic {
         return getFunctionalMethod(type).isPresent();
     }
 
-    private static String getSignature(Method m) {
+    private static string getSignature(Method m) {
         return String.format("%s(%s)", m.getName(), String.join(", ", Arrays.stream(m.getParameters()).map(p -> toSignature(p)).collect(Collectors.toList())));
     }
 
-    private static String toSignature(Parameter p) {
+    private static string toSignature(Parameter p) {
         return p.getType().getCanonicalName();
     }
 

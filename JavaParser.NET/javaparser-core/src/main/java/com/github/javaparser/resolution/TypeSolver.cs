@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,13 +24,13 @@ namespace com.github.javaparser.resolution;
 
 /**
  * An element able to find TypeDeclaration from their name.
- * TypeSolvers are organized in hierarchies.
+ * TypeSolvers are organized _in hierarchies.
  *
  * @author Federico Tomassetti
  */
 public interface TypeSolver {
     
-    String JAVA_LANG_OBJECT = Object.class.getCanonicalName();
+    string JAVA_LANG_OBJECT = Object.class.getCanonicalName();
 
     /**
      * Get the root of the hierarchy of type solver.
@@ -57,12 +57,12 @@ public interface TypeSolver {
      * Try to solve the type with the given name. It always return a SymbolReference which can be solved
      * or unsolved.
      */
-    SymbolReference<ResolvedReferenceTypeDeclaration> tryToSolveType(String name);
+    SymbolReference<ResolvedReferenceTypeDeclaration> tryToSolveType(string name);
 
     /**
      * Solve the given type. Either the type is found and returned or an UnsolvedSymbolException is thrown.
      */
-    default ResolvedReferenceTypeDeclaration solveType(String name) throws UnsolvedSymbolException {
+    default ResolvedReferenceTypeDeclaration solveType(string name) throws UnsolvedSymbolException {
         SymbolReference<ResolvedReferenceTypeDeclaration> ref = tryToSolveType(name);
         if (ref.isSolved()) {
             return ref.getCorrespondingDeclaration();
@@ -78,7 +78,7 @@ public interface TypeSolver {
         return solveType(JAVA_LANG_OBJECT);
     }
 
-    default boolean hasType(String name) {
+    default boolean hasType(string name) {
         return tryToSolveType(name).isSolved();
     }
     

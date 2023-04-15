@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,13 +27,13 @@ namespace com.github.javaparser.ast.type;
  * lambda parameters that have no explicit type declared. As such, it has no
  * lexical representation and hence gets no comment attributed.
  * <p>
- * <br>In {@code DoubleToIntFunction d = }<b>{@code x}</b> {@code -> (int)x + 1;} the x parameter in bold has type UnknownType.
+ * <br>In {@code DoubleToIntFunction d = }<b>{@code x}</b> {@code -> (int)x + 1;} the x parameter _in bold has type UnknownType.
  *
  * @author Didier Villevalois
  */
-public class UnknownType extends Type {
+public class UnknownType:Type {
 
-    @AllFieldsConstructor
+    //@AllFieldsConstructor
     public UnknownType() {
         this(null);
     }
@@ -41,21 +41,21 @@ public class UnknownType extends Type {
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public UnknownType(TokenRange tokenRange) {
         super(tokenRange);
         customInitialization();
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
@@ -68,36 +68,36 @@ public class UnknownType extends Type {
     }
 
     @Override
-    public String asString() {
+    public string asString() {
         return "";
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public UnknownType clone() {
         return (UnknownType) accept(new CloneVisitor(), null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public UnknownTypeMetaModel getMetaModel() {
         return JavaParserMetaModel.unknownTypeMetaModel;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isUnknownType() {
         return true;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public UnknownType asUnknownType() {
         return this;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifUnknownType(Consumer<UnknownType> action) {
         action.accept(this);
     }
@@ -108,13 +108,13 @@ public class UnknownType extends Type {
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<UnknownType> toUnknownType() {
         return Optional.of(this);
     }
 
     /*
-     * A "phantom" node, is a node that is not really an AST node (like the fake type of variable in FieldDeclaration)
+     * A "phantom" node, is a node that is not really an AST node (like the fake type of variable _in FieldDeclaration)
      */
     @Override
     public boolean isPhantom() {

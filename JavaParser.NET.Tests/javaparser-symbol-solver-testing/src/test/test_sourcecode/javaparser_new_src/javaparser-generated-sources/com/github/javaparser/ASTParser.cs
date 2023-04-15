@@ -18,13 +18,13 @@ namespace com.github.javaparser;
 /**
  * <p>This class was generated automatically by javacc, do not edit.</p>
  */
-final class ASTParser implements ASTParserConstants {
+/*final*/class ASTParser implements ASTParserConstants {
 
-    private final Position INVALID = pos(-1, 0);
+    private /*final*/Position INVALID = pos(-1, 0);
     List<Problem> problems = new ArrayList<Problem>();
 
-    void reset(InputStream in, String encoding) throws IOException {
-        ReInit(new StreamProvider(in, encoding));
+    void reset(InputStream _in, string encoding){
+        ReInit(new StreamProvider(_in, encoding));
     }
 
     private <T> List<T> add(List<T> list, T obj) {
@@ -44,9 +44,9 @@ final class ASTParser implements ASTParserConstants {
     }
 
         private class ModifierHolder {
-                final EnumSet<Modifier> modifiers;
-                final List<AnnotationExpr> annotations;
-                final Position begin;
+                /*final*/EnumSet<Modifier> modifiers;
+                /*final*/List<AnnotationExpr> annotations;
+                /*final*/Position begin;
 
                 public ModifierHolder(Position begin, EnumSet<Modifier> modifiers, List<AnnotationExpr> annotations) {
                         this.begin = begin;
@@ -86,28 +86,28 @@ final class ASTParser implements ASTParserConstants {
         return token_source.getCommentsCollection();
     }
 
-    private void addProblem(String message) {
+    private void addProblem(string message) {
         problems.add(new Problem(message + ": \"" + token.image, Optional.of(tokenRange()), Optional.empty()));
     }
 
     private Expression generateLambda(Expression ret, Statement lambdaBody) {
-            if (ret instanceof EnclosedExpr) {
+            if (ret is EnclosedExpr) {
                 Expression inner = ((EnclosedExpr) ret).getInner();
-                if (inner != null && inner instanceof NameExpr) {
+                if (inner != null && inner is NameExpr) {
                     VariableDeclaratorId id = new VariableDeclaratorId(inner.getRange(), ((NameExpr)inner).getName(), null);
                     List<Parameter> params = add(null, new Parameter(ret.getRange(), EnumSet.noneOf(Modifier.class), null, new UnknownType(), null, false, id));
                     ret = new LambdaExpr(range(ret.getBegin(), lambdaBody.getEnd()), params, lambdaBody, true);
                 } else {
                     ret = new LambdaExpr(range(ret.getBegin(), lambdaBody.getEnd()), null, lambdaBody, true);
                 }
-            } else if (ret instanceof NameExpr) {
+            } else if (ret is NameExpr) {
                     VariableDeclaratorId id = new VariableDeclaratorId(ret.getRange(), ((NameExpr)ret).getName(), null);
                 List<Parameter> params = add(null, new Parameter(ret.getRange(), EnumSet.noneOf(Modifier.class), null, new UnknownType(), null, false, id));
                 ret = new LambdaExpr(ret.getRange(), params, lambdaBody, false);
-            } else if (ret instanceof LambdaExpr) {
+            } else if (ret is LambdaExpr) {
                 ((LambdaExpr) ret).setBody(lambdaBody);
                 ret.setEnd(lambdaBody.getEnd());
-        } else if (ret instanceof CastExpr) {
+        } else if (ret is CastExpr) {
             CastExpr castExpr = (CastExpr)ret;
             Expression inner = generateLambda(castExpr.getExpr(), lambdaBody);
             castExpr.setExpr(inner);
@@ -127,15 +127,15 @@ final class ASTParser implements ASTParserConstants {
     }
 
 
-    static final class GTToken extends Token {
+    static /*final*/class GTToken:Token {
         int realKind = ASTParserConstants.GT;
 
-        GTToken(int kind, String image) {
+        GTToken(int kind, string image) {
             this.kind = kind;
             this.image = image;
         }
 
-        public static Token newToken(int kind, String image) {
+        public static Token newToken(int kind, string image) {
             return new GTToken(kind, image);
         }
     }
@@ -183,10 +183,10 @@ final class ASTParser implements ASTParserConstants {
 /*
  * Program structuring syntax follows.
  */
-  final public 
+  /*final*/public 
 CompilationUnit CompilationUnit() {PackageDeclaration pakage = null;
         List<ImportDeclaration> imports = null;
-        ImportDeclaration in = null;
+        ImportDeclaration _in = null;
         List<TypeDeclaration<?>> types = null;
         TypeDeclaration tn = null;
         Position begin = INVALID;
@@ -210,13 +210,13 @@ begin = begin.orIfInvalid(pakage.getBegin());
       }
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
       case IMPORT:{
-        in = ImportDeclaration();
-begin = begin.orIfInvalid(in.getBegin()); imports = add(imports, in);
+        _in = ImportDeclaration();
+begin = begin.orIfInvalid(_in.getBegin()); imports = add(imports, _in);
         break;
         }
       case SEMICOLON:{
-        in = EmptyImportDeclaration();
-begin = begin.orIfInvalid(in.getBegin()); imports = add(imports, in);
+        _in = EmptyImportDeclaration();
+begin = begin.orIfInvalid(_in.getBegin()); imports = add(imports, _in);
         break;
         }
       default:
@@ -271,13 +271,13 @@ begin = begin.orIfInvalid(tn.getBegin()); types = add(types, tn);
 return new CompilationUnit(begin.invalid() ? Range.UNKNOWN : range(begin, tokenEnd()), pakage, imports, types);
   }
 
-  final public ImportDeclaration EmptyImportDeclaration() {Position begin;
+  /*final*/public ImportDeclaration EmptyImportDeclaration() {Position begin;
     jj_consume_token(SEMICOLON);
 begin = tokenBegin();
 return ImportDeclaration.createEmptyDeclaration(range(begin, tokenEnd()));
   }
 
-  final public PackageDeclaration PackageDeclaration() {List<AnnotationExpr> annotations = null;
+  /*final*/public PackageDeclaration PackageDeclaration() {List<AnnotationExpr> annotations = null;
         NameExpr name;
         Position begin;
     annotations = Annotations();
@@ -288,7 +288,7 @@ begin = tokenBegin();
 return new PackageDeclaration(range(begin, tokenEnd()), annotations, name);
   }
 
-  final public ImportDeclaration ImportDeclaration() {NameExpr name;
+  /*final*/public ImportDeclaration ImportDeclaration() {NameExpr name;
         bool isStatic = false;
         bool isAsterisk = false;
         Position begin;
@@ -321,11 +321,11 @@ return new ImportDeclaration(range(begin, tokenEnd()),name, isStatic, isAsterisk
   }
 
 /*
- * Modifiers. We match all modifiers in a single rule to reduce the chances of
+ * Modifiers. We match all modifiers _in a single rule to reduce the chances of
  * syntax errors for simple modifier mistakes. It will also enable us to give
  * better error messages.
  */
-  final public 
+  /*final*/public 
 ModifierHolder Modifiers() {Position begin = INVALID;
     EnumSet<Modifier> modifiers = EnumSet.noneOf(Modifier.class);
     List<AnnotationExpr> annotations = null;
@@ -410,7 +410,7 @@ return new ModifierHolder(begin, modifiers, annotations);
 /*
  * Declaration syntax follows.
  */
-  final public TypeDeclaration TypeDeclaration() {ModifierHolder modifier;
+  /*final*/public TypeDeclaration TypeDeclaration() {ModifierHolder modifier;
    TypeDeclaration ret;
 
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -464,7 +464,7 @@ ret = new EmptyTypeDeclaration(tokenRange());
 return ret;
   }
 
-  final public ClassOrInterfaceDeclaration ClassOrInterfaceDeclaration(ModifierHolder modifier) {bool isInterface = false;
+  /*final*/public ClassOrInterfaceDeclaration ClassOrInterfaceDeclaration(ModifierHolder modifier) {bool isInterface = false;
     NameExpr name;
     RangedList<TypeParameter> typePar = new RangedList<TypeParameter>(null);
     List<ClassOrInterfaceType> extList = null;
@@ -521,7 +521,7 @@ ClassOrInterfaceDeclaration tmp = new ClassOrInterfaceDeclaration(range(begin, t
     return tmp;
   }
 
-  final public List<ClassOrInterfaceType> ExtendsList(bool isInterface) {bool extendsMoreThanOne = false;
+  /*final*/public List<ClassOrInterfaceType> ExtendsList(bool isInterface) {bool extendsMoreThanOne = false;
    List<ClassOrInterfaceType> ret = new LinkedList<ClassOrInterfaceType>();
    ClassOrInterfaceType cit;
     jj_consume_token(EXTENDS);
@@ -547,7 +547,7 @@ if (extendsMoreThanOne && !isInterface)
 return ret;
   }
 
-  final public List<ClassOrInterfaceType> ImplementsList(bool isInterface) {List<ClassOrInterfaceType> ret = new LinkedList<ClassOrInterfaceType>();
+  /*final*/public List<ClassOrInterfaceType> ImplementsList(bool isInterface) {List<ClassOrInterfaceType> ret = new LinkedList<ClassOrInterfaceType>();
    ClassOrInterfaceType cit;
     jj_consume_token(IMPLEMENTS);
     cit = AnnotatedClassOrInterfaceType();
@@ -572,7 +572,7 @@ if (isInterface)
 return ret;
   }
 
-  final public EnumDeclaration EnumDeclaration(ModifierHolder modifier) {NameExpr name;
+  /*final*/public EnumDeclaration EnumDeclaration(ModifierHolder modifier) {NameExpr name;
         List<ClassOrInterfaceType> impList = null;
         EnumConstantDeclaration entry;
         List<EnumConstantDeclaration> entries = null;
@@ -681,9 +681,9 @@ EnumDeclaration tmp = new EnumDeclaration(range(begin, tokenEnd()), modifier.mod
       return tmp;
   }
 
-  final public EnumConstantDeclaration EnumConstantDeclaration() {List<AnnotationExpr> annotations = null;
+  /*final*/public EnumConstantDeclaration EnumConstantDeclaration() {List<AnnotationExpr> annotations = null;
         AnnotationExpr ann;
-        String name;
+        string name;
         List<Expression> args = null;
         List<BodyDeclaration<?>> classBody = null;
         Position begin = INVALID;
@@ -727,10 +727,10 @@ return new EnumConstantDeclaration(range(begin, tokenEnd()), annotations, name, 
 
 /**
  * If the list inside the returned RangedList is null, there are no brackets.
- * If it is empty, there are brackets, but nothing is in them <>.
+ * If it is empty, there are brackets, but nothing is _in them <>.
  * The normal case is that it contains TypeParameters, like <A, B, C>.
  */
-  final public RangedList<TypeParameter> TypeParameters() {RangedList<TypeParameter> ret = new RangedList<TypeParameter>(new LinkedList<TypeParameter>());
+  /*final*/public RangedList<TypeParameter> TypeParameters() {RangedList<TypeParameter> ret = new RangedList<TypeParameter>(new LinkedList<TypeParameter>());
         TypeParameter tp;
         List<AnnotationExpr> annotations = null;
     jj_consume_token(LT);
@@ -759,7 +759,7 @@ ret.endAt(tokenEnd());
 return ret;
   }
 
-  final public TypeParameter TypeParameter() {String name;
+  /*final*/public TypeParameter TypeParameter() {string name;
         List<ClassOrInterfaceType> typeBound = null;
         Position begin;
     jj_consume_token(IDENTIFIER);
@@ -776,7 +776,7 @@ name = token.image; begin=tokenBegin();
 return new TypeParameter(range(begin, tokenEnd()),name, typeBound);
   }
 
-  final public List<ClassOrInterfaceType> TypeBound() {List<ClassOrInterfaceType> ret = new LinkedList<ClassOrInterfaceType>();
+  /*final*/public List<ClassOrInterfaceType> TypeBound() {List<ClassOrInterfaceType> ret = new LinkedList<ClassOrInterfaceType>();
         ClassOrInterfaceType cit;
     jj_consume_token(EXTENDS);
     cit = AnnotatedClassOrInterfaceType();
@@ -799,7 +799,7 @@ ret.add(cit);
 return ret;
   }
 
-  final public List<BodyDeclaration<?>> ClassOrInterfaceBody(bool isInterface) {List<BodyDeclaration<?>> ret = new LinkedList<BodyDeclaration<?>>();
+  /*final*/public List<BodyDeclaration<?>> ClassOrInterfaceBody(bool isInterface) {List<BodyDeclaration<?>> ret = new LinkedList<BodyDeclaration<?>>();
         BodyDeclaration member;
     jj_consume_token(LBRACE);
     label_11:
@@ -848,7 +848,7 @@ ret.add(member);
 return ret;
   }
 
-  final public BodyDeclaration<?> ClassOrInterfaceBodyDeclaration(bool isInterface) {ModifierHolder modifier;
+  /*final*/public BodyDeclaration<?> ClassOrInterfaceBodyDeclaration(bool isInterface) {ModifierHolder modifier;
    ModifierHolder modifier2 = null;
    EnumSet<Modifier> aux = null;
    BodyDeclaration<?> ret;
@@ -957,7 +957,7 @@ if(isDefault && ret!= null && ((MethodDeclaration)ret).getBody() == null)
             }
           }
         }
-if(isDefault && ! (ret instanceof MethodDeclaration))
+if(isDefault && ! (ret is MethodDeclaration))
             {
               addProblem("Only methods can have the keyword \"default\".");
             }
@@ -977,10 +977,10 @@ ret = new EmptyMemberDeclaration(tokenRange());
 return ret;
   }
 
-  final public FieldDeclaration FieldDeclaration(ModifierHolder modifier) {Type type;
+  /*final*/public FieldDeclaration FieldDeclaration(ModifierHolder modifier) {Type type;
         List<VariableDeclarator> variables = new LinkedList<VariableDeclarator>();
         VariableDeclarator val;
-    // Modifiers are already matched in the caller
+    // Modifiers are already matched _in the caller
       type = Type();
     val = VariableDeclarator();
 variables.add(val);
@@ -1005,7 +1005,7 @@ Position begin = modifier.begin.orIfInvalid(type.getBegin());
         return new FieldDeclaration(range(begin, tokenEnd()), modifier.modifiers, modifier.annotations, typeListPair.a, variables, typeListPair.b);
   }
 
-  final public VariableDeclarator VariableDeclarator() {VariableDeclaratorId id;
+  /*final*/public VariableDeclarator VariableDeclarator() {VariableDeclaratorId id;
         Expression init = null;
     id = VariableDeclaratorId();
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -1021,7 +1021,7 @@ Position begin = modifier.begin.orIfInvalid(type.getBegin());
 return new  VariableDeclarator(range(id.getBegin(), tokenEnd()), id, init);
   }
 
-  final public VariableDeclaratorId VariableDeclaratorId() {String name;
+  /*final*/public VariableDeclaratorId VariableDeclaratorId() {string name;
         Position begin;
         ArrayBracketPair arrayBracketPair;
         List<ArrayBracketPair> arrayBracketPairs = null;
@@ -1045,7 +1045,7 @@ arrayBracketPairs=add(arrayBracketPairs, arrayBracketPair);
 return new VariableDeclaratorId(range(begin, tokenEnd()),name, arrayBracketPairs);
   }
 
-  final public Expression VariableInitializer() {Expression ret;
+  /*final*/public Expression VariableInitializer() {Expression ret;
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case LBRACE:{
       ret = ArrayInitializer();
@@ -1090,7 +1090,7 @@ return new VariableDeclaratorId(range(begin, tokenEnd()),name, arrayBracketPairs
 return ret;
   }
 
-  final public ArrayInitializerExpr ArrayInitializer() {List<Expression> values = null;
+  /*final*/public ArrayInitializerExpr ArrayInitializer() {List<Expression> values = null;
         Expression val;
         Position begin;
     jj_consume_token(LBRACE);
@@ -1157,7 +1157,7 @@ values = add(values, val);
 return new ArrayInitializerExpr(range(begin, tokenEnd()), values);
   }
 
-  final public MethodDeclaration MethodDeclaration(ModifierHolder modifier) {RangedList<TypeParameter> typeParameters = new RangedList<TypeParameter>(null);
+  /*final*/public MethodDeclaration MethodDeclaration(ModifierHolder modifier) {RangedList<TypeParameter> typeParameters = new RangedList<TypeParameter>(null);
         Type type;
         NameExpr name;
         List<Parameter> parameters;
@@ -1240,7 +1240,7 @@ Pair<Type, List<ArrayBracketPair>> typeListPair = unwrapArrayTypes(type);
         return new MethodDeclaration(range(begin, pos(token.endLine, token.endColumn)), modifier.modifiers, modifier.annotations, typeParameters.list, typeListPair.a, typeListPair.b, name, parameters, arrayBracketPairs, throws_, block);
   }
 
-  final public ReferenceType ReferenceTypeWithAnnotations() {List<AnnotationExpr> annotations;
+  /*final*/public ReferenceType ReferenceTypeWithAnnotations() {List<AnnotationExpr> annotations;
         ReferenceType type;
     annotations = Annotations();
     type = ReferenceType();
@@ -1254,7 +1254,7 @@ if(annotations != null){
         return type;
   }
 
-  final public List<Parameter> FormalParameters() {List<Parameter> ret = null;
+  /*final*/public List<Parameter> FormalParameters() {List<Parameter> ret = null;
         Parameter par;
     jj_consume_token(LPAREN);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -1306,7 +1306,7 @@ ret = add(ret, par);
 return ret;
   }
 
-  final public List<Parameter> FormalLambdaParameters() {List<Parameter> ret = null;
+  /*final*/public List<Parameter> FormalLambdaParameters() {List<Parameter> ret = null;
   Parameter par;
     jj_consume_token(COMMA);
     par = FormalParameter();
@@ -1329,7 +1329,7 @@ ret = add(ret, par);
 return ret;
   }
 
-  final public List<Parameter> InferredLambdaParameters() {List<Parameter> ret = null;
+  /*final*/public List<Parameter> InferredLambdaParameters() {List<Parameter> ret = null;
   VariableDeclaratorId id;
     jj_consume_token(COMMA);
     id = VariableDeclaratorId();
@@ -1352,7 +1352,7 @@ ret = add(ret, new Parameter(range(id.getBegin(), id.getEnd()), EnumSet.noneOf(M
 return ret;
   }
 
-  final public Parameter FormalParameter() {ModifierHolder modifier;
+  /*final*/public Parameter FormalParameter() {ModifierHolder modifier;
         Type type;
         bool isVarArg = false;
         VariableDeclaratorId id;
@@ -1374,7 +1374,7 @@ Position begin = modifier.begin.orIfInvalid(type.getBegin());
         return new Parameter(range(begin, tokenEnd()), modifier.modifiers, modifier.annotations, typeListPair.a, typeListPair.b, isVarArg, id);
   }
 
-  final public ConstructorDeclaration ConstructorDeclaration(ModifierHolder modifier) {RangedList<TypeParameter> typeParameters = new RangedList<TypeParameter>(null);
+  /*final*/public ConstructorDeclaration ConstructorDeclaration(ModifierHolder modifier) {RangedList<TypeParameter> typeParameters = new RangedList<TypeParameter>(null);
         NameExpr name;
         List<Parameter> parameters;
         List<ReferenceType> throws_ = null;
@@ -1393,7 +1393,7 @@ begin = begin.orIfInvalid(typeParameters.range.begin);
       jj_la1[47] = jj_gen;
       ;
     }
-    // Modifiers matched in the caller
+    // Modifiers matched _in the caller
       name = SimpleName();
 begin = begin.orIfInvalid(typeParameters.range.begin);
     parameters = FormalParameters();
@@ -1440,7 +1440,7 @@ if (exConsInv != null) {
     return tmp;
   }
 
-  final public ExplicitConstructorInvocationStmt ExplicitConstructorInvocation() {bool isThis = false;
+  /*final*/public ExplicitConstructorInvocationStmt ExplicitConstructorInvocation() {bool isThis = false;
         List<Expression> args;
         Expression expr = null;
         RangedList<Type<?>> typeArgs = new RangedList<Type<?>>(null);
@@ -1517,7 +1517,7 @@ begin = begin.orIfInvalid(tokenBegin());
 return new ExplicitConstructorInvocationStmt(range(begin, tokenEnd()),typeArgs.list, isThis, expr, args);
   }
 
-  final public List<Statement> Statements() {List<Statement> ret = null;
+  /*final*/public List<Statement> Statements() {List<Statement> ret = null;
         Statement stmt;
     label_21:
     while (true) {
@@ -1586,7 +1586,7 @@ ret = add(ret, stmt);
 return ret;
   }
 
-  final public InitializerDeclaration InitializerDeclaration() {BlockStmt block;
+  /*final*/public InitializerDeclaration InitializerDeclaration() {BlockStmt block;
         Position begin = INVALID;
         bool isStatic = false;
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -1607,7 +1607,7 @@ return new InitializerDeclaration(range(begin, tokenEnd()), isStatic, block);
 /*
  * Type, name and expression syntax follows.
  */
-  final public 
+  /*final*/public 
 Type Type() {Type ret;
     if (jj_2_11(2)) {
       ret = ReferenceType();
@@ -1633,7 +1633,7 @@ Type Type() {Type ret;
 return ret;
   }
 
-  final public ReferenceType ReferenceType() {Type type;
+  /*final*/public ReferenceType ReferenceType() {Type type;
         ArrayBracketPair arrayBracketPair;
         List<ArrayBracketPair> arrayBracketPairs = null;
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -1680,7 +1680,7 @@ arrayBracketPairs=add(arrayBracketPairs, arrayBracketPair);
 return (ReferenceType)wrapInArrayTypes(type, arrayBracketPairs);
   }
 
-  final public ArrayBracketPair ArrayBracketPair() {List<AnnotationExpr> annotations = null;
+  /*final*/public ArrayBracketPair ArrayBracketPair() {List<AnnotationExpr> annotations = null;
     Position begin = INVALID;
     annotations = Annotations();
     jj_consume_token(LBRACKET);
@@ -1689,7 +1689,7 @@ begin = begin.orIfInvalid(tokenBegin());
 return new ArrayBracketPair(range(begin, tokenEnd()), annotations);
   }
 
-  final public IntersectionType IntersectionType() {Position begin;
+  /*final*/public IntersectionType IntersectionType() {Position begin;
         ReferenceType elementType;
         List<ReferenceType> elements = null;
     elementType = ReferenceType();
@@ -1720,7 +1720,7 @@ elements = add(elements, elementType);
 return new IntersectionType(range(begin, tokenEnd()), elements);
   }
 
-  final public ClassOrInterfaceType AnnotatedClassOrInterfaceType() {List<AnnotationExpr> annotations;
+  /*final*/public ClassOrInterfaceType AnnotatedClassOrInterfaceType() {List<AnnotationExpr> annotations;
         ClassOrInterfaceType cit;
     annotations = Annotations();
     cit = ClassOrInterfaceType();
@@ -1732,8 +1732,8 @@ if (cit.getScope()!=null) {
         return cit;
   }
 
-  final public ClassOrInterfaceType ClassOrInterfaceType() {ClassOrInterfaceType ret;
-        String name;
+  /*final*/public ClassOrInterfaceType ClassOrInterfaceType() {ClassOrInterfaceType ret;
+        string name;
         RangedList<Type<?>> typeArgs = new RangedList<Type<?>>(null);
         Position begin;
         List<AnnotationExpr> annotations = null;
@@ -1769,7 +1769,7 @@ ret = new ClassOrInterfaceType(range(begin, tokenEnd()),ret, name, typeArgs.list
 return ret;
   }
 
-  final public RangedList<Type<?>> TypeArguments() {RangedList<Type<?>> ret = new RangedList<Type<?>>(new LinkedList<Type<?>>());
+  /*final*/public RangedList<Type<?>> TypeArguments() {RangedList<Type<?>> ret = new RangedList<Type<?>>(new LinkedList<Type<?>>());
         Type type;
     jj_consume_token(LT);
 ret.beginAt(tokenBegin());
@@ -1813,7 +1813,7 @@ ret.endAt(tokenEnd());
 return ret;
   }
 
-  final public Type TypeArgument() {Type ret;
+  /*final*/public Type TypeArgument() {Type ret;
         List<AnnotationExpr> annotations = null;
     annotations = Annotations();
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -1841,7 +1841,7 @@ return ret;
 ret.setAnnotations(annotations); return ret;
   }
 
-  final public WildcardType Wildcard() {ReferenceType ext = null;
+  /*final*/public WildcardType Wildcard() {ReferenceType ext = null;
         ReferenceType sup = null;
         Position begin;
         List<AnnotationExpr> annotations = null;
@@ -1879,7 +1879,7 @@ sup.setAnnotations(annotations);
 return new WildcardType(range(begin, tokenEnd()),ext, sup);
   }
 
-  final public PrimitiveType PrimitiveType() {PrimitiveType ret;
+  /*final*/public PrimitiveType PrimitiveType() {PrimitiveType ret;
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case BOOLEAN:{
       jj_consume_token(BOOLEAN);
@@ -1929,7 +1929,7 @@ ret = new PrimitiveType(tokenRange(), PrimitiveType.Primitive.Double);
 return ret;
   }
 
-  final public Type ResultType() {Type ret;
+  /*final*/public Type ResultType() {Type ret;
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case VOID:{
       jj_consume_token(VOID);
@@ -1956,7 +1956,7 @@ ret = new VoidType(tokenRange());
 return ret;
   }
 
-  final public NameExpr Name() {NameExpr ret;
+  /*final*/public NameExpr Name() {NameExpr ret;
     jj_consume_token(IDENTIFIER);
 ret = new NameExpr(tokenRange(), token.image);
     label_27:
@@ -1973,7 +1973,7 @@ ret = new QualifiedNameExpr(range(ret.getBegin(), pos(token.endLine, token.endCo
 return ret;
   }
 
-  final public NameExpr SimpleName() {NameExpr ret;
+  /*final*/public NameExpr SimpleName() {NameExpr ret;
     jj_consume_token(IDENTIFIER);
 ret = new NameExpr(tokenRange(), token.image);
 return ret;
@@ -1982,7 +1982,7 @@ return ret;
 /*
  * Expression syntax follows.
  */
-  final public 
+  /*final*/public 
 Expression Expression() {Expression ret;
         AssignExpr.Operator op;
         Expression value;
@@ -2013,11 +2013,11 @@ ret = new AssignExpr(range(ret.getBegin(), pos(token.endLine, token.endColumn)),
         case ARROW:{
           jj_consume_token(ARROW);
           lambdaBody = LambdaBody();
-if (ret instanceof CastExpr)
+if (ret is CastExpr)
      {
        ret = generateLambda(ret, lambdaBody);
      }
-     else if (ret instanceof ConditionalExpr){
+     else if (ret is ConditionalExpr){
          ConditionalExpr ce = (ConditionalExpr) ret;
          if(ce.getElseExpr() != null){
             ce.setElseExpr(generateLambda(ce.getElseExpr(), lambdaBody));
@@ -2072,7 +2072,7 @@ ret = new MethodReferenceExpr(range(ret.getBegin(), pos(token.endLine, token.end
 return ret;
   }
 
-  final public AssignExpr.Operator AssignmentOperator() {AssignExpr.Operator ret;
+  /*final*/public AssignExpr.Operator AssignmentOperator() {AssignExpr.Operator ret;
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case ASSIGN:{
       jj_consume_token(ASSIGN);
@@ -2142,7 +2142,7 @@ ret = AssignExpr.Operator.or;
 return ret;
   }
 
-  final public Expression ConditionalExpression() {Expression ret;
+  /*final*/public Expression ConditionalExpression() {Expression ret;
         Expression left;
         Expression right;
     ret = ConditionalOrExpression();
@@ -2162,7 +2162,7 @@ ret = new ConditionalExpr(range(ret.getBegin(), pos(token.endLine, token.endColu
 return ret;
   }
 
-  final public Expression ConditionalOrExpression() {Expression ret;
+  /*final*/public Expression ConditionalOrExpression() {Expression ret;
         Expression right;
     ret = ConditionalAndExpression();
     label_28:
@@ -2183,7 +2183,7 @@ ret = new BinaryExpr(range(ret.getBegin(), pos(token.endLine, token.endColumn)),
 return ret;
   }
 
-  final public Expression ConditionalAndExpression() {Expression ret;
+  /*final*/public Expression ConditionalAndExpression() {Expression ret;
         Expression right;
     ret = InclusiveOrExpression();
     label_29:
@@ -2204,7 +2204,7 @@ ret = new BinaryExpr(range(ret.getBegin(), pos(token.endLine, token.endColumn)),
 return ret;
   }
 
-  final public Expression InclusiveOrExpression() {Expression ret;
+  /*final*/public Expression InclusiveOrExpression() {Expression ret;
         Expression right;
     ret = ExclusiveOrExpression();
     label_30:
@@ -2225,7 +2225,7 @@ ret = new BinaryExpr(range(ret.getBegin(), pos(token.endLine, token.endColumn)),
 return ret;
   }
 
-  final public Expression ExclusiveOrExpression() {Expression ret;
+  /*final*/public Expression ExclusiveOrExpression() {Expression ret;
         Expression right;
     ret = AndExpression();
     label_31:
@@ -2246,7 +2246,7 @@ ret = new BinaryExpr(range(ret.getBegin(), pos(token.endLine, token.endColumn)),
 return ret;
   }
 
-  final public Expression AndExpression() {Expression ret;
+  /*final*/public Expression AndExpression() {Expression ret;
         Expression right;
     ret = EqualityExpression();
     label_32:
@@ -2267,7 +2267,7 @@ ret = new BinaryExpr(range(ret.getBegin(), pos(token.endLine, token.endColumn)),
 return ret;
   }
 
-  final public Expression EqualityExpression() {Expression ret;
+  /*final*/public Expression EqualityExpression() {Expression ret;
         Expression right;
         BinaryExpr.Operator op;
     ret = InstanceOfExpression();
@@ -2305,7 +2305,7 @@ ret = new BinaryExpr(range(ret.getBegin(), pos(token.endLine, token.endColumn)),
 return ret;
   }
 
-  final public Expression InstanceOfExpression() {Expression ret;
+  /*final*/public Expression InstanceOfExpression() {Expression ret;
         Type type;
     ret = RelationalExpression();
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -2322,7 +2322,7 @@ ret = new InstanceOfExpr(range(ret.getBegin(), pos(token.endLine, token.endColum
 return ret;
   }
 
-  final public Expression RelationalExpression() {Expression ret;
+  /*final*/public Expression RelationalExpression() {Expression ret;
         Expression right;
         BinaryExpr.Operator op;
     ret = ShiftExpression();
@@ -2372,7 +2372,7 @@ ret = new BinaryExpr(range(ret.getBegin(), pos(token.endLine, token.endColumn)),
 return ret;
   }
 
-  final public Expression ShiftExpression() {Expression ret;
+  /*final*/public Expression ShiftExpression() {Expression ret;
         Expression right;
         BinaryExpr.Operator op;
     ret = AdditiveExpression();
@@ -2408,7 +2408,7 @@ ret = new BinaryExpr(range(ret.getBegin(), pos(token.endLine, token.endColumn)),
 return ret;
   }
 
-  final public Expression AdditiveExpression() {Expression ret;
+  /*final*/public Expression AdditiveExpression() {Expression ret;
         Expression right;
         BinaryExpr.Operator op;
     ret = MultiplicativeExpression();
@@ -2446,7 +2446,7 @@ ret = new BinaryExpr(range(ret.getBegin(), pos(token.endLine, token.endColumn)),
 return ret;
   }
 
-  final public Expression MultiplicativeExpression() {Expression ret;
+  /*final*/public Expression MultiplicativeExpression() {Expression ret;
         Expression right;
         BinaryExpr.Operator op;
     ret = UnaryExpression();
@@ -2490,7 +2490,7 @@ ret = new BinaryExpr(range(ret.getBegin(), tokenEnd()), ret, right, op);
 return ret;
   }
 
-  final public Expression UnaryExpression() {Expression ret;
+  /*final*/public Expression UnaryExpression() {Expression ret;
         UnaryExpr.Operator op;
         Position begin = INVALID;
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -2522,9 +2522,9 @@ op = UnaryExpr.Operator.negative; begin=tokenBegin();
       }
       ret = UnaryExpression();
 if(op == UnaryExpr.Operator.negative) {
-                        if (ret instanceof IntegerLiteralExpr && ((IntegerLiteralExpr)ret).isMinValue()) {
+                        if (ret is IntegerLiteralExpr && ((IntegerLiteralExpr)ret).isMinValue()) {
                                 ret = new IntegerLiteralMinValueExpr(range(begin, tokenEnd()));
-                        } else if (ret instanceof LongLiteralExpr && ((LongLiteralExpr)ret).isMinValue()) {
+                        } else if (ret is LongLiteralExpr && ((LongLiteralExpr)ret).isMinValue()) {
                                 ret = new LongLiteralMinValueExpr(range(begin, tokenEnd()));
                         } else {
                                 ret = new UnaryExpr(range(begin, tokenEnd()), ret, op);
@@ -2569,7 +2569,7 @@ if(op == UnaryExpr.Operator.negative) {
 return ret;
   }
 
-  final public Expression PreIncrementExpression() {Expression ret;
+  /*final*/public Expression PreIncrementExpression() {Expression ret;
         Position begin = INVALID;
     jj_consume_token(INCR);
 begin=tokenBegin();
@@ -2578,7 +2578,7 @@ ret = new UnaryExpr(range(begin, tokenEnd()), ret, UnaryExpr.Operator.preIncreme
 return ret;
   }
 
-  final public Expression PreDecrementExpression() {Expression ret;
+  /*final*/public Expression PreDecrementExpression() {Expression ret;
         Position begin;
     jj_consume_token(DECR);
 begin=tokenBegin();
@@ -2587,7 +2587,7 @@ ret = new UnaryExpr(range(begin, tokenEnd()), ret, UnaryExpr.Operator.preDecreme
 return ret;
   }
 
-  final public Expression UnaryExpressionNotPlusMinus() {Expression ret;
+  /*final*/public Expression UnaryExpressionNotPlusMinus() {Expression ret;
         UnaryExpr.Operator op;
         Position begin = INVALID;
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -2654,7 +2654,7 @@ ret = new UnaryExpr(range(begin, tokenEnd()), ret, op);
 return ret;
   }
 
-  final public Expression PostfixExpression() {Expression ret;
+  /*final*/public Expression PostfixExpression() {Expression ret;
         UnaryExpr.Operator op;
     ret = PrimaryExpression();
     if (jj_2_23(2)) {
@@ -2681,7 +2681,7 @@ ret = new UnaryExpr(range(ret.getBegin(), pos(token.endLine, token.endColumn)), 
 return ret;
   }
 
-  final public Expression CastExpression() {Expression ret;
+  /*final*/public Expression CastExpression() {Expression ret;
         ReferenceType referenceType;
         PrimitiveType primitiveType;
         Position begin = INVALID;
@@ -2740,7 +2740,7 @@ if (typesOfMultiCast.size() > 1) {
 return ret;
   }
 
-  final public Expression PrimaryExpression() {Expression ret;
+  /*final*/public Expression PrimaryExpression() {Expression ret;
     ret = PrimaryPrefix();
     label_39:
     while (true) {
@@ -2754,7 +2754,7 @@ return ret;
 return ret;
   }
 
-  final public Expression PrimaryExpressionWithoutSuperSuffix() {Expression ret;
+  /*final*/public Expression PrimaryExpressionWithoutSuperSuffix() {Expression ret;
     ret = PrimaryPrefix();
     label_40:
     while (true) {
@@ -2768,7 +2768,7 @@ return ret;
 return ret;
   }
 
-  final public Expression PrimaryPrefix() {Expression ret = null;
+  /*final*/public Expression PrimaryPrefix() {Expression ret = null;
         NameExpr name;
         RangedList<Type<?>> typeArgs = new RangedList<Type<?>>(null);
         List<Expression> args = null;
@@ -2983,7 +2983,7 @@ isLambda = true;
 if(!isLambda) { ret = new EnclosedExpr(range(begin, tokenEnd()), ret);}
                            else{
                                   if(ret != null){
-                                          if(ret instanceof NameExpr)
+                                          if(ret is NameExpr)
                                           {
                                             id = new VariableDeclaratorId(range(ret.getBegin(), ret.getEnd()), ((NameExpr)ret).getName(), null);
                                             p = new Parameter(range(ret.getBegin(), ret.getEnd()), EnumSet.noneOf(Modifier.class), null, new UnknownType(), null, false, id);
@@ -3069,7 +3069,7 @@ if (hasArgs) {
 return ret;
   }
 
-  final public Expression PrimarySuffix(Expression scope) {Expression ret;
+  /*final*/public Expression PrimarySuffix(Expression scope) {Expression ret;
     if (jj_2_30(2)) {
       ret = PrimarySuffixWithoutSuper(scope);
     } else {
@@ -3089,7 +3089,7 @@ ret = new SuperExpr(range(scope.getBegin(), tokenEnd()), scope);
 return ret;
   }
 
-  final public Expression PrimarySuffixWithoutSuper(Expression scope) {Expression ret;
+  /*final*/public Expression PrimarySuffixWithoutSuper(Expression scope) {Expression ret;
         RangedList<Type<?>> typeArgs = new RangedList<Type<?>>(null);
         List<Expression> args = null;
         bool hasArgs = false;
@@ -3161,7 +3161,7 @@ ret = new ArrayAccessExpr(range(scope.getBegin(), tokenEnd()), scope, ret);
 return ret;
   }
 
-  final public Expression Literal() {Expression ret;
+  /*final*/public Expression Literal() {Expression ret;
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case INTEGER_LITERAL:{
       jj_consume_token(INTEGER_LITERAL);
@@ -3205,7 +3205,7 @@ ret = new StringLiteralExpr(tokenRange(), token.image.substring(1, token.image.l
 return ret;
   }
 
-  final public Expression BooleanLiteral() {Expression ret;
+  /*final*/public Expression BooleanLiteral() {Expression ret;
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case TRUE:{
       jj_consume_token(TRUE);
@@ -3225,12 +3225,12 @@ ret = new BooleanLiteralExpr(tokenRange(), false);
 return ret;
   }
 
-  final public Expression NullLiteral() {
+  /*final*/public Expression NullLiteral() {
     jj_consume_token(NULL);
 return new NullLiteralExpr(tokenRange());
   }
 
-  final public List<Expression> Arguments() {List<Expression> ret = null;
+  /*final*/public List<Expression> Arguments() {List<Expression> ret = null;
     jj_consume_token(LPAREN);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case BOOLEAN:
@@ -3272,7 +3272,7 @@ return new NullLiteralExpr(tokenRange());
 return ret;
   }
 
-  final public List<Expression> ArgumentList() {List<Expression> ret = new LinkedList<Expression>();
+  /*final*/public List<Expression> ArgumentList() {List<Expression> ret = new LinkedList<Expression>();
         Expression expr;
     expr = Expression();
 ret.add(expr);
@@ -3294,7 +3294,7 @@ ret.add(expr);
 return ret;
   }
 
-  final public Expression AllocationExpression(Expression scope) {Expression ret;
+  /*final*/public Expression AllocationExpression(Expression scope) {Expression ret;
         Type type;
         RangedList<Type<?>> typeArgs = new RangedList<Type<?>>(null);
         List<BodyDeclaration<?>> anonymousBody = null;
@@ -3367,7 +3367,7 @@ return ret;
  * The third LOOKAHEAD specification below is to parse to PrimarySuffix
  * if there is an expression between the "[...]".
  */
-  final public ArrayCreationExpr ArrayCreation(Position begin, Type type) {Expression expr = null;
+  /*final*/public ArrayCreationExpr ArrayCreation(Position begin, Type type) {Expression expr = null;
         ArrayInitializerExpr arrayInitializerExpr = null;
         List<Expression> inits = null;
         List<List<AnnotationExpr>> accum = null;
@@ -3440,7 +3440,7 @@ return juggleArrayCreation(range(begin, tokenEnd()), type, inits, accum, arrayIn
 /*
  * Statement syntax follows.
  */
-  final public 
+  /*final*/public 
 Statement Statement() {Statement ret;
     if (jj_2_33(2)) {
       ret = LabeledStatement();
@@ -3538,7 +3538,7 @@ Statement Statement() {Statement ret;
 return ret;
   }
 
-  final public AssertStmt AssertStatement() {Expression check;
+  /*final*/public AssertStmt AssertStatement() {Expression check;
         Expression msg = null;
         Position begin;
     jj_consume_token(ASSERT);
@@ -3558,7 +3558,7 @@ begin=tokenBegin();
 return new AssertStmt(range(begin, tokenEnd()),check, msg);
   }
 
-  final public LabeledStmt LabeledStatement() {String label;
+  /*final*/public LabeledStmt LabeledStatement() {string label;
         Statement stmt;
         Position begin;
     jj_consume_token(IDENTIFIER);
@@ -3569,7 +3569,7 @@ label = token.image;
 return new LabeledStmt(range(begin, tokenEnd()),label, stmt);
   }
 
-  final public BlockStmt Block() {List<Statement> stmts;
+  /*final*/public BlockStmt Block() {List<Statement> stmts;
         Position begin;
     jj_consume_token(LBRACE);
 begin=tokenBegin();
@@ -3581,7 +3581,7 @@ return new BlockStmt(range(begin, tokenEnd()), stmts);
 /*
  * Classes inside block stametents can only be abstract or final. The semantic must check it.
  */
-  final public Statement BlockStatement() {Statement ret;
+  /*final*/public Statement BlockStatement() {Statement ret;
         Expression expr;
         ClassOrInterfaceDeclaration typeDecl;
         ModifierHolder modifier;
@@ -3646,7 +3646,7 @@ ret = new ExpressionStmt(range(expr.getBegin().line, expr.getBegin().column, tok
 return ret;
   }
 
-  final public VariableDeclarationExpr VariableDeclarationExpression() {ModifierHolder modifier;
+  /*final*/public VariableDeclarationExpr VariableDeclarationExpression() {ModifierHolder modifier;
         Type type;
         List<VariableDeclarator> variables = new LinkedList<VariableDeclarator>();
         VariableDeclarator var;
@@ -3674,12 +3674,12 @@ Position begin=modifier.begin.orIfInvalid(type.getBegin());
         return new VariableDeclarationExpr(range(begin, tokenEnd()), modifier.modifiers, modifier.annotations, typeListPair.a, variables, typeListPair.b);
   }
 
-  final public EmptyStmt EmptyStatement() {
+  /*final*/public EmptyStmt EmptyStatement() {
     jj_consume_token(SEMICOLON);
 return new EmptyStmt(tokenRange());
   }
 
-  final public Statement LambdaBody() {Expression expr;
+  /*final*/public Statement LambdaBody() {Expression expr;
   Statement n = null;
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case BOOLEAN:
@@ -3726,7 +3726,7 @@ n = new ExpressionStmt(range(expr.getBegin(), tokenEnd()), expr);
 return n;
   }
 
-  final public ExpressionStmt StatementExpression() {Expression expr;
+  /*final*/public ExpressionStmt StatementExpression() {Expression expr;
         AssignExpr.Operator op;
         Expression value;
         RangedList<Type<?>> typeArgs = new RangedList<Type<?>>(null);
@@ -3864,7 +3864,7 @@ expr = generateLambda(expr, lambdaBody);
 return new ExpressionStmt(range(expr.getBegin(), tokenEnd()), expr);
   }
 
-  final public SwitchStmt SwitchStatement() {Expression selector;
+  /*final*/public SwitchStmt SwitchStatement() {Expression selector;
         SwitchEntryStmt entry;
         List<SwitchEntryStmt> entries = null;
         Position begin;
@@ -3893,7 +3893,7 @@ entries = add(entries, entry);
 return new SwitchStmt(range(begin, tokenEnd()), selector, entries);
   }
 
-  final public SwitchEntryStmt SwitchEntry() {Expression label = null;
+  /*final*/public SwitchEntryStmt SwitchEntry() {Expression label = null;
         List<Statement> stmts;
         Position begin;
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -3918,7 +3918,7 @@ begin=tokenBegin();
 return new SwitchEntryStmt(range(begin, tokenEnd()),label, stmts);
   }
 
-  final public IfStmt IfStatement() {Expression condition;
+  /*final*/public IfStmt IfStatement() {Expression condition;
         Statement thenStmt;
         Statement elseStmt = null;
         Position begin;
@@ -3952,7 +3952,7 @@ IfStmt tmp = new IfStmt(range(begin, tokenEnd()),condition, thenStmt, elseStmt);
       return tmp;
   }
 
-  final public WhileStmt WhileStatement() {Expression condition;
+  /*final*/public WhileStmt WhileStatement() {Expression condition;
         Statement body;
         Position begin;
     jj_consume_token(WHILE);
@@ -3964,7 +3964,7 @@ begin=tokenBegin();
 return new WhileStmt(range(begin, tokenEnd()),condition, body);
   }
 
-  final public DoStmt DoStatement() {Expression condition;
+  /*final*/public DoStmt DoStatement() {Expression condition;
         Statement body;
         Position begin;
     jj_consume_token(DO);
@@ -3978,7 +3978,7 @@ begin=tokenBegin();
 return new DoStmt(range(begin, tokenEnd()),body, condition);
   }
 
-  final public Statement ForStatement() {VariableDeclarationExpr varExpr = null;
+  /*final*/public Statement ForStatement() {VariableDeclarationExpr varExpr = null;
         Expression expr = null;
         List<Expression> init = null;
         List<Expression> update = null;
@@ -4172,7 +4172,7 @@ if (varExpr != null) {
         return new ForStmt(range(begin, tokenEnd()),init, expr, update, body);
   }
 
-  final public List<Expression> ForInit() {List<Expression> ret;
+  /*final*/public List<Expression> ForInit() {List<Expression> ret;
         Expression expr;
     if (jj_2_38(2147483647)) {
       expr = VariableDeclarationExpression();
@@ -4219,7 +4219,7 @@ ret = new LinkedList<Expression>(); ret.add(expr);
 return ret;
   }
 
-  final public List<Expression> ExpressionList() {List<Expression> ret = new LinkedList<Expression>();
+  /*final*/public List<Expression> ExpressionList() {List<Expression> ret = new LinkedList<Expression>();
         Expression expr;
     expr = Expression();
 ret.add(expr);
@@ -4241,12 +4241,12 @@ ret.add(expr);
 return ret;
   }
 
-  final public List<Expression> ForUpdate() {List<Expression> ret;
+  /*final*/public List<Expression> ForUpdate() {List<Expression> ret;
     ret = ExpressionList();
 return ret;
   }
 
-  final public BreakStmt BreakStatement() {String id = null;
+  /*final*/public BreakStmt BreakStatement() {string id = null;
         Position begin;
     jj_consume_token(BREAK);
 begin=tokenBegin();
@@ -4264,7 +4264,7 @@ id = token.image;
 return new BreakStmt(range(begin, tokenEnd()),id);
   }
 
-  final public ContinueStmt ContinueStatement() {String id = null;
+  /*final*/public ContinueStmt ContinueStatement() {string id = null;
         Position begin;
     jj_consume_token(CONTINUE);
 begin=tokenBegin();
@@ -4282,7 +4282,7 @@ id = token.image;
 return new ContinueStmt(range(begin, tokenEnd()),id);
   }
 
-  final public ReturnStmt ReturnStatement() {Expression expr = null;
+  /*final*/public ReturnStmt ReturnStatement() {Expression expr = null;
         Position begin;
     jj_consume_token(RETURN);
 begin=tokenBegin();
@@ -4326,7 +4326,7 @@ begin=tokenBegin();
 return new ReturnStmt(range(begin, tokenEnd()),expr);
   }
 
-  final public ThrowStmt ThrowStatement() {Expression expr;
+  /*final*/public ThrowStmt ThrowStatement() {Expression expr;
         Position begin;
     jj_consume_token(THROW);
 begin=tokenBegin();
@@ -4335,7 +4335,7 @@ begin=tokenBegin();
 return new ThrowStmt(range(begin, tokenEnd()),expr);
   }
 
-  final public SynchronizedStmt SynchronizedStatement() {Expression expr;
+  /*final*/public SynchronizedStmt SynchronizedStatement() {Expression expr;
         BlockStmt block;
         Position begin;
     jj_consume_token(SYNCHRONIZED);
@@ -4347,7 +4347,7 @@ begin=tokenBegin();
 return new SynchronizedStmt(range(begin, tokenEnd()),expr, block);
   }
 
-  final public TryStmt TryStatement() {List<VariableDeclarationExpr> resources = null;
+  /*final*/public TryStmt TryStatement() {List<VariableDeclarationExpr> resources = null;
         BlockStmt tryBlock;
         BlockStmt finallyBlock = null;
         List<CatchClause> catchs = null;
@@ -4430,7 +4430,7 @@ if (finallyBlock==null && catchs==null && resources==null) {
     return new TryStmt(range(begin, tokenEnd()), resources, tryBlock, catchs, finallyBlock);
   }
 
-  final public List<VariableDeclarationExpr> ResourceSpecification() {List<VariableDeclarationExpr> variables;
+  /*final*/public List<VariableDeclarationExpr> ResourceSpecification() {List<VariableDeclarationExpr> variables;
     jj_consume_token(LPAREN);
     variables = Resources();
     if (jj_2_39(2)) {
@@ -4442,7 +4442,7 @@ if (finallyBlock==null && catchs==null && resources==null) {
 return variables;
   }
 
-  final public List<VariableDeclarationExpr> Resources() {List<VariableDeclarationExpr> variables = new LinkedList<VariableDeclarationExpr>();
+  /*final*/public List<VariableDeclarationExpr> Resources() {List<VariableDeclarationExpr> variables = new LinkedList<VariableDeclarationExpr>();
         VariableDeclarationExpr var;
     /*this is a bit more lenient than we need to be, eg allowing access modifiers like private*/
       var = VariableDeclarationExpression();
@@ -4464,7 +4464,7 @@ return variables;
 /* We use productions to match >>>, >> and > so that we can keep the
  * type declaration syntax with generics clean
  */
-  final public 
+  /*final*/public 
 void RUNSIGNEDSHIFT() {
     if (getToken(1).kind == GT &&
                     ((GTToken)getToken(1)).realKind == RUNSIGNEDSHIFT) {
@@ -4478,7 +4478,7 @@ void RUNSIGNEDSHIFT() {
     jj_consume_token(GT);
   }
 
-  final public void RSIGNEDSHIFT() {
+  /*final*/public void RSIGNEDSHIFT() {
     if (getToken(1).kind == GT &&
                     ((GTToken)getToken(1)).realKind == RSIGNEDSHIFT) {
 
@@ -4491,7 +4491,7 @@ void RUNSIGNEDSHIFT() {
   }
 
 /* Annotation syntax follows. */
-  final public 
+  /*final*/public 
 List<AnnotationExpr> Annotations() {List<AnnotationExpr> annotations = null;
         AnnotationExpr annotation;
     label_49:
@@ -4511,7 +4511,7 @@ annotations = add(annotations, annotation);
 return annotations;
   }
 
-  final public AnnotationExpr Annotation() {AnnotationExpr ret;
+  /*final*/public AnnotationExpr Annotation() {AnnotationExpr ret;
     if (jj_2_41(2147483647)) {
       ret = NormalAnnotation();
     } else if (jj_2_42(2147483647)) {
@@ -4531,7 +4531,7 @@ return annotations;
 return ret;
   }
 
-  final public NormalAnnotationExpr NormalAnnotation() {NameExpr name;
+  /*final*/public NormalAnnotationExpr NormalAnnotation() {NameExpr name;
         List<MemberValuePair> pairs = null;
         Position begin;
     jj_consume_token(AT);
@@ -4551,7 +4551,7 @@ begin=tokenBegin();
 return new NormalAnnotationExpr(range(begin, tokenEnd()),name, pairs);
   }
 
-  final public MarkerAnnotationExpr MarkerAnnotation() {NameExpr name;
+  /*final*/public MarkerAnnotationExpr MarkerAnnotation() {NameExpr name;
         Position begin;
     jj_consume_token(AT);
 begin=tokenBegin();
@@ -4559,7 +4559,7 @@ begin=tokenBegin();
 return new MarkerAnnotationExpr(range(begin, tokenEnd()),name);
   }
 
-  final public SingleMemberAnnotationExpr SingleMemberAnnotation() {NameExpr name;
+  /*final*/public SingleMemberAnnotationExpr SingleMemberAnnotation() {NameExpr name;
         Expression memberVal;
         Position begin;
     jj_consume_token(AT);
@@ -4571,7 +4571,7 @@ begin=tokenBegin();
 return new SingleMemberAnnotationExpr(range(begin, tokenEnd()),name, memberVal);
   }
 
-  final public List<MemberValuePair> MemberValuePairs() {List<MemberValuePair> ret = new LinkedList<MemberValuePair>();
+  /*final*/public List<MemberValuePair> MemberValuePairs() {List<MemberValuePair> ret = new LinkedList<MemberValuePair>();
         MemberValuePair pair;
     pair = MemberValuePair();
 ret.add(pair);
@@ -4593,7 +4593,7 @@ ret.add(pair);
 return ret;
   }
 
-  final public MemberValuePair MemberValuePair() {String name;
+  /*final*/public MemberValuePair MemberValuePair() {string name;
         Expression value;
         Position begin;
     jj_consume_token(IDENTIFIER);
@@ -4603,7 +4603,7 @@ name = token.image; begin=tokenBegin();
 return new MemberValuePair(range(begin, tokenEnd()),name, value);
   }
 
-  final public Expression MemberValue() {Expression ret;
+  /*final*/public Expression MemberValue() {Expression ret;
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case AT:{
       ret = Annotation();
@@ -4652,7 +4652,7 @@ return new MemberValuePair(range(begin, tokenEnd()),name, value);
 return ret;
   }
 
-  final public Expression MemberValueArrayInitializer() {List<Expression> ret = new LinkedList<Expression>();
+  /*final*/public Expression MemberValueArrayInitializer() {List<Expression> ret = new LinkedList<Expression>();
         Expression member;
         Position begin;
     jj_consume_token(LBRACE);
@@ -4721,7 +4721,7 @@ return new ArrayInitializerExpr(range(begin, tokenEnd()),ret);
   }
 
 /* Annotation Types. */
-  final public 
+  /*final*/public 
 AnnotationDeclaration AnnotationTypeDeclaration(ModifierHolder modifier) {NameExpr name;
         List<BodyDeclaration<?>> members;
         Position begin = modifier.begin;
@@ -4735,7 +4735,7 @@ AnnotationDeclaration tmp = new AnnotationDeclaration(range(begin, tokenEnd()), 
       return tmp;
   }
 
-  final public List<BodyDeclaration<?>> AnnotationTypeBody() {List<BodyDeclaration<?>> ret = null;
+  /*final*/public List<BodyDeclaration<?>> AnnotationTypeBody() {List<BodyDeclaration<?>> ret = null;
         BodyDeclaration member;
     jj_consume_token(LBRACE);
     label_52:
@@ -4780,7 +4780,7 @@ ret = add(ret, member);
 return ret;
   }
 
-  final public BodyDeclaration<?> AnnotationBodyDeclaration() {ModifierHolder modifier;
+  /*final*/public BodyDeclaration<?> AnnotationBodyDeclaration() {ModifierHolder modifier;
    BodyDeclaration ret;
 
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -4859,8 +4859,8 @@ ret = new EmptyTypeDeclaration(tokenRange());
 return ret;
   }
 
-  final public AnnotationMemberDeclaration AnnotationTypeMemberDeclaration(ModifierHolder modifier) {Type type;
-        String name;
+  /*final*/public AnnotationMemberDeclaration AnnotationTypeMemberDeclaration(ModifierHolder modifier) {Type type;
+        string name;
         Expression defaultVal = null;
     type = Type();
     jj_consume_token(IDENTIFIER);
@@ -4881,7 +4881,7 @@ Position begin = modifier.begin.orIfInvalid(tokenBegin());
     return new AnnotationMemberDeclaration(range(begin, tokenEnd()), modifier.modifiers, modifier.annotations, type, name, defaultVal);
   }
 
-  final public Expression DefaultValue() {Expression ret;
+  /*final*/public Expression DefaultValue() {Expression ret;
     jj_consume_token(_DEFAULT);
     ret = MemberValue();
 return ret;
@@ -8956,7 +8956,7 @@ return ret;
   private bool jj_lookingAhead = false;
   private bool jj_semLA;
   private int jj_gen;
-  final private int[] jj_la1 = new int[160];
+  /*final*/private int[] jj_la1 = new int[160];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static private int[] jj_la1_2;
@@ -8984,7 +8984,7 @@ return ret;
    private static void jj_la1_init_4() {
       jj_la1_4 = new int[] {0x0,0x0,0x0,0x10000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x40,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0xf,0xf,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x400000,0x0,0x0,0x0,0x0,0x0,0x0,0x3,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x1800000,0x1bff800,0x3ff800,0x0,0x0,0x0,0x80,0x100,0x40,0x0,0x0,0x0,0x8000000,0x8000000,0x400,0xc,0xc,0x230,0x230,0xc,0xf,0x0,0x0,0x0,0x3,0x40,0x0,0x0,0x0,0x0,0x0,0x1000000,0x0,0x0,0xf,0xf,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0xf,0x0,0x0,0x0,0x0,0xf,0x0,0x0,0x3,0x0,0x3,0x0,0xf,0x0,0x0,0x1bff803,0x1bff803,0x2,0x0,0x0,0x0,0xf,0xf,0xf,0xf,0xf,0x0,0x0,0x0,0xf,0x0,0x0,0x80,0x0,0x0,0x0,0x0,0x0,0xf,0xf,0x0,0x0,0x0,0x0,0x0,};
    }
-  final private JJCalls[] jj_2_rtns = new JJCalls[44];
+  /*final*/private JJCalls[] jj_2_rtns = new JJCalls[44];
   private bool jj_rescan = false;
   private int jj_gc = 0;
 
@@ -9000,11 +9000,11 @@ return ret;
   }
 
   /** Constructor. */
-  public ASTParser(String dsl) throws ParseException, TokenMgrException {
+  public ASTParser(string dsl) {
       this(new StringProvider(dsl));
   }
 
-  public void ReInit(String s) {
+  public void ReInit(string s) {
      ReInit(new StringProvider(s));
   }
   /** Reinitialise. */
@@ -9071,8 +9071,8 @@ return ret;
   }
 
   @SuppressWarnings("serial")
-  static private final class LookaheadSuccess extends java.lang.RuntimeException { }
-  final private LookaheadSuccess jj_ls = new LookaheadSuccess();
+  static private /*final*/class LookaheadSuccess:java.lang.RuntimeException { }
+  /*final*/private LookaheadSuccess jj_ls = new LookaheadSuccess();
   private bool jj_scan_token(int kind) {
     if (jj_scanpos == jj_lastpos) {
       jj_la--;
@@ -9096,7 +9096,7 @@ return ret;
 
 
 /** Get the next Token. */
-  final public Token getNextToken() {
+  /*final*/public Token getNextToken() {
     if (token.next != null) token = token.next;
     else token = token.next = token_source.getNextToken();
     jj_ntk = -1;
@@ -9105,7 +9105,7 @@ return ret;
   }
 
 /** Get the specific Token. */
-  final public Token getToken(int index) {
+  /*final*/public Token getToken(int index) {
     Token t = jj_lookingAhead ? jj_scanpos : token;
     for (int i = 0; i < index; i++) {
       if (t.next != null) t = t.next;
@@ -9212,11 +9212,11 @@ return ret;
   }
 
   /** Enable tracing. */
-  final public void enable_tracing() {
+  /*final*/public void enable_tracing() {
   }
 
   /** Disable tracing. */
-  final public void disable_tracing() {
+  /*final*/public void disable_tracing() {
   }
 
   private void jj_rescan_token() {
@@ -9295,7 +9295,7 @@ return ret;
     p.arg = xla;
   }
 
-  static final class JJCalls {
+  static /*final*/class JJCalls {
     int gen;
     Token first;
     int arg;

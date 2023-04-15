@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,21 +24,21 @@ namespace com.github.javaparser.ast;
 
 
 public class WalkFindTest {
-    @Test
+    [TestMethod]
     void findCompilationUnit() {
         CompilationUnit cu = parse("class X{int x;}");
         VariableDeclarator x = cu.getClassByName("X").get().getMember(0).asFieldDeclaration().getVariables().get(0);
         assertEquals(cu, x.findCompilationUnit().get());
     }
 
-    @Test
+    [TestMethod]
     void findParent() {
         CompilationUnit cu = parse("class X{int x;}");
         SimpleName x = cu.getClassByName("X").get().getMember(0).asFieldDeclaration().getVariables().get(0).getName();
         assertEquals("int x;", x.findAncestor(FieldDeclaration.class).get().toString());
     }
     
-    @Test
+    [TestMethod]
     void findParentFromTypes() {
         CompilationUnit cu = parse("class X{Integer x;}");
         VariableDeclarator vd = cu.getClassByName("X").get().getMember(0).asFieldDeclaration().getVariables().get(0);
@@ -50,13 +50,13 @@ public class WalkFindTest {
                         .getName());
     }
 
-    @Test
+    [TestMethod]
     void cantFindCompilationUnit() {
         VariableDeclarator x = new VariableDeclarator();
         assertFalse(x.findCompilationUnit().isPresent());
     }
 
-    @Test
+    [TestMethod]
     void genericWalk() {
         Expression e = parseExpression("1+1");
         StringBuilder b = new StringBuilder();
@@ -64,7 +64,7 @@ public class WalkFindTest {
         assertEquals("1 + 111", b.toString());
     }
 
-    @Test
+    [TestMethod]
     void classSpecificWalk() {
         Expression e = parseExpression("1+1");
         StringBuilder b = new StringBuilder();
@@ -72,46 +72,46 @@ public class WalkFindTest {
         assertEquals("11", b.toString());
     }
 
-    @Test
+    [TestMethod]
     void conditionalFindAll() {
         Expression e = parseExpression("1+2+3");
         List<IntegerLiteralExpr> ints = e.findAll(IntegerLiteralExpr.class, n -> n.asInt() > 1);
         assertEquals("[2, 3]", ints.toString());
     }
 
-    @Test
+    [TestMethod]
     void typeOnlyFindAll() {
         Expression e = parseExpression("1+2+3");
         List<IntegerLiteralExpr> ints = e.findAll(IntegerLiteralExpr.class);
         assertEquals("[1, 2, 3]", ints.toString());
     }
 
-    @Test
+    [TestMethod]
     void typeOnlyFindAllMatchesSubclasses() {
         Expression e = parseExpression("1+2+3");
         List<Node> ints = e.findAll(Node.class);
         assertEquals("[1 + 2 + 3, 1 + 2, 1, 2, 3]", ints.toString());
     }
 
-    @Test
+    [TestMethod]
     void conditionalTypedFindFirst() {
         Expression e = parseExpression("1+2+3");
         Optional<IntegerLiteralExpr> ints = e.findFirst(IntegerLiteralExpr.class, n -> n.asInt() > 1);
         assertEquals("Optional[2]", ints.toString());
     }
 
-    @Test
+    [TestMethod]
     void typeOnlyFindFirst() {
         Expression e = parseExpression("1+2+3");
         Optional<IntegerLiteralExpr> ints = e.findFirst(IntegerLiteralExpr.class);
         assertEquals("Optional[1]", ints.toString());
     }
 
-    @Test
+    [TestMethod]
     void stream() {
         Expression e = parseExpression("1+2+3");
         List<IntegerLiteralExpr> ints = e.stream()
-                .filter(n -> n instanceof IntegerLiteralExpr)
+                .filter(n -> n is IntegerLiteralExpr)
                 .map(IntegerLiteralExpr.class::cast)
                 .filter(i -> i.asInt() > 1)
                 .collect(Collectors.toList());

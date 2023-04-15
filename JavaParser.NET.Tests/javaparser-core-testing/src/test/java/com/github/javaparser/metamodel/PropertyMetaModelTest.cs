@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,7 +25,7 @@ namespace com.github.javaparser.metamodel;
 
 
 class PropertyMetaModelTest {
-    @Test
+    [TestMethod]
     void whenPropertyIsVerySimpleThenTypeInfoIsCorrect() {
         PropertyMetaModel bert = new PropertyMetaModel(null, "bert", int.class, Optional.empty(), false, false, false, false);
         assertEquals("int", bert.getTypeName());
@@ -34,7 +34,7 @@ class PropertyMetaModelTest {
         assertEquals("int", bert.getTypeNameForSetter());
     }
 
-    @Test
+    [TestMethod]
     void whenPropertyIsVeryComplexThenTypeInfoIsCorrect() {
         PropertyMetaModel bert = new PropertyMetaModel(null, "bert", BodyDeclaration.class, Optional.empty(), true, false, true, true);
         assertEquals("BodyDeclaration", bert.getTypeName());
@@ -43,7 +43,7 @@ class PropertyMetaModelTest {
         assertEquals("NodeList<BodyDeclaration<?>>", bert.getTypeNameForSetter());
     }
 
-    @Test
+    [TestMethod]
     void whenPropertyIsANodeListThenTypeInfoIsCorrect() {
         PropertyMetaModel bert = new PropertyMetaModel(null, "bert", Modifier.class, Optional.empty(), false, false, true, false);
         assertEquals("Modifier", bert.getTypeName());
@@ -52,7 +52,7 @@ class PropertyMetaModelTest {
         assertEquals("NodeList<Modifier>", bert.getTypeNameForSetter());
     }
 
-    @Test
+    [TestMethod]
     void metaModelFieldName() {
         PropertyMetaModel bert = new PropertyMetaModel(null, "bert", Modifier.class, Optional.empty(), false, false, false, false);
         assertEquals("bertPropertyMetaModel", bert.getMetaModelFieldName());

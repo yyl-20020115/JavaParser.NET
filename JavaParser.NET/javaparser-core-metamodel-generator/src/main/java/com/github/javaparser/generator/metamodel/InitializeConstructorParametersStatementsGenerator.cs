@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,7 +25,7 @@ namespace com.github.javaparser.generator.metamodel;
 
 
 class InitializeConstructorParametersStatementsGenerator {
-    void generate(Class<? extends Node> nodeClass, NodeList<Statement> initializeConstructorParametersStatements) {
+    void generate(Class<?:Node> nodeClass, NodeList<Statement> initializeConstructorParametersStatements) {
         if (nodeClass == Node.class) {
             return;
         }
@@ -33,7 +33,7 @@ class InitializeConstructorParametersStatementsGenerator {
         for (java.lang.reflect.Parameter parameter : constructor.getParameters()) {
             Field field = findFieldInClass(nodeClass, parameter.getName());
 
-            String addFieldStatement = f("%s.getConstructorParameters().add(%s.%s);",
+            string addFieldStatement = f("%s.getConstructorParameters().add(%s.%s);",
                     nodeMetaModelFieldName(nodeClass),
                     nodeMetaModelFieldName(field.getDeclaringClass()),
                     propertyMetaModelFieldName(field));
@@ -42,7 +42,7 @@ class InitializeConstructorParametersStatementsGenerator {
         }
     }
 
-    private Field findFieldInClass(Class<?> nodeClass, String name) {
+    private Field findFieldInClass(Class<?> nodeClass, string name) {
         Class<?> searchClass = nodeClass;
         do {
             for (Field field : searchClass.getDeclaredFields()) {
@@ -55,7 +55,7 @@ class InitializeConstructorParametersStatementsGenerator {
         throw new AssertionError(f("Couldn't find constructor parameter %s as a field, class %s", name, nodeClass.getSimpleName()));
     }
 
-    private Constructor<?> findAllFieldsConstructor(Class<? extends Node> nodeClass) {
+    private Constructor<?> findAllFieldsConstructor(Class<?:Node> nodeClass) {
         for (Constructor<?> constructor : nodeClass.getDeclaredConstructors()) {
             for (Annotation annotation : constructor.getAnnotations()) {
                 if (annotation.annotationType() == AllFieldsConstructor.class) {
@@ -63,6 +63,6 @@ class InitializeConstructorParametersStatementsGenerator {
                 }
             }
         }
-        throw new AssertionError(f("Node class %s has no constructor annotated with @AllFieldsConstructor", nodeClass.getSimpleName()));
+        throw new AssertionError(f("Node class %s has no constructor annotated with //@AllFieldsConstructor", nodeClass.getSimpleName()));
     }
 }

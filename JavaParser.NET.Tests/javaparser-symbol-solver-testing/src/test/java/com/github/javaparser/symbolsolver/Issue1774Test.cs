@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,17 +23,17 @@ namespace com.github.javaparser.symbolsolver;
 
 
 
-public class Issue1774Test extends AbstractResolutionTest {
+public class Issue1774Test:AbstractResolutionTest {
 
-    @Test
+    [TestMethod]
     public void test() {
         StaticJavaParser.setConfiguration(new ParserConfiguration().setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver(false))));
 
-        String str = 
+        string str = 
                   "public class A { "
-                + "  String s1 = false + \"str\";"
-                + "  String s2 = 'a' + \"str\";"
-                + "  String s3 = 1 + \"foo\";"
+                + "  string s1 = false + \"str\";"
+                + "  string s2 = 'a' + \"str\";"
+                + "  string s3 = 1 + \"foo\";"
                 + "  float f = 3 % 2.71f;"
                 + "  double d = 3 % 2.0;"
                 + "  Integer i1 = 'G' & 6;"

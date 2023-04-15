@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,21 +23,21 @@ namespace com.github.javaparser.utils;
 
 
 
-public final class PositionUtils {
+public /*final*/class PositionUtils {
 
     private PositionUtils() {
         // prevent instantiation
     }
 
-    public static <T extends Node> void sortByBeginPosition(List<T> nodes) {
+    public static <T:Node> void sortByBeginPosition(List<T> nodes) {
         sortByBeginPosition(nodes, false);
     }
 
-    public static <T extends Node> void sortByBeginPosition(NodeList<T> nodes) {
+    public static <T:Node> void sortByBeginPosition(NodeList<T> nodes) {
         sortByBeginPosition(nodes, false);
     }
 
-    public static <T extends Node> void sortByBeginPosition(List<T> nodes, final boolean ignoringAnnotations) {
+    public static <T:Node> void sortByBeginPosition(List<T> nodes, /*final*/boolean ignoringAnnotations) {
         nodes.sort((o1, o2) -> PositionUtils.compare(o1, o2, ignoringAnnotations));
     }
 
@@ -78,7 +78,7 @@ public final class PositionUtils {
     }
 
     public static AnnotationExpr getLastAnnotation(Node node) {
-        if (node instanceof NodeWithAnnotations) {
+        if (node is NodeWithAnnotations) {
             NodeList<AnnotationExpr> annotations = NodeList.nodeList(((NodeWithAnnotations<?>) node).getAnnotations());
             if (annotations.isEmpty()) {
                 return null;
@@ -100,7 +100,7 @@ public final class PositionUtils {
 
     private static Node firstNonAnnotationNode(Node node) {
         // TODO: Consider the remaining "types" of thing that annotations can target ( https://docs.oracle.com/javase/8/docs/api/java/lang/annotation/ElementType.html )
-        if (node instanceof ClassOrInterfaceDeclaration) {
+        if (node is ClassOrInterfaceDeclaration) {
             // Modifiers appear before the class name --
             ClassOrInterfaceDeclaration casted = (ClassOrInterfaceDeclaration) node;
             Modifier earliestModifier = casted.getModifiers().stream().filter(modifier -> modifier.hasRange()).min(Comparator.comparing(o -> o.getRange().get().begin)).orElse(null);
@@ -109,7 +109,7 @@ public final class PositionUtils {
             } else {
                 return earliestModifier;
             }
-        } else if (node instanceof MethodDeclaration) {
+        } else if (node is MethodDeclaration) {
             // Modifiers appear before the class name --
             MethodDeclaration casted = (MethodDeclaration) node;
             Modifier earliestModifier = casted.getModifiers().stream().filter(modifier -> modifier.hasRange()).min(Comparator.comparing(o -> o.getRange().get().begin)).orElse(null);
@@ -118,7 +118,7 @@ public final class PositionUtils {
             } else {
                 return earliestModifier;
             }
-        } else if (node instanceof FieldDeclaration) {
+        } else if (node is FieldDeclaration) {
             // Modifiers appear before the class name --
             FieldDeclaration casted = (FieldDeclaration) node;
             Modifier earliestModifier = casted.getModifiers().stream().filter(modifier -> modifier.hasRange()).min(Comparator.comparing(o -> o.getRange().get().begin)).orElse(null);
@@ -136,7 +136,7 @@ public final class PositionUtils {
      * Compare the position of two nodes. Optionally include annotations within the range checks.
      * This method takes into account whether the nodes are within the same compilation unit.
      * <p>
-     * Note that this performs a "strict contains", where the container must extend beyond the other node in both
+     * Note that this performs a "strict contains", where the container must extend beyond the other node _in both
      * directions (otherwise it would count as an overlap, rather than "contain").
      * <p>
      * If `ignoringAnnotations` is false, annotations on the container are ignored. For this reason, where
@@ -155,8 +155,8 @@ public final class PositionUtils {
         // // ... or both not within a CU (i.e. both are Optional.empty())
         // return false;
         // }
-        final boolean nodeCanHaveAnnotations = container instanceof NodeWithAnnotations;
-        // final boolean hasAnnotations = PositionUtils.getLastAnnotation(container) != null;
+        /*final*/boolean nodeCanHaveAnnotations = container is NodeWithAnnotations;
+        // /*final*/boolean hasAnnotations = PositionUtils.getLastAnnotation(container) != null;
         if (!ignoringAnnotations || PositionUtils.getLastAnnotation(container) == null) {
             // No special consideration required - perform simple range check.
             return container.containsWithinRange(other);

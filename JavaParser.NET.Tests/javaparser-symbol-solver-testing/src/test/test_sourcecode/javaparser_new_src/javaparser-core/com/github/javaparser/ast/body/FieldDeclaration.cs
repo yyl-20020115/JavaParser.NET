@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,7 +28,7 @@ namespace com.github.javaparser.ast.body;
 /**
  * @author Julio Vilmar Gesser
  */
-public final class FieldDeclaration extends BodyDeclaration<FieldDeclaration> implements
+public /*final*/class FieldDeclaration:BodyDeclaration<FieldDeclaration> implements
         NodeWithJavaDoc<FieldDeclaration>,
         NodeWithElementType<FieldDeclaration>,
         NodeWithModifiers<FieldDeclaration>,
@@ -106,7 +106,7 @@ public final class FieldDeclaration extends BodyDeclaration<FieldDeclaration> im
      *            field name
      * @return instance of {@link FieldDeclaration}
      */
-    public static FieldDeclaration create(EnumSet<Modifier> modifiers, Type type, String name) {
+    public static FieldDeclaration create(EnumSet<Modifier> modifiers, Type type, string name) {
         VariableDeclaratorId id = new VariableDeclaratorId(name);
         VariableDeclarator variable = new VariableDeclarator(id);
         return create(modifiers, type, variable);
@@ -154,7 +154,7 @@ public final class FieldDeclaration extends BodyDeclaration<FieldDeclaration> im
 
     @Override
     public JavadocComment getJavaDoc() {
-        if (getComment() instanceof JavadocComment) {
+        if (getComment() is JavadocComment) {
             return (JavadocComment) getComment();
         }
         return null;
@@ -178,9 +178,9 @@ public final class FieldDeclaration extends BodyDeclaration<FieldDeclaration> im
                     "You can use this only when the field is attached to a class or an enum");
 
         VariableDeclarator variable = getVariables().get(0);
-        String fieldName = variable.getId().getName();
-        String fieldNameUpper = fieldName.toUpperCase().substring(0, 1) + fieldName.substring(1, fieldName.length());
-        final MethodDeclaration getter;
+        string fieldName = variable.getId().getName();
+        string fieldNameUpper = fieldName.toUpperCase().substring(0, 1) + fieldName.substring(1, fieldName.length());
+        /*final*/MethodDeclaration getter;
         if (parentClass != null)
             getter = parentClass.addMethod("get" + fieldNameUpper, PUBLIC);
         else
@@ -210,10 +210,10 @@ public final class FieldDeclaration extends BodyDeclaration<FieldDeclaration> im
                     "You can use this only when the field is attached to a class or an enum");
 
         VariableDeclarator variable = getVariables().get(0);
-        String fieldName = variable.getId().getName();
-        String fieldNameUpper = fieldName.toUpperCase().substring(0, 1) + fieldName.substring(1, fieldName.length());
+        string fieldName = variable.getId().getName();
+        string fieldNameUpper = fieldName.toUpperCase().substring(0, 1) + fieldName.substring(1, fieldName.length());
 
-        final MethodDeclaration setter;
+        /*final*/MethodDeclaration setter;
         if (parentClass != null)
             setter = parentClass.addMethod("set" + fieldNameUpper, PUBLIC);
         else
@@ -233,14 +233,14 @@ public final class FieldDeclaration extends BodyDeclaration<FieldDeclaration> im
     }
 
     @Override
-    public FieldDeclaration setElementType(final Type elementType) {
+    public FieldDeclaration setElementType(/*final*/Type elementType) {
         this.elementType = elementType;
         setAsParentNodeOf(this.elementType);
         return this;
     }
 
     /**
-     * @return the array brackets in this position: <code>class C { int[] abc; }</code>
+     * @return the array brackets _in this position: <code>class C { int[] abc; }</code>
      */
     public List<ArrayBracketPair> getArrayBracketPairsAfterElementType() {
         arrayBracketPairsAfterElementType = ensureNotNull(arrayBracketPairsAfterElementType);

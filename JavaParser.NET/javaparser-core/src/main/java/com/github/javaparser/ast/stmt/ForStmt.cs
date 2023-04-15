@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -33,24 +33,24 @@ namespace com.github.javaparser.ast.stmt;
  * </ol>
  * <ul>
  * <li><i>initialization</i> is a list of expressions.
- * These can be any kind of expression as can be seen in example 3,
- * but the common ones are a single VariableDeclarationExpr (which declares multiple variables) in example 1,
- * or a list of AssignExpr's in example 2.</li>
+ * These can be any kind of expression as can be seen _in example 3,
+ * but the common ones are a single VariableDeclarationExpr (which declares multiple variables) _in example 1,
+ * or a list of AssignExpr's _in example 2.</li>
  * <li><i>compare</i> is an expression,
- * in example 1 and 2 it is a BinaryExpr.
+ * _in example 1 and 2 it is a BinaryExpr.
  * In example 3 there is no expression, it is empty.</li>
  * <li><i>update</i> is a list of expressions,
- * in example 1 and 2 they are UnaryExpr's.
+ * _in example 1 and 2 they are UnaryExpr's.
  * In example 3 there is no expression, the list empty.</li>
  * <li><i>body</i> is a statement,
- * in example 1 and 3 it is an ExpressionStmt.
- * in example 2 it is a BlockStmt.</li>
+ * _in example 1 and 3 it is an ExpressionStmt.
+ * _in example 2 it is a BlockStmt.</li>
  * </ul>
  *
  * @author Julio Vilmar Gesser
  * @see com.github.javaparser.ast.expr.VariableDeclarationExpr
  */
-public class ForStmt extends Statement implements NodeWithBody<ForStmt> {
+public class ForStmt:Statement implements NodeWithBody<ForStmt> {
 
     private NodeList<Expression> initialization;
 
@@ -65,15 +65,15 @@ public class ForStmt extends Statement implements NodeWithBody<ForStmt> {
         this(null, new NodeList<>(), new BooleanLiteralExpr(), new NodeList<>(), new ReturnStmt());
     }
 
-    @AllFieldsConstructor
-    public ForStmt(final NodeList<Expression> initialization, final Expression compare, final NodeList<Expression> update, final Statement body) {
+    //@AllFieldsConstructor
+    public ForStmt(/*final*/NodeList<Expression> initialization, /*final*/Expression compare, /*final*/NodeList<Expression> update, /*final*/Statement body) {
         this(null, initialization, compare, update, body);
     }
 
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public ForStmt(TokenRange tokenRange, NodeList<Expression> initialization, Expression compare, NodeList<Expression> update, Statement body) {
         super(tokenRange);
         setInitialization(initialization);
@@ -84,39 +84,39 @@ public class ForStmt extends Statement implements NodeWithBody<ForStmt> {
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Statement getBody() {
         return body;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Optional<Expression> getCompare() {
         return Optional.ofNullable(compare);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public NodeList<Expression> getInitialization() {
         return initialization;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public NodeList<Expression> getUpdate() {
         return update;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public ForStmt setBody(final Statement body) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public ForStmt setBody(/*final*/Statement body) {
         assertNotNull(body);
         if (body == this.body) {
             return this;
@@ -135,8 +135,8 @@ public class ForStmt extends Statement implements NodeWithBody<ForStmt> {
      * @param compare the compare, can be null
      * @return this, the ForStmt
      */
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public ForStmt setCompare(final Expression compare) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public ForStmt setCompare(/*final*/Expression compare) {
         if (compare == this.compare) {
             return this;
         }
@@ -148,8 +148,8 @@ public class ForStmt extends Statement implements NodeWithBody<ForStmt> {
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public ForStmt setInitialization(final NodeList<Expression> initialization) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public ForStmt setInitialization(/*final*/NodeList<Expression> initialization) {
         assertNotNull(initialization);
         if (initialization == this.initialization) {
             return this;
@@ -162,8 +162,8 @@ public class ForStmt extends Statement implements NodeWithBody<ForStmt> {
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public ForStmt setUpdate(final NodeList<Expression> update) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public ForStmt setUpdate(/*final*/NodeList<Expression> update) {
         assertNotNull(update);
         if (update == this.update) {
             return this;
@@ -177,7 +177,7 @@ public class ForStmt extends Statement implements NodeWithBody<ForStmt> {
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
     public boolean remove(Node node) {
         if (node == null) {
             return false;
@@ -203,25 +203,25 @@ public class ForStmt extends Statement implements NodeWithBody<ForStmt> {
         return super.remove(node);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
     public ForStmt removeCompare() {
         return setCompare((Expression) null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public ForStmt clone() {
         return (ForStmt) accept(new CloneVisitor(), null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public ForStmtMetaModel getMetaModel() {
         return JavaParserMetaModel.forStmtMetaModel;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public boolean replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
@@ -252,25 +252,25 @@ public class ForStmt extends Statement implements NodeWithBody<ForStmt> {
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isForStmt() {
         return true;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public ForStmt asForStmt() {
         return this;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifForStmt(Consumer<ForStmt> action) {
         action.accept(this);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<ForStmt> toForStmt() {
         return Optional.of(this);
     }

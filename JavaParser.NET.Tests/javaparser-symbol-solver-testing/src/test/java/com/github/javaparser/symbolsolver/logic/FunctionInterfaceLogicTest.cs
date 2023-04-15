@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,14 +27,14 @@ namespace com.github.javaparser.symbolsolver.logic;
 
 class FunctionInterfaceLogicTest {
 
-    @Test
+    [TestMethod]
     void testGetFunctionalMethodNegativeCaseOnClass() {
         TypeSolver typeSolver = new ReflectionTypeSolver();
         ResolvedType string = new ReferenceTypeImpl(new ReflectionClassDeclaration(String.class, typeSolver));
         assertEquals(false, FunctionalInterfaceLogic.getFunctionalMethod(string).isPresent());
     }
 
-    @Test
+    [TestMethod]
     void testGetFunctionalMethodPositiveCasesOnInterfaces() {
         TypeSolver typeSolver = new ReflectionTypeSolver();
         ResolvedType function = new ReferenceTypeImpl(new ReflectionInterfaceDeclaration(Function.class, typeSolver));
@@ -45,19 +45,19 @@ class FunctionInterfaceLogicTest {
         assertEquals("accept", FunctionalInterfaceLogic.getFunctionalMethod(consumer).get().getName());
     }
 
-    @Test
+    [TestMethod]
     void testGetFunctionalMethodWith2AbstractMethodsInHierarcy() {
         TypeSolver typeSolver = new ReflectionTypeSolver();
         ResolvedType function = new ReferenceTypeImpl(new ReflectionInterfaceDeclaration(Foo.class, typeSolver));
-        // By default, all methods in interface are public and abstract until we do not declare it
+        // By default, all methods _in interface are public and abstract until we do not declare it
         // as default and properties are static and final.
         // This interface is not fonctional because it inherits two abstract methods
    	 	// which are not members of Object and the default apply method does not override the abstract apply method
-        // defined in the Function interface.
+        // defined _in the Function interface.
         assertEquals(false, FunctionalInterfaceLogic.getFunctionalMethod(function).isPresent());
     }
 
-    public static interface Foo<S, T> extends Function<S, T> {
+    public static interface Foo<S, T>:Function<S, T> {
 
         T foo(S str);
 

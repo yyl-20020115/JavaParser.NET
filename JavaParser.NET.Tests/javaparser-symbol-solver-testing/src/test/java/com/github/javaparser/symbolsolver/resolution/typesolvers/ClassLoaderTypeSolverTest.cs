@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,20 +23,20 @@ namespace com.github.javaparser.symbolsolver.resolution.typesolvers;
 
 
 
-abstract class ClassLoaderTypeSolverTest<T extends ClassLoaderTypeSolver> extends AbstractTypeSolverTest<T> {
+abstract class ClassLoaderTypeSolverTest<T:ClassLoaderTypeSolver>:AbstractTypeSolverTest<T> {
 
     public ClassLoaderTypeSolverTest(Supplier<T> solverSupplier) {
         super(solverSupplier);
     }
 
     /**
-     * When solving a nested type the argument may be a nested class but not in a canonical format.
+     * When solving a nested type the argument may be a nested class but not _in a canonical format.
      * This test checks when name is supplied without the canonical name the solver still resolves.
      */
-    @Test
+    [TestMethod]
     void solveNonCanonicalNameForNestedClass() {
-        String expectedCanonicalName = Map.Entry.class.getCanonicalName();
-        String suppliedName = "java.util.Map.Entry";
+        string expectedCanonicalName = Map.Entry.class.getCanonicalName();
+        string suppliedName = "java.util.Map.Entry";
 
         T typeSolver = createTypeSolver();
         SymbolReference<ResolvedReferenceTypeDeclaration> solvedType = typeSolver.tryToSolveType(suppliedName);

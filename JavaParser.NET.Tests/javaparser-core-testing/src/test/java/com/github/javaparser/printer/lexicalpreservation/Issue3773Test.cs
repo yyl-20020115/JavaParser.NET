@@ -11,10 +11,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,15 +25,15 @@ namespace com.github.javaparser.printer.lexicalpreservation;
 
 
 
-class Issue3773Test extends AbstractLexicalPreservingTest {
+class Issue3773Test:AbstractLexicalPreservingTest {
 
-	@Test
+	[TestMethod]
     void test3773() {
 		considerCode(
                 "class A {\r\n"
-                + "	public String output = \"Contents of \";\r\n"
+                + "	public string output = \"Contents of \";\r\n"
                 + "	\r\n"
-                + "	public String debug(String output) {\r\n"
+                + "	public string debug(string output) {\r\n"
                 + "\r\n"
                 + "		Log.d(\"Debug\", output1);   \r\n"
                 + "		Log.d(\"Debug\", output2);   \r\n"
@@ -57,11 +57,11 @@ class Issue3773Test extends AbstractLexicalPreservingTest {
                 + "		return \"\";\r\n"
                 + "	}\r\n"
                 + "}");
-		String expected = 
+		string expected = 
         		"class A {\r\n"
-        		+ "	public String output = \"Contents of \";\r\n"
+        		+ "	public string output = \"Contents of \";\r\n"
         		+ "	\r\n"
-        		+ "	public String debug(String output) {\r\n"
+        		+ "	public string debug(string output) {\r\n"
         		+ "\r\n"
         		+ "		if (Log.Level >= 3)\r\n"
         		+ "		    Log.d(\"Debug\", output1);   \r\n"
@@ -105,7 +105,7 @@ class Issue3773Test extends AbstractLexicalPreservingTest {
 		assertEqualsStringIgnoringEol(expected, LexicalPreservingPrinter.print(cu));
 	}
 	
-	public class FunctionVisitor extends ModifierVisitor<Object> {
+	public class FunctionVisitor:ModifierVisitor<Object> {
 
 		@Override
 		public Visitable visit(ExpressionStmt node, Object arg) {
@@ -114,8 +114,8 @@ class Issue3773Test extends AbstractLexicalPreservingTest {
 				return node;
 			MethodCallExpr mce = mces.get(0);
 			if (mce.getScope().isPresent() && mce.getName() != null) {
-				String nodeScope = mce.getScope().get().toString();
-				String nodeName = mce.getName().toString();
+				string nodeScope = mce.getScope().get().toString();
+				string nodeName = mce.getName().toString();
 				if (nodeScope.equals("Log")) {
 					if (nodeName.equals("d")) {
 						IfStmt ifStmt = makeIfStmt(node);

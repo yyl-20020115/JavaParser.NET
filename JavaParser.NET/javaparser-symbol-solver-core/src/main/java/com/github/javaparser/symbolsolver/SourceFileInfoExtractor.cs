@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -39,7 +39,7 @@ public class SourceFileInfoExtractor
     private int failures = 0;
     private int unsupported = 0;
     private bool printFileName = true;
-    private PrintStream out = System.out;
+    private PrintStream _out = System._out;
     private PrintStream err = System.err;
     private bool verbose = false;
 
@@ -58,9 +58,9 @@ public class SourceFileInfoExtractor
         this.printFileName = printFileName;
     }
 
-    public void setOut(PrintStream out)
+    public void setOut(PrintStream _out)
     {
-        this.out = out;
+        this._out = _out;
     }
 
     public void setErr(PrintStream err)
@@ -88,38 +88,38 @@ public class SourceFileInfoExtractor
         ResolvedTypeDeclaration typeDeclaration = JavaParserFacade.get(typeSolver).getTypeDeclaration(node);
         if (typeDeclaration.isClass())
         {
-            out.println("\n[ Class " + typeDeclaration.getQualifiedName() + " ]");
+            _out.println("\n[ Class " + typeDeclaration.getQualifiedName() + " ]");
             for (ResolvedReferenceType sc : typeDeclaration.asClass().getAllSuperClasses())
             {
-                out.println("  superclass: " + sc.getQualifiedName());
+                _out.println("  superclass: " + sc.getQualifiedName());
             }
             for (ResolvedReferenceType sc : typeDeclaration.asClass().getAllInterfaces())
             {
-                out.println("  interface: " + sc.getQualifiedName());
+                _out.println("  interface: " + sc.getQualifiedName());
             }
         }
     }
 
     private void solve(Node node)
     {
-        if (node instanceof ClassOrInterfaceDeclaration) {
+        if (node is ClassOrInterfaceDeclaration) {
             solveTypeDecl((ClassOrInterfaceDeclaration)node);
-        } else if (node instanceof Expression) {
+        } else if (node is Expression) {
             Node parentNode = demandParentNode(node);
-            if (parentNode instanceof ImportDeclaration ||
-                    parentNode instanceof Expression ||
-                    parentNode instanceof MethodDeclaration ||
-                    parentNode instanceof PackageDeclaration) {
+            if (parentNode is ImportDeclaration ||
+                    parentNode is Expression ||
+                    parentNode is MethodDeclaration ||
+                    parentNode is PackageDeclaration) {
                 // skip
                 return;
             }
-            if (parentNode instanceof Statement ||
-                    parentNode instanceof VariableDeclarator ||
-                    parentNode instanceof SwitchEntry) {
+            if (parentNode is Statement ||
+                    parentNode is VariableDeclarator ||
+                    parentNode is SwitchEntry) {
                 try
                 {
                     ResolvedType ref = JavaParserFacade.get(typeSolver).getType(node);
-                    out.println("  Line " + lineNr(node) + ") " + node + " ==> " + ref.describe());
+                    _out.println("  Line " + lineNr(node) + ") " + node + " ==> " + ref.describe());
                     successes++;
                 }
                 catch (UnsupportedOperationException upe)
@@ -140,8 +140,8 @@ public class SourceFileInfoExtractor
 
     private void solveMethodCalls(Node node)
     {
-        if (node instanceof MethodCallExpr) {
-            out.println("  Line " + lineNr(node) + ") " + node + " ==> " + toString((MethodCallExpr)node));
+        if (node is MethodCallExpr) {
+            _out.println("  Line " + lineNr(node) + ") " + node + " ==> " + toString((MethodCallExpr)node));
         }
         for (Node child : node.getChildNodes())
         {
@@ -149,7 +149,7 @@ public class SourceFileInfoExtractor
         }
     }
 
-    private String toString(MethodCallExpr node)
+    private string toString(MethodCallExpr node)
     {
         try
         {
@@ -166,7 +166,7 @@ public class SourceFileInfoExtractor
         }
     }
 
-    private String toString(SymbolReference<ResolvedMethodDeclaration> methodDeclarationSymbolReference)
+    private string toString(SymbolReference<ResolvedMethodDeclaration> methodDeclarationSymbolReference)
     {
         if (methodDeclarationSymbolReference.isSolved())
         {
@@ -186,15 +186,15 @@ public class SourceFileInfoExtractor
         return nodes;
     }
 
-    public void solve(Path path) throws IOException
+    public void solve(Path path)
     {
         Files.walkFileTree(path, new SimpleFileVisitor<Path>() {
             @Override
-            public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException
+            public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
     {
                 if (file.toString().endsWith(".java")) {
                     if (printFileName) {
-                        out.println("- parsing " + file.toAbsolutePath());
+                        _out.println("- parsing " + file.toAbsolutePath());
 }
 CompilationUnit cu = parse(file);
 List<Node> nodes = collectAllNodes(cu);
@@ -205,16 +205,16 @@ nodes.forEach(n -> solve(n));
         });
     }
 
-    public void solveMethodCalls(Path path) throws IOException
+    public void solveMethodCalls(Path path)
 {
     Files.walkFileTree(path, new SimpleFileVisitor<Path>() {
             @Override
-            public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException
+            public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
 {
                 if (file.toString().endsWith(".java")) {
         if (printFileName)
         {
-                        out.println("- parsing " + file.toAbsolutePath());
+                        _out.println("- parsing " + file.toAbsolutePath());
         }
         CompilationUnit cu = parse(file);
         solveMethodCalls(cu);

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -22,11 +22,11 @@ namespace com.github.javaparser.resolution.declarations;
 
 
 /**
- * A declaration of a method (either in an interface, a class, an enum or an annotation).
+ * A declaration of a method (either _in an interface, a class, an enum or an annotation).
  *
  * @author Federico Tomassetti
  */
-public interface ResolvedMethodDeclaration extends ResolvedMethodLikeDeclaration {
+public interface ResolvedMethodDeclaration:ResolvedMethodLikeDeclaration {
 
     /**
      * The type of the value returned by the current method. This method can also be invoked
@@ -55,7 +55,7 @@ public interface ResolvedMethodDeclaration extends ResolvedMethodLikeDeclaration
      * is {@code (IDLjava/lang/Thread;)Ljava/lang/Object;}
      * Note that the internal forms of the binary names of Thread and Object are used.
      */
-    String toDescriptor();
+    string toDescriptor();
 
     /*
      * A method declaration d1 with return type R1 is return-type-substitutable
@@ -66,7 +66,7 @@ public interface ResolvedMethodDeclaration extends ResolvedMethodLikeDeclaration
      * R1, adapted to the type parameters of d2 (§8.4.4), is a subtype of R2.
      * R1 can be converted to a subtype of R2 by unchecked conversion (§5.1.9).
      * d1 does not have the same signature as d2 (§8.4.2), and R1 = |R2|.
-     * TODO: Probably this method needs to refer to a method "isTypeSubstituable" implemented in ResolvedType
+     * TODO: Probably this method needs to refer to a method "isTypeSubstituable" implemented _in ResolvedType
      */
     default boolean isReturnTypeSubstituable(ResolvedType otherResolvedType) {
     	ResolvedType returnType = getReturnType();

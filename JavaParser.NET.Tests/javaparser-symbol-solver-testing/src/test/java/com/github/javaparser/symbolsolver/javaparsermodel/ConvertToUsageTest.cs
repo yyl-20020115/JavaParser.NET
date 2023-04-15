@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,11 +24,11 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel;
 
 
 
-class ConvertToUsageTest extends AbstractResolutionTest {
+class ConvertToUsageTest:AbstractResolutionTest {
 
-    private final TypeSolver typeSolver = new ReflectionTypeSolver();
+    private /*final*/TypeSolver typeSolver = new ReflectionTypeSolver();
 
-    @Test
+    [TestMethod]
     void testConvertTypeToUsage() {
         CompilationUnit cu = parseSample("LocalTypeDeclarations");
         List<NameExpr> n = cu.findAll(NameExpr.class);
@@ -37,12 +37,12 @@ class ConvertToUsageTest extends AbstractResolutionTest {
         assertEquals("java.lang.Integer", usageDescribe(n, "b"));
         assertEquals("java.lang.Class<java.lang.Integer>", usageDescribe(n, "c"));
         assertEquals("java.lang.Class<? super java.lang.Integer>", usageDescribe(n, "d"));
-        assertEquals("java.lang.Class<? extends java.lang.Integer>", usageDescribe(n, "e"));
-        assertEquals("java.lang.Class<? extends java.lang.Class<? super java.lang.Class<? extends java.lang.Integer>>>", usageDescribe(n, "f"));
-        assertEquals("java.lang.Class<? super java.lang.Class<? extends java.lang.Class<? super java.lang.Integer>>>", usageDescribe(n, "g"));
+        assertEquals("java.lang.Class<?:java.lang.Integer>", usageDescribe(n, "e"));
+        assertEquals("java.lang.Class<?:java.lang.Class<? super java.lang.Class<?:java.lang.Integer>>>", usageDescribe(n, "f"));
+        assertEquals("java.lang.Class<? super java.lang.Class<?:java.lang.Class<? super java.lang.Integer>>>", usageDescribe(n, "g"));
     }
 
-    private String usageDescribe(List<NameExpr> n, String name){
+    private string usageDescribe(List<NameExpr> n, string name){
         return n.stream().filter(x -> x.getNameAsString().equals(name))
                 .map(JavaParserFacade.get(typeSolver)::getType)
                 .map(ResolvedType::describe)

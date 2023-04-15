@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -35,16 +35,16 @@ public class CommentsParser {
         IN_CHAR;
     }
 
-    private static final int COLUMNS_PER_TAB = 4;
+    private static /*final*/int COLUMNS_PER_TAB = 4;
 
-    public CommentsCollection parse(final String source) throws IOException, UnsupportedEncodingException {
-        InputStream in = new ByteArrayInputStream(source.getBytes(Charset.defaultCharset()));
-        return parse(in, Charset.defaultCharset().name());
+    public CommentsCollection parse(/*final*/string source), UnsupportedEncodingException {
+        InputStream _in = new ByteArrayInputStream(source.getBytes(Charset.defaultCharset()));
+        return parse(_in, Charset.defaultCharset().name());
     }
 
-    public CommentsCollection parse(final InputStream in, final String charsetName) throws IOException, UnsupportedEncodingException {
+    public CommentsCollection parse(/*final*/InputStream _in, /*final*/string charsetName), UnsupportedEncodingException {
         boolean lastWasASlashR = false;
-        BufferedReader br = new BufferedReader(new InputStreamReader(in, charsetName));
+        BufferedReader br = new BufferedReader(new InputStreamReader(_in, charsetName));
         CommentsCollection comments = new CommentsCollection();
         int r;
 
@@ -105,7 +105,7 @@ public class CommentsParser {
                     if (prevTwoChars.peekLast().equals('*') && c=='/' && !prevTwoChars.peekFirst().equals('/')){
 
                         // delete last character
-                        String content = currentContent.deleteCharAt(currentContent.toString().length()-1).toString();
+                        string content = currentContent.deleteCharAt(currentContent.toString().length()-1).toString();
 
                         if (content.startsWith("*")){
                             JavadocComment javadocComment = new JavadocComment();

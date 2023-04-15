@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -56,12 +56,12 @@ public class ClassLoaderTypeSolver implements TypeSolver {
         this.parent = parent;
     }
 
-    protected bool filterName(String name) {
+    protected bool filterName(string name) {
         return true;
     }
 
     //@Override
-    public SymbolReference<ResolvedReferenceTypeDeclaration> tryToSolveType(String name) {
+    public SymbolReference<ResolvedReferenceTypeDeclaration> tryToSolveType(string name) {
         if (filterName(name)) {
             try {
                 // Some implementations could return null when the class was loaded through the bootstrap classloader
@@ -87,8 +87,8 @@ public class ClassLoaderTypeSolver implements TypeSolver {
                 if (lastDot == -1) {
                     return SymbolReference.unsolved();
                 } else {
-                    String parentName = name.substring(0, lastDot);
-                    String childName = name.substring(lastDot + 1);
+                    string parentName = name.substring(0, lastDot);
+                    string childName = name.substring(lastDot + 1);
                     SymbolReference<ResolvedReferenceTypeDeclaration> parent = tryToSolveType(parentName);
                     if (parent.isSolved()) {
                         Optional<ResolvedReferenceTypeDeclaration> innerClass = parent.getCorrespondingDeclaration()

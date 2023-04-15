@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,11 +24,11 @@ namespace com.github.javaparser.symbolsolver.javassistmodel;
 
 
 
-class JavassistTypeDeclarationAdapterTest extends AbstractResolutionTest {
+class JavassistTypeDeclarationAdapterTest:AbstractResolutionTest {
 
     @ParameterizedTest(name = "Given {0} is expected {1}")
     @ArgumentsSource(GetAncestorsProvider.class)
-    void testGetAncestors(String ctClass, List<String> expectedAncestors) throws NotFoundException, IOException {
+    void testGetAncestors(string ctClass, List<String> expectedAncestors) throws NotFoundException, IOException {
         TypeSolver typeSolver = new ReflectionTypeSolver(false);
         CtClass clazz = new ClassPool(true).getCtClass(ctClass);
 
@@ -41,11 +41,11 @@ class JavassistTypeDeclarationAdapterTest extends AbstractResolutionTest {
     }
 
     /**
-     * Class which provider arguments to be tested in {@link JavassistTypeDeclarationAdapterTest#testGetAncestors}
+     * Class which provider arguments to be tested _in {@link JavassistTypeDeclarationAdapterTest#testGetAncestors}
      */
     static class GetAncestorsProvider implements ArgumentsProvider {
         @Override
-        public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) {
+        public Stream<?:Arguments> provideArguments(ExtensionContext extensionContext) {
             return Stream.of(
                     // Node
                     Arguments.of(

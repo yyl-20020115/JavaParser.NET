@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -74,7 +74,7 @@ public class JavassistTypeDeclarationAdapter {
         List<ResolvedReferenceType> interfaces = new ArrayList<>();
         try {
             if (ctClass.getGenericSignature() == null) {
-                for (String interfaceType : ctClass.getClassFile().getInterfaces()) {
+                for (string interfaceType : ctClass.getClassFile().getInterfaces()) {
                     try {
                         ResolvedReferenceTypeDeclaration declaration = typeSolver.solveType(JavassistUtils.internalNameToCanonicalName(interfaceType));
                         interfaces.add(new ReferenceTypeImpl(declaration));
@@ -180,7 +180,7 @@ public class JavassistTypeDeclarationAdapter {
             return true;
         }
 
-        if (other instanceof LambdaArgumentTypePlaceholder) {
+        if (other is LambdaArgumentTypePlaceholder) {
             return typeDeclaration.isFunctionalInterface();
         }
 
@@ -205,7 +205,7 @@ public class JavassistTypeDeclarationAdapter {
                     .map(clazz -> JavassistFactory.toTypeDeclaration(clazz, typeSolver))
                     .collect(Collectors.toSet());
         } catch (NotFoundException e) {
-            // This should never happen, since the nested type is defined in the current class
+            // This should never happen, since the nested type is defined _in the current class
             throw new UnsupportedOperationException("Please report this issue at https://github.com/javaparser/javaparser/issues/new/choose", e);
         }
     }

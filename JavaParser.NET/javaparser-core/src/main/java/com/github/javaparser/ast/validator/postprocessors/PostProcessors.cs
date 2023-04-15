@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,7 +27,7 @@ namespace com.github.javaparser.ast.validator.postprocessors;
  */
 public class PostProcessors {
 
-    private final List<Processor> postProcessors = new ArrayList<>();
+    private /*final*/List<Processor> postProcessors = new ArrayList<>();
 
     public PostProcessors(Processor... postProcessors) {
         this.postProcessors.addAll(Arrays.asList(postProcessors));
@@ -55,7 +55,7 @@ public class PostProcessors {
         return this;
     }
 
-    public void postProcess(ParseResult<? extends Node> result, ParserConfiguration configuration) {
+    public void postProcess(ParseResult<?:Node> result, ParserConfiguration configuration) {
         postProcessors.forEach(pp -> pp.postProcess(result, configuration));
     }
 }

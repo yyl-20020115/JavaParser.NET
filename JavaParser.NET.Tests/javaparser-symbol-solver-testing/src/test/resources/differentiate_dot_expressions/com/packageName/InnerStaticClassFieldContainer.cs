@@ -2,12 +2,12 @@ namespace com.packageName;
 
 public class InnerStaticClassFieldContainer {
     static class InnerClass {
-        public static String methodCall() {
+        public static string methodCall() {
             return "CalledMethod";
         }
         static class InnerInnerClass {
-            public static final String MY_INT = "1";
-            public static String innerMethodCall() {
+            public static /*final*/string MY_INT = "1";
+            public static string innerMethodCall() {
                 return "CalledInnerInnerClass";
             }
         }

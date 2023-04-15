@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,17 +23,17 @@ namespace com.github.javaparser.printer.lexicalpreservation;
 
 
 /**
- * Represent the position of a child node in the NodeText of its parent.
+ * Represent the position of a child node _in the NodeText of its parent.
  */
-class ChildTextElement extends TextElement {
+class ChildTextElement:TextElement {
 
-    private final Node child;
+    private /*final*/Node child;
 
     ChildTextElement(Node child) {
         this.child = child;
     }
 
-    String expand() {
+    string expand() {
         return LexicalPreservingPrinter.print(child);
     }
 
@@ -71,7 +71,7 @@ class ChildTextElement extends TextElement {
     }
 
     //@Override
-    public String toString() {
+    public string toString() {
         return "ChildTextElement{" + child + '}';
     }
 
@@ -92,7 +92,7 @@ class ChildTextElement extends TextElement {
 
     //@Override
     public bool isComment() {
-        return child instanceof Comment;
+        return child is Comment;
     }
 
     //@Override
@@ -121,7 +121,7 @@ class ChildTextElement extends TextElement {
     }
 
     //@Override
-    public bool isChildOfClass(Class<? extends Node> nodeClass) {
+    public bool isChildOfClass(Class<?:Node> nodeClass) {
         return nodeClass.isInstance(child);
     }
 

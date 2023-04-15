@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,7 +28,7 @@ public class CsmAttribute implements CsmElement {
         return property;
     }
 
-    private final ObservableProperty property;
+    private /*final*/ObservableProperty property;
 
     public CsmAttribute(ObservableProperty property) {
         this.property = property;
@@ -46,13 +46,13 @@ public class CsmAttribute implements CsmElement {
      *
      * @param tokenText Operator's token text
      */
-    public int getTokenType(Node node, String text, String tokenText) {
+    public int getTokenType(Node node, string text, string tokenText) {
         switch(property) {
             case IDENTIFIER:
                 return GeneratedJavaParserConstants.IDENTIFIER;
             case TYPE:
                 {
-                    String expectedImage = "\"" + text.toLowerCase() + "\"";
+                    string expectedImage = "\"" + text.toLowerCase() + "\"";
                     for (int i = 0; i < GeneratedJavaParserConstants.tokenImage.length; i++) {
                         if (GeneratedJavaParserConstants.tokenImage[i].equals(expectedImage)) {
                             return i;
@@ -63,7 +63,7 @@ public class CsmAttribute implements CsmElement {
             case KEYWORD:
             case OPERATOR:
                 {
-                    String expectedImage = "\"" + tokenText.toLowerCase() + "\"";
+                    string expectedImage = "\"" + tokenText.toLowerCase() + "\"";
                     for (int i = 0; i < GeneratedJavaParserConstants.tokenImage.length; i++) {
                         if (GeneratedJavaParserConstants.tokenImage[i].equals(expectedImage)) {
                             return i;
@@ -72,7 +72,7 @@ public class CsmAttribute implements CsmElement {
                     throw new RuntimeException(f("Attribute '%s' does not corresponding to any expected value. Text: %s", property.camelCaseName(), tokenText));
                 }
             case VALUE:
-                if (node instanceof IntegerLiteralExpr) {
+                if (node is IntegerLiteralExpr) {
                     return GeneratedJavaParserConstants.INTEGER_LITERAL;
                 }
             case NAME:
@@ -82,7 +82,7 @@ public class CsmAttribute implements CsmElement {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return String.format("%s(property:%s)", this.getClass().getSimpleName(), getProperty());
     }
 }

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -29,7 +29,7 @@ namespace com.github.javaparser.ast.expr;
  *
  * @author Julio Vilmar Gesser
  */
-public class EnclosedExpr extends Expression {
+public class EnclosedExpr:Expression {
 
     private Expression inner;
 
@@ -37,15 +37,15 @@ public class EnclosedExpr extends Expression {
         this(null, new StringLiteralExpr());
     }
 
-    @AllFieldsConstructor
-    public EnclosedExpr(final Expression inner) {
+    //@AllFieldsConstructor
+    public EnclosedExpr(/*final*/Expression inner) {
         this(null, inner);
     }
 
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public EnclosedExpr(TokenRange tokenRange, Expression inner) {
         super(tokenRange);
         setInner(inner);
@@ -53,18 +53,18 @@ public class EnclosedExpr extends Expression {
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Expression getInner() {
         return inner;
     }
@@ -75,8 +75,8 @@ public class EnclosedExpr extends Expression {
      * @param inner the inner expression, can be null
      * @return this, the EnclosedExpr
      */
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public EnclosedExpr setInner(final Expression inner) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public EnclosedExpr setInner(/*final*/Expression inner) {
         assertNotNull(inner);
         if (inner == this.inner) {
             return this;
@@ -90,19 +90,19 @@ public class EnclosedExpr extends Expression {
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public EnclosedExpr clone() {
         return (EnclosedExpr) accept(new CloneVisitor(), null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public EnclosedExprMetaModel getMetaModel() {
         return JavaParserMetaModel.enclosedExprMetaModel;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public boolean replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
@@ -115,25 +115,25 @@ public class EnclosedExpr extends Expression {
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isEnclosedExpr() {
         return true;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public EnclosedExpr asEnclosedExpr() {
         return this;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifEnclosedExpr(Consumer<EnclosedExpr> action) {
         action.accept(this);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<EnclosedExpr> toEnclosedExpr() {
         return Optional.of(this);
     }

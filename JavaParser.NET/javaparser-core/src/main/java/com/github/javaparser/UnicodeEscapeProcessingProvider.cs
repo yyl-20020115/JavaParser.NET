@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -22,37 +22,37 @@ namespace com.github.javaparser;
 
 
 /**
- * {@link Provider} un-escaping unicode escape sequences in the input sequence.
+ * {@link Provider} un-escaping unicode escape sequences _in the input sequence.
  */
 public class UnicodeEscapeProcessingProvider implements Provider {
 
-    private static final char LF = '\n';
+    private static /*final*/char LF = '\n';
 
-    private static final char CR = '\r';
+    private static /*final*/char CR = '\r';
 
-    private static final char BACKSLASH = '\\';
+    private static /*final*/char BACKSLASH = '\\';
 
-    private static final int EOF = -1;
+    private static /*final*/int EOF = -1;
 
     private char[] _data;
 
     /**
-     * The number of characters in {@link #_data}.
+     * The number of characters _in {@link #_data}.
      */
     private int _len = 0;
 
     /**
-     * The position in {@link #_data} where to read the next source character from.
+     * The position _in {@link #_data} where to read the next source character from.
      */
     private int _pos = 0;
 
     private boolean _backslashSeen;
 
-    private final LineCounter _inputLine = new LineCounter();
+    private /*final*/LineCounter _inputLine = new LineCounter();
 
-    private final LineCounter _outputLine = new LineCounter();
+    private /*final*/LineCounter _outputLine = new LineCounter();
 
-    private final PositionMappingBuilder _mappingBuilder = new PositionMappingBuilder(_outputLine, _inputLine);
+    private /*final*/PositionMappingBuilder _mappingBuilder = new PositionMappingBuilder(_outputLine, _inputLine);
 
     private Provider _input;
 
@@ -86,7 +86,7 @@ public class UnicodeEscapeProcessingProvider implements Provider {
     }
 
     @Override
-    public int read(char[] buffer, final int offset, int len) throws IOException {
+    public int read(char[] buffer, /*final*/int offset, int len){
         int pos = offset;
         int stop = offset + len;
         while (pos < stop) {
@@ -107,7 +107,7 @@ public class UnicodeEscapeProcessingProvider implements Provider {
     }
 
     @Override
-    public void close() throws IOException {
+    public void close(){
         _input.close();
     }
 
@@ -116,7 +116,7 @@ public class UnicodeEscapeProcessingProvider implements Provider {
      *
      * @return The next character or {@code -1} if no more characters are available.
      */
-    private int nextOutputChar() throws IOException {
+    private int nextOutputChar(){
         int next = nextInputChar();
         switch(next) {
             case EOF:
@@ -142,7 +142,7 @@ public class UnicodeEscapeProcessingProvider implements Provider {
         return next;
     }
 
-    private int backSlashSeen() throws IOException {
+    private int backSlashSeen(){
         _backslashSeen = true;
         int next = nextInputChar();
         switch(next) {
@@ -161,7 +161,7 @@ public class UnicodeEscapeProcessingProvider implements Provider {
         }
     }
 
-    private int unicodeStartSeen() throws IOException {
+    private int unicodeStartSeen(){
         int uCnt = 1;
         while (true) {
             int next = nextInputChar();
@@ -184,7 +184,7 @@ public class UnicodeEscapeProcessingProvider implements Provider {
         }
     }
 
-    private int readDigits(int uCnt, int next3) throws IOException {
+    private int readDigits(int uCnt, int next3){
         int digit3 = digit(next3);
         if (digit3 < 0) {
             pushBack(next3);
@@ -246,7 +246,7 @@ public class UnicodeEscapeProcessingProvider implements Provider {
      *
      * @return The next character or {@code -1} if no more input is available.
      */
-    private int nextInputChar() throws IOException {
+    private int nextInputChar(){
         int result = nextBufferedChar();
         return _inputLine.process(result);
     }
@@ -256,7 +256,7 @@ public class UnicodeEscapeProcessingProvider implements Provider {
      *
      * @return The next character or {@code -1} if no more input is available.
      */
-    private int nextBufferedChar() throws IOException {
+    private int nextBufferedChar(){
         while (isBufferEmpty()) {
             int direct = fillBuffer();
             if (direct < 0) {
@@ -270,7 +270,7 @@ public class UnicodeEscapeProcessingProvider implements Provider {
         return _pos >= _len;
     }
 
-    private int fillBuffer() throws IOException {
+    private int fillBuffer(){
         _pos = 0;
         int direct = _input.read(_data, 0, _data.length);
         if (direct != 0) {
@@ -315,9 +315,9 @@ public class UnicodeEscapeProcessingProvider implements Provider {
     /**
      * An algorithm mapping {@link Position} form two corresponding files.
      */
-    public static final class PositionMapping {
+    public static /*final*/class PositionMapping {
 
-        private final List<DeltaInfo> _deltas = new ArrayList<>();
+        private /*final*/List<DeltaInfo> _deltas = new ArrayList<>();
 
         /**
          * Creates a {@link UnicodeEscapeProcessingProvider.PositionMapping}.
@@ -359,7 +359,7 @@ public class UnicodeEscapeProcessingProvider implements Provider {
 
         /**
          * Algorithm updating a {@link Position} from one file to a
-         * {@link Position} in a corresponding file.
+         * {@link Position} _in a corresponding file.
          */
         public static interface PositionUpdate {
 
@@ -406,19 +406,19 @@ public class UnicodeEscapeProcessingProvider implements Provider {
             }
         }
 
-        private static final class DeltaInfo extends Position implements PositionUpdate {
+        private static /*final*/class DeltaInfo:Position implements PositionUpdate {
 
             /**
              * The offset to add to the {@link #line} and all following source
              * positions up to the next {@link PositionUpdate}.
              */
-            private final int _lineDelta;
+            private /*final*/int _lineDelta;
 
             /**
              * The offset to add to the {@link #column} and all following
              * source positions up to the next {@link PositionUpdate}.
              */
-            private final int _columnDelta;
+            private /*final*/int _columnDelta;
 
             /**
              * Creates a {@link PositionUpdate}.
@@ -440,7 +440,7 @@ public class UnicodeEscapeProcessingProvider implements Provider {
             }
 
             @Override
-            public String toString() {
+            public string toString() {
                 return "(" + line + ", " + column + ": " + _lineDelta + ", " + _columnDelta + ")";
             }
         }
@@ -466,13 +466,13 @@ public class UnicodeEscapeProcessingProvider implements Provider {
         }
     }
 
-    private static final class PositionMappingBuilder {
+    private static /*final*/class PositionMappingBuilder {
 
         private LineCounter _left;
 
         private LineCounter _right;
 
-        private final PositionMapping _mapping = new PositionMapping();
+        private /*final*/PositionMapping _mapping = new PositionMapping();
 
         private int _lineDelta = 0;
 
@@ -509,12 +509,12 @@ public class UnicodeEscapeProcessingProvider implements Provider {
     }
 
     /**
-     * Processor keeping track of the current line and column in a stream of
+     * Processor keeping track of the current line and column _in a stream of
      * incoming characters.
      *
      * @see #process(int)
      */
-    public static final class LineCounter {
+    public static /*final*/class LineCounter {
 
         /**
          * Whether {@link #CR} has been seen on the input as last character.

@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,9 +26,9 @@ namespace com.github.javaparser.symbolsolver;
 public class Issue2595Test {
 
 
-    @Test
+    [TestMethod]
     public void issue2595ImplicitTypeLambdaTest() {
-        String sourceCode = "" +
+        string sourceCode = "" +
                 "import java.util.ArrayList;\n" +
                 "import java.util.List;\n" +
                 "import java.util.function.Function;\n" +
@@ -41,15 +41,15 @@ public class Issue2595Test {
                 "    };\n" +
                 "\n" +
                 "\n" +
-                "    private List<String> getAllClassFieldNames(final String c) {\n" +
+                "    private List<String> getAllClassFieldNames(/*final*/string c) {\n" +
                 "        return new ArrayList<>();\n" +
                 "    }\n" +
                 "\n" +
                 "\n" +
                 "    @FunctionalInterface\n" +
-                "    public interface ClassMetric<T> extends Function<String, T> {\n" +
+                "    public interface ClassMetric<T>:Function<String, T> {\n" +
                 "        @Override\n" +
-                "        T apply(String c);\n" +
+                "        T apply(string c);\n" +
                 "    }\n" +
                 "\n" +
                 "}\n";
@@ -57,36 +57,36 @@ public class Issue2595Test {
         parse(sourceCode);
     }
 
-    @Test
+    [TestMethod]
     public void issue2595ExplicitTypeLambdaTest() {
-        String sourceCode = "import java.util.ArrayList;\n" +
+        string sourceCode = "import java.util.ArrayList;\n" +
                 "import java.util.List;\n" +
                 "import java.util.function.Function;\n" +
                 "\n" +
                 "public class TestIssue2595 {\n" +
-                "    ClassMetric fdp = (String c) -> {\n" +
+                "    ClassMetric fdp = (string c) -> {\n" +
                 "        List<String> classFieldNames = getAllClassFieldNames(c);\n" +
                 "        return classFieldNames.size();\n" +
                 "    };\n" +
                 "    \n" +
                 "\n" +
-                "    private List<String> getAllClassFieldNames(final String c) {\n" +
+                "    private List<String> getAllClassFieldNames(/*final*/string c) {\n" +
                 "        return new ArrayList<>();\n" +
                 "    }\n" +
                 "\n" +
                 "    @FunctionalInterface\n" +
-                "    public interface ClassMetric extends Function<String, Integer> {\n" +
+                "    public interface ClassMetric:Function<String, Integer> {\n" +
                 "        @Override\n" +
-                "        Integer apply(String c);\n" +
+                "        Integer apply(string c);\n" +
                 "    }\n" +
                 "}";
 
         parse(sourceCode);
     }
 
-    @Test
+    [TestMethod]
     public void issue2595NoParameterLambdaTest() {
-        String sourceCode = "import java.util.ArrayList;\n" +
+        string sourceCode = "import java.util.ArrayList;\n" +
                 "import java.util.List;\n" +
                 "\n" +
                 "public class TestIssue2595 {\n" +
@@ -109,36 +109,36 @@ public class Issue2595Test {
         parse(sourceCode);
     }
 
-    @Test
+    [TestMethod]
     public void issue2595AnonymousInnerClassTest() {
-        String sourceCode = "import java.util.ArrayList;\n" +
+        string sourceCode = "import java.util.ArrayList;\n" +
                 "import java.util.List;\n" +
                 "import java.util.function.Function;\n" +
                 "\n" +
                 "public class TestIssue2595 {\n" +
                 "    ClassMetric fdp = new ClassMetric() {\n" +
                 "        @Override\n" +
-                "        public Integer apply(String c) {\n" +
+                "        public Integer apply(string c) {\n" +
                 "            List<String> classFieldNames = getAllClassFieldNames(c);\n" +
                 "            return classFieldNames.size();\n" +
                 "        }\n" +
                 "    };\n" +
                 "\n" +
-                "    private List<String> getAllClassFieldNames(final String c) {\n" +
+                "    private List<String> getAllClassFieldNames(/*final*/string c) {\n" +
                 "        return new ArrayList<>();\n" +
                 "    }\n" +
                 "\n" +
                 "    @FunctionalInterface\n" +
-                "    public interface ClassMetric extends Function<String, Integer> {\n" +
+                "    public interface ClassMetric:Function<String, Integer> {\n" +
                 "        @Override\n" +
-                "        Integer apply(String c);\n" +
+                "        Integer apply(string c);\n" +
                 "    }\n" +
                 "}";
 
         parse(sourceCode);
     }
 
-    private void parse(String sourceCode) {
+    private void parse(string sourceCode) {
         TypeSolver typeSolver = new CombinedTypeSolver(new ReflectionTypeSolver());
         ParserConfiguration configuration = new ParserConfiguration().setSymbolResolver(new JavaSymbolSolver(typeSolver));
         JavaParser javaParser = new JavaParser(configuration);

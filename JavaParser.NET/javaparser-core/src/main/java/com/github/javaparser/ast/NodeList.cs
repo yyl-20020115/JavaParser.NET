@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -31,14 +31,14 @@ namespace com.github.javaparser.ast;
  *
  * @param <N> the type of nodes contained.
  */
-public class NodeList<N extends Node> implements List<N>, Iterable<N>, HasParentNode<NodeList<N>>, Visitable, Observable {
+public class NodeList<N:Node> implements List<N>, Iterable<N>, HasParentNode<NodeList<N>>, Visitable, Observable {
 
     @InternalProperty
-    private final List<N> innerList = new ArrayList<>(0);
+    private /*final*/List<N> innerList = new ArrayList<>(0);
 
     private Node parentNode;
 
-    private final List<AstObserver> observers = new ArrayList<>();
+    private /*final*/List<AstObserver> observers = new ArrayList<>();
 
     public NodeList() {
         parentNode = null;
@@ -85,20 +85,20 @@ public class NodeList<N extends Node> implements List<N>, Iterable<N>, HasParent
     }
 
     @SafeVarargs
-    public static <X extends Node> NodeList<X> nodeList(X... nodes) {
-        final NodeList<X> nodeList = new NodeList<>();
+    public static <X:Node> NodeList<X> nodeList(X... nodes) {
+        /*final*/NodeList<X> nodeList = new NodeList<>();
         Collections.addAll(nodeList, nodes);
         return nodeList;
     }
 
-    public static <X extends Node> NodeList<X> nodeList(Collection<X> nodes) {
-        final NodeList<X> nodeList = new NodeList<>();
+    public static <X:Node> NodeList<X> nodeList(Collection<X> nodes) {
+        /*final*/NodeList<X> nodeList = new NodeList<>();
         nodeList.addAll(nodes);
         return nodeList;
     }
 
-    public static <X extends Node> NodeList<X> nodeList(NodeList<X> nodes) {
-        final NodeList<X> nodeList = new NodeList<>();
+    public static <X:Node> NodeList<X> nodeList(NodeList<X> nodes) {
+        /*final*/NodeList<X> nodeList = new NodeList<>();
         nodeList.addAll(nodes);
         return nodeList;
     }
@@ -188,7 +188,7 @@ public class NodeList<N extends Node> implements List<N>, Iterable<N>, HasParent
     /**
      * Inserts the node after afterThisNode.
      *
-     * @throws IllegalArgumentException when afterThisNode is not in this list.
+     * @throws IllegalArgumentException when afterThisNode is not _in this list.
      */
     public NodeList<N> addAfter(N node, N afterThisNode) {
         int i = indexOf(afterThisNode);
@@ -202,7 +202,7 @@ public class NodeList<N extends Node> implements List<N>, Iterable<N>, HasParent
     /**
      * Inserts the node before beforeThisNode.
      *
-     * @throws IllegalArgumentException when beforeThisNode is not in this list.
+     * @throws IllegalArgumentException when beforeThisNode is not _in this list.
      */
     public NodeList<N> addBefore(N node, N beforeThisNode) {
         int i = indexOf(beforeThisNode);
@@ -257,12 +257,12 @@ public class NodeList<N extends Node> implements List<N>, Iterable<N>, HasParent
     }
 
     @Override
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
@@ -303,7 +303,7 @@ public class NodeList<N extends Node> implements List<N>, Iterable<N>, HasParent
      */
     @Override
     public boolean remove(Object o) {
-        if (o instanceof Node) {
+        if (o is Node) {
             return remove((Node) o);
         } else {
             return false;
@@ -322,7 +322,7 @@ public class NodeList<N extends Node> implements List<N>, Iterable<N>, HasParent
      * @see java.util.List#addAll(java.util.Collection)
      */
     @Override
-    public boolean addAll(Collection<? extends N> c) {
+    public boolean addAll(Collection<?:N> c) {
         c.forEach(this::add);
         return !c.isEmpty();
     }
@@ -331,7 +331,7 @@ public class NodeList<N extends Node> implements List<N>, Iterable<N>, HasParent
      * @see java.util.List#addAll(int, java.util.Collection)
      */
     @Override
-    public boolean addAll(int index, Collection<? extends N> c) {
+    public boolean addAll(int index, Collection<?:N> c) {
         for (N e : c) {
             add(index++, e);
         }
@@ -525,14 +525,14 @@ public class NodeList<N extends Node> implements List<N>, Iterable<N>, HasParent
             consumer.accept(this);
     }
 
-    public static <T extends Node> Collector<T, NodeList<T>, NodeList<T>> toNodeList() {
+    public static <T:Node> Collector<T, NodeList<T>, NodeList<T>> toNodeList() {
         return Collector.of(NodeList::new, NodeList::add, (left, right) -> {
             left.addAll(right);
             return left;
         });
     }
 
-    private void setAsParentNodeOf(List<? extends Node> childNodes) {
+    private void setAsParentNodeOf(List<?:Node> childNodes) {
         if (childNodes != null) {
             for (HasParentNode current : childNodes) {
                 current.setParentNode(getParentNodeForChildren());
@@ -547,7 +547,7 @@ public class NodeList<N extends Node> implements List<N>, Iterable<N>, HasParent
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return innerList.stream().map(Node::toString).collect(Collectors.joining(", ", "[", "]"));
     }
 

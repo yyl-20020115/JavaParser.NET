@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -32,9 +32,9 @@ class ConstraintFormulaTest {
      * From JLS 18.1.2
      *
      * From Collections.singleton("hi"), we have the constraint formula ‹"hi" → α›.
-     * Through reduction, this will become the constraint formula: ‹String <: α›.
+     * Through reduction, this will become the constraint formula: ‹string <: α›.
      */
-    @Test
+    [TestMethod]
     void testExpressionCompatibleWithTypeReduce1() {
         ResolvedTypeParameterDeclaration tp = mock(ResolvedTypeParameterDeclaration.class);
 
@@ -59,7 +59,7 @@ class ConstraintFormulaTest {
 //     * From Arrays.asList(1, 2.0), we have the constraint formulas ‹1 → α› and ‹2.0 → α›. Through reduction,
 //     * these will become the constraint formulas ‹int → α› and ‹double → α›, and then ‹Integer <: α› and ‹Double <: α›.
 //     */
-//    @Test
+//    [TestMethod]
 //    public void testExpressionCompatibleWithTypeReduce2() {
 //        throw new UnsupportedOperationException();
 //    }
@@ -71,7 +71,7 @@ class ConstraintFormulaTest {
 //     * formula ‹ArrayList<α> → List<Thread>›. Through reduction, this will become the constraint formula ‹α <= Thread›,
 //     * and then ‹α = Thread›.
 //     */
-//    @Test
+//    [TestMethod]
 //    public void testExpressionCompatibleWithTypeReduce3() {
 //        throw new UnsupportedOperationException();
 //    }

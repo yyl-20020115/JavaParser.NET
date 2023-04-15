@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,11 +24,11 @@ namespace com.github.javaparser.ast.body;
 
 
 /**
- * One of the values an enum can take. A(1) and B(2) in this example: {@code enum X { A(1), B(2) }}
+ * One of the values an enum can take. A(1) and B(2) _in this example: {@code enum X { A(1), B(2) }}
  *
  * @author Julio Vilmar Gesser
  */
-public class EnumConstantDeclaration extends BodyDeclaration<EnumConstantDeclaration> implements NodeWithJavadoc<EnumConstantDeclaration>, NodeWithSimpleName<EnumConstantDeclaration>, NodeWithArguments<EnumConstantDeclaration>, Resolvable<ResolvedEnumConstantDeclaration> {
+public class EnumConstantDeclaration:BodyDeclaration<EnumConstantDeclaration> implements NodeWithJavadoc<EnumConstantDeclaration>, NodeWithSimpleName<EnumConstantDeclaration>, NodeWithArguments<EnumConstantDeclaration>, Resolvable<ResolvedEnumConstantDeclaration> {
 
     private SimpleName name;
 
@@ -40,11 +40,11 @@ public class EnumConstantDeclaration extends BodyDeclaration<EnumConstantDeclara
         this(null, new NodeList<>(), new SimpleName(), new NodeList<>(), new NodeList<>());
     }
 
-    public EnumConstantDeclaration(String name) {
+    public EnumConstantDeclaration(string name) {
         this(null, new NodeList<>(), new SimpleName(name), new NodeList<>(), new NodeList<>());
     }
 
-    @AllFieldsConstructor
+    //@AllFieldsConstructor
     public EnumConstantDeclaration(NodeList<AnnotationExpr> annotations, SimpleName name, NodeList<Expression> arguments, NodeList<BodyDeclaration<?>> classBody) {
         this(null, annotations, name, arguments, classBody);
     }
@@ -52,7 +52,7 @@ public class EnumConstantDeclaration extends BodyDeclaration<EnumConstantDeclara
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public EnumConstantDeclaration(TokenRange tokenRange, NodeList<AnnotationExpr> annotations, SimpleName name, NodeList<Expression> arguments, NodeList<BodyDeclaration<?>> classBody) {
         super(tokenRange, annotations);
         setName(name);
@@ -62,34 +62,34 @@ public class EnumConstantDeclaration extends BodyDeclaration<EnumConstantDeclara
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public NodeList<Expression> getArguments() {
         return arguments;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public NodeList<BodyDeclaration<?>> getClassBody() {
         return classBody;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public SimpleName getName() {
         return name;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public EnumConstantDeclaration setArguments(final NodeList<Expression> arguments) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public EnumConstantDeclaration setArguments(/*final*/NodeList<Expression> arguments) {
         assertNotNull(arguments);
         if (arguments == this.arguments) {
             return this;
@@ -102,8 +102,8 @@ public class EnumConstantDeclaration extends BodyDeclaration<EnumConstantDeclara
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public EnumConstantDeclaration setClassBody(final NodeList<BodyDeclaration<?>> classBody) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public EnumConstantDeclaration setClassBody(/*final*/NodeList<BodyDeclaration<?>> classBody) {
         assertNotNull(classBody);
         if (classBody == this.classBody) {
             return this;
@@ -116,8 +116,8 @@ public class EnumConstantDeclaration extends BodyDeclaration<EnumConstantDeclara
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public EnumConstantDeclaration setName(final SimpleName name) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public EnumConstantDeclaration setName(/*final*/SimpleName name) {
         assertNotNull(name);
         if (name == this.name) {
             return this;
@@ -131,7 +131,7 @@ public class EnumConstantDeclaration extends BodyDeclaration<EnumConstantDeclara
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
     public boolean remove(Node node) {
         if (node == null) {
             return false;
@@ -152,19 +152,19 @@ public class EnumConstantDeclaration extends BodyDeclaration<EnumConstantDeclara
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public EnumConstantDeclaration clone() {
         return (EnumConstantDeclaration) accept(new CloneVisitor(), null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public EnumConstantDeclarationMetaModel getMetaModel() {
         return JavaParserMetaModel.enumConstantDeclarationMetaModel;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public boolean replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
@@ -189,19 +189,19 @@ public class EnumConstantDeclaration extends BodyDeclaration<EnumConstantDeclara
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isEnumConstantDeclaration() {
         return true;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public EnumConstantDeclaration asEnumConstantDeclaration() {
         return this;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifEnumConstantDeclaration(Consumer<EnumConstantDeclaration> action) {
         action.accept(this);
     }
@@ -212,7 +212,7 @@ public class EnumConstantDeclaration extends BodyDeclaration<EnumConstantDeclara
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<EnumConstantDeclaration> toEnumConstantDeclaration() {
         return Optional.of(this);
     }

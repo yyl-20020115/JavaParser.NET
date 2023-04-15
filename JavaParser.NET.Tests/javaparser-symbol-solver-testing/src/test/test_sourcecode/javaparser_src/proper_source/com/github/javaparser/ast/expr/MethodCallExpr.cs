@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.ast.expr;
 /**
  * @author Julio Vilmar Gesser
  */
-public final class MethodCallExpr extends Expression {
+public /*final*/class MethodCallExpr:Expression {
 
 	private Expression scope;
 
@@ -39,19 +39,19 @@ public final class MethodCallExpr extends Expression {
 	public MethodCallExpr() {
 	}
 
-	public MethodCallExpr(final Expression scope, final String name) {
+	public MethodCallExpr(/*final*/Expression scope, /*final*/string name) {
 		setScope(scope);
 		setName(name);
 	}
 
-	public MethodCallExpr(final Expression scope, final String name, final List<Expression> args) {
+	public MethodCallExpr(/*final*/Expression scope, /*final*/string name, /*final*/List<Expression> args) {
 		setScope(scope);
 		setName(name);
 		setArgs(args);
 	}
 
-	public MethodCallExpr(final int beginLine, final int beginColumn, final int endLine, final int endColumn,
-			final Expression scope, final List<Type> typeArgs, final String name, final List<Expression> args) {
+	public MethodCallExpr(/*final*/int beginLine, /*final*/int beginColumn, /*final*/int endLine, /*final*/int endColumn,
+			/*final*/Expression scope, /*final*/List<Type> typeArgs, /*final*/string name, /*final*/List<Expression> args) {
 		super(beginLine, beginColumn, endLine, endColumn);
 		setScope(scope);
 		setTypeArgs(typeArgs);
@@ -59,11 +59,11 @@ public final class MethodCallExpr extends Expression {
 		setArgs(args);
 	}
 
-	@Override public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+	@Override public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
 		return v.visit(this, arg);
 	}
 
-	@Override public <A> void accept(final VoidVisitor<A> v, final A arg) {
+	@Override public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
 		v.visit(this, arg);
 	}
 
@@ -71,7 +71,7 @@ public final class MethodCallExpr extends Expression {
 		return args;
 	}
 
-	public String getName() {
+	public string getName() {
 		return name.getName();
 	}
 
@@ -87,12 +87,12 @@ public final class MethodCallExpr extends Expression {
 		return typeArgs;
 	}
 
-	public void setArgs(final List<Expression> args) {
+	public void setArgs(/*final*/List<Expression> args) {
 		this.args = args;
 		setAsParentNodeOf(this.args);
 	}
 
-	public void setName(final String name) {
+	public void setName(/*final*/string name) {
 		this.name = new NameExpr(name);
 	}
 
@@ -100,12 +100,12 @@ public final class MethodCallExpr extends Expression {
 		this.name = name;
 	}
 
-	public void setScope(final Expression scope) {
+	public void setScope(/*final*/Expression scope) {
 		this.scope = scope;
 		setAsParentNodeOf(this.scope);
 	}
 
-	public void setTypeArgs(final List<Type> typeArgs) {
+	public void setTypeArgs(/*final*/List<Type> typeArgs) {
 		this.typeArgs = typeArgs;
 		setAsParentNodeOf(this.typeArgs);
 	}

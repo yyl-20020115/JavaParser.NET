@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,36 +25,36 @@ namespace com.github.javaparser.ast.expr;
 /**
  * @author Julio Vilmar Gesser
  */
-public class StringLiteralExpr extends LiteralExpr {
+public class StringLiteralExpr:LiteralExpr {
 
-	protected String value;
+	protected string value;
 
 	public StringLiteralExpr() {
 	}
 
-	public StringLiteralExpr(final String value) {
+	public StringLiteralExpr(/*final*/string value) {
 		this.value = value;
 	}
 
-	public StringLiteralExpr(final int beginLine, final int beginColumn, final int endLine, final int endColumn,
-			final String value) {
+	public StringLiteralExpr(/*final*/int beginLine, /*final*/int beginColumn, /*final*/int endLine, /*final*/int endColumn,
+			/*final*/string value) {
 		super(beginLine, beginColumn, endLine, endColumn);
 		this.value = value;
 	}
 
-	@Override public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+	@Override public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
 		return v.visit(this, arg);
 	}
 
-	@Override public <A> void accept(final VoidVisitor<A> v, final A arg) {
+	@Override public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
 		v.visit(this, arg);
 	}
 
-	public final String getValue() {
+	public /*final*/string getValue() {
 		return value;
 	}
 
-	public final void setValue(final String value) {
+	public /*final*/void setValue(/*final*/string value) {
 		this.value = value;
 	}
 }

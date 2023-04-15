@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -31,11 +31,11 @@ namespace com.github.javaparser.utils;
  */
 public class ProjectRoot {
 
-    private final Path root;
+    private /*final*/Path root;
 
-    private final Map<Path, SourceRoot> cache = new ConcurrentHashMap<>();
+    private /*final*/Map<Path, SourceRoot> cache = new ConcurrentHashMap<>();
 
-    private final ParserConfiguration parserConfiguration;
+    private /*final*/ParserConfiguration parserConfiguration;
 
     public ProjectRoot(Path root) {
         this(root, new ParserConfiguration());
@@ -63,7 +63,7 @@ public class ProjectRoot {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "ProjectRoot at " + root + " with " + cache.values().toString();
     }
 }

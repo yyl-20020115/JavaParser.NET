@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -30,7 +30,7 @@ class TextElementIteratorsFactory {
             Iterator<E> provide();
         }
 
-        private final Provider<E> nextProvider;
+        private /*final*/Provider<E> nextProvider;
 
         private Iterator<E> current;
 
@@ -100,7 +100,7 @@ class TextElementIteratorsFactory {
 
     private static class SingleElementIterator<E> implements Iterator<E> {
 
-        private final E element;
+        private /*final*/E element;
 
         private boolean returned;
 
@@ -126,7 +126,7 @@ class TextElementIteratorsFactory {
 
     static class ComposedIterator<E> implements Iterator<E> {
 
-        private final List<Iterator<E>> elements;
+        private /*final*/List<Iterator<E>> elements;
 
         private int currIndex;
 
@@ -163,7 +163,7 @@ class TextElementIteratorsFactory {
 
     private static Iterator<TokenTextElement> reverseIterator(NodeText nodeText, int index) {
         TextElement textElement = nodeText.getTextElement(index);
-        if (textElement instanceof TokenTextElement) {
+        if (textElement is TokenTextElement) {
             return new SingleElementIterator<TokenTextElement>((TokenTextElement) textElement) {
 
                 @Override
@@ -171,7 +171,7 @@ class TextElementIteratorsFactory {
                     nodeText.removeElement(index);
                 }
             };
-        } else if (textElement instanceof ChildTextElement) {
+        } else if (textElement is ChildTextElement) {
             ChildTextElement childTextElement = (ChildTextElement) textElement;
             NodeText textForChild = childTextElement.getNodeTextForWrappedNode();
             return reverseIterator(textForChild);

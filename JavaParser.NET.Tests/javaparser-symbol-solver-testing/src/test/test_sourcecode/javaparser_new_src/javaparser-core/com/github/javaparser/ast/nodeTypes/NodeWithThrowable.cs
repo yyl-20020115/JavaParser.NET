@@ -13,7 +13,7 @@ public interface NodeWithThrowable<T> {
      * @param throwType the exception type
      * @return this
      */
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     default T addThrows(ReferenceType throwType) {
         getThrows().add(throwType);
         throwType.setParentNode((Node) this);
@@ -26,7 +26,7 @@ public interface NodeWithThrowable<T> {
      * @param clazz the exception class
      * @return this
      */
-    default T addThrows(Class<? extends Throwable> clazz) {
+    default T addThrows(Class<?:Throwable> clazz) {
         ((Node) this).tryAddImportToParentCompilationUnit(clazz);
         return addThrows(new ClassOrInterfaceType(clazz.getSimpleName()));
     }
@@ -35,9 +35,9 @@ public interface NodeWithThrowable<T> {
      * Check whether this elements throws this exception class
      * 
      * @param clazz the class of the exception
-     * @return true if found in throws clause, false if not
+     * @return true if found _in throws clause, false if not
      */
-    public default boolean isThrows(Class<? extends Throwable> clazz) {
+    public default boolean isThrows(Class<?:Throwable> clazz) {
         return isThrows(clazz.getSimpleName());
     }
 
@@ -45,9 +45,9 @@ public interface NodeWithThrowable<T> {
      * Check whether this elements throws this exception class
      * 
      * @param throwableName the class of the exception
-     * @return true if found in throws clause, false if not
+     * @return true if found _in throws clause, false if not
      */
-    public default boolean isThrows(String throwableName) {
+    public default boolean isThrows(string throwableName) {
         return getThrows().stream().anyMatch(t -> t.toString().equals(throwableName));
     }
 }

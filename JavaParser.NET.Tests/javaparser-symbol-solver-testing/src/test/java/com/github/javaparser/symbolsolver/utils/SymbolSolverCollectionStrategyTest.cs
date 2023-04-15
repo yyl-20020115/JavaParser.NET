@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,11 +26,11 @@ namespace com.github.javaparser.symbolsolver.utils;
 
 class SymbolSolverCollectionStrategyTest {
 
-    private final Path root = classLoaderRoot(SymbolSolverCollectionStrategyTest.class).resolve("../../../javaparser-core").normalize();
-    private final ProjectRoot projectRoot = new SymbolSolverCollectionStrategy().collect(root);
+    private /*final*/Path root = classLoaderRoot(SymbolSolverCollectionStrategyTest.class).resolve("../../../javaparser-core").normalize();
+    private /*final*/ProjectRoot projectRoot = new SymbolSolverCollectionStrategy().collect(root);
 
-    @Test
-    void resolveExpressions() throws IOException {
+    [TestMethod]
+    void resolveExpressions(){
         SourceRoot sourceRoot = projectRoot.getSourceRoot(root.resolve("src/main/java")).get();
         AtomicInteger unresolved = new AtomicInteger();
         for (ParseResult<CompilationUnit> parseResult : sourceRoot.tryToParse()) {
@@ -51,7 +51,7 @@ class SymbolSolverCollectionStrategyTest {
         assertTrue(unresolved.get() < 10);
     }
     
-    @Test
+    [TestMethod]
     void resolveMultiSourceRoots() {
         String[] relativeRootDir = {"/src/main/java-templates", "src/main/java", "src/main/javacc-support", "target/generated-sources/javacc", "target/generated-sources/java-templates", "src/main/java-templates"};
         Path mainDirectory = classLoaderRoot(SymbolSolverCollectionStrategyTest.class).resolve("../../../javaparser-core").normalize();

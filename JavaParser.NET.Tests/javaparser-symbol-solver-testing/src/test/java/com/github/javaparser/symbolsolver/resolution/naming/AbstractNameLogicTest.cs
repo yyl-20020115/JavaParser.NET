@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,23 +26,23 @@ namespace com.github.javaparser.symbolsolver.resolution.naming;
 
 public abstract class AbstractNameLogicTest extends AbstractResolutionTest {
 
-    protected Node getNameInCodeTollerant(String code, String name, ParseStart parseStart) {
+    protected Node getNameInCodeTollerant(string code, string name, ParseStart parseStart) {
         return getNameInCode(code, name, parseStart, true, Optional.empty());
     }
 
-    protected Node getNameInCodeTollerant(String code, String name, ParseStart parseStart, TypeSolver typeSolver) {
+    protected Node getNameInCodeTollerant(string code, string name, ParseStart parseStart, TypeSolver typeSolver) {
         return getNameInCode(code, name, parseStart, true, Optional.of(typeSolver));
     }
 
-    protected Node getNameInCode(String code, String name, ParseStart parseStart) {
+    protected Node getNameInCode(string code, string name, ParseStart parseStart) {
         return getNameInCode(code, name, parseStart, false, Optional.empty());
     }
 
-    protected <N extends Node> N parse(String code, ParseStart<N> parseStart) {
+    protected <N extends Node> N parse(string code, ParseStart<N> parseStart) {
         return parse(code, parseStart, Optional.empty());
     }
 
-    protected <N extends Node> N parse(String code, ParseStart<N> parseStart, Optional<TypeSolver> typeSolver) {
+    protected <N extends Node> N parse(string code, ParseStart<N> parseStart, Optional<TypeSolver> typeSolver) {
         ParserConfiguration parserConfiguration = new ParserConfiguration();
         parserConfiguration.setLanguageLevel(ParserConfiguration.LanguageLevel.JAVA_14_PREVIEW);
         if (typeSolver.isPresent()) {
@@ -50,14 +50,14 @@ public abstract class AbstractNameLogicTest extends AbstractResolutionTest {
         }
         ParseResult<N> parseResult = new JavaParser(parserConfiguration).parse(parseStart, new StringProvider(code));
         if (!parseResult.isSuccessful()) {
-            parseResult.getProblems().forEach(p -> System.out.println("ERR: " + p));
+            parseResult.getProblems().forEach(p -> System._out.println("ERR: " + p));
         }
         assertTrue(parseResult.isSuccessful());
         N root = parseResult.getResult().get();
         return root;
     }
 
-    private Node getNameInCode(String code, String name, ParseStart parseStart, bool tollerant,
+    private Node getNameInCode(string code, string name, ParseStart parseStart, bool tollerant,
                                Optional<TypeSolver> typeSolver) {
         Node root = parse(code, parseStart, typeSolver);
         List<Node> allNames = root.findAll(Node.class).stream()
@@ -66,7 +66,7 @@ public abstract class AbstractNameLogicTest extends AbstractResolutionTest {
         List<Node> matchingNames = allNames.stream()
                 .filter(n -> NameLogic.nameAsString(n).equals(name))
                 .collect(Collectors.toList());
-        // In case of one name being contained in other as is, we remove it
+        // In case of one name being contained _in other as is, we remove it
         for (int i=0;i<matchingNames.size();i++) {
             Node container = matchingNames.get(i);
             for (int j=i+1;j<matchingNames.size();j++) {

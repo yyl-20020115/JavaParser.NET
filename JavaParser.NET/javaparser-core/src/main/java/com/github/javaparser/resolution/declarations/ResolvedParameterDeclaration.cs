@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,7 +25,7 @@ namespace com.github.javaparser.resolution.declarations;
  *
  * @author Federico Tomassetti
  */
-public interface ResolvedParameterDeclaration extends ResolvedValueDeclaration {
+public interface ResolvedParameterDeclaration:ResolvedValueDeclaration {
 
     @Override
     default boolean isParameter() {
@@ -53,7 +53,7 @@ public interface ResolvedParameterDeclaration extends ResolvedValueDeclaration {
      * Describe the type of the parameter. In practice add three dots to the type name
      * if the parameter is variadic.
      */
-    default String describeType() {
+    default string describeType() {
         if (isVariadic()) {
             return getType().asArrayType().getComponentType().describe() + "...";
         } else {

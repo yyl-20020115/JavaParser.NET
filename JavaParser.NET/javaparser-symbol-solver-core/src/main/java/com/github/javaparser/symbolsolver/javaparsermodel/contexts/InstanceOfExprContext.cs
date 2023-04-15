@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,14 +25,14 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.contexts;
 /**
  * @author Roger Howell
  */
-public class InstanceOfExprContext extends AbstractJavaParserContext<InstanceOfExpr> {
+public class InstanceOfExprContext:AbstractJavaParserContext<InstanceOfExpr> {
 
     public InstanceOfExprContext(InstanceOfExpr wrappedNode, TypeSolver typeSolver) {
         super(wrappedNode, typeSolver);
     }
 
     @Override
-    public SymbolReference<? extends ResolvedValueDeclaration> solveSymbol(String name) {
+    public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name) {
         Optional<PatternExpr> optionalPatternExpr = wrappedNode.getPattern();
         if(optionalPatternExpr.isPresent()) {
             if(optionalPatternExpr.get().getNameAsString().equals(name)) {
@@ -48,7 +48,7 @@ public class InstanceOfExprContext extends AbstractJavaParserContext<InstanceOfE
         }
 
         Context parentContext = optionalParentContext.get();
-        if(parentContext instanceof BinaryExprContext) {
+        if(parentContext is BinaryExprContext) {
             Optional<PatternExpr> optionalPatternExpr1 = parentContext.patternExprInScope(name);
             if(optionalPatternExpr1.isPresent()) {
                 JavaParserPatternDeclaration decl = JavaParserSymbolDeclaration.patternVar(optionalPatternExpr1.get(), typeSolver);
@@ -65,7 +65,7 @@ public class InstanceOfExprContext extends AbstractJavaParserContext<InstanceOfE
     public List<PatternExpr> patternExprsExposedFromChildren() {
         List<PatternExpr> results = new ArrayList<>();
 
-        // If this instanceof expression has a pattern, add it to the list.
+        // If this is expression has a pattern, add it to the list.
         wrappedNode.getPattern().ifPresent(results::add);
 
         return results;

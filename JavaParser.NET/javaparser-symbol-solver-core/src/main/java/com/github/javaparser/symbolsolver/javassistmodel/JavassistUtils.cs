@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -29,7 +29,7 @@ namespace com.github.javaparser.symbolsolver.javassistmodel;
  */
 class JavassistUtils {
 
-    static Optional<MethodUsage> solveMethodAsUsage(String name, List<ResolvedType> argumentsTypes, TypeSolver typeSolver,
+    static Optional<MethodUsage> solveMethodAsUsage(string name, List<ResolvedType> argumentsTypes, TypeSolver typeSolver,
                                                     Context invokationContext, List<ResolvedType> typeParameterValues,
                                                     ResolvedReferenceTypeDeclaration scopeType, CtClass ctClass) {
         List<ResolvedTypeParameterDeclaration> typeParameters = scopeType.getTypeParameters();
@@ -64,7 +64,7 @@ class JavassistUtils {
         return MethodResolutionLogic.findMostApplicableUsage(methods, name, argumentsTypes, typeSolver);
     }
 
-    static SymbolReference<ResolvedMethodDeclaration> solveMethod(String name, List<ResolvedType> argumentsTypes, boolean staticOnly,
+    static SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, boolean staticOnly,
                                                                   TypeSolver typeSolver, ResolvedReferenceTypeDeclaration scopeType, CtClass ctClass) {
         List<ResolvedMethodDeclaration> candidates = new ArrayList<>();
         Predicate<CtMethod> staticOnlyCheck = m -> !staticOnly || java.lang.reflect.Modifier.isStatic(m.getModifiers());
@@ -104,13 +104,13 @@ class JavassistUtils {
     }
 
     static ResolvedType signatureTypeToType(SignatureAttribute.Type signatureType, TypeSolver typeSolver, ResolvedTypeParametrizable typeParametrizable) {
-        if (signatureType instanceof SignatureAttribute.ClassType) {
+        if (signatureType is SignatureAttribute.ClassType) {
             SignatureAttribute.ClassType classType = (SignatureAttribute.ClassType) signatureType;
             List<ResolvedType> typeArguments = classType.getTypeArguments() == null ? Collections.emptyList() : Arrays.stream(classType.getTypeArguments()).map(ta -> typeArgumentToType(ta, typeSolver, typeParametrizable)).collect(Collectors.toList());
             ResolvedReferenceTypeDeclaration typeDeclaration = typeSolver.solveType(
                     removeTypeArguments(internalNameToCanonicalName(getTypeName(classType))));
             return new ReferenceTypeImpl(typeDeclaration, typeArguments);
-        } else if (signatureType instanceof SignatureAttribute.TypeVariable) {
+        } else if (signatureType is SignatureAttribute.TypeVariable) {
             SignatureAttribute.TypeVariable typeVariableSignature = (SignatureAttribute.TypeVariable) signatureType;
             Optional<ResolvedTypeParameterDeclaration> typeParameterDeclarationOpt = typeParametrizable.findTypeParameter(typeVariableSignature.getName());
             if (!typeParameterDeclarationOpt.isPresent()) {
@@ -118,11 +118,11 @@ class JavassistUtils {
             }
             ResolvedTypeParameterDeclaration typeParameterDeclaration = typeParameterDeclarationOpt.get();
             return new ResolvedTypeVariable(typeParameterDeclaration);
-        } else if (signatureType instanceof SignatureAttribute.ArrayType) {
+        } else if (signatureType is SignatureAttribute.ArrayType) {
             SignatureAttribute.ArrayType arrayType = (SignatureAttribute.ArrayType) signatureType;
             ResolvedType baseType = signatureTypeToType(arrayType.getComponentType(), typeSolver, typeParametrizable);
             return getArrayType(baseType, arrayType.getDimension());
-        } else if (signatureType instanceof SignatureAttribute.BaseType) {
+        } else if (signatureType is SignatureAttribute.BaseType) {
             SignatureAttribute.BaseType baseType = (SignatureAttribute.BaseType) signatureType;
             if (baseType.toString().equals("void")) {
                 return ResolvedVoidType.INSTANCE;
@@ -141,12 +141,12 @@ class JavassistUtils {
         return resolvedType;
     }
 
-    private static String getTypeName(SignatureAttribute.ClassType classType) {
+    private static string getTypeName(SignatureAttribute.ClassType classType) {
         SignatureAttribute.ClassType declaringClass = classType.getDeclaringClass();
         return declaringClass == null ? classType.getName() : getTypeName(declaringClass) + "." + classType.getName();
     }
 
-    private static String removeTypeArguments(String typeName) {
+    private static string removeTypeArguments(string typeName) {
         if (typeName.contains("<")) {
             return typeName.substring(0, typeName.indexOf('<'));
         } else {
@@ -154,22 +154,22 @@ class JavassistUtils {
         }
     }
 
-    static String internalNameToCanonicalName(String typeName) {
+    static string internalNameToCanonicalName(string typeName) {
         return typeName.replaceAll("\\$", ".");
     }
 
     private static ResolvedType objectTypeArgumentToType(SignatureAttribute.ObjectType typeArgument, TypeSolver typeSolver, ResolvedTypeParametrizable typeParametrizable) {
-        if (typeArgument instanceof SignatureAttribute.ClassType) {
+        if (typeArgument is SignatureAttribute.ClassType) {
             return signatureTypeToType(typeArgument, typeSolver, typeParametrizable);
-        } else if (typeArgument instanceof SignatureAttribute.ArrayType) {
+        } else if (typeArgument is SignatureAttribute.ArrayType) {
             return new ResolvedArrayType(signatureTypeToType(((SignatureAttribute.ArrayType) typeArgument).getComponentType(), typeSolver, typeParametrizable));
         } else {
-            String typeName = typeArgument.jvmTypeName();
+            string typeName = typeArgument.jvmTypeName();
             return getGenericParameterByName(typeName, typeParametrizable, typeSolver);
         }
     }
 
-    private static ResolvedType getGenericParameterByName(String typeName, ResolvedTypeParametrizable typeParametrizable, TypeSolver typeSolver) {
+    private static ResolvedType getGenericParameterByName(string typeName, ResolvedTypeParametrizable typeParametrizable, TypeSolver typeSolver) {
         Optional<ResolvedType> type = typeParametrizable.findTypeParameter(typeName).map(ResolvedTypeVariable::new);
         return type.orElseGet(() -> new ReferenceTypeImpl(
                 typeSolver.solveType(removeTypeArguments(internalNameToCanonicalName(typeName)))));

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -51,77 +51,77 @@ class ArrayTypeTest {
                 ImmutableList.of(new ReferenceTypeImpl(new ReflectionClassDeclaration(String.class, typeSolver)))));
     }
 
-    @Test
+    [TestMethod]
     void testIsArray() {
         assertEquals(true, arrayOfBooleans.isArray());
         assertEquals(true, arrayOfStrings.isArray());
     }
 
-    @Test
+    [TestMethod]
     void testIsPrimitive() {
         assertEquals(false, arrayOfBooleans.isPrimitive());
         assertEquals(false, arrayOfStrings.isPrimitive());
     }
 
-    @Test
+    [TestMethod]
     void testIsNull() {
         assertEquals(false, arrayOfBooleans.isNull());
         assertEquals(false, arrayOfStrings.isNull());
     }
 
-    @Test
+    [TestMethod]
     void testIsReference() {
         assertEquals(true, arrayOfBooleans.isReference());
         assertEquals(true, arrayOfStrings.isReference());
     }
 
-    @Test
+    [TestMethod]
     void testIsReferenceType() {
         assertEquals(false, arrayOfBooleans.isReferenceType());
         assertEquals(false, arrayOfStrings.isReferenceType());
     }
 
-    @Test
+    [TestMethod]
     void testIsVoid() {
         assertEquals(false, arrayOfBooleans.isVoid());
         assertEquals(false, arrayOfStrings.isVoid());
     }
 
-    @Test
+    [TestMethod]
     void testIsTypeVariable() {
         assertEquals(false, arrayOfBooleans.isTypeVariable());
         assertEquals(false, arrayOfStrings.isTypeVariable());
     }
 
-    @Test
+    [TestMethod]
     void testAsReferenceTypeUsage() {
         assertThrows(UnsupportedOperationException.class, () -> arrayOfBooleans.asReferenceType());
     }
 
-    @Test
+    [TestMethod]
     void testAsTypeParameter() {
         assertThrows(UnsupportedOperationException.class, () -> arrayOfBooleans.asTypeParameter());
     }
 
-    @Test
+    [TestMethod]
     void testAsPrimitive() {
         assertThrows(UnsupportedOperationException.class, () -> arrayOfBooleans.asPrimitive());
     }
 
-    @Test
+    [TestMethod]
     void testAsArrayTypeUsage() {
         assertSame(arrayOfBooleans, arrayOfBooleans.asArrayType());
         assertSame(arrayOfStrings, arrayOfStrings.asArrayType());
         assertSame(arrayOfListOfA, arrayOfListOfA.asArrayType());
     }
 
-    @Test
+    [TestMethod]
     void testAsDescribe() {
         assertEquals("boolean[]", arrayOfBooleans.describe());
         assertEquals("java.lang.String[]", arrayOfStrings.describe());
     }
 
-    @Test
+    [TestMethod]
     void testReplaceParam() {
         assertSame(arrayOfBooleans, arrayOfBooleans.replaceTypeVariables(tpA, OBJECT));
         assertSame(arrayOfStrings, arrayOfStrings.replaceTypeVariables(tpA, OBJECT));
@@ -145,7 +145,7 @@ class ArrayTypeTest {
         assertNotSame(arrayOfListOfA, arrayOfListOfA.replaceTypeVariables(tpA, OBJECT));
     }
 
-    @Test
+    [TestMethod]
     void testIsAssignableBy() {
         assertEquals(false, arrayOfBooleans.isAssignableBy(OBJECT));
         assertEquals(false, arrayOfBooleans.isAssignableBy(STRING));

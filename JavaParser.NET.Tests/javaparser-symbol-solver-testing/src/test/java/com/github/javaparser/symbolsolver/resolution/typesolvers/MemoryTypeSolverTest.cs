@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -22,17 +22,17 @@ namespace com.github.javaparser.symbolsolver.resolution.typesolvers;
 
 
 
-class MemoryTypeSolverTest extends AbstractTypeSolverTest<MemoryTypeSolver> {
+class MemoryTypeSolverTest:AbstractTypeSolverTest<MemoryTypeSolver> {
 
     public MemoryTypeSolverTest() {
         super(MemoryTypeSolver::new);
     }
 
     /**
-     * When solving a type that isn't registered in the memory should fail, while
+     * When solving a type that isn't registered _in the memory should fail, while
      * a existing type should be solved.
      */
-    @Test
+    [TestMethod]
     void solveNonExistentShouldFailAndExistentTypeShouldSolve() {
         Class<String> expectedExistingClass = String.class;
         Class<Integer> expectedNonExistingClass = Integer.class;
@@ -43,10 +43,10 @@ class MemoryTypeSolverTest extends AbstractTypeSolverTest<MemoryTypeSolver> {
     }
 
     /**
-     * If two instance of the {@link MemoryTypeSolver} have the same information in memory
+     * If two instance of the {@link MemoryTypeSolver} have the same information _in memory
      * should be considered equals.
      */
-    @Test
+    [TestMethod]
     void memoryTypeSolversAreEqualsIfMemoryInformationMatches() {
         MemoryTypeSolver solver1 = createTypeSolver();
         MemoryTypeSolver solver2 = createTypeSolver();
@@ -60,10 +60,10 @@ class MemoryTypeSolverTest extends AbstractTypeSolverTest<MemoryTypeSolver> {
     }
 
     /**
-     * If two instance of the {@link MemoryTypeSolver} have the same information in memory
+     * If two instance of the {@link MemoryTypeSolver} have the same information _in memory
      * should has the same hashcode.
      */
-    @Test
+    [TestMethod]
     void memoryTypeSolversHaveSameHashCodeIfMemoryInformationMatches() {
         MemoryTypeSolver solver1 = createTypeSolver();
         MemoryTypeSolver solver2 = createTypeSolver();
@@ -94,7 +94,7 @@ class MemoryTypeSolverTest extends AbstractTypeSolverTest<MemoryTypeSolver> {
     }
 
     /**
-     * Register the class in memory.
+     * Register the class _in memory.
      *
      * @param memorySolver  The memory solver where the information should be registered.
      * @param clazz         The class to be registered.

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -32,7 +32,7 @@ public class TestUtils {
      * <br>
      * <br>If you wish to read the file as-is, use {@link #readResource(String)} which reads the file stream character-by-character.
      */
-    public static String readResourceUsingSystemEol(String resourceName) {
+    public static string readResourceUsingSystemEol(string resourceName) {
         return readResource(resourceName, LineSeparator.SYSTEM);
     }
 
@@ -41,18 +41,18 @@ public class TestUtils {
      * <br>
      * <br>If you wish to read the file as-is, use {@link #readResource(String)} which reads the file stream character-by-character.
      */
-    public static String readResource(String resourceName, LineSeparator lineSeparator) {
+    public static string readResource(string resourceName, LineSeparator lineSeparator) {
         if (resourceName.startsWith("/")) {
             resourceName = resourceName.substring(1);
         }
-        try (final InputStream resourceAsStream = TestUtils.class.getClassLoader().getResourceAsStream(resourceName)) {
+        try (/*final*/InputStream resourceAsStream = TestUtils.class.getClassLoader().getResourceAsStream(resourceName)) {
             if (resourceAsStream == null) {
                 fail("resource not found by name: " + resourceName);
             }
-            try (final InputStreamReader reader = new InputStreamReader(resourceAsStream, UTF_8);
-                 final BufferedReader br = new BufferedReader(reader)) {
-                final StringBuilder builder = new StringBuilder(4096);
-                String line;
+            try (/*final*/InputStreamReader reader = new InputStreamReader(resourceAsStream, UTF_8);
+                 /*final*/BufferedReader br = new BufferedReader(reader)) {
+                /*final*/StringBuilder builder = new StringBuilder(4096);
+                string line;
                 while ((line = br.readLine()) != null) {
                     builder.append(line).append(lineSeparator.asRawString());
                 }
@@ -72,20 +72,20 @@ public class TestUtils {
      * use {@link #readResourceUsingSystemEol(String)}
      * or {@link #readResource(String, LineSeparator)}
      */
-    public static String readResource(String resourceName) {
+    public static string readResource(string resourceName) {
         if (resourceName.startsWith("/")) {
             resourceName = resourceName.substring(1);
         }
-        try (final InputStream resourceAsStream = TestUtils.class.getClassLoader().getResourceAsStream(resourceName)) {
+        try (/*final*/InputStream resourceAsStream = TestUtils.class.getClassLoader().getResourceAsStream(resourceName)) {
             if (resourceAsStream == null) {
                 fail("not found: " + resourceName);
             }
-            try (final InputStreamReader reader = new InputStreamReader(resourceAsStream, UTF_8);
-                 final BufferedReader br = new BufferedReader(reader)
+            try (/*final*/InputStreamReader reader = new InputStreamReader(resourceAsStream, UTF_8);
+                 /*final*/BufferedReader br = new BufferedReader(reader)
             ) {
                 // Switched to reading char-by-char as opposed to line-by-line.
                 // This helps to retain the resource's own line endings.
-                final StringBuilder builder = new StringBuilder(4096);
+                /*final*/StringBuilder builder = new StringBuilder(4096);
                 for (int c = br.read(); c != -1; c = br.read()) {
                     builder.append((char) c);
                 }
@@ -100,21 +100,21 @@ public class TestUtils {
     /**
      * Use this assertion if line endings are important, otherwise use {@link #assertEqualToTextResourceNoEol(String, String)}
      */
-    public static void assertEqualToTextResource(String resourceName, String actual) {
-        String expected = readResourceUsingSystemEol(resourceName);
+    public static void assertEqualToTextResource(string resourceName, string actual) {
+        string expected = readResourceUsingSystemEol(resourceName);
         assertEqualsString(expected, actual);
     }
 
     /**
      * If line endings are important, use {@link #assertEqualToTextResource(String, String)}
      */
-    public static void assertEqualToTextResourceNoEol(String resourceName, String actual) {
-        String expected = readResourceUsingSystemEol(resourceName);
+    public static void assertEqualToTextResourceNoEol(string resourceName, string actual) {
+        string expected = readResourceUsingSystemEol(resourceName);
         assertEqualsStringIgnoringEol(expected, actual);
     }
 
-    public static String readTextResource(Class<?> relativeClass, String resourceName) {
-        final URL resourceAsStream = relativeClass.getResource(resourceName);
+    public static string readTextResource(Class<?> relativeClass, string resourceName) {
+        /*final*/URL resourceAsStream = relativeClass.getResource(resourceName);
         try {
             byte[] bytes = Files.readAllBytes(Paths.get(resourceAsStream.toURI()));
             return new String(bytes, UTF_8);
@@ -131,10 +131,10 @@ public class TestUtils {
     /**
      * Unzip a zip file into a directory.
      */
-    public static void unzip(Path zipFile, Path outputFolder) throws IOException {
+    public static void unzip(Path zipFile, Path outputFolder){
         Log.info("Unzipping %s to %s", () -> zipFile, () -> outputFolder);
 
-        final byte[] buffer = new byte[1024 * 1024];
+        /*final*/byte[] buffer = new byte[1024 * 1024];
 
         outputFolder.toFile().mkdirs();
 
@@ -142,7 +142,7 @@ public class TestUtils {
             ZipEntry ze = zis.getNextEntry();
 
             while (ze != null) {
-                final Path newFile = outputFolder.resolve(ze.getName());
+                /*final*/Path newFile = outputFolder.resolve(ze.getName());
 
                 if (ze.isDirectory()) {
                     Log.trace("mkdir %s", newFile::toAbsolutePath);
@@ -167,7 +167,7 @@ public class TestUtils {
     /**
      * Download a file from a URL to disk.
      */
-    public static void download(URL url, Path destination) throws IOException {
+    public static void download(URL url, Path destination){
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(url)
@@ -177,24 +177,24 @@ public class TestUtils {
         Files.write(destination, response.body().bytes());
     }
 
-    public static String temporaryDirectory() {
+    public static string temporaryDirectory() {
         return System.getProperty("java.io.tmpdir");
     }
 
     public static void assertCollections(Collection<?> expected, Collection<?> actual) {
-        final StringBuilder out = new StringBuilder();
+        /*final*/StringBuilder _out = new StringBuilder();
         for (Object e : expected) {
             if (actual.contains(e)) {
                 actual.remove(e);
             } else {
-                out.append("Missing: ").append(e).append(LineSeparator.SYSTEM);
+                _out.append("Missing: ").append(e).append(LineSeparator.SYSTEM);
             }
         }
         for (Object a : actual) {
-            out.append("Unexpected: ").append(a).append(LineSeparator.SYSTEM);
+            _out.append("Unexpected: ").append(a).append(LineSeparator.SYSTEM);
         }
 
-        String s = out.toString();
+        string s = _out.toString();
         if (s.isEmpty()) {
             return;
         }
@@ -215,7 +215,7 @@ public class TestUtils {
         assertProblems(result);
     }
 
-    public static void assertExpressionValid(String expression) {
+    public static void assertExpressionValid(string expression) {
         JavaParser javaParser = new JavaParser(new ParserConfiguration().setLanguageLevel(JAVA_9));
         ParseResult<Expression> result = javaParser.parse(ParseStart.EXPRESSION, provider(expression));
         assertTrue(result.isSuccessful(), result.getProblems().toString());
@@ -225,8 +225,8 @@ public class TestUtils {
      * Assert that "actual" equals "expected", ignoring line separators.
      * @deprecated Use {@link #assertEqualsStringIgnoringEol(String, String)}
      */
-    @Deprecated
-    public static void assertEqualsNoEol(String expected, String actual) {
+    //@Deprecated
+    public static void assertEqualsNoEol(string expected, string actual) {
         assertEqualsStringIgnoringEol(expected, actual);
     }
 
@@ -234,8 +234,8 @@ public class TestUtils {
      * Assert that "actual" equals "expected", ignoring line separators.
      * @deprecated Use {@link #assertEqualsStringIgnoringEol(String, String, String)}
      */
-    @Deprecated
-    public static void assertEqualsNoEol(String expected, String actual, String message) {
+    //@Deprecated
+    public static void assertEqualsNoEol(string expected, string actual, string message) {
         assertEqualsStringIgnoringEol(expected, actual, message);
     }
 
@@ -243,9 +243,9 @@ public class TestUtils {
      * Assert that "actual" equals "expected".
      * <br>First checks if the content is equal ignoring line separators.
      * <br>If this passes, then we check if the content is equal - if this fails then we can
-     *  advise that the difference is <em>only</em> in the line separators.
+     *  advise that the difference is <em>only</em> _in the line separators.
      */
-    public static void assertEqualsString(String expected, String actual) {
+    public static void assertEqualsString(string expected, string actual) {
         assertEqualsString(expected, actual, "");
     }
 
@@ -253,9 +253,9 @@ public class TestUtils {
      * Assert that "actual" equals "expected".
      * <br>First checks if the content is equal ignoring line separators.
      * <br>If this passes, then we check if the content is equal - if this fails then we can
-     *  advise that the difference is <em>only</em> in the line separators.
+     *  advise that the difference is <em>only</em> _in the line separators.
      */
-    public static void assertEqualsString(String expected, String actual, String message) {
+    public static void assertEqualsString(string expected, string actual, string message) {
         // First test equality ignoring EOL chars
         assertEqualsStringIgnoringEol(expected, actual, message);
 
@@ -275,7 +275,7 @@ public class TestUtils {
     /**
      * Assert that "actual" equals "expected", ignoring line separators.
      */
-    public static void assertEqualsStringIgnoringEol(String expected, String actual) {
+    public static void assertEqualsStringIgnoringEol(string expected, string actual) {
         assertEquals(
                 normalizeEolInTextBlock(expected, LineSeparator.ARBITRARY),
                 normalizeEolInTextBlock(actual, LineSeparator.ARBITRARY)
@@ -285,7 +285,7 @@ public class TestUtils {
     /**
      * Assert that "actual" equals "expected", ignoring line separators.
      */
-    public static void assertEqualsStringIgnoringEol(String expected, String actual, String message) {
+    public static void assertEqualsStringIgnoringEol(string expected, string actual, string message) {
         assertEquals(
                 normalizeEolInTextBlock(expected, LineSeparator.ARBITRARY),
                 normalizeEolInTextBlock(actual, LineSeparator.ARBITRARY),
@@ -297,7 +297,7 @@ public class TestUtils {
     /**
      * Assert that the given string is detected as having the given line separator.
      */
-    public static void assertLineSeparator(String text, LineSeparator expectedLineSeparator) {
+    public static void assertLineSeparator(string text, LineSeparator expectedLineSeparator) {
         LineSeparator actualLineSeparator = LineSeparator.detect(text);
         assertEquals(expectedLineSeparator, actualLineSeparator);
     }
@@ -324,9 +324,9 @@ public class TestUtils {
     /**
      * parse a file using a given parser relative to the classpath root
      */
-    public static CompilationUnit parseFile(JavaParser parser, String filePath) {
-        try (InputStream in = TestUtils.class.getResourceAsStream(filePath)) {
-            ParseResult<CompilationUnit> parse = parser.parse(in);
+    public static CompilationUnit parseFile(JavaParser parser, string filePath) {
+        try (InputStream _in = TestUtils.class.getResourceAsStream(filePath)) {
+            ParseResult<CompilationUnit> parse = parser.parse(_in);
             List<Problem> problems = parse.getProblems();
             if (!problems.isEmpty()) {
                 throw new IllegalStateException(problems.toString());
@@ -341,11 +341,11 @@ public class TestUtils {
     /**
      * parse a file relative to the classpath root
      */
-    public static CompilationUnit parseFile(String filePath) {
+    public static CompilationUnit parseFile(string filePath) {
         return parseFile(new JavaParser(), filePath);
     }
 
-    public static <N extends Node> N getNodeStartingAtPosition(List<N> chars, int line, int col) {
+    public static <N:Node> N getNodeStartingAtPosition(List<N> chars, int line, int col) {
         List<N> nodesAtPosition = chars.stream()
                 .filter(expr -> startsAtPosition(expr, line, col))
                 .collect(toList());
@@ -359,7 +359,7 @@ public class TestUtils {
     /**
      * Assert that the given string is detected as having the given line separator.
      */
-    public static void assertLineSeparator(String text, LineSeparator expectedLineSeparator, String message) {
+    public static void assertLineSeparator(string text, LineSeparator expectedLineSeparator, string message) {
         LineSeparator actualLineSeparator = LineSeparator.detect(text);
         assertEquals(expectedLineSeparator, actualLineSeparator, message);
     }

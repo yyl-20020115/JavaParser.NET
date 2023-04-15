@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -22,7 +22,7 @@ namespace com.github.javaparser.symbolsolver;
 
 
 
-public class Issue2602Test extends AbstractSymbolResolutionTest {
+public class Issue2602Test:AbstractSymbolResolutionTest {
 
     private JavaParser javaParser;
     private CompilationUnit cu;
@@ -38,12 +38,12 @@ public class Issue2602Test extends AbstractSymbolResolutionTest {
         javaParser = new JavaParser(configuration);
 
         //language=JAVA
-        String src = "package java.lang;" +
+        string src = "package java.lang;" +
                 " class Object {}\n" +
                 "\n" +
-                "class A extends Object {}\n" +
+                "class A:Object {}\n" +
                 "\n" +
-                "class B extends Object {}\n";
+                "class B:Object {}\n";
 
 
         ParseResult<CompilationUnit> parseResult = javaParser.parse(
@@ -52,7 +52,7 @@ public class Issue2602Test extends AbstractSymbolResolutionTest {
         );
 
 
-//        parseResult.getProblems().forEach(problem -> System.out.println("problem.getVerboseMessage() = " + problem.getVerboseMessage()));
+//        parseResult.getProblems().forEach(problem -> System._out.println("problem.getVerboseMessage() = " + problem.getVerboseMessage()));
 
         assertTrue(parseResult.isSuccessful());
         assertEquals(0, parseResult.getProblems().size(), "Expected zero errors when attempting to parse the input code.");
@@ -70,7 +70,7 @@ public class Issue2602Test extends AbstractSymbolResolutionTest {
     }
 
 
-    @Test
+    [TestMethod]
     public void doTest_checkForRecursionWhen_java_lang_Object_IsA_JavaParserClassDeclaration() {
 
         ResolvedReferenceTypeDeclaration thisDeclaration = typeSolver.solveType("java.lang.A");

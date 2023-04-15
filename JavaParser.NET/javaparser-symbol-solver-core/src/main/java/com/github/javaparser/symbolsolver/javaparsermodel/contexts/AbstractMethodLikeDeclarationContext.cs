@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,17 +27,17 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.contexts;
  * @author Federico Tomassetti
  */
 public abstract class AbstractMethodLikeDeclarationContext
-        <T extends Node & NodeWithParameters<T> & NodeWithTypeParameters<T>> extends AbstractJavaParserContext<T> {
+        <T:Node & NodeWithParameters<T> & NodeWithTypeParameters<T>>:AbstractJavaParserContext<T> {
 
     public AbstractMethodLikeDeclarationContext(T wrappedNode, TypeSolver typeSolver) {
         super(wrappedNode, typeSolver);
     }
 
     
-    public final SymbolReference<? extends ResolvedValueDeclaration> solveSymbol(String name) {
+    public /*final*/SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name) {
         for (Parameter parameter : wrappedNode.getParameters()) {
             SymbolDeclarator sb = JavaParserFactory.getSymbolDeclarator(parameter, typeSolver);
-            SymbolReference<? extends ResolvedValueDeclaration> symbolReference = AbstractJavaParserContext.solveWith(sb, name);
+            SymbolReference<?:ResolvedValueDeclaration> symbolReference = AbstractJavaParserContext.solveWith(sb, name);
             if (symbolReference.isSolved()) {
                 return symbolReference;
             }
@@ -48,7 +48,7 @@ public abstract class AbstractMethodLikeDeclarationContext
     }
 
     
-    public final Optional<ResolvedType> solveGenericType(String name) {
+    public /*final*/Optional<ResolvedType> solveGenericType(string name) {
         // First check if the method-like declaration has type parameters defined.
         // For example: {@code public <T> bool containsAll(Collection<T> c);}
         for (TypeParameter tp : wrappedNode.getTypeParameters()) {
@@ -62,7 +62,7 @@ public abstract class AbstractMethodLikeDeclarationContext
     }
 
     
-    public final Optional<Value> solveSymbolAsValue(String name) {
+    public /*final*/Optional<Value> solveSymbolAsValue(string name) {
         for (Parameter parameter : wrappedNode.getParameters()) {
             SymbolDeclarator sb = JavaParserFactory.getSymbolDeclarator(parameter, typeSolver);
             Optional<Value> symbolReference = solveWithAsValue(sb, name);
@@ -77,7 +77,7 @@ public abstract class AbstractMethodLikeDeclarationContext
     }
 
     
-    public final SymbolReference<ResolvedTypeDeclaration> solveType(String name, List<ResolvedType> typeArguments) {
+    public /*final*/SymbolReference<ResolvedTypeDeclaration> solveType(string name, List<ResolvedType> typeArguments) {
         // TODO: Is null check required?
         if (wrappedNode.getTypeParameters() != null) {
             for (TypeParameter tp : wrappedNode.getTypeParameters()) {
@@ -103,7 +103,7 @@ public abstract class AbstractMethodLikeDeclarationContext
     }
 
     
-    public final SymbolReference<ResolvedMethodDeclaration> solveMethod(String name, List<ResolvedType> argumentsTypes, bool staticOnly) {
+    public /*final*/SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, bool staticOnly) {
         // TODO: Document why staticOnly is forced to be false.
         return solveMethodInParentContext(name, argumentsTypes, false);
     }

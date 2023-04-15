@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -22,15 +22,15 @@ namespace com.github.javaparser.printer.lexicalpreservation.changes;
 
 
 /**
- * The change in value of a property.
+ * The change _in value of a property.
  */
 public class PropertyChange implements Change {
 
-    private final ObservableProperty property;
+    private /*final*/ObservableProperty property;
 
-    private final Object oldValue;
+    private /*final*/Object oldValue;
 
-    private final Object newValue;
+    private /*final*/Object newValue;
 
     public PropertyChange(ObservableProperty property, Object oldValue, Object newValue) {
         this.property = property;

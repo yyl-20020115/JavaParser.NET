@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,11 +24,11 @@ namespace com.github.javaparser.symbolsolver;
 
 
 
-class SolveMethodDeclaredInEnumTest extends AbstractSymbolResolutionTest {
+class SolveMethodDeclaredInEnumTest:AbstractSymbolResolutionTest {
 
-    @Test
-    void methodDeclaredInEnum_enumFromJar() throws IOException {
-        String code = "public class A { public void callEnum() { MyEnum.CONST.method(); }}";
+    [TestMethod]
+    void methodDeclaredInEnum_enumFromJar(){
+        string code = "public class A { public void callEnum() { MyEnum.CONST.method(); }}";
         Path jarPath = adaptPath("src/test/resources/solveMethodDeclaredInEnum/MyEnum.jar");
         TypeSolver typeSolver = new CombinedTypeSolver(new JarTypeSolver(jarPath), new ReflectionTypeSolver());
 

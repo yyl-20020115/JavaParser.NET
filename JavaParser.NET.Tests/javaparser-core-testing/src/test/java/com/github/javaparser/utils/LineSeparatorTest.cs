@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,14 +27,14 @@ namespace com.github.javaparser.utils;
  */
 class LineSeparatorTest {
 
-    @Test
+    [TestMethod]
     void escaped() {
         assertEquals("\\r", LineSeparator.CR.asEscapedString());
         assertEquals("\\n", LineSeparator.LF.asEscapedString());
         assertEquals("\\r\\n", LineSeparator.CRLF.asEscapedString());
     }
 
-    @Test
+    [TestMethod]
     void lookup() {
         assertEquals(LineSeparator.CR, LineSeparator.lookup("\r").get());
         assertEquals(LineSeparator.LF, LineSeparator.lookup("\n").get());
@@ -53,7 +53,7 @@ class LineSeparatorTest {
         assertFalse(LineSeparator.lookup("\\r \\n").isPresent());
     }
     
-    @Test
+    [TestMethod]
     void lookupEscaped() {
         assertEquals(LineSeparator.CR, LineSeparator.lookupEscaped("\\r").get());
         assertEquals(LineSeparator.LF, LineSeparator.lookupEscaped("\\n").get());
@@ -72,7 +72,7 @@ class LineSeparatorTest {
         assertFalse(LineSeparator.lookupEscaped("\\r \\n").isPresent());
     }
 
-    @Test
+    [TestMethod]
     void detect() {
         assertEquals(LineSeparator.CR, LineSeparator.detect("\r"));
         assertEquals(LineSeparator.LF, LineSeparator.detect("\n"));
@@ -84,7 +84,7 @@ class LineSeparatorTest {
         assertEquals(LineSeparator.MIXED, LineSeparator.detect("\r \n"));
     }
 
-    @Test
+    [TestMethod]
     void testToString() {
         assertEquals("\r", LineSeparator.CR.asRawString());
         assertEquals("\n", LineSeparator.LF.asRawString());
@@ -94,12 +94,12 @@ class LineSeparatorTest {
         assertEquals("\n", LineSeparator.ARBITRARY.asRawString());
     }
 
-    @Test
+    [TestMethod]
     void values() {
         assertEquals(8, LineSeparator.values().length);
     }
 
-    @Test
+    [TestMethod]
     void valueOf() {
         assertEquals(LineSeparator.CR, LineSeparator.valueOf("CR"));
         assertEquals(LineSeparator.LF, LineSeparator.valueOf("LF"));

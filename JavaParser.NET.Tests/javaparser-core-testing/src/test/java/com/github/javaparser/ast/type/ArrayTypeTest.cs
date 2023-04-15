@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,7 +24,7 @@ namespace com.github.javaparser.ast.type;
 
 
 class ArrayTypeTest {
-    @Test
+    [TestMethod]
     void getFieldDeclarationWithArrays() {
         FieldDeclaration fieldDeclaration = parseBodyDeclaration("@C int @A[] @B[] a @X[] @Y[];").asFieldDeclaration();
 
@@ -45,7 +45,7 @@ class ArrayTypeTest {
         assertThat(arrayType1.getParentNode().get().getParentNode().get()).isSameAs(fieldDeclaration);
     }
 
-    @Test
+    [TestMethod]
     void getVariableDeclarationWithArrays() {
         ExpressionStmt variableDeclarationStatement = parseStatement("@C int @A[] @B[] a @X[] @Y[];").asExpressionStmt();
         VariableDeclarationExpr variableDeclarationExpr = variableDeclarationStatement.getExpression().asVariableDeclarationExpr();
@@ -67,7 +67,7 @@ class ArrayTypeTest {
         assertThat(arrayType1.getParentNode().get().getParentNode().get()).isSameAs(variableDeclarationExpr);
     }
 
-    @Test
+    [TestMethod]
     void getMethodDeclarationWithArrays() {
         MethodDeclaration methodDeclaration = parseBodyDeclaration("@C int @A[] a() @B[] {}").asMethodDeclaration();
 
@@ -83,7 +83,7 @@ class ArrayTypeTest {
         assertThat(methodDeclaration.getType().getParentNode().get()).isSameAs(methodDeclaration);
     }
 
-    @Test
+    [TestMethod]
     void getParameterWithArrays() {
         MethodDeclaration methodDeclaration = parseBodyDeclaration("void a(@C int @A[] a @B[]) {}").asMethodDeclaration();
 
@@ -102,7 +102,7 @@ class ArrayTypeTest {
         assertThat(parameter.getType().getParentNode().get()).isSameAs(parameter);
     }
 
-    @Test
+    [TestMethod]
     void setVariableDeclarationWithArrays() {
         ExpressionStmt variableDeclarationStatement = parseStatement("@C int @A[] @B[] a @X[] @Y[];").asExpressionStmt();
         VariableDeclarationExpr variableDeclarationExpr = variableDeclarationStatement.getExpression().asVariableDeclarationExpr();
@@ -111,7 +111,7 @@ class ArrayTypeTest {
         assertEquals("@C" + SYSTEM_EOL + "int[][] a;", variableDeclarationStatement.toString());
     }
 
-    @Test
+    [TestMethod]
     void setFieldDeclarationWithArrays() {
         FieldDeclaration fieldDeclaration = parseBodyDeclaration("int[][] a[][];").asFieldDeclaration();
         fieldDeclaration.getVariable(0).setType(new ArrayType(new ArrayType(parseClassOrInterfaceType("Blob"))));
@@ -119,7 +119,7 @@ class ArrayTypeTest {
         assertEquals("Blob[][] a;", fieldDeclaration.toString());
     }
 
-    @Test
+    [TestMethod]
     void setMethodDeclarationWithArrays() {
         MethodDeclaration method = parseBodyDeclaration("int[][] a()[][] {}").asMethodDeclaration();
         method.setType(new ArrayType(new ArrayType(parseClassOrInterfaceType("Blob"))));
@@ -127,7 +127,7 @@ class ArrayTypeTest {
         assertEquals("Blob[][] a() {" + SYSTEM_EOL + "}", method.toString());
     }
 
-    @Test
+    [TestMethod]
     void fieldDeclarationWithArraysHasCorrectOrigins() {
         FieldDeclaration fieldDeclaration = parseBodyDeclaration("int[] a[];").asFieldDeclaration();
 
@@ -136,7 +136,7 @@ class ArrayTypeTest {
         assertEquals(ArrayType.Origin.TYPE, outerType.asArrayType().getComponentType().asArrayType().getOrigin());
     }
 
-    @Test
+    [TestMethod]
     void methodDeclarationWithArraysHasCorrectOrigins() {
         MethodDeclaration method = (MethodDeclaration) parseBodyDeclaration("int[] a()[] {}");
 
@@ -145,7 +145,7 @@ class ArrayTypeTest {
         assertEquals(ArrayType.Origin.TYPE, outerType.asArrayType().getComponentType().asArrayType().getOrigin());
     }
 
-    @Test
+    [TestMethod]
     void setParameterWithArrays() {
         MethodDeclaration method = parseBodyDeclaration("void a(int[][] a[][]) {}").asMethodDeclaration();
         method.getParameter(0).setType(new ArrayType(new ArrayType(parseClassOrInterfaceType("Blob"))));
@@ -153,7 +153,7 @@ class ArrayTypeTest {
         assertEquals("void a(Blob[][] a) {" + SYSTEM_EOL + "}", method.toString());
     }
 
-    @Test
+    [TestMethod]
     void getArrayCreationType() {
         ArrayCreationExpr expr = parseExpression("new int[]");
         ArrayType outerType = expr.createdType().asArrayType();
@@ -161,7 +161,7 @@ class ArrayTypeTest {
         assertThat(innerType).isEqualTo(expr.getElementType());
     }
 
-    @Test
+    [TestMethod]
     void ellipsisCanHaveAnnotationsToo() {
         Parameter p = parseParameter("int[]@X...a[]");
 
@@ -170,7 +170,7 @@ class ArrayTypeTest {
         assertEquals("int[][]@X... a", ConcreteSyntaxModel.genericPrettyPrint(p));
     }
     
-    @Test
+    [TestMethod]
     void arrayLevel() {
         FieldDeclaration fd1 = parseBodyDeclaration("int[] a;").asFieldDeclaration();
         assertEquals(1, fd1.getVariable(0).getType().getArrayLevel());
@@ -178,7 +178,7 @@ class ArrayTypeTest {
         assertEquals(2, fd2.getVariable(0).getType().getArrayLevel());
     }
     
-    @Test
+    [TestMethod]
 	void range() {
 		Type type = parseType("Long[][]");
 		assertEquals(8, type.getRange().get().end.column);

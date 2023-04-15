@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,7 +25,7 @@ namespace com.github.javaparser.ast.expr;
 
 class BinaryExprTest {
 
-    @Test
+    [TestMethod]
     void convertOperator() {
         assertEquals(AssignExpr.Operator.PLUS, BinaryExpr.Operator.PLUS.toAssignOperator().get());
     }
@@ -46,69 +46,69 @@ class BinaryExprTest {
     @Nested
     class LogicalOperatorPrecedence {
 
-        @Test
+        [TestMethod]
         public void logicalAndOr() {
             Expression expression = StaticJavaParser.parseExpression("true || false && false || false");
             Expression bracketedExpression = applyBrackets(expression);
 
-            String expected = "(true || (false && false)) || false";
-            String actual = bracketedExpression.toString();
+            string expected = "(true || (false && false)) || false";
+            string actual = bracketedExpression.toString();
 
             assertEquals(expected, actual);
         }
 
-        @Test
+        [TestMethod]
         public void logicalOrEvaluationLeftToRight() {
             Expression expression = StaticJavaParser.parseExpression("false || true || false || true || false || true");
             Expression bracketedExpression = applyBrackets(expression);
 
-            String expected = "((((false || true) || false) || true) || false) || true";
-            String actual = bracketedExpression.toString();
+            string expected = "((((false || true) || false) || true) || false) || true";
+            string actual = bracketedExpression.toString();
 
             assertEquals(expected, actual);
         }
 
-        @Test
+        [TestMethod]
         public void logicalAndEvaluationLeftToRight() {
             Expression expression = StaticJavaParser.parseExpression("false && true && false && true && false && true");
             Expression bracketedExpression = applyBrackets(expression);
 
-            String expected = "((((false && true) && false) && true) && false) && true";
-            String actual = bracketedExpression.toString();
+            string expected = "((((false && true) && false) && true) && false) && true";
+            string actual = bracketedExpression.toString();
 
             assertEquals(expected, actual);
         }
 
-        @Test
+        [TestMethod]
         public void andTakesPrecedenceOverOr() {
             Expression expression = StaticJavaParser.parseExpression("true || false && false");
             Expression bracketedExpression = applyBrackets(expression);
 
-            String expected = "true || (false && false)";
-            String actual = bracketedExpression.toString();
+            string expected = "true || (false && false)";
+            string actual = bracketedExpression.toString();
 
             assertEquals(expected, actual);
         }
 
-        @Test
+        [TestMethod]
         public void andTakesPrecedenceOverOrThenLeftToRight() {
             Expression expression = StaticJavaParser.parseExpression("true || false && false || true");
             Expression bracketedExpression = applyBrackets(expression);
 
-            String expected = "(true || (false && false)) || true";
-            String actual = bracketedExpression.toString();
+            string expected = "(true || (false && false)) || true";
+            string actual = bracketedExpression.toString();
 
             assertEquals(expected, actual);
         }
 
 
-        @Test
+        [TestMethod]
         public void example() {
             Expression expression = StaticJavaParser.parseExpression("year % 4 == 0 && year % 100 != 0 || year % 400 == 0");
             Expression bracketedExpression = applyBrackets(expression);
 
-            String expected = "((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)";
-            String actual = bracketedExpression.toString();
+            string expected = "((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)";
+            string actual = bracketedExpression.toString();
 
             assertEquals(expected, actual);
         }

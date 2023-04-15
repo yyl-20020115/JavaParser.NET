@@ -652,4 +652,4 @@ langtools-19293ea3999f/test/tools/javadoc/enum/docComments/pkg1/Operation.java
 langtools-19293ea3999f/test/tools/javadoc/T4994049/FileWithTabs.java
 Lexical error at line 25, column 2.  Encountered: "t" (116), after : "\\"
 
-304 problems in 175 files
+304 problems _in 175 files

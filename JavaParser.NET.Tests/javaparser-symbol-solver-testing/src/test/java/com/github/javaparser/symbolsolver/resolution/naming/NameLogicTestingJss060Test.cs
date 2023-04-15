@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,12 +25,12 @@ namespace com.github.javaparser.symbolsolver.resolution.naming;
 
 
 @SlowTest
-class NameLogicTestingJss060Test extends AbstractResolutionTest {
+class NameLogicTestingJss060Test:AbstractResolutionTest {
 
-    private static final Path root = adaptPath("src/test/test_sourcecode/javasymbolsolver_0_6_0");
-    private static final Path src = root.resolve("src");
+    private static /*final*/Path root = adaptPath("src/test/test_sourcecode/javasymbolsolver_0_6_0");
+    private static /*final*/Path src = root.resolve("src");
 
-    private void classifyRoles(String projectName, String className) throws IOException {
+    private void classifyRoles(string projectName, string className){
         Path sourceFile = src.resolve(projectName + "/" + className + ".java");
         CompilationUnit cu = parse(sourceFile);
 
@@ -42,7 +42,7 @@ class NameLogicTestingJss060Test extends AbstractResolutionTest {
         });
     }
 
-    private void classifyReferences(String projectName, String className) throws IOException {
+    private void classifyReferences(string projectName, string className){
         Path sourceFile = src.resolve(projectName + "/" + className + ".java");
         CompilationUnit cu = parse(sourceFile);
 
@@ -56,30 +56,30 @@ class NameLogicTestingJss060Test extends AbstractResolutionTest {
         });
     }
 
-    @Test
-    void classifyRoleToFileToCoreSourceFileInfoExtractor() throws IOException {
+    [TestMethod]
+    void classifyRoleToFileToCoreSourceFileInfoExtractor(){
         classifyRoles("java-symbol-solver-core",
                 "com/github/javaparser/symbolsolver/SourceFileInfoExtractor");
     }
 
-    @Test
-    void classifyRolesCoreCoreResolution() throws IOException {
+    [TestMethod]
+    void classifyRolesCoreCoreResolution(){
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/core/resolution/Context");
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/core/resolution/ContextHelper");
     }
 
-    @Test
-    void classifyRolesCoreDeclarationsCommon() throws IOException {
+    [TestMethod]
+    void classifyRolesCoreDeclarationsCommon(){
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/declarations/common/MethodDeclarationCommonLogic");
     }
 
-    @Test
-    void classifyRolesCoreJavaparserNavigator() throws IOException {
+    [TestMethod]
+    void classifyRolesCoreJavaparserNavigator(){
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparser/Navigator");
     }
 
-    @Test
-    void classifyRolesCoreJavaparsermodel() throws IOException {
+    [TestMethod]
+    void classifyRolesCoreJavaparsermodel(){
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/DefaultVisitorAdapter");
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/JavaParserFacade");
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/JavaParserFactory");
@@ -88,8 +88,8 @@ class NameLogicTestingJss060Test extends AbstractResolutionTest {
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/UnsolvedSymbolException");
     }
 
-    @Test
-    void classifyRolesCoreJavaparsermodelContexts() throws IOException {
+    [TestMethod]
+    void classifyRolesCoreJavaparsermodelContexts(){
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/contexts/AbstractJavaParserContext");
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/contexts/AbstractMethodLikeDeclarationContext");
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/contexts/AnonymousClassDeclarationContext");
@@ -111,18 +111,18 @@ class NameLogicTestingJss060Test extends AbstractResolutionTest {
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/contexts/TryWithResourceContext");
     }
 
-    @Test
-    void classifyRolesCoreJavaparsermodelJavaParserAnonymousClassDeclaration() throws IOException {
+    [TestMethod]
+    void classifyRolesCoreJavaparsermodelJavaParserAnonymousClassDeclaration(){
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/declarations/JavaParserAnonymousClassDeclaration");
     }
 
-    @Test
-    void classifyRolesCoreJavaparsermodelJavaParserInterfaceDeclaration() throws IOException {
+    [TestMethod]
+    void classifyRolesCoreJavaparsermodelJavaParserInterfaceDeclaration(){
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/declarations/JavaParserInterfaceDeclaration");
     }
 
-    @Test
-    void classifyRolesCoreJavaparsermodelDeclarations() throws IOException {
+    [TestMethod]
+    void classifyRolesCoreJavaparsermodelDeclarations(){
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/declarations/DefaultConstructorDeclaration");
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/declarations/Helper");
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/declarations/JavaParserAnnotationDeclaration");
@@ -139,8 +139,8 @@ class NameLogicTestingJss060Test extends AbstractResolutionTest {
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/declarations/JavaParserTypeVariableDeclaration");
     }
 
-    @Test
-    void classifyRolesCoreJavaparsermodelDeclarators() throws IOException {
+    [TestMethod]
+    void classifyRolesCoreJavaparsermodelDeclarators(){
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/declarators/AbstractSymbolDeclarator");
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/declarators/FieldSymbolDeclarator");
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/declarators/NoSymbolDeclarator");
@@ -148,8 +148,8 @@ class NameLogicTestingJss060Test extends AbstractResolutionTest {
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/declarators/VariableSymbolDeclarator");
     }
 
-    @Test
-    void classifyRolesCoreJavassistmodel() throws IOException {
+    [TestMethod]
+    void classifyRolesCoreJavassistmodel(){
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javassistmodel/JavassistClassDeclaration");
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javassistmodel/JavassistConstructorDeclaration");
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javassistmodel/JavassistEnumDeclaration");
@@ -163,14 +163,14 @@ class NameLogicTestingJss060Test extends AbstractResolutionTest {
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javassistmodel/JavassistUtils");
     }
 
-    @Test
-    void classifyRolesCoreModelTypesystem() throws IOException {
+    [TestMethod]
+    void classifyRolesCoreModelTypesystem(){
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/model/typesystem/LazyType");
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/model/typesystem/ReferenceTypeImpl");
     }
 
-    @Test
-    void classifyRolesCoreReflectionmodel() throws IOException {
+    [TestMethod]
+    void classifyRolesCoreReflectionmodel(){
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/reflectionmodel/MyObjectProvider");
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/reflectionmodel/ReflectionClassAdapter");
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/reflectionmodel/ReflectionClassDeclaration");
@@ -185,23 +185,23 @@ class NameLogicTestingJss060Test extends AbstractResolutionTest {
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/reflectionmodel/ReflectionTypeParameter");
     }
 
-    @Test
-    void classifyRolesCoreReflectionmodelComparators() throws IOException {
+    [TestMethod]
+    void classifyRolesCoreReflectionmodelComparators(){
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/reflectionmodel/comparators/ClassComparator");
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/reflectionmodel/comparators/MethodComparator");
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/reflectionmodel/comparators/ParameterComparator");
     }
 
-    @Test
-    void classifyRolesCoreResolution() throws IOException {
+    [TestMethod]
+    void classifyRolesCoreResolution(){
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/resolution/ConstructorResolutionLogic");
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/resolution/MethodResolutionLogic");
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/resolution/SymbolDeclarator");
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/resolution/SymbolSolver");
     }
 
-    @Test
-    void classifyRolesCoreResolutionTypesolvers() throws IOException {
+    [TestMethod]
+    void classifyRolesCoreResolutionTypesolvers(){
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/resolution/typesolvers/CombinedTypeSolver");
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/resolution/typesolvers/JarTypeSolver");
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/resolution/typesolvers/JavaParserTypeSolver");
@@ -209,8 +209,8 @@ class NameLogicTestingJss060Test extends AbstractResolutionTest {
         classifyRoles("java-symbol-solver-core", "com/github/javaparser/symbolsolver/resolution/typesolvers/ReflectionTypeSolver");
     }
 
-    @Test
-    void classifyRolesLogic() throws IOException {
+    [TestMethod]
+    void classifyRolesLogic(){
         classifyRoles("java-symbol-solver-logic", "com/github/javaparser/symbolsolver/logic/AbstractClassDeclaration");
         classifyRoles("java-symbol-solver-logic", "com/github/javaparser/symbolsolver/logic/AbstractTypeDeclaration");
         classifyRoles("java-symbol-solver-logic", "com/github/javaparser/symbolsolver/logic/ConfilictingGenericTypesException");
@@ -220,8 +220,8 @@ class NameLogicTestingJss060Test extends AbstractResolutionTest {
         classifyRoles("java-symbol-solver-logic", "com/github/javaparser/symbolsolver/logic/ObjectProvider");
     }
 
-    @Test
-    void classifyRolesModelDeclarations() throws IOException {
+    [TestMethod]
+    void classifyRolesModelDeclarations(){
         classifyRoles("java-symbol-solver-model", "com/github/javaparser/symbolsolver/model/declarations/AccessLevel");
         classifyRoles("java-symbol-solver-model", "com/github/javaparser/symbolsolver/model/declarations/AnnotationDeclaration");
         classifyRoles("java-symbol-solver-model", "com/github/javaparser/symbolsolver/model/declarations/ClassDeclaration");
@@ -242,26 +242,26 @@ class NameLogicTestingJss060Test extends AbstractResolutionTest {
         classifyRoles("java-symbol-solver-model", "com/github/javaparser/symbolsolver/model/declarations/ValueDeclaration");
     }
 
-    @Test
-    void classifyRolesModelMethodsMethodUsage() throws IOException {
+    [TestMethod]
+    void classifyRolesModelMethodsMethodUsage(){
         classifyRoles("java-symbol-solver-model", "com/github/javaparser/symbolsolver/model/methods/MethodUsage");
     }
 
-    @Test
-    void classifyRolesModelResolution() throws IOException {
+    [TestMethod]
+    void classifyRolesModelResolution(){
         classifyRoles("java-symbol-solver-model", "com/github/javaparser/symbolsolver/model/resolution/SymbolReference");
         classifyRoles("java-symbol-solver-model", "com/github/javaparser/symbolsolver/model/resolution/TypeSolver");
         classifyRoles("java-symbol-solver-model", "com/github/javaparser/symbolsolver/model/resolution/UnsolvedSymbolException");
         classifyRoles("java-symbol-solver-model", "com/github/javaparser/symbolsolver/model/resolution/Value");
     }
 
-    @Test
-    void classifyRolesModelTypesystemReferenceType() throws IOException {
+    [TestMethod]
+    void classifyRolesModelTypesystemReferenceType(){
         classifyRoles("java-symbol-solver-model", "com/github/javaparser/symbolsolver/model/typesystem/ReferenceType");
     }
 
-    @Test
-    void classifyRolesModelTypesystem() throws IOException {
+    [TestMethod]
+    void classifyRolesModelTypesystem(){
         classifyRoles("java-symbol-solver-model", "com/github/javaparser/symbolsolver/model/typesystem/ArrayType");
         classifyRoles("java-symbol-solver-model", "com/github/javaparser/symbolsolver/model/typesystem/LambdaConstraintType");
         classifyRoles("java-symbol-solver-model", "com/github/javaparser/symbolsolver/model/typesystem/NullType");
@@ -273,37 +273,37 @@ class NameLogicTestingJss060Test extends AbstractResolutionTest {
         classifyRoles("java-symbol-solver-model", "com/github/javaparser/symbolsolver/model/typesystem/Wildcard");
     }
 
-    @Test
-    void classifyRolesModelTypesystemParametrization() throws IOException {
+    [TestMethod]
+    void classifyRolesModelTypesystemParametrization(){
         classifyRoles("java-symbol-solver-model", "com/github/javaparser/symbolsolver/model/typesystem/parametrization/TypeParametersMap");
         classifyRoles("java-symbol-solver-model", "com/github/javaparser/symbolsolver/model/typesystem/parametrization/TypeParameterValueProvider");
         classifyRoles("java-symbol-solver-model", "com/github/javaparser/symbolsolver/model/typesystem/parametrization/TypeParametrized");
     }
 
-    @Test
-    void classifyReferencesToFileToCoreSourceFileInfoExtractor() throws IOException {
+    [TestMethod]
+    void classifyReferencesToFileToCoreSourceFileInfoExtractor(){
         classifyReferences("java-symbol-solver-core",
                 "com/github/javaparser/symbolsolver/SourceFileInfoExtractor");
     }
 
-    @Test
-    void classifyReferencesCoreCoreResolution() throws IOException {
+    [TestMethod]
+    void classifyReferencesCoreCoreResolution(){
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/core/resolution/Context");
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/core/resolution/ContextHelper");
     }
 
-    @Test
-    void classifyReferencesCoreDeclarationsCommon() throws IOException {
+    [TestMethod]
+    void classifyReferencesCoreDeclarationsCommon(){
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/declarations/common/MethodDeclarationCommonLogic");
     }
 
-    @Test
-    void classifyReferencesCoreJavaparserNavigator() throws IOException {
+    [TestMethod]
+    void classifyReferencesCoreJavaparserNavigator(){
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparser/Navigator");
     }
 
-    @Test
-    void classifyReferencesCoreJavaparsermodel() throws IOException {
+    [TestMethod]
+    void classifyReferencesCoreJavaparsermodel(){
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/DefaultVisitorAdapter");
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/JavaParserFacade");
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/JavaParserFactory");
@@ -312,8 +312,8 @@ class NameLogicTestingJss060Test extends AbstractResolutionTest {
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/UnsolvedSymbolException");
     }
 
-    @Test
-    void classifyReferencesCoreJavaparsermodelContexts() throws IOException {
+    [TestMethod]
+    void classifyReferencesCoreJavaparsermodelContexts(){
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/contexts/AbstractJavaParserContext");
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/contexts/AbstractMethodLikeDeclarationContext");
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/contexts/AnonymousClassDeclarationContext");
@@ -335,18 +335,18 @@ class NameLogicTestingJss060Test extends AbstractResolutionTest {
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/contexts/TryWithResourceContext");
     }
 
-    @Test
-    void classifyReferencesCoreJavaparsermodelJavaParserAnonymousClassDeclaration() throws IOException {
+    [TestMethod]
+    void classifyReferencesCoreJavaparsermodelJavaParserAnonymousClassDeclaration(){
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/declarations/JavaParserAnonymousClassDeclaration");
     }
 
-    @Test
-    void classifyReferencesCoreJavaparsermodelJavaParserInterfaceDeclaration() throws IOException {
+    [TestMethod]
+    void classifyReferencesCoreJavaparsermodelJavaParserInterfaceDeclaration(){
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/declarations/JavaParserInterfaceDeclaration");
     }
 
-    @Test
-    void classifyReferencesCoreJavaparsermodelDeclarations() throws IOException {
+    [TestMethod]
+    void classifyReferencesCoreJavaparsermodelDeclarations(){
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/declarations/DefaultConstructorDeclaration");
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/declarations/Helper");
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/declarations/JavaParserAnnotationDeclaration");
@@ -363,8 +363,8 @@ class NameLogicTestingJss060Test extends AbstractResolutionTest {
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/declarations/JavaParserTypeVariableDeclaration");
     }
 
-    @Test
-    void classifyReferencesCoreJavaparsermodelDeclarators() throws IOException {
+    [TestMethod]
+    void classifyReferencesCoreJavaparsermodelDeclarators(){
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/declarators/AbstractSymbolDeclarator");
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/declarators/FieldSymbolDeclarator");
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/declarators/NoSymbolDeclarator");
@@ -372,8 +372,8 @@ class NameLogicTestingJss060Test extends AbstractResolutionTest {
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javaparsermodel/declarators/VariableSymbolDeclarator");
     }
 
-    @Test
-    void classifyReferencesCoreJavassistmodel() throws IOException {
+    [TestMethod]
+    void classifyReferencesCoreJavassistmodel(){
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javassistmodel/JavassistClassDeclaration");
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javassistmodel/JavassistConstructorDeclaration");
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javassistmodel/JavassistEnumDeclaration");
@@ -387,14 +387,14 @@ class NameLogicTestingJss060Test extends AbstractResolutionTest {
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/javassistmodel/JavassistUtils");
     }
 
-    @Test
-    void classifyReferencesCoreModelTypesystem() throws IOException {
+    [TestMethod]
+    void classifyReferencesCoreModelTypesystem(){
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/model/typesystem/LazyType");
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/model/typesystem/ReferenceTypeImpl");
     }
 
-    @Test
-    void classifyReferencesCoreReflectionmodel() throws IOException {
+    [TestMethod]
+    void classifyReferencesCoreReflectionmodel(){
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/reflectionmodel/MyObjectProvider");
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/reflectionmodel/ReflectionClassAdapter");
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/reflectionmodel/ReflectionClassDeclaration");
@@ -409,23 +409,23 @@ class NameLogicTestingJss060Test extends AbstractResolutionTest {
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/reflectionmodel/ReflectionTypeParameter");
     }
 
-    @Test
-    void classifyReferencesCoreReflectionmodelComparators() throws IOException {
+    [TestMethod]
+    void classifyReferencesCoreReflectionmodelComparators(){
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/reflectionmodel/comparators/ClassComparator");
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/reflectionmodel/comparators/MethodComparator");
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/reflectionmodel/comparators/ParameterComparator");
     }
 
-    @Test
-    void classifyReferencesCoreResolution() throws IOException {
+    [TestMethod]
+    void classifyReferencesCoreResolution(){
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/resolution/ConstructorResolutionLogic");
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/resolution/MethodResolutionLogic");
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/resolution/SymbolDeclarator");
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/resolution/SymbolSolver");
     }
 
-    @Test
-    void classifyReferencesCoreResolutionTypesolvers() throws IOException {
+    [TestMethod]
+    void classifyReferencesCoreResolutionTypesolvers(){
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/resolution/typesolvers/CombinedTypeSolver");
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/resolution/typesolvers/JarTypeSolver");
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/resolution/typesolvers/JavaParserTypeSolver");
@@ -433,8 +433,8 @@ class NameLogicTestingJss060Test extends AbstractResolutionTest {
         classifyReferences("java-symbol-solver-core", "com/github/javaparser/symbolsolver/resolution/typesolvers/ReflectionTypeSolver");
     }
 
-    @Test
-    void classifyReferencesLogic() throws IOException {
+    [TestMethod]
+    void classifyReferencesLogic(){
         classifyReferences("java-symbol-solver-logic", "com/github/javaparser/symbolsolver/logic/AbstractClassDeclaration");
         classifyReferences("java-symbol-solver-logic", "com/github/javaparser/symbolsolver/logic/AbstractTypeDeclaration");
         classifyReferences("java-symbol-solver-logic", "com/github/javaparser/symbolsolver/logic/ConfilictingGenericTypesException");
@@ -444,8 +444,8 @@ class NameLogicTestingJss060Test extends AbstractResolutionTest {
         classifyReferences("java-symbol-solver-logic", "com/github/javaparser/symbolsolver/logic/ObjectProvider");
     }
 
-    @Test
-    void classifyReferencesModelDeclarations() throws IOException {
+    [TestMethod]
+    void classifyReferencesModelDeclarations(){
         classifyReferences("java-symbol-solver-model", "com/github/javaparser/symbolsolver/model/declarations/AccessLevel");
         classifyReferences("java-symbol-solver-model", "com/github/javaparser/symbolsolver/model/declarations/AnnotationDeclaration");
         classifyReferences("java-symbol-solver-model", "com/github/javaparser/symbolsolver/model/declarations/ClassDeclaration");
@@ -466,26 +466,26 @@ class NameLogicTestingJss060Test extends AbstractResolutionTest {
         classifyReferences("java-symbol-solver-model", "com/github/javaparser/symbolsolver/model/declarations/ValueDeclaration");
     }
 
-    @Test
-    void classifyReferencesModelMethodsMethodUsage() throws IOException {
+    [TestMethod]
+    void classifyReferencesModelMethodsMethodUsage(){
         classifyReferences("java-symbol-solver-model", "com/github/javaparser/symbolsolver/model/methods/MethodUsage");
     }
 
-    @Test
-    void classifyReferencesModelResolution() throws IOException {
+    [TestMethod]
+    void classifyReferencesModelResolution(){
         classifyReferences("java-symbol-solver-model", "com/github/javaparser/symbolsolver/model/resolution/SymbolReference");
         classifyReferences("java-symbol-solver-model", "com/github/javaparser/symbolsolver/model/resolution/TypeSolver");
         classifyReferences("java-symbol-solver-model", "com/github/javaparser/symbolsolver/model/resolution/UnsolvedSymbolException");
         classifyReferences("java-symbol-solver-model", "com/github/javaparser/symbolsolver/model/resolution/Value");
     }
 
-    @Test
-    void classifyReferencesModelTypesystemReferenceType() throws IOException {
+    [TestMethod]
+    void classifyReferencesModelTypesystemReferenceType(){
         classifyReferences("java-symbol-solver-model", "com/github/javaparser/symbolsolver/model/typesystem/ReferenceType");
     }
 
-    @Test
-    void classifyReferencesModelTypesystem() throws IOException {
+    [TestMethod]
+    void classifyReferencesModelTypesystem(){
         classifyReferences("java-symbol-solver-model", "com/github/javaparser/symbolsolver/model/typesystem/ArrayType");
         classifyReferences("java-symbol-solver-model", "com/github/javaparser/symbolsolver/model/typesystem/LambdaConstraintType");
         classifyReferences("java-symbol-solver-model", "com/github/javaparser/symbolsolver/model/typesystem/NullType");
@@ -497,8 +497,8 @@ class NameLogicTestingJss060Test extends AbstractResolutionTest {
         classifyReferences("java-symbol-solver-model", "com/github/javaparser/symbolsolver/model/typesystem/Wildcard");
     }
 
-    @Test
-    void classifyReferencesModelTypesystemParametrization() throws IOException {
+    [TestMethod]
+    void classifyReferencesModelTypesystemParametrization(){
         classifyReferences("java-symbol-solver-model", "com/github/javaparser/symbolsolver/model/typesystem/parametrization/TypeParametersMap");
         classifyReferences("java-symbol-solver-model", "com/github/javaparser/symbolsolver/model/typesystem/parametrization/TypeParameterValueProvider");
         classifyReferences("java-symbol-solver-model", "com/github/javaparser/symbolsolver/model/typesystem/parametrization/TypeParametrized");

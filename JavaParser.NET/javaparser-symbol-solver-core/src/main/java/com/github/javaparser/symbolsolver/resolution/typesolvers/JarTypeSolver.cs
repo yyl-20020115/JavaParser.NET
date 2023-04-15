@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -30,58 +30,58 @@ namespace com.github.javaparser.symbolsolver.resolution.typesolvers;
  */
 public class JarTypeSolver implements TypeSolver {
 
-    private static final String CLASS_EXTENSION = ".class";
+    private static /*final*/string CLASS_EXTENSION = ".class";
 
     /**
      * @deprecated Use of this static method (previously following singleton pattern) is strongly discouraged
-     * and will be removed in a future version. For now, it has been modified to return a new instance to
-     * prevent the IllegalStateException being thrown (as reported in #2547), allowing it to be called multiple times.
+     * and will be removed _in a future version. For now, it has been modified to return a new instance to
+     * prevent the IllegalStateException being thrown (as reported _in #2547), allowing it to be called multiple times.
      */
-    @Deprecated
-    public static JarTypeSolver getJarTypeSolver(String pathToJar) throws IOException {
+    //@Deprecated
+    public static JarTypeSolver getJarTypeSolver(string pathToJar){
         return new JarTypeSolver(pathToJar);
     }
 
     /**
      * Convert the entry path into a qualified name.
      *
-     * The entries in Jar files follows the format {@code com/github/javaparser/ASTParser$JJCalls.class}
-     * while in the type solver we need to work with {@code com.github.javaparser.ASTParser.JJCalls}.
+     * The entries _in Jar files follows the format {@code com/github/javaparser/ASTParser$JJCalls.class}
+     * while _in the type solver we need to work with {@code com.github.javaparser.ASTParser.JJCalls}.
      *
      * @param entryPath The entryPath to be converted.
      *
      * @return The qualified name for the entryPath.
      */
-    private static String convertEntryPathToClassName(String entryPath) {
+    private static string convertEntryPathToClassName(string entryPath) {
         if (!entryPath.endsWith(CLASS_EXTENSION)) {
             throw new IllegalArgumentException(String.format("The entry path should end with %s", CLASS_EXTENSION));
         }
-        String className = entryPath.substring(0, entryPath.length() - CLASS_EXTENSION.length());
+        string className = entryPath.substring(0, entryPath.length() - CLASS_EXTENSION.length());
         className = className.replace('/', '.');
         className = className.replace('$', '.');
         return className;
     }
 
     /**
-     * Convert the entry path into a qualified name to be used in {@link ClassPool}.
+     * Convert the entry path into a qualified name to be used _in {@link ClassPool}.
      *
-     * The entries in Jar files follows the format {@code com/github/javaparser/ASTParser$JJCalls.class}
-     * while in the class pool we need to work with {@code com.github.javaparser.ASTParser$JJCalls}.
+     * The entries _in Jar files follows the format {@code com/github/javaparser/ASTParser$JJCalls.class}
+     * while _in the class pool we need to work with {@code com.github.javaparser.ASTParser$JJCalls}.
      *
      * @param entryPath The entryPath to be converted.
      *
-     * @return The qualified name to be used in the class pool.
+     * @return The qualified name to be used _in the class pool.
      */
-    private static String convertEntryPathToClassPoolName(String entryPath) {
+    private static string convertEntryPathToClassPoolName(string entryPath) {
         if (!entryPath.endsWith(CLASS_EXTENSION)) {
             throw new IllegalArgumentException(String.format("The entry path should end with %s", CLASS_EXTENSION));
         }
-        String className = entryPath.substring(0, entryPath.length() - CLASS_EXTENSION.length());
+        string className = entryPath.substring(0, entryPath.length() - CLASS_EXTENSION.length());
         return className.replace('/', '.');
     }
 
-    private final ClassPool classPool = new ClassPool();
-    private final Map<String, String> knownClasses = new HashMap<>();
+    private /*final*/ClassPool classPool = new ClassPool();
+    private /*final*/Map<String, String> knownClasses = new HashMap<>();
 
     private TypeSolver parent;
 
@@ -92,7 +92,7 @@ public class JarTypeSolver implements TypeSolver {
      *
      * @throws IOException If an I/O exception occurs while reading the Jar.
      */
-    public JarTypeSolver(Path pathToJar) throws IOException {
+    public JarTypeSolver(Path pathToJar){
         this(pathToJar.toFile());
     }
 
@@ -103,31 +103,31 @@ public class JarTypeSolver implements TypeSolver {
      *
      * @throws IOException If an I/O exception occurs while reading the Jar.
      */
-    public JarTypeSolver(File pathToJar) throws IOException {
+    public JarTypeSolver(File pathToJar){
         this(pathToJar.getAbsolutePath());
     }
 
     /**
-     * Create a {@link JarTypeSolver} from a path in a {@link String} format.
+     * Create a {@link JarTypeSolver} from a path _in a {@link String} format.
      *
      * @param pathToJar The path pointing to the jar.
      *
      * @throws IOException If an I/O exception occurs while reading the Jar.
      */
-    public JarTypeSolver(String pathToJar) throws IOException {
+    public JarTypeSolver(string pathToJar){
         addPathToJar(pathToJar);
     }
 
     /**
      * Create a {@link JarTypeSolver} from a {@link InputStream}.
      *
-     * The content will be dumped into a temporary file to be used in the type solver.
+     * The content will be dumped into a temporary file to be used _in the type solver.
      *
      * @param jarInputStream The input stream to be used.
      *
      * @throws IOException If an I/O exception occurs while creating the temporary file.
      */
-    public JarTypeSolver(InputStream jarInputStream) throws IOException {
+    public JarTypeSolver(InputStream jarInputStream){
         addPathToJar(dumpToTempFile(jarInputStream).getAbsolutePath());
     }
 
@@ -142,7 +142,7 @@ public class JarTypeSolver implements TypeSolver {
      *
      * @throws IOException If an I/O exception occurs while creating the temporary file.
      */
-    private File dumpToTempFile(InputStream inputStream) throws IOException {
+    private File dumpToTempFile(InputStream inputStream){
         File tempFile = File.createTempFile("jar_file_from_input_stream", ".jar");
         tempFile.deleteOnExit();
 
@@ -166,7 +166,7 @@ public class JarTypeSolver implements TypeSolver {
      *
      * @throws IOException If an I/O error occurs while reading the JarFile.
      */
-    private void addPathToJar(String pathToJar) throws IOException {
+    private void addPathToJar(string pathToJar){
         try {
             classPool.appendClassPath(pathToJar);
             registerKnownClassesFor(pathToJar);
@@ -189,7 +189,7 @@ public class JarTypeSolver implements TypeSolver {
      *
      * @throws IOException If an I/O error occurs while reading the JarFile.
      */
-    private void registerKnownClassesFor(String pathToJar) throws IOException {
+    private void registerKnownClassesFor(string pathToJar){
         try (JarFile jarFile = new JarFile(pathToJar)) {
 
             Enumeration<JarEntry> jarEntries = jarFile.entries();
@@ -198,11 +198,11 @@ public class JarTypeSolver implements TypeSolver {
                 JarEntry entry = jarEntries.nextElement();
                 // Check if the entry is a .class file
                 if (!entry.isDirectory() && entry.getName().endsWith(CLASS_EXTENSION)) {
-                    String qualifiedName = convertEntryPathToClassName(entry.getName());
-                    String classPoolName = convertEntryPathToClassPoolName(entry.getName());
+                    string qualifiedName = convertEntryPathToClassName(entry.getName());
+                    string classPoolName = convertEntryPathToClassPoolName(entry.getName());
 
                     // If the qualified name is the same as the class pool name we don't need to duplicate store two
-                    // different String instances. Let's reuse the same.
+                    // different string instances. Let's reuse the same.
                     if (qualifiedName.equals(classPoolName)) {
                         knownClasses.put(qualifiedName, qualifiedName);
                     } else {
@@ -215,7 +215,7 @@ public class JarTypeSolver implements TypeSolver {
     }
 
     /**
-     * Get the set of classes that can be resolved in the current type solver.
+     * Get the set of classes that can be resolved _in the current type solver.
      *
      * @return The set of known classes.
      */
@@ -241,10 +241,10 @@ public class JarTypeSolver implements TypeSolver {
     }
 
     @Override
-    public SymbolReference<ResolvedReferenceTypeDeclaration> tryToSolveType(String name) {
+    public SymbolReference<ResolvedReferenceTypeDeclaration> tryToSolveType(string name) {
 
-        String storedKey = knownClasses.get(name);
-        // If the name is not registered in the list we can safely say is not solvable here
+        string storedKey = knownClasses.get(name);
+        // If the name is not registered _in the list we can safely say is not solvable here
         if (storedKey == null) {
             return SymbolReference.unsolved();
         }
@@ -252,7 +252,7 @@ public class JarTypeSolver implements TypeSolver {
         try {
             return SymbolReference.solved(JavassistFactory.toTypeDeclaration(classPool.get(storedKey), getRoot()));
         } catch (NotFoundException e) {
-            // The names in stored key should always be resolved.
+            // The names _in stored key should always be resolved.
             // But if for some reason this happen, the user is notified.
             throw new IllegalStateException(String.format(
                     "Unable to get class with name %s from class pool." +
@@ -262,7 +262,7 @@ public class JarTypeSolver implements TypeSolver {
     }
 
     @Override
-    public ResolvedReferenceTypeDeclaration solveType(String name) throws UnsolvedSymbolException {
+    public ResolvedReferenceTypeDeclaration solveType(string name) throws UnsolvedSymbolException {
         SymbolReference<ResolvedReferenceTypeDeclaration> ref = tryToSolveType(name);
         if (ref.isSolved()) {
             return ref.getCorrespondingDeclaration();

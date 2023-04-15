@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,10 +24,10 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel;
 
 
 
-public class TypeExtractor extends DefaultVisitorAdapter {
+public class TypeExtractor:DefaultVisitorAdapter {
 
-    private static final String JAVA_LANG_STRING = String.class.getCanonicalName();
-    private final ResolvedType stringReferenceType;
+    private static /*final*/string JAVA_LANG_STRING = String.class.getCanonicalName();
+    private /*final*/ResolvedType stringReferenceType;
 
     private TypeSolver typeSolver;
     private JavaParserFacade facade;
@@ -36,16 +36,16 @@ public class TypeExtractor extends DefaultVisitorAdapter {
     public TypeExtractor(TypeSolver typeSolver, JavaParserFacade facade) {
         this.typeSolver = typeSolver;
         this.facade = facade;
-        // pre-calculate the String reference (optimization)
+        // pre-calculate the string reference (optimization)
         // consider a LazyType to avoid having to systematically declare a ReflectionTypeSolver
         stringReferenceType = new LazyType(v -> new ReferenceTypeImpl(typeSolver.solveType(JAVA_LANG_STRING)));
     }
 
     @Override
     public ResolvedType visit(VariableDeclarator node, Boolean solveLambdas) {
-        if (demandParentNode(node) instanceof FieldDeclaration) {
+        if (demandParentNode(node) is FieldDeclaration) {
             return facade.convertToUsage(node.getType());
-        } else if (demandParentNode(node) instanceof VariableDeclarationExpr) {
+        } else if (demandParentNode(node) is VariableDeclarationExpr) {
             return facade.convertToUsage(node.getType());
         }
         throw new UnsupportedOperationException(demandParentNode(node).getClass().getCanonicalName());
@@ -53,7 +53,7 @@ public class TypeExtractor extends DefaultVisitorAdapter {
 
     @Override
     public ResolvedType visit(Parameter node, Boolean solveLambdas) {
-        if (node.getType() instanceof UnknownType) {
+        if (node.getType() is UnknownType) {
             throw new IllegalStateException("Parameter has unknown type: " + node);
         }
         return facade.convertToUsage(node.getType());
@@ -190,8 +190,8 @@ public class TypeExtractor extends DefaultVisitorAdapter {
     @Override
     public ResolvedType visit(FieldAccessExpr node, Boolean solveLambdas) {
         // We should understand if this is a static access
-        if (node.getScope() instanceof NameExpr ||
-                node.getScope() instanceof FieldAccessExpr) {
+        if (node.getScope() is NameExpr ||
+                node.getScope() is FieldAccessExpr) {
             Expression staticValue = node.getScope();
             SymbolReference<ResolvedTypeDeclaration> typeAccessedStatically = JavaParserFactory.getContext(node, typeSolver).solveType(staticValue.toString());
             if (typeAccessedStatically.isSolved()) {
@@ -199,14 +199,14 @@ public class TypeExtractor extends DefaultVisitorAdapter {
                 return solveDotExpressionType(
                         typeAccessedStatically.getCorrespondingDeclaration().asReferenceType(), node);
             }
-        } else if (node.getScope() instanceof ThisExpr) {
+        } else if (node.getScope() is ThisExpr) {
             // If we are accessing through a 'this' expression, first resolve the type
             // corresponding to 'this'
             SymbolReference<ResolvedTypeDeclaration> solve = facade.solve((ThisExpr) node.getScope());
-            // If found get it's declaration and get the field in there
+            // If found get it's declaration and get the field _in there
             if (solve.isSolved()) {
                 ResolvedTypeDeclaration correspondingDeclaration = solve.getCorrespondingDeclaration();
-                if (correspondingDeclaration instanceof ResolvedReferenceTypeDeclaration) {
+                if (correspondingDeclaration is ResolvedReferenceTypeDeclaration) {
                     return solveDotExpressionType(correspondingDeclaration.asReferenceType(), node);
                 }
             }
@@ -303,12 +303,12 @@ public class TypeExtractor extends DefaultVisitorAdapter {
     @Override
     public ResolvedType visit(TypeExpr node, Boolean solveLambdas) {
         Log.trace("getType on type expr %s", ()-> node);
-        if (!(node.getType() instanceof ClassOrInterfaceType)) {
+        if (!(node.getType() is ClassOrInterfaceType)) {
             throw new UnsupportedOperationException(node.getType().getClass().getCanonicalName());
         }
 
         ClassOrInterfaceType classOrInterfaceType = (ClassOrInterfaceType) node.getType();
-        String nameWithScope = classOrInterfaceType.getNameWithScope();
+        string nameWithScope = classOrInterfaceType.getNameWithScope();
 
         // JLS 15.13 - ReferenceType :: [TypeArguments] Identifier
         SymbolReference<ResolvedTypeDeclaration> typeDeclarationSymbolReference = JavaParserFactory
@@ -337,8 +337,8 @@ public class TypeExtractor extends DefaultVisitorAdapter {
         // If 'this' is prefixed by a class eg. MyClass.this
         if (node.getTypeName().isPresent()) {
             // Get the class name
-            String className = node.getTypeName().get().asString();
-            // Attempt to resolve locally in Compilation unit
+            string className = node.getTypeName().get().asString();
+            // Attempt to resolve locally _in Compilation unit
             // first try a buttom/up approach
             try {
                 return new ReferenceTypeImpl(
@@ -359,7 +359,7 @@ public class TypeExtractor extends DefaultVisitorAdapter {
     public ResolvedType visit(SuperExpr node, Boolean solveLambdas) {
         // If 'super' is prefixed by a class eg. MyClass.this
         if (node.getTypeName().isPresent()) {
-            String className = node.getTypeName().get().asString();
+            string className = node.getTypeName().get().asString();
             SymbolReference<ResolvedTypeDeclaration> resolvedTypeNameRef = JavaParserFactory.getContext(node, typeSolver).solveType(className);
             if (resolvedTypeNameRef.isSolved()) {
                 // Cfr JLS $15.12.1
@@ -367,7 +367,7 @@ public class TypeExtractor extends DefaultVisitorAdapter {
                 if (resolvedTypeName.isInterface()) {
                     return new ReferenceTypeImpl(resolvedTypeName.asInterface());
                 } else if (resolvedTypeName.isClass()) {
-                    // TODO: Maybe include a presence check? e.g. in the case of `java.lang.Object` there will be no superclass.
+                    // TODO: Maybe include a presence check? e.g. _in the case of `java.lang.Object` there will be no superclass.
                     return resolvedTypeName.asClass().getSuperClass().orElseThrow(() -> new RuntimeException("super class unexpectedly empty"));
                 } else {
                     throw new UnsupportedOperationException(node.getClass().getCanonicalName());
@@ -378,8 +378,8 @@ public class TypeExtractor extends DefaultVisitorAdapter {
         }
 
         ResolvedTypeDeclaration typeOfNode = facade.getTypeDeclaration(facade.findContainingTypeDeclOrObjectCreationExpr(node));
-        if (typeOfNode instanceof ResolvedClassDeclaration) {
-            // TODO: Maybe include a presence check? e.g. in the case of `java.lang.Object` there will be no superclass.
+        if (typeOfNode is ResolvedClassDeclaration) {
+            // TODO: Maybe include a presence check? e.g. _in the case of `java.lang.Object` there will be no superclass.
             return ((ResolvedClassDeclaration) typeOfNode).getSuperClass().orElseThrow(() -> new RuntimeException("super class unexpectedly empty"));
         } else {
             throw new UnsupportedOperationException(node.getClass().getCanonicalName());
@@ -417,7 +417,7 @@ public class TypeExtractor extends DefaultVisitorAdapter {
     @Override
     public ResolvedType visit(LambdaExpr node, Boolean solveLambdas) {
         Node parentNode = demandParentNode(node, IS_NOT_ENCLOSED_EXPR);
-        if (parentNode instanceof MethodCallExpr) {
+        if (parentNode is MethodCallExpr) {
             MethodCallExpr callExpr = (MethodCallExpr) parentNode;
             int pos = getParamPos(node);
             SymbolReference<ResolvedMethodDeclaration> refMethod = facade.solve(callExpr);
@@ -435,7 +435,7 @@ public class TypeExtractor extends DefaultVisitorAdapter {
 
                     // If it is a static call we should not try to get the type of the scope
                     boolean staticCall = false;
-                    if (scope instanceof NameExpr) {
+                    if (scope is NameExpr) {
                         NameExpr nameExpr = (NameExpr) scope;
                         try {
                             SymbolReference<ResolvedTypeDeclaration> type = JavaParserFactory.getContext(nameExpr, typeSolver).solveType(nameExpr.getName().getId());
@@ -458,7 +458,7 @@ public class TypeExtractor extends DefaultVisitorAdapter {
                 result = resolveLambda(node, result);
             }
             return result;
-        } else if (demandParentNode(node) instanceof VariableDeclarator)
+        } else if (demandParentNode(node) is VariableDeclarator)
         {
             VariableDeclarator decExpr = (VariableDeclarator) demandParentNode(node);
             ResolvedType result = decExpr.getType().resolve();
@@ -467,7 +467,7 @@ public class TypeExtractor extends DefaultVisitorAdapter {
                 result = resolveLambda(node, result);
             }
             return result;
-        } else if (demandParentNode(node) instanceof AssignExpr) {
+        } else if (demandParentNode(node) is AssignExpr) {
             AssignExpr assExpr = (AssignExpr) demandParentNode(node);
             ResolvedType result = assExpr.calculateResolvedType();
 
@@ -485,7 +485,7 @@ public class TypeExtractor extends DefaultVisitorAdapter {
         Context ctx = JavaParserFactory.getContext(node, typeSolver);
         result = result.solveGenericTypes(ctx);
 
-        //We should find out which is the functional method (e.g., apply) and replace the params of the
+        //We should find _out which is the functional method (e.g., apply) and replace the params of the
         //solveLambdas with it, to derive so the values. We should also consider the value returned by the
         //lambdas
         Optional<MethodUsage> functionalMethod = FunctionalInterfaceLogic.getFunctionalMethod(result);
@@ -496,7 +496,7 @@ public class TypeExtractor extends DefaultVisitorAdapter {
             InferenceContext funcInterfaceCtx = new InferenceContext(typeSolver);
 
             // At this point parameterType
-            // if Function<T=? super Stream.T, ? extends map.R>
+            // if Function<T=? super Stream.T, ?:map.R>
             // we should replace Stream.T
             ResolvedType functionalInterfaceType = ReferenceTypeImpl.undeterminedParameters(functionalMethod.get().getDeclaration().declaringType());
 
@@ -504,12 +504,12 @@ public class TypeExtractor extends DefaultVisitorAdapter {
 
             ResolvedType actualType;
 
-            if (lambdaExpr.getBody() instanceof ExpressionStmt) {
+            if (lambdaExpr.getBody() is ExpressionStmt) {
                 actualType = facade.getType(((ExpressionStmt) lambdaExpr.getBody()).getExpression());
-            } else if (lambdaExpr.getBody() instanceof BlockStmt) {
+            } else if (lambdaExpr.getBody() is BlockStmt) {
                 BlockStmt blockStmt = (BlockStmt) lambdaExpr.getBody();
 
-                // Get all the return statements in the lambda block
+                // Get all the return statements _in the lambda block
                 List<ReturnStmt> returnStmts = blockStmt.findAll(ReturnStmt.class);
 
                 if (returnStmts.size() > 0) {
@@ -538,7 +538,7 @@ public class TypeExtractor extends DefaultVisitorAdapter {
 
             // if the functional method returns void anyway
             // we don't need to bother inferring types
-            if (!(formalType instanceof ResolvedVoidType)) {
+            if (!(formalType is ResolvedVoidType)) {
                 lambdaCtx.addPair(result, functionalTypeWithReturn);
                 result = lambdaCtx.resolve(lambdaCtx.addSingle(result));
             }
@@ -552,7 +552,7 @@ public class TypeExtractor extends DefaultVisitorAdapter {
 			return node.getScope().calculateResolvedType();
 		}
         Node parentNode = demandParentNode(node);
-        if (parentNode instanceof MethodCallExpr) {
+        if (parentNode is MethodCallExpr) {
             MethodCallExpr callExpr = (MethodCallExpr) parentNode;
             int pos = getParamPos(node);
             SymbolReference<ResolvedMethodDeclaration> refMethod = facade.solve(callExpr, false);
@@ -567,7 +567,7 @@ public class TypeExtractor extends DefaultVisitorAdapter {
                 Context ctx = JavaParserFactory.getContext(node, typeSolver);
                 result = result.solveGenericTypes(ctx);
 
-                //We should find out which is the functional method (e.g., apply) and replace the params of the
+                //We should find _out which is the functional method (e.g., apply) and replace the params of the
                 //solveLambdas with it, to derive so the values. We should also consider the value returned by the
                 //lambdas
                 Optional<MethodUsage> functionalMethodOpt = FunctionalInterfaceLogic.getFunctionalMethod(result);
@@ -612,7 +612,7 @@ public class TypeExtractor extends DefaultVisitorAdapter {
 
     private static int getParamPos(Expression node) {
         Node parentNode = demandParentNode(node, IS_NOT_ENCLOSED_EXPR);
-        if (parentNode instanceof MethodCallExpr) {
+        if (parentNode is MethodCallExpr) {
             MethodCallExpr call = (MethodCallExpr) parentNode;
             return call.getArgumentPosition(node, EXCLUDE_ENCLOSED_EXPR);
         }

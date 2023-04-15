@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,37 +25,37 @@ namespace com.github.javaparser;
 
 
 class CommentsInserterTest {
-    private String makeFilename(String sampleName) {
+    private string makeFilename(string sampleName) {
         return "com/github/javaparser/issue_samples/" + sampleName + ".java.txt";
     }
 
-    private String makeExpectedFilename(String sampleName) {
+    private string makeExpectedFilename(string sampleName) {
         return "/com/github/javaparser/issue_samples/" + sampleName + ".java.expected.txt";
     }
 
-    private ParseResult<CompilationUnit> parseSample(String sampleName) throws IOException {
+    private ParseResult<CompilationUnit> parseSample(string sampleName){
         Provider p = Providers.resourceProvider(makeFilename(sampleName));
         return new JavaParser().parse(ParseStart.COMPILATION_UNIT, p);
     }
 
     /**
-     * Issue: "When there is a String constant "\\" compilationUnit ignores all further comments"
+     * Issue: "When there is a string constant "\\" compilationUnit ignores all further comments"
      */
-    @Test
-    void issue290() throws IOException {
+    [TestMethod]
+    void issue290(){
         ParseResult<CompilationUnit> result = this.parseSample("Issue290");
         CommentsCollection cc = result.getCommentsCollection().get();
         assertEquals(1, cc.getLineComments().size());
         assertEquals(1, cc.getJavadocComments().size());
     }
 
-    @Test
-    void issue624() throws IOException {
+    [TestMethod]
+    void issue624(){
         this.parseSample("Issue624");
         // Should not fail
     }
 
-    @Test
+    [TestMethod]
     void issue200EnumConstantsWithCommentsForceVerticalAlignment() {
         CompilationUnit cu = TestParser.parseCompilationUnit("public enum X {" + SYSTEM_EOL +
                 "    /** const1 javadoc */" + SYSTEM_EOL +
@@ -76,7 +76,7 @@ class CommentsInserterTest {
                 "}\n", cu.toString());
     }
 
-    @Test
+    [TestMethod]
     void issue234LosingCommentsInArrayInitializerExpr() {
         CompilationUnit cu = TestParser.parseCompilationUnit("@Anno(stuff={" + SYSTEM_EOL +
                 "    // Just," + SYSTEM_EOL +
@@ -96,8 +96,8 @@ class CommentsInserterTest {
     }
 
 
-    @Test
-    void issue412() throws IOException {
+    [TestMethod]
+    void issue412(){
         CompilationUnit cu = parseSample("Issue412").getResult().get();
         assertEqualToTextResourceNoEol(makeExpectedFilename("Issue412"), cu.toString());
     }

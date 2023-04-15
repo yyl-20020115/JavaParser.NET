@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,7 +25,7 @@ namespace com.github.javaparser.symbolsolver.resolution;
 
 
 
-class SymbolSolverWithJavassistClassTest extends AbstractSymbolResolutionTest {
+class SymbolSolverWithJavassistClassTest:AbstractSymbolResolutionTest {
     private TypeSolver typeSolver;
     private Solver symbolSolver;
     private JavassistClassDeclaration classDeclarationConcreteClass;
@@ -37,9 +37,9 @@ class SymbolSolverWithJavassistClassTest extends AbstractSymbolResolutionTest {
     private JavassistClassDeclaration classDeclarationInterfaceUserExcludedJar;
 
     @BeforeEach
-    void setup() throws IOException {
-        final Path pathToMainJar = adaptPath("src/test/resources/javassist_symbols/main_jar/main_jar.jar");
-        final Path pathToIncludedJar = adaptPath("src/test/resources/javassist_symbols/included_jar/included_jar.jar");
+    void setup(){
+        /*final*/Path pathToMainJar = adaptPath("src/test/resources/javassist_symbols/main_jar/main_jar.jar");
+        /*final*/Path pathToIncludedJar = adaptPath("src/test/resources/javassist_symbols/included_jar/included_jar.jar");
         typeSolver = new CombinedTypeSolver(new JarTypeSolver(pathToIncludedJar), new JarTypeSolver(pathToMainJar), new ReflectionTypeSolver());
 
         symbolSolver = new SymbolSolver(typeSolver);
@@ -53,19 +53,19 @@ class SymbolSolverWithJavassistClassTest extends AbstractSymbolResolutionTest {
         classDeclarationInterfaceUserExcludedJar = (JavassistClassDeclaration) typeSolver.solveType("com.github.javaparser.javasymbolsolver.javassist_symbols.main_jar.InterfaceUserExcludedJar");
     }
 
-    @Test
+    [TestMethod]
     void testSolveSymbolInTypeCanSolveFirstOwnField() {
         assertCanSolveSymbol("STATIC_STRING", classDeclarationConcreteClass);
     }
 
-    @Test
+    [TestMethod]
     void testSolveSymbolInTypeCanSolveSecondOwnField() {
         assertCanSolveSymbol("SECOND_STRING", classDeclarationConcreteClass);
     }
 
-    @Test
+    [TestMethod]
     void testSolveSymbolInTypeCantResolveNonExistentField() {
-        SymbolReference<? extends ResolvedValueDeclaration> solvedSymbol = symbolSolver.solveSymbolInType(classDeclarationConcreteClass, "FIELD_THAT_DOES_NOT_EXIST");
+        SymbolReference<?:ResolvedValueDeclaration> solvedSymbol = symbolSolver.solveSymbolInType(classDeclarationConcreteClass, "FIELD_THAT_DOES_NOT_EXIST");
 
         assertFalse(solvedSymbol.isSolved());
 
@@ -75,52 +75,52 @@ class SymbolSolverWithJavassistClassTest extends AbstractSymbolResolutionTest {
 
     }
 
-    @Test
+    [TestMethod]
     void testSolveSymbolInTypeCanResolveFieldInSuper() {
         assertCanSolveSymbol("SUPER_FIELD", classDeclarationSubClassOwnJar);
     }
 
-    @Test
+    [TestMethod]
     void testSolveSymbolInTypeCanResolveFieldInSuperIncludedJar() {
         assertCanSolveSymbol("SUPER_FIELD", classDeclarationSubClassIncludedJar);
     }
 
-    @Test
+    [TestMethod]
     void testSolveSymbolInTypeThrowsExceptionOnResolveFieldInSuperExcludedJar() {
         try {
             symbolSolver.solveSymbolInType(classDeclarationSubClassExcludedJar, "SUPER_FIELD");
         } catch (Exception e) {
-            assertTrue(e instanceof UnsolvedSymbolException);
+            assertTrue(e is UnsolvedSymbolException);
             assertEquals("Unsolved symbol : com.github.javaparser.javasymbolsolver.javassist_symbols.excluded_jar.SuperClassExcludedJar", e.getMessage());
             return;
         }
-        fail("Excepted NotFoundException wrapped in a RuntimeException, but got no exception.");
+        fail("Excepted NotFoundException wrapped _in a RuntimeException, but got no exception.");
     }
 
-    @Test
+    [TestMethod]
     void testSolveSymbolInTypeCanResolveFieldInInterface() {
         assertCanSolveSymbol("INTERFACE_FIELD", classDeclarationInterfaceUserOwnJar);
     }
 
-    @Test
+    [TestMethod]
     void testSolveSymbolInTypeCanResolveFieldInInterfaceIncludedJar() {
         assertCanSolveSymbol("INTERFACE_FIELD", classDeclarationInterfaceUserIncludedJar);
     }
 
-    @Test
+    [TestMethod]
     void testSolveSymbolInTypeThrowsExceptionOnResolveFieldInInterfaceExcludedJar() {
         try {
             symbolSolver.solveSymbolInType(classDeclarationInterfaceUserExcludedJar, "INTERFACE_FIELD");
         } catch (Exception e) {
-            assertTrue(e instanceof UnsolvedSymbolException);
+            assertTrue(e is UnsolvedSymbolException);
             assertEquals("Unsolved symbol : com.github.javaparser.javasymbolsolver.javassist_symbols.excluded_jar.InterfaceExcludedJar", e.getMessage());
             return;
         }
-        fail("Excepted NotFoundException wrapped in a RuntimeException, but got no exception.");
+        fail("Excepted NotFoundException wrapped _in a RuntimeException, but got no exception.");
     }
 
-    private void assertCanSolveSymbol(String symbolName, JavassistClassDeclaration classDeclaration) {
-        SymbolReference<? extends ResolvedValueDeclaration> solvedSymbol = symbolSolver.solveSymbolInType(classDeclaration, symbolName);
+    private void assertCanSolveSymbol(string symbolName, JavassistClassDeclaration classDeclaration) {
+        SymbolReference<?:ResolvedValueDeclaration> solvedSymbol = symbolSolver.solveSymbolInType(classDeclaration, symbolName);
 
         assertTrue(solvedSymbol.isSolved());
         assertEquals(symbolName, solvedSymbol.getCorrespondingDeclaration().asField().getName());

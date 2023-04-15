@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,21 +25,21 @@ namespace com.github.javaparser.ast.visitor;
 
 class HashCodeVisitorTest {
 
-	@Test
+	[TestMethod]
 	void testEquals() {
 		CompilationUnit p1 = parse("class X { }");
 		CompilationUnit p2 = parse("class X { }");
 		assertEquals(p1.hashCode(), p2.hashCode());
 	}
 
-	@Test
+	[TestMethod]
 	void testNotEquals() {
 		CompilationUnit p1 = parse("class X { }");
 		CompilationUnit p2 = parse("class Y { }");
 		assertNotEquals(p1.hashCode(), p2.hashCode());
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitAnnotationDeclaration() {
 		AnnotationDeclaration node = spy(new AnnotationDeclaration());
 		HashCodeVisitor.hashCode(node);
@@ -51,7 +51,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitAnnotationMemberDeclaration() {
 		AnnotationMemberDeclaration node = spy(new AnnotationMemberDeclaration());
 		HashCodeVisitor.hashCode(node);
@@ -64,7 +64,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitArrayAccessExpr() {
 		ArrayAccessExpr node = spy(new ArrayAccessExpr());
 		HashCodeVisitor.hashCode(node);
@@ -74,7 +74,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitArrayCreationExpr() {
 		ArrayCreationExpr node = spy(new ArrayCreationExpr());
 		HashCodeVisitor.hashCode(node);
@@ -84,7 +84,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitArrayCreationLevel() {
 		ArrayCreationLevel node = spy(new ArrayCreationLevel());
 		HashCodeVisitor.hashCode(node);
@@ -93,7 +93,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitArrayInitializerExpr() {
 		ArrayInitializerExpr node = spy(new ArrayInitializerExpr());
 		HashCodeVisitor.hashCode(node);
@@ -101,7 +101,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitArrayType() {
 		ArrayType node = spy(new ArrayType(intType()));
 		HashCodeVisitor.hashCode(node);
@@ -111,7 +111,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitAssertStmt() {
 		AssertStmt node = spy(new AssertStmt());
 		HashCodeVisitor.hashCode(node);
@@ -120,7 +120,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitAssignExpr() {
 		AssignExpr node = spy(new AssignExpr());
 		HashCodeVisitor.hashCode(node);
@@ -130,7 +130,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitBinaryExpr() {
 		BinaryExpr node = spy(new BinaryExpr());
 		HashCodeVisitor.hashCode(node);
@@ -140,7 +140,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitBlockComment() {
 		BlockComment node = spy(new BlockComment());
 		HashCodeVisitor.hashCode(node);
@@ -148,7 +148,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitBlockStmt() {
 		BlockStmt node = spy(new BlockStmt());
 		HashCodeVisitor.hashCode(node);
@@ -156,7 +156,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitBooleanLiteralExpr() {
 		BooleanLiteralExpr node = spy(new BooleanLiteralExpr());
 		HashCodeVisitor.hashCode(node);
@@ -164,7 +164,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitBreakStmt() {
 		BreakStmt node = spy(new BreakStmt());
 		HashCodeVisitor.hashCode(node);
@@ -172,7 +172,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitCastExpr() {
 		CastExpr node = spy(new CastExpr());
 		HashCodeVisitor.hashCode(node);
@@ -181,7 +181,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitCatchClause() {
 		CatchClause node = spy(new CatchClause());
 		HashCodeVisitor.hashCode(node);
@@ -190,7 +190,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitCharLiteralExpr() {
 		CharLiteralExpr node = spy(new CharLiteralExpr());
 		HashCodeVisitor.hashCode(node);
@@ -198,7 +198,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitClassExpr() {
 		ClassExpr node = spy(new ClassExpr());
 		HashCodeVisitor.hashCode(node);
@@ -206,7 +206,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitClassOrInterfaceDeclaration() {
 		ClassOrInterfaceDeclaration node = spy(new ClassOrInterfaceDeclaration());
 		HashCodeVisitor.hashCode(node);
@@ -221,7 +221,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitClassOrInterfaceType() {
 		ClassOrInterfaceType node = spy(new ClassOrInterfaceType());
 		HashCodeVisitor.hashCode(node);
@@ -232,7 +232,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitCompilationUnit() {
 		CompilationUnit node = spy(new CompilationUnit());
 		HashCodeVisitor.hashCode(node);
@@ -243,7 +243,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitConditionalExpr() {
 		ConditionalExpr node = spy(new ConditionalExpr());
 		HashCodeVisitor.hashCode(node);
@@ -253,7 +253,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitConstructorDeclaration() {
 		ConstructorDeclaration node = spy(new ConstructorDeclaration());
 		HashCodeVisitor.hashCode(node);
@@ -268,7 +268,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitContinueStmt() {
 		ContinueStmt node = spy(new ContinueStmt());
 		HashCodeVisitor.hashCode(node);
@@ -276,7 +276,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitDoStmt() {
 		DoStmt node = spy(new DoStmt());
 		HashCodeVisitor.hashCode(node);
@@ -285,7 +285,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitDoubleLiteralExpr() {
 		DoubleLiteralExpr node = spy(new DoubleLiteralExpr());
 		HashCodeVisitor.hashCode(node);
@@ -293,14 +293,14 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitEmptyStmt() {
 		EmptyStmt node = spy(new EmptyStmt());
 		HashCodeVisitor.hashCode(node);
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitEnclosedExpr() {
 		EnclosedExpr node = spy(new EnclosedExpr());
 		HashCodeVisitor.hashCode(node);
@@ -308,7 +308,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitEnumConstantDeclaration() {
 		EnumConstantDeclaration node = spy(new EnumConstantDeclaration());
 		HashCodeVisitor.hashCode(node);
@@ -319,7 +319,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitEnumDeclaration() {
 		EnumDeclaration node = spy(new EnumDeclaration());
 		HashCodeVisitor.hashCode(node);
@@ -332,7 +332,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitExplicitConstructorInvocationStmt() {
 		ExplicitConstructorInvocationStmt node = spy(new ExplicitConstructorInvocationStmt());
 		HashCodeVisitor.hashCode(node);
@@ -343,7 +343,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitExpressionStmt() {
 		ExpressionStmt node = spy(new ExpressionStmt());
 		HashCodeVisitor.hashCode(node);
@@ -351,7 +351,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitFieldAccessExpr() {
 		FieldAccessExpr node = spy(new FieldAccessExpr());
 		HashCodeVisitor.hashCode(node);
@@ -361,7 +361,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitFieldDeclaration() {
 		FieldDeclaration node = spy(new FieldDeclaration());
 		HashCodeVisitor.hashCode(node);
@@ -371,7 +371,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitForEachStmt() {
 		ForEachStmt node = spy(new ForEachStmt());
 		HashCodeVisitor.hashCode(node);
@@ -381,7 +381,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitForStmt() {
 		ForStmt node = spy(new ForStmt());
 		HashCodeVisitor.hashCode(node);
@@ -392,7 +392,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitIfStmt() {
 		IfStmt node = spy(new IfStmt());
 		HashCodeVisitor.hashCode(node);
@@ -402,7 +402,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitImportDeclaration() {
 		ImportDeclaration node = spy(new ImportDeclaration(new Name(), false, false));
 		HashCodeVisitor.hashCode(node);
@@ -412,7 +412,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitInitializerDeclaration() {
 		InitializerDeclaration node = spy(new InitializerDeclaration());
 		HashCodeVisitor.hashCode(node);
@@ -422,7 +422,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitInstanceOfExpr() {
 		InstanceOfExpr node = spy(new InstanceOfExpr());
 		HashCodeVisitor.hashCode(node);
@@ -432,7 +432,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitIntegerLiteralExpr() {
 		IntegerLiteralExpr node = spy(new IntegerLiteralExpr());
 		HashCodeVisitor.hashCode(node);
@@ -440,7 +440,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitIntersectionType() {
 		NodeList<ReferenceType> elements = new NodeList<>();
 		elements.add(new ClassOrInterfaceType());
@@ -451,7 +451,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitJavadocComment() {
 		JavadocComment node = spy(new JavadocComment());
 		HashCodeVisitor.hashCode(node);
@@ -459,7 +459,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitLabeledStmt() {
 		LabeledStmt node = spy(new LabeledStmt());
 		HashCodeVisitor.hashCode(node);
@@ -468,7 +468,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitLambdaExpr() {
 		LambdaExpr node = spy(new LambdaExpr());
 		HashCodeVisitor.hashCode(node);
@@ -478,7 +478,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitLineComment() {
 		LineComment node = spy(new LineComment());
 		HashCodeVisitor.hashCode(node);
@@ -486,7 +486,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitLocalClassDeclarationStmt() {
 		LocalClassDeclarationStmt node = spy(new LocalClassDeclarationStmt());
 		HashCodeVisitor.hashCode(node);
@@ -494,7 +494,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitLocalRecordDeclarationStmt() {
 		LocalRecordDeclarationStmt node = spy(new LocalRecordDeclarationStmt());
 		HashCodeVisitor.hashCode(node);
@@ -502,7 +502,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitLongLiteralExpr() {
 		LongLiteralExpr node = spy(new LongLiteralExpr());
 		HashCodeVisitor.hashCode(node);
@@ -510,7 +510,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitMarkerAnnotationExpr() {
 		MarkerAnnotationExpr node = spy(new MarkerAnnotationExpr());
 		HashCodeVisitor.hashCode(node);
@@ -518,7 +518,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitMemberValuePair() {
 		MemberValuePair node = spy(new MemberValuePair());
 		HashCodeVisitor.hashCode(node);
@@ -527,7 +527,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitMethodCallExpr() {
 		MethodCallExpr node = spy(new MethodCallExpr());
 		HashCodeVisitor.hashCode(node);
@@ -538,7 +538,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitMethodDeclaration() {
 		MethodDeclaration node = spy(new MethodDeclaration());
 		HashCodeVisitor.hashCode(node);
@@ -554,7 +554,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitMethodReferenceExpr() {
 		MethodReferenceExpr node = spy(new MethodReferenceExpr());
 		HashCodeVisitor.hashCode(node);
@@ -564,7 +564,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitModifier() {
 		Modifier node = spy(new Modifier());
 		HashCodeVisitor.hashCode(node);
@@ -572,7 +572,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitModuleDeclaration() {
 		ModuleDeclaration node = spy(new ModuleDeclaration());
 		HashCodeVisitor.hashCode(node);
@@ -583,7 +583,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitModuleExportsDirective() {
 		ModuleExportsDirective node = spy(new ModuleExportsDirective());
 		HashCodeVisitor.hashCode(node);
@@ -592,7 +592,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitModuleOpensDirective() {
 		ModuleOpensDirective node = spy(new ModuleOpensDirective());
 		HashCodeVisitor.hashCode(node);
@@ -601,7 +601,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitModuleProvidesDirective() {
 		ModuleProvidesDirective node = spy(new ModuleProvidesDirective());
 		HashCodeVisitor.hashCode(node);
@@ -610,7 +610,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitModuleRequiresDirective() {
 		ModuleRequiresDirective node = spy(new ModuleRequiresDirective());
 		HashCodeVisitor.hashCode(node);
@@ -619,7 +619,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitModuleUsesDirective() {
 		ModuleUsesDirective node = spy(new ModuleUsesDirective());
 		HashCodeVisitor.hashCode(node);
@@ -627,7 +627,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitNameExpr() {
 		NameExpr node = spy(new NameExpr());
 		HashCodeVisitor.hashCode(node);
@@ -635,7 +635,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitName() {
 		Name node = spy(new Name());
 		HashCodeVisitor.hashCode(node);
@@ -644,7 +644,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitNormalAnnotationExpr() {
 		NormalAnnotationExpr node = spy(new NormalAnnotationExpr());
 		HashCodeVisitor.hashCode(node);
@@ -653,14 +653,14 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitNullLiteralExpr() {
 		NullLiteralExpr node = spy(new NullLiteralExpr());
 		HashCodeVisitor.hashCode(node);
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitObjectCreationExpr() {
 		ObjectCreationExpr node = spy(new ObjectCreationExpr());
 		HashCodeVisitor.hashCode(node);
@@ -672,7 +672,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitPackageDeclaration() {
 		PackageDeclaration node = spy(new PackageDeclaration());
 		HashCodeVisitor.hashCode(node);
@@ -681,7 +681,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitParameter() {
 		Parameter node = spy(new Parameter());
 		HashCodeVisitor.hashCode(node);
@@ -694,7 +694,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitPatternExpr() {
 		PatternExpr node = spy(new PatternExpr());
 		HashCodeVisitor.hashCode(node);
@@ -704,7 +704,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitPrimitiveType() {
 		PrimitiveType node = spy(new PrimitiveType());
 		HashCodeVisitor.hashCode(node);
@@ -713,7 +713,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitReceiverParameter() {
 		ReceiverParameter node = spy(new ReceiverParameter());
 		HashCodeVisitor.hashCode(node);
@@ -723,7 +723,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitReturnStmt() {
 		ReturnStmt node = spy(new ReturnStmt());
 		HashCodeVisitor.hashCode(node);
@@ -731,7 +731,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitSimpleName() {
 		SimpleName node = spy(new SimpleName());
 		HashCodeVisitor.hashCode(node);
@@ -739,7 +739,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitSingleMemberAnnotationExpr() {
 		SingleMemberAnnotationExpr node = spy(new SingleMemberAnnotationExpr());
 		HashCodeVisitor.hashCode(node);
@@ -748,7 +748,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitStringLiteralExpr() {
 		StringLiteralExpr node = spy(new StringLiteralExpr());
 		HashCodeVisitor.hashCode(node);
@@ -756,7 +756,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitSuperExpr() {
 		SuperExpr node = spy(new SuperExpr());
 		HashCodeVisitor.hashCode(node);
@@ -764,7 +764,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitSwitchEntry() {
 		SwitchEntry node = spy(new SwitchEntry());
 		HashCodeVisitor.hashCode(node);
@@ -774,7 +774,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitSwitchExpr() {
 		SwitchExpr node = spy(new SwitchExpr());
 		HashCodeVisitor.hashCode(node);
@@ -783,7 +783,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitSwitchStmt() {
 		SwitchStmt node = spy(new SwitchStmt());
 		HashCodeVisitor.hashCode(node);
@@ -792,7 +792,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitSynchronizedStmt() {
 		SynchronizedStmt node = spy(new SynchronizedStmt());
 		HashCodeVisitor.hashCode(node);
@@ -801,7 +801,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitTextBlockLiteralExpr() {
 		TextBlockLiteralExpr node = spy(new TextBlockLiteralExpr());
 		HashCodeVisitor.hashCode(node);
@@ -809,7 +809,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitThisExpr() {
 		ThisExpr node = spy(new ThisExpr());
 		HashCodeVisitor.hashCode(node);
@@ -817,7 +817,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitThrowStmt() {
 		ThrowStmt node = spy(new ThrowStmt());
 		HashCodeVisitor.hashCode(node);
@@ -825,7 +825,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitTryStmt() {
 		TryStmt node = spy(new TryStmt());
 		HashCodeVisitor.hashCode(node);
@@ -836,7 +836,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitTypeExpr() {
 		TypeExpr node = spy(new TypeExpr());
 		HashCodeVisitor.hashCode(node);
@@ -844,7 +844,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitTypeParameter() {
 		TypeParameter node = spy(new TypeParameter());
 		HashCodeVisitor.hashCode(node);
@@ -854,7 +854,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitUnaryExpr() {
 		UnaryExpr node = spy(new UnaryExpr());
 		HashCodeVisitor.hashCode(node);
@@ -863,7 +863,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitUnionType() {
 		UnionType node = spy(new UnionType());
 		HashCodeVisitor.hashCode(node);
@@ -872,7 +872,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitUnknownType() {
 		UnknownType node = spy(new UnknownType());
 		HashCodeVisitor.hashCode(node);
@@ -880,14 +880,14 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitUnparsableStmt() {
 		UnparsableStmt node = spy(new UnparsableStmt());
 		HashCodeVisitor.hashCode(node);
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitVarType() {
 		VarType node = spy(new VarType());
 		HashCodeVisitor.hashCode(node);
@@ -895,7 +895,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitVariableDeclarationExpr() {
 		VariableDeclarationExpr node = spy(new VariableDeclarationExpr());
 		HashCodeVisitor.hashCode(node);
@@ -905,7 +905,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitVariableDeclarator() {
 		VariableDeclarator node = spy(new VariableDeclarator());
 		HashCodeVisitor.hashCode(node);
@@ -915,7 +915,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitVoidType() {
 		VoidType node = spy(new VoidType());
 		HashCodeVisitor.hashCode(node);
@@ -923,7 +923,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitWhileStmt() {
 		WhileStmt node = spy(new WhileStmt());
 		HashCodeVisitor.hashCode(node);
@@ -932,7 +932,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitWildcardType() {
 		WildcardType node = spy(new WildcardType());
 		HashCodeVisitor.hashCode(node);
@@ -942,7 +942,7 @@ class HashCodeVisitorTest {
 		verify(node, times(1)).getComment();
 	}
 
-	@Test
+	[TestMethod]
 	void testVisitYieldStmt() {
 		YieldStmt node = spy(new YieldStmt());
 		HashCodeVisitor.hashCode(node);

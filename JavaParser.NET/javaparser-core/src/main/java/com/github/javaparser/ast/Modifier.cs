@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.ast;
 /**
  * A modifier, like private, public, or volatile.
  */
-public class Modifier extends Node {
+public class Modifier:Node {
 
     public static Modifier publicModifier() {
         return new Modifier(Keyword.PUBLIC);
@@ -95,16 +95,16 @@ public class Modifier extends Node {
         STRICTFP("strictfp"),
         TRANSITIVE("transitive");
 
-        private final String codeRepresentation;
+        private /*final*/string codeRepresentation;
 
-        Keyword(String codeRepresentation) {
+        Keyword(string codeRepresentation) {
             this.codeRepresentation = codeRepresentation;
         }
 
         /**
          * @return the Java keyword represented by this enum constant.
          */
-        public String asString() {
+        public string asString() {
             return codeRepresentation;
         }
     }
@@ -115,7 +115,7 @@ public class Modifier extends Node {
         this(Keyword.PUBLIC);
     }
 
-    @AllFieldsConstructor
+    //@AllFieldsConstructor
     public Modifier(Keyword keyword) {
         this(null, keyword);
     }
@@ -123,7 +123,7 @@ public class Modifier extends Node {
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public Modifier(TokenRange tokenRange, Keyword keyword) {
         super(tokenRange);
         setKeyword(keyword);
@@ -131,24 +131,24 @@ public class Modifier extends Node {
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Keyword getKeyword() {
         return keyword;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public Modifier setKeyword(final Keyword keyword) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public Modifier setKeyword(/*final*/Keyword keyword) {
         assertNotNull(keyword);
         if (keyword == this.keyword) {
             return this;
@@ -160,20 +160,20 @@ public class Modifier extends Node {
 
     /**
      * Utility method that instantiaties "Modifier"s for the keywords,
-     * and puts them in a NodeList.
+     * and puts them _in a NodeList.
      */
     public static NodeList<Modifier> createModifierList(Modifier.Keyword... modifiers) {
         return Arrays.stream(modifiers).map(Modifier::new).collect(toNodeList());
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public Modifier clone() {
         return (Modifier) accept(new CloneVisitor(), null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public ModifierMetaModel getMetaModel() {
         return JavaParserMetaModel.modifierMetaModel;
     }

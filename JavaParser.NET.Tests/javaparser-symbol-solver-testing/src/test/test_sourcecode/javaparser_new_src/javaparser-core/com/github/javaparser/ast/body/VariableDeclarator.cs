@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,7 +27,7 @@ namespace com.github.javaparser.ast.body;
 /**
  * @author Julio Vilmar Gesser
  */
-public final class VariableDeclarator extends Node implements
+public /*final*/class VariableDeclarator:Node implements
         NodeWithType<VariableDeclarator> {
 
     private VariableDeclaratorId id;
@@ -41,7 +41,7 @@ public final class VariableDeclarator extends Node implements
         setId(id);
     }
 
-    public VariableDeclarator(String variableName) {
+    public VariableDeclarator(string variableName) {
         setId(new VariableDeclaratorId(variableName));
     }
 
@@ -58,7 +58,7 @@ public final class VariableDeclarator extends Node implements
         setInit(init);
     }
 
-    public VariableDeclarator(String variableName, Expression init) {
+    public VariableDeclarator(string variableName, Expression init) {
         setId(new VariableDeclaratorId(variableName));
         setInit(init);
     }
@@ -102,7 +102,7 @@ public final class VariableDeclarator extends Node implements
     /**
      * Will create a {@link NameExpr} with the init param
      */
-    public VariableDeclarator setInit(String init) {
+    public VariableDeclarator setInit(string init) {
         this.init = new NameExpr(init);
         setAsParentNodeOf(this.init);
         return this;

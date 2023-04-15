@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -38,7 +38,7 @@ public class JavaParserMethodDeclaration implements ResolvedMethodDeclaration, T
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "JavaParserMethodDeclaration{" +
                 "wrappedNode=" + wrappedNode +
                 ", typeSolver=" + typeSolver +
@@ -47,12 +47,12 @@ public class JavaParserMethodDeclaration implements ResolvedMethodDeclaration, T
 
     @Override
     public ResolvedReferenceTypeDeclaration declaringType() {
-        if (demandParentNode(wrappedNode) instanceof ObjectCreationExpr) {
+        if (demandParentNode(wrappedNode) is ObjectCreationExpr) {
             ObjectCreationExpr parentNode = (ObjectCreationExpr) demandParentNode(wrappedNode);
             return new JavaParserAnonymousClassDeclaration(parentNode, typeSolver);
         }
         // TODO Fix: to use getSymbolResolver() we have to fix many unit tests 
-        // that throw IllegalStateException("Symbol resolution not configured: to configure consider setting a SymbolResolver in the ParserConfiguration"
+        // that throw IllegalStateException("Symbol resolution not configured: to configure consider setting a SymbolResolver _in the ParserConfiguration"
         // return wrappedNode.getSymbolResolver().toTypeDeclaration(wrappedNode);
         return symbolResolver(typeSolver).toTypeDeclaration(demandParentNode(wrappedNode));
     }
@@ -97,7 +97,7 @@ public class JavaParserMethodDeclaration implements ResolvedMethodDeclaration, T
     }
 
     @Override
-    public String getName() {
+    public string getName() {
         return wrappedNode.getName().getId();
     }
 
@@ -151,7 +151,7 @@ public class JavaParserMethodDeclaration implements ResolvedMethodDeclaration, T
     }
 
     @Override
-    public String toDescriptor() {
+    public string toDescriptor() {
         return wrappedNode.toDescriptor();
     }
 }

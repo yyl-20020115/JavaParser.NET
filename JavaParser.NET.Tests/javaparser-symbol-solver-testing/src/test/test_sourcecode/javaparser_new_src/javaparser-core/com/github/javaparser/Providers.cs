@@ -6,8 +6,8 @@ namespace com.github.javaparser;
  * Factory for providers of source code for JavaParser.
  * Providers that have no parameter for encoding but need it will use UTF-8.
  */
-public final class Providers {
-	public static final Charset UTF8 = Charset.forName("utf-8");
+public /*final*/class Providers {
+	public static /*final*/Charset UTF8 = Charset.forName("utf-8");
 
 	private Providers() {
 	}
@@ -40,15 +40,15 @@ public final class Providers {
 		return provider(assertNotNull(file), UTF8);
 	}
 
-	public static Provider provider(Path path, Charset encoding) throws IOException {
+	public static Provider provider(Path path, Charset encoding){
 		return provider(Files.newInputStream(assertNotNull(path)), assertNotNull(encoding));
 	}
 
-	public static Provider provider(Path path) throws IOException {
+	public static Provider provider(Path path){
 		return provider(assertNotNull(path), UTF8);
 	}
 
-	public static Provider provider(String source) {
+	public static Provider provider(string source) {
 		return new StringProvider(assertNotNull(source));
 	}
 

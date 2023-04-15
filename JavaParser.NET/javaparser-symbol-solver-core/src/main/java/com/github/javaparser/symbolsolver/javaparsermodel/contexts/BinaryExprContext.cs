@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -40,41 +40,41 @@ public class BinaryExprContext extends AbstractJavaParserContext<BinaryExpr> {
         if (binaryExpr.getOperator().equals(BinaryExpr.Operator.EQUALS)) {
             if (rightBranch.isBooleanLiteralExpr()) {
                 if (rightBranch.asBooleanLiteralExpr().getValue() == true) {
-                    // "x" instanceof String s == true
+                    // "x" is string s == true
                     results.addAll(patternExprsExposedToDirectParentFromBranch(leftBranch));
                 } else {
-                    // "x" instanceof String s == false
+                    // "x" is string s == false
                 }
             } else if (leftBranch.isBooleanLiteralExpr()) {
                 if (leftBranch.asBooleanLiteralExpr().getValue() == true) {
-                    // true == "x" instanceof String s
+                    // true == "x" is string s
                     results.addAll(patternExprsExposedToDirectParentFromBranch(rightBranch));
                 } else {
-                    // false == "x" instanceof String s
+                    // false == "x" is string s
                 }
             }
         } else if (binaryExpr.getOperator().equals(BinaryExpr.Operator.NOT_EQUALS)) {
             if (rightBranch.isBooleanLiteralExpr()) {
                 if (rightBranch.asBooleanLiteralExpr().getValue() == true) {
-                    // "x" instanceof String s != true
+                    // "x" is string s != true
                 } else {
-                    // "x" instanceof String s != false
+                    // "x" is string s != false
                     results.addAll(patternExprsExposedToDirectParentFromBranch(leftBranch));
                 }
             } else if (leftBranch.isBooleanLiteralExpr()) {
                 if (leftBranch.asBooleanLiteralExpr().getValue() == true) {
-                    // true != "x" instanceof String s
+                    // true != "x" is string s
                 } else {
-                    // false != "x" instanceof String s
+                    // false != "x" is string s
                     results.addAll(patternExprsExposedToDirectParentFromBranch(rightBranch));
                 }
             }
 
-            // TODO/FIXME: There are other cases where it may be ambiguously true until runtime e.g. `"x" instanceof String s == (new Random().nextBoolean())`
+            // TODO/FIXME: There are other cases where it may be ambiguously true until runtime e.g. `"x" is string s == (new Random().nextBoolean())`
 
         } else if (binaryExpr.getOperator().equals(BinaryExpr.Operator.AND)) {
-            // "x" instanceof String s && s.length() > 0
-            // "x" instanceof String s && "x" instanceof String s2
+            // "x" is string s && s.length() > 0
+            // "x" is string s && "x" is string s2
             results.addAll(patternExprsExposedToDirectParentFromBranch(leftBranch));
             results.addAll(patternExprsExposedToDirectParentFromBranch(rightBranch));
         } else {
@@ -97,51 +97,51 @@ public class BinaryExprContext extends AbstractJavaParserContext<BinaryExpr> {
         if (binaryExpr.getOperator().equals(BinaryExpr.Operator.EQUALS)) {
             if (rightBranch.isBooleanLiteralExpr()) {
                 if (isDefinitivelyTrue(rightBranch)) {
-                    // "x" instanceof String s == true
-                    // "x" instanceof String s == !(false)
+                    // "x" is string s == true
+                    // "x" is string s == !(false)
                     // No negations.
                 } else {
-                    // "x" instanceof String s == false
-                    // "x" instanceof String s == !(true)
+                    // "x" is string s == false
+                    // "x" is string s == !(true)
                     results.addAll(patternExprsExposedToDirectParentFromBranch(leftBranch));
                 }
             } else if (leftBranch.isBooleanLiteralExpr()) {
                 if (isDefinitivelyTrue(leftBranch)) {
-                    // true == "x" instanceof String s
-                    // !(false) == "x" instanceof String s
+                    // true == "x" is string s
+                    // !(false) == "x" is string s
                     // No negations.
                 } else {
-                    // false == "x" instanceof String s
-                    // !(true) == "x" instanceof String s
+                    // false == "x" is string s
+                    // !(true) == "x" is string s
                     results.addAll(patternExprsExposedToDirectParentFromBranch(rightBranch));
                 }
             }
         } else if (binaryExpr.getOperator().equals(BinaryExpr.Operator.NOT_EQUALS)) {
             if (rightBranch.isBooleanLiteralExpr()) {
                 if (isDefinitivelyTrue(rightBranch)) {
-                    // "x" instanceof String s != true
-                    // "x" instanceof String s != !(false)
+                    // "x" is string s != true
+                    // "x" is string s != !(false)
                     results.addAll(patternExprsExposedToDirectParentFromBranch(leftBranch));
                 } else {
-                    // "x" instanceof String s != false
-                    // "x" instanceof String s != !(true)
+                    // "x" is string s != false
+                    // "x" is string s != !(true)
                 }
             } else if (leftBranch.isBooleanLiteralExpr()) {
                 if (isDefinitivelyTrue(leftBranch)) {
-                    // true != "x" instanceof String s
-                    // !(false) != "x" instanceof String s
+                    // true != "x" is string s
+                    // !(false) != "x" is string s
                     results.addAll(patternExprsExposedToDirectParentFromBranch(rightBranch));
                 } else {
-                    // false != "x" instanceof String s
-                    // !(true) != "x" instanceof String s
+                    // false != "x" is string s
+                    // !(true) != "x" is string s
                 }
             }
 
-            // TODO/FIXME: There are other cases where it may be ambiguously true until runtime e.g. `"x" instanceof String s == (new Random().nextBoolean())`
+            // TODO/FIXME: There are other cases where it may be ambiguously true until runtime e.g. `"x" is string s == (new Random().nextBoolean())`
 
         } else if (binaryExpr.getOperator().equals(BinaryExpr.Operator.AND)) {
-            // "x" instanceof String s && s.length() > 0
-            // "x" instanceof String s && "x" instanceof String s2
+            // "x" is string s && s.length() > 0
+            // "x" is string s && "x" is string s2
             results.addAll(negatedPatternExprsExposedToDirectParentFromBranch(leftBranch));
             results.addAll(negatedPatternExprsExposedToDirectParentFromBranch(rightBranch));
         } else {
@@ -179,12 +179,12 @@ public class BinaryExprContext extends AbstractJavaParserContext<BinaryExpr> {
             results.addAll(patternExprsExposedToDirectParentFromBranch(leftBranch));
         } else if (child == rightBranch) {
             if (binaryExpr.getOperator().equals(BinaryExpr.Operator.AND)) {
-                // "" instanceof String s && "" instanceof String s2
+                // "" is string s && "" is string s2
                 results.addAll(patternExprsExposedToDirectParentFromBranch(leftBranch));
             }
         }
 //        else if (binaryExpr.getOperator().equals(BinaryExpr.Operator.AND) && rightBranch.isAncestorOf(child)) {
-//            // "" instanceof String s && "" instanceof String s2
+//            // "" is string s && "" is string s2
 //            results.addAll(patternExprsExposedToDirectParentFromBranch(leftBranch));
 //        }
 
@@ -192,7 +192,7 @@ public class BinaryExprContext extends AbstractJavaParserContext<BinaryExpr> {
     }
 
 
-    public Optional<PatternExpr> patternExprInScope(String name) {
+    public Optional<PatternExpr> patternExprInScope(string name) {
         BinaryExpr binaryExpr = wrappedNode;
         Expression leftBranch = binaryExpr.getLeft();
         Expression rightBranch = binaryExpr.getRight();

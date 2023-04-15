@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,7 +28,7 @@ namespace com.github.javaparser.ast.body;
  *
  * @author Julio Vilmar Gesser
  */
-public class EnumDeclaration extends TypeDeclaration<EnumDeclaration> implements NodeWithImplements<EnumDeclaration>, Resolvable<ResolvedEnumDeclaration> {
+public class EnumDeclaration:TypeDeclaration<EnumDeclaration> implements NodeWithImplements<EnumDeclaration>, Resolvable<ResolvedEnumDeclaration> {
 
     private NodeList<ClassOrInterfaceType> implementedTypes;
 
@@ -38,11 +38,11 @@ public class EnumDeclaration extends TypeDeclaration<EnumDeclaration> implements
         this(null, new NodeList<>(), new NodeList<>(), new SimpleName(), new NodeList<>(), new NodeList<>(), new NodeList<>());
     }
 
-    public EnumDeclaration(NodeList<Modifier> modifiers, String name) {
+    public EnumDeclaration(NodeList<Modifier> modifiers, string name) {
         this(null, modifiers, new NodeList<>(), new SimpleName(name), new NodeList<>(), new NodeList<>(), new NodeList<>());
     }
 
-    @AllFieldsConstructor
+    //@AllFieldsConstructor
     public EnumDeclaration(NodeList<Modifier> modifiers, NodeList<AnnotationExpr> annotations, SimpleName name, NodeList<ClassOrInterfaceType> implementedTypes, NodeList<EnumConstantDeclaration> entries, NodeList<BodyDeclaration<?>> members) {
         this(null, modifiers, annotations, name, implementedTypes, entries, members);
     }
@@ -50,7 +50,7 @@ public class EnumDeclaration extends TypeDeclaration<EnumDeclaration> implements
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public EnumDeclaration(TokenRange tokenRange, NodeList<Modifier> modifiers, NodeList<AnnotationExpr> annotations, SimpleName name, NodeList<ClassOrInterfaceType> implementedTypes, NodeList<EnumConstantDeclaration> entries, NodeList<BodyDeclaration<?>> members) {
         super(tokenRange, modifiers, annotations, name, members);
         setImplementedTypes(implementedTypes);
@@ -59,18 +59,18 @@ public class EnumDeclaration extends TypeDeclaration<EnumDeclaration> implements
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public NodeList<EnumConstantDeclaration> getEntries() {
         return entries;
     }
@@ -89,13 +89,13 @@ public class EnumDeclaration extends TypeDeclaration<EnumDeclaration> implements
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public NodeList<ClassOrInterfaceType> getImplementedTypes() {
         return implementedTypes;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public EnumDeclaration setEntries(final NodeList<EnumConstantDeclaration> entries) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public EnumDeclaration setEntries(/*final*/NodeList<EnumConstantDeclaration> entries) {
         assertNotNull(entries);
         if (entries == this.entries) {
             return this;
@@ -108,8 +108,8 @@ public class EnumDeclaration extends TypeDeclaration<EnumDeclaration> implements
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public EnumDeclaration setImplementedTypes(final NodeList<ClassOrInterfaceType> implementedTypes) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public EnumDeclaration setImplementedTypes(/*final*/NodeList<ClassOrInterfaceType> implementedTypes) {
         assertNotNull(implementedTypes);
         if (implementedTypes == this.implementedTypes) {
             return this;
@@ -122,7 +122,7 @@ public class EnumDeclaration extends TypeDeclaration<EnumDeclaration> implements
         return this;
     }
 
-    public EnumConstantDeclaration addEnumConstant(String name) {
+    public EnumConstantDeclaration addEnumConstant(string name) {
         assertNonEmpty(name);
         EnumConstantDeclaration enumConstant = new EnumConstantDeclaration(name);
         getEntries().add(enumConstant);
@@ -130,7 +130,7 @@ public class EnumDeclaration extends TypeDeclaration<EnumDeclaration> implements
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
     public boolean remove(Node node) {
         if (node == null) {
             return false;
@@ -151,19 +151,19 @@ public class EnumDeclaration extends TypeDeclaration<EnumDeclaration> implements
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public EnumDeclaration clone() {
         return (EnumDeclaration) accept(new CloneVisitor(), null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public EnumDeclarationMetaModel getMetaModel() {
         return JavaParserMetaModel.enumDeclarationMetaModel;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public boolean replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
@@ -184,19 +184,19 @@ public class EnumDeclaration extends TypeDeclaration<EnumDeclaration> implements
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isEnumDeclaration() {
         return true;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public EnumDeclaration asEnumDeclaration() {
         return this;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifEnumDeclaration(Consumer<EnumDeclaration> action) {
         action.accept(this);
     }
@@ -207,7 +207,7 @@ public class EnumDeclaration extends TypeDeclaration<EnumDeclaration> implements
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<EnumDeclaration> toEnumDeclaration() {
         return Optional.of(this);
     }

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,7 +28,7 @@ namespace com.github.javaparser.symbolsolver.resolution.typeinference.constraint
  *
  * @author Federico Tomassetti
  */
-public class TypeContainedByType extends ConstraintFormula {
+public class TypeContainedByType:ConstraintFormula {
     private ResolvedType S;
     private ResolvedType T;
 
@@ -53,7 +53,7 @@ public class TypeContainedByType extends ConstraintFormula {
             return ReductionResult.trueResult();
         }
 
-        // - If T is a wildcard of the form ? extends T':
+        // - If T is a wildcard of the form ?:T':
 
         if (T.isWildcard() && T.asWildcard().isExtends()) {
 
@@ -61,7 +61,7 @@ public class TypeContainedByType extends ConstraintFormula {
             //
             //   - If S is a wildcard of the form ?, the constraint reduces to ‹Object <: T'›.
             //
-            //   - If S is a wildcard of the form ? extends S', the constraint reduces to ‹S' <: T'›.
+            //   - If S is a wildcard of the form ?:S', the constraint reduces to ‹S' <: T'›.
             //
             //   - If S is a wildcard of the form ? super S', the constraint reduces to ‹Object = T'›.
 
@@ -103,7 +103,7 @@ public class TypeContainedByType extends ConstraintFormula {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "TypeContainedByType{" +
                 "S=" + S +
                 ", T=" + T +

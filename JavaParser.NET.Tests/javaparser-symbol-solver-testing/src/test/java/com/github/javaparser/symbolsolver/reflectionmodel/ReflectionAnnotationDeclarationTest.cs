@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -29,7 +29,7 @@ namespace com.github.javaparser.symbolsolver.reflectionmodel;
 }
 
 @interface WithValue {
-  String value();
+  string value();
 }
 
 @interface WithField {
@@ -42,7 +42,7 @@ namespace com.github.javaparser.symbolsolver.reflectionmodel;
 class ReflectionAnnotationDeclarationTest {
   private TypeSolver typeSolver = new ReflectionTypeSolver(false);
 
-  @Test
+  [TestMethod]
   void isClass() {
     ReflectionAnnotationDeclaration
         annotation = (ReflectionAnnotationDeclaration) typeSolver.solveType(
@@ -50,7 +50,7 @@ class ReflectionAnnotationDeclarationTest {
     assertFalse(annotation.isClass());
   }
 
-  @Test
+  [TestMethod]
   void innerIsClass() {
     ReflectionAnnotationDeclaration
         annotation = (ReflectionAnnotationDeclaration) typeSolver.solveType(
@@ -58,7 +58,7 @@ class ReflectionAnnotationDeclarationTest {
     assertFalse(annotation.isClass());
   }
 
-  @Test
+  [TestMethod]
   void getInternalTypes() {
     ReflectionAnnotationDeclaration annotation =
         (ReflectionAnnotationDeclaration) typeSolver.solveType(
@@ -67,16 +67,16 @@ class ReflectionAnnotationDeclarationTest {
         annotation.internalTypes().stream().map(ResolvedDeclaration::getName).collect(Collectors.toSet()));
   }
 
-  @Test
+  [TestMethod]
   void solveMethodForAnnotationWithValue() {
     ReflectionAnnotationDeclaration annotation =
         (ReflectionAnnotationDeclaration) typeSolver.solveType(WithValue.class.getCanonicalName());
-    final SymbolReference<ResolvedMethodDeclaration> symbolReference =
+    /*final*/SymbolReference<ResolvedMethodDeclaration> symbolReference =
         annotation.solveMethod("value", Collections.emptyList(), false);
     assertEquals("value", symbolReference.getCorrespondingDeclaration().getName());
   }
 
-  @Test
+  [TestMethod]
   void getAllFields_shouldReturnTheCorrectFields() {
     ReflectionAnnotationDeclaration annotation =
             (ReflectionAnnotationDeclaration) typeSolver.solveType(
@@ -85,7 +85,7 @@ class ReflectionAnnotationDeclarationTest {
             annotation.getAllFields().stream().map(ResolvedDeclaration::getName).collect(Collectors.toSet()));
   }
   
-  @Test
+  [TestMethod]
   void getClassName_shouldReturnCorrectValue() {
     ReflectionAnnotationDeclaration annotation =
         (ReflectionAnnotationDeclaration) typeSolver.solveType(
@@ -93,7 +93,7 @@ class ReflectionAnnotationDeclarationTest {
     assertEquals("WithField", annotation.getClassName());
   }
   
-  @Test
+  [TestMethod]
   void isAnnotationNotInheritable() {
     ReflectionAnnotationDeclaration
         annotation = (ReflectionAnnotationDeclaration) typeSolver.solveType(
@@ -101,7 +101,7 @@ class ReflectionAnnotationDeclarationTest {
     assertFalse(annotation.isInheritable());
   }
   
-  @Test
+  [TestMethod]
   void isAnnotationInheritable() {
     ReflectionAnnotationDeclaration
         annotation = (ReflectionAnnotationDeclaration) typeSolver.solveType(

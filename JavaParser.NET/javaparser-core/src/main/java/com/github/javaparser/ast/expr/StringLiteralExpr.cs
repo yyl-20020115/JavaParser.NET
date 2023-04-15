@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -33,7 +33,7 @@ namespace com.github.javaparser.ast.expr;
  *
  * @author Julio Vilmar Gesser
  */
-public class StringLiteralExpr extends LiteralStringValueExpr {
+public class StringLiteralExpr:LiteralStringValueExpr {
 
     public StringLiteralExpr() {
         this(null, "empty");
@@ -44,29 +44,29 @@ public class StringLiteralExpr extends LiteralStringValueExpr {
      *
      * @param value the value of the literal
      */
-    @AllFieldsConstructor
-    public StringLiteralExpr(final String value) {
+    //@AllFieldsConstructor
+    public StringLiteralExpr(/*final*/string value) {
         this(null, Utils.escapeEndOfLines(value));
     }
 
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
-    public StringLiteralExpr(TokenRange tokenRange, String value) {
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    public StringLiteralExpr(TokenRange tokenRange, string value) {
         super(tokenRange, value);
         customInitialization();
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
@@ -76,7 +76,7 @@ public class StringLiteralExpr extends LiteralStringValueExpr {
      * @param value the new literal value
      * @return self
      */
-    public StringLiteralExpr setEscapedValue(String value) {
+    public StringLiteralExpr setEscapedValue(string value) {
         this.value = Utils.escapeEndOfLines(value);
         return this;
     }
@@ -84,7 +84,7 @@ public class StringLiteralExpr extends LiteralStringValueExpr {
     /**
      * @return the unescaped literal value
      */
-    public String asString() {
+    public string asString() {
         return unescapeJava(value);
     }
 
@@ -94,43 +94,43 @@ public class StringLiteralExpr extends LiteralStringValueExpr {
      * @param value unescaped string
      * @return this literal expression
      */
-    public StringLiteralExpr setString(String value) {
+    public StringLiteralExpr setString(string value) {
         this.value = escapeJava(value);
         return this;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public StringLiteralExpr clone() {
         return (StringLiteralExpr) accept(new CloneVisitor(), null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public StringLiteralExprMetaModel getMetaModel() {
         return JavaParserMetaModel.stringLiteralExprMetaModel;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isStringLiteralExpr() {
         return true;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public StringLiteralExpr asStringLiteralExpr() {
         return this;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifStringLiteralExpr(Consumer<StringLiteralExpr> action) {
         action.accept(this);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<StringLiteralExpr> toStringLiteralExpr() {
         return Optional.of(this);
     }

@@ -3,24 +3,24 @@ namespace org.test;
 
 
 public class TestComments {
-    String str = "\\";
+    string str = "\\";
 
     /**
      * Comment that is ignored
      */
     public void someTestMethod() {}
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         // Correct path so that it will point to the file with this code
-        try (FileInputStream in = new FileInputStream(
+        try (FileInputStream _in = new FileInputStream(
                 new File(".\\src\\main\\java\\org\\test\\TestComments.java"))) {
-            CompilationUnit compilationUnit = JavaParser.parse(in);
+            CompilationUnit compilationUnit = JavaParser.parse(_in);
 
             new VoidVisitorAdapter<Object>() {
                 public void visit(MethodDeclaration method, Object arg) {
-                    System.out.println("Method: " + method.getName());
-                    System.out.println("Comment: " + method.getComment());
-                    System.out.println("JavaDoc: " + method.getJavaDoc() + "\n");
+                    System._out.println("Method: " + method.getName());
+                    System._out.println("Comment: " + method.getComment());
+                    System._out.println("JavaDoc: " + method.getJavaDoc() + "\n");
                 }
             }.visit(compilationUnit, null);
         }

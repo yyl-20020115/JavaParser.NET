@@ -15,7 +15,7 @@
 namespace com.github.javaparser;
 
 /** Token Manager Error. */
-public class TokenMgrException extends RuntimeException
+public class TokenMgrException:RuntimeException
 {
 
   /**
@@ -23,7 +23,7 @@ public class TokenMgrException extends RuntimeException
    * Increment only if the <i>serialized</i> form of the
    * class changes.
    */
-  private static final long serialVersionUID = 1L;
+  private static /*final*/long serialVersionUID = 1L;
 
   /*
    * Ordinals for various reasons why an Error of this type can be thrown.
@@ -32,22 +32,22 @@ public class TokenMgrException extends RuntimeException
   /**
    * Lexical error occurred.
    */
-  public static final int LEXICAL_ERROR = 0;
+  public static /*final*/int LEXICAL_ERROR = 0;
 
   /**
    * An attempt was made to create a second instance of a static token manager.
    */
-  public static final int STATIC_LEXER_ERROR = 1;
+  public static /*final*/int STATIC_LEXER_ERROR = 1;
 
   /**
    * Tried to change to an invalid lexical state.
    */
-  public static final int INVALID_LEXICAL_STATE = 2;
+  public static /*final*/int INVALID_LEXICAL_STATE = 2;
 
   /**
-   * Detected (and bailed out of) an infinite loop in the token manager.
+   * Detected (and bailed _out of) an infinite loop _in the token manager.
    */
-  public static final int LOOP_DETECTED = 3;
+  public static /*final*/int LOOP_DETECTED = 3;
 
   /**
    * Indicates the reason why the exception is thrown. It will have
@@ -57,9 +57,9 @@ public class TokenMgrException extends RuntimeException
 
   /**
    * Replaces unprintable characters by their escaped (or unicode escaped)
-   * equivalents in the given string
+   * equivalents _in the given string
    */
-  protected static final String addEscapes(String str) {
+  protected static /*final*/string addEscapes(string str) {
     StringBuffer retval = new StringBuffer();
     char ch;
     for (int i = 0; i < str.length(); i++) {
@@ -91,7 +91,7 @@ public class TokenMgrException extends RuntimeException
           continue;
         default:
           if ((ch = str.charAt(i)) < 0x20 || ch > 0x7e) {
-            String s = "0000" + Integer.toString(ch, 16);
+            string s = "0000" + Integer.toString(ch, 16);
             retval.append("\\u" + s.substring(s.length() - 4, s.length()));
           } else {
             retval.append(ch);
@@ -107,14 +107,14 @@ public class TokenMgrException extends RuntimeException
    * token manager to indicate a lexical error.
    * Parameters :
    *    EOFSeen     : indicates if EOF caused the lexical error
-   *    curLexState : lexical state in which this error occurred
+   *    curLexState : lexical state _in which this error occurred
    *    errorLine   : line number when the error occurred
    *    errorColumn : column number when the error occurred
    *    errorAfter  : prefix that was seen before this error occurred
    *    curchar     : the offending character
    * Note: You can customize the lexical error message by modifying this method.
    */
-  protected static String LexicalErr(boolean EOFSeen, int lexState, int errorLine, int errorColumn, String errorAfter, int curChar) {
+  protected static string LexicalErr(boolean EOFSeen, int lexState, int errorLine, int errorColumn, string errorAfter, int curChar) {
     char curChar1 = (char)curChar;
     return("Lexical error at line " +
           errorLine + ", column " +
@@ -130,9 +130,9 @@ public class TokenMgrException extends RuntimeException
    *
    *     "Internal Error : Please file a bug report .... "
    *
-   * from this method for such cases in the release version of your parser.
+   * from this method for such cases _in the release version of your parser.
    */
-  public String getMessage() {
+  public string getMessage() {
     return super.getMessage();
   }
 
@@ -145,13 +145,13 @@ public class TokenMgrException extends RuntimeException
   }
 
   /** Constructor with message and reason. */
-  public TokenMgrException(String message, int reason) {
+  public TokenMgrException(string message, int reason) {
     super(message);
     errorCode = reason;
   }
 
   /** Full Constructor. */
-  public TokenMgrException(boolean EOFSeen, int lexState, int errorLine, int errorColumn, String errorAfter, int curChar, int reason) {
+  public TokenMgrException(boolean EOFSeen, int lexState, int errorLine, int errorColumn, string errorAfter, int curChar, int reason) {
     this(LexicalErr(EOFSeen, lexState, errorLine, errorColumn, errorAfter, curChar), reason);
   }
 }

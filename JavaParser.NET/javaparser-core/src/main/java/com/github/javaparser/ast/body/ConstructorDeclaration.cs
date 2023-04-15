@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -31,7 +31,7 @@ namespace com.github.javaparser.ast.body;
  *
  * @author Julio Vilmar Gesser
  */
-public class ConstructorDeclaration extends CallableDeclaration<ConstructorDeclaration> implements NodeWithBlockStmt<ConstructorDeclaration>, NodeWithAccessModifiers<ConstructorDeclaration>, NodeWithJavadoc<ConstructorDeclaration>, NodeWithSimpleName<ConstructorDeclaration>, NodeWithParameters<ConstructorDeclaration>, NodeWithThrownExceptions<ConstructorDeclaration>, NodeWithTypeParameters<ConstructorDeclaration>, Resolvable<ResolvedConstructorDeclaration> {
+public class ConstructorDeclaration:CallableDeclaration<ConstructorDeclaration> implements NodeWithBlockStmt<ConstructorDeclaration>, NodeWithAccessModifiers<ConstructorDeclaration>, NodeWithJavadoc<ConstructorDeclaration>, NodeWithSimpleName<ConstructorDeclaration>, NodeWithParameters<ConstructorDeclaration>, NodeWithThrownExceptions<ConstructorDeclaration>, NodeWithTypeParameters<ConstructorDeclaration>, Resolvable<ResolvedConstructorDeclaration> {
 
     private BlockStmt body;
 
@@ -39,11 +39,11 @@ public class ConstructorDeclaration extends CallableDeclaration<ConstructorDecla
         this(null, new NodeList<>(), new NodeList<>(), new NodeList<>(), new SimpleName(), new NodeList<>(), new NodeList<>(), new BlockStmt(), null);
     }
 
-    public ConstructorDeclaration(String name) {
+    public ConstructorDeclaration(string name) {
         this(null, new NodeList<>(new Modifier()), new NodeList<>(), new NodeList<>(), new SimpleName(name), new NodeList<>(), new NodeList<>(), new BlockStmt(), null);
     }
 
-    public ConstructorDeclaration(NodeList<Modifier> modifiers, String name) {
+    public ConstructorDeclaration(NodeList<Modifier> modifiers, string name) {
         this(null, modifiers, new NodeList<>(), new NodeList<>(), new SimpleName(name), new NodeList<>(), new NodeList<>(), new BlockStmt(), null);
     }
 
@@ -51,7 +51,7 @@ public class ConstructorDeclaration extends CallableDeclaration<ConstructorDecla
         this(null, modifiers, annotations, typeParameters, name, parameters, thrownExceptions, body, null);
     }
 
-    @AllFieldsConstructor
+    //@AllFieldsConstructor
     public ConstructorDeclaration(NodeList<Modifier> modifiers, NodeList<AnnotationExpr> annotations, NodeList<TypeParameter> typeParameters, SimpleName name, NodeList<Parameter> parameters, NodeList<ReferenceType> thrownExceptions, BlockStmt body, ReceiverParameter receiverParameter) {
         this(null, modifiers, annotations, typeParameters, name, parameters, thrownExceptions, body, receiverParameter);
     }
@@ -59,7 +59,7 @@ public class ConstructorDeclaration extends CallableDeclaration<ConstructorDecla
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public ConstructorDeclaration(TokenRange tokenRange, NodeList<Modifier> modifiers, NodeList<AnnotationExpr> annotations, NodeList<TypeParameter> typeParameters, SimpleName name, NodeList<Parameter> parameters, NodeList<ReferenceType> thrownExceptions, BlockStmt body, ReceiverParameter receiverParameter) {
         super(tokenRange, modifiers, annotations, typeParameters, name, parameters, thrownExceptions, receiverParameter);
         setBody(body);
@@ -67,18 +67,18 @@ public class ConstructorDeclaration extends CallableDeclaration<ConstructorDecla
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public BlockStmt getBody() {
         return body;
     }
@@ -89,8 +89,8 @@ public class ConstructorDeclaration extends CallableDeclaration<ConstructorDecla
      * @param body the body, can not be null
      * @return this, the ConstructorDeclaration
      */
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public ConstructorDeclaration setBody(final BlockStmt body) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public ConstructorDeclaration setBody(/*final*/BlockStmt body) {
         assertNotNull(body);
         if (body == this.body) {
             return this;
@@ -104,27 +104,27 @@ public class ConstructorDeclaration extends CallableDeclaration<ConstructorDecla
     }
 
     @Override
-    public ConstructorDeclaration setModifiers(final NodeList<Modifier> modifiers) {
+    public ConstructorDeclaration setModifiers(/*final*/NodeList<Modifier> modifiers) {
         return super.setModifiers(modifiers);
     }
 
     @Override
-    public ConstructorDeclaration setName(final SimpleName name) {
+    public ConstructorDeclaration setName(/*final*/SimpleName name) {
         return super.setName(name);
     }
 
     @Override
-    public ConstructorDeclaration setParameters(final NodeList<Parameter> parameters) {
+    public ConstructorDeclaration setParameters(/*final*/NodeList<Parameter> parameters) {
         return super.setParameters(parameters);
     }
 
     @Override
-    public ConstructorDeclaration setThrownExceptions(final NodeList<ReferenceType> thrownExceptions) {
+    public ConstructorDeclaration setThrownExceptions(/*final*/NodeList<ReferenceType> thrownExceptions) {
         return super.setThrownExceptions(thrownExceptions);
     }
 
     @Override
-    public ConstructorDeclaration setTypeParameters(final NodeList<TypeParameter> typeParameters) {
+    public ConstructorDeclaration setTypeParameters(/*final*/NodeList<TypeParameter> typeParameters) {
         return super.setTypeParameters(typeParameters);
     }
 
@@ -135,7 +135,7 @@ public class ConstructorDeclaration extends CallableDeclaration<ConstructorDecla
      * [throws exceptionsList]
      */
     @Override
-    public String getDeclarationAsString(boolean includingModifiers, boolean includingThrows, boolean includingParameterName) {
+    public string getDeclarationAsString(boolean includingModifiers, boolean includingThrows, boolean includingParameterName) {
         StringBuilder sb = new StringBuilder();
         if (includingModifiers) {
             AccessSpecifier accessSpecifier = getAccessSpecifier();
@@ -164,7 +164,7 @@ public class ConstructorDeclaration extends CallableDeclaration<ConstructorDecla
     /*
      * Returns the constructor descriptor
      */
-    public String toDescriptor() {
+    public string toDescriptor() {
         StringBuilder sb = new StringBuilder();
         sb.append('(');
         for (int i = 0; i < getParameters().size(); i++) {
@@ -174,19 +174,19 @@ public class ConstructorDeclaration extends CallableDeclaration<ConstructorDecla
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public ConstructorDeclaration clone() {
         return (ConstructorDeclaration) accept(new CloneVisitor(), null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public ConstructorDeclarationMetaModel getMetaModel() {
         return JavaParserMetaModel.constructorDeclarationMetaModel;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public boolean replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
@@ -199,19 +199,19 @@ public class ConstructorDeclaration extends CallableDeclaration<ConstructorDecla
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isConstructorDeclaration() {
         return true;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public ConstructorDeclaration asConstructorDeclaration() {
         return this;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifConstructorDeclaration(Consumer<ConstructorDeclaration> action) {
         action.accept(this);
     }
@@ -222,7 +222,7 @@ public class ConstructorDeclaration extends CallableDeclaration<ConstructorDecla
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<ConstructorDeclaration> toConstructorDeclaration() {
         return Optional.of(this);
     }

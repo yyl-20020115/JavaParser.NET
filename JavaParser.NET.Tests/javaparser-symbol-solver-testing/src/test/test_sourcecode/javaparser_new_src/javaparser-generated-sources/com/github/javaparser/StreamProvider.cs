@@ -17,7 +17,7 @@ namespace com.github.javaparser;
 
 
 /**
- * NOTE : This generated class can be safely deleted if installing in a GWT installation (use StringProvider instead)
+ * NOTE : This generated class can be safely deleted if installing _in a GWT installation (use StringProvider instead)
  */
 public class StreamProvider implements Provider {
 
@@ -27,21 +27,21 @@ public class StreamProvider implements Provider {
 		_reader = reader;
 	}
 	
-	public StreamProvider(InputStream stream) throws IOException {
+	public StreamProvider(InputStream stream){
 		_reader = new BufferedReader(new InputStreamReader(stream));
 	}
 	
-	public StreamProvider(InputStream stream, String charsetName) throws IOException {
+	public StreamProvider(InputStream stream, string charsetName){
 		_reader = new BufferedReader(new InputStreamReader(stream, charsetName));
 	}
 
 	@Override
-	public int read(char[] buffer, int off, int len) throws IOException {
+	public int read(char[] buffer, int off, int len){
 	   int result = _reader.read(buffer, off, len);
 
 	   /* CBA -- Added 2014/03/29 -- 
 	             This logic allows the generated Java code to be easily translated to C# (via sharpen) -
-	             as in C# 0 represents end of file, and in Java, -1 represents end of file
+	             as _in C# 0 represents end of file, and _in Java, -1 represents end of file
 	             See : http://msdn.microsoft.com/en-us/library/9kstw824(v=vs.110).aspx
 	             ** Technically, this is not required for java but the overhead is extremely low compared to the code generation benefits.
 	   */
@@ -56,7 +56,7 @@ public class StreamProvider implements Provider {
 	}
 
 	@Override
-	public void close() throws IOException {
+	public void close(){
 		_reader.close();
 	}
 

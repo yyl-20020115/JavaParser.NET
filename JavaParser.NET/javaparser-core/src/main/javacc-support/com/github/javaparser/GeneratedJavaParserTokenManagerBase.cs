@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -36,11 +36,11 @@ abstract class GeneratedJavaParserTokenManagerBase {
     }
 
     /**
-     * Since comments are completely captured in a single token, including their delimiters, deconstruct them here so we
+     * Since comments are completely captured _in a single token, including their delimiters, deconstruct them here so we
      * can turn them into nodes later on.
      */
     static Comment createCommentFromToken(Token token) {
-        String commentText = token.image;
+        string commentText = token.image;
         if (token.kind == JAVADOC_COMMENT) {
             return new JavadocComment(tokenRange(token), commentText.substring(3, commentText.length() - 2));
         } else if (token.kind == MULTI_LINE_COMMENT) {

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,29 +24,29 @@ namespace com.github.javaparser.ast.expr;
 
 
 /**
- * Method reference expressions introduced in Java 8 specifically designed to simplify lambda Expressions.
+ * Method reference expressions introduced _in Java 8 specifically designed to simplify lambda Expressions.
  * These are some examples:
  *
- * System.out::println; 
+ * System._out::println; 
  *
  * (test ? stream.map(String::trim) : stream)::toArray; 
  * @author Raquel Pau
  *
  */
-public class MethodReferenceExpr extends Expression {
+public class MethodReferenceExpr:Expression {
 
     private Expression scope;
 
     private List<TypeParameter> typeParameters;
 
-    private String identifier;
+    private string identifier;
 
     public MethodReferenceExpr() {
     }
 
     public MethodReferenceExpr(int beginLine, int beginColumn, int endLine,
                                int endColumn, Expression scope,
-                               List<TypeParameter> typeParameters, String identifier) {
+                               List<TypeParameter> typeParameters, string identifier) {
 
         super(beginLine, beginColumn, endLine, endColumn);
         setIdentifier(identifier);
@@ -83,11 +83,11 @@ public class MethodReferenceExpr extends Expression {
         setAsParentNodeOf(this.typeParameters);
     }
 
-    public String getIdentifier() {
+    public string getIdentifier() {
         return identifier;
     }
 
-    public void setIdentifier(String identifier) {
+    public void setIdentifier(string identifier) {
         this.identifier = identifier;
     }
 

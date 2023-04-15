@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,55 +25,55 @@ namespace com.github.javaparser.symbolsolver.resolution;
 
 
 /**
- * Tests resolution of FieldAccessExpr with same names in scope and identifier
+ * Tests resolution of FieldAccessExpr with same names _in scope and identifier
  *
  * @author Takeshi D. Itoh
  */
-class FieldAccessExprResolutionTest extends AbstractResolutionTest {
+class FieldAccessExprResolutionTest:AbstractResolutionTest {
 
     @BeforeEach
-    void configureSymbolSolver() throws IOException {
-        // configure symbol solver so as not to potentially disturb tests in other classes
+    void configureSymbolSolver(){
+        // configure symbol solver so as not to potentially disturb tests _in other classes
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver()));
     }
 
-    @Test
-    void solveX() throws IOException {
+    [TestMethod]
+    void solveX(){
         CompilationUnit cu = parseSample("FieldAccessExprResolution");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "Main");
         MethodDeclaration md = Navigator.demandMethod(clazz, "x");
         MethodCallExpr mce = Navigator.findMethodCall(md, "method").get();
-        String actual = mce.resolve().getQualifiedName();
+        string actual = mce.resolve().getQualifiedName();
         assertEquals("X.method", actual);
     }
 
-    @Test
-    void solveXX() throws IOException {
+    [TestMethod]
+    void solveXX(){
         CompilationUnit cu = parseSample("FieldAccessExprResolution");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "Main");
         MethodDeclaration md = Navigator.demandMethod(clazz, "x_x");
         MethodCallExpr mce = Navigator.findMethodCall(md, "method").get();
-        String actual = mce.resolve().getQualifiedName();
+        string actual = mce.resolve().getQualifiedName();
         assertEquals("X.X1.method", actual);
     }
 
-    @Test
-    void solveXYX() throws IOException {
+    [TestMethod]
+    void solveXYX(){
         CompilationUnit cu = parseSample("FieldAccessExprResolution");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "Main");
         MethodDeclaration md = Navigator.demandMethod(clazz, "x_y_x");
         MethodCallExpr mce = Navigator.findMethodCall(md, "method").get();
-        String actual = mce.resolve().getQualifiedName();
+        string actual = mce.resolve().getQualifiedName();
         assertEquals("X.Y1.X2.method", actual);
     }
 
-    @Test
-    void solveXYZX() throws IOException {
+    [TestMethod]
+    void solveXYZX(){
         CompilationUnit cu = parseSample("FieldAccessExprResolution");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "Main");
         MethodDeclaration md = Navigator.demandMethod(clazz, "x_z_y_x");
         MethodCallExpr mce = Navigator.findMethodCall(md, "method").get();
-        String actual = mce.resolve().getQualifiedName();
+        string actual = mce.resolve().getQualifiedName();
         assertEquals("X.Z1.Y2.X3.method", actual);
     }
 

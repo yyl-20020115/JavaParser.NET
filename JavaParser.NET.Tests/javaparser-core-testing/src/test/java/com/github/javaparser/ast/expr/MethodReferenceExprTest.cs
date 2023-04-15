@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,107 +25,107 @@ namespace com.github.javaparser.ast.expr;
 
 class MethodReferenceExprTest {
 
-    @Test
+    [TestMethod]
     void methodReferenceExprHasAlwaysAScope() {
         assertNotNull(new MethodReferenceExpr().getScope());
     }
 
-    @Test
+    [TestMethod]
     void reference1() {
         assertExpressionValid("String::length");
     }
         
-    @Test
+    [TestMethod]
     void reference2() {
         assertExpressionValid("System::currentTimeMillis // static method");
     }
         
-    @Test
+    [TestMethod]
     void reference3() {
         assertExpressionValid("List<String>::size // explicit type arguments for generic type");
     }
         
-    @Test
+    [TestMethod]
     void reference4() {
         assertExpressionValid("List::size // inferred type arguments for generic type");
     }
         
-    @Test
+    [TestMethod]
     void reference5() {
         assertExpressionValid("int[]::clone");
     }
         
-    @Test
+    [TestMethod]
     void reference6() {
         assertExpressionValid("T::tvarMember");
     }
         
-    @Test
+    [TestMethod]
     void reference7() {
-        assertExpressionValid("System.out::println");
+        assertExpressionValid("System._out::println");
     }
         
-    @Test
+    [TestMethod]
     void reference8() {
         assertExpressionValid("\"abc\"::length");
     }
         
-    @Test
+    [TestMethod]
     void reference9() {
         assertExpressionValid("foo[x]::bar");
     }
         
-    @Test
+    [TestMethod]
     void reference10() {
         assertExpressionValid("(test ? list.replaceAll(String::trim) : list) :: iterator");
     }
         
-    @Test
+    [TestMethod]
     void reference10Annotated1() {
         assertExpressionValid("(test ? list.replaceAll(@A String::trim) : list) :: iterator");
     }
         
-    @Test
+    [TestMethod]
     void reference11() {
         assertExpressionValid("String::valueOf // overload resolution needed");
     }
         
-    @Test
+    [TestMethod]
     void reference12() {
         assertExpressionValid("Arrays::sort // type arguments inferred from context");
     }
         
-    @Test
+    [TestMethod]
     void reference13() {
         assertExpressionValid("Arrays::<String>sort // explicit type arguments");
     }
         
-    @Test
+    [TestMethod]
     void reference14() {
         assertExpressionValid("ArrayList<String>::new // constructor for parameterized type");
     }
         
-    @Test
+    [TestMethod]
     void reference15() {
         assertExpressionValid("ArrayList::new // inferred type arguments");
     }
         
-    @Test
+    [TestMethod]
     void reference16() {
         assertExpressionValid("Foo::<Integer>new // explicit type arguments");
     }
         
-    @Test
+    [TestMethod]
     void reference17() {
         assertExpressionValid("Bar<String>::<Integer>new // generic class, generic constructor");
     }
         
-    @Test
+    [TestMethod]
     void reference18() {
         assertExpressionValid("Outer.Inner::new // inner class constructor");
     }
         
-    @Test
+    [TestMethod]
     void reference19() {
         assertExpressionValid("int[]::new // array creation");
     }

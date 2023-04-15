@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,7 +24,7 @@ namespace com.github.javaparser.symbolsolver.javassistmodel;
 
 
 
-class JavassistClassDeclarationTest extends AbstractClassDeclarationTest {
+class JavassistClassDeclarationTest:AbstractClassDeclarationTest {
 
     private TypeSolver typeSolver;
 
@@ -33,7 +33,7 @@ class JavassistClassDeclarationTest extends AbstractClassDeclarationTest {
     private TypeSolver anotherTypeSolver;
 
     @BeforeEach
-    void setup() throws IOException {
+    void setup(){
         Path pathToJar = adaptPath("src/test/resources/javaparser-core-2.1.0.jar");
         typeSolver = new CombinedTypeSolver(new JarTypeSolver(pathToJar), new ReflectionTypeSolver());
 
@@ -48,49 +48,49 @@ class JavassistClassDeclarationTest extends AbstractClassDeclarationTest {
     /// Test misc
     ///
 
-    @Test
+    [TestMethod]
     void testIsClass() {
         JavassistClassDeclaration compilationUnit = (JavassistClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.CompilationUnit");
         assertTrue(compilationUnit.isClass());
     }
 
-    @Test
+    [TestMethod]
     void testIsInterface() {
         JavassistClassDeclaration compilationUnit = (JavassistClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.CompilationUnit");
         assertFalse(compilationUnit.isInterface());
     }
 
-    @Test
+    [TestMethod]
     void testIsEnum() {
         JavassistClassDeclaration compilationUnit = (JavassistClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.CompilationUnit");
         assertFalse(compilationUnit.isEnum());
     }
 
-    @Test
+    [TestMethod]
     void testIsTypeVariable() {
         JavassistClassDeclaration compilationUnit = (JavassistClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.CompilationUnit");
         assertFalse(compilationUnit.isTypeParameter());
     }
 
-    @Test
+    [TestMethod]
     void testIsType() {
         JavassistClassDeclaration compilationUnit = (JavassistClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.CompilationUnit");
         assertTrue(compilationUnit.isType());
     }
 
-    @Test
+    [TestMethod]
     void testAsType() {
         JavassistClassDeclaration compilationUnit = (JavassistClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.CompilationUnit");
         assertEquals(compilationUnit, compilationUnit.asType());
     }
 
-    @Test
+    [TestMethod]
     void testAsClass() {
         JavassistClassDeclaration compilationUnit = (JavassistClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.CompilationUnit");
         assertEquals(compilationUnit, compilationUnit.asClass());
     }
 
-    @Test
+    [TestMethod]
     void testAsInterface() {
         assertThrows(UnsupportedOperationException.class, () -> {
             JavassistClassDeclaration compilationUnit = (JavassistClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.CompilationUnit");
@@ -98,7 +98,7 @@ class JavassistClassDeclarationTest extends AbstractClassDeclarationTest {
     });
 }
 
-    @Test
+    [TestMethod]
     void testAsEnum() {
         assertThrows(UnsupportedOperationException.class, () -> {
             JavassistClassDeclaration compilationUnit = (JavassistClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.CompilationUnit");
@@ -106,37 +106,37 @@ class JavassistClassDeclarationTest extends AbstractClassDeclarationTest {
     });
 }
 
-    @Test
+    [TestMethod]
     void testGetPackageName() {
         JavassistClassDeclaration compilationUnit = (JavassistClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.CompilationUnit");
         assertEquals("com.github.javaparser.ast", compilationUnit.getPackageName());
     }
 
-    @Test
+    [TestMethod]
     void testGetClassName() {
         JavassistClassDeclaration compilationUnit = (JavassistClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.CompilationUnit");
         assertEquals("CompilationUnit", compilationUnit.getClassName());
     }
 
-    @Test
+    [TestMethod]
     void testGetQualifiedName() {
         JavassistClassDeclaration compilationUnit = (JavassistClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.CompilationUnit");
         assertEquals("com.github.javaparser.ast.CompilationUnit", compilationUnit.getQualifiedName());
     }
 
-    @Test
+    [TestMethod]
     void testHasDirectlyAnnotation() {
         JavassistClassDeclaration compilationUnit = (JavassistClassDeclaration) anotherTypeSolver.solveType("com.github.javaparser.test.TestClass");
         assertTrue(compilationUnit.hasDirectlyAnnotation("com.github.javaparser.test.TestAnnotation"));
     }
 
-    @Test
+    [TestMethod]
     void testHasAnnotation() {
         JavassistClassDeclaration compilationUnit = (JavassistClassDeclaration) anotherTypeSolver.solveType("com.github.javaparser.test.TestChildClass");
         assertTrue(compilationUnit.hasAnnotation("com.github.javaparser.test.TestAnnotation"));
     }
 
-    @Test
+    [TestMethod]
     void testGetGenericTypeField(){
         JavassistClassDeclaration compilationUnit = (JavassistClassDeclaration) anotherTypeSolver.solveType("com.github.javaparser.test.ClassWithFields");
         List<ResolvedFieldDeclaration> declarationList = compilationUnit.getAllFields();
@@ -144,7 +144,7 @@ class JavassistClassDeclarationTest extends AbstractClassDeclarationTest {
 
         Map<String, ResolvedType> fields = new HashMap<>();
         for (ResolvedFieldDeclaration fieldDeclaration : declarationList) {
-            String name = fieldDeclaration.getName();
+            string name = fieldDeclaration.getName();
             ResolvedType type = fieldDeclaration.getType();
             fields.put(name, type);
         }
@@ -157,7 +157,7 @@ class JavassistClassDeclarationTest extends AbstractClassDeclarationTest {
         assertTrue(fields.containsKey("objectField"));
     }
 
-    @Test
+    [TestMethod]
     void testGetDeclaredMethods() {
         JavassistClassDeclaration compilationUnit = (JavassistClassDeclaration) newTypeSolver.solveType("com.github.javaparser.Position");
         Set<ResolvedMethodDeclaration> methodsSet = compilationUnit.getDeclaredMethods();
@@ -198,45 +198,45 @@ class JavassistClassDeclarationTest extends AbstractClassDeclarationTest {
     /// Test ancestors
     ///
 
-    @Test
+    [TestMethod]
     void testGetSuperclass() {
         JavassistClassDeclaration compilationUnit = (JavassistClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.CompilationUnit");
         assertEquals("com.github.javaparser.ast.Node", compilationUnit.getSuperClass().orElseThrow(() -> new RuntimeException("super class unexpectedly empty")).getQualifiedName());
     }
 
-    @Test
+    [TestMethod]
     void testGetSuperclassOfJavaLangObject() throws NotFoundException {
         CtClass javaLangObject = ClassPool.getDefault().get("java.lang.Object");
         JavassistClassDeclaration objectDeclaration = new JavassistClassDeclaration(javaLangObject, typeSolver);
         assertFalse(objectDeclaration.getSuperClass().isPresent());
     }
 
-    @Test
+    [TestMethod]
     void testGetSuperclassWithoutTypeParameters() {
         JavassistClassDeclaration compilationUnit = (JavassistClassDeclaration) newTypeSolver.solveType("com.github.javaparser.ast.CompilationUnit");
         assertEquals("com.github.javaparser.ast.Node", compilationUnit.getSuperClass().orElseThrow(() -> new RuntimeException("super class unexpectedly empty")).getQualifiedName());
     }
 
-    @Test
+    [TestMethod]
     void testGetSuperclassWithTypeParameters() {
         JavassistClassDeclaration compilationUnit = (JavassistClassDeclaration) newTypeSolver.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
         assertEquals("com.github.javaparser.ast.body.BodyDeclaration", compilationUnit.getSuperClass().orElseThrow(() -> new RuntimeException("super class unexpectedly empty")).getQualifiedName());
         assertEquals("com.github.javaparser.ast.body.ConstructorDeclaration", compilationUnit.getSuperClass().orElseThrow(() -> new RuntimeException("super class unexpectedly empty")).typeParametersMap().getValueBySignature("com.github.javaparser.ast.body.BodyDeclaration.T").get().asReferenceType().getQualifiedName());
     }
 
-    @Test
+    [TestMethod]
     void testGetAllSuperclasses() {
         JavassistClassDeclaration cu = (JavassistClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.CompilationUnit");
         assertEquals(ImmutableSet.of("com.github.javaparser.ast.Node", "java.lang.Object"), cu.getAllSuperClasses().stream().map(ResolvedReferenceType::getQualifiedName).collect(Collectors.toSet()));
     }
 
-    @Test
+    [TestMethod]
     void testGetAllAncestorsWithDepthFirstTraversalOrder() {
         JavassistClassDeclaration cu = (JavassistClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.CompilationUnit");
         assertEquals(ImmutableSet.of("com.github.javaparser.ast.Node", "java.lang.Object"), cu.getAllAncestors().stream().map(ResolvedReferenceType::getQualifiedName).collect(Collectors.toSet()));
     }
 
-    @Test
+    [TestMethod]
     void testGetInterfaces() {
         JavassistClassDeclaration compilationUnit = (JavassistClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.CompilationUnit");
         assertEquals(ImmutableSet.of(), compilationUnit.getInterfaces().stream().map(ResolvedReferenceType::getQualifiedName).collect(Collectors.toSet()));
@@ -245,7 +245,7 @@ class JavassistClassDeclarationTest extends AbstractClassDeclarationTest {
         assertEquals(ImmutableSet.of("com.github.javaparser.ast.DocumentableNode"), coid.getInterfaces().stream().map(ResolvedReferenceType::getQualifiedName).collect(Collectors.toSet()));
     }
 
-    @Test
+    [TestMethod]
     void testGetAllInterfaces() {
         JavassistClassDeclaration compilationUnit = (JavassistClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.CompilationUnit");
         assertEquals(ImmutableSet.of(), compilationUnit.getAllInterfaces().stream().map(ResolvedReferenceType::getQualifiedName).collect(Collectors.toSet()));
@@ -254,13 +254,13 @@ class JavassistClassDeclarationTest extends AbstractClassDeclarationTest {
         assertEquals(ImmutableSet.of("com.github.javaparser.ast.NamedNode", "com.github.javaparser.ast.body.AnnotableNode", "com.github.javaparser.ast.DocumentableNode"), coid.getAllInterfaces().stream().map(ResolvedReferenceType::getQualifiedName).collect(Collectors.toSet()));
     }
 
-    @Test
+    [TestMethod]
     void testGetAllSuperclassesWithoutTypeParameters() {
         JavassistClassDeclaration cu = (JavassistClassDeclaration) newTypeSolver.solveType("com.github.javaparser.ast.CompilationUnit");
         assertEquals(ImmutableSet.of("com.github.javaparser.ast.Node", "java.lang.Object"), cu.getAllSuperClasses().stream().map(ResolvedReferenceType::getQualifiedName).collect(Collectors.toSet()));
     }
 
-    @Test
+    [TestMethod]
     void testGetAllSuperclassesWithTypeParameters() {
         JavassistClassDeclaration constructorDeclaration = (JavassistClassDeclaration) newTypeSolver.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
         assertEquals(3, constructorDeclaration.getAllSuperClasses().size());
@@ -281,7 +281,7 @@ class JavassistClassDeclarationTest extends AbstractClassDeclarationTest {
         assertEquals("java.lang.Object", ancestor.getQualifiedName());
     }
 
-    @Test
+    [TestMethod]
     void testGetInterfacesWithoutParameters() {
         JavassistClassDeclaration compilationUnit = (JavassistClassDeclaration) newTypeSolver.solveType("com.github.javaparser.ast.CompilationUnit");
         assertEquals(ImmutableSet.of(), compilationUnit.getInterfaces().stream().map(ResolvedReferenceType::getQualifiedName).collect(Collectors.toSet()));
@@ -290,7 +290,7 @@ class JavassistClassDeclarationTest extends AbstractClassDeclarationTest {
         assertEquals(ImmutableSet.of("com.github.javaparser.ast.nodeTypes.NodeWithExtends", "com.github.javaparser.ast.nodeTypes.NodeWithImplements"), coid.getInterfaces().stream().map(ResolvedReferenceType::getQualifiedName).collect(Collectors.toSet()));
     }
 
-    @Test
+    [TestMethod]
     void testGetInterfacesWithParameters() {
         JavassistClassDeclaration constructorDeclaration = (JavassistClassDeclaration) newTypeSolver.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
         assertEquals(7, constructorDeclaration.getInterfaces().size());
@@ -325,7 +325,7 @@ class JavassistClassDeclarationTest extends AbstractClassDeclarationTest {
         assertEquals("com.github.javaparser.ast.body.ConstructorDeclaration", interfaze.typeParametersMap().getValueBySignature("com.github.javaparser.ast.nodeTypes.NodeWithBlockStmt.T").get().asReferenceType().getQualifiedName());
     }
 
-    @Test
+    [TestMethod]
     void testGetAllInterfacesWithoutParameters() {
         JavassistClassDeclaration compilationUnit = (JavassistClassDeclaration) newTypeSolver.solveType("com.github.javaparser.ast.CompilationUnit");
         assertEquals(ImmutableSet.of("java.lang.Cloneable"), compilationUnit.getAllInterfaces().stream().map(ResolvedReferenceType::getQualifiedName).collect(Collectors.toSet()));
@@ -341,7 +341,7 @@ class JavassistClassDeclarationTest extends AbstractClassDeclarationTest {
                 "com.github.javaparser.ast.nodeTypes.NodeWithMembers"), coid.getAllInterfaces().stream().map(ResolvedReferenceType::getQualifiedName).collect(Collectors.toSet()));
     }
 
-    @Test
+    [TestMethod]
     void testGetAllInterfacesWithParametersWithDepthFirstTraversalOrder() {
         JavassistClassDeclaration constructorDeclaration = (JavassistClassDeclaration) newTypeSolver.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
         assertEquals(9, constructorDeclaration.getAllInterfaces().size());
@@ -383,7 +383,7 @@ class JavassistClassDeclarationTest extends AbstractClassDeclarationTest {
         assertEquals("com.github.javaparser.ast.body.ConstructorDeclaration", interfaze.typeParametersMap().getValueBySignature("com.github.javaparser.ast.nodeTypes.NodeWithAnnotations.T").get().asReferenceType().getQualifiedName());
     }
 
-    @Test
+    [TestMethod]
     void testGetAncestorsWithTypeParametersWithDepthFirstTraversalOrder() {
         JavassistClassDeclaration constructorDeclaration = (JavassistClassDeclaration) newTypeSolver.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
         assertEquals(8, constructorDeclaration.getAncestors().size());
@@ -422,13 +422,13 @@ class JavassistClassDeclarationTest extends AbstractClassDeclarationTest {
         assertEquals("com.github.javaparser.ast.body.ConstructorDeclaration", ancestor.typeParametersMap().getValueBySignature("com.github.javaparser.ast.nodeTypes.NodeWithBlockStmt.T").get().asReferenceType().getQualifiedName());
     }
 
-    @Test
+    [TestMethod]
     void testGetAllAncestorsWithoutTypeParametersWithDepthFirstTraversalOrder() {
         JavassistClassDeclaration cu = (JavassistClassDeclaration) newTypeSolver.solveType("com.github.javaparser.ast.CompilationUnit");
         assertEquals(ImmutableSet.of("java.lang.Cloneable", "com.github.javaparser.ast.Node", "java.lang.Object"), cu.getAllAncestors().stream().map(ResolvedReferenceType::getQualifiedName).collect(Collectors.toSet()));
     }
 
-    @Test
+    [TestMethod]
     void testGetAllAncestorsWithTypeParametersWithDepthFirstTraversalOrder() {
         JavassistClassDeclaration constructorDeclaration = (JavassistClassDeclaration) newTypeSolver.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
 
@@ -485,32 +485,32 @@ class JavassistClassDeclarationTest extends AbstractClassDeclarationTest {
 
     @Nested
     class TestIsAssignableBy {
-        @Test
+        [TestMethod]
         void whenNullTypeIsProvided() {
             JavassistClassDeclaration cu = (JavassistClassDeclaration) newTypeSolver.solveType("com.github.javaparser.ast.CompilationUnit");
             assertTrue(cu.isAssignableBy(NullType.INSTANCE));
         }
 
-        @Test
+        [TestMethod]
         void whenLambdaArgumentTypePlaceholderIsProvided() {
             JavassistClassDeclaration cu = (JavassistClassDeclaration) newTypeSolver.solveType("com.github.javaparser.ast.CompilationUnit");
             assertFalse(cu.isAssignableBy(new LambdaArgumentTypePlaceholder(0)));
         }
 
-        @Test
+        [TestMethod]
         void whenEqualTypeIsProvided() {
             JavassistClassDeclaration cu = (JavassistClassDeclaration) newTypeSolver.solveType("com.github.javaparser.ast.CompilationUnit");
             assertTrue(cu.isAssignableBy(cu));
         }
 
-        @Test
+        [TestMethod]
         void whenSuperClassIsProvided() {
             ResolvedReferenceTypeDeclaration node = newTypeSolver.solveType("com.github.javaparser.ast.Node");
             JavassistClassDeclaration cu = (JavassistClassDeclaration) newTypeSolver.solveType("com.github.javaparser.ast.CompilationUnit");
             assertTrue(cu.isAssignableBy(node));
         }
 
-        @Test
+        [TestMethod]
         void whenInterfaceIsProvided() {
             JavassistInterfaceDeclaration nodeWithImplements = (JavassistInterfaceDeclaration) newTypeSolver.solveType(
                     "com.github.javaparser.ast.nodeTypes.NodeWithImplements");

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,28 +25,28 @@ namespace com.github.javaparser.ast.expr;
 
 
 /**
- * Method reference expressions introduced in Java 8 specifically designed to simplify lambda Expressions.
+ * Method reference expressions introduced _in Java 8 specifically designed to simplify lambda Expressions.
  * These are some examples:
  *
- * System.out::println; 
+ * System._out::println; 
  *
  * (test ? stream.map(String::trim) : stream)::toArray; 
  * @author Raquel Pau
  *
  */
-public class MethodReferenceExpr extends Expression implements NodeWithTypeArguments<MethodReferenceExpr> {
+public class MethodReferenceExpr:Expression implements NodeWithTypeArguments<MethodReferenceExpr> {
 
     private Expression scope;
 
     private List<Type<?>> typeArguments;
 
-    private String identifier;
+    private string identifier;
 
     public MethodReferenceExpr() {
     }
 
     public MethodReferenceExpr(Range range, Expression scope,
-                               List<Type<?>> typeArguments, String identifier) {
+                               List<Type<?>> typeArguments, string identifier) {
         super(range);
         setIdentifier(identifier);
         setScope(scope);
@@ -80,17 +80,17 @@ public class MethodReferenceExpr extends Expression implements NodeWithTypeArgum
     }
 
     @Override
-    public MethodReferenceExpr setTypeArguments(final List<Type<?>> types) {
+    public MethodReferenceExpr setTypeArguments(/*final*/List<Type<?>> types) {
         this.typeArguments = types;
         setAsParentNodeOf(this.typeArguments);
         return this;
     }
 
-    public String getIdentifier() {
+    public string getIdentifier() {
         return identifier;
     }
 
-    public MethodReferenceExpr setIdentifier(String identifier) {
+    public MethodReferenceExpr setIdentifier(string identifier) {
         this.identifier = identifier;
         return this;
     }

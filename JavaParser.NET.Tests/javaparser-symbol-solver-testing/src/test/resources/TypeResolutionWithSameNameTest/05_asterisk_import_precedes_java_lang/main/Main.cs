@@ -2,5 +2,5 @@ namespace main;
 
 
 class Main {
-    String s;
+    string s;
 }

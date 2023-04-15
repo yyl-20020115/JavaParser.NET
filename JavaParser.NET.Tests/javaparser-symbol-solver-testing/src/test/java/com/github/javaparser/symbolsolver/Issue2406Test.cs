@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,19 +24,19 @@ namespace com.github.javaparser.symbolsolver;
 
 
 
-public class Issue2406Test extends AbstractSymbolResolutionTest {
+public class Issue2406Test:AbstractSymbolResolutionTest {
 
-    @Test
+    [TestMethod]
     public void test() {
 
         ParserConfiguration config = new ParserConfiguration()
                 .setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver(false)));
         StaticJavaParser.setConfiguration(config);
 
-        String s = "import java.lang.reflect.Array;\n" +
+        string s = "import java.lang.reflect.Array;\n" +
                 "\n" +
                 "public class Main {\n" +
-                "    public static <T, U> T[] copyOf(U[] original, int newLength, Class<? extends T[]> newType) {\n" +
+                "    public static <T, U> T[] copyOf(U[] original, int newLength, Class<?:T[]> newType) {\n" +
                 "        @SuppressWarnings(\"unchecked\")\n" +
                 "        T[] copy = ((Object) newType == (Object)Object[].class)\n" +
                 "            ? (T[]) new Object[newLength]\n" +
@@ -48,7 +48,7 @@ public class Issue2406Test extends AbstractSymbolResolutionTest {
                 "    public static void main(String[] args) {\n" +
                 "        String[] source = {\"a\", \"b\", \"c\"};\n" +
                 "        String[] target = copyOf(source, 2, source.getClass());\n" +
-                "        for (String e : target) System.out.println(e);\n" +
+                "        for (string e : target) System._out.println(e);\n" +
                 "    }\n" +
                 "}";
         CompilationUnit cu = StaticJavaParser.parse(s);
@@ -61,7 +61,7 @@ public class Issue2406Test extends AbstractSymbolResolutionTest {
             
         });
         
-        assertEquals("Main.copyOf(U[], int, java.lang.Class<? extends T[]>)", mces.get(0).resolve().getQualifiedSignature());
+        assertEquals("Main.copyOf(U[], int, java.lang.Class<?:T[]>)", mces.get(0).resolve().getQualifiedSignature());
 
     }
 

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,14 +24,14 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.declarations;
 
 
 
-class JavaParserAnnotationDeclarationTest extends AbstractResolutionTest {
+class JavaParserAnnotationDeclarationTest:AbstractResolutionTest {
 
-	private final TypeSolver typeSolver = new ReflectionTypeSolver();
-	private final JavaParser javaParser = createParserWithResolver(typeSolver);
+	private /*final*/TypeSolver typeSolver = new ReflectionTypeSolver();
+	private /*final*/JavaParser javaParser = createParserWithResolver(typeSolver);
 
-	@Test
+	[TestMethod]
 	void getAllFields_shouldReturnASingleField() {
-		String sourceCode = "@interface Foo { int a = 0; }";
+		string sourceCode = "@interface Foo { int a = 0; }";
 
 		ParseResult<CompilationUnit> result = javaParser.parse(sourceCode);
 		assertTrue(result.getResult().isPresent());
@@ -45,9 +45,9 @@ class JavaParserAnnotationDeclarationTest extends AbstractResolutionTest {
 		assertEquals("a", fields.get(0).getName());
 	}
 
-	@Test
+	[TestMethod]
 	void getAllFields_shouldReturnMultipleVariablesDeclaration() {
-		String sourceCode = "@interface Foo { int a = 0, b = 1; }";
+		string sourceCode = "@interface Foo { int a = 0, b = 1; }";
 
 		ParseResult<CompilationUnit> result = javaParser.parse(sourceCode);
 		assertTrue(result.getResult().isPresent());
@@ -62,9 +62,9 @@ class JavaParserAnnotationDeclarationTest extends AbstractResolutionTest {
 		assertEquals("b", fields.get(1).getName());
 	}
 
-	@Test
+	[TestMethod]
 	void testForIssue3094() {
-		String sourceCode = "@interface Foo { int a = 0; int b = a; }";
+		string sourceCode = "@interface Foo { int a = 0; int b = a; }";
 		ParseResult<CompilationUnit> result = javaParser.parse(sourceCode);
 		assertTrue(result.getResult().isPresent());
 		CompilationUnit cu = result.getResult().get();
@@ -74,9 +74,9 @@ class JavaParserAnnotationDeclarationTest extends AbstractResolutionTest {
 		assertDoesNotThrow(nameExpr.get()::resolve);
 	}
 
-	@Test
+	[TestMethod]
 	void internalTypes_shouldFindAllInnerTypeDeclaration() {
-		String sourceCode = "@interface Foo { class A {} interface B {} @interface C {} enum D {} }";
+		string sourceCode = "@interface Foo { class A {} interface B {} @interface C {} enum D {} }";
 
 		ParseResult<CompilationUnit> result = javaParser.parse(sourceCode);
 		assertTrue(result.getResult().isPresent());
@@ -87,9 +87,9 @@ class JavaParserAnnotationDeclarationTest extends AbstractResolutionTest {
 		assertEquals(4, annotation.get().resolve().internalTypes().size());
 	}
 	
-	@Test
+	[TestMethod]
     void isAnnotationNotInheritable() {
-        String sourceCode = "@interface Foo {}";
+        string sourceCode = "@interface Foo {}";
 
         ParseResult<CompilationUnit> result = javaParser.parse(sourceCode);
         assertTrue(result.getResult().isPresent());
@@ -101,9 +101,9 @@ class JavaParserAnnotationDeclarationTest extends AbstractResolutionTest {
         assertFalse(annotation.get().resolve().isInheritable());
     }
 	
-	@Test
+	[TestMethod]
     void isAnnotationInheritable() {
-        String sourceCode = "import java.lang.annotation.Inherited;\n" + 
+        string sourceCode = "import java.lang.annotation.Inherited;\n" + 
                 "    @Inherited\n" + 
                 "    @interface Foo {}";
 

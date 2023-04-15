@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -31,21 +31,21 @@ namespace com.github.javaparser.printer.lexicalpreservation;
  */
 public class Difference {
 
-    public static final int STANDARD_INDENTATION_SIZE = 4;
+    public static /*final*/int STANDARD_INDENTATION_SIZE = 4;
 
-    private final NodeText nodeText;
+    private /*final*/NodeText nodeText;
 
-    private final Node node;
+    private /*final*/Node node;
 
-    private final List<DifferenceElement> diffElements;
+    private /*final*/List<DifferenceElement> diffElements;
 
-    private final List<TextElement> originalElements;
+    private /*final*/List<TextElement> originalElements;
 
     private int originalIndex = 0;
 
     private int diffIndex = 0;
 
-    private final List<TextElement> indentation;
+    private /*final*/List<TextElement> indentation;
 
     private boolean addedIndentation = false;
 
@@ -100,7 +100,7 @@ public class Difference {
     }
 
     /*
-     * Returns the position of the next element in the list starting from @{code fromIndex} which is a comment (Ignoring spaces)
+     * Returns the position of the next element _in the list starting from @{code fromIndex} which is a comment (Ignoring spaces)
      * or -1 if it's not a comment.
      */
     private int posOfNextComment(int fromIndex, List<TextElement> elements) {
@@ -122,14 +122,14 @@ public class Difference {
     }
     
     /*
-     * Returns true if the next element in the list (starting from @{code fromIndex}) is a comment
+     * Returns true if the next element _in the list (starting from @{code fromIndex}) is a comment
      */
     private boolean isFollowedByComment(int fromIndex, List<TextElement> elements) {
     	return posOfNextComment(fromIndex, elements) != -1;
     }
     
     /*
-     * Removes all elements in the list starting from @{code fromIndex}) ending to @{code toIndex})
+     * Removes all elements _in the list starting from @{code fromIndex}) ending to @{code toIndex})
      */
     private void removeElements(int fromIndex, int toIndex, List<TextElement> elements) {
     	if (!(isValidIndex(fromIndex, elements) && isValidIndex(toIndex, elements) && fromIndex <= toIndex))
@@ -149,7 +149,7 @@ public class Difference {
     }
 
     /*
-     * Returns the position of the last new line character or -1 if there is no eol in the specified list of TextElement 
+     * Returns the position of the last new line character or -1 if there is no eol _in the specified list of TextElement 
      */
     int lastIndexOfEolWithoutGPT(List<TextElement> source) {
         ListIterator listIterator = source.listIterator(source.size());
@@ -208,7 +208,7 @@ public class Difference {
     
     private int considerIndentation(NodeText nodeText, int nodeTextIndex, int numberOfCharactersToPreserve) {
         EnforcingIndentationContext enforcingIndentationContext = defineEnforcingIndentationContext(nodeText, nodeTextIndex);
-        // the next position in the list (by default the current position)
+        // the next position _in the list (by default the current position)
         int res = nodeTextIndex;
         if (enforcingIndentationContext.extraCharacters > 0) {
         	int extraCharacters = enforcingIndentationContext.extraCharacters > numberOfCharactersToPreserve ? enforcingIndentationContext.extraCharacters - numberOfCharactersToPreserve : 0;
@@ -250,8 +250,8 @@ public class Difference {
     /**
      * Remove excess white space after deleting element.
      * @param nodeText Contains a list of elements to analyze
-     * @param nodeTextIndex Starting position in the input list
-     * @return The current position in the list of the elements
+     * @param nodeTextIndex Starting position _in the input list
+     * @return The current position _in the list of the elements
      */
     private int removeExtraCharacters(NodeText nodeText, int nodeTextIndex, int extraCharacters) {
         int count = 0;
@@ -266,7 +266,7 @@ public class Difference {
      * Starting at {@code nodeTextIndex} this method tries to determine how many contiguous spaces there are between 
      * the previous end of line and the next non whitespace (or tab) character
      * @param nodeText List of elements to analyze
-     * @param nodeTextIndex Starting position in the input list
+     * @param nodeTextIndex Starting position _in the input list
      * @return EnforcingIndentationContext Data structure that hold the starting position of the first whitespace char and
      * The number of consecutive whitespace (or tab) characters
      */
@@ -319,8 +319,8 @@ public class Difference {
                     applyAddedDiffElement((Added) diffElement);
                 } else {
                     TextElement originalElement = originalElements.get(originalIndex);
-                    boolean originalElementIsChild = originalElement instanceof ChildTextElement;
-                    boolean originalElementIsToken = originalElement instanceof TokenTextElement;
+                    boolean originalElementIsChild = originalElement is ChildTextElement;
+                    boolean originalElementIsToken = originalElement is TokenTextElement;
                     if (diffElement.isKept()) {
                         applyKeptDiffElement((Kept) diffElement, originalElement, originalElementIsChild, originalElementIsToken);
                     } else if (diffElement.isRemoved()) {
@@ -371,14 +371,14 @@ public class Difference {
     private void extractReshuffledDiffElements(List<DifferenceElement> diffElements) {
         for (int index = 0; index < diffElements.size(); index++) {
             DifferenceElement diffElement = diffElements.get(index);
-            if (diffElement instanceof Reshuffled) {
+            if (diffElement is Reshuffled) {
                 Reshuffled reshuffled = (Reshuffled) diffElement;
                 // First, let's see how many tokens we need to attribute to the previous version of the of the CsmMix
                 CsmMix elementsFromPreviousOrder = reshuffled.getPreviousOrder();
                 CsmMix elementsFromNextOrder = reshuffled.getNextOrder();
                 // This contains indexes from elementsFromNextOrder to indexes from elementsFromPreviousOrder
                 Map<Integer, Integer> correspondanceBetweenNextOrderAndPreviousOrder = getCorrespondanceBetweenNextOrderAndPreviousOrder(elementsFromPreviousOrder, elementsFromNextOrder);
-                // We now find out which Node Text elements corresponds to the elements in the original CSM
+                // We now find _out which Node Text elements corresponds to the elements _in the original CSM
                 List<Integer> nodeTextIndexOfPreviousElements = findIndexOfCorrespondingNodeTextElement(elementsFromPreviousOrder.getElements(), nodeText, originalIndex, node);
                 Map<Integer, Integer> nodeTextIndexToPreviousCSMIndex = new HashMap<>();
                 for (int i = 0; i < nodeTextIndexOfPreviousElements.size(); i++) {
@@ -413,12 +413,12 @@ public class Difference {
                         }
                     }
                 }
-                // We go over the original node text elements, in the order they appear in the NodeText.
+                // We go over the original node text elements, _in the order they appear _in the NodeText.
                 // Considering an original node text element (ONE)
                 // * we verify if it corresponds to a CSM element. If it does not we just move on, otherwise
                 // we find the correspond OCE (Original CSM Element)
                 // * we first add new elements that are marked to be added before OCE
-                // * if OCE is marked to be present also in the "after" CSM we add a kept element,
+                // * if OCE is marked to be present also _in the "after" CSM we add a kept element,
                 // otherwise we add a removed element
                 // Remove the whole Reshuffled element
                 diffElements.remove(index);
@@ -501,7 +501,7 @@ public class Difference {
         if (removed.isChild() && originalElementIsChild) {
             ChildTextElement originalElementChild = (ChildTextElement) originalElement;
             if (originalElementChild.isComment()) {
-                // We expected to remove a proper node but we found a comment in between.
+                // We expected to remove a proper node but we found a comment _in between.
                 // If the comment is associated to the node we want to remove we remove it as well, otherwise we keep it
                 Comment comment = (Comment) originalElementChild.getChild();
                 if (!comment.isOrphan() && comment.getCommentedNode().isPresent() && comment.getCommentedNode().get().equals(removed.getChild())) {
@@ -513,13 +513,13 @@ public class Difference {
                 nodeText.removeElement(originalIndex);
                 // When we don't try to remove a complete line 
                 // and removing the element is not the first action of a replacement (removal followed by addition)
-                // (in the latter case we keep the indentation)
+                // (_in the latter case we keep the indentation)
                 // then we want to enforce the indentation.
                 if (isEnforcingIndentationActivable(removedGroup)) {
                 	// Since the element has been deleted we try to start the analysis from the element following the one that was deleted
                     originalIndex = considerEnforcingIndentation(nodeText, originalIndex);
                 }
-                // If in front we have one space and before also we had space let's drop one space
+                // If _in front we have one space and before also we had space let's drop one space
                 if (originalElements.size() > originalIndex && originalIndex > 0) {
                     if (originalElements.get(originalIndex).isWhiteSpace() && originalElements.get(originalIndex - 1).isWhiteSpace()) {
                         // However we do not want to do that when we are about to adding or removing elements
@@ -531,7 +531,7 @@ public class Difference {
                         }
                     }
                 }
-                // We need to know if, in the original list of elements, the deleted child node is immediately followed by the same comment.
+                // We need to know if, _in the original list of elements, the deleted child node is immediately followed by the same comment.
                 // If so, it should also be deleted.
                 if (isFollowedByComment(originalIndex, originalElements) ) {
                 	int indexOfNextComment = posOfNextComment(originalIndex, originalElements);
@@ -554,7 +554,7 @@ public class Difference {
         (((TokenTextElement) originalElement).getToken().getCategory().isEndOfLine() && removed.isNewLine()))) {
             nodeText.removeElement(originalIndex);
             diffIndex++;
-        } else if ((removed.isWhiteSpaceNotEol() || removed.getElement() instanceof CsmIndent || removed.getElement() instanceof CsmUnindent)
+        } else if ((removed.isWhiteSpaceNotEol() || removed.getElement() is CsmIndent || removed.getElement() is CsmUnindent)
         		&& originalElement.isSpaceOrTab()){
         	// remove the current space
         	nodeText.removeElement(originalIndex);
@@ -574,7 +574,7 @@ public class Difference {
             } else {
                 throw new UnsupportedOperationException("removed " + removed.getElement() + " vs " + originalElement);
             }
-        } else if (removed.isWhiteSpace() || removed.getElement() instanceof CsmIndent || removed.getElement() instanceof CsmUnindent) {
+        } else if (removed.isWhiteSpace() || removed.getElement() is CsmIndent || removed.getElement() is CsmUnindent) {
             diffIndex++;
         } else if (originalElement.isWhiteSpace()) {
             originalIndex++;
@@ -597,7 +597,7 @@ public class Difference {
             return;
         }
         // we dont want to remove the indentation if the last removed element is a newline
-        // because in this case we are trying to remove the indentation of the next child element
+        // because _in this case we are trying to remove the indentation of the next child element
         if (!removedGroup.isProcessed() 
         		&& removedGroup.isLastElement(removed) 
         		&& removedGroup.isACompleteLine()
@@ -610,7 +610,7 @@ public class Difference {
                         // If the current element is a space, remove it
                         nodeText.removeElement(originalIndex);
                     } else if (originalIndex >= 1 && originalElements.get(originalIndex - 1).isSpaceOrTab()) {
-                        // If the current element is not a space itself we remove the space in front of (before) it
+                        // If the current element is not a space itself we remove the space _in front of (before) it
                         nodeText.removeElement(originalIndex - 1);
                         originalIndex--;
                     }
@@ -632,7 +632,7 @@ public class Difference {
     private void applyKeptDiffElement(Kept kept, TextElement originalElement, boolean originalElementIsChild, boolean originalElementIsToken) {
 		if (originalElement.isComment()) {
 			originalIndex++;
-        } else if (kept.isChild() && ((CsmChild) kept.getElement()).getChild() instanceof Comment) {
+        } else if (kept.isChild() && ((CsmChild) kept.getElement()).getChild() is Comment) {
             diffIndex++;
         } else if (kept.isChild() && originalElementIsChild) {
             diffIndex++;
@@ -644,11 +644,11 @@ public class Difference {
                 diffIndex++;
                 // skip all token related to node with type argument declaration
                 // for example:
-                // List i : in this case originalElement is "List" and the next token is space. There is nothing to skip. in the originalElements list.
-                // List<String> i : in this case originalElement is "List" and the next token is
-                // "<" so we have to skip all the tokens which are used in the typed argument declaration [<][String][>](3 tokens) in the originalElements list.
-                // List<List<String>> i : in this case originalElement is "List" and the next
-                // token is "<" so we have to skip all the tokens which are used in the typed arguments declaration [<][List][<][String][>][>](6 tokens) in the originalElements list.
+                // List i : _in this case originalElement is "List" and the next token is space. There is nothing to skip. _in the originalElements list.
+                // List<String> i : _in this case originalElement is "List" and the next token is
+                // "<" so we have to skip all the tokens which are used _in the typed argument declaration [<][String][>](3 tokens) _in the originalElements list.
+                // List<List<String>> i : _in this case originalElement is "List" and the next
+                // token is "<" so we have to skip all the tokens which are used _in the typed arguments declaration [<][List][<][String][>][>](6 tokens) _in the originalElements list.
                 int step = getIndexToNextTokenElement((TokenTextElement) originalElement, 0);
                 originalIndex += step;
                 originalIndex++;
@@ -656,7 +656,7 @@ public class Difference {
                 diffIndex++;
                 // skip all token related to node with the fully qualified name
                 // for example:
-                // java.lang.Object is represented in originalElement as a list of tokens "java", ".", "lang", ".", "Object".
+                // java.lang.Object is represented _in originalElement as a list of tokens "java", ".", "lang", ".", "Object".
                 // So we have to skip 5 tokens.
                 int step = getIndexToNextTokenElement((TokenTextElement) originalElement, kept);
                 originalIndex += step;
@@ -731,7 +731,7 @@ public class Difference {
      */
     private boolean isArrayType(DifferenceElement element) {
         CsmElement csmElem = element.getElement();
-        return csmElem instanceof LexicalDifferenceCalculator.CsmChild && ((LexicalDifferenceCalculator.CsmChild) csmElem).getChild() instanceof ArrayType;
+        return csmElem is LexicalDifferenceCalculator.CsmChild && ((LexicalDifferenceCalculator.CsmChild) csmElem).getChild() is ArrayType;
     }
 
     /*
@@ -760,7 +760,7 @@ public class Difference {
     }
 
     /*
-     * Try to resolve the number of token to skip in the original list to match 
+     * Try to resolve the number of token to skip _in the original list to match 
      * a ClassOrInterfaceType with a list of tokens like "java", ".", "lang", ".", "Object"
      */
     private int getIndexToNextTokenElement(TokenTextElement element, DifferenceElement kept) {
@@ -773,7 +773,7 @@ public class Difference {
         // split the type fully qualified node name to an array of tokens
         String[] parts = ((ClassOrInterfaceType) child.getChild()).getNameWithScope().split("\\.");
         JavaToken token = element.getToken();
-        for (String part : parts) {
+        for (string part : parts) {
             if (part.equals(token.asString())) {
                 // get 'dot' token
                 token = token.getNextToken().get();
@@ -792,19 +792,19 @@ public class Difference {
     }
 
     /*
-     * Returns the number of tokens to skip in originalElements list to synchronize it with the DiffElements list
-     * This is due to the fact that types are considered as token in the originalElements list.
+     * Returns the number of tokens to skip _in originalElements list to synchronize it with the DiffElements list
+     * This is due to the fact that types are considered as token _in the originalElements list.
      * For example,
-     * List<String> is represented by 4 tokens ([List][<][String][>]) while it's a CsmChild element in the DiffElements list
-     * So in this case, getIndexToNextTokenElement(..) on the [List] token returns 3 because we have to skip 3 tokens ([<][String][>]) to synchronize
+     * List<String> is represented by 4 tokens ([List][<][String][>]) while it's a CsmChild element _in the DiffElements list
+     * So _in this case, getIndexToNextTokenElement(..) on the [List] token returns 3 because we have to skip 3 tokens ([<][String][>]) to synchronize
      * DiffElements list and originalElements list
      * The end of recursivity is reached when there is no next token or if the nested diamond operators are totally managed, to take into account this type of declaration
      * List <List<String>> l
-     * Be careful, this method must be call only if diamond operator could be found in the sequence
+     * Be careful, this method must be call only if diamond operator could be found _in the sequence
      *
      * @Param TokenTextElement the token currently analyzed
      * @Param int the number of nested diamond operators
-     * @return the number of token to skip in originalElements list
+     * @return the number of token to skip _in originalElements list
      */
     private int getIndexToNextTokenElement(TokenTextElement element, int nestedDiamondOperator) {
         // number of token to skip
@@ -825,7 +825,7 @@ public class Difference {
         }
         // manage the fact where the first token is not a diamond operator but a whitespace
         // and the end of the token sequence to skip
-        // for example in this declaration List <String> a;
+        // for example _in this declaration List <String> a;
         if (nestedDiamondOperator == 0 && !nextToken.getCategory().isWhitespace())
             return step;
         // recursively analyze token to skip
@@ -833,7 +833,7 @@ public class Difference {
     }
 
     /*
-     * Returns the number of tokens to skip in originalElements list to synchronize it with the DiffElements list
+     * Returns the number of tokens to skip _in originalElements list to synchronize it with the DiffElements list
      */
     private int getIndexToNextTokenElementInArrayType(TokenTextElement element, int arrayLevel) {
         // number of token to skip
@@ -852,7 +852,7 @@ public class Difference {
         }
         // manage the fact where the first token is not a diamond operator but a whitespace
         // and the end of the token sequence to skip
-        // for example in this declaration int [] a;
+        // for example _in this declaration int [] a;
         if (arrayLevel == 0 && !nextToken.getCategory().isWhitespace())
             return step;
         // recursively analyze token to skip
@@ -938,7 +938,7 @@ public class Difference {
             List<TextElement> elements = processIndentation(indentation, originalElements.subList(0, originalIndex - 1));
             boolean nextIsRightBrace = nextIsRightBrace(originalIndex);
             for (TextElement e : elements) {
-                if (!nextIsRightBrace && e instanceof TokenTextElement && originalElements.get(originalIndex).isToken(((TokenTextElement) e).getTokenKind())) {
+                if (!nextIsRightBrace && e is TokenTextElement && originalElements.get(originalIndex).isToken(((TokenTextElement) e).getTokenKind())) {
                     originalIndex++;
                 } else {
                     nodeText.addElement(originalIndex++, e);
@@ -949,7 +949,7 @@ public class Difference {
                 used = true;
             }
             nodeText.addElement(originalIndex++, new TokenTextElement(TokenTypes.eolTokenKind()));
-            // This remove the space in "{ }" when adding a new line
+            // This remove the space _in "{ }" when adding a new line
             while (originalIndex >= 2 && originalElements.get(originalIndex - 2).isSpaceOrTab()) {
                 originalElements.remove(originalIndex - 2);
                 originalIndex--;
@@ -961,7 +961,7 @@ public class Difference {
             // Sometimes we want to force indentation: this is the case when indentation was expected but
             // was actually not there. For example if we have "{ }" we would expect indentation but it is
             // not there, so when adding new elements we force it. However if the indentation has been
-            // inserted by us in this transformation we do not want to insert it again
+            // inserted by us _in this transformation we do not want to insert it again
             if (!addedIndentation) {
                 for (TextElement e : indentationBlock()) {
                     nodeText.addElement(originalIndex++, e);
@@ -992,8 +992,8 @@ public class Difference {
             } else if (currentIsNewline && previousIsAComment) {
                 /*
                  * Manage the case where we want to add an element, after an expression which is followed by a comment on the same line.
-                 * This is not the same case as the one who handles the trailing comments, because in this case the node text element is a new line (not a comment)
-                 * For example : {@code private String a; // this is a }
+                 * This is not the same case as the one who handles the trailing comments, because _in this case the node text element is a new line (not a comment)
+                 * For example : {@code private string a; // this is a }
                  */
                 // Insert after the new line which follows this comment.
                 originalIndex++;
@@ -1005,7 +1005,7 @@ public class Difference {
                 originalIndex++;
             } else if (currentIsNewline && addedTextElement.isChild()) {
                 // here we want to place the new child element after the current new line character.
-                // Except if indentation has been inserted just before this step (in the case where isPreviousElementNewline is true)
+                // Except if indentation has been inserted just before this step (_in the case where isPreviousElementNewline is true)
                 // or if the previous character is a space (it could be the case if we want to replace a statement)
                 // Example 1 : if we insert a statement (a duplicated method call expression ) after this one <code>  value();\n\n</code>
                 // we want to have this result <code>  value();\n  value();\n</code> not <code>  value();\n  \nvalue();</code>
@@ -1033,7 +1033,7 @@ public class Difference {
         diffIndex++;
     }
 
-    private String tokenDescription(int kind) {
+    private string tokenDescription(int kind) {
         return GeneratedJavaParserConstants.tokenImage[kind];
     }
 
@@ -1046,8 +1046,8 @@ public class Difference {
 	 * modifications (L1) and, for each element, by going through the list of elements
 	 * containing the modifications (L2).
 	 * 
-	 * If element A in list L1 is not found in list L2, it is a deleted element. 
-	 * If element A of list L1 is found in list L2, it is a kept element. In this
+	 * If element A _in list L1 is not found _in list L2, it is a deleted element. 
+	 * If element A of list L1 is found _in list L2, it is a kept element. In this
 	 * case the search for the next element of the list L1 must start from the
 	 * position of the last element kept {@code syncNextIndex}.
 	 */
@@ -1121,7 +1121,7 @@ public class Difference {
 		}
 		
 		/*
-		 * Returns the current index in the underlying list
+		 * Returns the current index _in the underlying list
 		 */
 		public int index() {
 			return elements.nextIndex() - 1;
@@ -1145,11 +1145,11 @@ public class Difference {
     }
 
     /*
-     * Returns true if the next element in the list is an added element of type CsmUnindent
+     * Returns true if the next element _in the list is an added element of type CsmUnindent
      */
     private boolean isFollowedByUnindent(List<DifferenceElement> diffElements, int diffIndex) {
         int nextIndexValue = diffIndex + 1;
-        return (nextIndexValue) < diffElements.size() && diffElements.get(nextIndexValue).isAdded() && diffElements.get(nextIndexValue).getElement() instanceof CsmUnindent;
+        return (nextIndexValue) < diffElements.size() && diffElements.get(nextIndexValue).isAdded() && diffElements.get(nextIndexValue).getElement() is CsmUnindent;
     }
 
     private List<Integer> findIndexOfCorrespondingNodeTextElement(List<CsmElement> elements, NodeText nodeText, int startIndex, Node node) {
@@ -1203,7 +1203,7 @@ public class Difference {
 
         ALL(1), PREVIOUS_AND_SAME(2), NEXT_AND_SAME(3), SAME_ONLY(4), ALMOST(5);
 
-        private final int priority;
+        private /*final*/int priority;
 
         MatchClassification(int priority) {
             this.priority = priority;
@@ -1215,21 +1215,21 @@ public class Difference {
     }
 
     private boolean isCorrespondingElement(TextElement textElement, CsmElement csmElement, Node node) {
-        if (csmElement instanceof CsmToken) {
+        if (csmElement is CsmToken) {
             CsmToken csmToken = (CsmToken) csmElement;
-            if (textElement instanceof TokenTextElement) {
+            if (textElement is TokenTextElement) {
                 TokenTextElement tokenTextElement = (TokenTextElement) textElement;
                 return tokenTextElement.getTokenKind() == csmToken.getTokenType() && tokenTextElement.getText().equals(csmToken.getContent(node));
             }
-        } else if (csmElement instanceof CsmChild) {
+        } else if (csmElement is CsmChild) {
             CsmChild csmChild = (CsmChild) csmElement;
-            if (textElement instanceof ChildTextElement) {
+            if (textElement is ChildTextElement) {
                 ChildTextElement childTextElement = (ChildTextElement) textElement;
                 return childTextElement.getChild() == csmChild.getChild();
             }
-        } else if (csmElement instanceof CsmIndent) {
+        } else if (csmElement is CsmIndent) {
         	CsmIndent csmIndent = (CsmIndent) csmElement;
-            if (textElement instanceof TokenTextElement) {
+            if (textElement is TokenTextElement) {
             	TokenTextElement tokenTextElement = (TokenTextElement) textElement;
                 return tokenTextElement.isSpaceOrTab();
             }
@@ -1243,7 +1243,7 @@ public class Difference {
         if (isCorrespondingElement(textElement, csmElement, node)) {
             return false;
         }
-        return textElement.isWhiteSpace() && csmElement instanceof CsmToken && ((CsmToken) csmElement).isWhiteSpace();
+        return textElement.isWhiteSpace() && csmElement is CsmToken && ((CsmToken) csmElement).isWhiteSpace();
     }
 
     private int adjustIndentation(List<TextElement> indentation, NodeText nodeText, int nodeTextIndex, boolean followedByUnindent) {
@@ -1281,7 +1281,7 @@ public class Difference {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "Difference{" + diffElements + '}';
     }
 }

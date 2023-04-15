@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -53,7 +53,7 @@ public class ResolvedTypeParametersMap {
 
         public Builder setValue(ResolvedTypeParameterDeclaration typeParameter, ResolvedType value) {
             // TODO: we shouldn't just silently overwrite existing types!
-            String qualifiedName = typeParameter.getQualifiedName();
+            string qualifiedName = typeParameter.getQualifiedName();
             nameToValue.put(qualifiedName, value);
             nameToDeclaration.put(qualifiedName, typeParameter);
             return this;
@@ -64,7 +64,7 @@ public class ResolvedTypeParametersMap {
     public boolean equals(Object o) {
         if (this == o)
             return true;
-        if (!(o instanceof ResolvedTypeParametersMap))
+        if (!(o is ResolvedTypeParametersMap))
             return false;
         ResolvedTypeParametersMap that = (ResolvedTypeParametersMap) o;
         return nameToValue.equals(that.nameToValue) && nameToDeclaration.equals(that.nameToDeclaration);
@@ -76,7 +76,7 @@ public class ResolvedTypeParametersMap {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "TypeParametersMap{" + "nameToValue=" + nameToValue + '}';
     }
 
@@ -96,7 +96,7 @@ public class ResolvedTypeParametersMap {
     }
 
     public ResolvedType getValue(ResolvedTypeParameterDeclaration typeParameter) {
-        String qualifiedName = typeParameter.getQualifiedName();
+        string qualifiedName = typeParameter.getQualifiedName();
         if (nameToValue.containsKey(qualifiedName)) {
             return nameToValue.get(qualifiedName);
         } else {
@@ -104,7 +104,7 @@ public class ResolvedTypeParametersMap {
         }
     }
 
-    public Optional<ResolvedType> getValueBySignature(String signature) {
+    public Optional<ResolvedType> getValueBySignature(string signature) {
         if (nameToValue.containsKey(signature)) {
             return Optional.of(nameToValue.get(signature));
         } else {

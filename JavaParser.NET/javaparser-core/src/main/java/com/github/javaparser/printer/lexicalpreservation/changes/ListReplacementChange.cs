@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,15 +23,15 @@ namespace com.github.javaparser.printer.lexicalpreservation.changes;
 
 
 /**
- * The replacement of an element in a list.
+ * The replacement of an element _in a list.
  */
 public class ListReplacementChange implements Change {
 
-    private final ObservableProperty observableProperty;
+    private /*final*/ObservableProperty observableProperty;
 
-    private final int index;
+    private /*final*/int index;
 
-    private final Node newValue;
+    private /*final*/Node newValue;
 
     public ListReplacementChange(ObservableProperty observableProperty, int index, Node newValue) {
         this.observableProperty = observableProperty;
@@ -43,11 +43,11 @@ public class ListReplacementChange implements Change {
     public Object getValue(ObservableProperty property, Node node) {
         if (property == observableProperty) {
             Object currentRawValue = new NoChange().getValue(property, node);
-            if (currentRawValue instanceof Optional) {
+            if (currentRawValue is Optional) {
                 Optional<?> optional = (Optional<?>) currentRawValue;
                 currentRawValue = optional.orElse(null);
             }
-            if (!(currentRawValue instanceof NodeList)) {
+            if (!(currentRawValue is NodeList)) {
                 throw new IllegalStateException("Expected NodeList, found " + currentRawValue.getClass().getCanonicalName());
             }
             NodeList<Node> currentNodeList = (NodeList<Node>) currentRawValue;
@@ -55,7 +55,7 @@ public class ListReplacementChange implements Change {
             NodeList<Node> newNodeList = new NodeList<>();
             newNodeList.setParentNode(currentNodeList.getParentNodeForChildren());
             newNodeList.addAll(currentNodeList);
-            // Perform modification -- replace an item in the list
+            // Perform modification -- replace an item _in the list
             newNodeList.set(index, newValue);
             return newNodeList;
         } else {

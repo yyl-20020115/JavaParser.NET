@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -89,26 +89,26 @@ public abstract class Node implements Cloneable {
      *
      * @return comment property
      */
-    public final Comment getComment() {
+    public /*final*/Comment getComment() {
         return comment;
     }
 
     /**
-     * The begin position of this node in the source file.
+     * The begin position of this node _in the source file.
      */
     public Position getBegin() {
         return range.begin;
     }
 
     /**
-     * The end position of this node in the source file.
+     * The end position of this node _in the source file.
      */
     public Position getEnd() {
         return range.end;
     }
 
     /**
-     * Sets the begin position of this node in the source file.
+     * Sets the begin position of this node _in the source file.
      */
     public Node setBegin(Position begin) {
         range = range.withBegin(begin);
@@ -116,7 +116,7 @@ public abstract class Node implements Cloneable {
     }
 
     /**
-     * Sets the end position of this node in the source file.
+     * Sets the end position of this node _in the source file.
      */
     public Node setEnd(Position end) {
         range = range.withEnd(end);
@@ -124,14 +124,14 @@ public abstract class Node implements Cloneable {
     }
 
     /**
-     * @return the range of characters in the source code that this node covers.
+     * @return the range of characters _in the source code that this node covers.
      */
     public Range getRange() {
         return range;
     }
 
     /**
-     * @param range the range of characters in the source code that this node covers.
+     * @param range the range of characters _in the source code that this node covers.
      */
     public Node setRange(Range range) {
         this.range = range;
@@ -143,8 +143,8 @@ public abstract class Node implements Cloneable {
      *
      * @param comment to be set
      */
-    public final Node setComment(final Comment comment) {
-        if (comment != null && (this instanceof Comment)) {
+    public /*final*/Node setComment(/*final*/Comment comment) {
+        if (comment != null && (this is Comment)) {
             throw new RuntimeException("A comment can not be commented");
         }
         if (this.comment != null) {
@@ -164,7 +164,7 @@ public abstract class Node implements Cloneable {
      *
      * @param comment to be set
      */
-    public final Node setLineComment(String comment) {
+    public /*final*/Node setLineComment(string comment) {
         return setComment(new LineComment(comment));
     }
 
@@ -173,36 +173,36 @@ public abstract class Node implements Cloneable {
      *
      * @param comment to be set
      */
-    public final Node setBlockComment(String comment) {
+    public /*final*/Node setBlockComment(string comment) {
         return setComment(new BlockComment(comment));
     }
 
     /**
-     * Return the String representation of this node.
+     * Return the string representation of this node.
      * 
-     * @return the String representation of this node
+     * @return the string representation of this node
      */
     @Override
-    public final String toString() {
-        final DumpVisitor visitor = new DumpVisitor();
+    public /*final*/string toString() {
+        /*final*/DumpVisitor visitor = new DumpVisitor();
         accept(visitor, null);
         return visitor.getSource();
     }
 
-    public final String toStringWithoutComments() {
-        final DumpVisitor visitor = new DumpVisitor(false);
+    public /*final*/string toStringWithoutComments() {
+        /*final*/DumpVisitor visitor = new DumpVisitor(false);
         accept(visitor, null);
         return visitor.getSource();
     }
 
     @Override
-    public final int hashCode() {
+    public /*final*/int hashCode() {
         return toString().hashCode();
     }
 
     @Override
-    public boolean equals(final Object obj) {
-        if (obj == null || !(obj instanceof Node)) {
+    public boolean equals(/*final*/Object obj) {
+        if (obj == null || !(obj is Node)) {
             return false;
         }
         return EqualsVisitor.equals(this, (Node) obj);
@@ -217,7 +217,7 @@ public abstract class Node implements Cloneable {
         return parentNode;
     }
 
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     public <T> T getParentNodeOfType(Class<T> classType) {
         Node parent = parentNode;
         while (parent != null) {
@@ -258,7 +258,7 @@ public abstract class Node implements Cloneable {
     }
 
     /**
-     * This is the list of Comment which are contained in the Node either because
+     * This is the list of Comment which are contained _in the Node either because
      * they are properly associated to one of its children or because they are floating
      * around inside the Node
      * 
@@ -296,7 +296,7 @@ public abstract class Node implements Cloneable {
         }
     }
 
-    protected void setAsParentNodeOf(List<? extends Node> childNodes) {
+    protected void setAsParentNodeOf(List<?:Node> childNodes) {
         if (childNodes != null) {
             for (Node current : childNodes) {
                 current.setParentNode(this);
@@ -310,8 +310,8 @@ public abstract class Node implements Cloneable {
         }
     }
 
-    public static final int ABSOLUTE_BEGIN_LINE = -1;
-    public static final int ABSOLUTE_END_LINE = -2;
+    public static /*final*/int ABSOLUTE_BEGIN_LINE = -1;
+    public static /*final*/int ABSOLUTE_END_LINE = -2;
 
     public boolean isPositionedAfter(Position position) {
         return range.isAfter(position);
@@ -337,7 +337,7 @@ public abstract class Node implements Cloneable {
      *
      * @param clazz the type of node to find.
      */
-    public <N extends Node> List<N> getNodesByType(Class<N> clazz) {
+    public <N:Node> List<N> getNodesByType(Class<N> clazz) {
         List<N> nodes = new ArrayList<>();
         for (Node child : getChildrenNodes()) {
             if (clazz.isInstance(child)) {
@@ -359,7 +359,7 @@ public abstract class Node implements Cloneable {
      * @return The user data or null of no user data was found for the given key
      * @see UserDataKey
      */
-    public <M> M getUserData(final UserDataKey<M> key) {
+    public <M> M getUserData(/*final*/UserDataKey<M> key) {
         if (userData == null) {
             return null;
         }

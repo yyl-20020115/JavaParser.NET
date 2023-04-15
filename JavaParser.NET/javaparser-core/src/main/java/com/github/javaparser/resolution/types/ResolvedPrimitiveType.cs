@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -40,19 +40,19 @@ public enum ResolvedPrimitiveType implements ResolvedType {
     // /
     // / Fields
     // /
-    private String name;
+    private string name;
 
     private Class boxTypeClass;
 
     private List<ResolvedPrimitiveType> promotionTypes;
 
-    ResolvedPrimitiveType(String name, Class boxTypeClass, List<ResolvedPrimitiveType> promotionTypes) {
+    ResolvedPrimitiveType(string name, Class boxTypeClass, List<ResolvedPrimitiveType> promotionTypes) {
         this.name = name;
         this.boxTypeClass = boxTypeClass;
         this.promotionTypes = promotionTypes;
     }
 
-    public static ResolvedType byName(String name) {
+    public static ResolvedType byName(string name) {
         name = name.toLowerCase();
         for (ResolvedPrimitiveType ptu : values()) {
             if (ptu.describe().equals(name)) {
@@ -69,7 +69,7 @@ public enum ResolvedPrimitiveType implements ResolvedType {
     	if (!type.isReferenceType()) {
     		return false;
     	}
-        String qName = type.asReferenceType().getQualifiedName();
+        string qName = type.asReferenceType().getQualifiedName();
         for (ResolvedPrimitiveType ptu : values()) {
             if (ptu.getBoxTypeQName().equals(qName)) {
                 return true;
@@ -81,7 +81,7 @@ public enum ResolvedPrimitiveType implements ResolvedType {
     /*
      * Returns the primitive type corresponding to the specified boxed type canonical name.
      */
-    public static Optional<ResolvedType> byBoxTypeQName(String qName) {
+    public static Optional<ResolvedType> byBoxTypeQName(string qName) {
         for (ResolvedPrimitiveType ptu : values()) {
             if (ptu.getBoxTypeQName().equals(qName)) {
                 return Optional.of(ptu);
@@ -98,7 +98,7 @@ public enum ResolvedPrimitiveType implements ResolvedType {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "PrimitiveTypeUsage{" + "name='" + name + '\'' + '}';
     }
 
@@ -122,7 +122,7 @@ public enum ResolvedPrimitiveType implements ResolvedType {
     }
 
     @Override
-    public String describe() {
+    public string describe() {
         return name;
     }
 
@@ -150,7 +150,7 @@ public enum ResolvedPrimitiveType implements ResolvedType {
         }
     }
 
-    public String getBoxTypeQName() {
+    public string getBoxTypeQName() {
         return boxTypeClass.getCanonicalName();
     }
     
@@ -198,15 +198,15 @@ public enum ResolvedPrimitiveType implements ResolvedType {
         boolean isUnboxable = type.isReferenceType() && type.asReferenceType().isUnboxable();
         // If the operand is of compile-time type Byte, Short, Character, or Integer, it is subjected to unboxing conversion (§5.1.8).
         // The result is then promoted to a value of type int by a widening primitive conversion (§5.1.2) or an identity conversion (§5.1.1).
-        if (isUnboxable && type.asReferenceType().toUnboxedType().get().in(new ResolvedPrimitiveType[] { ResolvedPrimitiveType.BYTE, ResolvedPrimitiveType.SHORT, ResolvedPrimitiveType.CHAR, ResolvedPrimitiveType.INT })) {
+        if (isUnboxable && type.asReferenceType().toUnboxedType().get()._in(new ResolvedPrimitiveType[] { ResolvedPrimitiveType.BYTE, ResolvedPrimitiveType.SHORT, ResolvedPrimitiveType.CHAR, ResolvedPrimitiveType.INT })) {
             return ResolvedPrimitiveType.INT;
         }
         // Otherwise, if the operand is of compile-time type Long, Float, or Double, it is subjected to unboxing conversion (§5.1.8).
-        if (isUnboxable && type.asReferenceType().toUnboxedType().get().in(new ResolvedPrimitiveType[] { ResolvedPrimitiveType.LONG, ResolvedPrimitiveType.FLOAT, ResolvedPrimitiveType.DOUBLE })) {
+        if (isUnboxable && type.asReferenceType().toUnboxedType().get()._in(new ResolvedPrimitiveType[] { ResolvedPrimitiveType.LONG, ResolvedPrimitiveType.FLOAT, ResolvedPrimitiveType.DOUBLE })) {
             return type.asReferenceType().toUnboxedType().get();
         }
         // Otherwise, if the operand is of compile-time type byte, short, or char, it is promoted to a value of type int by a widening primitive conversion (§5.1.2).
-        if (type.isPrimitive() && type.asPrimitive().in(new ResolvedPrimitiveType[] { ResolvedPrimitiveType.BYTE, ResolvedPrimitiveType.CHAR, ResolvedPrimitiveType.SHORT })) {
+        if (type.isPrimitive() && type.asPrimitive()._in(new ResolvedPrimitiveType[] { ResolvedPrimitiveType.BYTE, ResolvedPrimitiveType.CHAR, ResolvedPrimitiveType.SHORT })) {
             return ResolvedPrimitiveType.INT;
         }
         // Otherwise, a unary numeric operand remains as is and is not converted.
@@ -214,14 +214,14 @@ public enum ResolvedPrimitiveType implements ResolvedType {
     }
 
     /*
-     * Verify if the ResolvedPrimitiveType is in the list of ResolvedPrimitiveType
+     * Verify if the ResolvedPrimitiveType is _in the list of ResolvedPrimitiveType
      */
-    public boolean in(ResolvedPrimitiveType... types) {
+    public boolean _in(ResolvedPrimitiveType... types) {
         return Arrays.stream(types).anyMatch(type -> this == type);
     }
 
     @Override
-    public String toDescriptor() {
+    public string toDescriptor() {
         return TypeUtils.getPrimitiveTypeDescriptor(boxTypeClass);
     }
 }

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,7 +28,7 @@ namespace com.github.javaparser.javadoc;
  * <p>
  * It is composed by a description and a list of block tags.
  * <p>
- * An example would be the text contained in this very Javadoc comment. At the moment
+ * An example would be the text contained _in this very Javadoc comment. At the moment
  * of this writing this comment does not contain any block tags (such as {@code @see AnotherClass})
  */
 public class Javadoc {
@@ -52,7 +52,7 @@ public class Javadoc {
      * tagName is "return",
      * and the rest is content.
      */
-    public Javadoc addBlockTag(String tagName, String content) {
+    public Javadoc addBlockTag(string tagName, string content) {
         return addBlockTag(new JavadocBlockTag(tagName, content));
     }
 
@@ -62,11 +62,11 @@ public class Javadoc {
      * parameter is "abc"
      * and the rest is content.
      */
-    public Javadoc addBlockTag(String tagName, String parameter, String content) {
+    public Javadoc addBlockTag(string tagName, string parameter, string content) {
         return addBlockTag(tagName, parameter + " " + content);
     }
 
-    public Javadoc addBlockTag(String tagName) {
+    public Javadoc addBlockTag(string tagName) {
         return addBlockTag(tagName, "");
     }
 
@@ -74,7 +74,7 @@ public class Javadoc {
      * Return the text content of the document. It does not containing trailing spaces and asterisks
      * at the start of the line.
      */
-    public String toText() {
+    public string toText() {
         StringBuilder sb = new StringBuilder();
         if (!description.isEmpty()) {
             sb.append(description.toText());
@@ -100,7 +100,7 @@ public class Javadoc {
     /**
      * Create a JavadocComment, by formatting the text of the Javadoc using the given indentation.
      */
-    public JavadocComment toComment(String indentation) {
+    public JavadocComment toComment(string indentation) {
         for (char c : indentation.toCharArray()) {
             if (!Character.isWhitespace(c)) {
                 throw new IllegalArgumentException("The indentation string should be composed only by whitespace characters");
@@ -108,9 +108,9 @@ public class Javadoc {
         }
         StringBuilder sb = new StringBuilder();
         sb.append(SYSTEM_EOL);
-        final String text = toText();
+        /*final*/string text = toText();
         if (!text.isEmpty()) {
-            for (String line : text.split(SYSTEM_EOL)) {
+            for (string line : text.split(SYSTEM_EOL)) {
                 sb.append(indentation);
                 sb.append(" * ");
                 sb.append(line);
@@ -151,7 +151,7 @@ public class Javadoc {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "Javadoc{" + "description=" + description + ", blockTags=" + blockTags + '}';
     }
 }

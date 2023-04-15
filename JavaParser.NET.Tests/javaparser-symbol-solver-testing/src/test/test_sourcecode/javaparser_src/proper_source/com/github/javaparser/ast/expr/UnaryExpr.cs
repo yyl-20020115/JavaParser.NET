@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,7 +25,7 @@ namespace com.github.javaparser.ast.expr;
 /**
  * @author Julio Vilmar Gesser
  */
-public final class UnaryExpr extends Expression {
+public /*final*/class UnaryExpr:Expression {
 
 	public static enum Operator {
 		positive, // +
@@ -45,23 +45,23 @@ public final class UnaryExpr extends Expression {
 	public UnaryExpr() {
 	}
 
-	public UnaryExpr(final Expression expr, final Operator op) {
+	public UnaryExpr(/*final*/Expression expr, /*final*/Operator op) {
 		setExpr(expr);
 		setOperator(op);
 	}
 
-	public UnaryExpr(final int beginLine, final int beginColumn, final int endLine, final int endColumn,
-			final Expression expr, final Operator op) {
+	public UnaryExpr(/*final*/int beginLine, /*final*/int beginColumn, /*final*/int endLine, /*final*/int endColumn,
+			/*final*/Expression expr, /*final*/Operator op) {
 		super(beginLine, beginColumn, endLine, endColumn);
 		setExpr(expr);
 		setOperator(op);
 	}
 
-	@Override public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+	@Override public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
 		return v.visit(this, arg);
 	}
 
-	@Override public <A> void accept(final VoidVisitor<A> v, final A arg) {
+	@Override public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
 		v.visit(this, arg);
 	}
 
@@ -73,12 +73,12 @@ public final class UnaryExpr extends Expression {
 		return op;
 	}
 
-	public void setExpr(final Expression expr) {
+	public void setExpr(/*final*/Expression expr) {
 		this.expr = expr;
 		setAsParentNodeOf(this.expr);
 	}
 
-	public void setOperator(final Operator op) {
+	public void setOperator(/*final*/Operator op) {
 		this.op = op;
 	}
 }

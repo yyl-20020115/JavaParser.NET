@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,8 +26,8 @@ namespace com.github.javaparser.symbolsolver.resolution;
 
 class InternalClassInInterfaceTest {
 
-    @Test
-    void resolveFieldOfEnumAsInternalClassOfInterfaceUnqualifiedSamePackage() throws IOException {
+    [TestMethod]
+    void resolveFieldOfEnumAsInternalClassOfInterfaceUnqualifiedSamePackage(){
         File src = new File("src/test/resources/internalClassInInterface");
         File aClass = new File(src.getPath() + File.separator + "foo" + File.separator + "bar"
                 + File.separator + "AClass.java");
@@ -49,8 +49,8 @@ class InternalClassInInterfaceTest {
         assertEquals("ADDITION", fae.get().resolve().getName());
     }
 
-    @Test
-    void resolveFieldOfEnumAsInternalClassOfInterfaceQualifiedSamePackage() throws IOException {
+    [TestMethod]
+    void resolveFieldOfEnumAsInternalClassOfInterfaceQualifiedSamePackage(){
         File src = new File("src/test/resources/internalClassInInterface");
         File aClass = new File(src.getPath() + File.separator + "foo" + File.separator + "bar"
                 + File.separator + "AClass.java");
@@ -72,8 +72,8 @@ class InternalClassInInterfaceTest {
         assertEquals("ADDITION", fae.get().resolve().getName());
     }
 
-    @Test
-    void resolveFieldOfEnumAsInternalClassOfInterfaceUnqualifiedDifferentPackage() throws IOException {
+    [TestMethod]
+    void resolveFieldOfEnumAsInternalClassOfInterfaceUnqualifiedDifferentPackage(){
         File src = new File("src/test/resources/internalClassInInterface");
         File aClass = new File(src.getPath() + File.separator + "foo" + File.separator + "bar"
                 + File.separator + "differentpackage" + File.separator + "AClass2.java");
@@ -95,8 +95,8 @@ class InternalClassInInterfaceTest {
         assertEquals("ADDITION", fae.get().resolve().getName());
     }
 
-    @Test
-    void resolveFieldOfEnumAsInternalClassOfInterfaceQualifiedDifferentPackage() throws IOException {
+    [TestMethod]
+    void resolveFieldOfEnumAsInternalClassOfInterfaceQualifiedDifferentPackage(){
         File src = new File("src/test/resources/internalClassInInterface");
         File aClass = new File(src.getPath() + File.separator + "foo" + File.separator + "bar"
                 + File.separator + "differentpackage" + File.separator + "AClass2.java");

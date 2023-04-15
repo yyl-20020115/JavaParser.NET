@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,7 +28,7 @@ namespace com.github.javaparser.symbolsolver.javassistmodel;
  */
 public class JavassistAnnotationMemberDeclaration implements ResolvedAnnotationMemberDeclaration {
     
-    private static Map<Class<? extends MemberValue>, Function<MemberValue, ? extends Expression>> memberValueAsExressionConverter = new HashMap<>();
+    private static Map<Class<?:MemberValue>, Function<MemberValue, ?:Expression>> memberValueAsExressionConverter = new HashMap<>();
     static {
         memberValueAsExressionConverter.put(BooleanMemberValue.class, (memberValue) -> new BooleanLiteralExpr(BooleanMemberValue.class.cast(memberValue).getValue()));
         memberValueAsExressionConverter.put(CharMemberValue.class, (memberValue) -> new CharLiteralExpr(CharMemberValue.class.cast(memberValue).getValue()));
@@ -51,7 +51,7 @@ public class JavassistAnnotationMemberDeclaration implements ResolvedAnnotationM
          AnnotationDefaultAttribute defaultAttribute = (AnnotationDefaultAttribute) annotationMember.getMethodInfo().getAttribute(AnnotationDefaultAttribute.tag);
          if (defaultAttribute == null) return null;
          MemberValue memberValue = defaultAttribute.getDefaultValue();
-         Function<MemberValue, ? extends Expression> fn = memberValueAsExressionConverter.get(memberValue.getClass());
+         Function<MemberValue, ?:Expression> fn = memberValueAsExressionConverter.get(memberValue.getClass());
          if (fn == null) throw new UnsupportedOperationException(String.format("Obtaining the type of the annotation member %s is not supported yet.", annotationMember.getName()));
          return fn.apply(memberValue);
     }
@@ -59,7 +59,7 @@ public class JavassistAnnotationMemberDeclaration implements ResolvedAnnotationM
     @Override
     public ResolvedType getType() {
         try {
-            String descriptor = annotationMember.getMethodInfo().getDescriptor();
+            string descriptor = annotationMember.getMethodInfo().getDescriptor();
             SignatureAttribute.MethodSignature signature = SignatureAttribute.toMethodSignature(descriptor);
             SymbolReference<ResolvedReferenceTypeDeclaration> returnType = typeSolver.tryToSolveType(signature.getReturnType().jvmTypeName());
             if (returnType.isSolved()) {
@@ -73,7 +73,7 @@ public class JavassistAnnotationMemberDeclaration implements ResolvedAnnotationM
     }
 
     @Override
-    public String getName() {
+    public string getName() {
         return annotationMember.getName();
     }
 }

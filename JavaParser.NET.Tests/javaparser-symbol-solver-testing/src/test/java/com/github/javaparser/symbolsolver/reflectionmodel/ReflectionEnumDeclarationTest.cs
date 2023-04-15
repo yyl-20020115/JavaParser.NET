@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,7 +28,7 @@ enum MyModifier {
 
 }
 
-class ReflectionEnumDeclarationTest extends AbstractSymbolResolutionTest {
+class ReflectionEnumDeclarationTest:AbstractSymbolResolutionTest {
 
     private TypeSolver typeSolver = new ReflectionTypeSolver(false);
 
@@ -38,43 +38,43 @@ class ReflectionEnumDeclarationTest extends AbstractSymbolResolutionTest {
     /// Test misc
     ///
 
-    @Test
+    [TestMethod]
     void testIsClass() {
         ReflectionEnumDeclaration modifier = (ReflectionEnumDeclaration) typeSolver.solveType("com.github.javaparser.symbolsolver.reflectionmodel.MyModifier");
         assertEquals(false, modifier.isClass());
     }
 
-    @Test
+    [TestMethod]
     void testIsInterface() {
         ReflectionEnumDeclaration modifier = (ReflectionEnumDeclaration) typeSolver.solveType("com.github.javaparser.symbolsolver.reflectionmodel.MyModifier");
         assertEquals(false, modifier.isInterface());
     }
 
-    @Test
+    [TestMethod]
     void testIsEnum() {
         ReflectionEnumDeclaration modifier = (ReflectionEnumDeclaration) typeSolver.solveType("com.github.javaparser.symbolsolver.reflectionmodel.MyModifier");
         assertEquals(true, modifier.isEnum());
     }
 
-    @Test
+    [TestMethod]
     void testIsTypeVariable() {
         ReflectionEnumDeclaration modifier = (ReflectionEnumDeclaration) typeSolver.solveType("com.github.javaparser.symbolsolver.reflectionmodel.MyModifier");
         assertEquals(false, modifier.isTypeParameter());
     }
 
-    @Test
+    [TestMethod]
     void testIsType() {
         ReflectionEnumDeclaration modifier = (ReflectionEnumDeclaration) typeSolver.solveType("com.github.javaparser.symbolsolver.reflectionmodel.MyModifier");
         assertEquals(true, modifier.isType());
     }
 
-    @Test
+    [TestMethod]
     void testAsType() {
         ReflectionEnumDeclaration modifier = (ReflectionEnumDeclaration) typeSolver.solveType("com.github.javaparser.symbolsolver.reflectionmodel.MyModifier");
         assertEquals(modifier, modifier.asType());
     }
 
-    @Test
+    [TestMethod]
     void testAsClass() {
         assertThrows(UnsupportedOperationException.class, () -> {
             ReflectionEnumDeclaration modifier = (ReflectionEnumDeclaration) typeSolver.solveType("com.github.javaparser.symbolsolver.reflectionmodel.MyModifier");
@@ -82,7 +82,7 @@ class ReflectionEnumDeclarationTest extends AbstractSymbolResolutionTest {
     });
 }
 
-    @Test
+    [TestMethod]
     void testAsInterface() {
         assertThrows(UnsupportedOperationException.class, () -> {
             ReflectionEnumDeclaration modifier = (ReflectionEnumDeclaration) typeSolver.solveType("com.github.javaparser.symbolsolver.reflectionmodel.MyModifier");
@@ -90,31 +90,31 @@ class ReflectionEnumDeclarationTest extends AbstractSymbolResolutionTest {
     });
 }
 
-    @Test
+    [TestMethod]
     void testAsEnum() {
         ReflectionEnumDeclaration modifier = (ReflectionEnumDeclaration) typeSolver.solveType("com.github.javaparser.symbolsolver.reflectionmodel.MyModifier");
         assertEquals(modifier, modifier.asEnum());
     }
 
-    @Test
+    [TestMethod]
     void testGetPackageName() {
         ReflectionEnumDeclaration modifier = (ReflectionEnumDeclaration) typeSolver.solveType("com.github.javaparser.symbolsolver.reflectionmodel.MyModifier");
         assertEquals("com.github.javaparser.symbolsolver.reflectionmodel", modifier.getPackageName());
     }
 
-    @Test
+    [TestMethod]
     void testGetClassName() {
         ReflectionEnumDeclaration modifier = (ReflectionEnumDeclaration) typeSolver.solveType("com.github.javaparser.symbolsolver.reflectionmodel.MyModifier");
         assertEquals("MyModifier", modifier.getClassName());
     }
 
-    @Test
+    [TestMethod]
     void testGetQualifiedName() {
         ReflectionEnumDeclaration modifier = (ReflectionEnumDeclaration) typeSolver.solveType("com.github.javaparser.symbolsolver.reflectionmodel.MyModifier");
         assertEquals("com.github.javaparser.symbolsolver.reflectionmodel.MyModifier", modifier.getQualifiedName());
     }
 
-    @Test
+    [TestMethod]
     void testInternalTypesEmpty() {
         ReflectionEnumDeclaration modifier = (ReflectionEnumDeclaration) typeSolver.solveType("com.github.javaparser.symbolsolver.reflectionmodel.MyModifier");
         assertEquals(Collections.emptySet(), modifier.internalTypes());

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -31,7 +31,7 @@ namespace com.github.javaparser;
  * @author Júlio Vilmar Gesser
  */
 class CommentsInserter {
-    private final ParserConfiguration configuration;
+    private /*final*/ParserConfiguration configuration;
 
     CommentsInserter(ParserConfiguration configuration) {
         this.configuration = configuration;
@@ -50,7 +50,7 @@ class CommentsInserter {
          a comment to the CompilationUnit */
 
         // FIXME if there is no package it could be also a comment to the following class...
-        // so I could use some heuristics in these cases to distinguish the two
+        // so I could use some heuristics _in these cases to distinguish the two
         // cases
 
         List<Node> children = cu.getChildrenNodes();
@@ -73,7 +73,7 @@ class CommentsInserter {
         if (commentsToAttribute.isEmpty())
             return;
         
-        if(node instanceof CompilationUnit){
+        if(node is CompilationUnit){
             insertComments((CompilationUnit)node, commentsToAttribute);
         }
 
@@ -100,8 +100,8 @@ class CommentsInserter {
             insertComments(child, commentsInsideChild);
         }
 
-        /* I can attribute in line comments to elements preceeding them, if
-         there is something contained in their line */
+        /* I can attribute _in line comments to elements preceeding them, if
+         there is something contained _in their line */
         List<Comment> attributedComments = new LinkedList<>();
         for (Comment comment : commentsToAttribute) {
             if (comment.isLineComment()) {
@@ -126,7 +126,7 @@ class CommentsInserter {
                 configuration.doNotConsiderAnnotationsAsNodeStartForCodeAttribution);
 
         for (Node thing : childrenAndComments) {
-            if (thing instanceof Comment) {
+            if (thing is Comment) {
                 previousComment = (Comment) thing;
                 if (!previousComment.isOrphan()) {
                     previousComment = null;
@@ -158,7 +158,7 @@ class CommentsInserter {
         // let's give to it the comment
         if (node.getBegin().line == lineComment.getBegin().line
                 && !node.hasComment()) {
-            if(!(node instanceof Comment)) {
+            if(!(node is Comment)) {
                 node.setComment(lineComment);
             }
             return true;

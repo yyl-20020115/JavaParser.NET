@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -31,7 +31,7 @@ public class ReflectionParameterDeclaration implements ResolvedParameterDeclarat
     private java.lang.reflect.Type genericType;
     private TypeSolver typeSolver;
     private boolean variadic;
-    private String name;
+    private string name;
 
     /**
      *
@@ -42,7 +42,7 @@ public class ReflectionParameterDeclaration implements ResolvedParameterDeclarat
      * @param name can potentially be null
      */
     public ReflectionParameterDeclaration(Class<?> type, java.lang.reflect.Type genericType, TypeSolver typeSolver,
-                                          boolean variadic, String name) {
+                                          boolean variadic, string name) {
         this.type = type;
         this.genericType = genericType;
         this.typeSolver = typeSolver;
@@ -55,7 +55,7 @@ public class ReflectionParameterDeclaration implements ResolvedParameterDeclarat
      * @return the name, which can be potentially null
      */
     @Override
-    public String getName() {
+    public string getName() {
         return name;
     }
 
@@ -65,7 +65,7 @@ public class ReflectionParameterDeclaration implements ResolvedParameterDeclarat
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "ReflectionParameterDeclaration{" +
                 "type=" + type +
                 ", name=" + name +

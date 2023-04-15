@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -41,7 +41,7 @@ public interface NodeWithAnnotations<T> {
      * @param name the name of the annotation
      * @return the {@link NormalAnnotationExpr} added
      */
-    public default NormalAnnotationExpr addAnnotation(String name) {
+    public default NormalAnnotationExpr addAnnotation(string name) {
         NormalAnnotationExpr normalAnnotationExpr = new NormalAnnotationExpr(
                 name(name), null);
         getAnnotations().add(normalAnnotationExpr);
@@ -55,7 +55,7 @@ public interface NodeWithAnnotations<T> {
      * @param clazz the class of the annotation
      * @return the {@link NormalAnnotationExpr} added
      */
-    public default NormalAnnotationExpr addAnnotation(Class<? extends Annotation> clazz) {
+    public default NormalAnnotationExpr addAnnotation(Class<?:Annotation> clazz) {
         ((Node) this).tryAddImportToParentCompilationUnit(clazz);
         return addAnnotation(clazz.getSimpleName());
     }
@@ -66,8 +66,8 @@ public interface NodeWithAnnotations<T> {
      * @param name the name of the annotation
      * @return this
      */
-    @SuppressWarnings("unchecked")
-    public default T addMarkerAnnotation(String name) {
+    //@SuppressWarnings("unchecked")
+    public default T addMarkerAnnotation(string name) {
         MarkerAnnotationExpr markerAnnotationExpr = new MarkerAnnotationExpr(
                 name(name));
         getAnnotations().add(markerAnnotationExpr);
@@ -81,7 +81,7 @@ public interface NodeWithAnnotations<T> {
      * @param clazz the class of the annotation
      * @return this
      */
-    public default T addMarkerAnnotation(Class<? extends Annotation> clazz) {
+    public default T addMarkerAnnotation(Class<?:Annotation> clazz) {
         ((Node) this).tryAddImportToParentCompilationUnit(clazz);
         return addMarkerAnnotation(clazz.getSimpleName());
     }
@@ -93,8 +93,8 @@ public interface NodeWithAnnotations<T> {
      * @param value the value, don't forget to add \"\" for a string value
      * @return this
      */
-    @SuppressWarnings("unchecked")
-    public default T addSingleMemberAnnotation(String name, String value) {
+    //@SuppressWarnings("unchecked")
+    public default T addSingleMemberAnnotation(string name, string value) {
         SingleMemberAnnotationExpr singleMemberAnnotationExpr = new SingleMemberAnnotationExpr(
                 name(name), name(value));
         getAnnotations().add(singleMemberAnnotationExpr);
@@ -109,8 +109,8 @@ public interface NodeWithAnnotations<T> {
      * @param value the value, don't forget to add \"\" for a string value
      * @return this
      */
-    public default T addSingleMemberAnnotation(Class<? extends Annotation> clazz,
-                                               String value) {
+    public default T addSingleMemberAnnotation(Class<?:Annotation> clazz,
+                                               string value) {
         ((Node) this).tryAddImportToParentCompilationUnit(clazz);
         return addSingleMemberAnnotation(clazz.getSimpleName(), value);
     }
@@ -121,7 +121,7 @@ public interface NodeWithAnnotations<T> {
      * @param annotationName the name of the annotation
      * @return true if found, false if not
      */
-    public default boolean isAnnotationPresent(String annotationName) {
+    public default boolean isAnnotationPresent(string annotationName) {
         return getAnnotations().stream().anyMatch(a -> a.getName().getName().equals(annotationName));
     }
 
@@ -131,7 +131,7 @@ public interface NodeWithAnnotations<T> {
      * @param annotationClass the class of the annotation
      * @return true if found, false if not
      */
-    public default boolean isAnnotationPresent(Class<? extends Annotation> annotationClass) {
+    public default boolean isAnnotationPresent(Class<?:Annotation> annotationClass) {
         return isAnnotationPresent(annotationClass.getSimpleName());
     }
 
@@ -141,7 +141,7 @@ public interface NodeWithAnnotations<T> {
      * @param annotationName the name of the annotation
      * @return null if not found, the annotation otherwise
      */
-    public default AnnotationExpr getAnnotationByName(String annotationName) {
+    public default AnnotationExpr getAnnotationByName(string annotationName) {
         return getAnnotations().stream().filter(a -> a.getName().getName().equals(annotationName)).findFirst()
                 .orElse(null);
     }
@@ -152,7 +152,7 @@ public interface NodeWithAnnotations<T> {
      * @param annotationClass the class of the annotation
      * @return null if not found, the annotation otherwise
      */
-    public default AnnotationExpr getAnnotationByClass(Class<? extends Annotation> annotationClass) {
+    public default AnnotationExpr getAnnotationByClass(Class<?:Annotation> annotationClass) {
         return getAnnotationByName(annotationClass.getSimpleName());
     }
 }

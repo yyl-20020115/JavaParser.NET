@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -34,7 +34,7 @@ public interface ResolvedTypeParameterValueProvider {
     Optional<ResolvedType> typeParamValue(ResolvedTypeParameterDeclaration typeParameterDeclaration);
 
     /**
-     * Replace the type typeParametersValues present in the given type with the ones for which this type
+     * Replace the type typeParametersValues present _in the given type with the ones for which this type
      * has a value.
      */
     default ResolvedType useThisTypeParametersOnTheGivenType(ResolvedType type) {
@@ -60,5 +60,5 @@ public interface ResolvedTypeParameterValueProvider {
         return type;
     }
 
-    Optional<ResolvedType> getGenericParameterByName(String name);
+    Optional<ResolvedType> getGenericParameterByName(string name);
 }

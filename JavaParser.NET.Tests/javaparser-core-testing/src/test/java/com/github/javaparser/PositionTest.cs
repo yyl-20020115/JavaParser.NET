@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,7 +24,7 @@ namespace com.github.javaparser;
 
 public class PositionTest {
 
-    @Test
+    [TestMethod]
     public void testOrIfInvalid() {
         Position p1 = new Position(1, 1);
         Position p2 = new Position(2, 2);
@@ -38,7 +38,7 @@ public class PositionTest {
         assertEquals(invalid2, invalid2.orIfInvalid(invalid));
     }
 
-    @Test
+    [TestMethod]
     public void testPositionExceptionFormat() {
         IllegalArgumentException thrown1 = Assertions.assertThrows(IllegalArgumentException.class,
                 () -> new Position(-10, 1));

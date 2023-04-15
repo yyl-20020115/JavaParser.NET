@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -43,7 +43,7 @@ namespace com.github.javaparser.ast.expr;
  * @see com.github.javaparser.ast.stmt.BreakStmt
  * @see com.github.javaparser.ast.stmt.YieldStmt
  */
-public class SwitchExpr extends Expression implements SwitchNode {
+public class SwitchExpr:Expression implements SwitchNode {
 
     private Expression selector;
 
@@ -53,15 +53,15 @@ public class SwitchExpr extends Expression implements SwitchNode {
         this(null, new NameExpr(), new NodeList<>());
     }
 
-    @AllFieldsConstructor
-    public SwitchExpr(final Expression selector, final NodeList<SwitchEntry> entries) {
+    //@AllFieldsConstructor
+    public SwitchExpr(/*final*/Expression selector, /*final*/NodeList<SwitchEntry> entries) {
         this(null, selector, entries);
     }
 
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public SwitchExpr(TokenRange tokenRange, Expression selector, NodeList<SwitchEntry> entries) {
         super(tokenRange);
         setSelector(selector);
@@ -70,18 +70,18 @@ public class SwitchExpr extends Expression implements SwitchNode {
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public NodeList<SwitchEntry> getEntries() {
         return entries;
     }
@@ -90,13 +90,13 @@ public class SwitchExpr extends Expression implements SwitchNode {
         return getEntries().get(i);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Expression getSelector() {
         return selector;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public SwitchExpr setEntries(final NodeList<SwitchEntry> entries) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public SwitchExpr setEntries(/*final*/NodeList<SwitchEntry> entries) {
         assertNotNull(entries);
         if (entries == this.entries) {
             return this;
@@ -109,8 +109,8 @@ public class SwitchExpr extends Expression implements SwitchNode {
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public SwitchExpr setSelector(final Expression selector) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public SwitchExpr setSelector(/*final*/Expression selector) {
         assertNotNull(selector);
         if (selector == this.selector) {
             return this;
@@ -124,7 +124,7 @@ public class SwitchExpr extends Expression implements SwitchNode {
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
     public boolean remove(Node node) {
         if (node == null) {
             return false;
@@ -139,13 +139,13 @@ public class SwitchExpr extends Expression implements SwitchNode {
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public SwitchExpr clone() {
         return (SwitchExpr) accept(new CloneVisitor(), null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public boolean replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
@@ -164,31 +164,31 @@ public class SwitchExpr extends Expression implements SwitchNode {
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isSwitchExpr() {
         return true;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public SwitchExpr asSwitchExpr() {
         return this;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<SwitchExpr> toSwitchExpr() {
         return Optional.of(this);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifSwitchExpr(Consumer<SwitchExpr> action) {
         action.accept(this);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public SwitchExprMetaModel getMetaModel() {
         return JavaParserMetaModel.switchExprMetaModel;
     }

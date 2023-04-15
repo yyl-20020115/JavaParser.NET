@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -30,11 +30,11 @@ namespace com.github.javaparser.ast.type;
  * <li><b>var</b> a = new ArrayList&lt;String&gt;();</li>
  * </ol>
  */
-public class VarType extends Type {
+public class VarType:Type {
 	
-	private static final String JAVA_LANG_OBJECT = Object.class.getCanonicalName();
+	private static /*final*/string JAVA_LANG_OBJECT = Object.class.getCanonicalName();
 
-    @AllFieldsConstructor
+    //@AllFieldsConstructor
     public VarType() {
         this(null);
     }
@@ -42,7 +42,7 @@ public class VarType extends Type {
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public VarType(TokenRange tokenRange) {
         super(tokenRange);
         customInitialization();
@@ -54,18 +54,18 @@ public class VarType extends Type {
     }
 
     @Override
-    public String asString() {
+    public string asString() {
         return "var";
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public VarType clone() {
         return (VarType) accept(new CloneVisitor(), null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public VarTypeMetaModel getMetaModel() {
         return JavaParserMetaModel.varTypeMetaModel;
     }
@@ -76,37 +76,37 @@ public class VarType extends Type {
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isVarType() {
         return true;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public VarType asVarType() {
         return this;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<VarType> toVarType() {
         return Optional.of(this);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifVarType(Consumer<VarType> action) {
         action.accept(this);
     }
@@ -114,10 +114,10 @@ public class VarType extends Type {
 	@Override
 	public ResolvedType convertToUsage(Context context) {
 		Node parent = getParentNode().get();
-        if (!(parent instanceof VariableDeclarator)) {
-            throw new IllegalStateException("Trying to resolve a `var` which is not in a variable declaration.");
+        if (!(parent is VariableDeclarator)) {
+            throw new IllegalStateException("Trying to resolve a `var` which is not _in a variable declaration.");
         }
-        final VariableDeclarator variableDeclarator = (VariableDeclarator) parent;
+        /*final*/VariableDeclarator variableDeclarator = (VariableDeclarator) parent;
         Optional<Expression> initializer = variableDeclarator.getInitializer();
         if (!initializer.isPresent()) {
             // When a `var` type decl has no initializer it may be part of a
@@ -126,13 +126,13 @@ public class VarType extends Type {
             if (forEachStmt.isPresent()) {
                 Expression iterable = forEachStmt.get().getIterable();
                 ResolvedType iterType = iterable.calculateResolvedType();
-                if (iterType instanceof ResolvedArrayType) {
-                    // The type of a variable in a for-each loop with an array
+                if (iterType is ResolvedArrayType) {
+                    // The type of a variable _in a for-each loop with an array
                     // is the component type of the array.
                     return ((ResolvedArrayType)iterType).getComponentType();
                 }
                 if (iterType.isReferenceType()) {
-                    // The type of a variable in a for-each loop with an
+                    // The type of a variable _in a for-each loop with an
                     // Iterable with parameter type
                 	List<ResolvedType> parametersType = iterType.asReferenceType().typeParametersMap().getTypes();
 					if (parametersType.isEmpty()) {
@@ -154,11 +154,11 @@ public class VarType extends Type {
 	private Optional<ForEachStmt> forEachStmtWithVariableDeclarator(
             VariableDeclarator variableDeclarator) {
         Optional<Node> node = variableDeclarator.getParentNode();
-        if (!node.isPresent() || !(node.get() instanceof VariableDeclarationExpr)) {
+        if (!node.isPresent() || !(node.get() is VariableDeclarationExpr)) {
             return Optional.empty();
         }
         node = node.get().getParentNode();
-        if (!node.isPresent() || !(node.get() instanceof ForEachStmt)) {
+        if (!node.isPresent() || !(node.get() is ForEachStmt)) {
             return Optional.empty();
         } else {
             return Optional.of((ForEachStmt)node.get());

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,7 +25,7 @@ namespace com.github.javaparser.ast.stmt;
 /**
  * @author Julio Vilmar Gesser
  */
-public final class DoStmt extends Statement implements NodeWithBody<DoStmt> {
+public /*final*/class DoStmt:Statement implements NodeWithBody<DoStmt> {
 
 	private Statement body;
 
@@ -34,22 +34,22 @@ public final class DoStmt extends Statement implements NodeWithBody<DoStmt> {
 	public DoStmt() {
 	}
 
-	public DoStmt(final Statement body, final Expression condition) {
+	public DoStmt(/*final*/Statement body, /*final*/Expression condition) {
 		setBody(body);
 		setCondition(condition);
 	}
 
-	public DoStmt(Range range, final Statement body, final Expression condition) {
+	public DoStmt(Range range, /*final*/Statement body, /*final*/Expression condition) {
 		super(range);
 		setBody(body);
 		setCondition(condition);
 	}
 
-	@Override public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+	@Override public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
 		return v.visit(this, arg);
 	}
 
-	@Override public <A> void accept(final VoidVisitor<A> v, final A arg) {
+	@Override public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
 		v.visit(this, arg);
 	}
 
@@ -63,13 +63,13 @@ public final class DoStmt extends Statement implements NodeWithBody<DoStmt> {
 	}
 
 	@Override
-    public DoStmt setBody(final Statement body) {
+    public DoStmt setBody(/*final*/Statement body) {
 		this.body = body;
 		setAsParentNodeOf(this.body);
         return this;
 	}
 
-	public DoStmt setCondition(final Expression condition) {
+	public DoStmt setCondition(/*final*/Expression condition) {
 		this.condition = condition;
 		setAsParentNodeOf(this.condition);
 		return this;

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,7 +28,7 @@ namespace com.github.javaparser.symbolsolver.reflectionmodel;
  */
 public class ReflectionAnnotationMemberDeclaration implements ResolvedAnnotationMemberDeclaration {
 
-    private static Map<Class<?>, Function<Object, ? extends Expression>> valueAsExressionConverter = new HashMap<>();
+    private static Map<Class<?>, Function<Object, ?:Expression>> valueAsExressionConverter = new HashMap<>();
     static {
         valueAsExressionConverter.put(Boolean.class, (value) -> new BooleanLiteralExpr(Boolean.class.cast(value)));
         valueAsExressionConverter.put(Character.class, (value) -> new CharLiteralExpr(Character.class.cast(value)));
@@ -49,7 +49,7 @@ public class ReflectionAnnotationMemberDeclaration implements ResolvedAnnotation
     @Override
     public Expression getDefaultValue() {
         Object value = annotationMember.getDefaultValue();
-        Function<Object, ? extends Expression> fn = valueAsExressionConverter.get(value.getClass());
+        Function<Object, ?:Expression> fn = valueAsExressionConverter.get(value.getClass());
         if (fn == null) throw new UnsupportedOperationException(String.format("Obtaining the type of the annotation member %s is not supported yet.", annotationMember.getName()));
         return fn.apply(value);
     }
@@ -68,7 +68,7 @@ public class ReflectionAnnotationMemberDeclaration implements ResolvedAnnotation
     }
 
     @Override
-    public String getName() {
+    public string getName() {
         return annotationMember.getName();
     }
 }

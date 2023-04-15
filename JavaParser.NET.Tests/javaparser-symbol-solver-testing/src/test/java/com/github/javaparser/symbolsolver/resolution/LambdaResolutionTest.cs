@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,9 +23,9 @@ namespace com.github.javaparser.symbolsolver.resolution;
 
 
 
-class LambdaResolutionTest extends AbstractResolutionTest {
+class LambdaResolutionTest:AbstractResolutionTest {
 
-    @Test
+    [TestMethod]
     void lambdaMapParameter() {
         CompilationUnit cu = parseSample("Lambda");
         com.github.javaparser.ast.body.ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "Agenda");
@@ -36,10 +36,10 @@ class LambdaResolutionTest extends AbstractResolutionTest {
 
         JavaParserFacade javaParserFacade = JavaParserFacade.get(new ReflectionTypeSolver());
         ResolvedType type = javaParserFacade.getType(expression);
-        assertEquals("java.util.function.Function<? super java.lang.String, ? extends java.lang.String>", type.describe());
+        assertEquals("java.util.function.Function<? super java.lang.String, ?:java.lang.String>", type.describe());
     }
 
-    @Test
+    [TestMethod]
     void personsStream() {
         CompilationUnit cu = parseSample("Lambda");
         com.github.javaparser.ast.body.ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "Agenda");
@@ -53,7 +53,7 @@ class LambdaResolutionTest extends AbstractResolutionTest {
         assertEquals("java.util.stream.Stream<java.lang.String>", type.describe());
     }
 
-    @Test
+    [TestMethod]
     void lambdaMap() {
         CompilationUnit cu = parseSample("Lambda");
         com.github.javaparser.ast.body.ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "Agenda");
@@ -71,7 +71,7 @@ class LambdaResolutionTest extends AbstractResolutionTest {
         assertEquals("java.util.stream.Stream<java.util.stream.IntStream>", type2.describe());
     }
 
-    @Test
+    [TestMethod]
     void lambdaReduce() {
         CompilationUnit cu = parseSample("Lambda");
         com.github.javaparser.ast.body.ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "Agenda");
@@ -84,7 +84,7 @@ class LambdaResolutionTest extends AbstractResolutionTest {
         assertEquals("java.util.Optional<java.lang.Integer>", type1.describe());
     }
 
-    @Test
+    [TestMethod]
     void lambdaPrint() {
         CompilationUnit cu = parseSample("Lambda");
         com.github.javaparser.ast.body.ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "Agenda");
@@ -97,7 +97,7 @@ class LambdaResolutionTest extends AbstractResolutionTest {
         assertEquals("void", type1.describe());
     }
 
-    @Test
+    [TestMethod]
     void lambdaBifunc() {
         CompilationUnit cu = parseSample("Lambda");
         com.github.javaparser.ast.body.ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "Agenda");
@@ -110,7 +110,7 @@ class LambdaResolutionTest extends AbstractResolutionTest {
         assertEquals("double", type1.describe());
     }
 
-    @Test
+    [TestMethod]
     void lambdaCollectParam() {
         CompilationUnit cu = parseSample("LambdaCollect");
         com.github.javaparser.ast.body.ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "Agenda");
@@ -122,10 +122,10 @@ class LambdaResolutionTest extends AbstractResolutionTest {
 
         JavaParserFacade javaParserFacade = JavaParserFacade.get(new ReflectionTypeSolver());
         ResolvedType type = javaParserFacade.getType(expression);
-        assertEquals("java.util.stream.Collector<T, ? extends java.lang.Object, java.util.List<T>>", type.describe());
+        assertEquals("java.util.stream.Collector<T, ?:java.lang.Object, java.util.List<T>>", type.describe());
     }
 
-    @Test
+    [TestMethod]
     void lambdaCollect() {
         CompilationUnit cu = parseSample("LambdaCollect");
         com.github.javaparser.ast.body.ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "Agenda");
@@ -138,7 +138,7 @@ class LambdaResolutionTest extends AbstractResolutionTest {
         assertEquals("java.util.List<java.lang.String>", type.describe());
     }
 
-    @Test
+    [TestMethod]
     void lambdaBlockExplicitReturn() {
         CompilationUnit cu = parseSample("LambdaMulti");
         com.github.javaparser.ast.body.ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "Agenda");
@@ -151,7 +151,7 @@ class LambdaResolutionTest extends AbstractResolutionTest {
         assertEquals("java.lang.String", type.describe());
     }
 
-    @Test
+    [TestMethod]
     void lambdaBlockMultiLineReturn() {
         CompilationUnit cu = parseSample("LambdaMulti");
         com.github.javaparser.ast.body.ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "Agenda");
@@ -164,7 +164,7 @@ class LambdaResolutionTest extends AbstractResolutionTest {
         assertEquals("java.lang.String", type.describe());
     }
 
-    @Test
+    [TestMethod]
     void typeOfVoidLambda() {
         CompilationUnit cu = parseSample("LambdaVoid");
         com.github.javaparser.ast.body.ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "Agenda");

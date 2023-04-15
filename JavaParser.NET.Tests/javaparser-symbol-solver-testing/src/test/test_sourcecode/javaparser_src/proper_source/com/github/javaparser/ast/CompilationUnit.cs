@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -38,7 +38,7 @@ namespace com.github.javaparser.ast;
  * </pre>
  * @author Julio Vilmar Gesser
  */
-public final class CompilationUnit extends Node {
+public /*final*/class CompilationUnit:Node {
 
     private PackageDeclaration pakage;
 
@@ -73,7 +73,7 @@ public final class CompilationUnit extends Node {
     }
 
     /**
-     * Return a list containing all comments declared in this compilation unit.
+     * Return a list containing all comments declared _in this compilation unit.
      * Including javadocs, line comments and block comments of all types,
      * inner-classes and other members.<br>
      * If there is no comment, <code>null</code> is returned.
@@ -89,7 +89,7 @@ public final class CompilationUnit extends Node {
     }
 
     /**
-     * Retrieves the list of imports declared in this compilation unit or
+     * Retrieves the list of imports declared _in this compilation unit or
      * <code>null</code> if there is no import.
      * 
      * @return the list of imports or <code>null</code> if there is no import
@@ -110,7 +110,7 @@ public final class CompilationUnit extends Node {
     }
 
     /**
-     * Return the list of types declared in this compilation unit.<br>
+     * Return the list of types declared _in this compilation unit.<br>
      * If there is no types declared, <code>null</code> is returned.
      * 
      * @return the list of types or <code>null</code> null if there is no type
@@ -158,7 +158,7 @@ public final class CompilationUnit extends Node {
     }
 
     /**
-     * Sets the list of types declared in this compilation unit.
+     * Sets the list of types declared _in this compilation unit.
      * 
      * @param types
      *            the lis of types

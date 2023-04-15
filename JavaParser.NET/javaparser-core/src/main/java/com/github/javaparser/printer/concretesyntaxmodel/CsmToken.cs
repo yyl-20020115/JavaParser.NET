@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,22 +24,22 @@ namespace com.github.javaparser.printer.concretesyntaxmodel;
 
 public class CsmToken implements CsmElement {
 
-    private final int tokenType;
+    private /*final*/int tokenType;
 
-    private String content;
+    private string content;
 
     private TokenContentCalculator tokenContentCalculator;
 
     public interface TokenContentCalculator {
 
-        String calculate(Node node);
+        string calculate(Node node);
     }
 
     public int getTokenType() {
         return tokenType;
     }
 
-    public String getContent(Node node) {
+    public string getContent(Node node) {
         if (tokenContentCalculator != null) {
             return tokenContentCalculator.calculate(node);
         }
@@ -62,7 +62,7 @@ public class CsmToken implements CsmElement {
         }
     }
 
-    public CsmToken(int tokenType, String content) {
+    public CsmToken(int tokenType, string content) {
         this.tokenType = tokenType;
         this.content = content;
     }
@@ -82,7 +82,7 @@ public class CsmToken implements CsmElement {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return String.format("%s(property:%s)", this.getClass().getSimpleName(), content);
     }
 

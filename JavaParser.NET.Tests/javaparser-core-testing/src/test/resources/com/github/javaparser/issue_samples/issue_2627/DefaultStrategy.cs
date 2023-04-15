@@ -4,12 +4,12 @@
  *  distributed with this work for additional information
  *  regarding copyright ownership.  The ASF licenses this file
  *  to you under the Apache License, Version 2.0 (the
- *  "License"); you may not use this file except in compliance
+ *  "License"); you may not use this file except _in compliance
  *  with the License.  You may obtain a copy of the License at
  *
  *    http://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing,
+ *  Unless required by applicable law or agreed to _in writing,
  *  software distributed under the License is distributed on an
  *  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
  *  KIND, either express or implied.  See the License for the
@@ -32,8 +32,8 @@ namespace groovy.transform.builder;
  *
  * {@code @Builder}
  * class Person {
- *     String firstName
- *     String lastName
+ *     string firstName
+ *     string lastName
  *     int age
  * }
  * def person = Person.builder().firstName("Robert").lastName("Lewandowski").age(21).build()
@@ -46,30 +46,30 @@ namespace groovy.transform.builder;
  * <pre class="groovyTestCase">
  * {@code @groovy.transform.builder.Builder}(prefix='set')
  * class Person {
- *     String firstName
- *     String lastName
+ *     string firstName
+ *     string lastName
  *     int age
  * }
  * def p2 = Person.builder().setFirstName("Robert").setLastName("Lewandowski").setAge(21).build()
  * </pre>
- * or using a prefix of 'with' would result in usage like this:
+ * or using a prefix of 'with' would result _in usage like this:
  * <pre>
  * def p3 = Person.builder().withFirstName("Robert").withLastName("Lewandowski").withAge(21).build()
  * </pre>
  *
- * You can also use the {@code @Builder} annotation in combination with this strategy on one or more constructor or
- * static method instead of or in addition to using it at the class level. An example with a constructor follows:
+ * You can also use the {@code @Builder} annotation _in combination with this strategy on one or more constructor or
+ * static method instead of or _in addition to using it at the class level. An example with a constructor follows:
  * <pre class="groovyTestCase">
  * import groovy.transform.ToString
  * import groovy.transform.builder.Builder
  *
  * {@code @ToString}
  * class Person {
- *     String first, last
+ *     string first, last
  *     int born
  *
  *     {@code @Builder}
- *     Person(String roleName) {
+ *     Person(string roleName) {
  *         if (roleName == 'Jack Sparrow') {
  *             first = 'Johnny'; last = 'Depp'; born = 1963
  *         }
@@ -78,15 +78,15 @@ namespace groovy.transform.builder;
  * assert Person.builder().roleName("Jack Sparrow").build().toString() == 'Person(Johnny, Depp, 1963)'
  * </pre>
  * In this case, the parameter(s) for the constructor or static method become the properties available
- * in the builder. For the case of a static method, the return type of the static method becomes the
+ * _in the builder. For the case of a static method, the return type of the static method becomes the
  * class of the instance being created. For static factory methods, this is normally the class containing the
- * static method but in general it can be any class.
+ * static method but _in general it can be any class.
  *
  * Note: if using more than one {@code @Builder} annotation, which is only possible when using static method
  * or constructor variants, it is up to you to ensure that any generated helper classes or builder methods
  * have unique names. E.g.&nbsp;we can modify the previous example to have three builders. At least two of the builders
- * in our case will need to set the 'builderClassName' and 'builderMethodName' annotation attributes to ensure
- * we have unique names. This is shown in the following example:
+ * _in our case will need to set the 'builderClassName' and 'builderMethodName' annotation attributes to ensure
+ * we have unique names. This is shown _in the following example:
  * <pre class="groovyTestCase">
  * import groovy.transform.builder.*
  * import groovy.transform.*
@@ -94,20 +94,20 @@ namespace groovy.transform.builder;
  * {@code @ToString}
  * {@code @Builder}
  * class Person {
- *     String first, last
+ *     string first, last
  *     int born
  *
  *     Person(){} // required to retain no-arg constructor
  *
  *     {@code @Builder}(builderClassName='MovieBuilder', builderMethodName='byRoleBuilder')
- *     Person(String roleName) {
+ *     Person(string roleName) {
  *         if (roleName == 'Jack Sparrow') {
  *             this.first = 'Johnny'; this.last = 'Depp'; this.born = 1963
  *         }
  *     }
  *
  *     {@code @Builder}(builderClassName='SplitBuilder', builderMethodName='splitBuilder')
- *     static Person split(String name, int year) {
+ *     static Person split(string name, int year) {
  *         def parts = name.split(' ')
  *         new Person(first: parts[0], last: parts[1], born: year)
  *     }
@@ -121,16 +121,16 @@ namespace groovy.transform.builder;
  * The 'forClass' annotation attribute for the {@code @Builder} transform isn't applicable for this strategy.
  * The 'useSetters' annotation attribute for the {@code @Builder} transform is ignored by this strategy which always uses setters.
  */
-public class DefaultStrategy extends BuilderASTTransformation.AbstractBuilderStrategy {
-    private static final Expression DEFAULT_INITIAL_VALUE = null;
-    private static final int PUBLIC_STATIC = ACC_PUBLIC | ACC_STATIC;
+public class DefaultStrategy:BuilderASTTransformation.AbstractBuilderStrategy {
+    private static /*final*/Expression DEFAULT_INITIAL_VALUE = null;
+    private static /*final*/int PUBLIC_STATIC = ACC_PUBLIC | ACC_STATIC;
 
     public void build(BuilderASTTransformation transform, AnnotatedNode annotatedNode, AnnotationNode anno) {
         if (unsupportedAttribute(transform, anno, "forClass")) return;
         if (unsupportedAttribute(transform, anno, "force")) return;
-        if (annotatedNode instanceof ClassNode) {
+        if (annotatedNode is ClassNode) {
             buildClass(transform, (ClassNode) annotatedNode, anno);
-        } else if (annotatedNode instanceof MethodNode) {
+        } else if (annotatedNode is MethodNode) {
             buildMethod(transform, (MethodNode) annotatedNode, anno);
         }
     }
@@ -164,7 +164,7 @@ public class DefaultStrategy extends BuilderASTTransformation.AbstractBuilderStr
         List<PropertyInfo> props = getPropertyInfos(transform, anno, buildee, excludes, includes, allNames, allProperties);
         for (PropertyInfo pi : props) {
             ClassNode correctedType = getCorrectedType(buildee, pi.getType(), builder);
-            String fieldName = pi.getName();
+            string fieldName = pi.getName();
             builder.addField(createFieldCopy(buildee, fieldName, correctedType));
             addGeneratedMethod(builder, createBuilderMethodForProp(builder, new PropertyInfo(fieldName, correctedType), getPrefix(anno)));
         }
@@ -186,20 +186,20 @@ public class DefaultStrategy extends BuilderASTTransformation.AbstractBuilderStr
         return new InnerClassNode(buildee, getFullName(anno, buildee), PUBLIC_STATIC, OBJECT_TYPE);
     }
 
-    private static String getFullName(AnnotationNode anno, ClassNode buildee) {
-        String builderClassName = getMemberStringValue(anno, "builderClassName", buildee.getNameWithoutPackage() + "Builder");
+    private static string getFullName(AnnotationNode anno, ClassNode buildee) {
+        string builderClassName = getMemberStringValue(anno, "builderClassName", buildee.getNameWithoutPackage() + "Builder");
         return buildee.getName() + "$" + builderClassName;
     }
 
-    private static String getPrefix(AnnotationNode anno) {
+    private static string getPrefix(AnnotationNode anno) {
         return getMemberStringValue(anno, "prefix", "");
     }
 
     private static MethodNode createBuildMethodForMethod(AnnotationNode anno, ClassNode buildee, MethodNode mNode, Parameter[] params) {
-        String buildMethodName = getMemberStringValue(anno, "buildMethodName", "build");
-        final BlockStatement body = new BlockStatement();
+        string buildMethodName = getMemberStringValue(anno, "buildMethodName", "build");
+        /*final*/BlockStatement body = new BlockStatement();
         ClassNode returnType;
-        if (mNode instanceof ConstructorNode) {
+        if (mNode is ConstructorNode) {
             returnType = newClass(buildee);
             body.addStatement(returnS(ctorX(newClass(mNode.getDeclaringClass()), args(params))));
         } else {
@@ -210,23 +210,23 @@ public class DefaultStrategy extends BuilderASTTransformation.AbstractBuilderStr
     }
 
     private static MethodNode createBuilderMethod(AnnotationNode anno, ClassNode builder) {
-        String builderMethodName = getMemberStringValue(anno, "builderMethodName", "builder");
-        final BlockStatement body = new BlockStatement();
+        string builderMethodName = getMemberStringValue(anno, "builderMethodName", "builder");
+        /*final*/BlockStatement body = new BlockStatement();
         body.addStatement(returnS(ctorX(builder)));
         return new MethodNode(builderMethodName, PUBLIC_STATIC, builder, NO_PARAMS, NO_EXCEPTIONS, body);
     }
 
     private static MethodNode createBuildMethod(AnnotationNode anno, ClassNode buildee, List<PropertyInfo> props) {
-        String buildMethodName = getMemberStringValue(anno, "buildMethodName", "build");
-        final BlockStatement body = new BlockStatement();
+        string buildMethodName = getMemberStringValue(anno, "buildMethodName", "build");
+        /*final*/BlockStatement body = new BlockStatement();
         body.addStatement(returnS(initializeInstance(buildee, props, body)));
         return new MethodNode(buildMethodName, ACC_PUBLIC, newClass(buildee), NO_PARAMS, NO_EXCEPTIONS, body);
     }
 
-    private MethodNode createBuilderMethodForProp(ClassNode builder, PropertyInfo pinfo, String prefix) {
+    private MethodNode createBuilderMethodForProp(ClassNode builder, PropertyInfo pinfo, string prefix) {
         ClassNode fieldType = pinfo.getType();
-        String fieldName = pinfo.getName();
-        String setterName = getSetterName(prefix, fieldName);
+        string fieldName = pinfo.getName();
+        string setterName = getSetterName(prefix, fieldName);
         return new MethodNode(setterName, ACC_PUBLIC, newClass(builder), params(param(fieldType, fieldName)), NO_EXCEPTIONS, block(
                 stmt(assignX(propX(varX("this"), constX(fieldName)), varX(fieldName, fieldType))),
                 returnS(varX("this", builder))
@@ -240,7 +240,7 @@ public class DefaultStrategy extends BuilderASTTransformation.AbstractBuilderStr
         return new FieldNode(param.getName(), ACC_PRIVATE, correctedParamType, buildee, param.getInitialExpression());
     }
 
-    private static FieldNode createFieldCopy(ClassNode buildee, String fieldName, ClassNode fieldType) {
+    private static FieldNode createFieldCopy(ClassNode buildee, string fieldName, ClassNode fieldType) {
         return new FieldNode(fieldName, ACC_PRIVATE, fieldType, buildee, DEFAULT_INITIAL_VALUE);
     }
 

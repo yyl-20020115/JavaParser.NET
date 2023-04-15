@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,7 +23,7 @@ namespace com.github.javaparser.symbolsolver;
 
 
 public class Issue2943Test {
-    @Test
+    [TestMethod]
     public void testPeek() {
         ParserConfiguration config = new ParserConfiguration();
         config.setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver(false)));
@@ -36,7 +36,7 @@ public class Issue2943Test {
                         + "import java.util.stream.Stream;\n"
                         + "public class TestPeek {\n"
                         + "    public void foo() {\n"
-                        + "        Stream.of(1,2,3).peek(info -> { System.out.println(info); }).collect(Collectors.toList());\n"
+                        + "        Stream.of(1,2,3).peek(info -> { System._out.println(info); }).collect(Collectors.toList());\n"
                         + "    }\n"
                         + "}"
         );

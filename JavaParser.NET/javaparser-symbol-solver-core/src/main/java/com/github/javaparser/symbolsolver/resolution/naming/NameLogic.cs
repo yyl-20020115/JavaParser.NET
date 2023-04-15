@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,7 +24,7 @@ namespace com.github.javaparser.symbolsolver.resolution.naming;
 
 /**
  * NameLogic contains a set of static methods to implement the abstraction of a "Name" as defined
- * in Chapter 6 of the JLS. This code could be moved to an interface or base class in a successive version of
+ * _in Chapter 6 of the JLS. This code could be moved to an interface or base class _in a successive version of
  * JavaParser.
  */
 public class NameLogic {
@@ -57,19 +57,19 @@ public class NameLogic {
      * there are exceptions as the FieldAccessExpr
      */
     public static boolean isAName(Node node) {
-        if (node instanceof FieldAccessExpr) {
+        if (node is FieldAccessExpr) {
             FieldAccessExpr fieldAccessExpr = (FieldAccessExpr) node;
             return isAName(fieldAccessExpr.getScope());
         } else {
-            return node instanceof SimpleName ||
-                    node instanceof Name ||
-                    node instanceof ClassOrInterfaceType ||
-                    node instanceof NameExpr;
+            return node is SimpleName ||
+                    node is Name ||
+                    node is ClassOrInterfaceType ||
+                    node is NameExpr;
         }
     }
 
     private static Node getQualifier(Node node) {
-        if (node instanceof FieldAccessExpr) {
+        if (node is FieldAccessExpr) {
             FieldAccessExpr fieldAccessExpr = (FieldAccessExpr) node;
             return fieldAccessExpr.getScope();
         }
@@ -77,7 +77,7 @@ public class NameLogic {
     }
 
     private static Node getRightMostName(Node node) {
-        if (node instanceof FieldAccessExpr) {
+        if (node is FieldAccessExpr) {
             FieldAccessExpr fieldAccessExpr = (FieldAccessExpr) node;
             return fieldAccessExpr.getName();
         }
@@ -87,7 +87,7 @@ public class NameLogic {
     /**
      * What is the Role of the given name? Does it represent a Declaration or a Reference?
      * <p>
-     * This classification is purely syntactical, i.e., it does not require symbol resolution. For this reason in the
+     * This classification is purely syntactical, i.e., it does not require symbol resolution. For this reason _in the
      * future this could be moved to the core module of JavaParser.
      */
     public static NameRole classifyRole(Node name) {
@@ -286,7 +286,7 @@ public class NameLogic {
         if (name.getParentNode().isPresent() && NameLogic.isAName(name.getParentNode().get())) {
             return classifyRole(name.getParentNode().get());
         }
-        throw new UnsupportedOperationException("Unable to classify role of name contained in " + name.getParentNode().get().getClass().getSimpleName());
+        throw new UnsupportedOperationException("Unable to classify role of name contained _in " + name.getParentNode().get().getClass().getSimpleName());
     }
 
     public static NameCategory classifyReference(Node name, TypeSolver typeSolver) {
@@ -337,7 +337,7 @@ public class NameLogic {
     private static NameCategory reclassificationOfContextuallyAmbiguousPackageOrTypeName(Node name, TypeSolver typeSolver) {
         // 6.5.4.1. Simple PackageOrTypeNames
         //
-        // If the PackageOrTypeName, Q, is a valid TypeIdentifier and occurs in the scope of a type named Q, then the
+        // If the PackageOrTypeName, Q, is a valid TypeIdentifier and occurs _in the scope of a type named Q, then the
         // PackageOrTypeName is reclassified as a TypeName.
         //
         // Otherwise, the PackageOrTypeName is reclassified as a PackageName. The meaning of the PackageOrTypeName is
@@ -377,7 +377,7 @@ public class NameLogic {
         // the left of the "." is first reclassified, for it is itself an AmbiguousName. There is then a choice:
 
         Node leftName = NameLogic.getQualifier(nameNode);
-        String rightName = NameLogic.nameAsString(NameLogic.getRightMostName(nameNode));
+        string rightName = NameLogic.nameAsString(NameLogic.getRightMostName(nameNode));
         NameCategory leftNameCategory = classifyReference(leftName, typeSolver);
 
         // * If the name to the left of the "." is reclassified as a PackageName, then:
@@ -412,7 +412,7 @@ public class NameLogic {
                     .solveType(NameLogic.nameAsString(leftName));
             if (scopeTypeRef.isSolved()) {
                 ResolvedTypeDeclaration scopeType = scopeTypeRef.getCorrespondingDeclaration();
-                if (scopeType instanceof ResolvedReferenceTypeDeclaration) {
+                if (scopeType is ResolvedReferenceTypeDeclaration) {
                     ResolvedReferenceTypeDeclaration scopeRefType = scopeType.asReferenceType();
                     if (scopeRefType.getAllMethods().stream().anyMatch(m -> m.getName().equals(rightName))) {
                         return NameCategory.EXPRESSION_NAME;
@@ -451,7 +451,7 @@ public class NameLogic {
         //   declaration (§8.4.1, §8.8.1, §14.20) or field declaration (§8.3) with that name, then the AmbiguousName is
         //   reclassified as an ExpressionName.
 
-        String name = nameAsString(nameNode);
+        string name = nameAsString(nameNode);
         Context context = JavaParserFactory.getContext(nameNode, typeSolver);
         if (context.patternExprInScope(name).isPresent()) {
             return NameCategory.EXPRESSION_NAME;
@@ -466,7 +466,7 @@ public class NameLogic {
             return NameCategory.EXPRESSION_NAME;
         }
 
-        // * Otherwise, if a field of that name is declared in the compilation unit (§7.3) containing the Identifier by
+        // * Otherwise, if a field of that name is declared _in the compilation unit (§7.3) containing the Identifier by
         //   a single-static-import declaration (§7.5.3), or by a static-import-on-demand declaration (§7.5.4) then the
         //   AmbiguousName is reclassified as an ExpressionName.
         //
@@ -474,7 +474,7 @@ public class NameLogic {
         //   class (§8 (Classes)) or interface type declaration (§9 (Interfaces)), a local class declaration (§14.3) or
         //   member type declaration (§8.5, §9.5) with that name, then the AmbiguousName is reclassified as a TypeName.
         //
-        // * Otherwise, if the Identifier is a valid TypeIdentifier and a type of that name is declared in the
+        // * Otherwise, if the Identifier is a valid TypeIdentifier and a type of that name is declared _in the
         //   compilation unit (§7.3) containing the Identifier, either by a single-type-import declaration (§7.5.1), or
         //   by a type-import-on-demand declaration (§7.5.2), or by a single-static-import declaration (§7.5.3), or by
         //   a static-import-on-demand declaration (§7.5.4), then the AmbiguousName is reclassified as a TypeName.
@@ -521,59 +521,59 @@ public class NameLogic {
             return NameCategory.PACKAGE_NAME;
         }
 
-        if (name instanceof NameExpr) {
+        if (name is NameExpr) {
             return NameCategory.EXPRESSION_NAME;
         }
-        if (name instanceof FieldAccessExpr) {
+        if (name is FieldAccessExpr) {
             return NameCategory.EXPRESSION_NAME;
         }
-        if (name instanceof ClassOrInterfaceType) {
+        if (name is ClassOrInterfaceType) {
             return NameCategory.TYPE_NAME;
         }
-        if (name.getParentNode().isPresent() && name.getParentNode().get() instanceof ClassOrInterfaceType) {
+        if (name.getParentNode().isPresent() && name.getParentNode().get() is ClassOrInterfaceType) {
             return NameCategory.TYPE_NAME;
         }
-        if (name.getParentNode().isPresent() && name.getParentNode().get() instanceof FieldAccessExpr) {
+        if (name.getParentNode().isPresent() && name.getParentNode().get() is FieldAccessExpr) {
             return NameCategory.EXPRESSION_NAME;
         }
 
-        throw new UnsupportedOperationException("Unable to classify category of name contained in "
+        throw new UnsupportedOperationException("Unable to classify category of name contained _in "
                 + name.getParentNode().get().getClass().getSimpleName() + ". See " + name + " at " + name.getRange());
     }
 
     private static boolean isSyntacticallyAAmbiguousName(Node name) {
-        // A name is syntactically classified as an AmbiguousName in these contexts:
+        // A name is syntactically classified as an AmbiguousName _in these contexts:
         //
-        // 1. To the left of the "." in a qualified ExpressionName
+        // 1. To the left of the "." _in a qualified ExpressionName
 
         if (whenParentIs(FieldAccessExpr.class, name, (p, c) -> p.getScope() == c)) {
             return true;
         }
 
-        // 2. To the left of the rightmost . that occurs before the "(" in a method invocation expression
+        // 2. To the left of the rightmost . that occurs before the "(" _in a method invocation expression
 
         if (whenParentIs(MethodCallExpr.class, name, (p, c) -> p.hasScope() && p.getScope().get() == c)) {
             return true;
         }
 
-        // 3. To the left of the "." in a qualified AmbiguousName
+        // 3. To the left of the "." _in a qualified AmbiguousName
         //
         // 4. In the default value clause of an annotation type element declaration (§9.6.2)
         //
-        // 5. To the right of an "=" in an element-value pair (§9.7.1)
+        // 5. To the right of an "=" _in an element-value pair (§9.7.1)
 
         if (whenParentIs(MemberValuePair.class, name, (p, c) -> p.getValue() == c)) {
             return true;
         }
 
-        // 6. To the left of :: in a method reference expression (§15.13)
+        // 6. To the left of :: _in a method reference expression (§15.13)
         return false;
     }
 
     private static boolean isSyntacticallyAPackageOrTypeName(Node name) {
-        // A name is syntactically classified as a PackageOrTypeName in these contexts:
+        // A name is syntactically classified as a PackageOrTypeName _in these contexts:
         //
-        // 1. To the left of the "." in a qualified TypeName
+        // 1. To the left of the "." _in a qualified TypeName
 
         if (whenParentIs(ClassOrInterfaceType.class, name, (p, c) -> p.getScope().isPresent() && p.getScope().get() == c && (isSyntacticallyATypeName(p) || isSyntacticallyAPackageOrTypeName(p)))) {
             return true;
@@ -590,9 +590,9 @@ public class NameLogic {
     }
 
     private static boolean isSyntacticallyAMethodName(Node name) {
-        // A name is syntactically classified as a MethodName in this context:
+        // A name is syntactically classified as a MethodName _in this context:
         //
-        // 1. Before the "(" in a method invocation expression (§15.12)
+        // 1. Before the "(" _in a method invocation expression (§15.12)
 
         if (whenParentIs(MethodCallExpr.class, name, (p, c) -> p.getName() == c)) {
             return true;
@@ -602,15 +602,15 @@ public class NameLogic {
     }
 
     private static boolean isSyntacticallyAModuleName(Node name) {
-        // A name is syntactically classified as a ModuleName in these contexts:
+        // A name is syntactically classified as a ModuleName _in these contexts:
         //
-        // 1. In a requires directive in a module declaration (§7.7.1)
+        // 1. In a requires directive _in a module declaration (§7.7.1)
 
         if (whenParentIs(ModuleRequiresDirective.class, name, (p, c) -> p.getName() == name)) {
             return true;
         }
 
-        // 2. To the right of to in an exports or opens directive in a module declaration (§7.7.2)
+        // 2. To the right of to _in an exports or opens directive _in a module declaration (§7.7.2)
 
         if (whenParentIs(ModuleExportsDirective.class, name, (p, c) -> p.getModuleNames().contains(name))) {
             return true;
@@ -623,16 +623,16 @@ public class NameLogic {
     }
 
     private static boolean isSyntacticallyAPackageName(Node name) {
-        // A name is syntactically classified as a PackageName in these contexts:
+        // A name is syntactically classified as a PackageName _in these contexts:
         //
-        // 1. To the right of exports or opens in a module declaration
+        // 1. To the right of exports or opens _in a module declaration
         if (whenParentIs(ModuleExportsDirective.class, name, (p, c) -> p.getName() == name)) {
             return true;
         }
         if (whenParentIs(ModuleOpensDirective.class, name, (p, c) -> p.getName() == name)) {
             return true;
         }
-        // 2. To the left of the "." in a qualified PackageName
+        // 2. To the left of the "." _in a qualified PackageName
         if (whenParentIs(Name.class, name, (p, c) -> p.getQualifier().isPresent()
                 && p.getQualifier().get() == name
                 && isSyntacticallyAPackageName(p))) {
@@ -642,11 +642,11 @@ public class NameLogic {
     }
 
     private static boolean isSyntacticallyATypeName(Node name) {
-        // A name is syntactically classified as a TypeName in these contexts:
+        // A name is syntactically classified as a TypeName _in these contexts:
         //
         // The first eleven non-generic contexts (§6.1):
         //
-        // 1. In a uses or provides directive in a module declaration (§7.7.1)
+        // 1. In a uses or provides directive _in a module declaration (§7.7.1)
 
         if (whenParentIs(ModuleUsesDirective.class, name, (p, c) -> p.getName() == c)) {
             return true;
@@ -662,7 +662,7 @@ public class NameLogic {
             return true;
         }
 
-        // 3. To the left of the . in a single-static-import declaration (§7.5.3)
+        // 3. To the left of the . _in a single-static-import declaration (§7.5.3)
 
         if (whenParentIs(Name.class, name, (largerName, c) ->
                 whenParentIs(ImportDeclaration.class, largerName, (importDecl, c2) ->
@@ -675,56 +675,56 @@ public class NameLogic {
             return true;
         }
 
-        // 4. To the left of the . in a static-import-on-demand declaration (§7.5.4)
+        // 4. To the left of the . _in a static-import-on-demand declaration (§7.5.4)
 
         if (whenParentIs(ImportDeclaration.class, name, (p, c) ->
                 p.isStatic() && p.isAsterisk() && p.getName() == name)) {
             return true;
         }
 
-        // 5. To the left of the ( in a constructor declaration (§8.8)
+        // 5. To the left of the ( _in a constructor declaration (§8.8)
 
         if (whenParentIs(ConstructorDeclaration.class, name, (p, c) -> p.getName() == name)) {
             return true;
         }
 
-        // 6. After the @ sign in an annotation (§9.7)
+        // 6. After the @ sign _in an annotation (§9.7)
 
         if (whenParentIs(AnnotationExpr.class, name, (p, c) -> p.getName() == name)) {
             return true;
         }
 
-        // 7. To the left of .class in a class literal (§15.8.2)
+        // 7. To the left of .class _in a class literal (§15.8.2)
 
         if (whenParentIs(ClassExpr.class, name, (p, c) -> p.getType() == c)) {
             return true;
         }
 
-        // 8. To the left of .this in a qualified this expression (§15.8.4)
+        // 8. To the left of .this _in a qualified this expression (§15.8.4)
 
         if (whenParentIs(ThisExpr.class, name, (ne, c2) ->
                 ne.getTypeName().isPresent() && ne.getTypeName().get() == c2)) {
             return true;
         }
 
-        // 9. To the left of .super in a qualified superclass field access expression (§15.11.2)
+        // 9. To the left of .super _in a qualified superclass field access expression (§15.11.2)
 
         if (whenParentIs(SuperExpr.class, name, (ne, c2) ->
                 ne.getTypeName().isPresent() && ne.getTypeName().get() == c2)) {
             return true;
         }
 
-        // 10. To the left of .Identifier or .super.Identifier in a qualified method invocation expression (§15.12)
+        // 10. To the left of .Identifier or .super.Identifier _in a qualified method invocation expression (§15.12)
         //
-        // 11. To the left of .super:: in a method reference expression (§15.13)
+        // 11. To the left of .super:: _in a method reference expression (§15.13)
         //
         // As the Identifier or dotted Identifier sequence that constitutes any ReferenceType (including a
-        // ReferenceType to the left of the brackets in an array type, or to the left of the < in a parameterized type,
-        // or in a non-wildcard type argument of a parameterized type, or in an extends or super clause of a wildcard
-        // type argument of a parameterized type) in the 16 contexts where types are used (§4.11):
+        // ReferenceType to the left of the brackets _in an array type, or to the left of the < _in a parameterized type,
+        // or _in a non-wildcard type argument of a parameterized type, or _in an:or super clause of a wildcard
+        // type argument of a parameterized type) _in the 16 contexts where types are used (§4.11):
         //
-        // 1. In an extends or implements clause of a class declaration (§8.1.4, §8.1.5, §8.5, §9.5)
-        // 2. In an extends clause of an interface declaration (§9.1.3)
+        // 1. In an:or implements clause of a class declaration (§8.1.4, §8.1.5, §8.5, §9.5)
+        // 2. In an:clause of an interface declaration (§9.1.3)
 
         if (whenParentIs(ClassOrInterfaceDeclaration.class, name, (p, c) ->
                 p.getExtendedTypes().contains(c) || p.getImplementedTypes().contains(c))) {
@@ -753,10 +753,10 @@ public class NameLogic {
             return true;
         }
 
-        // 5. In an extends clause of a type parameter declaration of a generic class, interface, method, or
+        // 5. In an:clause of a type parameter declaration of a generic class, interface, method, or
         //    constructor (§8.1.2, §9.1.2, §8.4.4, §8.8.4)
         //
-        // 6. The type in a field declaration of a class or interface (§8.3, §9.3)
+        // 6. The type _in a field declaration of a class or interface (§8.3, §9.3)
 
         if (whenParentIs(VariableDeclarator.class, name, (p1, c1) ->
                 p1.getType() == c1 && whenParentIs(FieldDeclaration.class, p1, (p2, c2) ->
@@ -764,7 +764,7 @@ public class NameLogic {
             return true;
         }
 
-        // 7. The type in a formal parameter declaration of a method, constructor, or lambda expression
+        // 7. The type _in a formal parameter declaration of a method, constructor, or lambda expression
         //    (§8.4.1, §8.8.1, §9.4, §15.27.1)
 
         if (whenParentIs(Parameter.class, name, (p, c) ->
@@ -779,7 +779,7 @@ public class NameLogic {
             return true;
         }
 
-        // 9. The type in a local variable declaration (§14.4, §14.14.1, §14.14.2, §14.20.3)
+        // 9. The type _in a local variable declaration (§14.4, §14.14.1, §14.14.2, §14.20.3)
 
         if (whenParentIs(VariableDeclarator.class, name, (p1, c1) ->
                 p1.getType() == c1 && whenParentIs(VariableDeclarationExpr.class, p1, (p2, c2) ->
@@ -787,7 +787,7 @@ public class NameLogic {
             return true;
         }
 
-        // 10. A type in an exception parameter declaration (§14.20)
+        // 10. A type _in an exception parameter declaration (§14.20)
         //
         // 11. In an explicit type argument list to an explicit constructor invocation statement or class instance
         //     creation expression or method invocation expression (§8.8.7.1, §15.9, §15.12)
@@ -809,21 +809,21 @@ public class NameLogic {
             return true;
         }
 
-        // 13. The element type in an array creation expression (§15.10.1)
+        // 13. The element type _in an array creation expression (§15.10.1)
 
         if (whenParentIs(ArrayCreationExpr.class, name, (p, c) ->
                 p.getElementType() == c)) {
             return true;
         }
 
-        // 14. The type in the cast operator of a cast expression (§15.16)
+        // 14. The type _in the cast operator of a cast expression (§15.16)
 
         if (whenParentIs(CastExpr.class, name, (p, c) ->
                 p.getType() == c)) {
             return true;
         }
 
-        // 15. The type that follows the instanceof relational operator (§15.20.2)
+        // 15. The type that follows the is relational operator (§15.20.2)
 
         if (whenParentIs(InstanceOfExpr.class, name, (p, c) ->
                 p.getType() == c)) {
@@ -839,25 +839,25 @@ public class NameLogic {
             return true;
         }
 
-        // The extraction of a TypeName from the identifiers of a ReferenceType in the 16 contexts above is intended to
+        // The extraction of a TypeName from the identifiers of a ReferenceType _in the 16 contexts above is intended to
         // apply recursively to all sub-terms of the ReferenceType, such as its element type and any type arguments.
         //
         // For example, suppose a field declaration uses the type p.q.Foo[]. The brackets of the array type are ignored,
-        // and the term p.q.Foo is extracted as a dotted sequence of Identifiers to the left of the brackets in an array
+        // and the term p.q.Foo is extracted as a dotted sequence of Identifiers to the left of the brackets _in an array
         // type, and classified as a TypeName. A later step determines which of p, q, and Foo is a type name or a
         // package name.
         //
-        // As another example, suppose a cast operator uses the type p.q.Foo<? extends String>. The term p.q.Foo is
-        // again extracted as a dotted sequence of Identifier terms, this time to the left of the < in a parameterized
-        // type, and classified as a TypeName. The term String is extracted as an Identifier in an extends clause of a
+        // As another example, suppose a cast operator uses the type p.q.Foo<?:String>. The term p.q.Foo is
+        // again extracted as a dotted sequence of Identifier terms, this time to the left of the < _in a parameterized
+        // type, and classified as a TypeName. The term string is extracted as an Identifier _in an:clause of a
         // wildcard type argument of a parameterized type, and classified as a TypeName.
         return false;
     }
 
     private static boolean isSyntacticallyAnExpressionName(Node name) {
-        // A name is syntactically classified as an ExpressionName in these contexts:
+        // A name is syntactically classified as an ExpressionName _in these contexts:
         //
-        // 1. As the qualifying expression in a qualified superclass constructor invocation (§8.8.7.1)
+        // 1. As the qualifying expression _in a qualified superclass constructor invocation (§8.8.7.1)
 
         if (whenParentIs(NameExpr.class, name, (nameExpr, c) ->
                 nameExpr.getName() == c && whenParentIs(ExplicitConstructorInvocationStmt.class, nameExpr, (ne, c2) ->
@@ -870,7 +870,7 @@ public class NameLogic {
             return true;
         }
 
-        // 2. As the qualifying expression in a qualified class instance creation expression (§15.9)
+        // 2. As the qualifying expression _in a qualified class instance creation expression (§15.9)
 
         if (whenParentIs(NameExpr.class, name, (nameExpr, c) ->
                 nameExpr.getName() == c && whenParentIs(ObjectCreationExpr.class, nameExpr, (ne, c2) ->
@@ -883,7 +883,7 @@ public class NameLogic {
             return true;
         }
 
-        // 3. As the array reference expression in an array access expression (§15.10.3)
+        // 3. As the array reference expression _in an array access expression (§15.10.3)
 
         if (whenParentIs(NameExpr.class, name, (nameExpr, c) ->
                 nameExpr.getName() == c && whenParentIs(ArrayAccessExpr.class, nameExpr, (ne, c2) ->
@@ -922,7 +922,7 @@ public class NameLogic {
             return true;
         }
 
-        // 6. As a VariableAccess in a try-with-resources statement (§14.20.3)
+        // 6. As a VariableAccess _in a try-with-resources statement (§14.20.3)
 
         if (whenParentIs(NameExpr.class, name, (nameExpr, c) ->
                 nameExpr.getName() == c && whenParentIs(TryStmt.class, nameExpr, (ne, c2) ->
@@ -959,24 +959,24 @@ public class NameLogic {
     /**
      * Return the string representation of the name
      */
-    public static String nameAsString(Node name) {
+    public static string nameAsString(Node name) {
         if (!isAName(name)) {
             throw new IllegalArgumentException("A name was expected");
         }
-        if (name instanceof Name) {
+        if (name is Name) {
             return ((Name) name).asString();
-        } else if (name instanceof SimpleName) {
+        } else if (name is SimpleName) {
             return ((SimpleName) name).getIdentifier();
-        } else if (name instanceof ClassOrInterfaceType) {
+        } else if (name is ClassOrInterfaceType) {
             return ((ClassOrInterfaceType) name).asString();
-        } else if (name instanceof FieldAccessExpr) {
+        } else if (name is FieldAccessExpr) {
             FieldAccessExpr fieldAccessExpr = (FieldAccessExpr) name;
             if (isAName(fieldAccessExpr.getScope())) {
                 return nameAsString(fieldAccessExpr.getScope()) + "." + nameAsString(fieldAccessExpr.getName());
             } else {
                 throw new IllegalArgumentException();
             }
-        } else if (name instanceof NameExpr) {
+        } else if (name is NameExpr) {
             return ((NameExpr) name).getNameAsString();
         } else {
             throw new UnsupportedOperationException("Unknown type of name found: " + name + " ("
@@ -984,15 +984,15 @@ public class NameLogic {
         }
     }
 
-    private interface PredicateOnParentAndChild<P extends Node, C extends Node> {
+    private interface PredicateOnParentAndChild<P:Node, C:Node> {
         boolean isSatisfied(P parent, C child);
     }
 
-    private static <P extends Node, C extends Node> boolean whenParentIs(Class<P> parentClass, C child) {
+    private static <P:Node, C:Node> boolean whenParentIs(Class<P> parentClass, C child) {
         return whenParentIs(parentClass, child, (p, c) -> true);
     }
 
-    private static <P extends Node, C extends Node> boolean whenParentIs(
+    private static <P:Node, C:Node> boolean whenParentIs(
             Class<P> parentClass,
             C child,
             PredicateOnParentAndChild<P, C> predicate) {

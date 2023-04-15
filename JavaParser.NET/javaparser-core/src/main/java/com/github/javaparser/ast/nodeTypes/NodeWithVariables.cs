@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,7 +25,7 @@ namespace com.github.javaparser.ast.nodeTypes;
 /**
  * A node which has a list of variables.
  */
-public interface NodeWithVariables<N extends Node> {
+public interface NodeWithVariables<N:Node> {
 
     NodeList<VariableDeclarator> getVariables();
 
@@ -35,13 +35,13 @@ public interface NodeWithVariables<N extends Node> {
         return getVariables().get(i);
     }
 
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     default N setVariable(int i, VariableDeclarator variableDeclarator) {
         getVariables().set(i, variableDeclarator);
         return (N) this;
     }
 
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     default N addVariable(VariableDeclarator variableDeclarator) {
         getVariables().add(variableDeclarator);
         return (N) this;
@@ -96,7 +96,7 @@ public interface NodeWithVariables<N extends Node> {
      * Erases any existing type.
      * This is a shortcut for setting a type on all variable declarators separately.
      */
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     default N setAllTypes(Type newType) {
         for (VariableDeclarator variable : getVariables()) {
             variable.setType(newType);
@@ -119,7 +119,7 @@ public interface NodeWithVariables<N extends Node> {
     }
 
     static Optional<Type> calculateMaximumCommonType(List<Type> types) {
-        // we use a local class because we cannot use an helper static method in an interface
+        // we use a local class because we cannot use an helper static method _in an interface
         class Helper {
 
             // Conceptually: given a type we start from the Element Type and get as many array levels as indicated
@@ -131,7 +131,7 @@ public interface NodeWithVariables<N extends Node> {
                     return Optional.empty();
                 }
                 for (int i = type.getArrayLevel(); i > level; i--) {
-                    if (!(type instanceof ArrayType)) {
+                    if (!(type is ArrayType)) {
                         return Optional.empty();
                     }
                     type = ((ArrayType) type).getComponentType();
@@ -145,7 +145,7 @@ public interface NodeWithVariables<N extends Node> {
         // In practice we want to check for how many levels of arrays all the variables have the same type,
         // including also the annotations
         while (keepGoing) {
-            final int currentLevel = level;
+            /*final*/int currentLevel = level;
             // Now, given that equality on nodes consider the position the simplest way is to compare
             // the pretty-printed string got for a node. We just check all them are the same and if they
             // are we just just is not null

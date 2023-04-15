@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,7 +28,7 @@ namespace com.github.javaparser.symbolsolver.resolution;
  */
 public class SymbolSolver implements Solver {
 
-    private final TypeSolver typeSolver;
+    private /*final*/TypeSolver typeSolver;
 
     public SymbolSolver(TypeSolver typeSolver) {
         if (typeSolver == null) {
@@ -39,38 +39,38 @@ public class SymbolSolver implements Solver {
     }
 
     @Override
-	public SymbolReference<? extends ResolvedValueDeclaration> solveSymbol(String name, Context context) {
+	public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name, Context context) {
         return context.solveSymbol(name);
     }
 
     @Override
-	public SymbolReference<? extends ResolvedValueDeclaration> solveSymbol(String name, Node node) {
+	public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name, Node node) {
         return solveSymbol(name, JavaParserFactory.getContext(node, typeSolver));
     }
 
     @Override
-	public Optional<Value> solveSymbolAsValue(String name, Context context) {
+	public Optional<Value> solveSymbolAsValue(string name, Context context) {
         return context.solveSymbolAsValue(name);
     }
 
     @Override
-	public Optional<Value> solveSymbolAsValue(String name, Node node) {
+	public Optional<Value> solveSymbolAsValue(string name, Node node) {
         Context context = JavaParserFactory.getContext(node, typeSolver);
         return solveSymbolAsValue(name, context);
     }
 
     @Override
-	public SymbolReference<? extends ResolvedTypeDeclaration> solveType(String name, Context context) {
+	public SymbolReference<?:ResolvedTypeDeclaration> solveType(string name, Context context) {
         return context.solveType(name);
     }
 
     @Override
-	public SymbolReference<? extends ResolvedTypeDeclaration> solveType(String name, Node node) {
+	public SymbolReference<?:ResolvedTypeDeclaration> solveType(string name, Node node) {
         return solveType(name, JavaParserFactory.getContext(node, typeSolver));
     }
 
     @Override
-	public MethodUsage solveMethod(String methodName, List<ResolvedType> argumentsTypes, Context context) {
+	public MethodUsage solveMethod(string methodName, List<ResolvedType> argumentsTypes, Context context) {
         SymbolReference<ResolvedMethodDeclaration> decl = context.solveMethod(methodName, argumentsTypes, false);
         if (!decl.isSolved()) {
             throw new UnsolvedSymbolException(context.toString(), methodName);
@@ -79,17 +79,17 @@ public class SymbolSolver implements Solver {
     }
 
     @Override
-	public MethodUsage solveMethod(String methodName, List<ResolvedType> argumentsTypes, Node node) {
+	public MethodUsage solveMethod(string methodName, List<ResolvedType> argumentsTypes, Node node) {
         return solveMethod(methodName, argumentsTypes, JavaParserFactory.getContext(node, typeSolver));
     }
 
     @Override
 	public ResolvedTypeDeclaration solveType(Type type) {
-        if (type instanceof ClassOrInterfaceType) {
+        if (type is ClassOrInterfaceType) {
 
             // FIXME should call typesolver here!
 
-            String name = ((ClassOrInterfaceType) type).getNameWithScope();
+            string name = ((ClassOrInterfaceType) type).getNameWithScope();
             SymbolReference<ResolvedTypeDeclaration> ref = JavaParserFactory.getContext(type, typeSolver).solveType(name);
             if (!ref.isSolved()) {
                 throw new UnsolvedSymbolException(JavaParserFactory.getContext(type, typeSolver).toString(), name);
@@ -101,7 +101,7 @@ public class SymbolSolver implements Solver {
     }
 
     @Override
-	public ResolvedType solveTypeUsage(String name, Context context) {
+	public ResolvedType solveTypeUsage(string name, Context context) {
         Optional<ResolvedType> genericType = context.solveGenericType(name);
         if (genericType.isPresent()) {
             return genericType.get();
@@ -117,26 +117,26 @@ public class SymbolSolver implements Solver {
      * It should contain its own private fields but not inherited private fields.
      */
     @Override
-	public SymbolReference<? extends ResolvedValueDeclaration> solveSymbolInType(ResolvedTypeDeclaration typeDeclaration, String name) {
-        if (typeDeclaration instanceof SymbolResolutionCapability) {
+	public SymbolReference<?:ResolvedValueDeclaration> solveSymbolInType(ResolvedTypeDeclaration typeDeclaration, string name) {
+        if (typeDeclaration is SymbolResolutionCapability) {
             return ((SymbolResolutionCapability) typeDeclaration).solveSymbol(name, typeSolver);
         }
         return SymbolReference.unsolved();
     }
 
     /**
-     * Try to solve a symbol just in the declaration, it does not delegate to the container.
+     * Try to solve a symbol just _in the declaration, it does not delegate to the container.
      *
      * @deprecated Similarly to solveType this should eventually disappear as the symbol resolution logic should be more general
-     * and do not be specific to JavaParser classes like in this case.
+     * and do not be specific to JavaParser classes like _in this case.
      */
     @Override
-	@Deprecated
-    public SymbolReference<ResolvedTypeDeclaration> solveTypeInType(ResolvedTypeDeclaration typeDeclaration, String name) {
-        if (typeDeclaration instanceof JavaParserClassDeclaration) {
+	//@Deprecated
+    public SymbolReference<ResolvedTypeDeclaration> solveTypeInType(ResolvedTypeDeclaration typeDeclaration, string name) {
+        if (typeDeclaration is JavaParserClassDeclaration) {
             return ((JavaParserClassDeclaration) typeDeclaration).solveType(name);
         }
-        if (typeDeclaration instanceof JavaParserInterfaceDeclaration) {
+        if (typeDeclaration is JavaParserInterfaceDeclaration) {
             return ((JavaParserInterfaceDeclaration) typeDeclaration).solveType(name);
         }
         return SymbolReference.unsolved();

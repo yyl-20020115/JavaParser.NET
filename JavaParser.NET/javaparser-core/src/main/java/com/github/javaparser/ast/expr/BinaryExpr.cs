@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,14 +24,14 @@ namespace com.github.javaparser.ast.expr;
 
 
 /**
- * An expression with an expression on the left, an expression on the right, and an operator in the middle.
+ * An expression with an expression on the left, an expression on the right, and an operator _in the middle.
  * It supports the operators that are found the BinaryExpr.Operator enum.
  * <br>{@code a && b}
  * <br>{@code 155 * 33}
  *
  * @author Julio Vilmar Gesser
  */
-public class BinaryExpr extends Expression {
+public class BinaryExpr:Expression {
 
     public enum Operator implements Stringable {
 
@@ -55,13 +55,13 @@ public class BinaryExpr extends Expression {
         DIVIDE("/"),
         REMAINDER("%");
 
-        private final String codeRepresentation;
+        private /*final*/string codeRepresentation;
 
-        Operator(String codeRepresentation) {
+        Operator(string codeRepresentation) {
             this.codeRepresentation = codeRepresentation;
         }
 
-        public String asString() {
+        public string asString() {
             return codeRepresentation;
         }
 
@@ -105,7 +105,7 @@ public class BinaryExpr extends Expression {
         this(null, new BooleanLiteralExpr(), new BooleanLiteralExpr(), Operator.EQUALS);
     }
 
-    @AllFieldsConstructor
+    //@AllFieldsConstructor
     public BinaryExpr(Expression left, Expression right, Operator operator) {
         this(null, left, right, operator);
     }
@@ -113,7 +113,7 @@ public class BinaryExpr extends Expression {
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public BinaryExpr(TokenRange tokenRange, Expression left, Expression right, Operator operator) {
         super(tokenRange);
         setLeft(left);
@@ -123,34 +123,34 @@ public class BinaryExpr extends Expression {
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Expression getLeft() {
         return left;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Operator getOperator() {
         return operator;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Expression getRight() {
         return right;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public BinaryExpr setLeft(final Expression left) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public BinaryExpr setLeft(/*final*/Expression left) {
         assertNotNull(left);
         if (left == this.left) {
             return this;
@@ -163,8 +163,8 @@ public class BinaryExpr extends Expression {
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public BinaryExpr setOperator(final Operator operator) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public BinaryExpr setOperator(/*final*/Operator operator) {
         assertNotNull(operator);
         if (operator == this.operator) {
             return this;
@@ -174,8 +174,8 @@ public class BinaryExpr extends Expression {
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public BinaryExpr setRight(final Expression right) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public BinaryExpr setRight(/*final*/Expression right) {
         assertNotNull(right);
         if (right == this.right) {
             return this;
@@ -189,19 +189,19 @@ public class BinaryExpr extends Expression {
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public BinaryExpr clone() {
         return (BinaryExpr) accept(new CloneVisitor(), null);
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public BinaryExprMetaModel getMetaModel() {
         return JavaParserMetaModel.binaryExprMetaModel;
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
@@ -218,25 +218,25 @@ public class BinaryExpr extends Expression {
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public bool isBinaryExpr() {
         return true;
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public BinaryExpr asBinaryExpr() {
         return this;
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifBinaryExpr(Consumer<BinaryExpr> action) {
         action.accept(this);
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<BinaryExpr> toBinaryExpr() {
         return Optional.of(this);
     }

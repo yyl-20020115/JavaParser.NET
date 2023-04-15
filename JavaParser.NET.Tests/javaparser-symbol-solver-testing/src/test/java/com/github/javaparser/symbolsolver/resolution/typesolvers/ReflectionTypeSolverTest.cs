@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,13 +24,13 @@ namespace com.github.javaparser.symbolsolver.resolution.typesolvers;
 
 
 
-class ReflectionTypeSolverTest extends ClassLoaderTypeSolverTest<ReflectionTypeSolver> {
+class ReflectionTypeSolverTest:ClassLoaderTypeSolverTest<ReflectionTypeSolver> {
 
     public ReflectionTypeSolverTest() {
         super(ReflectionTypeSolver::new);
     }
 
-    @Test
+    [TestMethod]
     void testHasType() {
         ReflectionTypeSolver ts = new ReflectionTypeSolver();
         assertEquals(true, ts.hasType(String.class.getCanonicalName()));
@@ -38,8 +38,8 @@ class ReflectionTypeSolverTest extends ClassLoaderTypeSolverTest<ReflectionTypeS
         assertEquals(false, ts.hasType("foo.zum.unexisting"));
     }
     
-    @Test()
-    void testInvalidArgumentNumber() throws IOException {
+    [TestMethod]()
+    void testInvalidArgumentNumber(){
         Path file = adaptPath("src/test/resources/issue2366/Test.java");
 
         CombinedTypeSolver combinedSolver = new CombinedTypeSolver(new ReflectionTypeSolver());	    

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,47 +23,47 @@ namespace com.github.javaparser.printer.lexicalpreservation;
 
 
 
-class PrettyPrinterIssue2340Test extends AbstractLexicalPreservingTest {
+class PrettyPrinterIssue2340Test:AbstractLexicalPreservingTest {
 
-    @Test
+    [TestMethod]
     void printingVariableDeclarationWithAddedModifier() {
-        String def2 = "List i";
+        string def2 = "List i";
         considerVariableDeclaration(def2);
         expression.asVariableDeclarationExpr().getModifiers().addFirst(Modifier.privateModifier());
         assertTrue(LexicalPreservingPrinter.getOrCreateNodeText(expression).getElements().stream()
                 .anyMatch(elem -> elem.expand().equals(Keyword.PRIVATE.asString())));
     }
 
-    @Test
+    [TestMethod]
     void printingGenericVariableDeclarationWithAddedModifier() {
-        String def2 = "List<String> i";
+        string def2 = "List<String> i";
         considerVariableDeclaration(def2);
         expression.asVariableDeclarationExpr().getModifiers().addFirst(Modifier.privateModifier());
         assertTrue(LexicalPreservingPrinter.getOrCreateNodeText(expression).getElements().stream()
                 .anyMatch(elem -> elem.expand().equals(Keyword.PRIVATE.asString())));
     }
     
-    @Test
+    [TestMethod]
     void printingGenericVariableDeclarationWithAddedModifierWithAnotherSyntaxe() {
-        String def2 = "List <String> i";
+        string def2 = "List <String> i";
         considerVariableDeclaration(def2);
         expression.asVariableDeclarationExpr().getModifiers().addFirst(Modifier.privateModifier());
         assertTrue(LexicalPreservingPrinter.getOrCreateNodeText(expression).getElements().stream()
                 .anyMatch(elem -> elem.expand().equals(Keyword.PRIVATE.asString())));
     }
     
-    @Test
+    [TestMethod]
     void printingGeneric2VariableDeclarationWithAddedModifier() {
-        String def2 = "List<List<String>> i";
+        string def2 = "List<List<String>> i";
         considerVariableDeclaration(def2);
         expression.asVariableDeclarationExpr().getModifiers().addFirst(Modifier.privateModifier());
         assertTrue(LexicalPreservingPrinter.getOrCreateNodeText(expression).getElements().stream()
                 .anyMatch(elem -> elem.expand().equals(Keyword.PRIVATE.asString())));
     }
     
-    @Test
+    [TestMethod]
     void printingGeneric2VariableDeclarationWithAddedModifierWithAnotherSyntaxe() {
-        String def2 = "List < List < String > > i";
+        string def2 = "List < List < string > > i";
         considerVariableDeclaration(def2);
         expression.asVariableDeclarationExpr().getModifiers().addFirst(Modifier.privateModifier());
         assertTrue(LexicalPreservingPrinter.getOrCreateNodeText(expression).getElements().stream()

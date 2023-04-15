@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,15 +28,15 @@ namespace com.github.javaparser.printer;
  */
 public class YamlPrinter {
 
-    private static final int NUM_SPACES_FOR_INDENT = 4;
+    private static /*final*/int NUM_SPACES_FOR_INDENT = 4;
 
-    private final boolean outputNodeType;
+    private /*final*/boolean outputNodeType;
 
     public YamlPrinter(boolean outputNodeType) {
         this.outputNodeType = outputNodeType;
     }
 
-    public String output(Node node) {
+    public string output(Node node) {
         StringBuilder output = new StringBuilder();
         output.append("---");
         output(node, "root", 0, output);
@@ -44,7 +44,7 @@ public class YamlPrinter {
         return output.toString();
     }
 
-    public void output(Node node, String name, int level, StringBuilder builder) {
+    public void output(Node node, string name, int level, StringBuilder builder) {
         assertNotNull(node);
         NodeMetaModel metaModel = node.getMetaModel();
         List<PropertyMetaModel> allPropertyMetaModels = metaModel.getAllPropertyMetaModels();
@@ -65,27 +65,27 @@ public class YamlPrinter {
                 output(nd, sn.getName(), level, builder);
         }
         for (PropertyMetaModel sl : subLists) {
-            NodeList<? extends Node> nl = (NodeList<? extends Node>) sl.getValue(node);
+            NodeList<?:Node> nl = (NodeList<?:Node>) sl.getValue(node);
             if (nl != null && nl.isNonEmpty()) {
                 builder.append(System.lineSeparator() + indent(level) + sl.getName() + ": ");
-                String slName = sl.getName();
+                string slName = sl.getName();
                 slName = slName.endsWith("s") ? slName.substring(0, sl.getName().length() - 1) : slName;
                 for (Node nd : nl) output(nd, "- " + slName, level + 1, builder);
             }
         }
     }
 
-    private String indent(int level) {
+    private string indent(int level) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < level; i++) for (int j = 0; j < NUM_SPACES_FOR_INDENT; j++) sb.append(" ");
         return sb.toString();
     }
 
-    private String escapeValue(String value) {
+    private string escapeValue(string value) {
         return "\"" + value.replace("\\", "\\\\").replaceAll("\"", "\\\\\"").replace("\n", "\\n").replace("\r", "\\r").replace("\f", "\\f").replace("\b", "\\b").replace("\t", "\\t") + "\"";
     }
 
     public static void print(Node node) {
-        System.out.println(new YamlPrinter(true).output(node));
+        System._out.println(new YamlPrinter(true).output(node));
     }
 }

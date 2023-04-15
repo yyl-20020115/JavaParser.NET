@@ -4,7 +4,7 @@ public enum ConcreteEnum {
     ENUM_VAL_ONE,
     ENUM_VAL_TWO;
 
-    public static final String STATIC_STRING = "ThisIsAString";
-    public static final String SECOND_STRING = "ThisIsASecondString";
+    public static /*final*/string STATIC_STRING = "ThisIsAString";
+    public static /*final*/string SECOND_STRING = "ThisIsASecondString";
 
 }

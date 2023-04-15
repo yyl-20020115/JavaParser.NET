@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,16 +26,16 @@ namespace com.github.javaparser.printer.lexicalpreservation.transformations.ast.
 /**
  * Transforming ConstructorDeclaration and verifying the LexicalPreservation works as expected.
  */
-class ConstructorDeclarationTransformationsTest extends AbstractLexicalPreservingTest {
+class ConstructorDeclarationTransformationsTest:AbstractLexicalPreservingTest {
 
-    protected ConstructorDeclaration consider(String code) {
+    protected ConstructorDeclaration consider(string code) {
         considerCode("class A { " + code + " }");
         return cu.getType(0).getMembers().get(0).asConstructorDeclaration();
     }
 
     // Name
 
-    @Test
+    [TestMethod]
     void settingName() {
         ConstructorDeclaration cd = consider("A(){}");
         cd.setName("B");
@@ -46,21 +46,21 @@ class ConstructorDeclarationTransformationsTest extends AbstractLexicalPreservin
 
     // Modifiers
 
-    @Test
+    [TestMethod]
     void addingModifiers() {
         ConstructorDeclaration cd = consider("A(){}");
         cd.setModifiers(createModifierList(PUBLIC));
         assertTransformedToString("public A(){}", cd);
     }
 
-    @Test
+    [TestMethod]
     void removingModifiers() {
         ConstructorDeclaration cd = consider("public A(){}");
         cd.setModifiers(new NodeList<>());
         assertTransformedToString("A(){}", cd);
     }
 
-    @Test
+    [TestMethod]
     void replacingModifiers() {
         ConstructorDeclaration cd = consider("public A(){}");
         cd.setModifiers(createModifierList(PROTECTED));
@@ -69,35 +69,35 @@ class ConstructorDeclarationTransformationsTest extends AbstractLexicalPreservin
 
     // Parameters
 
-    @Test
+    [TestMethod]
     void addingParameters() {
         ConstructorDeclaration cd = consider("A(){}");
         cd.addParameter(PrimitiveType.doubleType(), "d");
         assertTransformedToString("A(double d){}", cd);
     }
 
-    @Test
+    [TestMethod]
     void removingOnlyParameter() {
         ConstructorDeclaration cd = consider("public A(double d){}");
         cd.getParameters().remove(0);
         assertTransformedToString("public A(){}", cd);
     }
 
-    @Test
+    [TestMethod]
     void removingFirstParameterOfMany() {
         ConstructorDeclaration cd = consider("public A(double d, float f){}");
         cd.getParameters().remove(0);
         assertTransformedToString("public A(float f){}", cd);
     }
 
-    @Test
+    [TestMethod]
     void removingLastParameterOfMany() {
         ConstructorDeclaration cd = consider("public A(double d, float f){}");
         cd.getParameters().remove(1);
         assertTransformedToString("public A(double d){}", cd);
     }
 
-    @Test
+    [TestMethod]
     void replacingOnlyParameter() {
         ConstructorDeclaration cd = consider("public A(float f){}");
         cd.getParameters().set(0, new Parameter(new ArrayType(PrimitiveType.intType()), new SimpleName("foo")));

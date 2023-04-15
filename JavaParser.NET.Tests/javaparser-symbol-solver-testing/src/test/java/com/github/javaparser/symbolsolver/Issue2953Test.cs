@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,8 +24,8 @@ namespace com.github.javaparser.symbolsolver;
 
 
 public class Issue2953Test {
-    @Test
-    public void testResolveMethodOfEnumInheritedFromInterface() throws IOException {
+    [TestMethod]
+    public void testResolveMethodOfEnumInheritedFromInterface(){
         CombinedTypeSolver typeResolver = new CombinedTypeSolver(new ReflectionTypeSolver(false));
         typeResolver.add(new JarTypeSolver("src/test/resources/issue2953/a.jar"));
 
@@ -36,15 +36,15 @@ public class Issue2953Test {
     }
 
 
-    @Test
-    public void testIssue2953() throws IOException {
+    [TestMethod]
+    public void testIssue2953(){
         ParserConfiguration config = new ParserConfiguration();
         CombinedTypeSolver typeResolver = new CombinedTypeSolver(new ReflectionTypeSolver(false));
         typeResolver.add(new JarTypeSolver("src/test/resources/issue2953/a.jar"));
         config.setSymbolResolver(new JavaSymbolSolver(typeResolver));
         StaticJavaParser.setConfiguration(config);
 
-        String code = "package foo;\n"
+        string code = "package foo;\n"
                 + "import foo.A;\n"
                 + "public class Test {\n"
                 + "    public void foo() {\n"
@@ -60,7 +60,7 @@ public class Issue2953Test {
                         for (Statement stmt : body.getStatements()) {
                             for (MethodCallExpr methodCallExpr : stmt.findAll(MethodCallExpr.class)) {
                                 ResolvedMethodDeclaration resolvedMethodCall = methodCallExpr.resolve();
-                                String methodSig = resolvedMethodCall.getQualifiedSignature();
+                                string methodSig = resolvedMethodCall.getQualifiedSignature();
                                 assertEquals("foo.IB.equalByCode(java.lang.Integer)", methodSig);
                             }
                         }

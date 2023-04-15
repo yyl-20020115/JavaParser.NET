@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,15 +27,15 @@ namespace com.github.javaparser.steps;
 public class PrettyPrintingSteps {
 
     private Node resultNode;
-    private String sourceUnderTest;
+    private string sourceUnderTest;
 
     @Given("the {class|compilation unit|expression|block|statement|import|annotation|body|class body|interface body}:$classSrc")
-    public void givenTheClass(String classSrc) {
+    public void givenTheClass(string classSrc) {
         this.sourceUnderTest = classSrc.trim();
     }
 
-    @Given("the {class|compilation unit|expression|block|statement|import|annotation|body|class body|interface body} in the file \"$classFile\"")
-    public void givenTheClassInTheFile(String classFile) throws URISyntaxException, IOException {
+    @Given("the {class|compilation unit|expression|block|statement|import|annotation|body|class body|interface body} _in the file \"$classFile\"")
+    public void givenTheClassInTheFile(string classFile) throws URISyntaxException, IOException {
         URL url = getClass().getResource("../samples/" + classFile);
         sourceUnderTest = readerToString(new FileReader(new File(url.toURI()))).trim();
     }
@@ -92,7 +92,7 @@ public class PrettyPrintingSteps {
     }
 
     @Then("it is printed as:$src")
-    public void isPrintedAs(String src) {
+    public void isPrintedAs(string src) {
         assertEquals(src.trim(), resultNode.toString().trim());
     }
 }

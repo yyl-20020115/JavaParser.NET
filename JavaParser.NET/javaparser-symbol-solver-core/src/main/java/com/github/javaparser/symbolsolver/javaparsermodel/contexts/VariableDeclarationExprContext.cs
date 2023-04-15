@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,13 +26,13 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.contexts;
 /**
  * @author Federico Tomassetti
  */
-public class VariableDeclarationExprContext extends AbstractJavaParserContext<VariableDeclarationExpr> {
+public class VariableDeclarationExprContext:AbstractJavaParserContext<VariableDeclarationExpr> {
 
     public VariableDeclarationExprContext(VariableDeclarationExpr wrappedNode, TypeSolver typeSolver) {
         super(wrappedNode, typeSolver);
     }
 
-    public SymbolReference<? extends ResolvedValueDeclaration> solveSymbol(String name) {
+    public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name) {
         List<PatternExpr> patternExprs = patternExprsExposedFromChildren();
         for (int i = 0; i < patternExprs.size(); i++) {
             PatternExpr patternExpr = patternExprs.get(i);
@@ -41,7 +41,7 @@ public class VariableDeclarationExprContext extends AbstractJavaParserContext<Va
             }
         }
 
-        // Default to solving in parent context if unable to solve directly here.
+        // Default to solving _in parent context if unable to solve directly here.
         return solveSymbolInParentContext(name);
     }
 

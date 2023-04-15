@@ -78,7 +78,7 @@ namespace com.github.javaparser;
 
 
 @Generated("JavaCC")
-final class GeneratedJavaParser extends GeneratedJavaParserBase {
+/*final*/class GeneratedJavaParser extends GeneratedJavaParserBase {
     /* Returns the JavaParser specific token type of the last matched token */
     JavaToken token() {
         return token.javaToken;
@@ -1117,7 +1117,7 @@ public CompilationUnit CompilationUnit():
         { return new CompilationUnit(range(token_source.getHomeToken(), token()), packageDeclaration, imports, types, module); }
     } catch (ParseException e) {
         recover(EOF, e);
-        final CompilationUnit compilationUnit = new CompilationUnit(range(token_source.getHomeToken(), token()), null, new NodeList<ImportDeclaration>(), new NodeList<TypeDeclaration<?>>(), null);
+        /*final*/CompilationUnit compilationUnit = new CompilationUnit(range(token_source.getHomeToken(), token()), null, new NodeList<ImportDeclaration>(), new NodeList<TypeDeclaration<?>>(), null);
         compilationUnit.setParsed(UNPARSABLE);
         return compilationUnit;
     }
@@ -1192,21 +1192,21 @@ ImportDeclaration ImportDeclaration():
  *     ClassModifier:
  *         (one of)
  *         Annotation public protected private
- *         abstract static final strictfp
+ *         abstract static /*final*/strictfp
  * }</pre>
  * Field Modifiers: https://docs.oracle.com/javase/specs/jls/se15/html/jls-8.html#jls-8.3.1
  * <pre>{@code
  *     FieldModifier:
  *         (one of)
  *         Annotation public protected private
- *         static final transient volatile
+ *         static /*final*/transient volatile
  * }</pre>
  * Method Modifiers: https://docs.oracle.com/javase/specs/jls/se15/html/jls-8.html#jls-8.4.3
  * <pre>{@code
  *     MethodModifier:
  *         (one of)
  *         Annotation public protected private
- *         abstract static final synchronized native strictfp
+ *         abstract static /*final*/synchronized native strictfp
  * }</pre>
  * Constructor Modifiers: https://docs.oracle.com/javase/specs/jls/se15/html/jls-8.html#jls-8.8.3
  * <pre>{@code
@@ -2907,7 +2907,7 @@ SimpleName SimpleName():
  *         byte       else       import       public      throws
  *         case       enum       instanceof   return      transient
  *         catch      extends    int          short       try
- *         char       final      interface    static      void
+ *         char       /*final*/     interface    static      void
  *         class      finally    long         strictfp    volatile
  *         const      float      native       super       while
  *         _ (underscore)

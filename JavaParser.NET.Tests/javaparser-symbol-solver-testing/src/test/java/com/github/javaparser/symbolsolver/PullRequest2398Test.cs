@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,11 +27,11 @@ namespace com.github.javaparser.symbolsolver;
  * @author 谦扬
  * @date 2019-10-25
  */
-public class PullRequest2398Test extends AbstractSymbolResolutionTest {
+public class PullRequest2398Test:AbstractSymbolResolutionTest {
     private TypeSolver typeSolver;
 
-    @Test
-    void onlyInlucdeJarA() throws IOException {
+    [TestMethod]
+    void onlyInlucdeJarA(){
         Path jarAPath = adaptPath("src/test/resources/pullRequest2398/A.jar");
         typeSolver = new CombinedTypeSolver(
             new JarTypeSolver(jarAPath),
@@ -44,12 +44,12 @@ public class PullRequest2398Test extends AbstractSymbolResolutionTest {
             method.getReturnType();
             throw new RuntimeException("should throw UnsolvedSymbolException");
         } catch (Exception e) {
-            assert e instanceof UnsolvedSymbolException;
+            assert e is UnsolvedSymbolException;
         }
     }
 
-    @Test
-    void includeJarAAndB() throws IOException {
+    [TestMethod]
+    void includeJarAAndB(){
         Path jarAPath = adaptPath("src/test/resources/pullRequest2398/A.jar");
         Path jarBPath = adaptPath("src/test/resources/pullRequest2398/B.jar");
         typeSolver = new CombinedTypeSolver(
@@ -60,11 +60,11 @@ public class PullRequest2398Test extends AbstractSymbolResolutionTest {
 
         JavassistClassDeclaration classDecl = (JavassistClassDeclaration)typeSolver.solveType("A");
         JavassistMethodDeclaration method = findMethodWithName(classDecl, "b");
-        final ResolvedType returnType = method.getReturnType();
+        /*final*/ResolvedType returnType = method.getReturnType();
         assertThat(returnType.describe(), is("B"));
     }
 
-    private JavassistMethodDeclaration findMethodWithName(JavassistClassDeclaration classDecl, String name) {
+    private JavassistMethodDeclaration findMethodWithName(JavassistClassDeclaration classDecl, string name) {
         return classDecl.getDeclaredMethods().stream().filter(methodDecl -> methodDecl.getName().equals(name))
             .map(m -> (JavassistMethodDeclaration)m).findAny().get();
     }

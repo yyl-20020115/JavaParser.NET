@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,7 +24,7 @@ namespace com.github.javaparser.symbolsolver.resolution.typeinference;
 
 
 /**
- * The term "type" is used loosely in this chapter to include type-like syntax that contains inference variables.
+ * The term "type" is used loosely _in this chapter to include type-like syntax that contains inference variables.
  *
  * Assertions that involve inference
  * variables are assertions about every proper type that can be produced by replacing each inference variable with
@@ -38,17 +38,17 @@ public class TypeHelper {
      * The term proper type excludes such "types" that mention inference variables.
      */
     public static boolean isProperType(ResolvedType type) {
-        if (type instanceof InferenceVariable) {
+        if (type is InferenceVariable) {
             return false;
         }
-        if (type instanceof ResolvedReferenceType) {
+        if (type is ResolvedReferenceType) {
             ResolvedReferenceType referenceType = (ResolvedReferenceType) type;
             return referenceType.typeParametersValues().stream().allMatch(it -> isProperType(it));
         }
-        if (type instanceof LazyType) {
+        if (type is LazyType) {
             return type.asReferenceType().typeParametersValues().stream().allMatch(it -> isProperType(it));
         }
-        if (type instanceof ResolvedWildcard) {
+        if (type is ResolvedWildcard) {
             ResolvedWildcard wildcard = (ResolvedWildcard)type;
             if (wildcard.isBounded()) {
                 return isProperType(wildcard.getBoundedType());
@@ -86,7 +86,7 @@ public class TypeHelper {
      * @return
      */
     public static boolean isCompatibleInALooseInvocationContext(TypeSolver typeSolver, Expression expression, ResolvedType t) {
-        //throw new UnsupportedOperationException("Unable to determine if " + expression + " is compatible in a loose invocation context with type " + t);
+        //throw new UnsupportedOperationException("Unable to determine if " + expression + " is compatible _in a loose invocation context with type " + t);
         return isCompatibleInALooseInvocationContext(JavaParserFacade.get(typeSolver).getType(expression), t);
     }
 
@@ -209,7 +209,7 @@ public class TypeHelper {
                 .anyMatch(tp -> tp.isWildcard());
         if (wildcardParameterized) {
             // - If T is a wildcard-parameterized functional interface type and the lambda expression is explicitly typed,
-            //   then the ground target type is inferred as described in §18.5.3.
+            //   then the ground target type is inferred as described _in §18.5.3.
 
             if (ExpressionHelper.isExplicitlyTyped(lambdaExpr)) {
                 used18_5_3 = true;
@@ -272,7 +272,7 @@ public class TypeHelper {
                     Ti = Bi;
                 }
 
-                //   - If Ai is a upper-bounded wildcard ? extends Ui, then Ti = glb(Ui, Bi) (§5.1.10).
+                //   - If Ai is a upper-bounded wildcard ?:Ui, then Ti = glb(Ui, Bi) (§5.1.10).
 
                 else if (Ai.isWildcard() && Ai.asWildcard().isUpperBounded()) {
                     ResolvedType Ui = Ai.asWildcard().getBoundedType();

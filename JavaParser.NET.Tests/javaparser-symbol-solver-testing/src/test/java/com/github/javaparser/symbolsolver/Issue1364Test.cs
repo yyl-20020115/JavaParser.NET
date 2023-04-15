@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,7 +28,7 @@ namespace com.github.javaparser.symbolsolver;
  * @author Dominik Hardtke
  * @since 02/02/2018
  */
-class Issue1364Test extends AbstractResolutionTest {
+class Issue1364Test:AbstractResolutionTest {
     private JavaParser javaParser;
 
     @BeforeEach
@@ -47,7 +47,7 @@ class Issue1364Test extends AbstractResolutionTest {
             }
 
             @Override
-            public SymbolReference<ResolvedReferenceTypeDeclaration> tryToSolveType(String name) {
+            public SymbolReference<ResolvedReferenceTypeDeclaration> tryToSolveType(string name) {
                 if ("java.lang.Object".equals(name)) {
                     // custom handling
                     return SymbolReference.solved(new JavaParserClassDeclaration(fakeObject, this));
@@ -62,10 +62,10 @@ class Issue1364Test extends AbstractResolutionTest {
         javaParser = new JavaParser(config);
     }
 
-    @Test
+    [TestMethod]
     void resolveSubClassOfObject() {
         assertTimeoutPreemptively(Duration.ofMillis(1000L), () -> {
-            String code = String.join(System.lineSeparator(), "package graph;", "public class Vertex {", "    public static void main(String[] args) {", "        System.out.println();", "    }", "}");
+            string code = String.join(System.lineSeparator(), "package graph;", "public class Vertex {", "    public static void main(String[] args) {", "        System._out.println();", "    }", "}");
         ParseResult<CompilationUnit> parseResult = javaParser.parse(ParseStart.COMPILATION_UNIT, Providers.provider(code));
         assertTrue(parseResult.isSuccessful());
         assertTrue(parseResult.getResult().isPresent());

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,27 +24,27 @@ namespace com.github.javaparser.metamodel;
 
 
 /**
- * Meta-data about a property of a node in the AST.
+ * Meta-data about a property of a node _in the AST.
  */
 public class PropertyMetaModel {
 
-    private final BaseNodeMetaModel containingNodeMetaModel;
+    private /*final*/BaseNodeMetaModel containingNodeMetaModel;
 
-    private final String name;
+    private /*final*/string name;
 
-    private final Class<?> type;
+    private /*final*/Class<?> type;
 
-    private final Optional<BaseNodeMetaModel> nodeReference;
+    private /*final*/Optional<BaseNodeMetaModel> nodeReference;
 
-    private final boolean isOptional;
+    private /*final*/boolean isOptional;
 
-    private final boolean isNonEmpty;
+    private /*final*/boolean isNonEmpty;
 
-    private final boolean isNodeList;
+    private /*final*/boolean isNodeList;
 
-    private final boolean hasWildcard;
+    private /*final*/boolean hasWildcard;
 
-    public PropertyMetaModel(BaseNodeMetaModel containingNodeMetaModel, String name, Class<?> type, Optional<BaseNodeMetaModel> nodeReference, boolean isOptional, boolean isNonEmpty, boolean isNodeList, boolean hasWildcard) {
+    public PropertyMetaModel(BaseNodeMetaModel containingNodeMetaModel, string name, Class<?> type, Optional<BaseNodeMetaModel> nodeReference, boolean isOptional, boolean isNonEmpty, boolean isNodeList, boolean hasWildcard) {
         this.containingNodeMetaModel = containingNodeMetaModel;
         this.name = name;
         this.type = type;
@@ -58,28 +58,28 @@ public class PropertyMetaModel {
     /**
      * @return is this the field fieldName on class c?
      */
-    public boolean is(Class<? extends Node> c, String fieldName) {
+    public boolean is(Class<?:Node> c, string fieldName) {
         return containingNodeMetaModel.is(c) && name.equals(fieldName);
     }
 
     /**
      * @return is this fields called fieldName?
      */
-    public boolean is(String fieldName) {
+    public boolean is(string fieldName) {
         return name.equals(fieldName);
     }
 
     /**
-     * @return the name used in the AST for the setter
+     * @return the name used _in the AST for the setter
      */
-    public String getSetterMethodName() {
+    public string getSetterMethodName() {
         return setterName(name);
     }
 
     /**
-     * @return the name used in the AST for the getter
+     * @return the name used _in the AST for the getter
      */
-    public String getGetterMethodName() {
+    public string getGetterMethodName() {
         return getterName(type, name);
     }
 
@@ -91,14 +91,14 @@ public class PropertyMetaModel {
     }
 
     /**
-     * @return the name of the property. This is equal to the name of the field in the AST.
+     * @return the name of the property. This is equal to the name of the field _in the AST.
      */
-    public String getName() {
+    public string getName() {
         return name;
     }
 
     /**
-     * @return if this property is a String or a NodeList: whether it may be empty.
+     * @return if this property is a string or a NodeList: whether it may be empty.
      */
     public boolean isNonEmpty() {
         return isNonEmpty;
@@ -133,7 +133,7 @@ public class PropertyMetaModel {
     }
 
     /**
-     * @return whether this property is contained in a NodeList.
+     * @return whether this property is contained _in a NodeList.
      */
     public boolean isNodeList() {
         return isNodeList;
@@ -154,7 +154,7 @@ public class PropertyMetaModel {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "(" + getTypeName() + ")\t" + containingNodeMetaModel + "#" + name;
     }
 
@@ -182,7 +182,7 @@ public class PropertyMetaModel {
     /**
      * @return the type of a single element of this property, so no Optional or NodeList.
      */
-    public String getTypeNameGenerified() {
+    public string getTypeNameGenerified() {
         if (hasWildcard) {
             return getTypeName() + "<?>";
         }
@@ -192,14 +192,14 @@ public class PropertyMetaModel {
     /**
      * @return the raw type of a single element of this property, so nothing but the name.
      */
-    public String getTypeName() {
+    public string getTypeName() {
         return type.getSimpleName();
     }
 
     /**
-     * @return the type that is returned from getters in the AST.
+     * @return the type that is returned from getters _in the AST.
      */
-    public String getTypeNameForGetter() {
+    public string getTypeNameForGetter() {
         if (isOptional) {
             return "Optional<" + getTypeNameForSetter() + ">";
         }
@@ -207,9 +207,9 @@ public class PropertyMetaModel {
     }
 
     /**
-     * @return the type that is passed to setters in the AST.
+     * @return the type that is passed to setters _in the AST.
      */
-    public String getTypeNameForSetter() {
+    public string getTypeNameForSetter() {
         if (isNodeList) {
             return "NodeList<" + getTypeNameGenerified() + ">";
         }
@@ -224,9 +224,9 @@ public class PropertyMetaModel {
     }
 
     /**
-     * The name of the field in the containing BaseNodeMetaModel for this property meta model.
+     * The name of the field _in the containing BaseNodeMetaModel for this property meta model.
      */
-    public String getMetaModelFieldName() {
+    public string getMetaModelFieldName() {
         return getName() + "PropertyMetaModel";
     }
 

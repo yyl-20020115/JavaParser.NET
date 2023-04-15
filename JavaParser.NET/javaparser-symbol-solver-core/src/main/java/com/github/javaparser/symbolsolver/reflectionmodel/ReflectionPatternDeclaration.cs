@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -31,21 +31,21 @@ public class ReflectionPatternDeclaration implements ResolvedPatternDeclaration 
 
     private Class<?> type;
     private TypeSolver typeSolver;
-    private String name;
+    private string name;
 
     /**
      * @param type
      * @param typeSolver
      * @param name       can potentially be null
      */
-    public ReflectionPatternDeclaration(Class<?> type, TypeSolver typeSolver, String name) {
+    public ReflectionPatternDeclaration(Class<?> type, TypeSolver typeSolver, string name) {
         this.type = type;
         this.typeSolver = typeSolver;
         this.name = name;
     }
 
     @Override
-    public String getName() {
+    public string getName() {
         return name;
     }
 

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -29,11 +29,11 @@ namespace com.github.javaparser.symbolsolver.resolution;
  */
 class DefaultPackageTest {
 
-    private class MyClassDeclaration extends AbstractClassDeclaration {
+    private class MyClassDeclaration:AbstractClassDeclaration {
 
-        private String qualifiedName;
+        private string qualifiedName;
 
-        private MyClassDeclaration(String qualifiedName) {
+        private MyClassDeclaration(string qualifiedName) {
             this.qualifiedName = qualifiedName;
         }
 
@@ -53,7 +53,7 @@ class DefaultPackageTest {
         }
 
         @Override
-        public String getName() {
+        public string getName() {
             throw new UnsupportedOperationException();
         }
 
@@ -83,7 +83,7 @@ class DefaultPackageTest {
         }
 
         @Override
-        public boolean hasDirectlyAnnotation(String qualifiedName) {
+        public boolean hasDirectlyAnnotation(string qualifiedName) {
             throw new UnsupportedOperationException();
         }
 
@@ -108,17 +108,17 @@ class DefaultPackageTest {
         }
 
         @Override
-        public String getPackageName() {
+        public string getPackageName() {
             throw new UnsupportedOperationException();
         }
 
         @Override
-        public String getClassName() {
+        public string getClassName() {
             throw new UnsupportedOperationException();
         }
 
         @Override
-        public String getQualifiedName() {
+        public string getQualifiedName() {
             return qualifiedName;
         }
 
@@ -128,14 +128,14 @@ class DefaultPackageTest {
         }
 
         @Override
-        public SymbolReference<ResolvedMethodDeclaration> solveMethod(String name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
+        public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
             throw new UnsupportedOperationException();
         }
     }
 
-    @Test
+    [TestMethod]
     void aClassInDefaultPackageCanBeAccessedFromTheDefaultPackage() {
-        String code = "class A extends B {}";
+        string code = "class A:B {}";
         MemoryTypeSolver memoryTypeSolver = new MemoryTypeSolver();
         memoryTypeSolver.addDeclaration("B", new MyClassDeclaration("B"));
 
@@ -144,10 +144,10 @@ class DefaultPackageTest {
         assertEquals("B", resolvedType.asReferenceType().getQualifiedName());
     }
 
-    @Test
+    [TestMethod]
     void aClassInDefaultPackageCanBeAccessedFromOutsideTheDefaultPackageImportingIt() {
         assertThrows(UnsolvedSymbolException.class, () -> {
-            String code = "package myPackage; import B; class A extends B {}";
+            string code = "package myPackage; import B; class A:B {}";
         MemoryTypeSolver memoryTypeSolver = new MemoryTypeSolver();
         memoryTypeSolver.addDeclaration("B", new MyClassDeclaration("B"));
         ClassOrInterfaceType jpType = parse(code).getClassByName("A").get().getExtendedTypes(0);
@@ -157,10 +157,10 @@ class DefaultPackageTest {
                 
                 }
 
-    @Test
+    [TestMethod]
     void aClassInDefaultPackageCanBeAccessedFromOutsideTheDefaultPackageWithoutImportingIt() {
         assertThrows(UnsolvedSymbolException.class, () -> {
-            String code = "package myPackage; class A extends B {}";
+            string code = "package myPackage; class A:B {}";
         MemoryTypeSolver memoryTypeSolver = new MemoryTypeSolver();
         memoryTypeSolver.addDeclaration("B", new MyClassDeclaration("B"));
         ResolvedType resolvedType = JavaParserFacade.get(memoryTypeSolver).convertToUsage(parse(code).getClassByName("A").get().getExtendedTypes(0));

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,33 +25,33 @@ namespace com.github.javaparser.ast.expr;
 /**
  * @author Julio Vilmar Gesser
  */
-public class LongLiteralExpr extends StringLiteralExpr {
+public class LongLiteralExpr:StringLiteralExpr {
 
-	private static final String UNSIGNED_MIN_VALUE = "9223372036854775808";
+	private static /*final*/string UNSIGNED_MIN_VALUE = "9223372036854775808";
 
-	protected static final String MIN_VALUE = "-" + UNSIGNED_MIN_VALUE + "L";
+	protected static /*final*/string MIN_VALUE = "-" + UNSIGNED_MIN_VALUE + "L";
 
 	public LongLiteralExpr() {
 	}
 
-	public LongLiteralExpr(final String value) {
+	public LongLiteralExpr(/*final*/string value) {
 		super(value);
 	}
 
-	public LongLiteralExpr(final int beginLine, final int beginColumn, final int endLine, final int endColumn,
-			final String value) {
+	public LongLiteralExpr(/*final*/int beginLine, /*final*/int beginColumn, /*final*/int endLine, /*final*/int endColumn,
+			/*final*/string value) {
 		super(beginLine, beginColumn, endLine, endColumn, value);
 	}
 
-	@Override public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+	@Override public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
 		return v.visit(this, arg);
 	}
 
-	@Override public <A> void accept(final VoidVisitor<A> v, final A arg) {
+	@Override public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
 		v.visit(this, arg);
 	}
 
-	public final boolean isMinValue() {
+	public /*final*/boolean isMinValue() {
 		return value != null && //
 				value.length() == 20 && //
 				value.startsWith(UNSIGNED_MIN_VALUE) && //

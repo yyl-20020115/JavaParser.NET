@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,15 +25,15 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.contexts;
 
 /**
  * Limited version of ClassOrInterfaceDeclarationContext that only resolves type parameters for use by
- * extends and implements part of declaration.
+ *:and implements part of declaration.
  */
-public class ClassOrInterfaceDeclarationExtendsContext extends AbstractJavaParserContext<ClassOrInterfaceDeclaration> {
+public class ClassOrInterfaceDeclarationExtendsContext:AbstractJavaParserContext<ClassOrInterfaceDeclaration> {
     public ClassOrInterfaceDeclarationExtendsContext(ClassOrInterfaceDeclaration wrappedNode, TypeSolver typeSolver) {
         super(wrappedNode, typeSolver);
     }
 
     ////@Override
-    public SymbolReference<ResolvedTypeDeclaration> solveType(String name, List<ResolvedType> typeArguments) {
+    public SymbolReference<ResolvedTypeDeclaration> solveType(string name, List<ResolvedType> typeArguments) {
         for (TypeParameter typeParameter : wrappedNode.getTypeParameters()) {
             if (typeParameter.getName().getId().equals(name)) {
                 return SymbolReference.solved(new JavaParserTypeParameter(typeParameter, typeSolver));

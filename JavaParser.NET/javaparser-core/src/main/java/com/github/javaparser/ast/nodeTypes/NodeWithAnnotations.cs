@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -29,7 +29,7 @@ namespace com.github.javaparser.ast.nodeTypes;
  * @author Federico Tomassetti
  * @since July 2014
  */
-public interface NodeWithAnnotations<N extends Node> {
+public interface NodeWithAnnotations<N:Node> {
 
     NodeList<AnnotationExpr> getAnnotations();
 
@@ -41,13 +41,13 @@ public interface NodeWithAnnotations<N extends Node> {
         return getAnnotations().get(i);
     }
 
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     default N setAnnotation(int i, AnnotationExpr element) {
         getAnnotations().set(i, element);
         return (N) this;
     }
 
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     default N addAnnotation(AnnotationExpr element) {
         getAnnotations().add(element);
         return (N) this;
@@ -59,8 +59,8 @@ public interface NodeWithAnnotations<N extends Node> {
      * @param name the name of the annotation
      * @return this
      */
-    @SuppressWarnings("unchecked")
-    default N addAnnotation(String name) {
+    //@SuppressWarnings("unchecked")
+    default N addAnnotation(string name) {
         NormalAnnotationExpr annotation = new NormalAnnotationExpr(parseName(name), new NodeList<>());
         addAnnotation(annotation);
         return (N) this;
@@ -72,8 +72,8 @@ public interface NodeWithAnnotations<N extends Node> {
      * @param name the name of the annotation
      * @return the {@link NormalAnnotationExpr} added
      */
-    @SuppressWarnings("unchecked")
-    default NormalAnnotationExpr addAndGetAnnotation(String name) {
+    //@SuppressWarnings("unchecked")
+    default NormalAnnotationExpr addAndGetAnnotation(string name) {
         NormalAnnotationExpr annotation = new NormalAnnotationExpr(parseName(name), new NodeList<>());
         addAnnotation(annotation);
         return annotation;
@@ -85,7 +85,7 @@ public interface NodeWithAnnotations<N extends Node> {
      * @param clazz the class of the annotation
      * @return this
      */
-    default N addAnnotation(Class<? extends Annotation> clazz) {
+    default N addAnnotation(Class<?:Annotation> clazz) {
         tryAddImportToParentCompilationUnit(clazz);
         return addAnnotation(clazz.getSimpleName());
     }
@@ -96,7 +96,7 @@ public interface NodeWithAnnotations<N extends Node> {
      * @param clazz the class of the annotation
      * @return the {@link NormalAnnotationExpr} added
      */
-    default NormalAnnotationExpr addAndGetAnnotation(Class<? extends Annotation> clazz) {
+    default NormalAnnotationExpr addAndGetAnnotation(Class<?:Annotation> clazz) {
         tryAddImportToParentCompilationUnit(clazz);
         return addAndGetAnnotation(clazz.getSimpleName());
     }
@@ -107,8 +107,8 @@ public interface NodeWithAnnotations<N extends Node> {
      * @param name the name of the annotation
      * @return this
      */
-    @SuppressWarnings("unchecked")
-    default N addMarkerAnnotation(String name) {
+    //@SuppressWarnings("unchecked")
+    default N addMarkerAnnotation(string name) {
         MarkerAnnotationExpr markerAnnotationExpr = new MarkerAnnotationExpr(parseName(name));
         addAnnotation(markerAnnotationExpr);
         return (N) this;
@@ -120,7 +120,7 @@ public interface NodeWithAnnotations<N extends Node> {
      * @param clazz the class of the annotation
      * @return this
      */
-    default N addMarkerAnnotation(Class<? extends Annotation> clazz) {
+    default N addMarkerAnnotation(Class<?:Annotation> clazz) {
         tryAddImportToParentCompilationUnit(clazz);
         return addMarkerAnnotation(clazz.getSimpleName());
     }
@@ -132,8 +132,8 @@ public interface NodeWithAnnotations<N extends Node> {
      * @param expression the part between ()
      * @return this
      */
-    @SuppressWarnings("unchecked")
-    default N addSingleMemberAnnotation(String name, Expression expression) {
+    //@SuppressWarnings("unchecked")
+    default N addSingleMemberAnnotation(string name, Expression expression) {
         SingleMemberAnnotationExpr singleMemberAnnotationExpr = new SingleMemberAnnotationExpr(parseName(name), expression);
         return addAnnotation(singleMemberAnnotationExpr);
     }
@@ -145,7 +145,7 @@ public interface NodeWithAnnotations<N extends Node> {
      * @param expression the part between ()
      * @return this
      */
-    default N addSingleMemberAnnotation(Class<? extends Annotation> clazz, Expression expression) {
+    default N addSingleMemberAnnotation(Class<?:Annotation> clazz, Expression expression) {
         tryAddImportToParentCompilationUnit(clazz);
         return addSingleMemberAnnotation(clazz.getSimpleName(), expression);
     }
@@ -157,7 +157,7 @@ public interface NodeWithAnnotations<N extends Node> {
      * @param value the value, don't forget to add \"\" for a string value
      * @return this
      */
-    default N addSingleMemberAnnotation(String name, String value) {
+    default N addSingleMemberAnnotation(string name, string value) {
         return addSingleMemberAnnotation(name, parseExpression(value));
     }
 
@@ -168,7 +168,7 @@ public interface NodeWithAnnotations<N extends Node> {
      * @param value the value, don't forget to add \"\" for a string value
      * @return this
      */
-    default N addSingleMemberAnnotation(Class<? extends Annotation> clazz, String value) {
+    default N addSingleMemberAnnotation(Class<?:Annotation> clazz, string value) {
         tryAddImportToParentCompilationUnit(clazz);
         return addSingleMemberAnnotation(clazz.getSimpleName(), value);
     }
@@ -179,7 +179,7 @@ public interface NodeWithAnnotations<N extends Node> {
      * @param annotationName the name of the annotation
      * @return true if found, false if not
      */
-    default boolean isAnnotationPresent(String annotationName) {
+    default boolean isAnnotationPresent(string annotationName) {
         return getAnnotations().stream().anyMatch(a -> a.getName().getIdentifier().equals(annotationName));
     }
 
@@ -189,7 +189,7 @@ public interface NodeWithAnnotations<N extends Node> {
      * @param annotationClass the class of the annotation
      * @return true if found, false if not
      */
-    default boolean isAnnotationPresent(Class<? extends Annotation> annotationClass) {
+    default boolean isAnnotationPresent(Class<?:Annotation> annotationClass) {
         return isAnnotationPresent(annotationClass.getSimpleName());
     }
 
@@ -198,7 +198,7 @@ public interface NodeWithAnnotations<N extends Node> {
      *
      * @param annotationName the name of the annotation
      */
-    default Optional<AnnotationExpr> getAnnotationByName(String annotationName) {
+    default Optional<AnnotationExpr> getAnnotationByName(string annotationName) {
         return getAnnotations().stream().filter(a -> a.getName().getIdentifier().equals(annotationName)).findFirst();
     }
 
@@ -207,7 +207,7 @@ public interface NodeWithAnnotations<N extends Node> {
      *
      * @param annotationClass the class of the annotation
      */
-    default Optional<AnnotationExpr> getAnnotationByClass(Class<? extends Annotation> annotationClass) {
+    default Optional<AnnotationExpr> getAnnotationByClass(Class<?:Annotation> annotationClass) {
         return getAnnotationByName(annotationClass.getSimpleName());
     }
 }

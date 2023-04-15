@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,30 +26,30 @@ namespace com.github.javaparser.ast.expr;
 /**
  * @author Julio Vilmar Gesser
  */
-public final class NormalAnnotationExpr extends AnnotationExpr {
+public /*final*/class NormalAnnotationExpr:AnnotationExpr {
 
 	private List<MemberValuePair> pairs;
 
 	public NormalAnnotationExpr() {
 	}
 
-	public NormalAnnotationExpr(final NameExpr name, final List<MemberValuePair> pairs) {
+	public NormalAnnotationExpr(/*final*/NameExpr name, /*final*/List<MemberValuePair> pairs) {
 		setName(name);
 		setPairs(pairs);
 	}
 
-	public NormalAnnotationExpr(final int beginLine, final int beginColumn, final int endLine, final int endColumn,
-			final NameExpr name, final List<MemberValuePair> pairs) {
+	public NormalAnnotationExpr(/*final*/int beginLine, /*final*/int beginColumn, /*final*/int endLine, /*final*/int endColumn,
+			/*final*/NameExpr name, /*final*/List<MemberValuePair> pairs) {
 		super(beginLine, beginColumn, endLine, endColumn);
 		setName(name);
 		setPairs(pairs);
 	}
 
-	@Override public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+	@Override public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
 		return v.visit(this, arg);
 	}
 
-	@Override public <A> void accept(final VoidVisitor<A> v, final A arg) {
+	@Override public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
 		v.visit(this, arg);
 	}
 
@@ -57,7 +57,7 @@ public final class NormalAnnotationExpr extends AnnotationExpr {
 		return pairs;
 	}
 
-	public void setPairs(final List<MemberValuePair> pairs) {
+	public void setPairs(/*final*/List<MemberValuePair> pairs) {
 		this.pairs = pairs;
 		setAsParentNodeOf(this.pairs);
 	}

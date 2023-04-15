@@ -17,24 +17,24 @@ namespace com.github.javaparser;
 /**
  * This exception is thrown when parse errors are encountered.
  * You can explicitly create objects of this exception type by
- * calling the method generateParseException in the generated
+ * calling the method generateParseException _in the generated
  * parser.
  *
  * You can modify this class to customize your error reporting
  * mechanisms so long as you retain the public fields.
  */
-public class ParseException extends Exception {
+public class ParseException:Exception {
 
   /**
    * The version identifier for this Serializable class.
    * Increment only if the <i>serialized</i> form of the
    * class changes.
    */
-  private static final long serialVersionUID = 1L;
+  private static /*final*/long serialVersionUID = 1L;
 
   /**
    * This constructor is used by the method "generateParseException"
-   * in the generated parser.  Calling this constructor generates
+   * _in the generated parser.  Calling this constructor generates
    * a new object of this type with the fields "currentToken",
    * "expectedTokenSequences", and "tokenImage" set.
    */
@@ -51,9 +51,9 @@ public class ParseException extends Exception {
 
   /**
    * The following constructors are for use by you for whatever
-   * purpose you can think of.  Constructing the exception in this
-   * manner makes the exception behave in the normal way - i.e., as
-   * documented in the class "Throwable".  The fields "errorToken",
+   * purpose you can think of.  Constructing the exception _in this
+   * manner makes the exception behave _in the normal way - i.e., as
+   * documented _in the class "Throwable".  The fields "errorToken",
    * "expectedTokenSequences", and "tokenImage" do not contain
    * relevant information.  The JavaCC generated code does not use
    * these constructors.
@@ -64,7 +64,7 @@ public class ParseException extends Exception {
   }
 
   /** Constructor with message. */
-  public ParseException(String message) {
+  public ParseException(string message) {
     super(message);
   }
 
@@ -77,7 +77,7 @@ public class ParseException extends Exception {
   public Token currentToken;
 
   /**
-   * Each entry in this array is an array of integers.  Each array
+   * Each entry _in this array is an array of integers.  Each array
    * of integers represents a sequence of tokens (by their ordinal
    * values) that is expected at this point of the parse.
    */
@@ -86,7 +86,7 @@ public class ParseException extends Exception {
   /**
    * This is a reference to the "tokenImage" array of the generated
    * parser within which the parse error occurred.  This array is
-   * defined in the generated ...Constants interface.
+   * defined _in the generated ...Constants interface.
    */
   public String[] tokenImage;
 
@@ -97,10 +97,10 @@ public class ParseException extends Exception {
    * from the parser) the correct error message
    * gets displayed.
    */
-  private static String initialise(Token currentToken,
+  private static string initialise(Token currentToken,
                            int[][] expectedTokenSequences,
                            String[] tokenImage) {
-    String eol = System.getProperty("line.separator", "\n");
+    string eol = System.getProperty("line.separator", "\n");
     StringBuffer expected = new StringBuffer();
     int maxSize = 0;
     for (int i = 0; i < expectedTokenSequences.length; i++) {
@@ -115,7 +115,7 @@ public class ParseException extends Exception {
       }
       expected.append(eol).append("    ");
     }
-    String retval = "Encountered \"";
+    string retval = "Encountered \"";
     Token tok = currentToken.next;
     for (int i = 0; i < maxSize; i++) {
       if (i != 0) retval += " ";
@@ -143,14 +143,14 @@ public class ParseException extends Exception {
   /**
    * The end of line string for this machine.
    */
-  protected String eol = System.getProperty("line.separator", "\n");
+  protected string eol = System.getProperty("line.separator", "\n");
 
   /**
    * Used to convert raw characters to their escaped version
    * when these raw version cannot be used as part of an ASCII
    * string literal.
    */
-  static String add_escapes(String str) {
+  static string add_escapes(string str) {
       StringBuffer retval = new StringBuffer();
       char ch;
       for (int i = 0; i < str.length(); i++) {
@@ -184,7 +184,7 @@ public class ParseException extends Exception {
               continue;
            default:
               if ((ch = str.charAt(i)) < 0x20 || ch > 0x7e) {
-                 String s = "0000" + Integer.toString(ch, 16);
+                 string s = "0000" + Integer.toString(ch, 16);
                  retval.append("\\u" + s.substring(s.length() - 4, s.length()));
               } else {
                  retval.append(ch);

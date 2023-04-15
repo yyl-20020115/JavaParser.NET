@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,11 +24,11 @@ namespace com.github.javaparser.symbolsolver.resolution.typeinference.constraint
 
 
 /**
- * A type S is compatible in a loose invocation context with type T
+ * A type S is compatible _in a loose invocation context with type T
  *
  * @author Federico Tomassetti
  */
-public class TypeCompatibleWithType extends ConstraintFormula {
+public class TypeCompatibleWithType:ConstraintFormula {
     private ResolvedType s;
     private ResolvedType t;
     private TypeSolver typeSolver;
@@ -43,7 +43,7 @@ public class TypeCompatibleWithType extends ConstraintFormula {
     public ReductionResult reduce(BoundSet currentBoundSet) {
         // A constraint formula of the form ‹S → T› is reduced as follows:
         //
-        // 1. If S and T are proper types, the constraint reduces to true if S is compatible in a loose invocation context with T (§5.3), and false otherwise.
+        // 1. If S and T are proper types, the constraint reduces to true if S is compatible _in a loose invocation context with T (§5.3), and false otherwise.
 
         if (isProperType(s) && isProperType(t)) {
             if (isCompatibleInALooseInvocationContext(s, t)) {
@@ -70,7 +70,7 @@ public class TypeCompatibleWithType extends ConstraintFormula {
         }
 
         // The fourth and fifth cases are implicit uses of unchecked conversion (§5.1.9). These, along with any use of
-        // unchecked conversion in the first case, may result in compile-time unchecked warnings, and may influence a
+        // unchecked conversion _in the first case, may result _in compile-time unchecked warnings, and may influence a
         // method's invocation type (§15.12.2.6).
 
         // 4. Otherwise, if T is a parameterized type of the form G<T1, ..., Tn>, and there exists no type of the
@@ -126,7 +126,7 @@ public class TypeCompatibleWithType extends ConstraintFormula {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "TypeCompatibleWithType{" +
                 "s=" + s +
                 ", t=" + t +

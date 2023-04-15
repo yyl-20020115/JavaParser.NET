@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,7 +25,7 @@ namespace com.github.javaparser.ast.type;
 
 class ClassOrInterfaceTypeTest {
 
-    @Test
+    [TestMethod]
     void testSetName() {
         ClassOrInterfaceType classOrInterfaceType = new ClassOrInterfaceType();
 
@@ -34,7 +34,7 @@ class ClassOrInterfaceTypeTest {
         assertEquals("A", classOrInterfaceType.getName().toString());
     }
 
-    @Test
+    [TestMethod]
     void testNestedClass() {
         ClassOrInterfaceType classA = new ClassOrInterfaceType();
         classA.setName("A");
@@ -43,7 +43,7 @@ class ClassOrInterfaceTypeTest {
         assertEquals("A.B", classB.getNameWithScope());
     }
 
-    @Test
+    [TestMethod]
     void testWithGeneric() {
         ClassOrInterfaceType classA = new ClassOrInterfaceType(null, "A");
         ClassOrInterfaceType classB = new ClassOrInterfaceType(classA, new SimpleName("B"), new NodeList<>(classA));
@@ -56,7 +56,7 @@ class ClassOrInterfaceTypeTest {
         assertEquals("A.B<A>", classB.asString());
     }
 
-    @Test
+    [TestMethod]
     void testWithAnnotations() {
         AnnotationExpr annotationExpr = StaticJavaParser.parseAnnotation("//@Override");
         ClassOrInterfaceType classA = new ClassOrInterfaceType(
@@ -66,19 +66,19 @@ class ClassOrInterfaceTypeTest {
         assertEquals(annotationExpr, classA.getAnnotation(0));
     }
 
-    @Test
+    [TestMethod]
     void testResolveWithoutCompilationUnit() {
         ClassOrInterfaceType classA = new ClassOrInterfaceType(null, "A");
         Assertions.assertThrows(IllegalStateException.class, classA::resolve);
     }
 
-    @Test
+    [TestMethod]
     void testToDescriptorWithoutCompilationUnit() {
         ClassOrInterfaceType classA = new ClassOrInterfaceType(null, "A");
         Assertions.assertThrows(IllegalStateException.class, classA::toDescriptor);
     }
 
-    @Test
+    [TestMethod]
     void testToClassOrInterfaceType() {
         ClassOrInterfaceType classA = new ClassOrInterfaceType(null, "A");
 
@@ -87,13 +87,13 @@ class ClassOrInterfaceTypeTest {
         assertSame(classA, newClass.get());
     }
 
-    @Test
+    [TestMethod]
     void testIfClassOrInterfaceTypeIsCalled() {
         ClassOrInterfaceType classA = new ClassOrInterfaceType(null, "A");
         classA.ifClassOrInterfaceType(classOrInterfaceType -> assertSame(classA, classOrInterfaceType));
     }
 
-    @Test
+    [TestMethod]
     void testAsClassOrInterfaceTypeIsTheSame() {
         ClassOrInterfaceType classA = new ClassOrInterfaceType(null, "A");
 
@@ -101,19 +101,19 @@ class ClassOrInterfaceTypeTest {
         assertEquals(classA, classA.asClassOrInterfaceType());
     }
 
-    @Test
+    [TestMethod]
     void testCloneClass() {
         ClassOrInterfaceType classA = new ClassOrInterfaceType(null, "A");
         assertEquals(classA, classA.clone());
     }
 
-    @Test
+    [TestMethod]
     void testMetaModel() {
         ClassOrInterfaceType classA = new ClassOrInterfaceType(null, "A");
         assertEquals(JavaParserMetaModel.classOrInterfaceTypeMetaModel, classA.getMetaModel());
     }
 
-    @Test
+    [TestMethod]
     void testAcceptVoidVisitor() {
         ClassOrInterfaceType classA = new ClassOrInterfaceType(null, "A");
         classA.accept(new VoidVisitorAdapter<Object>() {

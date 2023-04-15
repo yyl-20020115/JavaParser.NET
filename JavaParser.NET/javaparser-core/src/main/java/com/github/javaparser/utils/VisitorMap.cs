@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,13 +26,13 @@ namespace com.github.javaparser.utils;
  * A map that overrides the equals and hashcode calculation of the added nodes
  * by using another equals and hashcode visitor for those methods.
  */
-public class VisitorMap<N extends Node, V> implements Map<N, V> {
+public class VisitorMap<N:Node, V> implements Map<N, V> {
 
-    private final Map<EqualsHashcodeOverridingFacade, V> innerMap = new HashMap<>();
+    private /*final*/Map<EqualsHashcodeOverridingFacade, V> innerMap = new HashMap<>();
 
-    private final GenericVisitor<Integer, Void> hashcodeVisitor;
+    private /*final*/GenericVisitor<Integer, Void> hashcodeVisitor;
 
-    private final GenericVisitor<Boolean, Visitable> equalsVisitor;
+    private /*final*/GenericVisitor<Boolean, Visitable> equalsVisitor;
 
     /**
      * Pass the visitors to use for equals and hashcode.
@@ -74,7 +74,7 @@ public class VisitorMap<N extends Node, V> implements Map<N, V> {
 
     private class EqualsHashcodeOverridingFacade implements Visitable {
 
-        private final N overridden;
+        private /*final*/N overridden;
 
         EqualsHashcodeOverridingFacade(N overridden) {
             this.overridden = overridden;
@@ -91,13 +91,13 @@ public class VisitorMap<N extends Node, V> implements Map<N, V> {
         }
 
         @Override
-        public final int hashCode() {
+        public /*final*/int hashCode() {
             return overridden.accept(hashcodeVisitor, null);
         }
 
         @Override
-        public boolean equals(final Object obj) {
-            if (obj == null || !(obj instanceof VisitorMap.EqualsHashcodeOverridingFacade)) {
+        public boolean equals(/*final*/Object obj) {
+            if (obj == null || !(obj is VisitorMap.EqualsHashcodeOverridingFacade)) {
                 return false;
             }
             return overridden.accept(equalsVisitor, ((EqualsHashcodeOverridingFacade) obj).overridden);
@@ -110,7 +110,7 @@ public class VisitorMap<N extends Node, V> implements Map<N, V> {
     }
 
     @Override
-    public void putAll(Map<? extends N, ? extends V> m) {
+    public void putAll(Map<?:N, ?:V> m) {
         m.forEach(this::put);
     }
 

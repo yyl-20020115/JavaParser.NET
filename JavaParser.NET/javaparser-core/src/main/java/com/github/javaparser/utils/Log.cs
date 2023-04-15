@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,29 +25,29 @@ namespace com.github.javaparser.utils;
 /**
  * To avoid dependencies on logging frameworks, we have invented yet another logging framework :-)
  * <p>
- * See <a href="http://javaparser.org/javaparsers-logging-framework-in-one-file/">a blog about this</a>
+ * See <a href="http://javaparser.org/javaparsers-logging-framework-_in-one-file/">a blog about this</a>
  */
 public class Log {
 
     /**
-     * This adapter logs to standard out and standard error.
+     * This adapter logs to standard _out and standard error.
      */
     public static class StandardOutStandardErrorAdapter implements Adapter {
 
         @Override
         public void info(Supplier<String> messageSupplier) {
-            System.out.println(messageSupplier.get());
+            System._out.println(messageSupplier.get());
         }
 
         @Override
         public void trace(Supplier<String> messageSupplier) {
-            System.out.println(messageSupplier.get());
+            System._out.println(messageSupplier.get());
         }
 
         @Override
         public void error(Supplier<Throwable> throwableSupplier, Supplier<String> messageSupplier) {
             Throwable throwable = throwableSupplier.get();
-            String message = messageSupplier.get();
+            string message = messageSupplier.get();
             if (message == null) {
                 System.err.println(throwable.getMessage());
                 printStackTrace(throwable);
@@ -65,7 +65,7 @@ public class Log {
                 throwable.printStackTrace(pw);
                 trace(sw::toString);
             } catch (IOException e) {
-                throw new AssertionError("Error in logging library");
+                throw new AssertionError("Error _in logging library");
             }
         }
     }
@@ -113,11 +113,11 @@ public class Log {
      * For logging information that may help solving a problem.
      */
     @SafeVarargs
-    public static void trace(String format, Supplier<Object>... args) {
+    public static void trace(string format, Supplier<Object>... args) {
         CURRENT_ADAPTER.trace(makeFormattingSupplier(format, args));
     }
 
-    private static Supplier<String> makeFormattingSupplier(String format, Supplier<Object>[] args) {
+    private static Supplier<String> makeFormattingSupplier(string format, Supplier<Object>[] args) {
         return () -> {
             Object[] objects = new Object[args.length];
             for (int i = 0; i < args.length; i++) {
@@ -131,7 +131,7 @@ public class Log {
      * For logging things that are nice to see scrolling by.
      */
     @SafeVarargs
-    public static void info(String format, Supplier<Object>... args) {
+    public static void info(string format, Supplier<Object>... args) {
         CURRENT_ADAPTER.info(makeFormattingSupplier(format, args));
     }
 
@@ -146,7 +146,7 @@ public class Log {
      * For drawing attention to an error that you don't have an exception for.
      */
     @SafeVarargs
-    public static void error(Throwable throwable, String format, Supplier<Object>... args) {
+    public static void error(Throwable throwable, string format, Supplier<Object>... args) {
         CURRENT_ADAPTER.error(() -> throwable, makeFormattingSupplier(format, args));
     }
 
@@ -154,7 +154,7 @@ public class Log {
      * For drawing attention to an error that you don't have an exception for.
      */
     @SafeVarargs
-    public static void error(String format, Supplier<Object>... args) {
+    public static void error(string format, Supplier<Object>... args) {
         CURRENT_ADAPTER.error(() -> null, makeFormattingSupplier(format, args));
     }
 }

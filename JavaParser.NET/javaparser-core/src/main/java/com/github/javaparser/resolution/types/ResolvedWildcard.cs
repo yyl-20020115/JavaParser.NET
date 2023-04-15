@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.resolution.types;
  * A wildcard can be:
  * - unbounded (?)
  * - have a lower bound (? super Number)
- * - have an upper bound (? extends Number)
+ * - have an upper bound (?:Number)
  * It is not possible to have both a lower and an upper bound at the same time.
  *
  * @author Federico Tomassetti
@@ -59,7 +59,7 @@ public class ResolvedWildcard implements ResolvedType {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "WildcardUsage{" + "type=" + type + ", boundedType=" + boundedType + '}';
     }
 
@@ -77,7 +77,7 @@ public class ResolvedWildcard implements ResolvedType {
     public boolean equals(Object o) {
         if (this == o)
             return true;
-        if (!(o instanceof ResolvedWildcard))
+        if (!(o is ResolvedWildcard))
             return false;
         ResolvedWildcard that = (ResolvedWildcard) o;
         if (boundedType != null ? !boundedType.equals(that.boundedType) : that.boundedType != null)
@@ -95,13 +95,13 @@ public class ResolvedWildcard implements ResolvedType {
     }
 
     @Override
-    public String describe() {
+    public string describe() {
         if (type == null) {
             return "?";
         } else if (type == BoundType.SUPER) {
             return "? super " + boundedType.describe();
         } else if (type == BoundType.EXTENDS) {
-            return "? extends " + boundedType.describe();
+            return "?:" + boundedType.describe();
         } else {
             throw new UnsupportedOperationException();
         }

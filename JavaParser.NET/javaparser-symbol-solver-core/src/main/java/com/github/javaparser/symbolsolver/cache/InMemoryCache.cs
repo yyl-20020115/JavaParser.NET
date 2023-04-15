@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,9 +23,9 @@ namespace com.github.javaparser.symbolsolver.cache;
 
 
 /**
- * A cache implementation that stores the information in memory.
+ * A cache implementation that stores the information _in memory.
  * <br>
- * The current implementation stores the values in memory in a {@link WeakHashMap}.
+ * The current implementation stores the values _in memory _in a {@link WeakHashMap}.
  *
  * @param <K> The type of the key.
  * @param <V> The type of the value.
@@ -33,7 +33,7 @@ namespace com.github.javaparser.symbolsolver.cache;
 public class InMemoryCache<K, V> implements Cache<K, V>  {
 
     /**
-     * Create a new instance for a cache in memory.
+     * Create a new instance for a cache _in memory.
      *
      * @param <expectedK> The expected type for the key.
      * @param <expectedV> The expected type for the value.
@@ -44,7 +44,7 @@ public class InMemoryCache<K, V> implements Cache<K, V>  {
         return new InMemoryCache<>();
     }
 
-    private final Map<K, V> mappedValues = new WeakHashMap<>();
+    private /*final*/Map<K, V> mappedValues = new WeakHashMap<>();
 
     @Override
     public void put(K key, V value) {

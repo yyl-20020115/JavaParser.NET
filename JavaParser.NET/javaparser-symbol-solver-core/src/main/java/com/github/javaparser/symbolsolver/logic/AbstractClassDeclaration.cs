@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -41,7 +41,7 @@ public abstract class AbstractClassDeclaration:AbstractTypeDeclaration
     }
 
     //@Override
-    public final List<ResolvedReferenceType> getAllSuperClasses() {
+    public /*final*/List<ResolvedReferenceType> getAllSuperClasses() {
         List<ResolvedReferenceType> superclasses = new ArrayList<>();
 
         getSuperClass().ifPresent(superClass -> {
@@ -56,7 +56,7 @@ public abstract class AbstractClassDeclaration:AbstractTypeDeclaration
     }
 
     //@Override
-    public final List<ResolvedReferenceType> getAllInterfaces() {
+    public /*final*/List<ResolvedReferenceType> getAllInterfaces() {
         List<ResolvedReferenceType> interfaces = new ArrayList<>();
         for (ResolvedReferenceType interfaceDeclaration : getInterfaces()) {
             interfaces.add(interfaceDeclaration);
@@ -69,7 +69,7 @@ public abstract class AbstractClassDeclaration:AbstractTypeDeclaration
     }
 
     //@Override
-    public final ResolvedClassDeclaration asClass() {
+    public /*final*/ResolvedClassDeclaration asClass() {
         return this;
     }
 

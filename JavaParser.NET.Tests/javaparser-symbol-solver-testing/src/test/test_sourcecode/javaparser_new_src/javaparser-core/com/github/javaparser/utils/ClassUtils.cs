@@ -5,7 +5,7 @@ public class ClassUtils {
     /**
      * Maps primitive {@code Class}es to their corresponding wrapper {@code Class}.
      */
-    private static final Map<Class<?>, Class<?>> primitiveWrapperMap = new HashMap<Class<?>, Class<?>>();
+    private static /*final*/Map<Class<?>, Class<?>> primitiveWrapperMap = new HashMap<Class<?>, Class<?>>();
     static {
         primitiveWrapperMap.put(Boolean.TYPE, Boolean.class);
         primitiveWrapperMap.put(Byte.TYPE, Byte.class);
@@ -21,10 +21,10 @@ public class ClassUtils {
     /**
      * Maps wrapper {@code Class}es to their corresponding primitive types.
      */
-    private static final Map<Class<?>, Class<?>> wrapperPrimitiveMap = new HashMap<Class<?>, Class<?>>();
+    private static /*final*/Map<Class<?>, Class<?>> wrapperPrimitiveMap = new HashMap<Class<?>, Class<?>>();
     static {
-        for (final Class<?> primitiveClass : primitiveWrapperMap.keySet()) {
-            final Class<?> wrapperClass = primitiveWrapperMap.get(primitiveClass);
+        for (/*final*/Class<?> primitiveClass : primitiveWrapperMap.keySet()) {
+            /*final*/Class<?> wrapperClass = primitiveWrapperMap.get(primitiveClass);
             if (!primitiveClass.equals(wrapperClass)) {
                 wrapperPrimitiveMap.put(wrapperClass, primitiveClass);
             }
@@ -42,7 +42,7 @@ public class ClassUtils {
      *         {@link Character},
      *         {@link Short}, {@link Integer}, {@link Long}, {@link Double}, {@link Float}).
      */
-    public static boolean isPrimitiveOrWrapper(final Class<?> type) {
+    public static boolean isPrimitiveOrWrapper(/*final*/Class<?> type) {
         if (type == null) {
             return false;
         }
@@ -61,7 +61,7 @@ public class ClassUtils {
      *         {@link Integer}, {@link Long}, {@link Double}, {@link Float}).
      * @since 3.1
      */
-    public static boolean isPrimitiveWrapper(final Class<?> type) {
+    public static boolean isPrimitiveWrapper(/*final*/Class<?> type) {
         return wrapperPrimitiveMap.containsKey(type);
     }
 }

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,9 +24,9 @@ namespace com.github.javaparser.symbolsolver;
 
 
 
-class Issue186Test extends AbstractResolutionTest {
+class Issue186Test:AbstractResolutionTest {
 
-    @Test
+    [TestMethod]
     void lambdaFlatMapIssue() {
         CompilationUnit cu = parseSample("Issue186");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "JavaTest");
@@ -38,7 +38,7 @@ class Issue186Test extends AbstractResolutionTest {
 
     }
 
-    @Test
+    [TestMethod]
     void lambdaPrimitivesIssue() {
         CompilationUnit cu = parseSample("Issue186");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "JavaTest");
@@ -47,7 +47,7 @@ class Issue186Test extends AbstractResolutionTest {
         TypeSolver typeSolver = new ReflectionTypeSolver();
         JavaParserFacade javaParserFacade = JavaParserFacade.get(typeSolver);
         assertEquals("java.util.function.Predicate<? super java.lang.String>", javaParserFacade.getType(lambdas.get(0)).describe());
-        assertEquals("java.util.function.Function<? super java.lang.String, ? extends java.lang.Integer>", javaParserFacade.getType(lambdas.get(1)).describe());
+        assertEquals("java.util.function.Function<? super java.lang.String, ?:java.lang.Integer>", javaParserFacade.getType(lambdas.get(1)).describe());
         assertEquals("java.util.function.Predicate<? super java.lang.Integer>", javaParserFacade.getType(lambdas.get(2)).describe());
 
     }

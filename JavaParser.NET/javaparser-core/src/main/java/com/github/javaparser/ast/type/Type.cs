@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,7 +28,7 @@ namespace com.github.javaparser.ast.type;
  *
  * @author Julio Vilmar Gesser
  */
-public abstract class Type extends Node implements Resolvable<ResolvedType>, ConvertibleToUsage {
+public abstract class Type:Node implements Resolvable<ResolvedType>, ConvertibleToUsage {
 
     private NodeList<AnnotationExpr> annotations;
 
@@ -40,7 +40,7 @@ public abstract class Type extends Node implements Resolvable<ResolvedType>, Con
         this(range, new NodeList<>());
     }
 
-    @AllFieldsConstructor
+    //@AllFieldsConstructor
     public Type(NodeList<AnnotationExpr> annotations) {
         this(null, annotations);
     }
@@ -48,14 +48,14 @@ public abstract class Type extends Node implements Resolvable<ResolvedType>, Con
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public Type(TokenRange tokenRange, NodeList<AnnotationExpr> annotations) {
         super(tokenRange);
         setAnnotations(annotations);
         customInitialization();
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public NodeList<AnnotationExpr> getAnnotations() {
         return annotations;
     }
@@ -64,8 +64,8 @@ public abstract class Type extends Node implements Resolvable<ResolvedType>, Con
         return getAnnotations().get(i);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public Type setAnnotations(final NodeList<AnnotationExpr> annotations) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public Type setAnnotations(/*final*/NodeList<AnnotationExpr> annotations) {
         assertNotNull(annotations);
         if (annotations == this.annotations) {
             return this;
@@ -94,12 +94,12 @@ public abstract class Type extends Node implements Resolvable<ResolvedType>, Con
         return 0;
     }
 
-    public String toDescriptor() {
+    public string toDescriptor() {
         return "";
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
     public boolean remove(Node node) {
         if (node == null) {
             return false;
@@ -113,22 +113,22 @@ public abstract class Type extends Node implements Resolvable<ResolvedType>, Con
         return super.remove(node);
     }
 
-    public abstract String asString();
+    public abstract string asString();
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public Type clone() {
         return (Type) accept(new CloneVisitor(), null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public TypeMetaModel getMetaModel() {
         return JavaParserMetaModel.typeMetaModel;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public boolean replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
@@ -142,215 +142,215 @@ public abstract class Type extends Node implements Resolvable<ResolvedType>, Con
         return super.replace(node, replacementNode);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isArrayType() {
         return false;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public ArrayType asArrayType() {
         throw new IllegalStateException(f("%s is not ArrayType, it is %s", this, this.getClass().getSimpleName()));
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isClassOrInterfaceType() {
         return false;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public ClassOrInterfaceType asClassOrInterfaceType() {
         throw new IllegalStateException(f("%s is not ClassOrInterfaceType, it is %s", this, this.getClass().getSimpleName()));
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isIntersectionType() {
         return false;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public IntersectionType asIntersectionType() {
         throw new IllegalStateException(f("%s is not IntersectionType, it is %s", this, this.getClass().getSimpleName()));
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isPrimitiveType() {
         return false;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public PrimitiveType asPrimitiveType() {
         throw new IllegalStateException(f("%s is not PrimitiveType, it is %s", this, this.getClass().getSimpleName()));
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isReferenceType() {
         return false;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public ReferenceType asReferenceType() {
         throw new IllegalStateException(f("%s is not ReferenceType, it is %s", this, this.getClass().getSimpleName()));
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isTypeParameter() {
         return false;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public TypeParameter asTypeParameter() {
         throw new IllegalStateException(f("%s is not TypeParameter, it is %s", this, this.getClass().getSimpleName()));
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isUnionType() {
         return false;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public UnionType asUnionType() {
         throw new IllegalStateException(f("%s is not UnionType, it is %s", this, this.getClass().getSimpleName()));
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isUnknownType() {
         return false;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public UnknownType asUnknownType() {
         throw new IllegalStateException(f("%s is not UnknownType, it is %s", this, this.getClass().getSimpleName()));
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isVoidType() {
         return false;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public VoidType asVoidType() {
         throw new IllegalStateException(f("%s is not VoidType, it is %s", this, this.getClass().getSimpleName()));
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isWildcardType() {
         return false;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public WildcardType asWildcardType() {
         throw new IllegalStateException(f("%s is not WildcardType, it is %s", this, this.getClass().getSimpleName()));
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifArrayType(Consumer<ArrayType> action) {
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifClassOrInterfaceType(Consumer<ClassOrInterfaceType> action) {
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifIntersectionType(Consumer<IntersectionType> action) {
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifPrimitiveType(Consumer<PrimitiveType> action) {
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifReferenceType(Consumer<ReferenceType> action) {
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifTypeParameter(Consumer<TypeParameter> action) {
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifUnionType(Consumer<UnionType> action) {
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifUnknownType(Consumer<UnknownType> action) {
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifVoidType(Consumer<VoidType> action) {
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifWildcardType(Consumer<WildcardType> action) {
     }
 
     @Override
     public abstract ResolvedType resolve();
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<ArrayType> toArrayType() {
         return Optional.empty();
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<ClassOrInterfaceType> toClassOrInterfaceType() {
         return Optional.empty();
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<IntersectionType> toIntersectionType() {
         return Optional.empty();
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<PrimitiveType> toPrimitiveType() {
         return Optional.empty();
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<ReferenceType> toReferenceType() {
         return Optional.empty();
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<TypeParameter> toTypeParameter() {
         return Optional.empty();
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<UnionType> toUnionType() {
         return Optional.empty();
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<UnknownType> toUnknownType() {
         return Optional.empty();
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<VoidType> toVoidType() {
         return Optional.empty();
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<WildcardType> toWildcardType() {
         return Optional.empty();
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isVarType() {
         return false;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public VarType asVarType() {
         throw new IllegalStateException(f("%s is not VarType, it is %s", this, this.getClass().getSimpleName()));
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<VarType> toVarType() {
         return Optional.empty();
     }
 
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifVarType(Consumer<VarType> action) {
     }
 }

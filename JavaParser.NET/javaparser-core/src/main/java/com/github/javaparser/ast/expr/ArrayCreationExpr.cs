@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,11 +27,11 @@ namespace com.github.javaparser.ast.expr;
  * {@code new int[5][4][][]} or {@code new int[][]{{1},{2,3}}}.
  *
  * <br>"int" is the element type.
- * <br>All the brackets are stored in the levels field, from left to right.
+ * <br>All the brackets are stored _in the levels field, from left to right.
  *
  * @author Julio Vilmar Gesser
  */
-public class ArrayCreationExpr extends Expression {
+public class ArrayCreationExpr:Expression {
 
     @NonEmptyProperty
     private NodeList<ArrayCreationLevel> levels;
@@ -45,7 +45,7 @@ public class ArrayCreationExpr extends Expression {
         this(null, new ClassOrInterfaceType(), new NodeList<>(new ArrayCreationLevel()), new ArrayInitializerExpr());
     }
 
-    @AllFieldsConstructor
+    //@AllFieldsConstructor
     public ArrayCreationExpr(Type elementType, NodeList<ArrayCreationLevel> levels, ArrayInitializerExpr initializer) {
         this(null, elementType, levels, initializer);
     }
@@ -57,7 +57,7 @@ public class ArrayCreationExpr extends Expression {
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public ArrayCreationExpr(TokenRange tokenRange, Type elementType, NodeList<ArrayCreationLevel> levels, ArrayInitializerExpr initializer) {
         super(tokenRange);
         setElementType(elementType);
@@ -67,23 +67,23 @@ public class ArrayCreationExpr extends Expression {
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Optional<ArrayInitializerExpr> getInitializer() {
         return Optional.ofNullable(initializer);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Type getElementType() {
         return elementType;
     }
@@ -94,8 +94,8 @@ public class ArrayCreationExpr extends Expression {
      * @param initializer the initializer, can be null
      * @return this, the ArrayCreationExpr
      */
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public ArrayCreationExpr setInitializer(final ArrayInitializerExpr initializer) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public ArrayCreationExpr setInitializer(/*final*/ArrayInitializerExpr initializer) {
         if (initializer == this.initializer) {
             return this;
         }
@@ -107,8 +107,8 @@ public class ArrayCreationExpr extends Expression {
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public ArrayCreationExpr setElementType(final Type elementType) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public ArrayCreationExpr setElementType(/*final*/Type elementType) {
         assertNotNull(elementType);
         if (elementType == this.elementType) {
             return this;
@@ -121,13 +121,13 @@ public class ArrayCreationExpr extends Expression {
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public NodeList<ArrayCreationLevel> getLevels() {
         return levels;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public ArrayCreationExpr setLevels(final NodeList<ArrayCreationLevel> levels) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public ArrayCreationExpr setLevels(/*final*/NodeList<ArrayCreationLevel> levels) {
         assertNotNull(levels);
         if (levels == this.levels) {
             return this;
@@ -141,7 +141,7 @@ public class ArrayCreationExpr extends Expression {
     }
 
     /**
-     * Takes the element type and wraps it in an ArrayType for every array creation level.
+     * Takes the element type and wraps it _in an ArrayType for every array creation level.
      */
     public Type createdType() {
         Type result = elementType;
@@ -162,12 +162,12 @@ public class ArrayCreationExpr extends Expression {
         return setElementType(parseType(typeClass.getSimpleName()));
     }
 
-    public ArrayCreationExpr setElementType(final String type) {
+    public ArrayCreationExpr setElementType(/*final*/string type) {
         return setElementType(parseType(type));
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
     public bool remove(Node node) {
         if (node == null) {
             return false;
@@ -187,25 +187,25 @@ public class ArrayCreationExpr extends Expression {
         return super.remove(node);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
     public ArrayCreationExpr removeInitializer() {
         return setInitializer((ArrayInitializerExpr) null);
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public ArrayCreationExpr clone() {
         return (ArrayCreationExpr) accept(new CloneVisitor(), null);
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public ArrayCreationExprMetaModel getMetaModel() {
         return JavaParserMetaModel.arrayCreationExprMetaModel;
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
@@ -230,25 +230,25 @@ public class ArrayCreationExpr extends Expression {
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public bool isArrayCreationExpr() {
         return true;
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public ArrayCreationExpr asArrayCreationExpr() {
         return this;
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifArrayCreationExpr(Consumer<ArrayCreationExpr> action) {
         action.accept(this);
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<ArrayCreationExpr> toArrayCreationExpr() {
         return Optional.of(this);
     }

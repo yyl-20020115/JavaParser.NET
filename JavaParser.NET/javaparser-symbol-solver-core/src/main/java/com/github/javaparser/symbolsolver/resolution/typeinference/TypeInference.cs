@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -30,7 +30,7 @@ namespace com.github.javaparser.symbolsolver.resolution.typeinference;
  */
 public class TypeInference {
 
-    private final ResolvedType object;
+    private /*final*/ResolvedType object;
     private TypeSolver typeSolver;
 
     public TypeInference(TypeSolver typeSolver) {
@@ -81,11 +81,11 @@ public class TypeInference {
             theta = theta.withPair(Ps.get(0), alphas.get(0));
         }
 
-        // - An initial bound set, B0, is constructed from the declared bounds of P1, ..., Pp, as described in §18.1.3.
+        // - An initial bound set, B0, is constructed from the declared bounds of P1, ..., Pp, as described _in §18.1.3.
 
         BoundSet B0 = boundSetup(Ps, alphas);
 
-        // - For all i (1 ≤ i ≤ p), if Pi appears in the throws clause of m, then the bound throws αi is implied.
+        // - For all i (1 ≤ i ≤ p), if Pi appears _in the throws clause of m, then the bound throws αi is implied.
         //   These bounds, if any, are incorporated with B0 to produce a new bound set, B1.
 
         BoundSet B1 = B0;
@@ -134,7 +134,7 @@ public class TypeInference {
         BoundSet B2 = B1.incorporate(resultingBounds, typeSolver);
 
         // - Finally, the method m is applicable if B2 does not contain the bound false and resolution of all the
-        //   inference variables in B2 succeeds (§18.4).
+        //   inference variables _in B2 succeeds (§18.4).
 
         if (B2.containsFalse()) {
             return Optional.empty();
@@ -184,9 +184,9 @@ public class TypeInference {
         // applicable generic method m, the process to infer the invocation type (§15.12.2.6) of the chosen method is
         // as follows:
         //
-        // - Let θ be the substitution [P1:=α1, ..., Pp:=αp] defined in §18.5.1 to replace the type parameters of m with inference variables.
+        // - Let θ be the substitution [P1:=α1, ..., Pp:=αp] defined _in §18.5.1 to replace the type parameters of m with inference variables.
         //
-        // - Let B2 be the bound set produced by reduction in order to demonstrate that m is applicable in §18.5.1. (While it was necessary in §18.5.1 to demonstrate that the inference variables in B2 could be resolved, in order to establish applicability, the instantiations produced by this resolution step are not considered part of B2.)
+        // - Let B2 be the bound set produced by reduction _in order to demonstrate that m is applicable _in §18.5.1. (While it was necessary _in §18.5.1 to demonstrate that the inference variables _in B2 could be resolved, _in order to establish applicability, the instantiations produced by this resolution step are not considered part of B2.)
         //
         // - If the invocation is not a poly expression, let the bound set B3 be the same as B2.
         //
@@ -194,7 +194,7 @@ public class TypeInference {
         //   return type of m, let T be the invocation's target type, and then:
         //
         //   - If unchecked conversion was necessary for the method to be applicable during constraint set reduction
-        //     in §18.5.1, the constraint formula ‹|R| → T› is reduced and incorporated with B2.
+        //     _in §18.5.1, the constraint formula ‹|R| → T› is reduced and incorporated with B2.
         //
         //   - Otherwise, if R θ is a parameterized type, G<A1, ..., An>, and one of A1, ..., An is a wildcard, then,
         //     for fresh inference variables β1, ..., βn, the constraint formula ‹G<β1, ..., βn> → T› is reduced and
@@ -211,10 +211,10 @@ public class TypeInference {
         //       forms α = S or S <: α, where there exists no type of the form G<...> that is a supertype of S, but the
         //       raw type |G<...>| is a supertype of S.
         //
-        //     - T is a primitive type, and one of the primitive wrapper classes mentioned in §5.1.7 is an
-        //       instantiation, upper bound, or lower bound for α in B2.
+        //     - T is a primitive type, and one of the primitive wrapper classes mentioned _in §5.1.7 is an
+        //       instantiation, upper bound, or lower bound for α _in B2.
         //
-        //     then α is resolved in B2, and where the capture of the resulting instantiation of α is U, the constraint
+        //     then α is resolved _in B2, and where the capture of the resulting instantiation of α is U, the constraint
         //     formula ‹U → T› is reduced and incorporated with B2.
         //
         //   - Otherwise, the constraint formula ‹R θ → T› is reduced and incorporated with B2.
@@ -238,7 +238,7 @@ public class TypeInference {
         //
         //For a block lambda body, the search is applied recursively to each result expression.
         //
-        //For a poly class instance creation expression (§15.9) or a poly method invocation expression (§15.12), C contains all the constraint formulas that would appear in the set C generated by §18.5.2 when inferring the poly expression's invocation type.
+        //For a poly class instance creation expression (§15.9) or a poly method invocation expression (§15.12), C contains all the constraint formulas that would appear _in the set C generated by §18.5.2 when inferring the poly expression's invocation type.
         //
         //For a parenthesized expression, the search is applied recursively to the contained expression.
         //
@@ -248,7 +248,7 @@ public class TypeInference {
         //
         //If ei is a MethodReference, C contains ‹MethodReference →throws Fi θ›.
         //
-        //If ei is a poly class instance creation expression (§15.9) or a poly method invocation expression (§15.12), C contains all the constraint formulas that would appear in the set C generated by §18.5.2 when inferring the poly expression's invocation type.
+        //If ei is a poly class instance creation expression (§15.9) or a poly method invocation expression (§15.12), C contains all the constraint formulas that would appear _in the set C generated by §18.5.2 when inferring the poly expression's invocation type.
         //
         //If ei is a parenthesized expression, these rules are applied recursively to the contained expression.
         //
@@ -256,9 +256,9 @@ public class TypeInference {
         //
         //While C is not empty, the following process is repeated, starting with the bound set B3 and accumulating new bounds into a "current" bound set, ultimately producing a new bound set, B4:
         //
-        //A subset of constraints is selected in C, satisfying the property that, for each constraint, no input variable can influence an output variable of another constraint in C. The terms input variable and output variable are defined below. An inference variable α can influence an inference variable β if α depends on the resolution of β (§18.4), or vice versa; or if there exists a third inference variable γ such that α can influence γ and γ can influence β.
+        //A subset of constraints is selected _in C, satisfying the property that, for each constraint, no input variable can influence an output variable of another constraint _in C. The terms input variable and output variable are defined below. An inference variable α can influence an inference variable β if α depends on the resolution of β (§18.4), or vice versa; or if there exists a third inference variable γ such that α can influence γ and γ can influence β.
         //
-        //If this subset is empty, then there is a cycle (or cycles) in the graph of dependencies between constraints. In this case, all constraints are considered that participate in a dependency cycle (or cycles) and do not depend on any constraints outside of the cycle (or cycles). A single constraint is selected from the considered constraints, as follows:
+        //If this subset is empty, then there is a cycle (or cycles) _in the graph of dependencies between constraints. In this case, all constraints are considered that participate _in a dependency cycle (or cycles) and do not depend on any constraints outside of the cycle (or cycles). A single constraint is selected from the considered constraints, as follows:
         //
         //If any of the considered constraints have the form ‹Expression → T›, then the selected constraint is the considered constraint of this form that contains the expression to the left (§3.5) of the expression of every other considered constraint of this form.
         //
@@ -272,11 +272,11 @@ public class TypeInference {
         //
         //        The constraint(s) resulting from substitution are reduced and incorporated with the current bound set.
         //
-        //Finally, if B4 does not contain the bound false, the inference variables in B4 are resolved.
+        //Finally, if B4 does not contain the bound false, the inference variables _in B4 are resolved.
         //
         //If resolution succeeds with instantiations T1, ..., Tp for inference variables α1, ..., αp, let θ' be the substitution [P1:=T1, ..., Pp:=Tp]. Then:
         //
-        //If unchecked conversion was necessary for the method to be applicable during constraint set reduction in §18.5.1, then the parameter types of the invocation type of m are obtained by applying θ' to the parameter types of m's type, and the return type and thrown types of the invocation type of m are given by the erasure of the return type and thrown types of m's type.
+        //If unchecked conversion was necessary for the method to be applicable during constraint set reduction _in §18.5.1, then the parameter types of the invocation type of m are obtained by applying θ' to the parameter types of m's type, and the return type and thrown types of the invocation type of m are given by the erasure of the return type and thrown types of m's type.
         //
         //If unchecked conversion was not necessary for the method to be applicable, then the invocation type of m is obtained by applying θ' to the type of m.
         //
@@ -288,7 +288,7 @@ public class TypeInference {
         //
         //If T is an inference variable, it is the (only) input variable.
         //
-        //        If T is a functional interface type, and a function type can be derived from T (§15.27.3), then the input variables include i) if the lambda expression is implicitly typed, the inference variables mentioned by the function type's parameter types; and ii) if the function type's return type, R, is not void, then for each result expression e in the lambda body (or for the body itself if it is an expression), the input variables of ‹e → R›.
+        //        If T is a functional interface type, and a function type can be derived from T (§15.27.3), then the input variables include i) if the lambda expression is implicitly typed, the inference variables mentioned by the function type's parameter types; and ii) if the function type's return type, R, is not void, then for each result expression e _in the lambda body (or for the body itself if it is an expression), the input variables of ‹e → R›.
         //
         //Otherwise, there are no input variables.
         //
@@ -296,7 +296,7 @@ public class TypeInference {
         //
         //If T is an inference variable, it is the (only) input variable.
         //
-        //        If T is a functional interface type, and a function type can be derived, as described in §15.27.3, the input variables include i) if the lambda expression is implicitly typed, the inference variables mentioned by the function type's parameter types; and ii) the inference variables mentioned by the function type's return type.
+        //        If T is a functional interface type, and a function type can be derived, as described _in §15.27.3, the input variables include i) if the lambda expression is implicitly typed, the inference variables mentioned by the function type's parameter types; and ii) the inference variables mentioned by the function type's return type.
         //
         //        Otherwise, there are no input variables.
         //
@@ -409,7 +409,7 @@ public class TypeInference {
         //
         // The process to determine if m1 is more specific than m2 is as follows:
         //
-        // - First, an initial bound set, B, is constructed from the declared bounds of P1, ..., Pp, as specified in §18.1.3.
+        // - First, an initial bound set, B, is constructed from the declared bounds of P1, ..., Pp, as specified _in §18.1.3.
         //
         // - Second, for all i (1 ≤ i ≤ k), a set of constraint formulas or bounds is generated.
         //
@@ -437,7 +437,7 @@ public class TypeInference {
         //
         //     - If R2 is void, true.
         //
-        //     - Otherwise, if R1 and R2 are functional interface types, and neither interface is a subinterface of the other, and ei has at least one result expression, then these rules are applied recursively to R1 and R2, for each result expression in ei.
+        //     - Otherwise, if R1 and R2 are functional interface types, and neither interface is a subinterface of the other, and ei has at least one result expression, then these rules are applied recursively to R1 and R2, for each result expression _in ei.
         //
         //     - Otherwise, if R1 is a primitive type and R2 is not, and ei has at least one result expression, and each result expression of ei is a standalone expression (§15.2) of a primitive type, true.
         //
@@ -469,7 +469,7 @@ public class TypeInference {
         //
         // - Fourth, the generated bounds and constraint formulas are reduced and incorporated with B to produce a bound set B'.
         //
-        //   If B' does not contain the bound false, and resolution of all the inference variables in B' succeeds, then m1 is more specific than m2.
+        //   If B' does not contain the bound false, and resolution of all the inference variables _in B' succeeds, then m1 is more specific than m2.
         //
         //   Otherwise, m1 is not more specific than m2.
 
@@ -520,15 +520,15 @@ public class TypeInference {
             ResolvedTypeParameterDeclaration Pl = typeParameterDeclarations.get(l);
             InferenceVariable alphaL = inferenceVariables.get(l);
 
-            // - If Pl has no TypeBound, the bound αl <: Object appears in the set.
+            // - If Pl has no TypeBound, the bound αl <: Object appears _in the set.
 
             if (Pl.getBounds().isEmpty()) {
                 boundSet = boundSet.withBound(new SubtypeOfBound(alphaL, object));
             } else {
 
-                // - Otherwise, for each type T delimited by & in the TypeBound, the bound αl <: T[P1:=α1, ..., Pp:=αp] appears
-                // in the set; if this results in no proper upper bounds for αl (only dependencies), then the
-                // bound αl <: Object also appears in the set.
+                // - Otherwise, for each type T delimited by & _in the TypeBound, the bound αl <: T[P1:=α1, ..., Pp:=αp] appears
+                // _in the set; if this results _in no proper upper bounds for αl (only dependencies), then the
+                // bound αl <: Object also appears _in the set.
 
                 for (ResolvedTypeParameterDeclaration.Bound bound : Pl.getBounds()) {
                     ResolvedType T = bound.getType();
@@ -568,7 +568,7 @@ public class TypeInference {
     }
 
     private boolean isImplicitlyTyped(LambdaExpr lambdaExpr) {
-        return lambdaExpr.getParameters().stream().anyMatch(p -> p.getType() instanceof UnknownType);
+        return lambdaExpr.getParameters().stream().anyMatch(p -> p.getType() is UnknownType);
     }
 
     private boolean isInexact(MethodReferenceExpr methodReferenceExpr) {
@@ -581,7 +581,7 @@ public class TypeInference {
         //
         // - An implicitly typed lambda expression (§15.27.1).
 
-        if (argument instanceof LambdaExpr) {
+        if (argument is LambdaExpr) {
             LambdaExpr lambdaExpr = (LambdaExpr)argument;
             if (isImplicitlyTyped(lambdaExpr)) {
                 return false;
@@ -590,7 +590,7 @@ public class TypeInference {
 
         // - An inexact method reference expression (§15.13.1).
 
-        if (argument instanceof MethodReferenceExpr) {
+        if (argument is MethodReferenceExpr) {
             MethodReferenceExpr methodReferenceExpr = (MethodReferenceExpr)argument;
             if (isInexact(methodReferenceExpr)) {
                 return false;
@@ -601,37 +601,37 @@ public class TypeInference {
         //   explicitly typed lambda expression or an exact method reference expression for which the
         //   corresponding target type (as derived from the signature of m) is a type parameter of m.
 
-        if (argument instanceof LambdaExpr) {
+        if (argument is LambdaExpr) {
             throw new UnsupportedOperationException();
         }
 
-        if (argument instanceof MethodReferenceExpr) {
+        if (argument is MethodReferenceExpr) {
             throw new UnsupportedOperationException();
         }
 
         // - An explicitly typed lambda expression whose body is an expression that is not pertinent to applicability.
 
-        if (argument instanceof LambdaExpr) {
+        if (argument is LambdaExpr) {
             throw new UnsupportedOperationException();
         }
 
         // - An explicitly typed lambda expression whose body is a block, where at least one result expression is not
         //   pertinent to applicability.
 
-        if (argument instanceof LambdaExpr) {
+        if (argument is LambdaExpr) {
             throw new UnsupportedOperationException();
         }
 
         // - A parenthesized expression (§15.8.5) whose contained expression is not pertinent to applicability.
 
-        if (argument instanceof EnclosedExpr) {
+        if (argument is EnclosedExpr) {
             EnclosedExpr enclosedExpr = (EnclosedExpr)argument;
             return isPertinentToApplicability(enclosedExpr.getInner());
         }
 
         // - A conditional expression (§15.25) whose second or third operand is not pertinent to applicability.
 
-        if (argument instanceof ConditionalExpr) {
+        if (argument is ConditionalExpr) {
             ConditionalExpr conditionalExpr = (ConditionalExpr)argument;
             return isPertinentToApplicability(conditionalExpr.getThenExpr()) &&
                     isPertinentToApplicability(conditionalExpr.getElseExpr());

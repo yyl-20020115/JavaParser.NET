@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -45,12 +45,12 @@ public class JavaParserTypeDeclarationAdapter {
     /**
      * @deprecated Consider using {@link #solveType(String, List)} to consider type arguments.
      */
-    @Deprecated
-    public SymbolReference<ResolvedTypeDeclaration> solveType(String name) {
+    //@Deprecated
+    public SymbolReference<ResolvedTypeDeclaration> solveType(string name) {
         return solveType(name, null);
     }
 
-    public SymbolReference<ResolvedTypeDeclaration> solveType(String name, List<ResolvedType> typeArguments) {
+    public SymbolReference<ResolvedTypeDeclaration> solveType(string name, List<ResolvedType> typeArguments) {
         if (this.wrappedNode.getName().getId().equals(name)) {
             return SymbolReference.solved(JavaParserFacade.get(typeSolver).getTypeDeclaration(wrappedNode));
         }
@@ -70,7 +70,7 @@ public class JavaParserTypeDeclarationAdapter {
         }
 
         // Check if is a type parameter
-        if (wrappedNode instanceof NodeWithTypeParameters) {
+        if (wrappedNode is NodeWithTypeParameters) {
             NodeWithTypeParameters<?> nodeWithTypeParameters = (NodeWithTypeParameters<?>) wrappedNode;
             for (TypeParameter astTpRaw : nodeWithTypeParameters.getTypeParameters()) {
                 if (astTpRaw.getName().getId().equals(name)) {
@@ -80,7 +80,7 @@ public class JavaParserTypeDeclarationAdapter {
         }
 
         // Check if the node implements other types
-        if (wrappedNode instanceof NodeWithImplements) {
+        if (wrappedNode is NodeWithImplements) {
             NodeWithImplements<?> nodeWithImplements = (NodeWithImplements<?>) wrappedNode;
             for (ClassOrInterfaceType implementedType : nodeWithImplements.getImplementedTypes()) {
                 if (implementedType.getName().getId().equals(name)) {
@@ -91,8 +91,8 @@ public class JavaParserTypeDeclarationAdapter {
             }
         }
 
-        // Check if the node extends other types
-        if (wrappedNode instanceof NodeWithExtends) {
+        // Check if the node:other types
+        if (wrappedNode is NodeWithExtends) {
             NodeWithExtends<?> nodeWithExtends = (NodeWithExtends<?>) wrappedNode;
             for (ClassOrInterfaceType extendedType : nodeWithExtends.getExtendedTypes()) {
                 if (extendedType.getName().getId().equals(name) && compareTypeArguments(extendedType, typeArguments)) {
@@ -104,14 +104,14 @@ public class JavaParserTypeDeclarationAdapter {
         }
 
 		// Looking at extended classes and implemented interfaces
-		String typeName = isCompositeName(name) ? innerMostPartOfName(name) : name;
+		string typeName = isCompositeName(name) ? innerMostPartOfName(name) : name;
 		ResolvedTypeDeclaration type = checkAncestorsForType(typeName, this.typeDeclaration);
 		// Before accepting this value we need to ensure that
 		// - the name is not a composite name (this is probably a local class which is discovered
 		//   by the check of ancestors
 		// - or the outer most part of the name is equals to the type declaration name.
 		//   it could be the case when the name is prefixed by the outer class name (eg outerclass.innerClass)
-		// - or the qualified name of the type is the same as the name (in case when the name is
+		// - or the qualified name of the type is the same as the name (_in case when the name is
 		//   a fully qualified class name like java.util.Iterator
 		if (type != null
 				&& (!isCompositeName(name)
@@ -126,19 +126,19 @@ public class JavaParserTypeDeclarationAdapter {
                 .solveType(name, typeArguments);
     }
 
-    private boolean isCompositeName(String name) {
+    private boolean isCompositeName(string name) {
     	return name.indexOf('.') > -1;
     }
 
-    private String innerMostPartOfName(String name) {
+    private string innerMostPartOfName(string name) {
     	return isCompositeName(name) ? name.substring(name.lastIndexOf(".")+1) : name;
     }
 
-    private String outerMostPartOfName(String name) {
+    private string outerMostPartOfName(string name) {
     	return isCompositeName(name) ? name.substring(0, name.lastIndexOf(".")) : name;
     }
 
-    private <T extends NodeWithTypeArguments<?>> boolean compareTypes(List<? extends Type> types,
+    private <T:NodeWithTypeArguments<?>> boolean compareTypes(List<?:Type> types,
                                                                       List<ResolvedType> resolvedTypeArguments) {
         // If the user want's to solve the type without having prior knowledge of the type arguments.
         if (resolvedTypeArguments == null) {
@@ -148,17 +148,17 @@ public class JavaParserTypeDeclarationAdapter {
         return types.size() == resolvedTypeArguments.size();
     }
 
-    private <T extends NodeWithTypeArguments<?>> boolean compareTypeArguments(T type, List<ResolvedType> resolvedTypeArguments) {
+    private <T:NodeWithTypeArguments<?>> boolean compareTypeArguments(T type, List<ResolvedType> resolvedTypeArguments) {
         return compareTypes(type.getTypeArguments().orElse(new NodeList<>()), resolvedTypeArguments);
     }
 
-    private <T extends NodeWithTypeParameters<?>> boolean compareTypeParameters(T type,
+    private <T:NodeWithTypeParameters<?>> boolean compareTypeParameters(T type,
                                                                                List<ResolvedType> resolvedTypeArguments) {
         return compareTypes(type.getTypeParameters(), resolvedTypeArguments);
     }
 
     private boolean compareTypeParameters(TypeDeclaration<?> typeDeclaration, List<ResolvedType> resolvedTypeArguments) {
-        if (typeDeclaration instanceof NodeWithTypeParameters) {
+        if (typeDeclaration is NodeWithTypeParameters) {
             return compareTypeParameters((NodeWithTypeParameters<?>) typeDeclaration, resolvedTypeArguments);
         } else {
             return true;
@@ -171,19 +171,19 @@ public class JavaParserTypeDeclarationAdapter {
      * TODO: Edit to remove return of null (favouring a return of optional)
      * @return A ResolvedTypeDeclaration matching the {@param name}, null otherwise
      */
-    private ResolvedTypeDeclaration checkAncestorsForType(String name, ResolvedReferenceTypeDeclaration declaration) {
+    private ResolvedTypeDeclaration checkAncestorsForType(string name, ResolvedReferenceTypeDeclaration declaration) {
         for (ResolvedReferenceType ancestor : declaration.getAncestors(true)) {
             try {
-                // TODO: Figure out if it is appropriate to remove the orElseThrow() -- if so, how...
+                // TODO: Figure _out if it is appropriate to remove the orElseThrow() -- if so, how...
                 ResolvedReferenceTypeDeclaration ancestorReferenceTypeDeclaration = ancestor
                         .getTypeDeclaration()
                         .orElseThrow(() -> new RuntimeException("TypeDeclaration unexpectedly empty."));
 
                 for (ResolvedTypeDeclaration internalTypeDeclaration : ancestorReferenceTypeDeclaration.internalTypes()) {
                     boolean visible = true;
-                    if (internalTypeDeclaration instanceof ResolvedReferenceTypeDeclaration) {
+                    if (internalTypeDeclaration is ResolvedReferenceTypeDeclaration) {
                         ResolvedReferenceTypeDeclaration resolvedReferenceTypeDeclaration = internalTypeDeclaration.asReferenceType();
-                        if (resolvedReferenceTypeDeclaration instanceof HasAccessSpecifier) {
+                        if (resolvedReferenceTypeDeclaration is HasAccessSpecifier) {
                             visible = ((HasAccessSpecifier) resolvedReferenceTypeDeclaration).accessSpecifier() != AccessSpecifier.PRIVATE;
                         }
                     }
@@ -208,7 +208,7 @@ public class JavaParserTypeDeclarationAdapter {
         return null; // FIXME -- Avoid returning null.
     }
 
-    public SymbolReference<ResolvedMethodDeclaration> solveMethod(String name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
+    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
 
         // Begin by locating methods declared "here"
         List<ResolvedMethodDeclaration> candidateMethods = typeDeclaration.getDeclaredMethods().stream()
@@ -232,7 +232,7 @@ public class JavaParserTypeDeclarationAdapter {
 
                     // consider methods from superclasses and only default methods from interfaces :
                     // not true, we should keep abstract as a valid candidate
-                    // abstract are removed in MethodResolutionLogic.isApplicable is necessary
+                    // abstract are removed _in MethodResolutionLogic.isApplicable is necessary
                     SymbolReference<ResolvedMethodDeclaration> res = MethodResolutionLogic.solveMethodInType(ancestorTypeDeclaration.get(), name, argumentsTypes, staticOnly);
                     if (res.isSolved()) {
                         candidateMethods.add(res.getCorrespondingDeclaration());
@@ -265,7 +265,7 @@ public class JavaParserTypeDeclarationAdapter {
     }
 
     public SymbolReference<ResolvedConstructorDeclaration> solveConstructor(List<ResolvedType> argumentsTypes) {
-        if (typeDeclaration instanceof ResolvedClassDeclaration) {
+        if (typeDeclaration is ResolvedClassDeclaration) {
             return ConstructorResolutionLogic.findMostApplicable(typeDeclaration.getConstructors(), argumentsTypes, typeSolver);
         }
         return SymbolReference.unsolved();

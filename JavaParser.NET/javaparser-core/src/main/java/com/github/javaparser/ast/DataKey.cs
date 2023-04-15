@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,14 +23,14 @@ namespace com.github.javaparser.ast;
 /**
  * A key to a piece of data associated with a {@link Node} at runtime.
  * The key contains type information that can be used to check the
- * type of any user data value for the key when the value is set. DataKey is abstract in order to
+ * type of any user data value for the key when the value is set. DataKey is abstract _in order to
  * force the creation of a subtype. That subtype is used to test for identity when looking for the
  * user data because actual object identity would suffer from problems under serialization.
  * So, the correct way to declare a DataKey is like this:
  * <p>
  * <pre>
  * {@code
- * public static final DataKey<Role> ROLE = new DataKey<Role>() { };
+ * public static /*final*/DataKey<Role> ROLE = new DataKey<Role>() { };
  * }
  * </pre>
  * <p>

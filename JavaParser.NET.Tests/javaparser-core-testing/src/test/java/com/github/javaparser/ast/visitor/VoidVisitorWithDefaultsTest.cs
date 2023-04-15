@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General License for more details.
@@ -46,7 +46,7 @@ class VoidVisitorWithDefaultsTest {
         );
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithNodeListMethodAsParameter() {
         NodeList<Node> nodeList = new NodeList<>();
         visitor.visit(nodeList, argument);
@@ -58,619 +58,619 @@ class VoidVisitorWithDefaultsTest {
         verifyNoMoreInteractions(visitor);
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithAnnotationDeclarationMethodAsParameterCallsDefaultAction() {
         visitor.visit(mock(AnnotationDeclaration.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithAnnotationMemberDeclarationMethodAsParameterCallsDefaultAction() {
         visitor.visit(mock(AnnotationMemberDeclaration.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithArrayAccessExprMethodAsParameterCallsDefaultAction() {
         visitor.visit(mock(ArrayAccessExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithArrayCreationExprMethodAsParameterCallsDefaultAction() {
         visitor.visit(mock(ArrayCreationExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithArrayInitializerExprMethodAsParameterCallsDefaultAction() {
         visitor.visit(mock(ArrayInitializerExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithAssertStmtMethodAsParameterCallsDefaultAction() {
         visitor.visit(mock(AssertStmt.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithBlockStmtAsParameterCallDefaultAction() {
         visitor.visit(mock(BlockStmt.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithBooleanLiteralExprAsParameterCallDefaultAction() {
         visitor.visit(mock(BooleanLiteralExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithBreakStmtAsParameterCallDefaultAction() {
         visitor.visit(mock(BreakStmt.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithCastExprAsParameterCallDefaultAction() {
         visitor.visit(mock(CastExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithCatchClauseAsParameterCallDefaultAction() {
         visitor.visit(mock(CatchClause.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithCharLiteralExprAsParameterCallDefaultAction() {
         visitor.visit(mock(CharLiteralExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithClassExprAsParameterCallDefaultAction() {
         visitor.visit(mock(ClassExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithClassOrInterfaceDeclarationAsParameterCallDefaultAction() {
         visitor.visit(mock(ClassOrInterfaceDeclaration.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithClassOrInterfaceTypeAsParameterCallDefaultAction() {
         visitor.visit(mock(ClassOrInterfaceType.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithCompilationUnitAsParameterCallDefaultAction() {
         visitor.visit(mock(CompilationUnit.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithConditionalExprAsParameterCallDefaultAction() {
         visitor.visit(mock(ConditionalExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithConstructorDeclarationAsParameterCallDefaultAction() {
         visitor.visit(mock(ConstructorDeclaration.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithContinueStmtAsParameterCallDefaultAction() {
         visitor.visit(mock(ContinueStmt.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithDoStmtAsParameterCallDefaultAction() {
         visitor.visit(mock(DoStmt.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithDoubleLiteralExprAsParameterCallDefaultAction() {
         visitor.visit(mock(DoubleLiteralExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithAnnotationDeclarationAsParameterCallDefaultAction() {
         visitor.visit(mock(AnnotationDeclaration.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithAnnotationMemberDeclarationAsParameterCallDefaultAction() {
         visitor.visit(mock(AnnotationMemberDeclaration.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithArrayAccessExprAsParameterCallDefaultAction() {
         visitor.visit(mock(ArrayAccessExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithArrayCreationExprAsParameterCallDefaultAction() {
         visitor.visit(mock(ArrayCreationExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithArrayCreationLevelAsParameterCallDefaultAction() {
         visitor.visit(mock(ArrayCreationLevel.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithArrayInitializerExprAsParameterCallDefaultAction() {
         visitor.visit(mock(ArrayInitializerExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithArrayTypeAsParameterCallDefaultAction() {
         visitor.visit(mock(ArrayType.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithAssertStmtAsParameterCallDefaultAction() {
         visitor.visit(mock(AssertStmt.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithAssignExprAsParameterCallDefaultAction() {
         visitor.visit(mock(AssignExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithBinaryExprAsParameterCallDefaultAction() {
         visitor.visit(mock(BinaryExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithBlockCommentAsParameterCallDefaultAction() {
         visitor.visit(mock(BlockComment.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithEmptyStmtAsParameterCallDefaultAction() {
         visitor.visit(mock(EmptyStmt.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithEnclosedExprAsParameterCallDefaultAction() {
         visitor.visit(mock(EnclosedExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithEnumConstantDeclarationAsParameterCallDefaultAction() {
         visitor.visit(mock(EnumConstantDeclaration.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithEnumDeclarationAsParameterCallDefaultAction() {
         visitor.visit(mock(EnumDeclaration.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithExplicitConstructorInvocationStmtAsParameterCallDefaultAction() {
         visitor.visit(mock(ExplicitConstructorInvocationStmt.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithExpressionStmtAsParameterCallDefaultAction() {
         visitor.visit(mock(ExpressionStmt.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithFieldAccessExprAsParameterCallDefaultAction() {
         visitor.visit(mock(FieldAccessExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithFieldDeclarationAsParameterCallDefaultAction() {
         visitor.visit(mock(FieldDeclaration.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithForEachStmtAsParameterCallDefaultAction() {
         visitor.visit(mock(ForEachStmt.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithForStmtAsParameterCallDefaultAction() {
         visitor.visit(mock(ForStmt.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithIfStmtAsParameterCallDefaultAction() {
         visitor.visit(mock(IfStmt.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithImportDeclarationAsParameterCallDefaultAction() {
         visitor.visit(mock(ImportDeclaration.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithInitializerDeclarationAsParameterCallDefaultAction() {
         visitor.visit(mock(InitializerDeclaration.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithInstanceOfExprAsParameterCallDefaultAction() {
         visitor.visit(mock(InstanceOfExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithIntegerLiteralExprAsParameterCallDefaultAction() {
         visitor.visit(mock(IntegerLiteralExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithIntersectionTypeAsParameterCallDefaultAction() {
         visitor.visit(mock(IntersectionType.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithJavadocCommentAsParameterCallDefaultAction() {
         visitor.visit(mock(JavadocComment.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithLabeledStmtAsParameterCallDefaultAction() {
         visitor.visit(mock(LabeledStmt.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithLambdaExprAsParameterCallDefaultAction() {
         visitor.visit(mock(LambdaExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithLineCommentAsParameterCallDefaultAction() {
         visitor.visit(mock(LineComment.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithLocalClassDeclarationStmtAsParameterCallDefaultAction() {
         visitor.visit(mock(LocalClassDeclarationStmt.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithLocalRecordDeclarationStmtAsParameterCallDefaultAction() {
         visitor.visit(mock(LocalRecordDeclarationStmt.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithLongLiteralExprAsParameterCallDefaultAction() {
         visitor.visit(mock(LongLiteralExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithMarkerAnnotationExprAsParameterCallDefaultAction() {
         visitor.visit(mock(MarkerAnnotationExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithMemberValuePairAsParameterCallDefaultAction() {
         visitor.visit(mock(MemberValuePair.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithMethodCallExprAsParameterCallDefaultAction() {
         visitor.visit(mock(MethodCallExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithMethodDeclarationAsParameterCallDefaultAction() {
         visitor.visit(mock(MethodDeclaration.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithMethodReferenceExprAsParameterCallDefaultAction() {
         visitor.visit(mock(MethodReferenceExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithModifierAsParameterCallDefaultAction() {
         visitor.visit(mock(Modifier.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithModuleDeclarationAsParameterCallDefaultAction() {
         visitor.visit(mock(ModuleDeclaration.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithModuleExportsDirectiveAsParameterCallDefaultAction() {
         visitor.visit(mock(ModuleExportsDirective.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithModuleOpensDirectiveAsParameterCallDefaultAction() {
         visitor.visit(mock(ModuleOpensDirective.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithModuleProvidesDirectiveAsParameterCallDefaultAction() {
         visitor.visit(mock(ModuleProvidesDirective.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithModuleRequiresDirectiveAsParameterCallDefaultAction() {
         visitor.visit(mock(ModuleRequiresDirective.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithModuleUsesDirectiveAsParameterCallDefaultAction() {
         visitor.visit(mock(ModuleUsesDirective.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithNameExprAsParameterCallDefaultAction() {
         visitor.visit(mock(NameExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithNameAsParameterCallDefaultAction() {
         visitor.visit(mock(Name.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithNormalAnnotationExprAsParameterCallDefaultAction() {
         visitor.visit(mock(NormalAnnotationExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithNullLiteralExprAsParameterCallDefaultAction() {
         visitor.visit(mock(NullLiteralExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithObjectCreationExprAsParameterCallDefaultAction() {
         visitor.visit(mock(ObjectCreationExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithPackageDeclarationAsParameterCallDefaultAction() {
         visitor.visit(mock(PackageDeclaration.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithParameterAsParameterCallDefaultAction() {
         visitor.visit(mock(Parameter.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithPatternExprAsParameterCallDefaultAction() {
         visitor.visit(mock(PatternExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithPrimitiveTypeAsParameterCallDefaultAction() {
         visitor.visit(mock(PrimitiveType.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithReceiverParameterAsParameterCallDefaultAction() {
         visitor.visit(mock(ReceiverParameter.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithReturnStmtAsParameterCallDefaultAction() {
         visitor.visit(mock(ReturnStmt.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithSimpleNameAsParameterCallDefaultAction() {
         visitor.visit(mock(SimpleName.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithSingleMemberAnnotationExprAsParameterCallDefaultAction() {
         visitor.visit(mock(SingleMemberAnnotationExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithStringLiteralExprAsParameterCallDefaultAction() {
         visitor.visit(mock(StringLiteralExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithSuperExprAsParameterCallDefaultAction() {
         visitor.visit(mock(SuperExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithSwitchEntryAsParameterCallDefaultAction() {
         visitor.visit(mock(SwitchEntry.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithSwitchExprAsParameterCallDefaultAction() {
         visitor.visit(mock(SwitchExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithSwitchStmtAsParameterCallDefaultAction() {
         visitor.visit(mock(SwitchStmt.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithSynchronizedStmtAsParameterCallDefaultAction() {
         visitor.visit(mock(SynchronizedStmt.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithTextBlockLiteralExprAsParameterCallDefaultAction() {
         visitor.visit(mock(TextBlockLiteralExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithThisExprAsParameterCallDefaultAction() {
         visitor.visit(mock(ThisExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithThrowStmtAsParameterCallDefaultAction() {
         visitor.visit(mock(ThrowStmt.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithTryStmtAsParameterCallDefaultAction() {
         visitor.visit(mock(TryStmt.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithTypeExprAsParameterCallDefaultAction() {
         visitor.visit(mock(TypeExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithTypeParameterAsParameterCallDefaultAction() {
         visitor.visit(mock(TypeParameter.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithUnaryExprAsParameterCallDefaultAction() {
         visitor.visit(mock(UnaryExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithUnionTypeAsParameterCallDefaultAction() {
         visitor.visit(mock(UnionType.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithUnknownTypeAsParameterCallDefaultAction() {
         visitor.visit(mock(UnknownType.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithUnparsableStmtAsParameterCallDefaultAction() {
         visitor.visit(mock(UnparsableStmt.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithVarTypeAsParameterCallDefaultAction() {
         visitor.visit(mock(VarType.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithVariableDeclarationExprAsParameterCallDefaultAction() {
         visitor.visit(mock(VariableDeclarationExpr.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithVariableDeclaratorCallDefaultAction() {
         visitor.visit(mock(VariableDeclarator.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithVoidTypeAsParameterCallDefaultAction() {
         visitor.visit(mock(VoidType.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithWhileStmtAsParameterCallDefaultAction() {
         visitor.visit(mock(WhileStmt.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithWildcardTypeAsParameterCallDefaultAction() {
         visitor.visit(mock(WildcardType.class), argument);
         assertNodeVisitDefaultAction();
     }
 
-    @Test
+    [TestMethod]
     void testThatVisitWithYieldStmtAsParameterCallDefaultAction() {
         visitor.visit(mock(YieldStmt.class), argument);
         assertNodeVisitDefaultAction();

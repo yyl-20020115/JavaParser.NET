@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,13 +24,13 @@ namespace com.github.javaparser.printer.lexicalpreservation;
 
 
 
-public class Issue2592Test extends AbstractLexicalPreservingTest {
+public class Issue2592Test:AbstractLexicalPreservingTest {
 
-    @Test
+    [TestMethod]
     public void testLPP() {
 
         considerCode("public class A {" +
-                "  public void m(final int a_original, int b) {" +
+                "  public void m(/*final*/int a_original, int b) {" +
                 "  }" +
                 "} ");
         Optional<MethodDeclaration> md = cu.findFirst(MethodDeclaration.class);
@@ -48,7 +48,7 @@ public class Issue2592Test extends AbstractLexicalPreservingTest {
         assertTrue(md.get().getParameters().stream().allMatch(p -> p.getParentNode().isPresent()));
 
 
-//        md.get().getParameters().forEach(p -> System.out.println(p + " parent " + p.getParentNode().isPresent()));
+//        md.get().getParameters().forEach(p -> System._out.println(p + " parent " + p.getParentNode().isPresent()));
         Parameter p1 = md.get().getParameter(0);
         Parameter p2 = new Parameter(p1.getModifiers(), p1.getType(), new SimpleName("a_renamed"));
 
@@ -58,7 +58,7 @@ public class Issue2592Test extends AbstractLexicalPreservingTest {
 
 
         //...however when we replaced the parent nodes (for the replaced node AND the added node (after the replaced node) now null
-//        md.get().getParameters().forEach(p -> System.out.println(p + " parent " + p.getParentNode().isPresent()));
+//        md.get().getParameters().forEach(p -> System._out.println(p + " parent " + p.getParentNode().isPresent()));
         assertTrue(md.get().getParameters().stream().allMatch(p -> p.getParentNode().isPresent()));
     }
 

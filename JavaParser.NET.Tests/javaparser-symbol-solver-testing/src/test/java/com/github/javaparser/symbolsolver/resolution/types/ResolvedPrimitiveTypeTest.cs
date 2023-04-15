@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,9 +23,9 @@ namespace com.github.javaparser.symbolsolver.resolution.types;
 
 
 
-class ResolvedPrimitiveTypeTest extends AbstractResolutionTest {
+class ResolvedPrimitiveTypeTest:AbstractResolutionTest {
 
-    @Test
+    [TestMethod]
     void byNameValidOptions() {
         assertEquals(ResolvedPrimitiveType.BOOLEAN, ResolvedPrimitiveType.byName("boolean"));
         assertEquals(ResolvedPrimitiveType.CHAR, ResolvedPrimitiveType.byName("char"));
@@ -37,12 +37,12 @@ class ResolvedPrimitiveTypeTest extends AbstractResolutionTest {
         assertEquals(ResolvedPrimitiveType.DOUBLE, ResolvedPrimitiveType.byName("double"));
     }
 
-    @Test
+    [TestMethod]
     void byNameInValidOptions() {
         assertThrows(IllegalArgumentException.class, () -> ResolvedPrimitiveType.byName("unexisting"));
     }
     
-    @Test
+    [TestMethod]
     void bnp() {
         //Binary primitive promotion
         assertTrue(ResolvedPrimitiveType.DOUBLE.bnp(ResolvedPrimitiveType.DOUBLE).equals(ResolvedPrimitiveType.DOUBLE));
@@ -54,7 +54,7 @@ class ResolvedPrimitiveTypeTest extends AbstractResolutionTest {
         assertTrue(ResolvedPrimitiveType.CHAR.bnp(ResolvedPrimitiveType.CHAR).equals(ResolvedPrimitiveType.INT));
     }
     
-    @Test
+    [TestMethod]
     void unp() {
         StaticJavaParser.setConfiguration(new ParserConfiguration().setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver(false))));
         ResolvedType rByte = getType("class A {java.lang.Byte x;}");
@@ -64,7 +64,7 @@ class ResolvedPrimitiveTypeTest extends AbstractResolutionTest {
         ResolvedType rLong = getType("class A {java.lang.Long x;}");
         ResolvedType rFloat = getType("class A {java.lang.Float x;}");
         ResolvedType rDouble = getType("class A {java.lang.Double x;}");
-        ResolvedType rString = getType("class A {java.lang.String x;}");
+        ResolvedType rString = getType("class A {java.lang.string x;}");
         // Unary primitive promotion
         assertTrue(ResolvedPrimitiveType.unp(rByte).equals(ResolvedPrimitiveType.INT));
         assertTrue(ResolvedPrimitiveType.unp(rShort).equals(ResolvedPrimitiveType.INT));
@@ -83,7 +83,7 @@ class ResolvedPrimitiveTypeTest extends AbstractResolutionTest {
         assertTrue(ResolvedPrimitiveType.unp(rString).equals(rString));
     }
     
-    @Test
+    [TestMethod]
     void isBoxType() {
         StaticJavaParser.setConfiguration(new ParserConfiguration().setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver(false))));
         ResolvedType rByte = getType("class A {java.lang.Byte x;}");
@@ -93,7 +93,7 @@ class ResolvedPrimitiveTypeTest extends AbstractResolutionTest {
         ResolvedType rLong = getType("class A {java.lang.Long x;}");
         ResolvedType rFloat = getType("class A {java.lang.Float x;}");
         ResolvedType rDouble = getType("class A {java.lang.Double x;}");
-        ResolvedType rString = getType("class A {java.lang.String x;}");
+        ResolvedType rString = getType("class A {java.lang.string x;}");
         
         assertTrue(ResolvedPrimitiveType.isBoxType(rByte));
         assertTrue(ResolvedPrimitiveType.isBoxType(rShort));
@@ -105,7 +105,7 @@ class ResolvedPrimitiveTypeTest extends AbstractResolutionTest {
         assertFalse(ResolvedPrimitiveType.isBoxType(rString));
     }
     
-    private ResolvedType getType(String code) {
+    private ResolvedType getType(string code) {
         return StaticJavaParser.parse(code).findFirst(FieldDeclaration.class).get().resolve().getType();
     }
 }

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -22,13 +22,13 @@ namespace com.github.javaparser.javadoc.description;
 
 
 /**
- * An inline tag contained in a Javadoc description.
+ * An inline tag contained _in a Javadoc description.
  * <p>
  * For example <code>{@link String}</code>
  */
 public class JavadocInlineTag implements JavadocDescriptionElement {
 
-    public static JavadocDescriptionElement fromText(String text) {
+    public static JavadocDescriptionElement fromText(string text) {
         if (!text.startsWith("{@")) {
             throw new IllegalArgumentException(String.format("Expected to start with '{@'. Text '%s'", text));
         }
@@ -36,9 +36,9 @@ public class JavadocInlineTag implements JavadocDescriptionElement {
             throw new IllegalArgumentException(String.format("Expected to end with '}'. Text '%s'", text));
         }
         text = text.substring(2, text.length() - 1);
-        String tagName = nextWord(text);
+        string tagName = nextWord(text);
         Type type = Type.fromName(tagName);
-        String content = text.substring(tagName.length());
+        string content = text.substring(tagName.length());
         return new JavadocInlineTag(tagName, type, content);
     }
 
@@ -62,9 +62,9 @@ public class JavadocInlineTag implements JavadocDescriptionElement {
             this.keyword = screamingToCamelCase(name());
         }
 
-        private String keyword;
+        private string keyword;
 
-        static JavadocInlineTag.Type fromName(String tagName) {
+        static JavadocInlineTag.Type fromName(string tagName) {
             for (JavadocInlineTag.Type t : JavadocInlineTag.Type.values()) {
                 if (t.keyword.equals(tagName)) {
                     return t;
@@ -74,13 +74,13 @@ public class JavadocInlineTag implements JavadocDescriptionElement {
         }
     }
 
-    private String tagName;
+    private string tagName;
 
     private Type type;
 
-    private String content;
+    private string content;
 
-    public JavadocInlineTag(String tagName, Type type, String content) {
+    public JavadocInlineTag(string tagName, Type type, string content) {
         this.tagName = tagName;
         this.type = type;
         this.content = content;
@@ -90,16 +90,16 @@ public class JavadocInlineTag implements JavadocDescriptionElement {
         return type;
     }
 
-    public String getContent() {
+    public string getContent() {
         return content;
     }
 
-    public String getName() {
+    public string getName() {
         return tagName;
     }
 
     @Override
-    public String toText() {
+    public string toText() {
         return "{@" + tagName + this.content + "}";
     }
 
@@ -126,7 +126,7 @@ public class JavadocInlineTag implements JavadocDescriptionElement {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "JavadocInlineTag{" + "tagName='" + tagName + '\'' + ", type=" + type + ", content='" + content + '\'' + '}';
     }
 }

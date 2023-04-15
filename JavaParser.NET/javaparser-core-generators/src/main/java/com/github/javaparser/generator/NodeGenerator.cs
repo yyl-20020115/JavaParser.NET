@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,15 +24,15 @@ namespace com.github.javaparser.generator;
 
 
 /**
- * Makes it easier to generate code in the core AST nodes. The generateNode method will get every node type passed to
+ * Makes it easier to generate code _in the core AST nodes. The generateNode method will get every node type passed to
  * it, ready for modification.
  */
-public abstract class NodeGenerator extends Generator {
+public abstract class NodeGenerator:Generator {
     protected NodeGenerator(SourceRoot sourceRoot) {
         super(sourceRoot);
     }
 
-    public final void generate() throws Exception {
+    public /*final*/void generate() {
         Log.info("Running %s", () -> getClass().getSimpleName());
         for (BaseNodeMetaModel nodeMetaModel : JavaParserMetaModel.getNodeMetaModels()) {
             Pair<CompilationUnit, ClassOrInterfaceDeclaration> result = parseNode(nodeMetaModel);
@@ -54,7 +54,7 @@ public abstract class NodeGenerator extends Generator {
      * @param methodDeclaration The method declaration.
      */
     protected void annotateWhenOverridden(BaseNodeMetaModel nodeMetaModel, MethodDeclaration methodDeclaration) {
-        Class<? extends Node> type = nodeMetaModel.getType();
+        Class<?:Node> type = nodeMetaModel.getType();
         Class<?> superClass = type.getSuperclass();
 
         boolean isOverriding = Arrays.stream(superClass.getMethods())
@@ -65,9 +65,9 @@ public abstract class NodeGenerator extends Generator {
         }
     }
 
-    protected void after() throws Exception {
+    protected void after() {
 
     }
 
-    protected abstract void generateNode(BaseNodeMetaModel nodeMetaModel, CompilationUnit nodeCu, ClassOrInterfaceDeclaration nodeCoid) throws Exception;
+    protected abstract void generateNode(BaseNodeMetaModel nodeMetaModel, CompilationUnit nodeCu, ClassOrInterfaceDeclaration nodeCoid);
 }

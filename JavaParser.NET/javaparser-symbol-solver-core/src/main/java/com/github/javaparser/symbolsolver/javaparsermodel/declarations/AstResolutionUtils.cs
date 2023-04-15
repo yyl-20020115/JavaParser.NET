@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,9 +28,9 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.declarations;
  */
 class AstResolutionUtils {
 
-    static String containerName(Node container) {
-        String packageName = getPackageName(container);
-        String className = getClassName("", container);
+    static string containerName(Node container) {
+        string packageName = getPackageName(container);
+        string className = getClassName("", container);
         return packageName +
                 ((!packageName.isEmpty() && !className.isEmpty()) ? "." : "") +
                 className;
@@ -39,8 +39,8 @@ class AstResolutionUtils {
     /*
      * Returns the package name from a node (that can be null) or an empty string
      */
-    static String getPackageName(Node container) {
-        String packageName = "";
+    static string getPackageName(Node container) {
+        string packageName = "";
         if (container == null) return packageName;
         Optional<CompilationUnit> cu = container.findCompilationUnit();
         if (cu.isPresent()) {
@@ -49,26 +49,26 @@ class AstResolutionUtils {
         return packageName;
     }
 
-    static String getClassName(String base, Node container) {
-        if (container instanceof com.github.javaparser.ast.body.ClassOrInterfaceDeclaration) {
-            String b = getClassName(base, container.getParentNode().orElse(null));
-            String cn = ((com.github.javaparser.ast.body.ClassOrInterfaceDeclaration) container).getName().getId();
+    static string getClassName(string base, Node container) {
+        if (container is com.github.javaparser.ast.body.ClassOrInterfaceDeclaration) {
+            string b = getClassName(base, container.getParentNode().orElse(null));
+            string cn = ((com.github.javaparser.ast.body.ClassOrInterfaceDeclaration) container).getName().getId();
             if (b.isEmpty()) {
                 return cn;
             } else {
                 return b + "." + cn;
             }
-        } else if (container instanceof com.github.javaparser.ast.body.EnumDeclaration) {
-            String b = getClassName(base, container.getParentNode().orElse(null));
-            String cn = ((com.github.javaparser.ast.body.EnumDeclaration) container).getName().getId();
+        } else if (container is com.github.javaparser.ast.body.EnumDeclaration) {
+            string b = getClassName(base, container.getParentNode().orElse(null));
+            string cn = ((com.github.javaparser.ast.body.EnumDeclaration) container).getName().getId();
             if (b.isEmpty()) {
                 return cn;
             } else {
                 return b + "." + cn;
             }
-        } else if (container instanceof com.github.javaparser.ast.body.AnnotationDeclaration) {
-            String b = getClassName(base, container.getParentNode().orElse(null));
-            String cn = ((com.github.javaparser.ast.body.AnnotationDeclaration) container).getName().getId();
+        } else if (container is com.github.javaparser.ast.body.AnnotationDeclaration) {
+            string b = getClassName(base, container.getParentNode().orElse(null));
+            string cn = ((com.github.javaparser.ast.body.AnnotationDeclaration) container).getName().getId();
             if (b.isEmpty()) {
                 return cn;
             } else {
@@ -81,7 +81,7 @@ class AstResolutionUtils {
     }
 
     static boolean hasDirectlyAnnotation(NodeWithAnnotations<?> nodeWithAnnotations, TypeSolver typeSolver,
-                                         String canonicalName) {
+                                         string canonicalName) {
         for (AnnotationExpr annotationExpr : nodeWithAnnotations.getAnnotations()) {
             SymbolReference<ResolvedTypeDeclaration> ref = JavaParserFactory.getContext(annotationExpr, typeSolver)
                     .solveType(annotationExpr.getNameAsString());
@@ -96,7 +96,7 @@ class AstResolutionUtils {
         return false;
     }
 
-    static <N extends ResolvedReferenceTypeDeclaration> List<ResolvedConstructorDeclaration> getConstructors(
+    static <N:ResolvedReferenceTypeDeclaration> List<ResolvedConstructorDeclaration> getConstructors(
             NodeWithMembers<?> wrappedNode,
             TypeSolver typeSolver,
             N container) {

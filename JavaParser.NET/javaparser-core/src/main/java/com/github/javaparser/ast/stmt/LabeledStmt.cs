@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,7 +28,7 @@ namespace com.github.javaparser.ast.stmt;
  *
  * @author Julio Vilmar Gesser
  */
-public class LabeledStmt extends Statement {
+public class LabeledStmt:Statement {
 
     private SimpleName label;
 
@@ -38,19 +38,19 @@ public class LabeledStmt extends Statement {
         this(null, new SimpleName(), new ReturnStmt());
     }
 
-    public LabeledStmt(final String label, final Statement statement) {
+    public LabeledStmt(/*final*/string label, /*final*/Statement statement) {
         this(null, new SimpleName(label), statement);
     }
 
-    @AllFieldsConstructor
-    public LabeledStmt(final SimpleName label, final Statement statement) {
+    //@AllFieldsConstructor
+    public LabeledStmt(/*final*/SimpleName label, /*final*/Statement statement) {
         this(null, label, statement);
     }
 
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public LabeledStmt(TokenRange tokenRange, SimpleName label, Statement statement) {
         super(tokenRange);
         setLabel(label);
@@ -59,24 +59,24 @@ public class LabeledStmt extends Statement {
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Statement getStatement() {
         return statement;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public LabeledStmt setStatement(final Statement statement) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public LabeledStmt setStatement(/*final*/Statement statement) {
         assertNotNull(statement);
         if (statement == this.statement) {
             return this;
@@ -89,13 +89,13 @@ public class LabeledStmt extends Statement {
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public SimpleName getLabel() {
         return label;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public LabeledStmt setLabel(final SimpleName label) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public LabeledStmt setLabel(/*final*/SimpleName label) {
         assertNotNull(label);
         if (label == this.label) {
             return this;
@@ -109,19 +109,19 @@ public class LabeledStmt extends Statement {
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public LabeledStmt clone() {
         return (LabeledStmt) accept(new CloneVisitor(), null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public LabeledStmtMetaModel getMetaModel() {
         return JavaParserMetaModel.labeledStmtMetaModel;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public boolean replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
@@ -138,25 +138,25 @@ public class LabeledStmt extends Statement {
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isLabeledStmt() {
         return true;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public LabeledStmt asLabeledStmt() {
         return this;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifLabeledStmt(Consumer<LabeledStmt> action) {
         action.accept(this);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<LabeledStmt> toLabeledStmt() {
         return Optional.of(this);
     }

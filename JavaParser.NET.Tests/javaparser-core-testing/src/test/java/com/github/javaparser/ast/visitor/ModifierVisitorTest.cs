@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,8 +23,8 @@ namespace com.github.javaparser.ast.visitor;
 
 
 
-class ModifierVisitorTest extends AbstractLexicalPreservingTest {
-    @Test
+class ModifierVisitorTest:AbstractLexicalPreservingTest {
+    [TestMethod]
     void makeSureParentListsCanBeModified() {
         NodeList<StringLiteralExpr> list = new NodeList<>();
         list.add(new StringLiteralExpr("t"));
@@ -34,8 +34,8 @@ class ModifierVisitorTest extends AbstractLexicalPreservingTest {
 
         list.accept(new ModifierVisitor<Void>() {
             @Override
-            public Visitable visit(final StringLiteralExpr n, final Void arg) {
-                String v = n.getValue();
+            public Visitable visit(/*final*/StringLiteralExpr n, /*final*/Void arg) {
+                string v = n.getValue();
 
                 list.addFirst(new StringLiteralExpr("extra " + v));
                 list.remove(new StringLiteralExpr("t"));
@@ -60,7 +60,7 @@ class ModifierVisitorTest extends AbstractLexicalPreservingTest {
         assertEquals(6, list.size());
     }
 
-    @Test
+    [TestMethod]
     void binaryExprReturnsLeftExpressionWhenRightSideIsRemoved() {
         Expression expression = parseExpression("1+2");
         Visitable result = expression.accept(new ModifierVisitor<Void>() {
@@ -74,10 +74,10 @@ class ModifierVisitorTest extends AbstractLexicalPreservingTest {
         assertEquals("2", result.toString());
     }
 
-    @Test
+    [TestMethod]
     void binaryExprReturnsRightExpressionWhenLeftSideIsRemoved() {
-        final Expression expression = parseExpression("1+2");
-        final Visitable result = expression.accept(new ModifierVisitor<Void>() {
+        /*final*/Expression expression = parseExpression("1+2");
+        /*final*/Visitable result = expression.accept(new ModifierVisitor<Void>() {
             public Visitable visit(IntegerLiteralExpr integerLiteralExpr, Void arg) {
                 if (integerLiteralExpr.getValue().equals("2")) {
                     return null;
@@ -88,11 +88,11 @@ class ModifierVisitorTest extends AbstractLexicalPreservingTest {
         assertEquals("1", result.toString());
     }
 
-    @Test
+    [TestMethod]
     void fieldDeclarationCantSurviveWithoutVariables() {
-        final BodyDeclaration<?> bodyDeclaration = parseBodyDeclaration("int x=1;");
+        /*final*/BodyDeclaration<?> bodyDeclaration = parseBodyDeclaration("int x=1;");
 
-        final Visitable result = bodyDeclaration.accept(new ModifierVisitor<Void>() {
+        /*final*/Visitable result = bodyDeclaration.accept(new ModifierVisitor<Void>() {
             public Visitable visit(VariableDeclarator x, Void arg) {
                 return null;
             }
@@ -101,11 +101,11 @@ class ModifierVisitorTest extends AbstractLexicalPreservingTest {
         assertNull(result);
     }
 
-    @Test
+    [TestMethod]
     void variableDeclarationCantSurviveWithoutVariables() {
-        final BodyDeclaration<?> bodyDeclaration = parseBodyDeclaration("void x() {int x=1;}");
+        /*final*/BodyDeclaration<?> bodyDeclaration = parseBodyDeclaration("void x() {int x=1;}");
 
-        final Visitable result = bodyDeclaration.accept(new ModifierVisitor<Void>() {
+        /*final*/Visitable result = bodyDeclaration.accept(new ModifierVisitor<Void>() {
             public Visitable visit(VariableDeclarator x, Void arg) {
                 return null;
             }
@@ -114,7 +114,7 @@ class ModifierVisitorTest extends AbstractLexicalPreservingTest {
         assertEquals("void x() {" + SYSTEM_EOL + "}", result.toString());
     }
 
-    @Test
+    [TestMethod]
     void issue2124() {
         ModifierVisitor<Void> modifier = new ModifierVisitor<>();
         considerCode("\n" +

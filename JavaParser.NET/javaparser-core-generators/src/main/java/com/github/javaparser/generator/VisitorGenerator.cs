@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,16 +27,16 @@ namespace com.github.javaparser.generator;
 /**
  * Makes it easier to generate visitor classes.
  * It will create missing visit methods on the fly,
- * and will ask you to fill in the bodies of the visit methods.
+ * and will ask you to fill _in the bodies of the visit methods.
  */
-public abstract class VisitorGenerator extends Generator {
-    private final String pkg;
-    private final String visitorClassName;
-    private final String returnType;
-    private final String argumentType;
-    private final boolean createMissingVisitMethods;
+public abstract class VisitorGenerator:Generator {
+    private /*final*/string pkg;
+    private /*final*/string visitorClassName;
+    private /*final*/string returnType;
+    private /*final*/string argumentType;
+    private /*final*/boolean createMissingVisitMethods;
 
-    protected VisitorGenerator(SourceRoot sourceRoot, String pkg, String visitorClassName, String returnType, String argumentType, boolean createMissingVisitMethods) {
+    protected VisitorGenerator(SourceRoot sourceRoot, string pkg, string visitorClassName, string returnType, string argumentType, boolean createMissingVisitMethods) {
         super(sourceRoot);
         this.pkg = pkg;
         this.visitorClassName = visitorClassName;
@@ -45,16 +45,16 @@ public abstract class VisitorGenerator extends Generator {
         this.createMissingVisitMethods = createMissingVisitMethods;
     }
 
-    public final void generate() throws Exception {
+    public /*final*/void generate() {
         Log.info("Running %s", () -> getClass().getSimpleName());
 
-        final CompilationUnit compilationUnit = sourceRoot.tryToParse(pkg, visitorClassName + ".java").getResult().get();
+        /*final*/CompilationUnit compilationUnit = sourceRoot.tryToParse(pkg, visitorClassName + ".java").getResult().get();
 
         Optional<ClassOrInterfaceDeclaration> visitorClassOptional = compilationUnit.getClassByName(visitorClassName);
         if (!visitorClassOptional.isPresent()) {
             visitorClassOptional = compilationUnit.getInterfaceByName(visitorClassName);
         }
-        final ClassOrInterfaceDeclaration visitorClass = visitorClassOptional.get();
+        /*final*/ClassOrInterfaceDeclaration visitorClass = visitorClassOptional.get();
 
         JavaParserMetaModel.getNodeMetaModels().stream()
                 .filter((baseNodeMetaModel) -> !baseNodeMetaModel.isAbstract())
@@ -62,12 +62,12 @@ public abstract class VisitorGenerator extends Generator {
         after();
     }
 
-    protected void after() throws Exception {
+    protected void after() {
 
     }
 
     private void generateVisitMethodForNode(BaseNodeMetaModel node, ClassOrInterfaceDeclaration visitorClass, CompilationUnit compilationUnit) {
-        final Optional<MethodDeclaration> existingVisitMethod = visitorClass.getMethods().stream()
+        /*final*/Optional<MethodDeclaration> existingVisitMethod = visitorClass.getMethods().stream()
                 .filter(m -> m.getNameAsString().equals("visit"))
                 .filter(m -> m.getParameter(0).getType().toString().equals(node.getTypeName()))
                 .findFirst();

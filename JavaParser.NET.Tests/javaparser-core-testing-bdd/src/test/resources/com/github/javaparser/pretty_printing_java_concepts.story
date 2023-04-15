@@ -1,14 +1,14 @@
 Scenario: Check a whole lot of things at once that should be separate tests
 
-Given the class in the file "JavaConcepts.java"
+Given the class _in the file "JavaConcepts.java"
 When the class is parsed by the Java parser
 Then it is printed as:
 namespace japa.bdd.samples;
 
 
-@Ignore
-@Deprecated
-public class JavaConcepts<T extends List<int[]>, X> extends Base implements Serializable {
+//@Ignore
+//@Deprecated
+public class JavaConcepts<T:List<int[]>, X>:Base implements Serializable {
 
     static Class clz1 = String.class;
 
@@ -51,7 +51,7 @@ public class JavaConcepts<T extends List<int[]>, X> extends Base implements Seri
 
     List<String> diamond1 = new LinkedList<>();
 
-    @Deprecated()
+    //@Deprecated()
     static class Ugly {
 
         static int x = 0;
@@ -90,7 +90,7 @@ public class JavaConcepts<T extends List<int[]>, X> extends Base implements Seri
         }
     }
 
-    @Deprecated()
+    //@Deprecated()
     int[][][][] arr2 = new int[10][2][1][0];
 
     volatile float fff = 0x1.fffeP+127f;
@@ -118,7 +118,7 @@ public class JavaConcepts<T extends List<int[]>, X> extends Base implements Seri
 
     public enum Sexo {
 
-        m, @Deprecated
+        m, //@Deprecated
         f;
 
         public enum Sexo_ implements Serializable, Cloneable {
@@ -128,7 +128,7 @@ public class JavaConcepts<T extends List<int[]>, X> extends Base implements Seri
         }
     }
 
-    @Deprecated
+    //@Deprecated
     public enum Enum {
 
         m(1) {
@@ -175,8 +175,8 @@ public class JavaConcepts<T extends List<int[]>, X> extends Base implements Seri
             public void m() {
             }
         }
-        @Deprecated
-        final class Y extends X {
+        //@Deprecated
+        /*final*/class Y:X {
 
             public Y() {
                 super();
@@ -195,13 +195,13 @@ public class JavaConcepts<T extends List<int[]>, X> extends Base implements Seri
         }
     }
 
-    public <T> JavaConcepts(String str) {
+    public <T> JavaConcepts(string str) {
     }
 
-    private class QWE extends JavaConcepts<List<int[]>, String> {
+    private class QWE:JavaConcepts<List<int[]>, String> {
 
-        @Deprecated
-        final int z = 0;
+        //@Deprecated
+        /*final*/int z = 0;
 
         int i = (int) -1;
 
@@ -230,16 +230,16 @@ public class JavaConcepts<T extends List<int[]>, X> extends Base implements Seri
             }
             ll: switch(i) {
                 case 1:
-                    System.out.println(1);
+                    System._out.println(1);
                     break ll;
                 default:
                     {
-                        System.out.println("default");
+                        System._out.println("default");
                         break;
                     }
                 case 2:
-                    if (t instanceof Base) {
-                        System.out.println(1);
+                    if (t is Base) {
+                        System._out.println(1);
                     }
                     i++;
                     ++i;
@@ -247,7 +247,7 @@ public class JavaConcepts<T extends List<int[]>, X> extends Base implements Seri
         }
 
         private synchronized int[] doSomething() {
-            List<? extends Number> x = new ArrayList<Integer>();
+            List<?:Number> x = new ArrayList<Integer>();
             return new int[] { 1 };
         }
     }
@@ -255,7 +255,7 @@ public class JavaConcepts<T extends List<int[]>, X> extends Base implements Seri
     public static void main(String[] args) throws ParseException, IOException {
         int x = 2;
         CompilationUnit cu = parse(new File("src/japa/parser/javacc/Parser.java"));
-        System.out.println(cu);
+        System._out.println(cu);
         JavaConcepts teste = new JavaConcepts(2);
         JavaConcepts.QWE qwe = teste.new QWE(1);
         if (1 + 1 == 2) {
@@ -284,10 +284,10 @@ public class JavaConcepts<T extends List<int[]>, X> extends Base implements Seri
             x++;
         } while (x < 100);
         do x++; while (x < 100);
-        for (@Deprecated int i : arr4[0]) {
+        for (//@Deprecated int i : arr4[0]) {
             x--;
         }
-        for (@Deprecated final int i = 0, j = 1; i < 10; x++) {
+        for (//@Deprecated /*final*/int i = 0, j = 1; i < 10; x++) {
             break;
         }
         int i, j;
@@ -296,9 +296,9 @@ public class JavaConcepts<T extends List<int[]>, X> extends Base implements Seri
         }
     }
 
-    public static CompilationUnit parse(@Deprecated File file) throws ParseException, IOException {
-        String a = ((String) "qwe");
-        String x = ((String) clz1.getName());
+    public static CompilationUnit parse(//@Deprecated File file) throws ParseException, IOException {
+        string a = ((String) "qwe");
+        string x = ((String) clz1.getName());
         int y = ((Integer) (Object) x).intValue();
         synchronized (file) {
             file = null;
@@ -308,59 +308,59 @@ public class JavaConcepts<T extends List<int[]>, X> extends Base implements Seri
             if (file == null) {
                 throw new NullPointerException("blah");
             }
-        } catch (final NullPointerException e) {
-            System.out.println("catch");
+        } catch (/*final*/NullPointerException e) {
+            System._out.println("catch");
         } catch (RuntimeException e) {
-            System.out.println("catch");
+            System._out.println("catch");
         } finally {
-            System.out.println("finally");
+            System._out.println("finally");
         }
         try {
             if (file == null) {
                 throw new NullPointerException("blah");
             }
         } finally {
-            System.out.println("finally");
+            System._out.println("finally");
         }
         try {
             if (file == null) {
                 throw new NullPointerException("blah");
             }
         } catch (RuntimeException e) {
-            System.out.println("catch");
+            System._out.println("catch");
         }
-        try (InputStream in = createInputStream()) {
-            System.out.println(in);
+        try (InputStream _in = createInputStream()) {
+            System._out.println(_in);
         } catch (IOException e) {
-            System.out.println("catch");
+            System._out.println("catch");
         }
-        try (InputStream in = createInputStream();
+        try (InputStream _in = createInputStream();
             InputStream in2 = createInputStream()) {
-            System.out.println(in);
+            System._out.println(_in);
         } catch (IOException e) {
-            System.out.println("catch");
+            System._out.println("catch");
         }
-        try (InputStream in = createInputStream()) {
-            System.out.println(in);
+        try (InputStream _in = createInputStream()) {
+            System._out.println(_in);
         }
         try {
-            System.out.println("whatever");
+            System._out.println("whatever");
         } catch (RuntimeException e) {
-            System.out.println(e);
-        } catch (final Exception | Error e) {
-            System.out.println(e);
+            System._out.println(e);
+        } catch (/*final*/Exception | Error e) {
+            System._out.println(e);
         }
         return JavaParser.parse(file);
     }
 
-    class A<T extends Integer & Serializable> implements XXX, Serializable {
+    class A<T:Integer & Serializable> implements XXX, Serializable {
 
-        public <ABC> A(Integer integer, ABC string) throws Exception, IOException {
+        public <ABC> A(Integer integer, ABC string), IOException {
         }
     }
 
-    private <Y> void x(Map<? extends X, ? super T> x) {
-        @Deprecated
+    private <Y> void x(Map<?:X, ? super T> x) {
+        //@Deprecated
         Comparator c = new Comparator() {
 
             public int compare(Object o1, Object o2) {
@@ -390,5 +390,5 @@ class Base {
     }
 }
 
-interface XXX extends Serializable, Cloneable {
+interface XXX:Serializable, Cloneable {
 }

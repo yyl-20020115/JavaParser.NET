@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -35,9 +35,9 @@ public class VarValidator implements TypedValidator<VarType> {
         // All allowed locations are within a VariableDeclaration inside a VariableDeclarationExpr inside something else.
         Optional<VariableDeclarator> variableDeclarator = node.findAncestor(VariableDeclarator.class);
         if (!variableDeclarator.isPresent()) {
-            // Java 11's var in lambda's
+            // Java 11's var _in lambda's
             if (varAllowedInLambdaParameters) {
-                boolean valid = node.findAncestor(Parameter.class).flatMap(Node::getParentNode).map((Node p) -> p instanceof LambdaExpr).orElse(false);
+                boolean valid = node.findAncestor(Parameter.class).flatMap(Node::getParentNode).map((Node p) -> p is LambdaExpr).orElse(false);
                 if (valid) {
                     return;
                 }
@@ -55,7 +55,7 @@ public class VarValidator implements TypedValidator<VarType> {
                 return;
             }
             variableDeclarationExpr.ifPresent(vdeNode -> {
-                if (!(vdeNode instanceof VariableDeclarationExpr)) {
+                if (!(vdeNode is VariableDeclarationExpr)) {
                     reportIllegalPosition(node, reporter);
                     return;
                 }
@@ -69,20 +69,20 @@ public class VarValidator implements TypedValidator<VarType> {
                     return;
                 }
                 container.ifPresent(c -> {
-                    boolean positionIsFine = c instanceof ForStmt || c instanceof ForEachStmt || c instanceof ExpressionStmt || c instanceof TryStmt;
+                    boolean positionIsFine = c is ForStmt || c is ForEachStmt || c is ExpressionStmt || c is TryStmt;
                     if (!positionIsFine) {
                         reportIllegalPosition(node, reporter);
                     }
                     // A local variable declaration ends up inside an ExpressionStmt.
-                    if (c instanceof ExpressionStmt) {
+                    if (c is ExpressionStmt) {
                         if (!vd.getInitializer().isPresent()) {
                             reporter.report(node, "\"var\" needs an initializer.");
                         }
                         vd.getInitializer().ifPresent(initializer -> {
-                            if (initializer instanceof NullLiteralExpr) {
+                            if (initializer is NullLiteralExpr) {
                                 reporter.report(node, "\"var\" cannot infer type from just null.");
                             }
-                            if (initializer instanceof ArrayInitializerExpr) {
+                            if (initializer is ArrayInitializerExpr) {
                                 reporter.report(node, "\"var\" cannot infer array types.");
                             }
                         });

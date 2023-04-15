@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,16 +25,16 @@ namespace com.github.javaparser.ast.expr;
 
 /**
  * A declaration of variables.
- * It is an expression, so it can be put in places like the initializer of a for loop,
+ * It is an expression, so it can be put _in places like the initializer of a for loop,
  * or the resources part of the try statement.
- * <br>{@code final int x=3, y=55}
+ * <br>{@code /*final*/int x=3, y=55}
  *
  * <br>All annotations preceding the type will be set on this object, not on the type.
  * JavaParser doesn't know if it they are applicable to the method or the type.
  *
  * @author Julio Vilmar Gesser
  */
-public class VariableDeclarationExpr extends Expression implements NodeWithFinalModifier<VariableDeclarationExpr>, NodeWithAnnotations<VariableDeclarationExpr>, NodeWithVariables<VariableDeclarationExpr> {
+public class VariableDeclarationExpr:Expression implements NodeWithFinalModifier<VariableDeclarationExpr>, NodeWithAnnotations<VariableDeclarationExpr>, NodeWithVariables<VariableDeclarationExpr> {
 
     private NodeList<Modifier> modifiers;
 
@@ -47,7 +47,7 @@ public class VariableDeclarationExpr extends Expression implements NodeWithFinal
         this(null, new NodeList<>(), new NodeList<>(), new NodeList<>());
     }
 
-    public VariableDeclarationExpr(final Type type, String variableName) {
+    public VariableDeclarationExpr(/*final*/Type type, string variableName) {
         this(null, new NodeList<>(), new NodeList<>(), nodeList(new VariableDeclarator(type, variableName)));
     }
 
@@ -55,7 +55,7 @@ public class VariableDeclarationExpr extends Expression implements NodeWithFinal
         this(null, new NodeList<>(), new NodeList<>(), nodeList(var));
     }
 
-    public VariableDeclarationExpr(final Type type, String variableName, Modifier... modifiers) {
+    public VariableDeclarationExpr(/*final*/Type type, string variableName, Modifier... modifiers) {
         this(null, Arrays.stream(modifiers).collect(Collectors.toCollection(() -> new NodeList<>())), new NodeList<>(), nodeList(new VariableDeclarator(type, variableName)));
     }
 
@@ -63,23 +63,23 @@ public class VariableDeclarationExpr extends Expression implements NodeWithFinal
         this(null, Arrays.stream(modifiers).collect(Collectors.toCollection(() -> new NodeList<>())), new NodeList<>(), nodeList(var));
     }
 
-    public VariableDeclarationExpr(final NodeList<VariableDeclarator> variables) {
+    public VariableDeclarationExpr(/*final*/NodeList<VariableDeclarator> variables) {
         this(null, new NodeList<>(), new NodeList<>(), variables);
     }
 
-    public VariableDeclarationExpr(final NodeList<Modifier> modifiers, final NodeList<VariableDeclarator> variables) {
+    public VariableDeclarationExpr(/*final*/NodeList<Modifier> modifiers, /*final*/NodeList<VariableDeclarator> variables) {
         this(null, modifiers, new NodeList<>(), variables);
     }
 
-    @AllFieldsConstructor
-    public VariableDeclarationExpr(final NodeList<Modifier> modifiers, final NodeList<AnnotationExpr> annotations, final NodeList<VariableDeclarator> variables) {
+    //@AllFieldsConstructor
+    public VariableDeclarationExpr(/*final*/NodeList<Modifier> modifiers, /*final*/NodeList<AnnotationExpr> annotations, /*final*/NodeList<VariableDeclarator> variables) {
         this(null, modifiers, annotations, variables);
     }
 
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public VariableDeclarationExpr(TokenRange tokenRange, NodeList<Modifier> modifiers, NodeList<AnnotationExpr> annotations, NodeList<VariableDeclarator> variables) {
         super(tokenRange);
         setModifiers(modifiers);
@@ -89,18 +89,18 @@ public class VariableDeclarationExpr extends Expression implements NodeWithFinal
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public NodeList<AnnotationExpr> getAnnotations() {
         return annotations;
     }
@@ -111,18 +111,18 @@ public class VariableDeclarationExpr extends Expression implements NodeWithFinal
      * @return modifiers
      * @see Modifier
      */
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public NodeList<Modifier> getModifiers() {
         return modifiers;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public NodeList<VariableDeclarator> getVariables() {
         return variables;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public VariableDeclarationExpr setAnnotations(final NodeList<AnnotationExpr> annotations) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public VariableDeclarationExpr setAnnotations(/*final*/NodeList<AnnotationExpr> annotations) {
         assertNotNull(annotations);
         if (annotations == this.annotations) {
             return this;
@@ -135,8 +135,8 @@ public class VariableDeclarationExpr extends Expression implements NodeWithFinal
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public VariableDeclarationExpr setModifiers(final NodeList<Modifier> modifiers) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public VariableDeclarationExpr setModifiers(/*final*/NodeList<Modifier> modifiers) {
         assertNotNull(modifiers);
         if (modifiers == this.modifiers) {
             return this;
@@ -149,8 +149,8 @@ public class VariableDeclarationExpr extends Expression implements NodeWithFinal
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public VariableDeclarationExpr setVariables(final NodeList<VariableDeclarator> variables) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public VariableDeclarationExpr setVariables(/*final*/NodeList<VariableDeclarator> variables) {
         assertNotNull(variables);
         if (variables == this.variables) {
             return this;
@@ -164,7 +164,7 @@ public class VariableDeclarationExpr extends Expression implements NodeWithFinal
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
     public boolean remove(Node node) {
         if (node == null) {
             return false;
@@ -191,19 +191,19 @@ public class VariableDeclarationExpr extends Expression implements NodeWithFinal
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public VariableDeclarationExpr clone() {
         return (VariableDeclarationExpr) accept(new CloneVisitor(), null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public VariableDeclarationExprMetaModel getMetaModel() {
         return JavaParserMetaModel.variableDeclarationExprMetaModel;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public boolean replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
@@ -230,25 +230,25 @@ public class VariableDeclarationExpr extends Expression implements NodeWithFinal
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isVariableDeclarationExpr() {
         return true;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public VariableDeclarationExpr asVariableDeclarationExpr() {
         return this;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifVariableDeclarationExpr(Consumer<VariableDeclarationExpr> action) {
         action.accept(this);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<VariableDeclarationExpr> toVariableDeclarationExpr() {
         return Optional.of(this);
     }

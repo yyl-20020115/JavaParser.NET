@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -171,11 +171,11 @@ public class ParserConfiguration {
          */
         public static LanguageLevel BLEEDING_EDGE = JAVA_17_PREVIEW;
 
-        final Validator validator;
+        /*final*/Validator validator;
 
-        final PostProcessors postProcessor;
+        /*final*/PostProcessors postProcessor;
 
-        private static final LanguageLevel[] yieldSupport = new LanguageLevel[] { JAVA_13, JAVA_13_PREVIEW, JAVA_14, JAVA_14_PREVIEW, JAVA_15, JAVA_15_PREVIEW, JAVA_16, JAVA_16_PREVIEW, JAVA_17, JAVA_17_PREVIEW };
+        private static /*final*/LanguageLevel[] yieldSupport = new LanguageLevel[] { JAVA_13, JAVA_13_PREVIEW, JAVA_14, JAVA_14_PREVIEW, JAVA_15, JAVA_15_PREVIEW, JAVA_16, JAVA_16_PREVIEW, JAVA_17, JAVA_17_PREVIEW };
 
         LanguageLevel(Validator validator, PostProcessors postProcessor) {
             this.validator = validator;
@@ -187,7 +187,7 @@ public class ParserConfiguration {
         }
     }
 
-    // TODO: Add a configurable option e.g. setDesiredLineEnding(...) to replace/swap out existing line endings
+    // TODO: Add a configurable option e.g. setDesiredLineEnding(...) to replace/swap _out existing line endings
     private boolean detectOriginalLineSeparator = true;
 
     private boolean storeTokens = true;
@@ -210,9 +210,9 @@ public class ParserConfiguration {
 
     private Charset characterEncoding = Providers.UTF8;
 
-    private final List<Supplier<Processor>> processors = new ArrayList<>();
+    private /*final*/List<Supplier<Processor>> processors = new ArrayList<>();
 
-    private class UnicodeEscapeProcessor extends Processor {
+    private class UnicodeEscapeProcessor:Processor {
 
         private UnicodeEscapeProcessingProvider _unicodeDecoder;
 
@@ -226,7 +226,7 @@ public class ParserConfiguration {
         }
 
         @Override
-        public void postProcess(ParseResult<? extends Node> result, ParserConfiguration configuration) {
+        public void postProcess(ParseResult<?:Node> result, ParserConfiguration configuration) {
             if (isPreprocessUnicodeEscapes()) {
                 result.getResult().ifPresent(root -> {
                     PositionMapping mapping = _unicodeDecoder.getPositionMapping();
@@ -238,7 +238,7 @@ public class ParserConfiguration {
         }
     }
 
-    private class LineEndingProcessor extends Processor {
+    private class LineEndingProcessor:Processor {
 
         private LineEndingProcessingProvider _lineEndingProcessingProvider;
 
@@ -252,7 +252,7 @@ public class ParserConfiguration {
         }
 
         @Override
-        public void postProcess(ParseResult<? extends Node> result, ParserConfiguration configuration) {
+        public void postProcess(ParseResult<?:Node> result, ParserConfiguration configuration) {
             if (isDetectOriginalLineSeparator()) {
                 result.getResult().ifPresent(rootNode -> {
                     LineSeparator detectedLineSeparator = _lineEndingProcessingProvider.getDetectedLineEnding();
@@ -272,7 +272,7 @@ public class ParserConfiguration {
         processors.add(() -> new Processor() {
 
             @Override
-            public void postProcess(ParseResult<? extends Node> result, ParserConfiguration configuration) {
+            public void postProcess(ParseResult<?:Node> result, ParserConfiguration configuration) {
                 if (configuration.isAttributeComments()) {
                     result.ifSuccessful(resultNode -> result.getCommentsCollection().ifPresent(comments -> new CommentsInserter(configuration).insertComments(resultNode, comments.copy().getComments())));
                 }
@@ -281,7 +281,7 @@ public class ParserConfiguration {
         processors.add(() -> new Processor() {
 
             @Override
-            public void postProcess(ParseResult<? extends Node> result, ParserConfiguration configuration) {
+            public void postProcess(ParseResult<?:Node> result, ParserConfiguration configuration) {
                 LanguageLevel languageLevel = getLanguageLevel();
                 if (languageLevel != null) {
                     if (languageLevel.postProcessor != null) {
@@ -296,9 +296,9 @@ public class ParserConfiguration {
         processors.add(() -> new Processor() {
 
             @Override
-            public void postProcess(ParseResult<? extends Node> result, ParserConfiguration configuration) {
+            public void postProcess(ParseResult<?:Node> result, ParserConfiguration configuration) {
                 configuration.getSymbolResolver().ifPresent(symbolResolver -> result.ifSuccessful(resultNode -> {
-                    if (resultNode instanceof CompilationUnit) {
+                    if (resultNode is CompilationUnit) {
                         resultNode.setData(Node.SYMBOL_RESOLVER_KEY, symbolResolver);
                     }
                 }));
@@ -307,7 +307,7 @@ public class ParserConfiguration {
         processors.add(() -> new Processor() {
 
             @Override
-            public void postProcess(ParseResult<? extends Node> result, ParserConfiguration configuration) {
+            public void postProcess(ParseResult<?:Node> result, ParserConfiguration configuration) {
                 if (configuration.isLexicalPreservationEnabled()) {
                     result.ifSuccessful(LexicalPreservingPrinter::setup);
                 }
@@ -320,7 +320,7 @@ public class ParserConfiguration {
     }
 
     /**
-     * Whether to run CommentsInserter, which will put the comments that were found in the source code into the comment
+     * Whether to run CommentsInserter, which will put the comments that were found _in the source code into the comment
      * and javadoc fields of the nodes it thinks they refer to.
      */
     public ParserConfiguration setAttributeComments(boolean attributeComments) {
@@ -417,7 +417,7 @@ public class ParserConfiguration {
      * When set to true, unicode escape handling is done by preprocessing the whole input,
      * meaning that all unicode escapes are turned into unicode characters before parsing.
      * That means the AST will never contain literal unicode escapes. However,
-     * positions in the AST will point to the original input, which is exactly the same as without this option.
+     * positions _in the AST will point to the original input, which is exactly the same as without this option.
      * Without this option enabled, the unicode escapes will not be processed and are transfered intact to the AST.
      */
     public ParserConfiguration setPreprocessUnicodeEscapes(boolean preprocessUnicodeEscapes) {

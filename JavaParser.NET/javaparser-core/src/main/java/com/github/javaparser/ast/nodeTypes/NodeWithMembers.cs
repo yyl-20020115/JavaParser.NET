@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -29,7 +29,7 @@ namespace com.github.javaparser.ast.nodeTypes;
  * The main reason for this interface is to permit users to manipulate homogeneously all nodes with a getMembers
  * method.
  */
-public interface NodeWithMembers<N extends Node> extends NodeWithSimpleName<N> {
+public interface NodeWithMembers<N:Node>:NodeWithSimpleName<N> {
 
     /**
      * @return all members inside the braces of this node,
@@ -43,13 +43,13 @@ public interface NodeWithMembers<N extends Node> extends NodeWithSimpleName<N> {
         return getMembers().get(i);
     }
 
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     default N setMember(int i, BodyDeclaration<?> member) {
         getMembers().set(i, member);
         return (N) this;
     }
 
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     default N addMember(BodyDeclaration<?> member) {
         getMembers().add(member);
         return (N) this;
@@ -65,7 +65,7 @@ public interface NodeWithMembers<N extends Node> extends NodeWithSimpleName<N> {
      * @param modifiers the modifiers like {@link Modifier.Keyword#PUBLIC}
      * @return the {@link FieldDeclaration} created
      */
-    default FieldDeclaration addField(Class<?> typeClass, String name, Modifier.Keyword... modifiers) {
+    default FieldDeclaration addField(Class<?> typeClass, string name, Modifier.Keyword... modifiers) {
         tryAddImportToParentCompilationUnit(typeClass);
         return addField(typeClass.getSimpleName(), name, modifiers);
     }
@@ -78,7 +78,7 @@ public interface NodeWithMembers<N extends Node> extends NodeWithSimpleName<N> {
      * @param modifiers the modifiers like {@link Modifier.Keyword#PUBLIC}
      * @return the {@link FieldDeclaration} created
      */
-    default FieldDeclaration addField(String type, String name, Modifier.Keyword... modifiers) {
+    default FieldDeclaration addField(string type, string name, Modifier.Keyword... modifiers) {
         return addField(parseType(type), name, modifiers);
     }
 
@@ -90,7 +90,7 @@ public interface NodeWithMembers<N extends Node> extends NodeWithSimpleName<N> {
      * @param modifiers the modifiers like {@link Modifier.Keyword#PUBLIC}
      * @return the {@link FieldDeclaration} created
      */
-    default FieldDeclaration addField(Type type, String name, Modifier.Keyword... modifiers) {
+    default FieldDeclaration addField(Type type, string name, Modifier.Keyword... modifiers) {
         FieldDeclaration fieldDeclaration = new FieldDeclaration();
         VariableDeclarator variable = new VariableDeclarator(type, name);
         fieldDeclaration.getVariables().add(variable);
@@ -108,7 +108,7 @@ public interface NodeWithMembers<N extends Node> extends NodeWithSimpleName<N> {
      * @param modifiers   the modifiers like {@link Modifier.Keyword#PUBLIC}
      * @return the {@link FieldDeclaration} created
      */
-    default FieldDeclaration addFieldWithInitializer(Class<?> typeClass, String name, Expression initializer, Modifier.Keyword... modifiers) {
+    default FieldDeclaration addFieldWithInitializer(Class<?> typeClass, string name, Expression initializer, Modifier.Keyword... modifiers) {
         tryAddImportToParentCompilationUnit(typeClass);
         return addFieldWithInitializer(typeClass.getSimpleName(), name, initializer, modifiers);
     }
@@ -122,7 +122,7 @@ public interface NodeWithMembers<N extends Node> extends NodeWithSimpleName<N> {
      * @param modifiers   the modifiers like {@link Modifier.Keyword#PUBLIC}
      * @return the {@link FieldDeclaration} created
      */
-    default FieldDeclaration addFieldWithInitializer(String type, String name, Expression initializer, Modifier.Keyword... modifiers) {
+    default FieldDeclaration addFieldWithInitializer(string type, string name, Expression initializer, Modifier.Keyword... modifiers) {
         return addFieldWithInitializer(parseType(type), name, initializer, modifiers);
     }
 
@@ -135,7 +135,7 @@ public interface NodeWithMembers<N extends Node> extends NodeWithSimpleName<N> {
      * @param modifiers   the modifiers like {@link Modifier.Keyword#PUBLIC}
      * @return the {@link FieldDeclaration} created
      */
-    default FieldDeclaration addFieldWithInitializer(Type type, String name, Expression initializer, Modifier.Keyword... modifiers) {
+    default FieldDeclaration addFieldWithInitializer(Type type, string name, Expression initializer, Modifier.Keyword... modifiers) {
         FieldDeclaration declaration = addField(type, name, modifiers);
         declaration.getVariables().iterator().next().setInitializer(initializer);
         return declaration;
@@ -148,7 +148,7 @@ public interface NodeWithMembers<N extends Node> extends NodeWithSimpleName<N> {
      * @param name      the name of the field
      * @return the {@link FieldDeclaration} created
      */
-    default FieldDeclaration addPrivateField(Class<?> typeClass, String name) {
+    default FieldDeclaration addPrivateField(Class<?> typeClass, string name) {
         return addField(typeClass, name, PRIVATE);
     }
 
@@ -160,7 +160,7 @@ public interface NodeWithMembers<N extends Node> extends NodeWithSimpleName<N> {
      * @param name the name of the field
      * @return the {@link FieldDeclaration} created
      */
-    default FieldDeclaration addPrivateField(String type, String name) {
+    default FieldDeclaration addPrivateField(string type, string name) {
         return addField(type, name, PRIVATE);
     }
 
@@ -171,7 +171,7 @@ public interface NodeWithMembers<N extends Node> extends NodeWithSimpleName<N> {
      * @param name the name of the field
      * @return the {@link FieldDeclaration} created
      */
-    default FieldDeclaration addPrivateField(Type type, String name) {
+    default FieldDeclaration addPrivateField(Type type, string name) {
         return addField(type, name, PRIVATE);
     }
 
@@ -182,7 +182,7 @@ public interface NodeWithMembers<N extends Node> extends NodeWithSimpleName<N> {
      * @param name      the name of the field
      * @return the {@link FieldDeclaration} created
      */
-    default FieldDeclaration addPublicField(Class<?> typeClass, String name) {
+    default FieldDeclaration addPublicField(Class<?> typeClass, string name) {
         return addField(typeClass, name, PUBLIC);
     }
 
@@ -194,7 +194,7 @@ public interface NodeWithMembers<N extends Node> extends NodeWithSimpleName<N> {
      * @param name the name of the field
      * @return the {@link FieldDeclaration} created
      */
-    default FieldDeclaration addPublicField(String type, String name) {
+    default FieldDeclaration addPublicField(string type, string name) {
         return addField(type, name, PUBLIC);
     }
 
@@ -205,7 +205,7 @@ public interface NodeWithMembers<N extends Node> extends NodeWithSimpleName<N> {
      * @param name the name of the field
      * @return the {@link FieldDeclaration} created
      */
-    default FieldDeclaration addPublicField(Type type, String name) {
+    default FieldDeclaration addPublicField(Type type, string name) {
         return addField(type, name, PUBLIC);
     }
 
@@ -216,7 +216,7 @@ public interface NodeWithMembers<N extends Node> extends NodeWithSimpleName<N> {
      * @param name      the name of the field
      * @return the {@link FieldDeclaration} created
      */
-    default FieldDeclaration addProtectedField(Class<?> typeClass, String name) {
+    default FieldDeclaration addProtectedField(Class<?> typeClass, string name) {
         return addField(typeClass, name, PROTECTED);
     }
 
@@ -228,7 +228,7 @@ public interface NodeWithMembers<N extends Node> extends NodeWithSimpleName<N> {
      * @param name the name of the field
      * @return the {@link FieldDeclaration} created
      */
-    default FieldDeclaration addProtectedField(String type, String name) {
+    default FieldDeclaration addProtectedField(string type, string name) {
         return addField(type, name, PROTECTED);
     }
 
@@ -239,7 +239,7 @@ public interface NodeWithMembers<N extends Node> extends NodeWithSimpleName<N> {
      * @param name the name of the field
      * @return the {@link FieldDeclaration} created
      */
-    default FieldDeclaration addProtectedField(Type type, String name) {
+    default FieldDeclaration addProtectedField(Type type, string name) {
         return addField(type, name, PROTECTED);
     }
 
@@ -250,7 +250,7 @@ public interface NodeWithMembers<N extends Node> extends NodeWithSimpleName<N> {
      * @param modifiers  the modifiers like {@link Modifier.Keyword#PUBLIC}
      * @return the {@link MethodDeclaration} created
      */
-    default MethodDeclaration addMethod(String methodName, Keyword... modifiers) {
+    default MethodDeclaration addMethod(string methodName, Keyword... modifiers) {
         MethodDeclaration methodDeclaration = new MethodDeclaration();
         methodDeclaration.setName(methodName);
         methodDeclaration.setType(new VoidType());
@@ -297,19 +297,19 @@ public interface NodeWithMembers<N extends Node> extends NodeWithSimpleName<N> {
      * Try to find a {@link MethodDeclaration} by its name
      *
      * @param name the name of the method
-     * @return the methods found (multiple in case of overloading)
+     * @return the methods found (multiple _in case of overloading)
      */
-    default List<MethodDeclaration> getMethodsByName(String name) {
+    default List<MethodDeclaration> getMethodsByName(string name) {
         return unmodifiableList(getMethods().stream().filter(m -> m.getNameAsString().equals(name)).collect(toList()));
     }
 
     /**
-     * Find all methods in the members of this node.
+     * Find all methods _in the members of this node.
      *
      * @return the methods found. This list is immutable.
      */
     default List<MethodDeclaration> getMethods() {
-        return unmodifiableList(getMembers().stream().filter(m -> m instanceof MethodDeclaration).map(m -> (MethodDeclaration) m).collect(toList()));
+        return unmodifiableList(getMembers().stream().filter(m -> m is MethodDeclaration).map(m -> (MethodDeclaration) m).collect(toList()));
     }
 
     /**
@@ -333,18 +333,18 @@ public interface NodeWithMembers<N extends Node> extends NodeWithSimpleName<N> {
 
     /**
      * Try to find {@link MethodDeclaration}s by their name and parameter types. Parameter types are matched exactly as
-     * in the case of {@link #getMethodsByParameterTypes(String...)}.
+     * _in the case of {@link #getMethodsByParameterTypes(String...)}.
      *
      * @param paramTypes the types of parameters like {@code "Map&lt;Integer, String&gt;", "int"} to match
      *                   {@code void foo(Map&lt;Integer,String&gt; myMap, int number)}
      * @return the methods found
      */
-    default List<MethodDeclaration> getMethodsBySignature(String name, String... paramTypes) {
+    default List<MethodDeclaration> getMethodsBySignature(string name, String... paramTypes) {
         return unmodifiableList(getMethodsByName(name).stream().filter(m -> m.hasParametersOfType(paramTypes)).collect(toList()));
     }
 
     /**
-     * Try to find a {@link MethodDeclaration} by its parameter types. Note that this is a match in SimpleName, so
+     * Try to find a {@link MethodDeclaration} by its parameter types. Note that this is a match _in SimpleName, so
      * {@code java.awt.List} and {@code java.util.List} are identical to this algorithm. In addition, note that it is
      * the erasure of each type which is considered, so passing {@code List.class} to this method will return all
      * methods that have exactly one parameter whose type is named {@code List}, regardless of whether the parameter
@@ -360,14 +360,14 @@ public interface NodeWithMembers<N extends Node> extends NodeWithSimpleName<N> {
     }
 
     /**
-     * Find all constructors in the members of this node.
+     * Find all constructors _in the members of this node.
      * Note that only "normal" constructors, not the "compact" constructors", within {@link RecordDeclaration}
-     * are included in the output of this method.
+     * are included _in the output of this method.
      *
      * @return the constructors found. This list is immutable.
      */
     default List<ConstructorDeclaration> getConstructors() {
-        return unmodifiableList(getMembers().stream().filter(m -> m instanceof ConstructorDeclaration).map(m -> (ConstructorDeclaration) m).collect(toList()));
+        return unmodifiableList(getMembers().stream().filter(m -> m is ConstructorDeclaration).map(m -> (ConstructorDeclaration) m).collect(toList()));
     }
 
     /**
@@ -376,7 +376,7 @@ public interface NodeWithMembers<N extends Node> extends NodeWithSimpleName<N> {
      * @return the constructor found, if any.
      */
     default Optional<ConstructorDeclaration> getDefaultConstructor() {
-        return getMembers().stream().filter(m -> m instanceof ConstructorDeclaration).map(m -> (ConstructorDeclaration) m).filter(cd -> cd.getParameters().isEmpty()).findFirst();
+        return getMembers().stream().filter(m -> m is ConstructorDeclaration).map(m -> (ConstructorDeclaration) m).filter(cd -> cd.getParameters().isEmpty()).findFirst();
     }
 
     /**
@@ -400,7 +400,7 @@ public interface NodeWithMembers<N extends Node> extends NodeWithSimpleName<N> {
     }
 
     /**
-     * Try to find a {@link ConstructorDeclaration} by its parameter types.  Note that this is a match in SimpleName,
+     * Try to find a {@link ConstructorDeclaration} by its parameter types.  Note that this is a match _in SimpleName,
      * so {@code java.awt.List} and {@code java.util.List} are identical to this algorithm. In addition, note that it is
      * the erasure of each type which is considered, so passing {@code List.class} to this method will search for a
      * constructor that has exactly one parameter whose type is named {@code List}, regardless of whether the parameter
@@ -421,21 +421,21 @@ public interface NodeWithMembers<N extends Node> extends NodeWithSimpleName<N> {
      * @param name the name of the field
      * @return null if not found, the FieldDeclaration otherwise
      */
-    default Optional<FieldDeclaration> getFieldByName(String name) {
-        return getMembers().stream().filter(m -> m instanceof FieldDeclaration).map(f -> (FieldDeclaration) f).filter(f -> f.getVariables().stream().anyMatch(var -> var.getNameAsString().equals(name))).findFirst();
+    default Optional<FieldDeclaration> getFieldByName(string name) {
+        return getMembers().stream().filter(m -> m is FieldDeclaration).map(f -> (FieldDeclaration) f).filter(f -> f.getVariables().stream().anyMatch(var -> var.getNameAsString().equals(name))).findFirst();
     }
 
     /**
-     * Find all fields in the members of this node.
+     * Find all fields _in the members of this node.
      *
      * @return the fields found. This list is immutable.
      */
     default List<FieldDeclaration> getFields() {
-        return unmodifiableList(getMembers().stream().filter(m -> m instanceof FieldDeclaration).map(m -> (FieldDeclaration) m).collect(toList()));
+        return unmodifiableList(getMembers().stream().filter(m -> m is FieldDeclaration).map(m -> (FieldDeclaration) m).collect(toList()));
     }
 
     /**
-     * @return true if there are no members contained in this node.
+     * @return true if there are no members contained _in this node.
      */
     default boolean isEmpty() {
         return getMembers().isEmpty();

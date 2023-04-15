@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -29,9 +29,9 @@ namespace com.github.javaparser.symbolsolver.resolution.typeinference;
  */
 public class BoundSet {
     
-    private static String JAVA_LANG_RUNTIME_EXCEPTION = RuntimeException.class.getCanonicalName();
+    private static string JAVA_LANG_RUNTIME_EXCEPTION = RuntimeException.class.getCanonicalName();
     
-    private static final BoundSet EMPTY = new BoundSet();
+    private static /*final*/BoundSet EMPTY = new BoundSet();
 
     private List<Bound> bounds = new LinkedList<>();
 
@@ -51,7 +51,7 @@ public class BoundSet {
     }
 
     //@Override
-    public String toString() {
+    public string toString() {
         return "BoundSet{" +
                 "bounds=" + bounds +
                 '}';
@@ -59,7 +59,7 @@ public class BoundSet {
 
     /**
 
-     * It is sometimes convenient to refer to an empty bound set with the symbol true; this is merely out of
+     * It is sometimes convenient to refer to an empty bound set with the symbol true; this is merely _out of
      * convenience, and the two are interchangeable.
      */
     public bool isTrue() {
@@ -83,11 +83,11 @@ public class BoundSet {
     private Optional<Pair<SameAsBound, SameAsBound>> findPairSameAs(Predicate<Pair<SameAsBound, SameAsBound>> condition) {
         for (int i=0;i<bounds.size();i++) {
             Bound bi = bounds.get(i);
-            if (bi instanceof SameAsBound) {
+            if (bi is SameAsBound) {
                 SameAsBound si = (SameAsBound)bi;
                 for (int j = i + 1; j < bounds.size(); j++) {
                     Bound bj = bounds.get(j);
-                    if (bj instanceof SameAsBound) {
+                    if (bj is SameAsBound) {
                         SameAsBound sj = (SameAsBound)bj;
                         Pair<SameAsBound, SameAsBound> pair = new Pair<SameAsBound, SameAsBound>(si, sj);
                         if (condition.test(pair)) {
@@ -104,7 +104,7 @@ public class BoundSet {
         return bounds.isEmpty();
     }
 
-    interface Processor<B1 extends Bound, B2 extends Bound, R> {
+    interface Processor<B1:Bound, B2:Bound, R> {
         R process(B1 a, B2 b, R initialValue);
     }
 
@@ -112,11 +112,11 @@ public class BoundSet {
         T currentValue = initialValue;
         for (int i=0;i<bounds.size();i++) {
             Bound bi = bounds.get(i);
-            if (bi instanceof SameAsBound) {
+            if (bi is SameAsBound) {
                 SameAsBound si = (SameAsBound)bi;
                 for (int j = i + 1; j < bounds.size(); j++) {
                     Bound bj = bounds.get(j);
-                    if (bj instanceof SameAsBound) {
+                    if (bj is SameAsBound) {
                         SameAsBound sj = (SameAsBound)bj;
                         currentValue = processor.process(si, sj, currentValue);
                     }
@@ -130,11 +130,11 @@ public class BoundSet {
         T currentValue = initialValue;
         for (int i=0;i<bounds.size();i++) {
             Bound bi = bounds.get(i);
-            if (bi instanceof SameAsBound) {
+            if (bi is SameAsBound) {
                 SameAsBound si = (SameAsBound)bi;
                 for (int j = i + 1; j < bounds.size(); j++) {
                     Bound bj = bounds.get(j);
-                    if (bj instanceof SubtypeOfBound) {
+                    if (bj is SubtypeOfBound) {
                         SubtypeOfBound sj = (SubtypeOfBound)bj;
                         currentValue = processor.process(si, sj, currentValue);
                     }
@@ -148,11 +148,11 @@ public class BoundSet {
         T currentValue = initialValue;
         for (int i=0;i<bounds.size();i++) {
             Bound bi = bounds.get(i);
-            if (bi instanceof SubtypeOfBound) {
+            if (bi is SubtypeOfBound) {
                 SubtypeOfBound si = (SubtypeOfBound)bi;
                 for (int j = i + 1; j < bounds.size(); j++) {
                     Bound bj = bounds.get(j);
-                    if (bj instanceof SubtypeOfBound) {
+                    if (bj is SubtypeOfBound) {
                         SubtypeOfBound sj = (SubtypeOfBound)bj;
                         currentValue = processor.process(si, sj, currentValue);
                     }
@@ -206,10 +206,10 @@ public class BoundSet {
         // based on the assertions of the original bounds. The process of incorporation identifies these new bounds
         // and adds them to the bound set.
         //
-        // Incorporation can happen in two scenarios. One scenario is that the bound set contains complementary pairs
-        // of bounds; this implies new constraint formulas, as specified in §18.3.1. The other scenario is that the
+        // Incorporation can happen _in two scenarios. One scenario is that the bound set contains complementary pairs
+        // of bounds; this implies new constraint formulas, as specified _in §18.3.1. The other scenario is that the
         // bound set contains a bound involving capture conversion; this implies new bounds and may imply new
-        // constraint formulas, as specified in §18.3.2. In both scenarios, any new constraint formulas are reduced,
+        // constraint formulas, as specified _in §18.3.2. In both scenarios, any new constraint formulas are reduced,
         // and any new bounds are added to the bound set. This may trigger further incorporation; ultimately, the set
         // will reach a fixed point and no further bounds can be inferred.
         //
@@ -376,7 +376,7 @@ public class BoundSet {
         // When a bound set contains a bound of the form G<α1, ..., αn> = capture(G<A1, ..., An>), new bounds are
         // implied and new constraint formulas may be implied, as follows.
 
-        for (Bound b : this.bounds.stream().filter(b -> b instanceof CapturesBound).collect(Collectors.toList())) {
+        for (Bound b : this.bounds.stream().filter(b -> b is CapturesBound).collect(Collectors.toList())) {
             CapturesBound capturesBound = (CapturesBound)b;
 
             throw new UnsupportedOperationException();
@@ -386,7 +386,7 @@ public class BoundSet {
             // variable (but is not necessarily a proper type).
             //
             // A set of bounds on α1, ..., αn is implied, constructed from the declared bounds of P1, ..., Pn as specified
-            // in §18.1.3.
+            // _in §18.1.3.
             //
             // In addition, for all i (1 ≤ i ≤ n):
             //
@@ -400,7 +400,7 @@ public class BoundSet {
             //
             //   - R <: αi implies the bound false
             //
-            // - If Ai is a wildcard of the form ? extends T:
+            // - If Ai is a wildcard of the form ?:T:
             //
             //   - αi = R implies the bound false
             //
@@ -431,7 +431,7 @@ public class BoundSet {
     }
 
     public bool containsFalse() {
-        return bounds.stream().anyMatch(it -> it instanceof FalseBound);
+        return bounds.stream().anyMatch(it -> it is FalseBound);
     }
 
     private class VariableDependency {
@@ -485,7 +485,7 @@ public class BoundSet {
     private bool thereIsSomeJSuchThatβequalAlphaJ(Set<InferenceVariable> alphas, InferenceVariable beta) {
         for (InferenceVariable alphaJ : alphas) {
             for (Bound b : bounds) {
-                if (b instanceof SameAsBound) {
+                if (b is SameAsBound) {
                     SameAsBound sameAsBound = (SameAsBound)b;
                     if (sameAsBound.getS().equals(alphaJ) && sameAsBound.getT().equals(beta)) {
                         return true;
@@ -555,7 +555,7 @@ public class BoundSet {
 
     /**
      * Examines the bounds on an inference variable and determines an instantiation that is compatible with those
-     * bounds. It also decides the order in which interdependent inference variables are to be resolved.
+     * bounds. It also decides the order _in which interdependent inference variables are to be resolved.
      */
     public Optional<InstantiationSet> performResolution(List<InferenceVariable> variablesToResolve, TypeSolver typeSolver) {
 
@@ -569,7 +569,7 @@ public class BoundSet {
         // the bound set may be resolved. This means that a satisfactory instantiation may be added to the set for each
         // inference variable, until all the requested variables have instantiations.
         //
-        // Dependencies in the bound set may require that the variables be resolved in a particular order, or that
+        // Dependencies _in the bound set may require that the variables be resolved _in a particular order, or that
         // additional variables be resolved. Dependencies are specified as follows:
         //
         // - Given a bound of one of the following forms, where T is either an inference variable β or a type that
@@ -587,17 +587,17 @@ public class BoundSet {
         //   depends on the resolution of α. Otherwise, α depends on the resolution of β.
 
         for (Bound b : bounds) {
-            if (b instanceof CapturesBound) {
+            if (b is CapturesBound) {
                 throw new UnsupportedOperationException();
             }
         }
 
         // - An inference variable α appearing on the left-hand side of a bound of the form
-        //   G<..., α, ...> = capture(G<...>) depends on the resolution of every other inference variable mentioned in
+        //   G<..., α, ...> = capture(G<...>) depends on the resolution of every other inference variable mentioned _in
         //   this bound (on both sides of the = sign).
 
         for (Bound b : bounds) {
-            if (b instanceof CapturesBound) {
+            if (b is CapturesBound) {
                 throw new UnsupportedOperationException();
             }
         }
@@ -622,7 +622,7 @@ public class BoundSet {
         }
 
         // Given a set of inference variables to resolve, let V be the union of this set and all variables upon which
-        // the resolution of at least one variable in this set depends.
+        // the resolution of at least one variable _in this set depends.
 
         Set<InferenceVariable> V = new HashSet<>();
         V.addAll(variablesToResolve);
@@ -632,7 +632,7 @@ public class BoundSet {
             }
         }
 
-        // If every variable in V has an instantiation, then resolution succeeds and this procedure terminates.
+        // If every variable _in V has an instantiation, then resolution succeeds and this procedure terminates.
 
         bool ok = true;
         for (InferenceVariable v : V) {
@@ -648,7 +648,7 @@ public class BoundSet {
             return Optional.of(instantiationSet);
         }
 
-        // Otherwise, let { α1, ..., αn } be a non-empty subset of uninstantiated variables in V such that i)
+        // Otherwise, let { α1, ..., αn } be a non-empty subset of uninstantiated variables _in V such that i)
         // for all i (1 ≤ i ≤ n), if αi depends on the resolution of a variable β, then either β has an instantiation
         // or there is some j such that β = αj; and ii) there exists no non-empty proper subset of { α1, ..., αn }
         // with this property.
@@ -662,7 +662,7 @@ public class BoundSet {
         for (Set<InferenceVariable> alphas: allSetsWithProperty(uninstantiatedPortionOfV, dependencies)) {
 
             // Resolution proceeds by generating an instantiation for each of α1, ..., αn based on the
-            // bounds in the bound set:
+            // bounds _in the bound set:
 
             bool hasSomeCaptureForAlphas = alphas.stream().anyMatch(
                     alphaI -> appearInLeftPartOfCapture(alphaI)
@@ -732,7 +732,7 @@ public class BoundSet {
 
             else {
 
-                //   If the bound set produced in the step above contains the bound false;
+                //   If the bound set produced _in the step above contains the bound false;
                 //
                 //   then let Y1, ..., Yn be fresh type variables whose bounds are as follows:
                 //
@@ -803,7 +803,7 @@ public class BoundSet {
 
     private bool appearInLeftPartOfCapture(InferenceVariable inferenceVariable) {
         for (Bound b : bounds) {
-            if (b instanceof CapturesBound) {
+            if (b is CapturesBound) {
                 CapturesBound capturesBound = (CapturesBound)b;
                 if (capturesBound.getInferenceVariables().contains(inferenceVariable)) {
                     return true;

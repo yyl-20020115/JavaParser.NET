@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,7 +28,7 @@ namespace com.github.javaparser.ast.expr;
  *
  * @author Julio Vilmar Gesser
  */
-public class MemberValuePair extends Node implements NodeWithSimpleName<MemberValuePair> {
+public class MemberValuePair:Node implements NodeWithSimpleName<MemberValuePair> {
 
     private SimpleName name;
 
@@ -38,19 +38,19 @@ public class MemberValuePair extends Node implements NodeWithSimpleName<MemberVa
         this(null, new SimpleName(), new StringLiteralExpr());
     }
 
-    public MemberValuePair(final String name, final Expression value) {
+    public MemberValuePair(/*final*/string name, /*final*/Expression value) {
         this(null, new SimpleName(name), value);
     }
 
-    @AllFieldsConstructor
-    public MemberValuePair(final SimpleName name, final Expression value) {
+    //@AllFieldsConstructor
+    public MemberValuePair(/*final*/SimpleName name, /*final*/Expression value) {
         this(null, name, value);
     }
 
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public MemberValuePair(TokenRange tokenRange, SimpleName name, Expression value) {
         super(tokenRange);
         setName(name);
@@ -59,29 +59,29 @@ public class MemberValuePair extends Node implements NodeWithSimpleName<MemberVa
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public SimpleName getName() {
         return name;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Expression getValue() {
         return value;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public MemberValuePair setName(final SimpleName name) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public MemberValuePair setName(/*final*/SimpleName name) {
         assertNotNull(name);
         if (name == this.name) {
             return this;
@@ -94,8 +94,8 @@ public class MemberValuePair extends Node implements NodeWithSimpleName<MemberVa
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public MemberValuePair setValue(final Expression value) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public MemberValuePair setValue(/*final*/Expression value) {
         assertNotNull(value);
         if (value == this.value) {
             return this;
@@ -109,19 +109,19 @@ public class MemberValuePair extends Node implements NodeWithSimpleName<MemberVa
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public MemberValuePair clone() {
         return (MemberValuePair) accept(new CloneVisitor(), null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public MemberValuePairMetaModel getMetaModel() {
         return JavaParserMetaModel.memberValuePairMetaModel;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public boolean replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;

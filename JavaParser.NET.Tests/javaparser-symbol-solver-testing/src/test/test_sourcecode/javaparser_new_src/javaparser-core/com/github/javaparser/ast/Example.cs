@@ -8,7 +8,7 @@ namespace com.github.javaparser.ast;
 public class Example {
 
     public static void main(String[] args) throws UnsupportedEncodingException, ParseException {
-        String code = "interface A {\n" +
+        string code = "interface A {\n" +
                 "    default Comparator<T> thenComparing(Comparator<? super T> other) {\n" +
                 "        Objects.requireNonNull(other);\n" +
                 "        return (Comparator<T> & Serializable) (c1, c2) -> { // this is the defaulting line\n" +

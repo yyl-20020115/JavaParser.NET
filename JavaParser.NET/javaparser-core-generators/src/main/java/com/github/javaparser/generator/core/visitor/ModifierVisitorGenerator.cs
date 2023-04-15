@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,7 +24,7 @@ namespace com.github.javaparser.generator.core.visitor;
 
 
 
-public class ModifierVisitorGenerator extends VisitorGenerator {
+public class ModifierVisitorGenerator:VisitorGenerator {
     public ModifierVisitorGenerator(SourceRoot sourceRoot) {
         super(sourceRoot, "com.github.javaparser.ast.visitor", "ModifierVisitor", "Visitable", "A", true);
     }
@@ -57,7 +57,7 @@ public class ModifierVisitorGenerator extends VisitorGenerator {
             body.addStatement("if (left == null) return right;");
             body.addStatement("if (right == null) return left;");
         } else {
-            final SeparatedItemStringBuilder collapseCheck = new SeparatedItemStringBuilder("if(", "||", ") return null;");
+            /*final*/SeparatedItemStringBuilder collapseCheck = new SeparatedItemStringBuilder("if(", "||", ") return null;");
             sortedPropertyMetaModels.forEach(property -> {
                 if (property.isRequired() && property.isNode()) {
                     if (property.isNodeList()) {

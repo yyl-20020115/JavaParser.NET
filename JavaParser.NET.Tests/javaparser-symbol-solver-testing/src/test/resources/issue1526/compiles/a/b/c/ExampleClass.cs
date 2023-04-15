@@ -3,7 +3,7 @@ namespace a.b.c;
 
 public class ExampleClass {
 
-    protected final DataObjectFactory doFactory;
+    protected /*final*/DataObjectFactory doFactory;
 
 
     public ExampleClass() {
@@ -11,7 +11,7 @@ public class ExampleClass {
     }
 
 
-    public DataObject getDataObject(String objectID) {
+    public DataObject getDataObject(string objectID) {
         return doFactory.getDataObject(objectID);
     }
 

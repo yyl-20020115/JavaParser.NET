@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -30,7 +30,7 @@ namespace com.github.javaparser.ast.body;
  *
  * @author Julio Vilmar Gesser
  */
-public class ReceiverParameter extends Node implements NodeWithType<ReceiverParameter, Type>, NodeWithAnnotations<ReceiverParameter>, NodeWithName<ReceiverParameter> {
+public class ReceiverParameter:Node implements NodeWithType<ReceiverParameter, Type>, NodeWithAnnotations<ReceiverParameter>, NodeWithName<ReceiverParameter> {
 
     private Type type;
 
@@ -52,11 +52,11 @@ public class ReceiverParameter extends Node implements NodeWithType<ReceiverPara
      * @param type type of the parameter
      * @param name name of the parameter
      */
-    public ReceiverParameter(Type type, String name) {
+    public ReceiverParameter(Type type, string name) {
         this(null, new NodeList<>(), type, new Name(name));
     }
 
-    @AllFieldsConstructor
+    //@AllFieldsConstructor
     public ReceiverParameter(NodeList<AnnotationExpr> annotations, Type type, Name name) {
         this(null, annotations, type, name);
     }
@@ -64,7 +64,7 @@ public class ReceiverParameter extends Node implements NodeWithType<ReceiverPara
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public ReceiverParameter(TokenRange tokenRange, NodeList<AnnotationExpr> annotations, Type type, Name name) {
         super(tokenRange);
         setAnnotations(annotations);
@@ -74,24 +74,24 @@ public class ReceiverParameter extends Node implements NodeWithType<ReceiverPara
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Type getType() {
         return type;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public ReceiverParameter setType(final Type type) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public ReceiverParameter setType(/*final*/Type type) {
         assertNotNull(type);
         if (type == this.type) {
             return this;
@@ -105,19 +105,19 @@ public class ReceiverParameter extends Node implements NodeWithType<ReceiverPara
     }
 
     /**
-     * @return the list returned could be immutable (in that case it will be empty)
+     * @return the list returned could be immutable (_in that case it will be empty)
      */
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public NodeList<AnnotationExpr> getAnnotations() {
         return annotations;
     }
 
     /**
-     * @param annotations a null value is currently treated as an empty list. This behavior could change in the future,
+     * @param annotations a null value is currently treated as an empty list. This behavior could change _in the future,
      * so please avoid passing null
      */
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public ReceiverParameter setAnnotations(final NodeList<AnnotationExpr> annotations) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public ReceiverParameter setAnnotations(/*final*/NodeList<AnnotationExpr> annotations) {
         assertNotNull(annotations);
         if (annotations == this.annotations) {
             return this;
@@ -131,24 +131,24 @@ public class ReceiverParameter extends Node implements NodeWithType<ReceiverPara
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public ReceiverParameter clone() {
         return (ReceiverParameter) accept(new CloneVisitor(), null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public ReceiverParameterMetaModel getMetaModel() {
         return JavaParserMetaModel.receiverParameterMetaModel;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Name getName() {
         return name;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public ReceiverParameter setName(final Name name) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public ReceiverParameter setName(/*final*/Name name) {
         assertNotNull(name);
         if (name == this.name) {
             return this;
@@ -162,7 +162,7 @@ public class ReceiverParameter extends Node implements NodeWithType<ReceiverPara
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
     public boolean remove(Node node) {
         if (node == null) {
             return false;
@@ -177,7 +177,7 @@ public class ReceiverParameter extends Node implements NodeWithType<ReceiverPara
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public boolean replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;

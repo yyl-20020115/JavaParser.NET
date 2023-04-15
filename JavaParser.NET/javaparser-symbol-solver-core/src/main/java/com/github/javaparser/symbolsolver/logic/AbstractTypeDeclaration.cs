@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -31,13 +31,13 @@ namespace com.github.javaparser.symbolsolver.logic;
 public abstract class AbstractTypeDeclaration implements ResolvedReferenceTypeDeclaration {
 
 	/*
-	 * Returns all methods which have distinct "enhanced" signature declared in this type and all members.
+	 * Returns all methods which have distinct "enhanced" signature declared _in this type and all members.
 	 * An "enhanced" signature include the return type which is used sometimes to identify functional interfaces.
 	 * This is a different implementation from the previous one which returned all methods which have a distinct
 	 * signature (based on method name and qualified parameter types)
 	 */
     //@Override
-    public final Set<MethodUsage> getAllMethods() {
+    public /*final*/Set<MethodUsage> getAllMethods() {
         Set<MethodUsage> methods = new HashSet<>();
 
         Set<String> methodsSignatures = new HashSet<>();
@@ -45,9 +45,9 @@ public abstract class AbstractTypeDeclaration implements ResolvedReferenceTypeDe
         for (ResolvedMethodDeclaration methodDeclaration : getDeclaredMethods()) {
             MethodUsage methodUsage = new MethodUsage(methodDeclaration);
             methods.add(methodUsage);
-            String signature = methodUsage.getSignature();
-            String returnType = methodUsage.getDeclaration().getReturnType().describe();
-            String enhancedSignature = String.format("%s %s", returnType, signature);
+            string signature = methodUsage.getSignature();
+            string returnType = methodUsage.getDeclaration().getReturnType().describe();
+            string enhancedSignature = String.format("%s %s", returnType, signature);
             methodsSignatures.add(enhancedSignature);
         }
 
@@ -59,9 +59,9 @@ public abstract class AbstractTypeDeclaration implements ResolvedReferenceTypeDe
                 for (Pair<ResolvedTypeParameterDeclaration, ResolvedType> p : typeParametersMap) {
                     methodUsage = methodUsage.replaceTypeParameter(p.a, p.b);
                 }
-                String signature = methodUsage.getSignature();
-                String returnType = methodUsage.getDeclaration().getReturnType().describe();
-                String enhancedSignature = String.format("%s %s", returnType, signature);
+                string signature = methodUsage.getSignature();
+                string returnType = methodUsage.getDeclaration().getReturnType().describe();
+                string enhancedSignature = String.format("%s %s", returnType, signature);
                 if (!methodsSignatures.contains(enhancedSignature)) {
                     methodsSignatures.add(enhancedSignature);
                     methods.add(mu);
@@ -73,7 +73,7 @@ public abstract class AbstractTypeDeclaration implements ResolvedReferenceTypeDe
     }
 
     //@Override
-    public final bool isFunctionalInterface() {
+    public /*final*/bool isFunctionalInterface() {
         return FunctionalInterfaceLogic.getFunctionalMethod(this).isPresent();
     }
 

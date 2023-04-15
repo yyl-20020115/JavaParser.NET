@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,14 +25,14 @@ namespace com.github.javaparser.generator.metamodel;
 
 
 class InitializePropertyMetaModelsStatementsGenerator {
-    void generate(Field field, ClassOrInterfaceDeclaration nodeMetaModelClass, String nodeMetaModelFieldName, NodeList<Statement> initializePropertyMetaModelsStatements) {
-        final AstTypeAnalysis fieldTypeAnalysis = new AstTypeAnalysis(field.getGenericType());
+    void generate(Field field, ClassOrInterfaceDeclaration nodeMetaModelClass, string nodeMetaModelFieldName, NodeList<Statement> initializePropertyMetaModelsStatements) {
+        /*final*/AstTypeAnalysis fieldTypeAnalysis = new AstTypeAnalysis(field.getGenericType());
 
-        final Class<?> fieldType = fieldTypeAnalysis.innerType;
-        final String typeName = fieldType.getTypeName().replace('$', '.');
-        final String propertyMetaModelFieldName = field.getName() + "PropertyMetaModel";
+        /*final*/Class<?> fieldType = fieldTypeAnalysis.innerType;
+        /*final*/string typeName = fieldType.getTypeName().replace('$', '.');
+        /*final*/string propertyMetaModelFieldName = field.getName() + "PropertyMetaModel";
         nodeMetaModelClass.addField("PropertyMetaModel", propertyMetaModelFieldName, PUBLIC);
-        final String propertyInitializer = f("new PropertyMetaModel(%s, \"%s\", %s.class, %s, %s, %s, %s, %s)",
+        /*final*/string propertyInitializer = f("new PropertyMetaModel(%s, \"%s\", %s.class, %s, %s, %s, %s, %s)",
                 nodeMetaModelFieldName,
                 field.getName(),
                 typeName,
@@ -41,21 +41,21 @@ class InitializePropertyMetaModelsStatementsGenerator {
                 isNonEmpty(field),
                 fieldTypeAnalysis.isNodeList,
                 fieldTypeAnalysis.isSelfType);
-        final String fieldSetting = f("%s.%s=%s;", nodeMetaModelFieldName, propertyMetaModelFieldName, propertyInitializer);
-        final String fieldAddition = f("%s.getDeclaredPropertyMetaModels().add(%s.%s);", nodeMetaModelFieldName, nodeMetaModelFieldName, propertyMetaModelFieldName);
+        /*final*/string fieldSetting = f("%s.%s=%s;", nodeMetaModelFieldName, propertyMetaModelFieldName, propertyInitializer);
+        /*final*/string fieldAddition = f("%s.getDeclaredPropertyMetaModels().add(%s.%s);", nodeMetaModelFieldName, nodeMetaModelFieldName, propertyMetaModelFieldName);
 
         initializePropertyMetaModelsStatements.add(parseStatement(fieldSetting));
         initializePropertyMetaModelsStatements.add(parseStatement(fieldAddition));
     }
 
-    void generateDerivedProperty(Method method, ClassOrInterfaceDeclaration nodeMetaModelClass, String nodeMetaModelFieldName, NodeList<Statement> initializePropertyMetaModelsStatements) {
-        final AstTypeAnalysis returnTypeAnalysis = new AstTypeAnalysis(method.getGenericReturnType());
+    void generateDerivedProperty(Method method, ClassOrInterfaceDeclaration nodeMetaModelClass, string nodeMetaModelFieldName, NodeList<Statement> initializePropertyMetaModelsStatements) {
+        /*final*/AstTypeAnalysis returnTypeAnalysis = new AstTypeAnalysis(method.getGenericReturnType());
 
-        final Class<?> innermostReturnType = returnTypeAnalysis.innerType;
-        final String typeName = innermostReturnType.getTypeName().replace('$', '.');
-        final String propertyMetaModelFieldName = getterToPropertyName(method.getName()) + "PropertyMetaModel";
+        /*final*/Class<?> innermostReturnType = returnTypeAnalysis.innerType;
+        /*final*/string typeName = innermostReturnType.getTypeName().replace('$', '.');
+        /*final*/string propertyMetaModelFieldName = getterToPropertyName(method.getName()) + "PropertyMetaModel";
         nodeMetaModelClass.addField("PropertyMetaModel", propertyMetaModelFieldName, PUBLIC);
-        final String propertyInitializer = f("new PropertyMetaModel(%s, \"%s\", %s.class, %s, %s, %s, %s, %s)",
+        /*final*/string propertyInitializer = f("new PropertyMetaModel(%s, \"%s\", %s.class, %s, %s, %s, %s, %s)",
                 nodeMetaModelFieldName,
                 getterToPropertyName(method.getName()),
                 typeName,
@@ -64,8 +64,8 @@ class InitializePropertyMetaModelsStatementsGenerator {
                 isNonEmpty(method),
                 returnTypeAnalysis.isNodeList,
                 returnTypeAnalysis.isSelfType);
-        final String fieldSetting = f("%s.%s=%s;", nodeMetaModelFieldName, propertyMetaModelFieldName, propertyInitializer);
-        final String fieldAddition = f("%s.getDerivedPropertyMetaModels().add(%s.%s);", nodeMetaModelFieldName, nodeMetaModelFieldName, propertyMetaModelFieldName);
+        /*final*/string fieldSetting = f("%s.%s=%s;", nodeMetaModelFieldName, propertyMetaModelFieldName, propertyInitializer);
+        /*final*/string fieldAddition = f("%s.getDerivedPropertyMetaModels().add(%s.%s);", nodeMetaModelFieldName, nodeMetaModelFieldName, propertyMetaModelFieldName);
 
         initializePropertyMetaModelsStatements.add(parseStatement(fieldSetting));
         initializePropertyMetaModelsStatements.add(parseStatement(fieldAddition));

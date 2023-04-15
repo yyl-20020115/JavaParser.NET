@@ -1,2 +1,2 @@
-public class ComponentBase extends ObjectContextDecorator {
+public class ComponentBase:ObjectContextDecorator {
 }

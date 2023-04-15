@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,8 +23,8 @@ namespace com.github.javaparser.ast.visitor;
 
 
 /**
- * Iterate over all the nodes in (a part of) the AST. In contrast to the visit methods in Node, these methods are
- * implemented in a simple recursive way which should be more efficient. A disadvantage is that they cannot be quit in
+ * Iterate over all the nodes _in (a part of) the AST. In contrast to the visit methods _in Node, these methods are
+ * implemented _in a simple recursive way which should be more efficient. A disadvantage is that they cannot be quit _in
  * the middle of their traversal.
  */
 public abstract class TreeVisitor {
@@ -66,10 +66,10 @@ public abstract class TreeVisitor {
      * @param node the start node, and the first one that is passed to process(node).
      */
     public void visitBreadthFirst(Node node) {
-        final Queue<Node> queue = new LinkedList<>();
+        /*final*/Queue<Node> queue = new LinkedList<>();
         queue.offer(node);
         while (queue.size() > 0) {
-            final Node head = queue.peek();
+            /*final*/Node head = queue.peek();
             for (Node child : head.getChildNodes()) {
                 queue.offer(child);
             }

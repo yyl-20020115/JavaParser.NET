@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,9 +24,9 @@ namespace com.github.javaparser.printer.lexicalpreservation;
 
 
 
-class LexicalDifferenceCalculatorTest extends AbstractLexicalPreservingTest {
+class LexicalDifferenceCalculatorTest:AbstractLexicalPreservingTest {
 
-    @Test
+    [TestMethod]
     void compilationUnitExampleOriginal() {
         considerCode("class A {}");
         CsmElement element = ConcreteSyntaxModel.forClass(cu.getClass());
@@ -36,7 +36,7 @@ class LexicalDifferenceCalculatorTest extends AbstractLexicalPreservingTest {
         assertEquals(new CsmToken(eolTokenKind()), csmOriginal.elements.get(1));
     }
 
-    @Test
+    [TestMethod]
     void compilationUnitExampleWithPackageSet() {
         considerCode("class A {}");
         CsmElement element = ConcreteSyntaxModel.forClass(cu.getClass());
@@ -48,8 +48,8 @@ class LexicalDifferenceCalculatorTest extends AbstractLexicalPreservingTest {
         assertEquals(new CsmToken(eolTokenKind()), csmChanged.elements.get(2));
     }
 
-    @Test
-    void annotationDeclarationModifiersExampleOriginal() throws IOException {
+    [TestMethod]
+    void annotationDeclarationModifiersExampleOriginal(){
         considerExample("AnnotationDeclaration_Example1_original");
         AnnotationDeclaration annotationDeclaration = (AnnotationDeclaration)cu.getType(0);
         CsmElement element = ConcreteSyntaxModel.forClass(annotationDeclaration.getClass());
@@ -79,8 +79,8 @@ class LexicalDifferenceCalculatorTest extends AbstractLexicalPreservingTest {
         assertEquals(i, csm.elements.size());
     }
 
-    @Test
-    void annotationDeclarationModifiersExampleModified() throws IOException {
+    [TestMethod]
+    void annotationDeclarationModifiersExampleModified(){
         considerExample("AnnotationDeclaration_Example1_original");
         AnnotationDeclaration annotationDeclaration = (AnnotationDeclaration)cu.getType(0);
         CsmElement element = ConcreteSyntaxModel.forClass(annotationDeclaration.getClass());
@@ -112,8 +112,8 @@ class LexicalDifferenceCalculatorTest extends AbstractLexicalPreservingTest {
         assertEquals(i, csm.elements.size());
     }
 
-    @Test
-    void annotationDeclarationNameExampleModified() throws IOException {
+    [TestMethod]
+    void annotationDeclarationNameExampleModified(){
         considerExample("AnnotationDeclaration_Example1_original");
         AnnotationDeclaration annotationDeclaration = (AnnotationDeclaration)cu.getType(0);
         CsmElement element = ConcreteSyntaxModel.forClass(annotationDeclaration.getClass());
@@ -145,8 +145,8 @@ class LexicalDifferenceCalculatorTest extends AbstractLexicalPreservingTest {
         assertEquals(i, csm.elements.size());
     }
 
-    @Test
-    void annotationDeclarationJavadocExampleOriginal() throws IOException {
+    [TestMethod]
+    void annotationDeclarationJavadocExampleOriginal(){
         considerExample("AnnotationDeclaration_Example3_original");
         AnnotationDeclaration annotationDeclaration = (AnnotationDeclaration)cu.getType(0);
         CsmElement element = ConcreteSyntaxModel.forClass(annotationDeclaration.getClass());
@@ -178,8 +178,8 @@ class LexicalDifferenceCalculatorTest extends AbstractLexicalPreservingTest {
         assertEquals(i, csm.elements.size());
     }
 
-    @Test
-    void annotationDeclarationJavadocExampleAddingJavadoc() throws IOException {
+    [TestMethod]
+    void annotationDeclarationJavadocExampleAddingJavadoc(){
         considerExample("AnnotationDeclaration_Example3_original");
         AnnotationDeclaration annotationDeclaration = (AnnotationDeclaration)cu.getType(0);
         CsmElement element = ConcreteSyntaxModel.forClass(annotationDeclaration.getClass());
@@ -212,7 +212,7 @@ class LexicalDifferenceCalculatorTest extends AbstractLexicalPreservingTest {
         assertEquals(i, csm.elements.size());
     }
 
-    @Test
+    [TestMethod]
     void simpleEnumConstantDeclaration() {
         EnumConstantDeclaration ecd = considerEcd("A");
         LexicalDifferenceCalculator.CalculatedSyntaxModel csm = new LexicalDifferenceCalculator().calculatedSyntaxModelForNode(ecd);
@@ -222,8 +222,8 @@ class LexicalDifferenceCalculatorTest extends AbstractLexicalPreservingTest {
         assertEquals(i, csm.elements.size());
     }
 
-    @Test
-    void csmModelAfterAddingStatementToEmptyBlock() throws IOException {
+    [TestMethod]
+    void csmModelAfterAddingStatementToEmptyBlock(){
         LexicalDifferenceCalculator ldc = new LexicalDifferenceCalculator();
         considerExample("ASimpleClassWithMoreFormatting_step3");
 
@@ -253,8 +253,8 @@ class LexicalDifferenceCalculatorTest extends AbstractLexicalPreservingTest {
         assertEquals(index, calculatedSyntaxModel.elements.size());
     }
 
-    @Test
-    void differenceAfterddingStatementToEmptyBlock() throws IOException {
+    [TestMethod]
+    void differenceAfterddingStatementToEmptyBlock(){
         LexicalDifferenceCalculator ldc = new LexicalDifferenceCalculator();
         considerExample("ASimpleClassWithMoreFormatting_step3");
 
@@ -284,15 +284,15 @@ class LexicalDifferenceCalculatorTest extends AbstractLexicalPreservingTest {
         assertEquals(index, differenceElements.size());
     }
 
-    private boolean isAddedChild(DifferenceElement element, Class<? extends Node> childClass) {
+    private boolean isAddedChild(DifferenceElement element, Class<?:Node> childClass) {
         return element.isAdded() && isChild(element.getElement(), childClass);
     }
 
-    private boolean isChild(CsmElement element, Class<? extends Node> childClass) {
-        return element instanceof CsmChild && childClass.isInstance(((CsmChild)element).getChild());
+    private boolean isChild(CsmElement element, Class<?:Node> childClass) {
+        return element is CsmChild && childClass.isInstance(((CsmChild)element).getChild());
     }
 
-    protected EnumConstantDeclaration considerEcd(String code) {
+    protected EnumConstantDeclaration considerEcd(string code) {
         considerCode("enum A { " + code + " }");
         return ((EnumDeclaration)cu.getType(0)).getEntries().get(0);
     }

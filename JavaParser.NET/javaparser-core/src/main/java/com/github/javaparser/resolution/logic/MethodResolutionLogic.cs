@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,7 +28,7 @@ namespace com.github.javaparser.resolution.logic;
  */
 public class MethodResolutionLogic {
 
-    private static String JAVA_LANG_OBJECT = Object.class.getCanonicalName();
+    private static string JAVA_LANG_OBJECT = Object.class.getCanonicalName();
 
     private static List<ResolvedType> groupVariadicParamValues(List<ResolvedType> argumentsTypes, int startVariadic, ResolvedType variadicType) {
         List<ResolvedType> res = new ArrayList<>(argumentsTypes.subList(0, startVariadic));
@@ -51,7 +51,7 @@ public class MethodResolutionLogic {
         return variadicValues.get(0);
     }
 
-    public static boolean isApplicable(ResolvedMethodDeclaration method, String name, List<ResolvedType> argumentsTypes, TypeSolver typeSolver) {
+    public static boolean isApplicable(ResolvedMethodDeclaration method, string name, List<ResolvedType> argumentsTypes, TypeSolver typeSolver) {
         return isApplicable(method, name, argumentsTypes, typeSolver, false);
     }
 
@@ -64,15 +64,15 @@ public class MethodResolutionLogic {
      *
      * @see {@link MethodResolutionLogic#isApplicable(MethodUsage, String, List, TypeSolver)}
      */
-    private static boolean isApplicable(ResolvedMethodDeclaration methodDeclaration, String needleName, List<ResolvedType> needleArgumentTypes, TypeSolver typeSolver, boolean withWildcardTolerance) {
+    private static boolean isApplicable(ResolvedMethodDeclaration methodDeclaration, string needleName, List<ResolvedType> needleArgumentTypes, TypeSolver typeSolver, boolean withWildcardTolerance) {
         if (!methodDeclaration.getName().equals(needleName)) {
             return false;
         }
 
-        // The index of the final method parameter (on the method declaration).
+        // The index of the /*final*/method parameter (on the method declaration).
         int countOfMethodParametersDeclared = methodDeclaration.getNumberOfParams();
 
-        // The index of the final argument passed (on the method usage).
+        // The index of the /*final*/argument passed (on the method usage).
         int countOfNeedleArgumentsPassed = needleArgumentTypes.size();
 
         boolean methodIsDeclaredWithVariadicParameter = methodDeclaration.hasVariadicParameter();
@@ -93,7 +93,7 @@ public class MethodResolutionLogic {
 
             // If the method declaration we're considering has a variadic parameter,
             // attempt to convert the given list of arguments to fit this pattern
-            // e.g. foo(String s, String... s2) {} --- consider the first argument, then group the remainder as an array
+            // e.g. foo(string s, String... s2) {} --- consider the first argument, then group the remainder as an array
 
             ResolvedType expectedVariadicParameterType = methodDeclaration.getLastParam().getType();
             for (ResolvedTypeParameterDeclaration tp : methodDeclaration.getTypeParameters()) {
@@ -116,7 +116,7 @@ public class MethodResolutionLogic {
         }
 
 
-        // The index of the final argument passed (on the method usage).
+        // The index of the /*final*/argument passed (on the method usage).
         int countOfNeedleArgumentsPassedAfterGrouping = needleArgumentTypes.size();
         int lastNeedleArgumentIndexAfterGrouping = getLastParameterIndex(countOfNeedleArgumentsPassed);
 
@@ -210,11 +210,11 @@ public class MethodResolutionLogic {
     private static List<ResolvedType> groupTrailingArgumentsIntoArray(ResolvedMethodDeclaration methodDeclaration,
                                                                       List<ResolvedType> needleArgumentTypes,
                                                                       ResolvedType expectedVariadicParameterType) {
-        // The index of the final method parameter (on the method declaration).
+        // The index of the /*final*/method parameter (on the method declaration).
         int countOfMethodParametersDeclared = methodDeclaration.getNumberOfParams();
         int lastMethodParameterIndex = getLastParameterIndex(countOfMethodParametersDeclared);
 
-        // The index of the final argument passed (on the method usage).
+        // The index of the /*final*/argument passed (on the method usage).
         int countOfNeedleArgumentsPassed = needleArgumentTypes.size();
         int lastNeedleArgumentIndex = getLastParameterIndex(countOfNeedleArgumentsPassed);
 
@@ -234,11 +234,11 @@ public class MethodResolutionLogic {
             ResolvedType actualArgumentType = needleArgumentTypes.get(lastNeedleArgumentIndex);
             boolean finalArgumentIsArray = actualArgumentType.isArray() && expectedVariadicParameterType.isAssignableBy(actualArgumentType.asArrayType().getComponentType());
             if(finalArgumentIsArray) {
-                // Treat as an array of values -- in which case the expected parameter type is the common type of this array.
+                // Treat as an array of values -- _in which case the expected parameter type is the common type of this array.
                 // no need to do anything
                 // expectedVariadicParameterType = actualArgumentType.asArrayType().getComponentType();
             } else {
-                // Treat as a single value -- in which case, the expected parameter type is the same as the single value.
+                // Treat as a single value -- _in which case, the expected parameter type is the same as the single value.
                 needleArgumentTypes = groupVariadicParamValues(needleArgumentTypes, lastMethodParameterIndex, methodDeclaration.getLastParam().getType());
             }
         } else {
@@ -301,8 +301,8 @@ public class MethodResolutionLogic {
             if (expectedParam.isReferenceType() && actualParam.isReferenceType()) {
                 ResolvedReferenceType r1 = expectedParam.asReferenceType();
                 ResolvedReferenceType r2 = actualParam.asReferenceType();
-                // we can have r1=A and r2=A.B (with B extends A and B is an inner class of A)
-                // in this case we want to verify expected parameter from the actual parameter ancestors
+                // we can have r1=A and r2=A.B (with B:A and B is an inner class of A)
+                // _in this case we want to verify expected parameter from the actual parameter ancestors
                 return isAssignableMatchTypeParameters(r1, r2, matchedParameters);
             }
 
@@ -314,7 +314,7 @@ public class MethodResolutionLogic {
             }
 
             if (expectedParam.isTypeVariable()) {
-                String expectedParamName = expectedParam.asTypeParameter().getName();
+                string expectedParamName = expectedParam.asTypeParameter().getName();
                 if (!actualParam.isTypeVariable() || !actualParam.asTypeParameter().getName().equals(expectedParamName)) {
                     return matchTypeVariable(expectedParam.asTypeVariable(), actualParam, matchedParameters);
                 }
@@ -339,7 +339,7 @@ public class MethodResolutionLogic {
     }
 
     private static boolean matchTypeVariable(ResolvedTypeVariable typeVariable, ResolvedType type, Map<String, ResolvedType> matchedParameters) {
-        String typeParameterName = typeVariable.asTypeParameter().getName();
+        string typeParameterName = typeVariable.asTypeParameter().getName();
         if (matchedParameters.containsKey(typeParameterName)) {
             ResolvedType matchedParameter = matchedParameters.get(typeParameterName);
             if (matchedParameter.isAssignableBy(type)) {
@@ -394,16 +394,16 @@ public class MethodResolutionLogic {
      * @see {@link MethodResolutionLogic#isApplicable(ResolvedMethodDeclaration, String, List, TypeSolver)}  }
      * @see {@link MethodResolutionLogic#isApplicable(ResolvedMethodDeclaration, String, List, TypeSolver, boolean)}
      */
-    public static boolean isApplicable(MethodUsage methodUsage, String needleName, List<ResolvedType> needleParameterTypes, TypeSolver typeSolver) {
+    public static boolean isApplicable(MethodUsage methodUsage, string needleName, List<ResolvedType> needleParameterTypes, TypeSolver typeSolver) {
         if (!methodUsage.getName().equals(needleName)) {
             return false;
         }
 
-        // The index of the final method parameter (on the method declaration).
+        // The index of the /*final*/method parameter (on the method declaration).
         int countOfMethodUsageArgumentsPassed = methodUsage.getNoParams();
         int lastMethodUsageArgumentIndex = getLastParameterIndex(countOfMethodUsageArgumentsPassed);
 
-        // The index of the final argument passed (on the method usage).
+        // The index of the /*final*/argument passed (on the method usage).
         int needleParameterCount = needleParameterTypes.size();
         int lastNeedleParameterIndex = getLastParameterIndex(needleParameterCount);
 
@@ -416,7 +416,7 @@ public class MethodResolutionLogic {
         }
 
         // If the counts do not match and we have provided too few arguments, this is not a match. Note that variadic parameters
-        // allow you to omit the vararg, which would allow a difference of one, but a difference in count of 2 or more is not a match.
+        // allow you to omit the vararg, which would allow a difference of one, but a difference _in count of 2 or more is not a match.
         if (!(needleParameterCount == countOfMethodUsageArgumentsPassed) && needleParameterCount < lastMethodUsageArgumentIndex) {
             return false;
         }
@@ -471,7 +471,7 @@ public class MethodResolutionLogic {
                 expectedTypeWithInference = expectedTypeWithInference.replaceTypeVariables(tp, entry.getValue());
             }
 
-            // Consider cases where type variables can be replaced (e.g. add(E element) vs add(String element))
+            // Consider cases where type variables can be replaced (e.g. add(E element) vs add(string element))
             for (ResolvedTypeParameterDeclaration tp : typeParameters) {
                 if (tp.getBounds().isEmpty()) {
                     //expectedArgumentType = expectedArgumentType.replaceTypeVariables(tp.getName(), new ReferenceTypeUsageImpl(typeSolver.solveType(JAVA_LANG_OBJECT), typeSolver));
@@ -535,10 +535,10 @@ public class MethodResolutionLogic {
     }
 
     /**
-     * @param methods we expect the methods to be ordered such that inherited methods are later in the list
+     * @param methods we expect the methods to be ordered such that inherited methods are later _in the list
      */
     public static SymbolReference<ResolvedMethodDeclaration> findMostApplicable(List<ResolvedMethodDeclaration> methods,
-                                                                                String name, List<ResolvedType> argumentsTypes, TypeSolver typeSolver) {
+                                                                                string name, List<ResolvedType> argumentsTypes, TypeSolver typeSolver) {
         SymbolReference<ResolvedMethodDeclaration> res = findMostApplicable(methods, name, argumentsTypes, typeSolver, false);
         if (res.isSolved()) {
             return res;
@@ -547,7 +547,7 @@ public class MethodResolutionLogic {
     }
 
     public static SymbolReference<ResolvedMethodDeclaration> findMostApplicable(List<ResolvedMethodDeclaration> methods,
-                                                                                String name, List<ResolvedType> argumentsTypes,
+                                                                                string name, List<ResolvedType> argumentsTypes,
                                                                                 TypeSolver typeSolver,
                                                                                 boolean wildcardTolerance
     ) {
@@ -555,7 +555,7 @@ public class MethodResolutionLogic {
         List<ResolvedMethodDeclaration> applicableMethods = methods.stream()
                 // Only consider methods with a matching name
                 .filter(m -> m.getName().equals(name))
-                // Filters out duplicate ResolvedMethodDeclaration by their signature.
+                // Filters _out duplicate ResolvedMethodDeclaration by their signature.
                 .filter(distinctByKey(ResolvedMethodDeclaration::getQualifiedSignature))
                 // Checks if ResolvedMethodDeclaration is applicable to argumentsTypes.
                 .filter((m) -> isApplicable(m, name, argumentsTypes, typeSolver, wildcardTolerance))
@@ -624,7 +624,7 @@ public class MethodResolutionLogic {
                 } else if (winningCandidate.declaringType().getQualifiedName().equals(other.declaringType().getQualifiedName())) {
                     possibleAmbiguity = true;
                 } else {
-                    // we expect the methods to be ordered such that inherited methods are later in the list
+                    // we expect the methods to be ordered such that inherited methods are later _in the list
                 }
             }
         }
@@ -669,13 +669,13 @@ public class MethodResolutionLogic {
     private static boolean isMoreSpecific(ResolvedMethodDeclaration methodA, ResolvedMethodDeclaration methodB,
                                           List<ResolvedType> argumentTypes) {
 
-        final boolean aVariadic = methodA.hasVariadicParameter();
-        final boolean bVariadic = methodB.hasVariadicParameter();
-        final int aNumberOfParams = methodA.getNumberOfParams();
-        final int bNumberOfParams = methodB.getNumberOfParams();
-        final int numberOfArgs = argumentTypes.size();
-        final ResolvedType lastArgType = numberOfArgs > 0 ? argumentTypes.get(numberOfArgs - 1) : null;
-        final boolean isLastArgArray = lastArgType != null && lastArgType.isArray();
+        /*final*/boolean aVariadic = methodA.hasVariadicParameter();
+        /*final*/boolean bVariadic = methodB.hasVariadicParameter();
+        /*final*/int aNumberOfParams = methodA.getNumberOfParams();
+        /*final*/int bNumberOfParams = methodB.getNumberOfParams();
+        /*final*/int numberOfArgs = argumentTypes.size();
+        /*final*/ResolvedType lastArgType = numberOfArgs > 0 ? argumentTypes.get(numberOfArgs - 1) : null;
+        /*final*/boolean isLastArgArray = lastArgType != null && lastArgType.isArray();
         int omittedArgs = 0;
         boolean isMethodAMoreSpecific = false;
 
@@ -744,7 +744,7 @@ public class MethodResolutionLogic {
             }
             // If we get to this point then we check whether one of the methods contains a parameter type that is more
             // specific. If it does, we can assume the entire declaration is more specific as we would otherwise have
-            // a situation where the declarations are ambiguous in the given context.
+            // a situation where the declarations are ambiguous _in the given context.
             else {
                 boolean aAssignableFromB = paramTypeA.isAssignableBy(paramTypeB);
                 boolean bAssignableFromA = paramTypeB.isAssignableBy(paramTypeA);
@@ -803,7 +803,7 @@ public class MethodResolutionLogic {
         return oneMoreSpecificFound;
     }
 
-    public static Optional<MethodUsage> findMostApplicableUsage(List<MethodUsage> methods, String name, List<ResolvedType> argumentsTypes, TypeSolver typeSolver) {
+    public static Optional<MethodUsage> findMostApplicableUsage(List<MethodUsage> methods, string name, List<ResolvedType> argumentsTypes, TypeSolver typeSolver) {
         List<MethodUsage> applicableMethods = methods.stream().filter((m) -> isApplicable(m, name, argumentsTypes, typeSolver)).collect(Collectors.toList());
 
         if (applicableMethods.isEmpty()) {
@@ -822,10 +822,10 @@ public class MethodResolutionLogic {
                 } else {
                     if (winningCandidate.declaringType().getQualifiedName().equals(other.declaringType().getQualifiedName())) {
                         if (!areOverride(winningCandidate, other)) {
-                            throw new MethodAmbiguityException("Ambiguous method call: cannot find a most applicable method: " + winningCandidate + ", " + other + ". First declared in " + winningCandidate.declaringType().getQualifiedName());
+                            throw new MethodAmbiguityException("Ambiguous method call: cannot find a most applicable method: " + winningCandidate + ", " + other + ". First declared _in " + winningCandidate.declaringType().getQualifiedName());
                         }
                     } else {
-                        // we expect the methods to be ordered such that inherited methods are later in the list
+                        // we expect the methods to be ordered such that inherited methods are later _in the list
                         //throw new UnsupportedOperationException();
                     }
                 }
@@ -850,18 +850,18 @@ public class MethodResolutionLogic {
     }
 
     public static SymbolReference<ResolvedMethodDeclaration> solveMethodInType(ResolvedTypeDeclaration typeDeclaration,
-                                                                               String name,
+                                                                               string name,
                                                                                List<ResolvedType> argumentsTypes) {
         return solveMethodInType(typeDeclaration, name, argumentsTypes, false);
     }
 
     // TODO: Replace TypeDeclaration.solveMethod
     public static SymbolReference<ResolvedMethodDeclaration> solveMethodInType(ResolvedTypeDeclaration typeDeclaration,
-                                                                               String name,
+                                                                               string name,
                                                                                List<ResolvedType> argumentsTypes,
                                                                                boolean staticOnly) {
 
-        if (typeDeclaration instanceof MethodResolutionCapability) {
+        if (typeDeclaration is MethodResolutionCapability) {
             return ((MethodResolutionCapability) typeDeclaration).solveMethod(name, argumentsTypes,
                     staticOnly);
         }

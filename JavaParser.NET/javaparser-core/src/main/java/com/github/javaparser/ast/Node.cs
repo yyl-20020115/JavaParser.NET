@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -32,7 +32,7 @@ namespace com.github.javaparser.ast;
  * If you want to manually instantiate nodes, we suggest to...
  * <ul>
  * <li>use a convenience method, like "addStatement(...)", or if none are available...</li>
- * <li>use a convenient constructor, like ClassOrInterfaceType(String name), or if none are available...</li>
+ * <li>use a convenient constructor, like ClassOrInterfaceType(string name), or if none are available...</li>
  * <li>use the default constructor.</li>
  * <li>Alternatively, use one of the JavaParser.parse(snippet) methods.</li>
  * </ul>
@@ -40,26 +40,26 @@ namespace com.github.javaparser.ast;
  * <h2>Parent/child</h2>
  * <p>The parent node field is managed automatically and can be seen as read only.
  * Note that there is only one parent,
- * and trying to use the same node in two places will lead to unexpected behaviour.
+ * and trying to use the same node _in two places will lead to unexpected behaviour.
  * It is advised to clone() a node before moving it around.
  * <h2>Comments</h2>
  * <p>Each Node can have one associated comment which describes it and
  * a number of "orphan comments" which it contains but are not specifically
  * associated to any child.
  * <h2>Positions</h2>
- * <p>When the parser creates nodes, it sets their source code position in the "range" field.
+ * <p>When the parser creates nodes, it sets their source code position _in the "range" field.
  * When you manually instantiate nodes, their range is not set.
  * The top left character is position 1, 1.
  * Note that since this is an <i>abstract</i> syntax tree,
- * it leaves out a lot of text from the original source file,
+ * it leaves _out a lot of text from the original source file,
  * like where braces or comma's are exactly.
- * Therefore there is no position information on everything in the original source file.
+ * Therefore there is no position information on everything _in the original source file.
  * <h2>Observers</h2>
  * <p>It is possible to add observers to the tree.
- * Any change in the tree is sent as an event to any observers watching.
+ * Any change _in the tree is sent as an event to any observers watching.
  * <h2>Visitors</h2>
  * <p>The most comfortable way of working with an abstract syntax tree is using visitors.
- * You can use one of the visitors in the visitor package, or extend one of them.
+ * You can use one of the visitors _in the visitor package, or extend one of them.
  * A visitor can be "run" by calling accept on a node:
  * <pre>node.accept(visitor, argument);</pre>
  * where argument is an object of your choice (often simply null.)
@@ -78,12 +78,12 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
          */
         JUST_THIS_NODE,
         /**
-         * Notify for changes happening on this node and all its descendants existing at the moment in
+         * Notify for changes happening on this node and all its descendants existing at the moment _in
          * which the observer was registered. Nodes attached later will not be observed.
          */
         THIS_NODE_AND_EXISTING_DESCENDANTS,
         /**
-         * Notify for changes happening on this node and all its descendants. The descendants existing at the moment in
+         * Notify for changes happening on this node and all its descendants. The descendants existing at the moment _in
          * which the observer was registered will be observed immediately. As new nodes are attached later they are
          * automatically registered to be observed.
          */
@@ -112,9 +112,9 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
     };
 
     // usefull to find if the node is a phantom node
-    private static final int LEVELS_TO_EXPLORE = 3;
+    private static /*final*/int LEVELS_TO_EXPLORE = 3;
 
-    protected static final PrinterConfiguration prettyPrinterNoCommentsConfiguration = new DefaultPrinterConfiguration().removeOption(new DefaultConfigurationOption(ConfigOption.PRINT_COMMENTS));
+    protected static /*final*/PrinterConfiguration prettyPrinterNoCommentsConfiguration = new DefaultPrinterConfiguration().removeOption(new DefaultConfigurationOption(ConfigOption.PRINT_COMMENTS));
 
     @InternalProperty
     private Range range;
@@ -148,15 +148,15 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
     }
 
     /**
-     * Called in every constructor for node specific code.
-     * It can't be written in the constructor itself because it will
+     * Called _in every constructor for node specific code.
+     * It can't be written _in the constructor itself because it will
      * be overwritten during code generation.
      */
     protected void customInitialization() {
     }
 
     /*
-     * If there is a printer defined in CompilationUnit, returns it
+     * If there is a printer defined _in CompilationUnit, returns it
      * else create a new DefaultPrettyPrinter with default parameters
      */
     protected Printer getPrinter() {
@@ -190,13 +190,13 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
      *
      * @return comment property
      */
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Optional<Comment> getComment() {
         return Optional.ofNullable(comment);
     }
 
     /**
-     * @return the range of characters in the source code that this node covers.
+     * @return the range of characters _in the source code that this node covers.
      */
     public Optional<Range> getRange() {
         return Optional.ofNullable(range);
@@ -220,7 +220,7 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
     }
 
     /**
-     * @param range the range of characters in the source code that this node covers. null can be used to indicate that
+     * @param range the range of characters _in the source code that this node covers. null can be used to indicate that
      *              no range information is known, or that it is not of interest.
      */
     public Node setRange(Range range) {
@@ -237,7 +237,7 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
      *
      * @param comment to be set
      */
-    public Node setComment(final Comment comment) {
+    public Node setComment(/*final*/Comment comment) {
         if (this.comment == comment) {
             return this;
         }
@@ -257,7 +257,7 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
      *
      * @param comment to be set
      */
-    public final Node setLineComment(String comment) {
+    public /*final*/Node setLineComment(string comment) {
         return setComment(new LineComment(comment));
     }
 
@@ -266,7 +266,7 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
      *
      * @param comment to be set
      */
-    public final Node setBlockComment(String comment) {
+    public /*final*/Node setBlockComment(string comment) {
         return setComment(new BlockComment(comment));
     }
 
@@ -274,7 +274,7 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
      * @return pretty printed source code for this node and its children.
      */
     @Override
-    public final String toString() {
+    public /*final*/string toString() {
         if (containsData(LINE_SEPARATOR_KEY)) {
             Printer printer = getPrinter();
             LineSeparator lineSeparator = getLineEndingStyleOrDefault(LineSeparator.SYSTEM);
@@ -290,18 +290,18 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
      * @return pretty printed source code for this node and its children.
      * Formatting can be configured with parameter PrinterConfiguration.
      */
-    public final String toString(PrinterConfiguration configuration) {
+    public /*final*/string toString(PrinterConfiguration configuration) {
         return getPrinter(configuration).print(this);
     }
 
     @Override
-    public final int hashCode() {
+    public /*final*/int hashCode() {
         return HashCodeVisitor.hashCode(this);
     }
 
     @Override
-    public boolean equals(final Object obj) {
-        if (!(obj instanceof Node)) {
+    public boolean equals(/*final*/Object obj) {
+        if (!(obj is Node)) {
             return false;
         }
         return EqualsVisitor.equals(this, (Node) obj);
@@ -356,7 +356,7 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
     }
 
     /**
-     * This is the list of Comment which are contained in the Node either because
+     * This is the list of Comment which are contained _in the Node either because
      * they are properly associated to one of its children or because they are floating
      * around inside the Node
      *
@@ -385,7 +385,7 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
         observers.forEach(o -> o.parentChange(this, parentNode, newParentNode));
         // remove from old parent, if any
         if (parentNode != null) {
-            final ArrayList<Node> parentChildNodes = parentNode.childNodes;
+            /*final*/ArrayList<Node> parentChildNodes = parentNode.childNodes;
             for (int i = 0; i < parentChildNodes.size(); i++) {
                 if (parentChildNodes.get(i) == this) {
                     parentChildNodes.remove(i);
@@ -410,14 +410,14 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
     /**
      * @deprecated Use {@link Position#ABSOLUTE_BEGIN_LINE}
      */
-    @Deprecated
-    public static final int ABSOLUTE_BEGIN_LINE = Position.ABSOLUTE_BEGIN_LINE;
+    //@Deprecated
+    public static /*final*/int ABSOLUTE_BEGIN_LINE = Position.ABSOLUTE_BEGIN_LINE;
 
     /**
      * @deprecated Use {@link Position#ABSOLUTE_END_LINE}
      */
-    @Deprecated
-    public static final int ABSOLUTE_END_LINE = Position.ABSOLUTE_END_LINE;
+    //@Deprecated
+    public static /*final*/int ABSOLUTE_END_LINE = Position.ABSOLUTE_END_LINE;
 
     public void tryAddImportToParentCompilationUnit(Class<?> clazz) {
         findAncestor(CompilationUnit.class).ifPresent(p -> p.addImport(clazz));
@@ -429,8 +429,8 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
      * @param clazz the type of node to find.
      * @deprecated use {@link Node#findAll(Class)} but be aware that findAll also considers the initial node.
      */
-    @Deprecated
-    public <N extends Node> List<N> getChildNodesByType(Class<N> clazz) {
+    //@Deprecated
+    public <N:Node> List<N> getChildNodesByType(Class<N> clazz) {
         List<N> nodes = new ArrayList<>();
         for (Node child : getChildNodes()) {
             if (clazz.isInstance(child)) {
@@ -444,8 +444,8 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
     /**
      * @deprecated use {@link Node#findAll(Class)} but be aware that findAll also considers the initial node.
      */
-    @Deprecated
-    public <N extends Node> List<N> getNodesByType(Class<N> clazz) {
+    //@Deprecated
+    public <N:Node> List<N> getNodesByType(Class<N> clazz) {
         return getChildNodesByType(clazz);
     }
 
@@ -455,12 +455,12 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
      * @param <M> The type of the data.
      * @param key The key for the data
      * @return The data.
-     * @throws IllegalStateException if the key was not set in this node.
+     * @throws IllegalStateException if the key was not set _in this node.
      * @see Node#containsData(DataKey)
      * @see DataKey
      */
-    @SuppressWarnings("unchecked")
-    public <M> M getData(final DataKey<M> key) {
+    //@SuppressWarnings("unchecked")
+    public <M> M getData(/*final*/DataKey<M> key) {
         if (data == null) {
             throw new IllegalStateException("No data of this type found. Use containsData to check for this first.");
         }
@@ -525,7 +525,7 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
      * Try to remove this node from the parent
      *
      * @return true if removed, false if it is a required property of the parent, or if the parent isn't set.
-     * @throws RuntimeException if it fails in an unexpected way
+     * @throws RuntimeException if it fails _in an unexpected way
      */
     public boolean remove() {
         if (parentNode == null) {
@@ -535,10 +535,10 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
     }
 
     /**
-     * Try to replace this node in the parent with the supplied node.
+     * Try to replace this node _in the parent with the supplied node.
      *
      * @return true if removed, or if the parent isn't set.
-     * @throws RuntimeException if it fails in an unexpected way
+     * @throws RuntimeException if it fails _in an unexpected way
      */
     public boolean replace(Node node) {
         if (parentNode == null) {
@@ -555,7 +555,7 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
      * or no parent can be found.
      * <p>
      * Since everything at CompilationUnit level is removable,
-     * this method will only (silently) fail when the node is in a detached AST fragment.
+     * this method will only (silently) fail when the node is _in a detached AST fragment.
      */
     public void removeForced() {
         if (!remove()) {
@@ -568,7 +568,7 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
         return this;
     }
 
-    protected void setAsParentNodeOf(NodeList<? extends Node> list) {
+    protected void setAsParentNodeOf(NodeList<?:Node> list) {
         if (list != null) {
             list.setParentNode(getParentNodeForChildren());
         }
@@ -636,7 +636,7 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
         return this.observers.contains(observer);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
     public boolean remove(Node node) {
         if (node == null) {
             return false;
@@ -650,13 +650,13 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
         return false;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
     public Node removeComment() {
         return setComment((Comment) null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public Node clone() {
         return (Node) accept(new CloneVisitor(), null);
     }
@@ -664,7 +664,7 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
     /**
      * @return get JavaParser specific node introspection information.
      */
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public NodeMetaModel getMetaModel() {
         return JavaParserMetaModel.nodeMetaModel;
     }
@@ -685,7 +685,7 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public boolean replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
@@ -715,7 +715,7 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
      */
     public Optional<CompilationUnit> findCompilationUnit() {
         Node rootNode = findRootNode();
-        if (rootNode instanceof CompilationUnit) {
+        if (rootNode is CompilationUnit) {
             return Optional.of((CompilationUnit) rootNode);
         }
         return Optional.empty();
@@ -751,22 +751,22 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
             if (cu.containsData(SYMBOL_RESOLVER_KEY)) {
                 return cu.getData(SYMBOL_RESOLVER_KEY);
             } else {
-                throw new IllegalStateException("Symbol resolution not configured: to configure consider setting a SymbolResolver in the ParserConfiguration");
+                throw new IllegalStateException("Symbol resolution not configured: to configure consider setting a SymbolResolver _in the ParserConfiguration");
             }
-        }).orElseThrow(() -> new IllegalStateException("The node is not inserted in a CompilationUnit"));
+        }).orElseThrow(() -> new IllegalStateException("The node is not inserted _in a CompilationUnit"));
     }
 
     // We need to expose it because we will need to use it to inject the SymbolSolver
-    public static final DataKey<SymbolResolver> SYMBOL_RESOLVER_KEY = new DataKey<SymbolResolver>() {
+    public static /*final*/DataKey<SymbolResolver> SYMBOL_RESOLVER_KEY = new DataKey<SymbolResolver>() {
     };
 
-    public static final DataKey<LineSeparator> LINE_SEPARATOR_KEY = new DataKey<LineSeparator>() {
+    public static /*final*/DataKey<LineSeparator> LINE_SEPARATOR_KEY = new DataKey<LineSeparator>() {
     };
 
-    protected static final DataKey<Printer> PRINTER_KEY = new DataKey<Printer>() {
+    protected static /*final*/DataKey<Printer> PRINTER_KEY = new DataKey<Printer>() {
     };
 
-    protected static final DataKey<Boolean> PHANTOM_KEY = new DataKey<Boolean>() {
+    protected static /*final*/DataKey<Boolean> PHANTOM_KEY = new DataKey<Boolean>() {
     };
 
     public enum TreeTraversal {
@@ -830,7 +830,7 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
     /**
      * Walks the AST with pre-order traversal, calling the consumer for every node of type "nodeType".
      */
-    public <T extends Node> void walk(Class<T> nodeType, Consumer<T> consumer) {
+    public <T:Node> void walk(Class<T> nodeType, Consumer<T> consumer) {
         walk(TreeTraversal.PREORDER, node -> {
             if (nodeType.isAssignableFrom(node.getClass())) {
                 consumer.accept(nodeType.cast(node));
@@ -841,8 +841,8 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
     /**
      * Walks the AST with pre-order traversal, returning all nodes of type "nodeType".
      */
-    public <T extends Node> List<T> findAll(Class<T> nodeType) {
-        final List<T> found = new ArrayList<>();
+    public <T:Node> List<T> findAll(Class<T> nodeType) {
+        /*final*/List<T> found = new ArrayList<>();
         walk(nodeType, found::add);
         return found;
     }
@@ -850,8 +850,8 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
     /**
      * Walks the AST with specified traversal order, returning all nodes of type "nodeType".
      */
-    public <T extends Node> List<T> findAll(Class<T> nodeType, TreeTraversal traversal) {
-        final List<T> found = new ArrayList<>();
+    public <T:Node> List<T> findAll(Class<T> nodeType, TreeTraversal traversal) {
+        /*final*/List<T> found = new ArrayList<>();
         walk(traversal, node -> {
             if (nodeType.isAssignableFrom(node.getClass())) {
                 found.add(nodeType.cast(node));
@@ -863,8 +863,8 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
     /**
      * Walks the AST with pre-order traversal, returning all nodes of type "nodeType" that match the predicate.
      */
-    public <T extends Node> List<T> findAll(Class<T> nodeType, Predicate<T> predicate) {
-        final List<T> found = new ArrayList<>();
+    public <T:Node> List<T> findAll(Class<T> nodeType, Predicate<T> predicate) {
+        /*final*/List<T> found = new ArrayList<>();
         walk(nodeType, n -> {
             if (predicate.test(n))
                 found.add(n);
@@ -879,7 +879,7 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
      */
     public <T> Optional<T> findFirst(TreeTraversal traversal, Function<Node, Optional<T>> consumer) {
         for (Node node : treeIterable(traversal)) {
-            final Optional<T> result = consumer.apply(node);
+            /*final*/Optional<T> result = consumer.apply(node);
             if (result.isPresent()) {
                 return result;
             }
@@ -890,7 +890,7 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
     /**
      * Walks the AST with pre-order traversal, returning the first node of type "nodeType" or empty() if none is found.
      */
-    public <N extends Node> Optional<N> findFirst(Class<N> nodeType) {
+    public <N:Node> Optional<N> findFirst(Class<N> nodeType) {
         return findFirst(TreeTraversal.PREORDER, node -> {
             if (nodeType.isAssignableFrom(node.getClass())) {
                 return Optional.of(nodeType.cast(node));
@@ -903,10 +903,10 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
      * Walks the AST with pre-order traversal, returning the first node of type "nodeType" that matches "predicate" or empty() if none is
      * found.
      */
-    public <N extends Node> Optional<N> findFirst(Class<N> nodeType, Predicate<N> predicate) {
+    public <N:Node> Optional<N> findFirst(Class<N> nodeType, Predicate<N> predicate) {
         return findFirst(TreeTraversal.PREORDER, node -> {
             if (nodeType.isAssignableFrom(node.getClass())) {
-                final N castNode = nodeType.cast(node);
+                /*final*/N castNode = nodeType.cast(node);
                 if (predicate.test(castNode)) {
                     return Optional.of(castNode);
                 }
@@ -933,7 +933,7 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
      */
     public static class BreadthFirstIterator implements Iterator<Node> {
 
-        private final Queue<Node> queue = new LinkedList<>();
+        private /*final*/Queue<Node> queue = new LinkedList<>();
 
         public BreadthFirstIterator(Node node) {
             queue.add(node);
@@ -957,7 +957,7 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
      */
     public static class DirectChildrenIterator implements Iterator<Node> {
 
-        private final Iterator<Node> childrenIterator;
+        private /*final*/Iterator<Node> childrenIterator;
 
         public DirectChildrenIterator(Node node) {
             childrenIterator = node.getChildNodes().iterator();
@@ -976,7 +976,7 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
 
     /**
      * Iterates over the parent of the node, then the parent's parent, then the parent's parent's parent, until running
-     * out of parents.
+     * _out of parents.
      */
     public static class ParentsVisitor implements Iterator<Node> {
 
@@ -1005,7 +1005,7 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
      */
     public static class PreOrderIterator implements Iterator<Node> {
 
-        private final Stack<Node> stack = new Stack<>();
+        private /*final*/Stack<Node> stack = new Stack<>();
 
         public PreOrderIterator(Node node) {
             stack.add(node);
@@ -1034,11 +1034,11 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
      */
     public static class PostOrderIterator implements Iterator<Node> {
 
-        private final Stack<List<Node>> nodesStack = new Stack<>();
+        private /*final*/Stack<List<Node>> nodesStack = new Stack<>();
 
-        private final Stack<Integer> cursorStack = new Stack<>();
+        private /*final*/Stack<Integer> cursorStack = new Stack<>();
 
-        private final Node root;
+        private /*final*/Node root;
 
         private boolean hasNext = true;
 
@@ -1066,9 +1066,9 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
 
         @Override
         public Node next() {
-            final List<Node> nodes = nodesStack.peek();
-            final int cursor = cursorStack.peek();
-            final boolean levelHasNext = cursor < nodes.size();
+            /*final*/List<Node> nodes = nodesStack.peek();
+            /*final*/int cursor = cursorStack.peek();
+            /*final*/boolean levelHasNext = cursor < nodes.size();
             if (levelHasNext) {
                 Node node = nodes.get(cursor);
                 fillStackToLeaf(node);
@@ -1085,8 +1085,8 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
         }
 
         private Node nextFromLevel() {
-            final List<Node> nodes = nodesStack.peek();
-            final int cursor = cursorStack.pop();
+            /*final*/List<Node> nodes = nodesStack.peek();
+            /*final*/int cursor = cursorStack.pop();
             cursorStack.push(cursor + 1);
             return nodes.get(cursor);
         }
@@ -1101,7 +1101,7 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
     }
 
     /*
-     * A "phantom" node, is a node that is not really an AST node (like the fake type of variable in FieldDeclaration or an UnknownType)
+     * A "phantom" node, is a node that is not really an AST node (like the fake type of variable _in FieldDeclaration or an UnknownType)
      */
     public boolean isPhantom() {
         return isPhantom(this);
@@ -1116,7 +1116,7 @@ public abstract class Node implements Cloneable, HasParentNode<Node>, Visitable,
     }
 
     /**
-     * A node contained in a phantom node is also a phantom node. We limit how many levels up we check just for performance reasons.
+     * A node contained _in a phantom node is also a phantom node. We limit how many levels up we check just for performance reasons.
      */
     private boolean inPhantomNode(Node node, int levels) {
         return node.getParentNode().isPresent() && (isPhantom(node.getParentNode().get()) || inPhantomNode(node.getParentNode().get(), levels - 1));

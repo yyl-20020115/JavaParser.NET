@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -40,7 +40,7 @@ public class JavaParserFieldDeclaration implements ResolvedFieldDeclaration {
         }
         this.variableDeclarator = variableDeclarator;
         this.typeSolver = typeSolver;
-        if (!(demandParentNode(variableDeclarator) instanceof com.github.javaparser.ast.body.FieldDeclaration)) {
+        if (!(demandParentNode(variableDeclarator) is com.github.javaparser.ast.body.FieldDeclaration)) {
             throw new IllegalStateException(demandParentNode(variableDeclarator).getClass().getCanonicalName());
         }
         this.wrappedNode = (com.github.javaparser.ast.body.FieldDeclaration) demandParentNode(variableDeclarator);
@@ -52,7 +52,7 @@ public class JavaParserFieldDeclaration implements ResolvedFieldDeclaration {
     }
 
     @Override
-    public String getName() {
+    public string getName() {
         return variableDeclarator.getName().getId();
     }
 
@@ -85,7 +85,7 @@ public class JavaParserFieldDeclaration implements ResolvedFieldDeclaration {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "JavaParserFieldDeclaration{" + getName() + "}";
     }
 

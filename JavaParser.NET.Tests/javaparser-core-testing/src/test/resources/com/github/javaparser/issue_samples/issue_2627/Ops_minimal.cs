@@ -256,7 +256,7 @@ class Ops {
      */
 
     void methodA() {
-        System.out.println("");
+        System._out.println("");
     }
 
     /*

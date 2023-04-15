@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,7 +24,7 @@ namespace com.github.javaparser.ast.visitor;
 
 
 class TreeVisitorTest {
-    @Test
+    [TestMethod]
     void isValidBreadthFirstTraversal() {
         Expression expression = parseExpression("(2+3)+(4+5)");
 
@@ -41,7 +41,7 @@ class TreeVisitorTest {
         assertEquals("<(2 + 3) + (4 + 5)> <(2 + 3)> <(4 + 5)> <2 + 3> <4 + 5> <2> <3> <4> <5> ", result.toString());
     }
 
-    @Test
+    [TestMethod]
     void issue743ConcurrentModificationProblem() {
         Expression expression = parseExpression("new int[]{1,2,3,4}");
 
@@ -49,7 +49,7 @@ class TreeVisitorTest {
         TreeVisitor visitor = new TreeVisitor() {
             @Override
             public void process(Node node) {
-                if (node instanceof IntegerLiteralExpr) {
+                if (node is IntegerLiteralExpr) {
                     node.getParentNode().ifPresent(
                             parent -> ((ArrayInitializerExpr) parent).getValues().add(new IntegerLiteralExpr("1")));
                 }
@@ -57,10 +57,10 @@ class TreeVisitorTest {
             }
         };
         visitor.visitPreOrder(expression);
-//        System.out.println(result);
+//        System._out.println(result);
     }
 
-    @Test
+    [TestMethod]
     void isValidPreOrderTraversal() {
         StringBuilder result = new StringBuilder();
         new TreeVisitor() {
@@ -72,7 +72,7 @@ class TreeVisitorTest {
         assertEquals("<(2 + 3) + (4 + 5)> <(2 + 3)> <2 + 3> <2> <3> <(4 + 5)> <4 + 5> <4> <5> ", result.toString());
     }
 
-    @Test
+    [TestMethod]
     void isValidPostOrderTraversal() {
         StringBuilder result = new StringBuilder();
         new TreeVisitor() {
@@ -84,12 +84,12 @@ class TreeVisitorTest {
         assertEquals("<2> <3> <2 + 3> <(2 + 3)> <4> <5> <4 + 5> <(4 + 5)> <(2 + 3) + (4 + 5)> ", result.toString());
     }
 
-    @Test
+    [TestMethod]
     void preOrderConcurrentModificationIsOk() {
         new TreeVisitor() {
             @Override
             public void process(Node node) {
-                if (node instanceof IntegerLiteralExpr) {
+                if (node is IntegerLiteralExpr) {
                     node.getParentNode().ifPresent(
                             parent -> ((ArrayInitializerExpr) parent).getValues().add(new IntegerLiteralExpr("1")));
                 }
@@ -97,12 +97,12 @@ class TreeVisitorTest {
         }.visitPreOrder(parseExpression("new int[]{1,2,3,4}"));
     }
 
-    @Test
+    [TestMethod]
     void postOrderConcurrentModificationIsOk() {
         new TreeVisitor() {
             @Override
             public void process(Node node) {
-                if (node instanceof IntegerLiteralExpr) {
+                if (node is IntegerLiteralExpr) {
                     node.getParentNode().ifPresent(
                             parent -> ((ArrayInitializerExpr) parent).getValues().add(new IntegerLiteralExpr("1")));
                 }
@@ -110,7 +110,7 @@ class TreeVisitorTest {
         }.visitPostOrder(parseExpression("new int[]{1,2,3,4}"));
     }
 
-    @Test
+    [TestMethod]
     void parents() {
         CompilationUnit cu = parse("class X{int x=1;}");
         SimpleName x = cu.getClassByName("X").get().getMember(0).asFieldDeclaration().getVariable(0).getName();
@@ -129,7 +129,7 @@ class TreeVisitorTest {
         assertFalse(visitor.hasNext());
     }
 
-    @Test
+    [TestMethod]
     void isValidDirectChildrenTraversal() {
         Expression expression = parseExpression("(2+3)+(4+5)");
 

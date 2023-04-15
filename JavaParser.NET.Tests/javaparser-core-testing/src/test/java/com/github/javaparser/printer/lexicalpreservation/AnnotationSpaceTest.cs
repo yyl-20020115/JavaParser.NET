@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,18 +24,18 @@ namespace com.github.javaparser.printer.lexicalpreservation;
 
 
 
-public class AnnotationSpaceTest extends AbstractLexicalPreservingTest {
+public class AnnotationSpaceTest:AbstractLexicalPreservingTest {
     /** Tests that inserted annotations on types are followed by a space. */
-    @Test
+    [TestMethod]
     public void test() {
         considerCode("public class Foo {\n" +
-                        "    void myMethod(String param);\n" +
+                        "    void myMethod(string param);\n" +
                         "}");
-        // Insert the annotation onto the String parameter type.
+        // Insert the annotation onto the string parameter type.
         Optional<ClassOrInterfaceType> type = cu.findFirst(ClassOrInterfaceType.class);
         type.get().addAnnotation(new MarkerAnnotationExpr("Nullable"));
-        String result = LexicalPreservingPrinter.print(cu);
-        // Verify that there's a space between the annotation and the String type.
+        string result = LexicalPreservingPrinter.print(cu);
+        // Verify that there's a space between the annotation and the string type.
         assertTrue(result.contains("@Nullable String"));
     }
 }

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,7 +24,7 @@ namespace com.github.javaparser.symbolsolver;
 
 
 
-class Issue144Test extends AbstractResolutionTest {
+class Issue144Test:AbstractResolutionTest {
 
     private TypeSolver typeSolver;
 
@@ -34,7 +34,7 @@ class Issue144Test extends AbstractResolutionTest {
         typeSolver = new JavaParserTypeSolver(srcDir, new LeanParserConfiguration());
     }
 
-    @Test
+    [TestMethod]
     void issue144() {
         CompilationUnit cu = parseSampleWithStandardExtension("issue144/HelloWorld");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "HelloWorld");
@@ -48,7 +48,7 @@ class Issue144Test extends AbstractResolutionTest {
         assertEquals("hw", javaParserFacade.solve(firstParameter).getCorrespondingDeclaration().getName());
     }
 
-    @Test
+    [TestMethod]
     void issue144WithReflectionTypeSolver() {
         CompilationUnit cu = parseSampleWithStandardExtension("issue144/HelloWorld");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "HelloWorld");
@@ -60,7 +60,7 @@ class Issue144Test extends AbstractResolutionTest {
         assertEquals(true, javaParserFacade.solve(firstParameter).isSolved());
     }
 
-    @Test
+    [TestMethod]
     void issue144WithCombinedTypeSolver() {
         CompilationUnit cu = parseSampleWithStandardExtension("issue144/HelloWorld");
         ClassOrInterfaceDeclaration clazz = Navigator.demandClass(cu, "HelloWorld");

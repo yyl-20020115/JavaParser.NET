@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -53,7 +53,7 @@ public class JavaParserJsonSerializer {
      * @param generator the json-p generator for writing the json
      */
 
-    private void serialize(String nodeName, Node node, JsonGenerator generator) {
+    private void serialize(string nodeName, Node node, JsonGenerator generator) {
         requireNonNull(node);
         BaseNodeMetaModel nodeMetaModel = JavaParserMetaModel.getNodeMetaModel(node.getClass()).orElseThrow(() -> new IllegalStateException("Unknown Node: " + node.getClass()));
 
@@ -65,7 +65,7 @@ public class JavaParserJsonSerializer {
         generator.write(JsonNode.CLASS.propertyKey, node.getClass().getName());
         this.writeNonMetaProperties(node, generator);
         for (PropertyMetaModel propertyMetaModel : nodeMetaModel.getAllPropertyMetaModels()) {
-            String name = propertyMetaModel.getName();
+            string name = propertyMetaModel.getName();
             Object value = propertyMetaModel.getValue(node);
             if (value != null) {
                 if (propertyMetaModel.isNodeList()) {
@@ -86,7 +86,7 @@ public class JavaParserJsonSerializer {
     }
 
     /***
-     * This method writes json for properties not included in meta model (i.e., RANGE and TOKEN_RANGE).
+     * This method writes json for properties not included _in meta model (i.e., RANGE and TOKEN_RANGE).
      * This method could be overriden so that - for example - tokens are not written to json to save space
      *
      * @see com.github.javaparser.metamodel.BaseNodeMetaModel#getAllPropertyMetaModels()
@@ -119,7 +119,7 @@ public class JavaParserJsonSerializer {
         }
     }
 
-    protected void writeToken(String name, JavaToken token, JsonGenerator generator) {
+    protected void writeToken(string name, JavaToken token, JsonGenerator generator) {
         generator.writeStartObject(name);
         generator.write(JsonToken.KIND.propertyKey, token.getKind());
         generator.write(JsonToken.TEXT.propertyKey, token.getText());
@@ -134,13 +134,13 @@ public class JavaParserJsonSerializer {
         TOKEN_RANGE("tokenRange"),
         COMMENT(decapitalize(JavaParserMetaModel.commentMetaModel.getTypeName())),
         CLASS("!");
-        final String propertyKey;
+        /*final*/string propertyKey;
 
-        JsonNode(String p) {
+        JsonNode(string p) {
             this.propertyKey = p;
         }
 
-        public String toString() {
+        public string toString() {
             return this.propertyKey;
         }
     }
@@ -150,13 +150,13 @@ public class JavaParserJsonSerializer {
         BEGIN_COLUMN("beginColumn"),
         END_LINE("endLine"),
         END_COLUMN("endColumn");
-        final String propertyKey;
+        /*final*/string propertyKey;
 
-        JsonRange(String p) {
+        JsonRange(string p) {
             this.propertyKey = p;
         }
 
-        public String toString() {
+        public string toString() {
             return this.propertyKey;
         }
     }
@@ -164,13 +164,13 @@ public class JavaParserJsonSerializer {
     public enum JsonTokenRange {
         BEGIN_TOKEN("beginToken"),
         END_TOKEN("endToken");
-        final String propertyKey;
+        /*final*/string propertyKey;
 
-        JsonTokenRange(String p) {
+        JsonTokenRange(string p) {
             this.propertyKey = p;
         }
 
-        public String toString() {
+        public string toString() {
             return this.propertyKey;
         }
     }
@@ -178,13 +178,13 @@ public class JavaParserJsonSerializer {
     public enum JsonToken {
         TEXT("text"),
         KIND("kind");
-        final String propertyKey;
+        /*final*/string propertyKey;
 
-        JsonToken(String p) {
+        JsonToken(string p) {
             this.propertyKey = p;
         }
 
-        public String toString() {
+        public string toString() {
             return this.propertyKey;
         }
     }

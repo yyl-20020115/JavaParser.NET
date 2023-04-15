@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -31,16 +31,16 @@ namespace com.github.javaparser;
 @SuppressWarnings("javadoc")
 public class PositionMappingTest {
 
-	@Test
-	public void testNoMapping() throws IOException {
+	[TestMethod]
+	public void testNoMapping(){
 		List<List<String>> input = lines(
 			line("Hello World !\n"), 
 			line("Next Line\r"), 
 			line("Third Line\r\n"), 
 			line("Fourth Line."));
-		String inputText = text(input);
+		string inputText = text(input);
 		UnicodeEscapeProcessingProvider provider = provider(inputText);
-		String outputText = process(provider);
+		string outputText = process(provider);
 		assertEquals(inputText, outputText);
 		PositionMapping mapping = provider.getPositionMapping();
 		assertTrue(mapping.isEmpty());
@@ -49,8 +49,8 @@ public class PositionMappingTest {
 		assertSame(PositionMapping.PositionUpdate.NONE, mapping.lookup(new Position(10000, 1)));
 	}
 
-	@Test
-	public void testEncodedLineFeed() throws IOException {
+	[TestMethod]
+	public void testEncodedLineFeed(){
 		List<List<String>> input = lines(
 			line("B", "\\u000A", "C"));
 		List<List<String>> output = lines(
@@ -60,8 +60,8 @@ public class PositionMappingTest {
 		checkConvert(input, output);
 	}
 	
-	@Test
-	public void testComplexMapping() throws IOException {
+	[TestMethod]
+	public void testComplexMapping(){
 		List<List<String>> input = lines(
 			// Character positions:
 			//                      111    1 11111    1222    2 2222     2
@@ -78,9 +78,9 @@ public class PositionMappingTest {
 	}
 
 	private void checkConvert(List<List<String>> input,
-			List<List<String>> output) throws IOException {
+			List<List<String>> output){
 		UnicodeEscapeProcessingProvider provider = provider(text(input));
-		String decoded = process(provider);
+		string decoded = process(provider);
 		assertEquals(text(output), decoded);
 		
 		PositionMapping mapping = provider.getPositionMapping();
@@ -97,10 +97,10 @@ public class PositionMappingTest {
 		Iterator<List<String>> outLineIt = output.iterator();
 		List<String> outLine = outLineIt.next();
 		Iterator<String> outPartIt = outLine.iterator();
-		String outPart = outPartIt.next();
+		string outPart = outPartIt.next();
 		boolean outFinished = false;
 		for (List<String> inLine : input) {
-			for (String inPart : inLine) {
+			for (string inPart : inLine) {
 				assertFalse(outFinished);
 				
 				Position inPos = new Position(inPosLine, inPosColumn);
@@ -133,10 +133,10 @@ public class PositionMappingTest {
 		}
 	}
 	
-	private static String text(List<List<String>> input) {
+	private static string text(List<List<String>> input) {
 		StringBuilder result = new StringBuilder();
 		for (List<String> line : input) {
-			for (String part : line) {
+			for (string part : line) {
 				result.append(part);
 			}
 		}
@@ -144,7 +144,7 @@ public class PositionMappingTest {
 	}
 
 	@SafeVarargs
-	private static List<String> line(String ...parts) {
+	private static List<String> line(string ...parts) {
 		return Arrays.asList(parts);
 	}
 

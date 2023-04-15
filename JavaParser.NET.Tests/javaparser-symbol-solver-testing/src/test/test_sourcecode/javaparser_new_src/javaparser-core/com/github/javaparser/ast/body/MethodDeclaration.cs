@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -29,7 +29,7 @@ namespace com.github.javaparser.ast.body;
 /**
  * @author Julio Vilmar Gesser
  */
-public final class MethodDeclaration extends BodyDeclaration<MethodDeclaration> implements 
+public /*final*/class MethodDeclaration:BodyDeclaration<MethodDeclaration> implements 
         NodeWithJavaDoc<MethodDeclaration>, 
         NodeWithDeclaration, 
         NodeWithName<MethodDeclaration>,
@@ -63,30 +63,30 @@ public final class MethodDeclaration extends BodyDeclaration<MethodDeclaration> 
     public MethodDeclaration() {
     }
 
-    public MethodDeclaration(final EnumSet<Modifier> modifiers, final Type elementType, final String name) {
+    public MethodDeclaration(/*final*/EnumSet<Modifier> modifiers, /*final*/Type elementType, /*final*/string name) {
         setModifiers(modifiers);
         setElementType(elementType);
         setName(name);
     }
 
-    public MethodDeclaration(final EnumSet<Modifier> modifiers, final Type elementType, final String name,
-                             final List<Parameter> parameters) {
+    public MethodDeclaration(/*final*/EnumSet<Modifier> modifiers, /*final*/Type elementType, /*final*/string name,
+                             /*final*/List<Parameter> parameters) {
         setModifiers(modifiers);
         setElementType(elementType);
         setName(name);
         setParameters(parameters);
     }
 
-    public MethodDeclaration(final EnumSet<Modifier> modifiers, 
-                             final List<AnnotationExpr> annotations,
-                             final List<TypeParameter> typeParameters, 
-                             final Type elementType,
-                             final List<ArrayBracketPair> arrayBracketPairsAfterElementType,
-                             final String name,
-                             final List<Parameter> parameters, 
-                             final List<ArrayBracketPair> arrayBracketPairsAfterParameterList,
-                             final List<ReferenceType> throws_, 
-                             final BlockStmt body) {
+    public MethodDeclaration(/*final*/EnumSet<Modifier> modifiers, 
+                             /*final*/List<AnnotationExpr> annotations,
+                             /*final*/List<TypeParameter> typeParameters, 
+                             /*final*/Type elementType,
+                             /*final*/List<ArrayBracketPair> arrayBracketPairsAfterElementType,
+                             /*final*/string name,
+                             /*final*/List<Parameter> parameters, 
+                             /*final*/List<ArrayBracketPair> arrayBracketPairsAfterParameterList,
+                             /*final*/List<ReferenceType> throws_, 
+                             /*final*/BlockStmt body) {
         super(annotations);
         setModifiers(modifiers);
         setTypeParameters(typeParameters);
@@ -100,16 +100,16 @@ public final class MethodDeclaration extends BodyDeclaration<MethodDeclaration> 
     }
 
     public MethodDeclaration(Range range,
-                             final EnumSet<Modifier> modifiers, 
-                             final List<AnnotationExpr> annotations,
-                             final List<TypeParameter> typeParameters, 
-                             final Type elementType,
-                             final List<ArrayBracketPair> arrayBracketPairsAfterElementType,
-                             final NameExpr nameExpr,
-                             final List<Parameter> parameters, 
-                             final List<ArrayBracketPair> arrayBracketPairsAfterParameterList,
-                             final List<ReferenceType> throws_, 
-                             final BlockStmt body) {
+                             /*final*/EnumSet<Modifier> modifiers, 
+                             /*final*/List<AnnotationExpr> annotations,
+                             /*final*/List<TypeParameter> typeParameters, 
+                             /*final*/Type elementType,
+                             /*final*/List<ArrayBracketPair> arrayBracketPairsAfterElementType,
+                             /*final*/NameExpr nameExpr,
+                             /*final*/List<Parameter> parameters, 
+                             /*final*/List<ArrayBracketPair> arrayBracketPairsAfterParameterList,
+                             /*final*/List<ReferenceType> throws_, 
+                             /*final*/BlockStmt body) {
         super(range, annotations);
         setModifiers(modifiers);
         setTypeParameters(typeParameters);
@@ -123,12 +123,12 @@ public final class MethodDeclaration extends BodyDeclaration<MethodDeclaration> 
     }
 
     @Override
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
@@ -149,7 +149,7 @@ public final class MethodDeclaration extends BodyDeclaration<MethodDeclaration> 
     }
 
     @Override
-    public String getName() {
+    public string getName() {
         return name.getName();
     }
 
@@ -187,46 +187,46 @@ public final class MethodDeclaration extends BodyDeclaration<MethodDeclaration> 
     }
 
     @Override
-    public MethodDeclaration setBody(final BlockStmt body) {
+    public MethodDeclaration setBody(/*final*/BlockStmt body) {
         this.body = body;
         setAsParentNodeOf(this.body);
         return this;
     }
 
     @Override
-    public MethodDeclaration setModifiers(final EnumSet<Modifier> modifiers) {
+    public MethodDeclaration setModifiers(/*final*/EnumSet<Modifier> modifiers) {
         this.modifiers = modifiers;
         return this;
     }
 
     @Override
-    public MethodDeclaration setName(final String name) {
+    public MethodDeclaration setName(/*final*/string name) {
         setNameExpr(new NameExpr(name));
         return this;
     }
 
-    public MethodDeclaration setNameExpr(final NameExpr name) {
+    public MethodDeclaration setNameExpr(/*final*/NameExpr name) {
         this.name = name;
         setAsParentNodeOf(this.name);
         return this;
     }
 
     @Override
-    public MethodDeclaration setParameters(final List<Parameter> parameters) {
+    public MethodDeclaration setParameters(/*final*/List<Parameter> parameters) {
         this.parameters = parameters;
         setAsParentNodeOf(this.parameters);
         return this;
     }
 
     @Override
-    public MethodDeclaration setThrows(final List<ReferenceType> throws_) {
+    public MethodDeclaration setThrows(/*final*/List<ReferenceType> throws_) {
         this.throws_ = throws_;
         setAsParentNodeOf(this.throws_);
         return this;
     }
 
     @Override
-    public MethodDeclaration setType(final Type type) {
+    public MethodDeclaration setType(/*final*/Type type) {
         Pair<Type, List<ArrayBracketPair>> typeListPair = unwrapArrayTypes(type);
         setElementType(typeListPair.a);
         setArrayBracketPairsAfterElementType(typeListPair.b);
@@ -235,13 +235,13 @@ public final class MethodDeclaration extends BodyDeclaration<MethodDeclaration> 
     }
 
     @Override
-    public MethodDeclaration setElementType(final Type elementType) {
+    public MethodDeclaration setElementType(/*final*/Type elementType) {
         this.elementType = elementType;
         setAsParentNodeOf(this.elementType);
         return this;
     }
 
-    public MethodDeclaration setTypeParameters(final List<TypeParameter> typeParameters) {
+    public MethodDeclaration setTypeParameters(/*final*/List<TypeParameter> typeParameters) {
         this.typeParameters = typeParameters;
         setAsParentNodeOf(typeParameters);
         return this;
@@ -257,12 +257,12 @@ public final class MethodDeclaration extends BodyDeclaration<MethodDeclaration> 
     }
 
     @Override
-    public String getDeclarationAsString() {
+    public string getDeclarationAsString() {
         return getDeclarationAsString(true, true, true);
     }
 
     @Override
-    public String getDeclarationAsString(boolean includingModifiers, boolean includingThrows) {
+    public string getDeclarationAsString(boolean includingModifiers, boolean includingThrows) {
         return getDeclarationAsString(includingModifiers, includingThrows, true);
     }
 
@@ -276,7 +276,7 @@ public final class MethodDeclaration extends BodyDeclaration<MethodDeclaration> 
      * @return method declaration as String
      */
     @Override
-    public String getDeclarationAsString(boolean includingModifiers, boolean includingThrows,
+    public string getDeclarationAsString(boolean includingModifiers, boolean includingThrows,
                                          boolean includingParameterName) {
         StringBuilder sb = new StringBuilder();
         if (includingModifiers) {
@@ -290,7 +290,7 @@ public final class MethodDeclaration extends BodyDeclaration<MethodDeclaration> 
                 sb.append("abstract ");
             }
             if (getModifiers().contains(Modifier.FINAL)) {
-                sb.append("final ");
+                sb.append("/*final*/");
             }
             if (getModifiers().contains(Modifier.NATIVE)) {
                 sb.append("native ");
@@ -338,14 +338,14 @@ public final class MethodDeclaration extends BodyDeclaration<MethodDeclaration> 
 
     @Override
     public JavadocComment getJavaDoc() {
-        if (getComment() instanceof JavadocComment) {
+        if (getComment() is JavadocComment) {
             return (JavadocComment) getComment();
         }
         return null;
     }
 
     /**
-     * @return the array brackets in this position: <code>class C { int[] abc; }</code>
+     * @return the array brackets _in this position: <code>class C { int[] abc; }</code>
      */
     public List<ArrayBracketPair> getArrayBracketPairsAfterElementType() {
         arrayBracketPairsAfterType = ensureNotNull(arrayBracketPairsAfterType);
@@ -360,7 +360,7 @@ public final class MethodDeclaration extends BodyDeclaration<MethodDeclaration> 
     }
 
 	/**
-     * @return the array brackets in this position: <code>int abc()[] {...}</code>
+     * @return the array brackets _in this position: <code>int abc()[] {...}</code>
      */
     public List<ArrayBracketPair> getArrayBracketPairsAfterParameterList() {
         arrayBracketPairsAfterParameterList = ensureNotNull(arrayBracketPairsAfterParameterList);

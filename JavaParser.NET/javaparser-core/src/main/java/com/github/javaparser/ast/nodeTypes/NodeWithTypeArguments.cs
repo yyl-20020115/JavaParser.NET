@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -34,10 +34,10 @@ namespace com.github.javaparser.ast.nodeTypes;
  * Only ObjectCreationExpr uses the diamond operator.
  * On other nodes it is treated the same as the first case.
  */
-public interface NodeWithTypeArguments<N extends Node> {
+public interface NodeWithTypeArguments<N:Node> {
 
     /**
-     * @return the types that can be found in the type arguments: {@code  <String, Integer>}.
+     * @return the types that can be found _in the type arguments: {@code  <String, Integer>}.
      */
     Optional<NodeList<Type>> getTypeArguments();
 
@@ -59,7 +59,7 @@ public interface NodeWithTypeArguments<N extends Node> {
     /**
      * Sets the type arguments to {@code <>}.
      */
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     default N setDiamondOperator() {
         return setTypeArguments(new NodeList<>());
     }
@@ -67,12 +67,12 @@ public interface NodeWithTypeArguments<N extends Node> {
     /**
      * Removes all type arguments, including the surrounding {@code <>}.
      */
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     default N removeTypeArguments() {
         return setTypeArguments((NodeList<Type>) null);
     }
 
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     default N setTypeArguments(Type... typeArguments) {
         return setTypeArguments(nodeList(typeArguments));
     }

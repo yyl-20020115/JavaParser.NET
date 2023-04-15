@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,15 +24,15 @@ namespace com.github.javaparser.ast.validator;
 
 
 class Java8ValidatorTest {
-    public static final JavaParser javaParser = new JavaParser(new ParserConfiguration().setLanguageLevel(JAVA_8));
+    public static /*final*/JavaParser javaParser = new JavaParser(new ParserConfiguration().setLanguageLevel(JAVA_8));
 
-    @Test
+    [TestMethod]
     void localInterface() {
         ParseResult<CompilationUnit> result = javaParser.parse(COMPILATION_UNIT, provider("class X {void a(){interface I{}};}"));
         assertProblems(result, "(line 1,col 19) There is no such thing as a local interface.");
     }
 
-    @Test
+    [TestMethod]
     void lambdaParameter() {
         ParseResult<CompilationUnit> result = javaParser.parse(COMPILATION_UNIT, provider("class X{int x(){ a((" + allModifiers + " Integer x) -> 10);}}"));
         assertProblems(result,
@@ -55,7 +55,7 @@ class Java8ValidatorTest {
         );
     }
 
-    @Test
+    [TestMethod]
     void interfaceMethod() {
         ParseResult<CompilationUnit> result = javaParser.parse(COMPILATION_UNIT, provider("interface X{" + allModifiers + "int x(){};}"));
         assertProblems(result,
@@ -70,19 +70,19 @@ class Java8ValidatorTest {
         );
     }
 
-    @Test
+    [TestMethod]
     void defaultMethodWithoutBody() {
         ParseResult<CompilationUnit> result = javaParser.parse(COMPILATION_UNIT, provider("interface X {default void a();}"));
         assertProblems(result, "(line 1,col 14) 'default' methods must have a body.");
     }
 
-    @Test
+    [TestMethod]
     void lambdas() {
         ParseResult<Statement> result = javaParser.parse(STATEMENT, provider("a(() -> 1);"));
         assertNoProblems(result);
     }
 
-    @Test
+    [TestMethod]
     void noModules() {
         ParseResult<CompilationUnit> result = javaParser.parse(COMPILATION_UNIT, provider("open module x {}"));
         assertProblems(result, "(line 1,col 1) Modules are not supported.");

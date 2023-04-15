@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,7 +25,7 @@ namespace com.github.javaparser;
 /**
  * An object that can have a parent node.
  */
-public interface HasParentNode<T> extends Observable {
+public interface HasParentNode<T>:Observable {
 
     /**
      * Returns true if the parent has a parent
@@ -72,7 +72,7 @@ public interface HasParentNode<T> extends Observable {
      * This method is no longer acceptable to find ancestor.
      * <p> Use {@link findAncestor(Predicate, Class)} instead.
      */
-    @Deprecated
+    //@Deprecated
     default <N> Optional<N> findAncestor(Class<N> type, Predicate<N> predicate) {
         return findAncestor(predicate, type);
     }

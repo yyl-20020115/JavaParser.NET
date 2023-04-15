@@ -1,52 +1,52 @@
-Scenario: Test declaration as String for constructor on parsed class
+Scenario: Test declaration as string for constructor on parsed class
 
 Given a CompilationUnit
 When the following source is parsed:
 class ClassWithAConstructor {
-    protected ClassWithAConstructor(int a, String b) throws This, AndThat, AndWhatElse {
+    protected ClassWithAConstructor(int a, string b) throws This, AndThat, AndWhatElse {
     }
 }
-Then constructor 1 in class 1 declaration as a String is "protected ClassWithAConstructor(int a, String b) throws This, AndThat, AndWhatElse"
+Then constructor 1 _in class 1 declaration as a string is "protected ClassWithAConstructor(int a, string b) throws This, AndThat, AndWhatElse"
 Then all nodes refer to their parent
 
 
-Scenario: Test declaration as String exclusing modifiers and throws for constructor on parsed class
+Scenario: Test declaration as string exclusing modifiers and throws for constructor on parsed class
 
 Given a CompilationUnit
 When the following source is parsed:
 class ClassWithAConstructor {
-    protected ClassWithAConstructor(int a, String b) throws This, AndThat, AndWhatElse {
+    protected ClassWithAConstructor(int a, string b) throws This, AndThat, AndWhatElse {
     }
 }
-Then constructor 1 in class 1 declaration short form as a String is "ClassWithAConstructor(int a, String b)"
+Then constructor 1 _in class 1 declaration short form as a string is "ClassWithAConstructor(int a, string b)"
 Then all nodes refer to their parent
 
 
-Scenario: Test declaration as String exclusing modifiers and throws for method on parsed class
+Scenario: Test declaration as string exclusing modifiers and throws for method on parsed class
 
 Given a CompilationUnit
 When the following source is parsed:
 class ClassWithAMethod {
     /*comment1*/
-    final protected /*comment2*/ native List<String> /*comment2*/ aMethod(int a, String b) throws /*comment3*/ This, AndThat, AndWhatElse {
+    /*final*/protected /*comment2*/ native List<String> /*comment2*/ aMethod(int a, string b) throws /*comment3*/ This, AndThat, AndWhatElse {
 
     }
 }
-Then method 1 in class 1 declaration as a String is "protected final native List<String> aMethod(int a, String b) throws This, AndThat, AndWhatElse"
+Then method 1 _in class 1 declaration as a string is "protected /*final*/native List<String> aMethod(int a, string b) throws This, AndThat, AndWhatElse"
 Then all nodes refer to their parent
 
 
-Scenario: Test declaration as String exclusing modifiers and throws for method on parsed class
+Scenario: Test declaration as string exclusing modifiers and throws for method on parsed class
 
 Given a CompilationUnit
 When the following source is parsed:
 class ClassWithAMethod {
     /*comment1*/
-    final protected /*comment2*/ native List<String> /*comment2*/ aMethod(int a, String b) throws /*comment3*/ This, AndThat, AndWhatElse {
+    /*final*/protected /*comment2*/ native List<String> /*comment2*/ aMethod(int a, string b) throws /*comment3*/ This, AndThat, AndWhatElse {
 
     }
 }
-Then method 1 in class 1 declaration as a String short form is "List<String> aMethod(int a, String b)"
+Then method 1 _in class 1 declaration as a string short form is "List<String> aMethod(int a, string b)"
 Then all nodes refer to their parent
 
 
@@ -134,20 +134,20 @@ Then all nodes refer to their parent
 Then all nodes of the second compilation unit refer to their parent
 
 
-Scenario: A class with a colon in the annoation value is parsed by the Java Parser
+Scenario: A class with a colon _in the annoation value is parsed by the Java Parser
 
 Given a CompilationUnit
 When the following source is parsed:
 namespace japa.parser.ast;
 public class Issue37 {
     public static @interface SomeAnnotation {
-        String value();
+        string value();
     }
     // Parser bug: the type of this field
     @SomeAnnotation("http://someURL.org/")
     protected Test test;
 }
-Then field 1 in class 1 contains annotation 1 value is ""http://someURL.org/""
+Then field 1 _in class 1 contains annotation 1 value is ""http://someURL.org/""
 Then all nodes refer to their parent
 
 
@@ -160,23 +160,23 @@ public class Lambdas {
 
     public static void main(String[] args) {
         // Lambda Runnable
-        Runnable r1 = () -> System.out.println("Hello world!");
+        Runnable r1 = () -> System._out.println("Hello world!");
         Runnable r2 = () -> {};
-        Runnable r3 = () -> { System.out.println("Hello world two!"); };
+        Runnable r3 = () -> { System._out.println("Hello world two!"); };
 
         Stream<CharSequence> stream = Stream.generate((Supplier<CharSequence>) () -> "foo");
     }
 }
-Then lambda in statement 1 in method 1 in class 1 is called r1
-Then lambda in statement 2 in method 1 in class 1 is called r2
-Then lambda in statement 3 in method 1 in class 1 is called r3
-Then lambda in statement 1 in method 1 in class 1 body is "System.out.println("Hello world!");"
-Then lambda in statement 2 in method 1 in class 1 block statement is null
-Then lambda in statement 3 in method 1 in class 1 block statement is "System.out.println("Hello world two!");"
-Then lambda in statement 1 in method 1 in class 1 is parent of contained body
-Then lambda in statement 3 in method 1 in class 1 is parent of contained body
+Then lambda _in statement 1 _in method 1 _in class 1 is called r1
+Then lambda _in statement 2 _in method 1 _in class 1 is called r2
+Then lambda _in statement 3 _in method 1 _in class 1 is called r3
+Then lambda _in statement 1 _in method 1 _in class 1 body is "System._out.println("Hello world!");"
+Then lambda _in statement 2 _in method 1 _in class 1 block statement is null
+Then lambda _in statement 3 _in method 1 _in class 1 block statement is "System._out.println("Hello world two!");"
+Then lambda _in statement 1 _in method 1 _in class 1 is parent of contained body
+Then lambda _in statement 3 _in method 1 _in class 1 is parent of contained body
 Then all nodes refer to their parent
-Then lambda in method call in statement 4 in method 1 in class 1 body is ""foo";"
+Then lambda _in method call _in statement 4 _in method 1 _in class 1 body is ""foo";"
 
 
 Scenario: A class with parameterized Lambdas is parsed by the Java Parser
@@ -191,15 +191,15 @@ public class ParameterizedLambdas {
         Function<Integer,String> f3 = i -> String.valueOf(i);
     }
 }
-Then lambda in statement 1 in method 1 in class 1 is parent of contained parameter
-Then lambda in statement 2 in method 1 in class 1 is parent of contained parameter
-Then lambda in statement 3 in method 1 in class 1 is parent of contained parameter
-Then lambda in statement 1 in method 1 in class 1 is parent of contained body
-Then lambda in statement 2 in method 1 in class 1 is parent of contained body
-Then lambda in statement 3 in method 1 in class 1 is parent of contained body
-Then lambda in statement 1 in method 1 in class 1 has parameters with non-null type
-Then lambda in statement 2 in method 1 in class 1 has parameters with non-null type
-Then lambda in statement 3 in method 1 in class 1 has parameters with non-null type
+Then lambda _in statement 1 _in method 1 _in class 1 is parent of contained parameter
+Then lambda _in statement 2 _in method 1 _in class 1 is parent of contained parameter
+Then lambda _in statement 3 _in method 1 _in class 1 is parent of contained parameter
+Then lambda _in statement 1 _in method 1 _in class 1 is parent of contained body
+Then lambda _in statement 2 _in method 1 _in class 1 is parent of contained body
+Then lambda _in statement 3 _in method 1 _in class 1 is parent of contained body
+Then lambda _in statement 1 _in method 1 _in class 1 has parameters with non-null type
+Then lambda _in statement 2 _in method 1 _in class 1 has parameters with non-null type
+Then lambda _in statement 3 _in method 1 _in class 1 has parameters with non-null type
 
 
 Scenario: A class with multi-parameters Lambdas is parsed by the Java Parser
@@ -212,7 +212,7 @@ public class MultiParameterizedLambdas {
         BiFunction<Integer, Integer, String> f = (a, b) -> String.valueOf(a) + String.valueOf(b);
     }
 }
-Then lambda in statement 1 in method 1 in class 1 has parameters with non-null type
+Then lambda _in statement 1 _in method 1 _in class 1 has parameters with non-null type
 
 
 Scenario: A class with a method reference is parsed by the Java Parser
@@ -221,7 +221,7 @@ Given a CompilationUnit
 When the following source is parsed:
 public class Person {
 
-    String name;
+    string name;
     LocalDate birthday;
 
     public void sortByAge(Person[] people){
@@ -232,8 +232,8 @@ public class Person {
         return a.birthday.compareTo(b.birthday);
     }
 }
-Then method reference in statement 1 in method 1 in class 1 scope is Person
-Then method reference in statement 1 in method 1 in class 1 identifier is compareByAge
+Then method reference _in statement 1 _in method 1 _in class 1 scope is Person
+Then method reference _in statement 1 _in method 1 _in class 1 identifier is compareByAge
 Then all nodes refer to their parent
 
 
@@ -242,11 +242,11 @@ Scenario: An interface with a default method is parsed by the Java Parser
 Given a CompilationUnit
 When the following source is parsed:
 interface MyInterface {
-    default String doSomething(){
-        return "implementation in an interface!";
+    default string doSomething(){
+        return "implementation _in an interface!";
     }
 
-    String doSomethingElse();
+    string doSomethingElse();
 }
 Then method 1 class 1 is a default method
 Then method 2 class 1 is not a default method
@@ -261,7 +261,7 @@ public class A{
 	    return (null == targetRef)? Objects::isNull : object -> targetRef.equals(object);
 	}
 }
-Then ThenExpr in the conditional expression of the statement 1 in method 1 in class 1 is LambdaExpr
+Then ThenExpr _in the conditional expression of the statement 1 _in method 1 _in class 1 is LambdaExpr
 
 Scenario: Parsing array creation expressions the positions are correct
 
@@ -281,7 +281,7 @@ Scenario: simple cast on lambda expression can be parsed
 Given a CompilationUnit
 When the following source is parsed:
 class A {
-    static final Comparator<ChronoLocalDate> DATE_ORDER =
+    static /*final*/Comparator<ChronoLocalDate> DATE_ORDER =
         (Comparator<ChronoLocalDate>) (date1, date2) -> {
             return Long.compare(date1.toEpochDay(), date2.toEpochDay());
         };
@@ -294,7 +294,7 @@ Scenario: a combined cast on lambda expression can be parsed
 Given a CompilationUnit
 When the following source is parsed:
 class A {
-    static final Comparator<ChronoLocalDate> DATE_ORDER =
+    static /*final*/Comparator<ChronoLocalDate> DATE_ORDER =
         (Comparator<ChronoLocalDate> & Serializable) (date1, date2) -> {
             return Long.compare(date1.toEpochDay(), date2.toEpochDay());
         };
@@ -323,7 +323,7 @@ class A { }
 ;
 Then no errors are reported
 
-Scenario: Parsing excess semicolons in an AnnotationTypeDeclaration should work
+Scenario: Parsing excess semicolons _in an AnnotationTypeDeclaration should work
 Given a CompilationUnit
 When the following source is parsed:
 @interface A {
@@ -376,7 +376,7 @@ Then the package name is com.github.javaparser.bdd
 Scenario: Strings with unescaped newlines are illegal (issue 211)
 Given the class:
 class A {
-    public void helloWorld(String greeting, String name) {
+    public void helloWorld(string greeting, string name) {
         return "hello
         world";
     }
@@ -386,7 +386,7 @@ Then the Java parser cannot parse it because of an error
 Scenario: Chars with unescaped newlines are illegal (issue 211)
 Given the class:
 class A {
-    public void helloWorld(String greeting, String name) {
+    public void helloWorld(string greeting, string name) {
         return '
 ';
     }
@@ -447,19 +447,19 @@ Scenario: The target of this assignExpr is not null
 Given a CompilationUnit
 When the following source is parsed:
 public class Example {
-  private String mString;
-  public Example(String arg) {
+  private string mString;
+  public Example(string arg) {
     mString = arg;
   }
 }
 Then the assignExpr produced doesn't have a null target
 
-Scenario: Two comments in one line, and a unicode space
+Scenario: Two comments _in one line, and a unicode space
 Given a CompilationUnit
 When the following source is parsed:
 public class Example {
   Object mAvailablePrimaryConnection;
-  public Example(String arg) {
+  public Example(string arg) {
      ​mAvailablePrimaryConnection = openConnectionLocked(mConfiguration,
         true /*primaryConnection*/); // comment
   }

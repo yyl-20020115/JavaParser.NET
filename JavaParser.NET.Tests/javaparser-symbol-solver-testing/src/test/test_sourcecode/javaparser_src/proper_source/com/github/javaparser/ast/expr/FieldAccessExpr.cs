@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.ast.expr;
 /**
  * @author Julio Vilmar Gesser
  */
-public final class FieldAccessExpr extends Expression {
+public /*final*/class FieldAccessExpr:Expression {
 
 	private Expression scope;
 
@@ -37,28 +37,28 @@ public final class FieldAccessExpr extends Expression {
 	public FieldAccessExpr() {
 	}
 
-	public FieldAccessExpr(final Expression scope, final String field) {
+	public FieldAccessExpr(/*final*/Expression scope, /*final*/string field) {
 		setScope(scope);
 		setField(field);
 	}
 
-	public FieldAccessExpr(final int beginLine, final int beginColumn, final int endLine, final int endColumn,
-			final Expression scope, final List<Type> typeArgs, final String field) {
+	public FieldAccessExpr(/*final*/int beginLine, /*final*/int beginColumn, /*final*/int endLine, /*final*/int endColumn,
+			/*final*/Expression scope, /*final*/List<Type> typeArgs, /*final*/string field) {
 		super(beginLine, beginColumn, endLine, endColumn);
 		setScope(scope);
 		setTypeArgs(typeArgs);
 		setField(field);
 	}
 
-	@Override public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+	@Override public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
 		return v.visit(this, arg);
 	}
 
-	@Override public <A> void accept(final VoidVisitor<A> v, final A arg) {
+	@Override public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
 		v.visit(this, arg);
 	}
 
-	public String getField() {
+	public string getField() {
 		return field.getName();
 	}
 
@@ -74,7 +74,7 @@ public final class FieldAccessExpr extends Expression {
 		return typeArgs;
 	}
 
-	public void setField(final String field) {
+	public void setField(/*final*/string field) {
 		this.field = new NameExpr(field);
 	}
 
@@ -82,12 +82,12 @@ public final class FieldAccessExpr extends Expression {
 		this.field = field;
 	}
 
-	public void setScope(final Expression scope) {
+	public void setScope(/*final*/Expression scope) {
 		this.scope = scope;
 		setAsParentNodeOf(this.scope);
 	}
 
-	public void setTypeArgs(final List<Type> typeArgs) {
+	public void setTypeArgs(/*final*/List<Type> typeArgs) {
 		this.typeArgs = typeArgs;
 		setAsParentNodeOf(this.typeArgs);
 	}

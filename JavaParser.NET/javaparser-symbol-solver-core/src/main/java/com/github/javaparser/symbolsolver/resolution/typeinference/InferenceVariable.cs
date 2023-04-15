@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -34,7 +34,7 @@ namespace com.github.javaparser.symbolsolver.resolution.typeinference;
 public class InferenceVariable implements ResolvedType {
     private static int unnamedInstantiated = 0;
 
-    private String name;
+    private string name;
     private ResolvedTypeParameterDeclaration typeParameterDeclaration;
 
     public static List<InferenceVariable> instantiate(List<ResolvedTypeParameterDeclaration> typeParameterDeclarations) {
@@ -49,7 +49,7 @@ public class InferenceVariable implements ResolvedType {
         return new InferenceVariable("__unnamed__" + (unnamedInstantiated++), typeParameterDeclaration);
     }
 
-    public InferenceVariable(String name, ResolvedTypeParameterDeclaration typeParameterDeclaration) {
+    public InferenceVariable(string name, ResolvedTypeParameterDeclaration typeParameterDeclaration) {
         this.name = name;
         this.typeParameterDeclaration = typeParameterDeclaration;
     }
@@ -60,7 +60,7 @@ public class InferenceVariable implements ResolvedType {
     }
     
     @Override
-    public String describe() {
+    public string describe() {
         return name;
     }
 
@@ -101,7 +101,7 @@ public class InferenceVariable implements ResolvedType {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "InferenceVariable{" +
                 "name='" + name + '\'' +
                 ", typeParameterDeclaration=" + typeParameterDeclaration +

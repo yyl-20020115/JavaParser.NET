@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.generator.core.visitor;
 /**
  * Generates JavaParser's EqualsVisitor.
  */
-public class EqualsVisitorGenerator extends VisitorGenerator {
+public class EqualsVisitorGenerator:VisitorGenerator {
     public EqualsVisitorGenerator(SourceRoot sourceRoot) {
         super(sourceRoot, "com.github.javaparser.ast.visitor", "EqualsVisitor", "Boolean", "Visitable", true);
     }
@@ -38,10 +38,10 @@ public class EqualsVisitorGenerator extends VisitorGenerator {
         BlockStmt body = visitMethod.getBody().get();
         body.getStatements().clear();
 
-        body.addStatement(f("final %s n2 = (%s) arg;", node.getTypeName(), node.getTypeName()));
+        body.addStatement(f("/*final*/%s n2 = (%s) arg;", node.getTypeName(), node.getTypeName()));
 
         for (PropertyMetaModel field : node.getAllPropertyMetaModels()) {
-            final String getter = field.getGetterMethodName() + "()";
+            /*final*/string getter = field.getGetterMethodName() + "()";
             if (field.getNodeReference().isPresent()) {
                 if (field.isNodeList()) {
                     body.addStatement(f("if (!nodesEquals(n.%s, n2.%s)) return false;", getter, getter));

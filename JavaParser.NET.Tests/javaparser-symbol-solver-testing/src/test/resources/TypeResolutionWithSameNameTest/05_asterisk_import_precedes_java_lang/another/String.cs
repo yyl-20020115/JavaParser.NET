@@ -1,4 +1,4 @@
 namespace another;
 
-class String {
+class string {
 }

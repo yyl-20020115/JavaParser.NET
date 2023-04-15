@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -33,7 +33,7 @@ class SubtypeOfBoundTest {
     private ResolvedType doubleType = new ReferenceTypeImpl(new ReflectionTypeSolver().solveType(Double.class.getCanonicalName()));
     private ResolvedType objectType = new ReferenceTypeImpl(new ReflectionTypeSolver().solveType(Object.class.getCanonicalName()));
 
-    @Test
+    [TestMethod]
     void recognizeProperLowerBound1() {
         ResolvedTypeParameterDeclaration typeParameterDeclaration = mock(ResolvedTypeParameterDeclaration.class);
 
@@ -45,7 +45,7 @@ class SubtypeOfBoundTest {
         assertEquals(Optional.of(new ProperLowerBound(inferenceVariable, integerType)), bound.isProperLowerBound());
     }
 
-    @Test
+    [TestMethod]
     void recognizeProperLowerBound2() {
         ResolvedTypeParameterDeclaration typeParameterDeclaration = mock(ResolvedTypeParameterDeclaration.class);
 
@@ -57,7 +57,7 @@ class SubtypeOfBoundTest {
         assertEquals(Optional.of(new ProperLowerBound(inferenceVariable, doubleType)), bound.isProperLowerBound());
     }
 
-    @Test
+    [TestMethod]
     void recognizeProperUpperBound1() {
         ResolvedTypeParameterDeclaration typeParameterDeclaration = mock(ResolvedTypeParameterDeclaration.class);
 
@@ -69,7 +69,7 @@ class SubtypeOfBoundTest {
         assertEquals(Optional.of(new ProperUpperBound(inferenceVariable, objectType)), bound.isProperUpperBound());
     }
 
-    @Test
+    [TestMethod]
     void recognizeProperUpperBound2() {
         ResolvedTypeParameterDeclaration typeParameterDeclaration1 = mock(ResolvedTypeParameterDeclaration.class);
         ResolvedTypeParameterDeclaration typeParameterDeclaration2 = mock(ResolvedTypeParameterDeclaration.class);

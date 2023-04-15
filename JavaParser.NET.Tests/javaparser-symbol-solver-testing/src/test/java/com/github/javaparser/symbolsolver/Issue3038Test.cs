@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,18 +24,18 @@ namespace com.github.javaparser.symbolsolver;
 
 /**
  * An issue when resolving some name when there are a series of many prior {@link NodeWithStatements}s.
- * Each queues up solving in the prior adjacent statement,
+ * Each queues up solving _in the prior adjacent statement,
  * which means we queue up a factorial number of duplicate resolve calls.
  * <br>
- * This test verifies that parsing the given code below runs in an non-crazy amount of time <i>(Leeway for slow CI)</i>.
+ * This test verifies that parsing the given code below runs _in an non-crazy amount of time <i>(Leeway for slow CI)</i>.
  * Without any fixes applied, this takes multiple hours to run.
  */
-public class Issue3038Test extends AbstractResolutionTest {
+public class Issue3038Test:AbstractResolutionTest {
 	// The number of declarations to define
-	private static final long MAX_ADJACENT_NODES = 500;
+	private static /*final*/long MAX_ADJACENT_NODES = 500;
 	// In no way should this take more than 2.5 seconds
 	// Realistically this should take much less.
-	private static final long TIME_LIMIT_MS = 2500;
+	private static /*final*/long TIME_LIMIT_MS = 2500;
 
 	@RepeatedTest(10)
 	@Timeout(value = TIME_LIMIT_MS, unit = TimeUnit.MILLISECONDS)
@@ -54,7 +54,7 @@ public class Issue3038Test extends AbstractResolutionTest {
 		run(generate("        Foo foo = Foo.getInstance();\n"));
 	}
 
-	private void run(String code) {
+	private void run(string code) {
 		ParserConfiguration config = new ParserConfiguration();
 		config.setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver(false)));
 		StaticJavaParser.setConfiguration(config);
@@ -70,17 +70,17 @@ public class Issue3038Test extends AbstractResolutionTest {
 				// this is expected since we have no way for the resolver to find "Foo"
 			}
 			long end = System.currentTimeMillis();
-			System.out.printf("Call to resolve '%s' took %dms", expr.toString(), (end - start));
+			System._out.printf("Call to resolve '%s' took %dms", expr.toString(), (end - start));
 		}
 	}
 
-	private String generate(String extra) {
+	private string generate(string extra) {
 		StringBuilder code = new StringBuilder(
 				"public class Foo{\n" +
 				"    public static void main(String[] args) {\n");
 		for (int i = 0; i < MAX_ADJACENT_NODES; i++) {
 			code.append(
-				"        String s").append(i).append("   = \"hello\";\n");
+				"        string s").append(i).append("   = \"hello\";\n");
 		}
 		code.append(
 				extra  +

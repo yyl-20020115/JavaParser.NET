@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,14 +26,14 @@ namespace com.github.javaparser.symbolsolver.javassistmodel;
 /**
  * @author Malte Skoruppa
  */
-public class JavassistAnnotationDeclaration extends AbstractTypeDeclaration implements ResolvedAnnotationDeclaration {
+public class JavassistAnnotationDeclaration:AbstractTypeDeclaration implements ResolvedAnnotationDeclaration {
 
     private CtClass ctClass;
     private TypeSolver typeSolver;
     private JavassistTypeDeclarationAdapter javassistTypeDeclarationAdapter;
 
     @Override
-    public String toString() {
+    public string toString() {
         return getClass().getSimpleName() + "{" +
                 "ctClass=" + ctClass.getName() +
                 ", typeSolver=" + typeSolver +
@@ -50,13 +50,13 @@ public class JavassistAnnotationDeclaration extends AbstractTypeDeclaration impl
     }
 
     @Override
-    public String getPackageName() {
+    public string getPackageName() {
         return ctClass.getPackageName();
     }
 
     @Override
-    public String getClassName() {
-        String qualifiedName = getQualifiedName();
+    public string getClassName() {
+        string qualifiedName = getQualifiedName();
         if (qualifiedName.contains(".")) {
             return qualifiedName.substring(qualifiedName.lastIndexOf(".") + 1, qualifiedName.length());
         } else {
@@ -65,7 +65,7 @@ public class JavassistAnnotationDeclaration extends AbstractTypeDeclaration impl
     }
 
     @Override
-    public String getQualifiedName() {
+    public string getQualifiedName() {
         return ctClass.getName().replace('$', '.');
     }
 
@@ -102,12 +102,12 @@ public class JavassistAnnotationDeclaration extends AbstractTypeDeclaration impl
     }
 
     @Override
-    public boolean hasDirectlyAnnotation(String canonicalName) {
+    public boolean hasDirectlyAnnotation(string canonicalName) {
         return ctClass.hasAnnotation(canonicalName);
     }
 
     @Override
-    public String getName() {
+    public string getName() {
         return getClassName();
     }
 

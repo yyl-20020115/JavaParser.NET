@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -30,8 +30,8 @@ public abstract class PropagatingAstObserver implements AstObserver {
      * Wrap a given observer to make it self-propagating. If the given observer is an instance of PropagatingAstObserver
      * the observer is returned without changes.
      */
-    public static PropagatingAstObserver transformInPropagatingObserver(final AstObserver observer) {
-        if (observer instanceof PropagatingAstObserver) {
+    public static PropagatingAstObserver transformInPropagatingObserver(/*final*/AstObserver observer) {
+        if (observer is PropagatingAstObserver) {
             return (PropagatingAstObserver) observer;
         }
         return new PropagatingAstObserver() {
@@ -54,14 +54,14 @@ public abstract class PropagatingAstObserver implements AstObserver {
     }
 
     @Override
-    public final void propertyChange(Node observedNode, ObservableProperty property, Object oldValue, Object newValue) {
+    public /*final*/void propertyChange(Node observedNode, ObservableProperty property, Object oldValue, Object newValue) {
         considerRemoving(oldValue);
         considerAdding(newValue);
         concretePropertyChange(observedNode, property, oldValue, newValue);
     }
 
     @Override
-    public final void listChange(NodeList<?> observedNode, ListChangeType type, int index, Node nodeAddedOrRemoved) {
+    public /*final*/void listChange(NodeList<?> observedNode, ListChangeType type, int index, Node nodeAddedOrRemoved) {
         if (type == ListChangeType.REMOVAL) {
             considerRemoving(nodeAddedOrRemoved);
         } else if (type == ListChangeType.ADDITION) {
@@ -98,7 +98,7 @@ public abstract class PropagatingAstObserver implements AstObserver {
     }
 
     private void considerRemoving(Object element) {
-        if (element instanceof Observable) {
+        if (element is Observable) {
             if (((Observable) element).isRegistered(this)) {
                 ((Observable) element).unregister(this);
             }
@@ -106,9 +106,9 @@ public abstract class PropagatingAstObserver implements AstObserver {
     }
 
     private void considerAdding(Object element) {
-        if (element instanceof Node) {
+        if (element is Node) {
             ((Node) element).registerForSubtree(this);
-        } else if (element instanceof Observable) {
+        } else if (element is Observable) {
             ((Observable) element).register(this);
         }
     }

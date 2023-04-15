@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -33,7 +33,7 @@ namespace com.github.javaparser.ast;
  * <p>The name does not include the asterisk or the static keyword.</p>
  * @author Julio Vilmar Gesser
  */
-public class ImportDeclaration extends Node implements NodeWithName<ImportDeclaration> {
+public class ImportDeclaration:Node implements NodeWithName<ImportDeclaration> {
 
     private Name name;
 
@@ -45,11 +45,11 @@ public class ImportDeclaration extends Node implements NodeWithName<ImportDeclar
         this(null, new Name(), false, false);
     }
 
-    public ImportDeclaration(String name, boolean isStatic, boolean isAsterisk) {
+    public ImportDeclaration(string name, boolean isStatic, boolean isAsterisk) {
         this(null, parseName(name), isStatic, isAsterisk);
     }
 
-    @AllFieldsConstructor
+    //@AllFieldsConstructor
     public ImportDeclaration(Name name, boolean isStatic, boolean isAsterisk) {
         this(null, name, isStatic, isAsterisk);
     }
@@ -57,7 +57,7 @@ public class ImportDeclaration extends Node implements NodeWithName<ImportDeclar
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public ImportDeclaration(TokenRange tokenRange, Name name, boolean isStatic, boolean isAsterisk) {
         super(tokenRange);
         setName(name);
@@ -67,21 +67,21 @@ public class ImportDeclaration extends Node implements NodeWithName<ImportDeclar
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
     /**
      * Retrieves the name of the import (.* is not included.)
      */
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Name getName() {
         return name;
     }
@@ -89,18 +89,18 @@ public class ImportDeclaration extends Node implements NodeWithName<ImportDeclar
     /**
      * Return if the import ends with "*".
      */
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public boolean isAsterisk() {
         return isAsterisk;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public boolean isStatic() {
         return isStatic;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public ImportDeclaration setAsterisk(final boolean isAsterisk) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public ImportDeclaration setAsterisk(/*final*/boolean isAsterisk) {
         if (isAsterisk == this.isAsterisk) {
             return this;
         }
@@ -109,8 +109,8 @@ public class ImportDeclaration extends Node implements NodeWithName<ImportDeclar
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public ImportDeclaration setName(final Name name) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public ImportDeclaration setName(/*final*/Name name) {
         assertNotNull(name);
         if (name == this.name) {
             return this;
@@ -123,8 +123,8 @@ public class ImportDeclaration extends Node implements NodeWithName<ImportDeclar
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public ImportDeclaration setStatic(final boolean isStatic) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public ImportDeclaration setStatic(/*final*/boolean isStatic) {
         if (isStatic == this.isStatic) {
             return this;
         }
@@ -134,19 +134,19 @@ public class ImportDeclaration extends Node implements NodeWithName<ImportDeclar
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public ImportDeclaration clone() {
         return (ImportDeclaration) accept(new CloneVisitor(), null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public ImportDeclarationMetaModel getMetaModel() {
         return JavaParserMetaModel.importDeclarationMetaModel;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public boolean replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;

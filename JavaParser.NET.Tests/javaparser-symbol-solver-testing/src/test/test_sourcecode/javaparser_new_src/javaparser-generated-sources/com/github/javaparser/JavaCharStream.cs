@@ -24,10 +24,10 @@ public
 class JavaCharStream
 {
   /** Whether parser is static. */
-  public static final boolean staticFlag = false;
+  public static /*final*/boolean staticFlag = false;
 
 
-  static final int hexval(char c) throws java.io.IOException {
+  static /*final*/int hexval(char c) throws java.io.IOException {
     switch(c)
     {
        case '0' :
@@ -74,7 +74,7 @@ class JavaCharStream
     throw new java.io.IOException(); // Should never come here
   }
 
-/** Position in buffer. */
+/** Position _in buffer. */
   public int bufpos = -1;
   int bufsize;
   int available;
@@ -362,7 +362,7 @@ class JavaCharStream
     }
   }
 
-  @Deprecated
+  //@Deprecated
   /**
    * @deprecated
    * @see #getEndColumn
@@ -371,7 +371,7 @@ class JavaCharStream
     return bufcolumn[bufpos];
   }
 
-  @Deprecated
+  //@Deprecated
   /**
    * @deprecated
    * @see #getEndLine
@@ -471,8 +471,8 @@ class JavaCharStream
 
 
 
-  /** @return token image as String */
-  public String GetImage()
+  /** @return token image as string */
+  public string GetImage()
   {
     if (bufpos >= tokenBegin)
       return new String(buffer, tokenBegin, bufpos - tokenBegin + 1);

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,9 +26,9 @@ namespace com.github.javaparser.ast.body;
 /**
  * @author Julio Vilmar Gesser
  */
-public final class EnumConstantDeclaration extends BodyDeclaration implements DocumentableNode, NamedNode {
+public /*final*/class EnumConstantDeclaration:BodyDeclaration implements DocumentableNode, NamedNode {
 
-    private String name;
+    private string name;
 
     private List<Expression> args;
 
@@ -37,18 +37,18 @@ public final class EnumConstantDeclaration extends BodyDeclaration implements Do
     public EnumConstantDeclaration() {
     }
 
-    public EnumConstantDeclaration(String name) {
+    public EnumConstantDeclaration(string name) {
         setName(name);
     }
 
-    public EnumConstantDeclaration(List<AnnotationExpr> annotations, String name, List<Expression> args, List<BodyDeclaration> classBody) {
+    public EnumConstantDeclaration(List<AnnotationExpr> annotations, string name, List<Expression> args, List<BodyDeclaration> classBody) {
         super(annotations);
         setName(name);
         setArgs(args);
         setClassBody(classBody);
     }
 
-    public EnumConstantDeclaration(int beginLine, int beginColumn, int endLine, int endColumn, List<AnnotationExpr> annotations, String name, List<Expression> args, List<BodyDeclaration> classBody) {
+    public EnumConstantDeclaration(int beginLine, int beginColumn, int endLine, int endColumn, List<AnnotationExpr> annotations, string name, List<Expression> args, List<BodyDeclaration> classBody) {
         super(beginLine, beginColumn, endLine, endColumn, annotations);
         setName(name);
         setArgs(args);
@@ -73,7 +73,7 @@ public final class EnumConstantDeclaration extends BodyDeclaration implements Do
         return classBody;
     }
 
-    public String getName() {
+    public string getName() {
         return name;
     }
 
@@ -87,7 +87,7 @@ public final class EnumConstantDeclaration extends BodyDeclaration implements Do
 		setAsParentNodeOf(this.classBody);
     }
 
-    public void setName(String name) {
+    public void setName(string name) {
         this.name = name;
     }
 

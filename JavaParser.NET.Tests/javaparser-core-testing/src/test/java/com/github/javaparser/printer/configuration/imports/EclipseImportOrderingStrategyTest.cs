@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,9 +25,9 @@ namespace com.github.javaparser.printer.configuration.imports;
 
 class EclipseImportOrderingStrategyTest {
 
-    private final EclipseImportOrderingStrategy strategy = new EclipseImportOrderingStrategy();
+    private /*final*/EclipseImportOrderingStrategy strategy = new EclipseImportOrderingStrategy();
 
-    @Test
+    [TestMethod]
     void sortImports_givenNoImports_ThenNoImports_ShouldBeReturned() {
         List<NodeList<ImportDeclaration>> actual = strategy.sortImports(new NodeList<>());
         assertEquals(6, actual.size());
@@ -39,7 +39,7 @@ class EclipseImportOrderingStrategyTest {
         assertEquals(0, actual.get(5).size());
     }
 
-    @Test
+    [TestMethod]
     void sortImports_givenImports_ThenImportsShouldBeInCorrectLocation() {
 
         NodeList<ImportDeclaration> imports = new NodeList<>();
@@ -72,7 +72,7 @@ class EclipseImportOrderingStrategyTest {
         assertEquals("pt.example.OtherTest", actual.get(5).get(0).getNameAsString());
     }
 
-    @Test
+    [TestMethod]
     void sortImports_givenUnsortedImportsAndSortingIsTrue_ThenImportsShouldBeSorted() {
         NodeList<ImportDeclaration> imports = new NodeList<>();
         imports.add(new ImportDeclaration("com.example.B", false, false));

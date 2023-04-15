@@ -3,15 +3,15 @@ namespace com.github.javaparser.printer.lexicalpreservation;
 
 
 
-class Issue3949Test extends AbstractLexicalPreservingTest  {
+class Issue3949Test:AbstractLexicalPreservingTest  {
 
-	@Test
+	[TestMethod]
     public void test() {
     	considerCode(
     			"class A {\n"
     					+ "\n"
     		            + "  void foo() {\n"
-    		            + "    Consumer<Integer> lambda = a -> System.out.println(a);\n"
+    		            + "    Consumer<Integer> lambda = a -> System._out.println(a);\n"
     		            + "  }\n"
     		            + "}");
 
@@ -25,12 +25,12 @@ class Issue3949Test extends AbstractLexicalPreservingTest  {
         block.addStatement(bstmt);
         lexpr.setBody(block);
 
-        String expected =
+        string expected =
         		"class A {\n"
         		+ "\n"
         		+ "  void foo() {\n"
         		+ "    Consumer<Integer> lambda = a -> {\n"
-        		+ "        System.out.println(a);\n"
+        		+ "        System._out.println(a);\n"
         		+ "        break;\n"
         		+ "    };\n"
         		+ "  }\n"

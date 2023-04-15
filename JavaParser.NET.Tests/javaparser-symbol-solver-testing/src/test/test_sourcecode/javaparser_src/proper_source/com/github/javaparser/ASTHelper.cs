@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,25 +28,25 @@ namespace com.github.javaparser;
  * 
  * @author Júlio Vilmar Gesser
  */
-public final class ASTHelper {
+public /*final*/class ASTHelper {
 
-    public static final PrimitiveType BYTE_TYPE = new PrimitiveType(Primitive.Byte);
+    public static /*final*/PrimitiveType BYTE_TYPE = new PrimitiveType(Primitive.Byte);
 
-    public static final PrimitiveType SHORT_TYPE = new PrimitiveType(Primitive.Short);
+    public static /*final*/PrimitiveType SHORT_TYPE = new PrimitiveType(Primitive.Short);
 
-    public static final PrimitiveType INT_TYPE = new PrimitiveType(Primitive.Int);
+    public static /*final*/PrimitiveType INT_TYPE = new PrimitiveType(Primitive.Int);
 
-    public static final PrimitiveType LONG_TYPE = new PrimitiveType(Primitive.Long);
+    public static /*final*/PrimitiveType LONG_TYPE = new PrimitiveType(Primitive.Long);
 
-    public static final PrimitiveType FLOAT_TYPE = new PrimitiveType(Primitive.Float);
+    public static /*final*/PrimitiveType FLOAT_TYPE = new PrimitiveType(Primitive.Float);
 
-    public static final PrimitiveType DOUBLE_TYPE = new PrimitiveType(Primitive.Double);
+    public static /*final*/PrimitiveType DOUBLE_TYPE = new PrimitiveType(Primitive.Double);
 
-    public static final PrimitiveType BOOLEAN_TYPE = new PrimitiveType(Primitive.Boolean);
+    public static /*final*/PrimitiveType BOOLEAN_TYPE = new PrimitiveType(Primitive.Boolean);
 
-    public static final PrimitiveType CHAR_TYPE = new PrimitiveType(Primitive.Char);
+    public static /*final*/PrimitiveType CHAR_TYPE = new PrimitiveType(Primitive.Char);
 
-    public static final VoidType VOID_TYPE = new VoidType();
+    public static /*final*/VoidType VOID_TYPE = new VoidType();
 
     private ASTHelper() {
         // nop
@@ -58,9 +58,9 @@ public final class ASTHelper {
      * 
      * @param qualifiedName
      *            qualified name
-     * @return instanceof {@link NameExpr}
+     * @return is {@link NameExpr}
      */
-    public static NameExpr createNameExpr(String qualifiedName) {
+    public static NameExpr createNameExpr(string qualifiedName) {
         String[] split = qualifiedName.split("\\.");
         NameExpr ret = new NameExpr(split[0]);
         for (int i = 1; i < split.length; i++) {
@@ -78,7 +78,7 @@ public final class ASTHelper {
      *            name of the parameter
      * @return instance of {@link Parameter}
      */
-    public static Parameter createParameter(Type type, String name) {
+    public static Parameter createParameter(Type type, string name) {
         return new Parameter(type, new VariableDeclaratorId(name));
     }
 
@@ -111,7 +111,7 @@ public final class ASTHelper {
      *            field name
      * @return instance of {@link FieldDeclaration}
      */
-    public static FieldDeclaration createFieldDeclaration(int modifiers, Type type, String name) {
+    public static FieldDeclaration createFieldDeclaration(int modifiers, Type type, string name) {
         VariableDeclaratorId id = new VariableDeclaratorId(name);
         VariableDeclarator variable = new VariableDeclarator(id);
         return createFieldDeclaration(modifiers, type, variable);
@@ -126,7 +126,7 @@ public final class ASTHelper {
      *            name
      * @return instance of {@link VariableDeclarationExpr}
      */
-    public static VariableDeclarationExpr createVariableDeclarationExpr(Type type, String name) {
+    public static VariableDeclarationExpr createVariableDeclarationExpr(Type type, string name) {
         List<VariableDeclarator> vars = new ArrayList<VariableDeclarator>();
         vars.add(new VariableDeclarator(new VariableDeclaratorId(name)));
         return new VariableDeclarationExpr(type, vars);
@@ -194,9 +194,9 @@ public final class ASTHelper {
      *            name of the class or interface
      * @param arrayCount
      *            number of arrays or <code>0</code> if is not a array.
-     * @return instanceof {@link ReferenceType}
+     * @return is {@link ReferenceType}
      */
-    public static ReferenceType createReferenceType(String name, int arrayCount) {
+    public static ReferenceType createReferenceType(string name, int arrayCount) {
         return new ReferenceType(new ClassOrInterfaceType(name), arrayCount);
     }
 
@@ -207,7 +207,7 @@ public final class ASTHelper {
      *            primitive type
      * @param arrayCount
      *            number of arrays or <code>0</code> if is not a array.
-     * @return instanceof {@link ReferenceType}
+     * @return is {@link ReferenceType}
      */
     public static ReferenceType createReferenceType(PrimitiveType type, int arrayCount) {
         return new ReferenceType(type, arrayCount);
@@ -258,7 +258,7 @@ public final class ASTHelper {
         members.add(decl);
     }
 
-    public static <N extends Node> List<N> getNodesByType(Node container, Class<N> clazz) {
+    public static <N:Node> List<N> getNodesByType(Node container, Class<N> clazz) {
         List<N> nodes = new ArrayList<N>();
         for (Node child : container.getChildrenNodes()) {
             if (clazz.isInstance(child)) {

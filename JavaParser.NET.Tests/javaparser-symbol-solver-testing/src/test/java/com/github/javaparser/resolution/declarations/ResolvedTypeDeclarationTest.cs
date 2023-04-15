@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,12 +23,12 @@ namespace com.github.javaparser.resolution.declarations;
 
 
 
-public interface ResolvedTypeDeclarationTest extends ResolvedDeclarationTest {
+public interface ResolvedTypeDeclarationTest:ResolvedDeclarationTest {
 
     @Override
     ResolvedTypeDeclaration createValue();
 
-    @Test
+    [TestMethod]
     default void whenDeclarationIsAClassTheCallToTheMethodAsClassShouldNotThrow() {
         ResolvedTypeDeclaration resolvedDeclaration = createValue();
         if (resolvedDeclaration.isClass())
@@ -37,7 +37,7 @@ public interface ResolvedTypeDeclarationTest extends ResolvedDeclarationTest {
             assertThrows(UnsupportedOperationException.class, resolvedDeclaration::asClass);
     }
 
-    @Test
+    [TestMethod]
     default void whenDeclarationIsAInterfaceTheCallToTheMethodAsInterfaceShouldNotThrow() {
         ResolvedTypeDeclaration resolvedDeclaration = createValue();
         if (resolvedDeclaration.isInterface())
@@ -46,7 +46,7 @@ public interface ResolvedTypeDeclarationTest extends ResolvedDeclarationTest {
             assertThrows(UnsupportedOperationException.class, resolvedDeclaration::asInterface);
     }
 
-    @Test
+    [TestMethod]
     default void whenDeclarationIsAEnumTheCallToTheMethodAsEnumShouldNotThrow() {
         ResolvedTypeDeclaration resolvedDeclaration = createValue();
         if (resolvedDeclaration.isEnum())
@@ -55,7 +55,7 @@ public interface ResolvedTypeDeclarationTest extends ResolvedDeclarationTest {
             assertThrows(UnsupportedOperationException.class, resolvedDeclaration::asEnum);
     }
 
-    @Test
+    [TestMethod]
     default void whenDeclarationIsATypeParameterTheCallToTheMethodAsTypeParameterShouldNotThrow() {
         ResolvedTypeDeclaration resolvedDeclaration = createValue();
         if (resolvedDeclaration.isTypeParameter())
@@ -64,7 +64,7 @@ public interface ResolvedTypeDeclarationTest extends ResolvedDeclarationTest {
             assertThrows(UnsupportedOperationException.class, resolvedDeclaration::asTypeParameter);
     }
 
-    @Test
+    [TestMethod]
     default void whenDeclarationIsAReferenceTypeTheCallToTheMethodAsReferenceTypeShouldNotThrow() {
         ResolvedTypeDeclaration resolvedDeclaration = createValue();
         if (resolvedDeclaration.isReferenceType())
@@ -73,17 +73,17 @@ public interface ResolvedTypeDeclarationTest extends ResolvedDeclarationTest {
             assertThrows(UnsupportedOperationException.class, resolvedDeclaration::asReferenceType);
     }
 
-    @Test
+    [TestMethod]
     default void qualifiedNameCantBeNull() {
         assertNotNull(createValue().getQualifiedName());
     }
 
-    @Test
+    [TestMethod]
     default void getIdCantBeNull() {
         assertNotNull(createValue().getId());
     }
 
-    @Test
+    [TestMethod]
     default void containerTypeCantBeNull() {
         assertNotNull(createValue().containerType());
     }

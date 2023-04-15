@@ -3,11 +3,11 @@ namespace com.github.javaparser.symbolsolver;
 
 
 
-public class Issue3859Test extends AbstractResolutionTest {
+public class Issue3859Test:AbstractResolutionTest {
 
-    @Test
+    [TestMethod]
     void test() {
-        String code = "import java.util.function.Consumer;\n" +
+        string code = "import java.util.function.Consumer;\n" +
                 "\n" +
                 "class Demo {\n" +
                 "    void foo(Consumer<String> arg) {}\n" +

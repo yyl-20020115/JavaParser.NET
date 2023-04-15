@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,31 +28,31 @@ namespace com.github.javaparser.ast.body;
  * The modifier constants declared here holds equivalent values to
  * {@link Modifier} constants.
  */
-public final class ModifierSet {
+public /*final*/class ModifierSet {
 
-    /* Definitions of the bits in the modifiers field.  */
+    /* Definitions of the bits _in the modifiers field.  */
 
-    public static final int PUBLIC = Modifier.PUBLIC;
+    public static /*final*/int PUBLIC = Modifier.PUBLIC;
 
-    public static final int PRIVATE = Modifier.PRIVATE;
+    public static /*final*/int PRIVATE = Modifier.PRIVATE;
 
-    public static final int PROTECTED = Modifier.PROTECTED;
+    public static /*final*/int PROTECTED = Modifier.PROTECTED;
 
-    public static final int STATIC = Modifier.STATIC;
+    public static /*final*/int STATIC = Modifier.STATIC;
 
-    public static final int FINAL = Modifier.FINAL;
+    public static /*final*/int FINAL = Modifier.FINAL;
 
-    public static final int SYNCHRONIZED = Modifier.SYNCHRONIZED;
+    public static /*final*/int SYNCHRONIZED = Modifier.SYNCHRONIZED;
 
-    public static final int VOLATILE = Modifier.VOLATILE;
+    public static /*final*/int VOLATILE = Modifier.VOLATILE;
 
-    public static final int TRANSIENT = Modifier.TRANSIENT;
+    public static /*final*/int TRANSIENT = Modifier.TRANSIENT;
 
-    public static final int NATIVE = Modifier.NATIVE;
+    public static /*final*/int NATIVE = Modifier.NATIVE;
 
-    public static final int ABSTRACT = Modifier.ABSTRACT;
+    public static /*final*/int ABSTRACT = Modifier.ABSTRACT;
 
-    public static final int STRICTFP = Modifier.STRICT;
+    public static /*final*/int STRICTFP = Modifier.STRICT;
 
     public static AccessSpecifier getAccessSpecifier(int modifiers) {
         if (isPublic(modifiers)){

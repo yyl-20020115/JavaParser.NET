@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,30 +27,30 @@ namespace com.github.javaparser.ast.type;
 /**
  * @author Julio Vilmar Gesser
  */
-public final class ClassOrInterfaceType extends ReferenceType<ClassOrInterfaceType> implements 
+public /*final*/class ClassOrInterfaceType:ReferenceType<ClassOrInterfaceType> implements 
         NodeWithName<ClassOrInterfaceType>, 
         NodeWithAnnotations<ClassOrInterfaceType>,
         NodeWithTypeArguments<ClassOrInterfaceType> {
 
     private ClassOrInterfaceType scope;
 
-    private String name;
+    private string name;
 
     private List<Type<?>> typeArguments;
 
     public ClassOrInterfaceType() {
     }
 
-    public ClassOrInterfaceType(final String name) {
+    public ClassOrInterfaceType(/*final*/string name) {
         setName(name);
     }
 
-    public ClassOrInterfaceType(final ClassOrInterfaceType scope, final String name) {
+    public ClassOrInterfaceType(/*final*/ClassOrInterfaceType scope, /*final*/string name) {
         setScope(scope);
         setName(name);
     }
 
-    public ClassOrInterfaceType(final Range range, final ClassOrInterfaceType scope, final String name, final List<Type<?>> typeArguments) {
+    public ClassOrInterfaceType(/*final*/Range range, /*final*/ClassOrInterfaceType scope, /*final*/string name, /*final*/List<Type<?>> typeArguments) {
         super(range);
         setScope(scope);
         setName(name);
@@ -58,17 +58,17 @@ public final class ClassOrInterfaceType extends ReferenceType<ClassOrInterfaceTy
     }
 
     //@Override 
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     //@Override 
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
     //@Override
-    public String getName() {
+    public string getName() {
         return name;
     }
 
@@ -88,12 +88,12 @@ public final class ClassOrInterfaceType extends ReferenceType<ClassOrInterfaceTy
     }
 
     //@Override
-    public ClassOrInterfaceType setName(final String name) {
+    public ClassOrInterfaceType setName(/*final*/string name) {
         this.name = name;
         return this;
     }
 
-    public ClassOrInterfaceType setScope(final ClassOrInterfaceType scope) {
+    public ClassOrInterfaceType setScope(/*final*/ClassOrInterfaceType scope) {
         this.scope = scope;
         setAsParentNodeOf(this.scope);
         return this;
@@ -105,7 +105,7 @@ public final class ClassOrInterfaceType extends ReferenceType<ClassOrInterfaceTy
     }
 
     //@Override
-    public ClassOrInterfaceType setTypeArguments(final List<Type<?>> types) {
+    public ClassOrInterfaceType setTypeArguments(/*final*/List<Type<?>> types) {
         this.typeArguments = types;
         setAsParentNodeOf(this.typeArguments);
         return this;

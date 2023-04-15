@@ -7,49 +7,49 @@ public interface NodeWithParameters<T> {
 
     T setParameters(List<Parameter> parameters);
 
-    default T addParameter(Type type, String name) {
+    default T addParameter(Type type, string name) {
         return addParameter(new Parameter(type, new VariableDeclaratorId(name)));
     }
 
-    default T addParameter(Class<?> paramClass, String name) {
+    default T addParameter(Class<?> paramClass, string name) {
         ((Node) this).tryAddImportToParentCompilationUnit(paramClass);
         return addParameter(new ClassOrInterfaceType(paramClass.getSimpleName()), name);
     }
 
     /**
-     * Remember to import the class in the compilation unit yourself
+     * Remember to import the class _in the compilation unit yourself
      * 
      * @param className the name of the class, ex : org.test.Foo or Foo if you added manually the import
      * @param name the name of the parameter
      */
-    default T addParameter(String className, String name) {
+    default T addParameter(string className, string name) {
         return addParameter(new ClassOrInterfaceType(className), name);
     }
 
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     default T addParameter(Parameter parameter) {
         getParameters().add(parameter);
         parameter.setParentNode((Node) this);
         return (T) this;
     }
 
-    default Parameter addAndGetParameter(Type type, String name) {
+    default Parameter addAndGetParameter(Type type, string name) {
         return addAndGetParameter(new Parameter(type, new VariableDeclaratorId(name)));
     }
 
-    default Parameter addAndGetParameter(Class<?> paramClass, String name) {
+    default Parameter addAndGetParameter(Class<?> paramClass, string name) {
         ((Node) this).tryAddImportToParentCompilationUnit(paramClass);
         return addAndGetParameter(new ClassOrInterfaceType(paramClass.getSimpleName()), name);
     }
 
     /**
-     * Remember to import the class in the compilation unit yourself
+     * Remember to import the class _in the compilation unit yourself
      * 
      * @param className the name of the class, ex : org.test.Foo or Foo if you added manually the import
      * @param name the name of the parameter
      * @return the {@link Parameter} created
      */
-    default Parameter addAndGetParameter(String className, String name) {
+    default Parameter addAndGetParameter(string className, string name) {
         return addAndGetParameter(new ClassOrInterfaceType(className), name);
     }
 
@@ -65,7 +65,7 @@ public interface NodeWithParameters<T> {
      * @param name the name of the param
      * @return null if not found, the param found otherwise
      */
-    default Parameter getParamByName(String name) {
+    default Parameter getParamByName(string name) {
         return getParameters().stream()
                 .filter(p -> p.getName().equals(name)).findFirst().orElse(null);
     }
@@ -76,7 +76,7 @@ public interface NodeWithParameters<T> {
      * @param type the type of the param
      * @return null if not found, the param found otherwise
      */
-    default Parameter getParamByType(String type) {
+    default Parameter getParamByType(string type) {
         return getParameters().stream()
                 .filter(p -> p.getType().toString().equals(type)).findFirst().orElse(null);
     }

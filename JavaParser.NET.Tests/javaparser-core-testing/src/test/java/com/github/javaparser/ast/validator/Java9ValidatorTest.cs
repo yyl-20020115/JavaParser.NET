@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,9 +24,9 @@ namespace com.github.javaparser.ast.validator;
 
 
 class Java9ValidatorTest {
-    public static final JavaParser javaParser = new JavaParser(new ParserConfiguration().setLanguageLevel(JAVA_9));
+    public static /*final*/JavaParser javaParser = new JavaParser(new ParserConfiguration().setLanguageLevel(JAVA_9));
 
-    @Test
+    [TestMethod]
     void underscoreIdentifiers() {
         ParseResult<Statement> result = javaParser.parse(STATEMENT, provider("a.b._.c.d = act(_, _ -> _);"));
         assertProblems(result,
@@ -37,7 +37,7 @@ class Java9ValidatorTest {
         );
     }
 
-    @Test
+    [TestMethod]
     void moduleRequires() {
         ParseResult<CompilationUnit> result = javaParser.parse(COMPILATION_UNIT, provider("module x{requires " + allModifiers + " a;}"));
         assertProblems(result,
@@ -58,7 +58,7 @@ class Java9ValidatorTest {
         );
     }
 
-    @Test
+    [TestMethod]
     void interfaceMethod() {
         ParseResult<CompilationUnit> result = javaParser.parse(COMPILATION_UNIT, provider("interface X{" + allModifiers + "int x(){};}"));
         assertProblems(result,
@@ -72,13 +72,13 @@ class Java9ValidatorTest {
         );
     }
 
-    @Test
+    [TestMethod]
     void modules() {
         ParseResult<CompilationUnit> result = javaParser.parse(COMPILATION_UNIT, provider("open module x {}"));
         assertNoProblems(result);
     }
 
-    @Test
+    [TestMethod]
     void tryWithResourceReference() {
         ParseResult<Statement> result = javaParser.parse(STATEMENT, provider("try(a.b.c){}"));
         assertNoProblems(result);

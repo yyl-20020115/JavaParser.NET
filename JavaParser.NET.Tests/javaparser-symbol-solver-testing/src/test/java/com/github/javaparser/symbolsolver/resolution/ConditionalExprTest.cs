@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,7 +23,7 @@ namespace com.github.javaparser.symbolsolver.resolution;
 
 
 
-class ConditionalExprTest extends AbstractResolutionTest {
+class ConditionalExprTest:AbstractResolutionTest {
 
     @BeforeEach
     void setup() {
@@ -32,9 +32,9 @@ class ConditionalExprTest extends AbstractResolutionTest {
         StaticJavaParser.setConfiguration(config);
     }
 
-    @Test
+    [TestMethod]
     void test_if_operands_have_the_same_type() {
-        String code = "class A { public void m() { Object o = true ? null : null;}}";
+        string code = "class A { public void m() { Object o = true ? null : null;}}";
         ResolvedType rt1 = StaticJavaParser.parse(code).findFirst(ConditionalExpr.class).get().calculateResolvedType();
         assertEquals("null", rt1.describe());
         code = "class A { public void m() { Object o = true ? \"\" : \"\";}}";
@@ -45,9 +45,9 @@ class ConditionalExprTest extends AbstractResolutionTest {
         assertEquals("A", rt3.describe());
     }
 
-    @Test
+    [TestMethod]
     void test_null_operand_in_conditional_expression() {
-        String code = "class A { public void m() { Object o = true ? \"\" : null;}}";
+        string code = "class A { public void m() { Object o = true ? \"\" : null;}}";
         ResolvedType rt1 = StaticJavaParser.parse(code).findFirst(ConditionalExpr.class).get().calculateResolvedType();
         assertEquals("java.lang.String", rt1.describe());
         code = "class A { public void m() { Object o = true ? null : \"\";}}";
@@ -55,10 +55,10 @@ class ConditionalExprTest extends AbstractResolutionTest {
         assertEquals("java.lang.String", rt2.describe());
     }
 
-    @Test
+    [TestMethod]
     void test_boolean_conditional_expression() {
         // If the second and third operands are both of type Boolean, the conditional expression has type Boolean.
-        String code = "class A { public void m() { boolean r = true ? Boolean.TRUE : Boolean.FALSE;}}";
+        string code = "class A { public void m() { boolean r = true ? Boolean.TRUE : Boolean.FALSE;}}";
         ResolvedType rt1 = StaticJavaParser.parse(code).findFirst(ConditionalExpr.class).get().calculateResolvedType();
         assertEquals("java.lang.Boolean", rt1.describe());
         // Otherwise, the conditional expression has type boolean.
@@ -67,10 +67,10 @@ class ConditionalExprTest extends AbstractResolutionTest {
         assertEquals("boolean", rt2.describe());
     }
 
-    @Test
+    [TestMethod]
     void test_numeric_conditional_expression() {
         // If the second and third operands have the same type, then that is the type of the conditional expression.
-        String code = "class A { public void m() { int r = true ? 1 : 2;}}";
+        string code = "class A { public void m() { int r = true ? 1 : 2;}}";
         ResolvedType rt1 = StaticJavaParser.parse(code).findFirst(ConditionalExpr.class).get().calculateResolvedType();
         assertEquals("int", rt1.describe());
         // If one of the second and third operands is of primitive type T, and the type of the other is the result of
@@ -93,7 +93,7 @@ class ConditionalExprTest extends AbstractResolutionTest {
         ResolvedType rt5b = StaticJavaParser.parse(code).findFirst(ConditionalExpr.class).get().calculateResolvedType();
         assertEquals("short", rt5b.describe());
         // If one of the operands is of type T where T is byte, short, or char, and the other operand is a constant
-        // expression (§15.28) of type int whose value is representable in type T, then the type of the conditional
+        // expression (§15.28) of type int whose value is representable _in type T, then the type of the conditional
         // expression is T.
         code = "class A { public void m() { byte r = true ? Byte.MIN_VALUE : 1;}}";
         ResolvedType rt6 = StaticJavaParser.parse(code).findFirst(ConditionalExpr.class).get().calculateResolvedType();
@@ -106,7 +106,7 @@ class ConditionalExprTest extends AbstractResolutionTest {
         assertEquals("char", rt8.describe());
         // If one of the operands is of type T, where T is Byte, Short, or Character,
         // and the other operand is a constant expression of type int whose value is
-        // representable in the type U which is the result of applying unboxing
+        // representable _in the type U which is the result of applying unboxing
         // conversion to T, then the type of the conditional expression is U.
         code = "class A { public void m() { byte r = true ? Byte.valueOf(Byte.MIN_VALUE) : 1;}}";
         ResolvedType rt9 = StaticJavaParser.parse(code).findFirst(ConditionalExpr.class).get().calculateResolvedType();
@@ -133,10 +133,10 @@ class ConditionalExprTest extends AbstractResolutionTest {
 
     }
 
-    @Test
+    [TestMethod]
     void test_reference_conditional_expression() {
         // If the second and third operands have the same type, then that is the type of the conditional expression.
-        String code = "class A { public void m() { String r = true ? new String(\"new string\") : \"\";}}";
+        string code = "class A { public void m() { string r = true ? new String(\"new string\") : \"\";}}";
         ResolvedType rt1 = StaticJavaParser.parse(code).findFirst(ConditionalExpr.class).get().calculateResolvedType();
         assertEquals("java.lang.String", rt1.describe());
         // Otherwise, the second and third operands are of types S1 and S2 respectively. Let T1 be the type that
@@ -148,17 +148,17 @@ class ConditionalExprTest extends AbstractResolutionTest {
         assertEquals("java.util.List<T>", rt2.describe());
         code = "class A { public void m() { Class clazz = true ?  String.class : StringBuilder.class;}}";
         ResolvedType rt5 = StaticJavaParser.parse(code).findFirst(ConditionalExpr.class).get().calculateResolvedType();
-        assertEquals("java.lang.Class<? extends java.io.Serializable>", rt5.describe());
+        assertEquals("java.lang.Class<?:java.io.Serializable>", rt5.describe());
         code = "class A { public void m() { java.io.Serializable r = true ?  Integer.valueOf(1) : \"\";}}";
         ResolvedType rt6 = StaticJavaParser.parse(code).findFirst(ConditionalExpr.class).get().calculateResolvedType();
         assertEquals("java.io.Serializable", rt6.describe());
     }
 
-    @Test
+    [TestMethod]
     void test_reference_conditional_expression_with_type_variable() {
-        // require that type variable T in the returned type of this method call java.util.Collections.emptyList()
-    	// can be translated into String type
-        String code = "class A { public void m() { java.util.List list = true ? new java.util.ArrayList<String>() : java.util.Collections.emptyList();}}";
+        // require that type variable T _in the returned type of this method call java.util.Collections.emptyList()
+    	// can be translated into string type
+        string code = "class A { public void m() { java.util.List list = true ? new java.util.ArrayList<String>() : java.util.Collections.emptyList();}}";
         ResolvedType rt3 = StaticJavaParser.parse(code).findFirst(ConditionalExpr.class).get().calculateResolvedType();
         assertEquals("java.util.List<java.lang.String>", rt3.describe());
 

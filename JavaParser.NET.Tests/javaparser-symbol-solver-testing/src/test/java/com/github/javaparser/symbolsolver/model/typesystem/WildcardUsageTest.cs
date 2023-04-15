@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -29,7 +29,7 @@ class WildcardUsageTest {
     class Foo {
     }
 
-    class Bar extends Foo {
+    class Bar:Foo {
     }
 
     private TypeSolver typeSolver;
@@ -66,7 +66,7 @@ class WildcardUsageTest {
         extendsString = ResolvedWildcard.extendsBound(string);
     }
 
-    @Test
+    [TestMethod]
     void testIsArray() {
         assertEquals(false, unbounded.isArray());
         assertEquals(false, superFoo.isArray());
@@ -75,7 +75,7 @@ class WildcardUsageTest {
         assertEquals(false, extendsBar.isArray());
     }
 
-    @Test
+    [TestMethod]
     void testIsPrimitive() {
         assertEquals(false, unbounded.isPrimitive());
         assertEquals(false, superFoo.isPrimitive());
@@ -84,7 +84,7 @@ class WildcardUsageTest {
         assertEquals(false, extendsBar.isPrimitive());
     }
 
-    @Test
+    [TestMethod]
     void testIsNull() {
         assertEquals(false, unbounded.isNull());
         assertEquals(false, superFoo.isNull());
@@ -93,7 +93,7 @@ class WildcardUsageTest {
         assertEquals(false, extendsBar.isNull());
     }
 
-    @Test
+    [TestMethod]
     void testIsReference() {
         assertEquals(true, unbounded.isReference());
         assertEquals(true, superFoo.isReference());
@@ -102,7 +102,7 @@ class WildcardUsageTest {
         assertEquals(true, extendsBar.isReference());
     }
 
-    @Test
+    [TestMethod]
     void testIsReferenceType() {
         assertEquals(false, unbounded.isReferenceType());
         assertEquals(false, superFoo.isReferenceType());
@@ -111,7 +111,7 @@ class WildcardUsageTest {
         assertEquals(false, extendsBar.isReferenceType());
     }
 
-    @Test
+    [TestMethod]
     void testIsVoid() {
         assertEquals(false, unbounded.isVoid());
         assertEquals(false, superFoo.isVoid());
@@ -120,7 +120,7 @@ class WildcardUsageTest {
         assertEquals(false, extendsBar.isVoid());
     }
 
-    @Test
+    [TestMethod]
     void testIsTypeVariable() {
         assertEquals(false, unbounded.isTypeVariable());
         assertEquals(false, superFoo.isTypeVariable());
@@ -129,7 +129,7 @@ class WildcardUsageTest {
         assertEquals(false, extendsBar.isTypeVariable());
     }
 
-    @Test
+    [TestMethod]
     void testIsWildcard() {
         assertEquals(true, unbounded.isWildcard());
         assertEquals(true, superFoo.isWildcard());
@@ -138,27 +138,27 @@ class WildcardUsageTest {
         assertEquals(true, extendsBar.isWildcard());
     }
 
-    @Test
+    [TestMethod]
     void testAsArrayTypeUsage() {
         assertThrows(UnsupportedOperationException.class, () -> unbounded.asArrayType());
     }
 
-    @Test
+    [TestMethod]
     void testAsReferenceTypeUsage() {
         assertThrows(UnsupportedOperationException.class, () -> unbounded.asReferenceType());
     }
 
-    @Test
+    [TestMethod]
     void testAsTypeParameter() {
         assertThrows(UnsupportedOperationException.class, () -> unbounded.asTypeParameter());
     }
 
-    @Test
+    [TestMethod]
     void testAsPrimitive() {
         assertThrows(UnsupportedOperationException.class, () -> unbounded.asPrimitive());
     }
 
-    @Test
+    [TestMethod]
     void testAsWildcard() {
         assertTrue(unbounded == unbounded.asWildcard());
         assertTrue(superFoo == superFoo.asWildcard());
@@ -167,16 +167,16 @@ class WildcardUsageTest {
         assertTrue(extendsBar == extendsBar.asWildcard());
     }
 
-    @Test
+    [TestMethod]
     void testAsDescribe() {
         assertEquals("?", unbounded.describe());
         assertEquals("? super com.github.javaparser.symbolsolver.model.typesystem.WildcardUsageTest.Foo", superFoo.describe());
         assertEquals("? super com.github.javaparser.symbolsolver.model.typesystem.WildcardUsageTest.Bar", superBar.describe());
-        assertEquals("? extends com.github.javaparser.symbolsolver.model.typesystem.WildcardUsageTest.Foo", extendsFoo.describe());
-        assertEquals("? extends com.github.javaparser.symbolsolver.model.typesystem.WildcardUsageTest.Bar", extendsBar.describe());
+        assertEquals("?:com.github.javaparser.symbolsolver.model.typesystem.WildcardUsageTest.Foo", extendsFoo.describe());
+        assertEquals("?:com.github.javaparser.symbolsolver.model.typesystem.WildcardUsageTest.Bar", extendsBar.describe());
     }
 
-    @Test
+    [TestMethod]
     void testReplaceParam() {
         ResolvedTypeParameterDeclaration tpA = ResolvedTypeParameterDeclaration.onType("A", "foo.Bar", Collections.emptyList());
         ResolvedTypeParameterDeclaration tpB = ResolvedTypeParameterDeclaration.onType("B", "foo.Bar", Collections.emptyList());
@@ -189,7 +189,7 @@ class WildcardUsageTest {
         assertTrue(extendsA == extendsA.replaceTypeVariables(tpB, string));
     }
 
-    @Test
+    [TestMethod]
     void testIsAssignableBySimple() {
         assertEquals(false, unbounded.isAssignableBy(object));
         assertEquals(true, object.isAssignableBy(unbounded));
@@ -200,7 +200,7 @@ class WildcardUsageTest {
         assertEquals(true, foo.isAssignableBy(extendsFoo));
     }
 
-    /*@Test
+    /*[TestMethod]
     public void testIsAssignableByGenerics() {
         assertEquals(false, listOfStrings.isAssignableBy(listOfWildcardExtendsString));
         assertEquals(false, listOfStrings.isAssignableBy(listOfWildcardExtendsString));
@@ -210,7 +210,7 @@ class WildcardUsageTest {
         assertEquals(false, listOfWildcardSuperString.isAssignableBy(listOfWildcardExtendsString));
     }
 
-    @Test
+    [TestMethod]
     public void testIsAssignableByGenericsInheritance() {
         assertEquals(true, collectionOfString.isAssignableBy(collectionOfString));
         assertEquals(true, collectionOfString.isAssignableBy(listOfStrings));
@@ -225,7 +225,7 @@ class WildcardUsageTest {
         assertEquals(true, linkedListOfString.isAssignableBy(linkedListOfString));
     }
 
-    @Test
+    [TestMethod]
     public void testGetAllAncestorsConsideringTypeParameters() {
         assertTrue(linkedListOfString.getAllAncestors().contains(object));
         assertTrue(linkedListOfString.getAllAncestors().contains(listOfStrings));
@@ -233,7 +233,7 @@ class WildcardUsageTest {
         assertFalse(linkedListOfString.getAllAncestors().contains(listOfA));
     }
 
-    @Test
+    [TestMethod]
     public void testGetAllAncestorsConsideringGenericsCases() {
         ReferenceTypeUsage foo = new ReferenceTypeUsage(new ReflectionClassDeclaration(Foo.class, typeSolver), typeSolver);
         ReferenceTypeUsage bar = new ReferenceTypeUsage(new ReflectionClassDeclaration(Bar.class, typeSolver), typeSolver);
@@ -249,7 +249,7 @@ class WildcardUsageTest {
                                 ImmutableList.of(foo, bar), typeSolver))
         );
 
-        //YES MoreBazzing<? extends Foo, Bar> e2 = new MoreBazzing<Foo, Bar>();
+        //YES MoreBazzing<?:Foo, Bar> e2 = new MoreBazzing<Foo, Bar>();
         assertEquals(true,
                 new ReferenceTypeUsage(
                         new ReflectionClassDeclaration(MoreBazzing.class, typeSolver),
@@ -259,7 +259,7 @@ class WildcardUsageTest {
                                 ImmutableList.of(foo, bar), typeSolver))
         );
 
-        //YES MoreBazzing<Foo, ? extends Bar> e3 = new MoreBazzing<Foo, Bar>();
+        //YES MoreBazzing<Foo, ?:Bar> e3 = new MoreBazzing<Foo, Bar>();
         assertEquals(true,
                 new ReferenceTypeUsage(
                         new ReflectionClassDeclaration(MoreBazzing.class, typeSolver),
@@ -269,7 +269,7 @@ class WildcardUsageTest {
                                 ImmutableList.of(foo, bar), typeSolver))
         );
 
-        //YES MoreBazzing<? extends Foo, ? extends Foo> e4 = new MoreBazzing<Foo, Bar>();
+        //YES MoreBazzing<?:Foo, ?:Foo> e4 = new MoreBazzing<Foo, Bar>();
         assertEquals(true,
                 new ReferenceTypeUsage(
                         new ReflectionClassDeclaration(MoreBazzing.class, typeSolver),
@@ -279,7 +279,7 @@ class WildcardUsageTest {
                                 ImmutableList.of(foo, bar), typeSolver))
         );
 
-        //YES MoreBazzing<? extends Foo, ? extends Foo> e5 = new MoreBazzing<Bar, Bar>();
+        //YES MoreBazzing<?:Foo, ?:Foo> e5 = new MoreBazzing<Bar, Bar>();
         left = new ReferenceTypeUsage(
                 new ReflectionClassDeclaration(MoreBazzing.class, typeSolver),
                 ImmutableList.of(WildcardUsage.extendsBound(foo), WildcardUsage.extendsBound(foo)), typeSolver);
@@ -358,7 +358,7 @@ class WildcardUsageTest {
         );
     }
 
-    @Test
+    [TestMethod]
     public void charSequenceIsAssignableToObject() {
         TypeSolver typeSolver = new JreTypeSolver();
         ReferenceTypeUsage charSequence = new ReferenceTypeUsage(new ReflectionInterfaceDeclaration(CharSequence.class, typeSolver), typeSolver);
@@ -367,7 +367,7 @@ class WildcardUsageTest {
         assertEquals(true, object.isAssignableBy(charSequence));
     }
 
-    @Test
+    [TestMethod]
     public void testGetFieldTypeExisting() {
         class Foo<A> {
             List<A> elements;
@@ -395,7 +395,7 @@ class WildcardUsageTest {
         assertEquals(String.class.getCanonicalName(), ref.getFieldType("elements").get().asReferenceType().typeParametersValues().get(0).asReferenceType().getQualifiedName());
     }
 
-    @Test
+    [TestMethod]
     public void testGetFieldTypeUnexisting() {
         class Foo<A> {
             List<A> elements;

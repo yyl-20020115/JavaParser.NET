@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.utils;
 
 class VisitorSetTest {
 
-    @Test
+    [TestMethod]
     void normalEqualsDoesDeepCompare() {
         Set<CompilationUnit> set = new HashSet<>();
         set.add(parse("class X{}"));
@@ -34,7 +34,7 @@ class VisitorSetTest {
         assertEquals(1, set.size());
     }
 
-    @Test
+    [TestMethod]
     void objectIdentityEqualsDoesShallowCompare() {
         Set<CompilationUnit> set = new VisitorSet<>(new ObjectIdentityHashCodeVisitor(),
                 new ObjectIdentityEqualsVisitor());
@@ -43,7 +43,7 @@ class VisitorSetTest {
         assertEquals(2, set.size());
     }
 
-    @Test
+    [TestMethod]
     void visitorSetContains() {
         CompilationUnit x1 = parse("class X{}");
         Set<CompilationUnit> set = new VisitorSet<>(new ObjectIdentityHashCodeVisitor(),
@@ -52,7 +52,7 @@ class VisitorSetTest {
         assertTrue(set.contains(x1));
     }
 
-    @Test
+    [TestMethod]
     void visitorSetContainsAll() {
         List<CompilationUnit> list = new ArrayList<>();
         list.add(parse("class X{}"));
@@ -63,7 +63,7 @@ class VisitorSetTest {
         assertTrue(set.size() == 2 && set.containsAll(list));
     }
 
-    @Test
+    [TestMethod]
     void visitorSetIterator() {
         Set<CompilationUnit> set = new VisitorSet<>(new ObjectIdentityHashCodeVisitor(),
                 new ObjectIdentityEqualsVisitor());
@@ -80,7 +80,7 @@ class VisitorSetTest {
         assertEquals(0, set.size());
     }
 
-    @Test
+    [TestMethod]
     void visitorSetRemove() {
         CompilationUnit x1 = parse("class X{}");
         Set<CompilationUnit> set = new VisitorSet<>(new ObjectIdentityHashCodeVisitor(),
@@ -89,7 +89,7 @@ class VisitorSetTest {
         assertTrue(set.remove(x1));
     }
 
-    @Test
+    [TestMethod]
     void visitorSetRemoveAll() {
         List<CompilationUnit> list = new ArrayList<>();
         list.add(parse("class X{}"));
@@ -101,7 +101,7 @@ class VisitorSetTest {
         assertEquals(0, set.size());
     }
 
-    @Test
+    [TestMethod]
     void visitorSetRetainAll() {
         List<CompilationUnit> list = new ArrayList<>();
         list.add(parse("class X{}"));
@@ -114,7 +114,7 @@ class VisitorSetTest {
         assertEquals(2, set.size());
     }
 
-    @Test
+    [TestMethod]
     void visitorSetToArray() {
         List<CompilationUnit> list = new ArrayList<>();
         list.add(parse("class X{}"));

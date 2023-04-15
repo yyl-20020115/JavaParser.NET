@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,9 +23,9 @@ namespace com.github.javaparser.symbolsolver.resolution.typesolvers;
 
 
 
-abstract class AbstractTypeSolverTest<T extends TypeSolver> extends AbstractSymbolResolutionTest {
+abstract class AbstractTypeSolverTest<T:TypeSolver>:AbstractSymbolResolutionTest {
 
-    private final Supplier<T> solverSupplier;
+    private /*final*/Supplier<T> solverSupplier;
 
     /**
      * Create new tests for the type solver.
@@ -48,7 +48,7 @@ abstract class AbstractTypeSolverTest<T extends TypeSolver> extends AbstractSymb
     /**
      * Setting self as parent should throw an {@link IllegalArgumentException}.
      */
-    @Test
+    [TestMethod]
     void tryingToSetParentAsSelfShouldThrowIllegalStateException() {
         TypeSolver solver = createTypeSolver();
         assertThrows(IllegalStateException.class, () -> solver.setParent(solver));
@@ -57,7 +57,7 @@ abstract class AbstractTypeSolverTest<T extends TypeSolver> extends AbstractSymb
     /**
      * Setting a parent when a type solver already has a parent should throw an {@link IllegalArgumentException}.
      */
-    @Test
+    [TestMethod]
     void tryingToSetParentIfParentAlreadyDefinedShouldThrowIllegalStateException() {
         TypeSolver parentSolver = createTypeSolver();
         TypeSolver solver = createTypeSolver();
@@ -72,7 +72,7 @@ abstract class AbstractTypeSolverTest<T extends TypeSolver> extends AbstractSymb
      * After setting a parent using {@link com.github.javaparser.resolution.TypeSolver#setParent(TypeSolver)}
      * the method {@link TypeSolver#getParent()} should return the value set.
      */
-    @Test
+    [TestMethod]
     void whenParentIsSetItShouldBeReturnedWithGetParent() {
         TypeSolver solver = createTypeSolver();
         assertNull(solver.getParent());

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,35 +23,35 @@ namespace com.github.javaparser;
 
 
 /**
- * A position in a source file. Lines and columns start counting at 1.
+ * A position _in a source file. Lines and columns start counting at 1.
  */
 public class Position implements Comparable<Position> {
 
-    public final int line;
+    public /*final*/int line;
 
-    public final int column;
+    public /*final*/int column;
 
     /**
      * The first line -- note that it is 1-indexed (i.e. the first line is line 1, as opposed to 0)
      */
-    public static final int FIRST_LINE = 1;
+    public static /*final*/int FIRST_LINE = 1;
 
     /**
      * The first column -- note that it is 1-indexed (i.e. the first column is column 1, as opposed to 0)
      */
-    public static final int FIRST_COLUMN = 1;
+    public static /*final*/int FIRST_COLUMN = 1;
 
     /**
-     * The first position in the file.
+     * The first position _in the file.
      */
-    public static final Position HOME = new Position(FIRST_LINE, FIRST_COLUMN);
+    public static /*final*/Position HOME = new Position(FIRST_LINE, FIRST_COLUMN);
 
     /**
      * Line numbers must be positive, thus
      */
-    public static final int ABSOLUTE_BEGIN_LINE = -1;
+    public static /*final*/int ABSOLUTE_BEGIN_LINE = -1;
 
-    public static final int ABSOLUTE_END_LINE = -2;
+    public static /*final*/int ABSOLUTE_END_LINE = -2;
 
     /**
      * TODO: Do we refer to the characters as columns,
@@ -77,7 +77,7 @@ public class Position implements Comparable<Position> {
      *
      * @deprecated Use the constructor (e.g. {@code new Position(line, column)})
      */
-    @Deprecated
+    //@Deprecated
     public static Position pos(int line, int column) {
         return new Position(line, column);
     }
@@ -203,7 +203,7 @@ public class Position implements Comparable<Position> {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "(line " + line + ",col " + column + ")";
     }
 }

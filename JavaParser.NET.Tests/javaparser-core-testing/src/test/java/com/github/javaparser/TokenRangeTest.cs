@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,13 +25,13 @@ namespace com.github.javaparser;
 
 
 class TokenRangeTest {
-    @Test
+    [TestMethod]
     void toStringWorks() {
         CompilationUnit cu = parse("class X {\n\tX(){\n// hello\n}\n}");
         assertEquals("X(){\n// hello\n}", cu.getClassByName("X").get().getDefaultConstructor().get().getTokenRange().get().toString());
     }
 
-    @Test
+    [TestMethod]
     void renumberRangesWorks() {
         CompilationUnit cu = parse("class X {\n\tX(){\n// hello\n}\n}");
 
@@ -46,9 +46,9 @@ class TokenRangeTest {
     }
 
     /**
-     * Make a compact String for comparing token range positions.
+     * Make a compact string for comparing token range positions.
      */
-    private String makeRangesString(Node node) {
+    private string makeRangesString(Node node) {
         Optional<JavaToken> token = node.getTokenRange().map(TokenRange::getBegin);
         StringBuilder result = new StringBuilder();
         while (token.isPresent()) {

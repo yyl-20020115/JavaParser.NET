@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,18 +23,18 @@ namespace com.github.javaparser.ast.expr;
 
 
 /**
- * Java® Language Specification 3.10.5 String Literals
+ * Java® Language Specification 3.10.5 string Literals
  * @author Julio Vilmar Gesser
  */
-public class StringLiteralExpr extends LiteralExpr {
+public class StringLiteralExpr:LiteralExpr {
 
-	protected String value;
+	protected string value;
 
 	public StringLiteralExpr() {
         this.value = "";
 	}
 
-	public StringLiteralExpr(final String value) {
+	public StringLiteralExpr(/*final*/string value) {
         if (value.contains("\n") || value.contains("\r")) {
             throw new IllegalArgumentException("Illegal literal expression: newlines (line feed or carriage return) have to be escaped");
         }
@@ -44,28 +44,28 @@ public class StringLiteralExpr extends LiteralExpr {
 	/**
 	 * Utility method that creates a new StringLiteralExpr. Escapes EOL characters.
 	 */
-	public static StringLiteralExpr escape(String string) {
+	public static StringLiteralExpr escape(string string) {
 		return new StringLiteralExpr(Utils.escapeEndOfLines(string));
 	}
 
-	public StringLiteralExpr(final Range range, final String value) {
+	public StringLiteralExpr(/*final*/Range range, /*final*/string value) {
 		super(range);
 		this.value = value;
 	}
 
-	@Override public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+	@Override public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
 		return v.visit(this, arg);
 	}
 
-	@Override public <A> void accept(final VoidVisitor<A> v, final A arg) {
+	@Override public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
 		v.visit(this, arg);
 	}
 
-	public final String getValue() {
+	public /*final*/string getValue() {
 		return value;
 	}
 
-	public final StringLiteralExpr setValue(final String value) {
+	public /*final*/StringLiteralExpr setValue(/*final*/string value) {
 		this.value = value;
 		return this;
 	}

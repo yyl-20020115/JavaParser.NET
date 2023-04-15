@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,9 +24,9 @@ namespace com.github.javaparser.symbolsolver.resolution;
 
 
 
-public class LambdaGenericResolutionTest extends AbstractSymbolResolutionTest {
+public class LambdaGenericResolutionTest:AbstractSymbolResolutionTest {
 
-    @Test
+    [TestMethod]
     void genericLambdas() {
         Path testFile= adaptPath("src/test/resources/GenericLambdas.java.txt");
         CombinedTypeSolver typeSolver = new CombinedTypeSolver();

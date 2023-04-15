@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,35 +23,35 @@ namespace com.github.javaparser;
 
 
 /**
- * {@link Provider} un-escaping unicode escape sequences in the input sequence.
+ * {@link Provider} un-escaping unicode escape sequences _in the input sequence.
  */
 public class LineEndingProcessingProvider implements Provider {
 
-    private static final int EOF = -1;
+    private static /*final*/int EOF = -1;
 
-    private static final int DEFAULT_BUFFER_SIZE = 2048;
+    private static /*final*/int DEFAULT_BUFFER_SIZE = 2048;
 
     /**
      * The "other" provider which we are wrapping around / reading from.
      */
-    private final Provider _input;
+    private /*final*/Provider _input;
 
     /**
      * The buffer that we're storing data within.
      */
-    private final char[] _data;
+    private /*final*/char[] _data;
 
     /**
-     * The number of characters in {@link #_data}.
+     * The number of characters _in {@link #_data}.
      */
     private int _len = 0;
 
     /**
-     * The position in {@link #_data} where to read the next source character from.
+     * The position _in {@link #_data} where to read the next source character from.
      */
     private int _pos = 0;
 
-    private final Map<LineSeparator, Integer> eolCounts = new HashMap<>();
+    private /*final*/Map<LineSeparator, Integer> eolCounts = new HashMap<>();
 
     public LineEndingProcessingProvider(Provider input) {
         this(DEFAULT_BUFFER_SIZE, input);
@@ -63,11 +63,11 @@ public class LineEndingProcessingProvider implements Provider {
     }
 
     @Override
-    public void close() throws IOException {
+    public void close(){
         _input.close();
     }
 
-    private int fillBuffer() throws IOException {
+    private int fillBuffer(){
         _pos = 0;
         int direct = _input.read(_data, 0, _data.length);
         if (direct != 0) {
@@ -89,7 +89,7 @@ public class LineEndingProcessingProvider implements Provider {
      *
      * @return The next character or {@code -1} if no more input is available.
      */
-    private int nextBufferedChar() throws IOException {
+    private int nextBufferedChar(){
         while (isBufferEmpty()) {
             int direct = fillBuffer();
             if (direct < 0) {
@@ -100,7 +100,7 @@ public class LineEndingProcessingProvider implements Provider {
     }
 
     @Override
-    public int read(char[] buffer, final int offset, int len) throws IOException {
+    public int read(char[] buffer, /*final*/int offset, int len){
         int pos = offset;
         int stop = offset + len;
         LineSeparator previousLineSeparator = null;
@@ -114,7 +114,7 @@ public class LineEndingProcessingProvider implements Provider {
                     break;
                 }
             } else {
-                String str = String.valueOf((char) ch);
+                string str = String.valueOf((char) ch);
                 Optional<LineSeparator> lookup = LineSeparator.lookup(str);
                 if (lookup.isPresent()) {
                     LineSeparator lineSeparator = lookup.get();

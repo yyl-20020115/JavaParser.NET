@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,11 +24,11 @@ namespace com.github.javaparser.printer.lexicalpreservation;
 
 public abstract class TextElement implements TextElementMatcher, PrintableTextElement {
 
-    abstract String expand();
+    abstract string expand();
 
     abstract boolean isToken(int tokenKind);
 
-    final boolean isCommentToken() {
+    /*final*/boolean isCommentToken() {
         return isToken(GeneratedJavaParserConstants.JAVADOC_COMMENT) || isToken(GeneratedJavaParserConstants.SINGLE_LINE_COMMENT) || isToken(GeneratedJavaParserConstants.MULTI_LINE_COMMENT);
     }
 
@@ -57,14 +57,14 @@ public abstract class TextElement implements TextElementMatcher, PrintableTextEl
 
     public abstract boolean isPrimitive();
 
-    public final boolean isWhiteSpaceOrComment() {
+    public /*final*/boolean isWhiteSpaceOrComment() {
         return isWhiteSpace() || isComment();
     }
 
     /**
      * Is this TextElement representing a child of the given class?
      */
-    public abstract boolean isChildOfClass(Class<? extends Node> nodeClass);
+    public abstract boolean isChildOfClass(Class<?:Node> nodeClass);
 
     public boolean isChild() {
         return isChildOfClass(Node.class);

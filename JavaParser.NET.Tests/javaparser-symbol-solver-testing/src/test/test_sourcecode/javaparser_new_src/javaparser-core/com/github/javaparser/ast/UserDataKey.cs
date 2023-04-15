@@ -3,14 +3,14 @@ namespace com.github.javaparser.ast;
 /**
  * A key to a piece of user data associated with a {@link Node} at runtime.
  * The key contains type information that can be used to check the
- * type of any user data value for the key when the value is set. UserDataKey is abstract in order to
+ * type of any user data value for the key when the value is set. UserDataKey is abstract _in order to
  * force the creation of a subtype. That subtype is used to test for identity when looking for the
  * user data because actual object identity would suffer from problems under serialization.
  * So, the correct way to declare a UserDataKey is like this:
  *
  * <pre>
  * <code>
- * public static final UserDataKey&lt;Role&gt; ROLE = new UserDataKey&lt;Role&gt;() { };
+ * public static /*final*/UserDataKey&lt;Role&gt; ROLE = new UserDataKey&lt;Role&gt;() { };
  * </code>
  * </pre>
  *

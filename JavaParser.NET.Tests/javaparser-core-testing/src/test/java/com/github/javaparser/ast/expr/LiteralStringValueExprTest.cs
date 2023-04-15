@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.ast.expr;
 @SuppressWarnings("OctalInteger")
 class LiteralStringValueExprTest {
 
-    @Test
+    [TestMethod]
     void trivialLiteralsAreConverted() {
         assertThat(new CharLiteralExpr('\t').getValue()).isEqualTo("\\t");
         assertThat(new CharLiteralExpr('\b').getValue()).isEqualTo("\\b");
@@ -68,7 +68,7 @@ class LiteralStringValueExprTest {
         assertThat(new DoubleLiteralExpr(0.0d).asDouble()).isEqualTo(0.0);
     }
 
-    @Test
+    [TestMethod]
     void lowerAndUpperBoundIntegersAreConverted() {
         IntegerLiteralExpr dec = parseExpression("2147483647");
         IntegerLiteralExpr posOct = parseExpression("0177_7777_7777");
@@ -87,7 +87,7 @@ class LiteralStringValueExprTest {
         assertThat(negBin.asInt()).isEqualTo(0b1000_0000_0000_0000_0000_0000_0000_0000);
     }
 
-    @Test
+    [TestMethod]
     void negativeLiteralValues() {
         UnaryExpr unaryIntExpr = parseExpression("-2147483648"); // valid, Integer.MIN_VALUE
         IntegerLiteralExpr literalIntExpr = (IntegerLiteralExpr) unaryIntExpr.getExpression();
@@ -104,7 +104,7 @@ class LiteralStringValueExprTest {
         assertThatThrownBy(notValidLongExpr::asNumber).isInstanceOf(NumberFormatException.class);
     }
 
-    @Test
+    [TestMethod]
     void lowerAndUpperBoundLongsAreConverted() {
         LongLiteralExpr dec = parseExpression("9223372036854775807L");
         LongLiteralExpr posOct = parseExpression("07_7777_7777_7777_7777_7777L");
@@ -123,7 +123,7 @@ class LiteralStringValueExprTest {
         assertThat(negBin.asLong()).isEqualTo(0b1000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000L);
     }
 
-    @Test
+    [TestMethod]
     void charLiteralsAreConverted() {
         CharLiteralExpr a = parseExpression("'a'");
         CharLiteralExpr percent = parseExpression("'%'");
@@ -148,7 +148,7 @@ class LiteralStringValueExprTest {
         assertThat(trademark.asChar()).isEqualTo('™');
     }
 
-    @Test
+    [TestMethod]
     void lowerAndUpperBoundDoublesAreConverted() {
         DoubleLiteralExpr posFloat = parseExpression("3.4028235e38f");
         DoubleLiteralExpr negFloat = parseExpression("1.40e-45f");
@@ -165,7 +165,7 @@ class LiteralStringValueExprTest {
         assertThat(negHexFloat.asDouble()).isEqualTo(0x0.0000000000001P-1022);
     }
 
-    @Test
+    [TestMethod]
     void specialCharactersInStringsAreEscaped() {
         assertThat(new StringLiteralExpr("\n").getValue()).isEqualTo("\\n");
         assertThat(new StringLiteralExpr("\r").getValue()).isEqualTo("\\r");

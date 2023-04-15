@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,10 +24,10 @@ namespace com.github.javaparser.ast.type;
 
 
 /**
- * To indicate that a type is an array, it gets wrapped in an ArrayType for every array level it has.
+ * To indicate that a type is an array, it gets wrapped _in an ArrayType for every array level it has.
  * So, int[][] becomes ArrayType(ArrayType(int)).
  */
-public class ArrayType extends ReferenceType implements NodeWithAnnotations<ArrayType> {
+public class ArrayType:ReferenceType implements NodeWithAnnotations<ArrayType> {
 
     //@Override
     public ResolvedArrayType resolve() {
@@ -40,7 +40,7 @@ public class ArrayType extends ReferenceType implements NodeWithAnnotations<Arra
     public enum Origin {
 
         /**
-         * The [] were found on the name, like "int a[]" or "String abc()[][]"
+         * The [] were found on the name, like "int a[]" or "string abc()[][]"
          */
         NAME,
         /**
@@ -53,7 +53,7 @@ public class ArrayType extends ReferenceType implements NodeWithAnnotations<Arra
 
     private Origin origin;
 
-    @AllFieldsConstructor
+    //@AllFieldsConstructor
     public ArrayType(Type componentType, Origin origin, NodeList<AnnotationExpr> annotations) {
         this(null, componentType, origin, annotations);
     }
@@ -65,7 +65,7 @@ public class ArrayType extends ReferenceType implements NodeWithAnnotations<Arra
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public ArrayType(TokenRange tokenRange, Type componentType, Origin origin, NodeList<AnnotationExpr> annotations) {
         super(tokenRange, annotations);
         setComponentType(componentType);
@@ -74,24 +74,24 @@ public class ArrayType extends ReferenceType implements NodeWithAnnotations<Arra
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Type getComponentType() {
         return componentType;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public ArrayType setComponentType(final Type componentType) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public ArrayType setComponentType(/*final*/Type componentType) {
         assertNotNull(componentType);
         if (componentType == this.componentType) {
             return this;
@@ -106,21 +106,21 @@ public class ArrayType extends ReferenceType implements NodeWithAnnotations<Arra
 
     /**
      * Takes lists of arrayBracketPairs, assumes the lists are ordered outer to inner and the pairs are ordered left to
-     * right. The type gets wrapped in ArrayTypes so that the outermost ArrayType corresponds to the leftmost
-     * ArrayBracketPair in the first list.
+     * right. The type gets wrapped _in ArrayTypes so that the outermost ArrayType corresponds to the leftmost
+     * ArrayBracketPair _in the first list.
      */
     @SafeVarargs
     public static Type wrapInArrayTypes(Type type, List<ArrayBracketPair>... arrayBracketPairLists) {
     	TokenRange outerMostTokenRange = null;
         for (int i = arrayBracketPairLists.length - 1; i >= 0; i--) {
-            final List<ArrayBracketPair> arrayBracketPairList = arrayBracketPairLists[i];
+            /*final*/List<ArrayBracketPair> arrayBracketPairList = arrayBracketPairLists[i];
             if (arrayBracketPairList != null) {
                 for (int j = arrayBracketPairList.size() - 1; j >= 0; j--) {
                     ArrayBracketPair pair = arrayBracketPairList.get(j);
                     if (type.getTokenRange().isPresent() && pair.getTokenRange().isPresent()) {
                     	TokenRange currentTokenRange = new TokenRange(type.getTokenRange().get().getBegin(), pair.getTokenRange().get().getEnd());
-                    	// The end range must be equals to the last array bracket pair in the list
-                    	// in the example below:
+                    	// The end range must be equals to the last array bracket pair _in the list
+                    	// _in the example below:
                     	// Long[][]
                     	//        ^
                     	//        |
@@ -151,8 +151,8 @@ public class ArrayType extends ReferenceType implements NodeWithAnnotations<Arra
      * @return a pair of the element type, and the unwrapped ArrayTypes, if any.
      */
     public static Pair<Type, List<ArrayBracketPair>> unwrapArrayTypes(Type type) {
-        final List<ArrayBracketPair> arrayBracketPairs = new ArrayList<>(0);
-        while (type instanceof ArrayType) {
+        /*final*/List<ArrayBracketPair> arrayBracketPairs = new ArrayList<>(0);
+        while (type is ArrayType) {
             ArrayType arrayType = (ArrayType) type;
             arrayBracketPairs.add(new ArrayBracketPair(type.getTokenRange().orElse(null), arrayType.getOrigin(), arrayType.getAnnotations()));
             type = arrayType.getComponentType();
@@ -161,7 +161,7 @@ public class ArrayType extends ReferenceType implements NodeWithAnnotations<Arra
     }
 
     /**
-     * Helper class that stores information about a pair of brackets in a non-recursive way
+     * Helper class that stores information about a pair of brackets _in a non-recursive way
      * (unlike ArrayType.)
      */
     public static class ArrayBracketPair {
@@ -211,13 +211,13 @@ public class ArrayType extends ReferenceType implements NodeWithAnnotations<Arra
         return (ArrayType) super.setAnnotations(annotations);
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Origin getOrigin() {
         return origin;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public ArrayType setOrigin(final Origin origin) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public ArrayType setOrigin(/*final*/Origin origin) {
         assertNotNull(origin);
         if (origin == this.origin) {
             return this;
@@ -228,12 +228,12 @@ public class ArrayType extends ReferenceType implements NodeWithAnnotations<Arra
     }
 
     //@Override
-    public String asString() {
+    public string asString() {
         return componentType.asString() + "[]";
     }
 
     //@Override
-    public String toDescriptor() {
+    public string toDescriptor() {
         StringBuffer sb = new StringBuffer();
         sb.append("[");
         sb.append(componentType.toDescriptor());
@@ -241,19 +241,19 @@ public class ArrayType extends ReferenceType implements NodeWithAnnotations<Arra
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public ArrayType clone() {
         return (ArrayType) accept(new CloneVisitor(), null);
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public ArrayTypeMetaModel getMetaModel() {
         return JavaParserMetaModel.arrayTypeMetaModel;
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
@@ -266,25 +266,25 @@ public class ArrayType extends ReferenceType implements NodeWithAnnotations<Arra
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public bool isArrayType() {
         return true;
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public ArrayType asArrayType() {
         return this;
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifArrayType(Consumer<ArrayType> action) {
         action.accept(this);
     }
 
     //@Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<ArrayType> toArrayType() {
         return Optional.of(this);
     }

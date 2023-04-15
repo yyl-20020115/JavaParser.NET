@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -30,7 +30,7 @@ namespace com.github.javaparser.ast.nodeTypes;
  *
  * @since 2.3.1
  */
-public interface NodeWithType<N extends Node, T extends Type> {
+public interface NodeWithType<N:Node, T:Type> {
 
     /**
      * Gets the type
@@ -55,19 +55,19 @@ public interface NodeWithType<N extends Node, T extends Type> {
      * @param typeClass the type
      * @return this
      */
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     default N setType(Class<?> typeClass) {
         tryAddImportToParentCompilationUnit(typeClass);
         return setType((T) parseType(typeClass.getSimpleName()));
     }
 
-    @SuppressWarnings("unchecked")
-    default N setType(final String typeString) {
+    //@SuppressWarnings("unchecked")
+    default N setType(/*final*/string typeString) {
         assertNonEmpty(typeString);
         return setType((T) parseType(typeString));
     }
 
-    default String getTypeAsString() {
+    default string getTypeAsString() {
         return getType().asString();
     }
 }

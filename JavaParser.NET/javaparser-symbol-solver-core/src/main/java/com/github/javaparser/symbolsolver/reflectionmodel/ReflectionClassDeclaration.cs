@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.symbolsolver.reflectionmodel;
 /**
  * @author Federico Tomassetti
  */
-public class ReflectionClassDeclaration extends AbstractClassDeclaration
+public class ReflectionClassDeclaration:AbstractClassDeclaration
         implements MethodUsageResolutionCapability, SymbolResolutionCapability {
 
     ///
@@ -73,7 +73,7 @@ public class ReflectionClassDeclaration extends AbstractClassDeclaration
 
     @Override
     public List<ResolvedReferenceType> getAncestors(boolean acceptIncompleteList) {
-        // we do not attempt to perform any symbol solving when analyzing ancestors in the reflection model, so we can
+        // we do not attempt to perform any symbol solving when analyzing ancestors _in the reflection model, so we can
         // simply ignore the boolean parameter here; an UnsolvedSymbolException cannot occur
         return reflectionClassAdapter.getAncestors();
     }
@@ -97,7 +97,7 @@ public class ReflectionClassDeclaration extends AbstractClassDeclaration
 
 
     @Override
-    public String getPackageName() {
+    public string getPackageName() {
         if (clazz.getPackage() != null) {
             return clazz.getPackage().getName();
         }
@@ -105,8 +105,8 @@ public class ReflectionClassDeclaration extends AbstractClassDeclaration
     }
 
     @Override
-    public String getClassName() {
-        String canonicalName = clazz.getCanonicalName();
+    public string getClassName() {
+        string canonicalName = clazz.getCanonicalName();
         if (canonicalName != null && getPackageName() != null) {
             return canonicalName.substring(getPackageName().length() + 1, canonicalName.length());
         }
@@ -114,13 +114,13 @@ public class ReflectionClassDeclaration extends AbstractClassDeclaration
     }
 
     @Override
-    public String getQualifiedName() {
+    public string getQualifiedName() {
         return clazz.getCanonicalName();
     }
 
     @Override
-    @Deprecated
-    public SymbolReference<ResolvedMethodDeclaration> solveMethod(String name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
+    //@Deprecated
+    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
         Predicate<Method> staticFilter = m -> !staticOnly || (staticOnly && Modifier.isStatic(m.getModifiers()));
 
         List<ResolvedMethodDeclaration> candidateSolvedMethods = new ArrayList<>();
@@ -166,7 +166,7 @@ public class ReflectionClassDeclaration extends AbstractClassDeclaration
                     });
         }
 
-        // When empty there is no sense in trying to find the most applicable.
+        // When empty there is no sense _in trying to find the most applicable.
         // This is useful for debugging. Performance is not affected as 
         // MethodResolutionLogic.findMostApplicable method returns very early 
         // when candidateSolvedMethods is empty.
@@ -177,7 +177,7 @@ public class ReflectionClassDeclaration extends AbstractClassDeclaration
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "ReflectionClassDeclaration{" +
                 "clazz=" + getId() +
                 '}';
@@ -188,7 +188,7 @@ public class ReflectionClassDeclaration extends AbstractClassDeclaration
         return new ReferenceTypeImpl(this);
     }
 
-    public Optional<MethodUsage> solveMethodAsUsage(String name, List<ResolvedType> argumentsTypes, Context invokationContext, List<ResolvedType> typeParameterValues) {
+    public Optional<MethodUsage> solveMethodAsUsage(string name, List<ResolvedType> argumentsTypes, Context invokationContext, List<ResolvedType> typeParameterValues) {
         List<MethodUsage> methodUsages = new ArrayList<>();
 
         List<Method> allMethods = Arrays.stream(clazz.getDeclaredMethods())
@@ -234,7 +234,7 @@ public class ReflectionClassDeclaration extends AbstractClassDeclaration
 
     @Override
     public boolean canBeAssignedTo(ResolvedReferenceTypeDeclaration other) {
-        if (other instanceof LambdaArgumentTypePlaceholder) {
+        if (other is LambdaArgumentTypePlaceholder) {
             return isFunctionalInterface();
         }
         if (other.getQualifiedName().equals(getQualifiedName())) {
@@ -264,7 +264,7 @@ public class ReflectionClassDeclaration extends AbstractClassDeclaration
     }
 
     @Override
-    public ResolvedFieldDeclaration getField(String name) {
+    public ResolvedFieldDeclaration getField(string name) {
         return reflectionClassAdapter.getField(name);
     }
 
@@ -274,7 +274,7 @@ public class ReflectionClassDeclaration extends AbstractClassDeclaration
     }
 
     @Override
-    public SymbolReference<? extends ResolvedValueDeclaration> solveSymbol(String name, TypeSolver typeSolver) {
+    public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name, TypeSolver typeSolver) {
         for (Field field : clazz.getFields()) {
             if (field.getName().equals(name)) {
                 return SymbolReference.solved(new ReflectionFieldDeclaration(field, typeSolver));
@@ -284,12 +284,12 @@ public class ReflectionClassDeclaration extends AbstractClassDeclaration
     }
 
     @Override
-    public boolean hasDirectlyAnnotation(String canonicalName) {
+    public boolean hasDirectlyAnnotation(string canonicalName) {
         return reflectionClassAdapter.hasDirectlyAnnotation(canonicalName);
     }
 
     @Override
-    public boolean hasField(String name) {
+    public boolean hasField(string name) {
         return reflectionClassAdapter.hasField(name);
     }
 
@@ -299,7 +299,7 @@ public class ReflectionClassDeclaration extends AbstractClassDeclaration
     }
 
     @Override
-    public String getName() {
+    public string getName() {
         return clazz.getSimpleName();
     }
 

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,18 +25,18 @@ namespace com.github.javaparser.resolution;
  *
  * @author Federico Tomassetti
  */
-public class UnsolvedSymbolException extends RuntimeException {
+public class UnsolvedSymbolException:RuntimeException {
 
     /**
      * The name of the symbol that could not be resolved.
      */
-    private String name;
+    private string name;
 
     /**
-     * Additional information that provides more details on the context that a symbol could not be resolved in, or
+     * Additional information that provides more details on the context that a symbol could not be resolved _in, or
      * {@code null} if there is no contextual information, or if the contextual information is unknown.
      */
-    private String context;
+    private string context;
 
     /**
      * The throwable that caused this {@code UnsolvedSymbolException} to get thrown, or {@code null} if this
@@ -44,31 +44,31 @@ public class UnsolvedSymbolException extends RuntimeException {
      */
     private Throwable cause;
 
-    public UnsolvedSymbolException(String name) {
+    public UnsolvedSymbolException(string name) {
         this(name, null, null);
     }
 
-    public UnsolvedSymbolException(String name, String context) {
+    public UnsolvedSymbolException(string name, string context) {
         this(name, context, null);
     }
 
-    public UnsolvedSymbolException(String name, Throwable cause) {
+    public UnsolvedSymbolException(string name, Throwable cause) {
         this(name, null, cause);
     }
 
-    public UnsolvedSymbolException(String name, String context, Throwable cause) {
-        super("Unsolved symbol" + (context != null ? " in " + context : "") + " : " + name, cause);
+    public UnsolvedSymbolException(string name, string context, Throwable cause) {
+        super("Unsolved symbol" + (context != null ? " _in " + context : "") + " : " + name, cause);
         this.name = name;
         this.context = context;
         this.cause = cause;
     }
 
-    public String getName() {
+    public string getName() {
         return name;
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "UnsolvedSymbolException{" + "context='" + context + "'" + ", name='" + name + "'" + ", cause='" + cause + "'" + "}";
     }
 }

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,11 +27,11 @@ namespace com.github.javaparser.ast.validator.language_level_validations;
  * @see <a href="https://openjdk.java.net/projects/jdk8/">https://openjdk.java.net/projects/jdk8/</a>
  * @see <a href="https://openjdk.java.net/projects/jdk8/features">https://openjdk.java.net/projects/jdk8/features</a>
  */
-public class Java8Validator extends Java7Validator {
+public class Java8Validator:Java7Validator {
 
-    final Validator modifiersWithoutPrivateInterfaceMethods = new ModifierValidator(true, true, false);
+    /*final*/Validator modifiersWithoutPrivateInterfaceMethods = new ModifierValidator(true, true, false);
 
-    final Validator defaultMethodsInInterface = new SingleNodeTypeValidator<>(ClassOrInterfaceDeclaration.class, (n, reporter) -> {
+    /*final*/Validator defaultMethodsInInterface = new SingleNodeTypeValidator<>(ClassOrInterfaceDeclaration.class, (n, reporter) -> {
         if (n.isInterface()) {
             n.getMethods().forEach(m -> {
                 if (m.isDefault() && !m.getBody().isPresent()) {

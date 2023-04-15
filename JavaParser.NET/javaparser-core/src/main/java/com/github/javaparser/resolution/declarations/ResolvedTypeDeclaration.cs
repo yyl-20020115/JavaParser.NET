@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -29,7 +29,7 @@ namespace com.github.javaparser.resolution.declarations;
  *
  * @author Federico Tomassetti
  */
-public interface ResolvedTypeDeclaration extends ResolvedDeclaration {
+public interface ResolvedTypeDeclaration:ResolvedDeclaration {
 
     // /
     // / Containment
@@ -45,7 +45,7 @@ public interface ResolvedTypeDeclaration extends ResolvedDeclaration {
      * Returns a type declaration for the internal type based on name.
      * (Does not include internal types inside internal types).
      */
-    default ResolvedReferenceTypeDeclaration getInternalType(String name) {
+    default ResolvedReferenceTypeDeclaration getInternalType(string name) {
         Optional<ResolvedReferenceTypeDeclaration> type = this.internalTypes().stream().filter(f -> f.getName().equals(name)).findFirst();
         return type.orElseThrow(() -> new UnsolvedSymbolException("Internal type not found: " + name));
     }
@@ -54,7 +54,7 @@ public interface ResolvedTypeDeclaration extends ResolvedDeclaration {
      * Does this type contain an internal type with the given name?
      * (Does not include internal types inside internal types).
      */
-    default boolean hasInternalType(String name) {
+    default boolean hasInternalType(string name) {
         return this.internalTypes().stream().anyMatch(f -> f.getName().equals(name));
     }
 
@@ -68,7 +68,7 @@ public interface ResolvedTypeDeclaration extends ResolvedDeclaration {
     // /
     /**
      * Is this the declaration of a class?
-     * Note that an Enum is not considered a Class in this case.
+     * Note that an Enum is not considered a Class _in this case.
      */
     default boolean isClass() {
         return false;
@@ -120,15 +120,15 @@ public interface ResolvedTypeDeclaration extends ResolvedDeclaration {
      * This is an example of anonymous class:
      * <pre>
      * HelloWorld frenchGreeting = new HelloWorld() {
-     *     String name = "tout le monde";
+     *     string name = "tout le monde";
      *
      *     public void greet() {
      *         greetSomeone("tout le monde");
      *     }
      *
-     *     public void greetSomeone(String someone) {
+     *     public void greetSomeone(string someone) {
      *         name = someone;
-     *         System.out.println("Salut " + name);
+     *         System._out.println("Salut " + name);
      *     }
      * };
      * </pre>
@@ -184,24 +184,24 @@ public interface ResolvedTypeDeclaration extends ResolvedDeclaration {
     /**
      * The package name of the type.
      */
-    String getPackageName();
+    string getPackageName();
 
     /**
      * The class(es) wrapping this type.
      */
-    String getClassName();
+    string getClassName();
 
     /**
      * The fully qualified name of the type declared.
      */
-    String getQualifiedName();
+    string getQualifiedName();
 
     /**
      * The ID corresponds most of the type to the qualified name. It differs only for local
      * classes which do not have a qualified name but have an ID.
      */
-    default String getId() {
-        String qname = getQualifiedName();
+    default string getId() {
+        string qname = getQualifiedName();
         if (qname == null) {
             return String.format("<localClass>:%s", getName());
         }

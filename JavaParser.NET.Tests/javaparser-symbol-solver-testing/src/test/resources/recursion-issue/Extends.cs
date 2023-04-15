@@ -1,5 +1,5 @@
 
-public interface Extends extends Base<Integer, Extends> {
+public interface Extends:Base<Integer, Extends> {
 
     public static void foo() {
 

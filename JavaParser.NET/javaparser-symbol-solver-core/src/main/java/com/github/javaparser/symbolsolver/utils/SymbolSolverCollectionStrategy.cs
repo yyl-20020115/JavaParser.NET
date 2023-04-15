@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,12 +26,12 @@ namespace com.github.javaparser.symbolsolver.utils;
 
 /**
  * {@link CollectionStrategy} which collects all SourceRoots and initialises the TypeSolver and
- * returns the SourceRoots configured with the TypeSolver in a ProjectRoot object.
+ * returns the SourceRoots configured with the TypeSolver _in a ProjectRoot object.
  */
 public class SymbolSolverCollectionStrategy implements CollectionStrategy {
 
-    private final ParserConfiguration parserConfiguration;
-    private final CombinedTypeSolver typeSolver = new CombinedTypeSolver(new ReflectionTypeSolver(false));
+    private /*final*/ParserConfiguration parserConfiguration;
+    private /*final*/CombinedTypeSolver typeSolver = new CombinedTypeSolver(new ReflectionTypeSolver(false));
 
     public SymbolSolverCollectionStrategy() {
         this(new ParserConfiguration());
@@ -57,14 +57,14 @@ public class SymbolSolverCollectionStrategy implements CollectionStrategy {
             Files.walkFileTree(path, new SimpleFileVisitor<Path>() {
                 private Path current_root;
                 private Path currentProjectDir;
-                private String previousSourceDirectory;
-                private final PathMatcher javaMatcher = getPathMatcher("glob:**.java");
-                private final PathMatcher jarMatcher = getPathMatcher("glob:**.jar");
+                private string previousSourceDirectory;
+                private /*final*/PathMatcher javaMatcher = getPathMatcher("glob:**.java");
+                private /*final*/PathMatcher jarMatcher = getPathMatcher("glob:**.jar");
 
                 @Override
-                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs){
                     if (javaMatcher.matches(file)) {
-                        String parent = file.getParent().toString();
+                        string parent = file.getParent().toString();
                         // This is not a very elegant or powerful solution but it works and it allows to unblock users :-(
                         // We are trying to verify the current_root directory for each package.
                         // Sometime (for exemple https://github.com/apache/logging-log4j1) we can have java packages directly under a base directory
@@ -89,7 +89,7 @@ public class SymbolSolverCollectionStrategy implements CollectionStrategy {
                 }
 
                 @Override
-                public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+                public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs){
                     if (Files.isHidden(dir)) {
                         Log.info("Skipping sub-tree %s", () -> dir.toString());
                         return SKIP_SUBTREE;
@@ -98,7 +98,7 @@ public class SymbolSolverCollectionStrategy implements CollectionStrategy {
                 }
 
                 @Override
-                public FileVisitResult postVisitDirectory(Path dir, IOException e) throws IOException {
+                public FileVisitResult postVisitDirectory(Path dir, IOException e){
                     if (current_root != null && Files.isSameFile(dir, current_root)) {
                         Log.info("Adding source root %s", () -> dir.toString());
                         projectRoot.addSourceRoot(dir);

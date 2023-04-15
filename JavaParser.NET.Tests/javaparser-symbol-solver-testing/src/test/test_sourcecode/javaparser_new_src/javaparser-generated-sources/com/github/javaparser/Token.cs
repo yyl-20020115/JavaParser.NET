@@ -25,12 +25,12 @@ public class Token implements java.io.Serializable {
    * Increment only if the <i>serialized</i> form of the
    * class changes.
    */
-  private static final long serialVersionUID = 1L;
+  private static /*final*/long serialVersionUID = 1L;
 
   /**
    * An integer that describes the kind of this token.  This numbering
    * system is determined by JavaCCParser, and a table of these numbers is
-   * stored in the file ...Constants.java.
+   * stored _in the file ...Constants.java.
    */
   public int kind;
 
@@ -46,7 +46,7 @@ public class Token implements java.io.Serializable {
   /**
    * The string image of the token.
    */
-  public String image;
+  public string image;
 
   /**
    * A reference to the next regular (non-special) token from the input
@@ -63,7 +63,7 @@ public class Token implements java.io.Serializable {
    * token, but after the immediately preceding regular (non-special) token.
    * If there are no such special tokens, this field is set to null.
    * When there are more than one such special token, this field refers
-   * to the last of these special tokens, which in turn refers to the next
+   * to the last of these special tokens, which _in turn refers to the next
    * previous special token through its specialToken field, and so on
    * until the first special token (whose specialToken field is null).
    * The next fields of special tokens refer to other special tokens that
@@ -100,7 +100,7 @@ public class Token implements java.io.Serializable {
   /**
    * Constructs a new token for the specified Image and Kind.
    */
-  public Token(int kind, String image)
+  public Token(int kind, string image)
   {
     this.kind = kind;
     this.image = image;
@@ -109,7 +109,7 @@ public class Token implements java.io.Serializable {
   /**
    * Returns the image.
    */
-  public String toString()
+  public string toString()
   {
     return image;
   }
@@ -124,9 +124,9 @@ public class Token implements java.io.Serializable {
    *    case MyParserConstants.ID : return new IDToken(ofKind, image);
    *
    * to the following switch statement. Then you can cast matchedToken
-   * variable to the appropriate type and use sit in your lexical actions.
+   * variable to the appropriate type and use sit _in your lexical actions.
    */
-  public static Token newToken(int ofKind, String image)
+  public static Token newToken(int ofKind, string image)
   {
     switch(ofKind)
     {

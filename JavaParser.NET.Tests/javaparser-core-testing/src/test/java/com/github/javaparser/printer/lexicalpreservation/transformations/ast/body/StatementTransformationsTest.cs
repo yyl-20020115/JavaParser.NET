@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,22 +26,22 @@ namespace com.github.javaparser.printer.lexicalpreservation.transformations.ast.
 /**
  * Transforming Statement and verifying the LexicalPreservation works as expected.
  */
-class StatementTransformationsTest extends AbstractLexicalPreservingTest {
+class StatementTransformationsTest:AbstractLexicalPreservingTest {
 
-    Statement consider(String code) {
+    Statement consider(string code) {
         Statement statement = parseStatement(code);
         LexicalPreservingPrinter.setup(statement);
         return statement;
     }
 
-    @Test
+    [TestMethod]
     void ifStmtTransformation() {
         Statement stmt = consider("if (a) {} else {}");
         stmt.asIfStmt().setCondition(new NameExpr("b"));
         assertTransformedToString("if (b) {} else {}", stmt);
     }
 
-    @Test
+    [TestMethod]
     void switchEntryCsmHasTrailingUnindent() {
         Statement stmt = consider("switch (a) { case 1: a; a; }");
         NodeList<Statement> statements = stmt.asSwitchStmt().getEntry(0).getStatements();

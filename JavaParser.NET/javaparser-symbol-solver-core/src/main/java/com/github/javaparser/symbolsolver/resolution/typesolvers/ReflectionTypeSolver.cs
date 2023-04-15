@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,9 +28,9 @@ namespace com.github.javaparser.symbolsolver.resolution.typesolvers;
  *
  * @author Federico Tomassetti
  */
-public class ReflectionTypeSolver extends ClassLoaderTypeSolver {
+public class ReflectionTypeSolver:ClassLoaderTypeSolver {
 
-    private final boolean jreOnly;
+    private /*final*/boolean jreOnly;
 
     /**
      * @param jreOnly if true, will only resolve types from the java or javax packages.
@@ -51,7 +51,7 @@ public class ReflectionTypeSolver extends ClassLoaderTypeSolver {
     }
 
     @Override
-    protected boolean filterName(String name) {
+    protected boolean filterName(string name) {
         return !jreOnly || (name.startsWith("java.") || name.startsWith("javax."));
     }
 

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,9 +25,9 @@ namespace com.github.javaparser.printer.lexicalpreservation.transformations.ast.
 /**
  * Transforming InitializerDeclaration and verifying the LexicalPreservation works as expected.
  */
-class InitializerDeclarationTransformationsTest extends AbstractLexicalPreservingTest {
+class InitializerDeclarationTransformationsTest:AbstractLexicalPreservingTest {
 
-    protected InitializerDeclaration consider(String code) {
+    protected InitializerDeclaration consider(string code) {
         considerCode("class A { " + code + " }");
         return cu.getType(0).getMembers().get(0).asInitializerDeclaration();
     }
@@ -38,14 +38,14 @@ class InitializerDeclarationTransformationsTest extends AbstractLexicalPreservin
 
     // IsStatic
 
-    @Test
+    [TestMethod]
     void instanceToStatic() {
         InitializerDeclaration it = consider("{ /*some comment*/ }");
         it.setStatic(true);
         assertTransformedToString("static { /*some comment*/ }", it);
     }
 
-    @Test
+    [TestMethod]
     void staticToInstance() {
         InitializerDeclaration it = consider("static { /*some comment*/ }");
         it.setStatic(false);

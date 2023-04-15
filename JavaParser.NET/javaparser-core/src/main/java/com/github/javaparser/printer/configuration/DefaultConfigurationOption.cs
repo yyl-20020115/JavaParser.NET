@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -41,7 +41,7 @@ public class DefaultConfigurationOption implements ConfigurationOption {
 
     @Override
     public boolean equals(Object o) {
-        if (o == null || !(o instanceof DefaultConfigurationOption))
+        if (o == null || !(o is DefaultConfigurationOption))
             return false;
         DefaultConfigurationOption other = (DefaultConfigurationOption) o;
         return configOption.equals(other.configOption);
@@ -86,7 +86,7 @@ public class DefaultConfigurationOption implements ConfigurationOption {
      * returns the currentValue as a String
      */
     @Override
-    public String asString() {
+    public string asString() {
         return cast();
     }
 
@@ -99,11 +99,11 @@ public class DefaultConfigurationOption implements ConfigurationOption {
     }
 
     @Override
-    public <T extends Object> T asValue() {
+    public <T:Object> T asValue() {
         return cast();
     }
 
-    private <T extends Object> T cast() {
+    private <T:Object> T cast() {
         if (!hasValue())
             throw new IllegalArgumentException(String.format("The option %s has no currentValue", configOption.name()));
         if (configOption.type.isAssignableFrom(currentValue.getClass()))

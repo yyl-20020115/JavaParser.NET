@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -29,10 +29,10 @@ namespace com.github.javaparser.ast.body;
 /**
  * @author Julio Vilmar Gesser
  */
-public final class EnumConstantDeclaration extends BodyDeclaration<EnumConstantDeclaration>
+public /*final*/class EnumConstantDeclaration:BodyDeclaration<EnumConstantDeclaration>
         implements NodeWithJavaDoc<EnumConstantDeclaration>, NodeWithName<EnumConstantDeclaration> {
 
-    private String name;
+    private string name;
 
     private List<Expression> args;
 
@@ -41,11 +41,11 @@ public final class EnumConstantDeclaration extends BodyDeclaration<EnumConstantD
     public EnumConstantDeclaration() {
     }
 
-    public EnumConstantDeclaration(String name) {
+    public EnumConstantDeclaration(string name) {
         setName(name);
     }
 
-    public EnumConstantDeclaration(List<AnnotationExpr> annotations, String name, List<Expression> args,
+    public EnumConstantDeclaration(List<AnnotationExpr> annotations, string name, List<Expression> args,
                                    List<BodyDeclaration<?>> classBody) {
         super(annotations);
         setName(name);
@@ -53,7 +53,7 @@ public final class EnumConstantDeclaration extends BodyDeclaration<EnumConstantD
         setClassBody(classBody);
     }
 
-    public EnumConstantDeclaration(Range range, List<AnnotationExpr> annotations, String name, List<Expression> args,
+    public EnumConstantDeclaration(Range range, List<AnnotationExpr> annotations, string name, List<Expression> args,
                                    List<BodyDeclaration<?>> classBody) {
         super(range, annotations);
         setName(name);
@@ -82,7 +82,7 @@ public final class EnumConstantDeclaration extends BodyDeclaration<EnumConstantD
     }
 
     @Override
-    public String getName() {
+    public string getName() {
         return name;
     }
 
@@ -99,20 +99,20 @@ public final class EnumConstantDeclaration extends BodyDeclaration<EnumConstantD
     }
 
     @Override
-    public EnumConstantDeclaration setName(String name) {
+    public EnumConstantDeclaration setName(string name) {
         this.name = name;
         return this;
     }
 
     @Override
     public JavadocComment getJavaDoc() {
-        if(getComment() instanceof JavadocComment){
+        if(getComment() is JavadocComment){
             return (JavadocComment) getComment();
         }
         return null;
     }
 
-    public EnumConstantDeclaration addArgument(String valueExpr) {
+    public EnumConstantDeclaration addArgument(string valueExpr) {
         getArgs().add(name(valueExpr));
         return this;
     }

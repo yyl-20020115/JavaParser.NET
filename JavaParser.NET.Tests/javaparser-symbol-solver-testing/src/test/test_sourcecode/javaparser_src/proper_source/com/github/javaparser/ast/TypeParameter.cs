@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -35,9 +35,9 @@ namespace com.github.javaparser.ast;
  * </pre>
  * @author Julio Vilmar Gesser
  */
-public final class TypeParameter extends Node implements NamedNode {
+public /*final*/class TypeParameter:Node implements NamedNode {
 
-	private String name;
+	private string name;
 
     private List<AnnotationExpr> annotations;
 
@@ -46,31 +46,31 @@ public final class TypeParameter extends Node implements NamedNode {
 	public TypeParameter() {
 	}
 
-	public TypeParameter(final String name, final List<ClassOrInterfaceType> typeBound) {
+	public TypeParameter(/*final*/string name, /*final*/List<ClassOrInterfaceType> typeBound) {
 		setName(name);
 		setTypeBound(typeBound);
 	}
 
-	public TypeParameter(final int beginLine, final int beginColumn, final int endLine, final int endColumn,
-			final String name, final List<ClassOrInterfaceType> typeBound) {
+	public TypeParameter(/*final*/int beginLine, /*final*/int beginColumn, /*final*/int endLine, /*final*/int endColumn,
+			/*final*/string name, /*final*/List<ClassOrInterfaceType> typeBound) {
 		super(beginLine, beginColumn, endLine, endColumn);
 		setName(name);
 		setTypeBound(typeBound);
 	}
 
     public TypeParameter(int beginLine, int beginColumn, int endLine,
-                         int endColumn, String name, List<ClassOrInterfaceType> typeBound, List<AnnotationExpr> annotations) {
+                         int endColumn, string name, List<ClassOrInterfaceType> typeBound, List<AnnotationExpr> annotations) {
         this(beginLine, beginColumn, endLine, endColumn, name, typeBound);
         setName(name);
         setTypeBound(typeBound);
         this.annotations = annotations;
     }
 
-	@Override public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+	@Override public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
 		return v.visit(this, arg);
 	}
 
-	@Override public <A> void accept(final VoidVisitor<A> v, final A arg) {
+	@Override public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
 		v.visit(this, arg);
 	}
 
@@ -79,7 +79,7 @@ public final class TypeParameter extends Node implements NamedNode {
 	 * 
 	 * @return the name of the paramenter
 	 */
-	public String getName() {
+	public string getName() {
 		return name;
 	}
 
@@ -87,7 +87,7 @@ public final class TypeParameter extends Node implements NamedNode {
 	 * Return the list of {@link ClassOrInterfaceType} that this parameter
 	 * extends. Return <code>null</code> null if there are no type.
 	 * 
-	 * @return list of types that this paramente extends or <code>null</code>
+	 * @return list of types that this paramente:or <code>null</code>
 	 */
 	public List<ClassOrInterfaceType> getTypeBound() {
 		return typeBound;
@@ -99,7 +99,7 @@ public final class TypeParameter extends Node implements NamedNode {
 	 * @param name
 	 *            the name to set
 	 */
-	public void setName(final String name) {
+	public void setName(/*final*/string name) {
 		this.name = name;
 	}
 
@@ -109,7 +109,7 @@ public final class TypeParameter extends Node implements NamedNode {
 	 * @param typeBound
 	 *            the typeBound to set
 	 */
-	public void setTypeBound(final List<ClassOrInterfaceType> typeBound) {
+	public void setTypeBound(/*final*/List<ClassOrInterfaceType> typeBound) {
 		this.typeBound = typeBound;
 		setAsParentNodeOf(typeBound);
 	}

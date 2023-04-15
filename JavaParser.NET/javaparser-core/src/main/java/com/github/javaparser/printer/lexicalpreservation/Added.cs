@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,14 +23,14 @@ namespace com.github.javaparser.printer.lexicalpreservation;
 
 public class Added implements DifferenceElement {
 
-    private final CsmElement element;
+    private /*final*/CsmElement element;
 
     Added(CsmElement element) {
         this.element = element;
     }
 
     //@Override
-    public String toString() {
+    public string toString() {
         return "Added{" + element + '}';
     }
 
@@ -70,21 +70,21 @@ public class Added implements DifferenceElement {
     }
 
     public bool isIndent() {
-        return element instanceof CsmIndent;
+        return element is CsmIndent;
     }
 
     public bool isUnindent() {
-        return element instanceof CsmUnindent;
+        return element is CsmUnindent;
     }
 
     private bool isToken() {
-        return element instanceof CsmToken;
+        return element is CsmToken;
     }
 
     public TextElement toTextElement() {
-        if (element instanceof LexicalDifferenceCalculator.CsmChild) {
+        if (element is LexicalDifferenceCalculator.CsmChild) {
             return new ChildTextElement(((LexicalDifferenceCalculator.CsmChild) element).getChild());
-        } else if (element instanceof CsmToken) {
+        } else if (element is CsmToken) {
             return new TokenTextElement(((CsmToken) element).getTokenType(), ((CsmToken) element).getContent(null));
         } else {
             throw new UnsupportedOperationException(element.getClass().getSimpleName());

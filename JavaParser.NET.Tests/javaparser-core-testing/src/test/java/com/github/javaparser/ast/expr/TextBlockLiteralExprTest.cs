@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,9 +24,9 @@ namespace com.github.javaparser.ast.expr;
 
 
 class TextBlockLiteralExprTest {
-    @Test
+    [TestMethod]
     void htmlExample() {
-        TextBlockLiteralExpr textBlock = parseStatement("String html = \"\"\"\n" +
+        TextBlockLiteralExpr textBlock = parseStatement("string html = \"\"\"\n" +
                 "              <html>\n" +
                 "                  <body>\n" +
                 "                      <p>Hello, world</p>\n" +
@@ -63,9 +63,9 @@ class TextBlockLiteralExprTest {
                 "</html>\n", textBlock.translateEscapes());
     }
 
-    @Test
+    [TestMethod]
     void htmlExampleWithEndAllToTheLeft() {
-        TextBlockLiteralExpr textBlock = parseStatement("String html = \"\"\"\n" +
+        TextBlockLiteralExpr textBlock = parseStatement("string html = \"\"\"\n" +
                 "              <html>\n" +
                 "                  <body>\n" +
                 "                      <p>Hello, world</p>\n" +
@@ -81,9 +81,9 @@ class TextBlockLiteralExprTest {
                         "              </html>\n", textBlock.translateEscapes());
     }
 
-    @Test
+    [TestMethod]
     void htmlExampleWithEndALittleToTheLeft() {
-        TextBlockLiteralExpr textBlock = parseStatement("String html = \"\"\"\n" +
+        TextBlockLiteralExpr textBlock = parseStatement("string html = \"\"\"\n" +
                 "              <html>\n" +
                 "                  <body>\n" +
                 "                      <p>Hello, world</p>\n" +
@@ -98,9 +98,9 @@ class TextBlockLiteralExprTest {
                 "      </html>\n", textBlock.translateEscapes());
     }
 
-    @Test
+    [TestMethod]
     void htmlExampleWithEndALittleToTheRight() {
-        TextBlockLiteralExpr textBlock = parseStatement("String html = \"\"\"\n" +
+        TextBlockLiteralExpr textBlock = parseStatement("string html = \"\"\"\n" +
                 "              <html>\n" +
                 "                  <body>\n" +
                 "                      <p>Hello, world</p>\n" +
@@ -115,11 +115,11 @@ class TextBlockLiteralExprTest {
                 "</html>\n", textBlock.translateEscapes());
     }
 
-    @Test
+    [TestMethod]
     void itIsLegalToUseDoubleQuoteFreelyInsideATextBlock() {
-        parseStatement("String story = \"\"\"\n" +
+        parseStatement("string story = \"\"\"\n" +
                 "    \"When I use a word,\" Humpty Dumpty said,\n" +
-                "    in rather a scornful tone, \"it means just what I\n" +
+                "    _in rather a scornful tone, \"it means just what I\n" +
                 "    choose it to mean - neither more nor less.\"\n" +
                 "    \"The question is,\" said Alice, \"whether you\n" +
                 "    can make words mean so many different things.\"\n" +
@@ -128,32 +128,32 @@ class TextBlockLiteralExprTest {
                 "    \"\"\";");
     }
 
-    @Test
+    [TestMethod]
     void sequencesOfThreeDoubleQuotesNeedAtLeastOneEscaped() {
-        TextBlockLiteralExpr textBlock = parseStatement("String code = \n" +
+        TextBlockLiteralExpr textBlock = parseStatement("string code = \n" +
                 "    \"\"\"\n" +
-                "    String text = \\\"\"\"\n" +
+                "    string text = \\\"\"\"\n" +
                 "        A text block inside a text block\n" +
                 "    \\\"\"\";\n" +
                 "    \"\"\";").findFirst(TextBlockLiteralExpr.class).get();
 
-        assertEquals("String text = \"\"\"\n" +
+        assertEquals("string text = \"\"\"\n" +
                 "    A text block inside a text block\n" +
                 "\"\"\";\n", textBlock.translateEscapes());
     }
 
-    @Test
+    [TestMethod]
     void concatenatingTextBlocks() {
-        parseStatement("String code = \"public void print(Object o) {\" +\n" +
+        parseStatement("string code = \"public void print(Object o) {\" +\n" +
                 "              \"\"\"\n" +
-                "                  System.out.println(Objects.toString(o));\n" +
+                "                  System._out.println(Objects.toString(o));\n" +
                 "              }\n" +
                 "              \"\"\";");
     }
 
-    @Test
+    [TestMethod]
     void forceTrailingWhitespace() {
-        TextBlockLiteralExpr textBlock = parseStatement("String code = \"\"\"\n" +
+        TextBlockLiteralExpr textBlock = parseStatement("string code = \"\"\"\n" +
                 "The quick brown fox\\040\\040\n" +
                 "jumps over the lazy dog\n" +
                 "\"\"\";").findFirst(TextBlockLiteralExpr.class).get();
@@ -162,9 +162,9 @@ class TextBlockLiteralExprTest {
                 "jumps over the lazy dog\n", textBlock.translateEscapes());
     }
 
-    @Test
+    [TestMethod]
     void escapeLineTerminator() {
-        TextBlockLiteralExpr textBlock = parseStatement("String text = \"\"\"\n" +
+        TextBlockLiteralExpr textBlock = parseStatement("string text = \"\"\"\n" +
                 "                Lorem ipsum dolor sit amet, consectetur adipiscing \\\n" +
                 "                elit, sed do eiusmod tempor incididunt ut labore \\\n" +
                 "                et dolore magna aliqua.\\\n" +
@@ -175,9 +175,9 @@ class TextBlockLiteralExprTest {
                 "et dolore magna aliqua.", textBlock.translateEscapes());
     }
 
-    @Test
+    [TestMethod]
     void escapeSpace() {
-        TextBlockLiteralExpr textBlock = parseStatement("String colors = \"\"\"\n" +
+        TextBlockLiteralExpr textBlock = parseStatement("string colors = \"\"\"\n" +
                 "    red  \\s\n" +
                 "    green\\s\n" +
                 "    blue \\s\n" +
@@ -188,9 +188,9 @@ class TextBlockLiteralExprTest {
                 "blue  \n", textBlock.translateEscapes());
     }
 
-    @Test
+    [TestMethod]
     void whiteSpaceLineShorterThanMiniumCommonPrefix() {
-        TextBlockLiteralExpr textBlock = parseStatement("String text = \"\"\" \n" +
+        TextBlockLiteralExpr textBlock = parseStatement("string text = \"\"\" \n" +
                 "  Hello\n" +
                 "  World\"\"\";").findFirst(TextBlockLiteralExpr.class).get();
         assertEquals("\nHello\n" +

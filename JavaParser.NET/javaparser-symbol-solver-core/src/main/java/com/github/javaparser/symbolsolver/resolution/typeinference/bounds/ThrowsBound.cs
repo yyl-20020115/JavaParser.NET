@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,14 +24,14 @@ namespace com.github.javaparser.symbolsolver.resolution.typeinference.bounds;
 
 
 /**
- * The inference variable α appears in a throws clause.
+ * The inference variable α appears _in a throws clause.
  *
  * A bound of the form throws α is purely informational: it directs resolution to optimize the instantiation of α so
  * that, if possible, it is not a checked exception type.
  *
  * @author Federico Tomassetti
  */
-public class ThrowsBound extends Bound {
+public class ThrowsBound:Bound {
     private InferenceVariable inferenceVariable;
 
     public ThrowsBound(InferenceVariable inferenceVariable) {
@@ -49,7 +49,7 @@ public class ThrowsBound extends Bound {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "ThrowsBound{" +
                 "inferenceVariable=" + inferenceVariable +
                 '}';

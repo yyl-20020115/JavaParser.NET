@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,9 +25,9 @@ namespace com.github.javaparser.symbolsolver.resolution;
 
 
 
-class MethodReferenceResolutionTest extends AbstractResolutionTest {
+class MethodReferenceResolutionTest:AbstractResolutionTest {
 
-    @Test
+    [TestMethod]
     void classMethod() {
         // configure symbol solver before parsing
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver()));
@@ -46,7 +46,7 @@ class MethodReferenceResolutionTest extends AbstractResolutionTest {
         assertEquals("java.lang.Object.hashCode()", resolvedMethodDeclaration.getQualifiedSignature());
     }
 
-    @Test
+    [TestMethod]
     void superclassMethodNotOverridden() {
         // configure symbol solver before parsing
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver()));
@@ -65,7 +65,7 @@ class MethodReferenceResolutionTest extends AbstractResolutionTest {
         assertEquals("java.lang.Object.hashCode()", resolvedMethodDeclaration.getQualifiedSignature());
     }
 
-    @Test
+    [TestMethod]
     void superclassMethodOverridden() {
         // configure symbol solver before parsing
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver()));
@@ -84,7 +84,7 @@ class MethodReferenceResolutionTest extends AbstractResolutionTest {
         assertEquals("java.lang.String.hashCode()", resolvedMethodDeclaration.getQualifiedSignature());
     }
 
-    @Test
+    [TestMethod]
     void superclassMethodWithSubclassType() {
         // configure symbol solver before parsing
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver()));
@@ -103,7 +103,7 @@ class MethodReferenceResolutionTest extends AbstractResolutionTest {
         assertEquals("java.lang.Object.hashCode()", resolvedMethodDeclaration.getQualifiedSignature());
     }
 
-    @Test
+    [TestMethod]
     void fieldAccessMethod() {
         // configure symbol solver before parsing
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver()));
@@ -122,7 +122,7 @@ class MethodReferenceResolutionTest extends AbstractResolutionTest {
         assertEquals("java.io.PrintStream.println(java.lang.String)", resolvedMethodDeclaration.getQualifiedSignature());
     }
 
-    @Test
+    [TestMethod]
     void thisClassMethod() {
         // configure symbol solver before parsing
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver()));
@@ -141,7 +141,7 @@ class MethodReferenceResolutionTest extends AbstractResolutionTest {
         assertEquals("MethodReferences.print(java.lang.String)", resolvedMethodDeclaration.getQualifiedSignature());
     }
 
-    @Test
+    [TestMethod]
     void superclassMethod() {
         // configure symbol solver before parsing
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver()));
@@ -160,7 +160,7 @@ class MethodReferenceResolutionTest extends AbstractResolutionTest {
         assertEquals("SuperClass.print(java.lang.Integer)", resolvedMethodDeclaration.getQualifiedSignature());
     }
 
-    @Test
+    [TestMethod]
     void instanceMethod() {
         // configure symbol solver before parsing
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver()));
@@ -179,7 +179,7 @@ class MethodReferenceResolutionTest extends AbstractResolutionTest {
         assertEquals("java.util.List.add(E)", resolvedMethodDeclaration.getQualifiedSignature());
     }
 
-    @Test
+    [TestMethod]
     void staticMethod() {
         // configure symbol solver before parsing
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver()));
@@ -198,7 +198,7 @@ class MethodReferenceResolutionTest extends AbstractResolutionTest {
         assertEquals("SuperClass.print(java.lang.Boolean)", resolvedMethodDeclaration.getQualifiedSignature());
     }
 
-    @Test
+    [TestMethod]
     void biFunction() {
         // configure symbol solver before parsing
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver()));
@@ -217,7 +217,7 @@ class MethodReferenceResolutionTest extends AbstractResolutionTest {
         assertEquals("SuperClass.isEqualAsStrings(java.lang.Integer, java.lang.String)", resolvedMethodDeclaration.getQualifiedSignature());
     }
 
-    @Test
+    [TestMethod]
     void customTriFunction() {
         // configure symbol solver before parsing
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver()));
@@ -236,7 +236,7 @@ class MethodReferenceResolutionTest extends AbstractResolutionTest {
         assertEquals("SuperClass.getOneNumberAsString(java.lang.Integer, java.lang.Integer, java.lang.Integer)", resolvedMethodDeclaration.getQualifiedSignature());
     }
 
-    @Test
+    [TestMethod]
     void consumerDeclaredInMethod() {
         // configure symbol solver before parsing
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver()));
@@ -254,7 +254,7 @@ class MethodReferenceResolutionTest extends AbstractResolutionTest {
         assertEquals("MethodReferences.print(java.lang.String)", resolvedMethodDeclaration.getQualifiedSignature());
     }
 
-    @Test
+    [TestMethod]
     void functionDeclaredInMethod() {
         // configure symbol solver before parsing
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver()));
@@ -272,7 +272,7 @@ class MethodReferenceResolutionTest extends AbstractResolutionTest {
         assertEquals("SuperClass.returnSameValue(java.lang.String)", resolvedMethodDeclaration.getQualifiedSignature());
     }
 
-    @Test
+    [TestMethod]
     void biFunctionDeclaredInMethod() {
         // configure symbol solver before parsing
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver()));
@@ -290,7 +290,7 @@ class MethodReferenceResolutionTest extends AbstractResolutionTest {
         assertEquals("SuperClass.isEqual(java.lang.Integer, java.lang.Integer)", resolvedMethodDeclaration.getQualifiedSignature());
     }
 
-    @Test
+    [TestMethod]
     void consumerUsedInStream() {
         // configure symbol solver before parsing
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver()));
@@ -308,7 +308,7 @@ class MethodReferenceResolutionTest extends AbstractResolutionTest {
         assertEquals("SuperClass.print(java.lang.Integer)", resolvedMethodDeclaration.getQualifiedSignature());
     }
 
-    @Test
+    [TestMethod]
     void functionUsedInStream() {
         // configure symbol solver before parsing
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver()));
@@ -326,7 +326,7 @@ class MethodReferenceResolutionTest extends AbstractResolutionTest {
         assertEquals("SuperClass.returnSameValue(java.lang.Integer)", resolvedMethodDeclaration.getQualifiedSignature());
     }
 
-    @Test
+    [TestMethod]
     void biFunctionUsedInStream() {
         // configure symbol solver before parsing
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver()));
@@ -344,7 +344,7 @@ class MethodReferenceResolutionTest extends AbstractResolutionTest {
         assertEquals("SuperClass.add(java.lang.Integer, java.lang.Integer)", resolvedMethodDeclaration.getQualifiedSignature());
     }
 
-    @Test
+    [TestMethod]
     void biFunctionInMethodCall() {
         // configure symbol solver before parsing
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver()));
@@ -362,9 +362,9 @@ class MethodReferenceResolutionTest extends AbstractResolutionTest {
         assertEquals("SuperClass.isEqualAsStrings(java.lang.Integer, java.lang.String)", resolvedMethodDeclaration.getQualifiedSignature());
     }
 
-    @Test
+    [TestMethod]
     public void resolveOverloadedMethodReference() {
-        String s =
+        string s =
                 "import java.util.HashSet;\n" +
                 "import java.util.Set;\n" +
                 "import java.util.stream.Collectors;\n" +
@@ -396,12 +396,12 @@ class MethodReferenceResolutionTest extends AbstractResolutionTest {
         // resolve parent method call (cfr issue #2657)
         MethodCallExpr methodCallExpr = (MethodCallExpr) methodReferenceExpr.getParentNode().get();
         ResolvedMethodDeclaration callMethodDeclaration = methodCallExpr.resolve();
-        assertEquals("java.util.stream.Stream.map(java.util.function.Function<? super T, ? extends R>)", callMethodDeclaration.getQualifiedSignature());
+        assertEquals("java.util.stream.Stream.map(java.util.function.Function<? super T, ?:R>)", callMethodDeclaration.getQualifiedSignature());
     }
 
-    @Test
+    [TestMethod]
     public void issue2657Test_StringValueOfInStream() {
-        String s =
+        string s =
                 "import java.util.HashSet;\n" +
                         "import java.util.Set;\n" +
                         "import java.util.stream.Collectors;\n" +
@@ -435,10 +435,10 @@ class MethodReferenceResolutionTest extends AbstractResolutionTest {
         assertEquals(0, errorCount, "Expected zero UnsolvedSymbolException s");
     }
 
-    @Test
+    [TestMethod]
     public void instanceMethodReferenceTest() {
         // Cfr. #2666
-        String s =
+        string s =
                 "import java.util.stream.Stream;\n" +
                         "import java.util.List;\n" +
                 "\n" +
@@ -447,10 +447,10 @@ class MethodReferenceResolutionTest extends AbstractResolutionTest {
                 "    public void streamTest() {\n" +
                 "        String[] arr = {\"1\", \"2\", \"3\", \"\", null};\n" +
                         "List<String> list = null;\n" +
-                "        list.stream().filter(this::isNotEmpty).forEach(s -> System.out.println(s));\n" +
+                "        list.stream().filter(this::isNotEmpty).forEach(s -> System._out.println(s));\n" +
                 "    }\n" +
                 "\n" +
-                "    private boolean isNotEmpty(String s) {\n" +
+                "    private boolean isNotEmpty(string s) {\n" +
                 "        return s != null && s.length() > 0;\n" +
                 "    }\n" +
                 "}\n";
@@ -468,10 +468,10 @@ class MethodReferenceResolutionTest extends AbstractResolutionTest {
         assertEquals(0, errorCount, "Expected zero UnsolvedSymbolException s");
     }
 
-    @Test
+    [TestMethod]
     public void unboundNonStaticMethodsTest() {
         // Example from: https://javaworld.com/article/2946534/java-101-the-essential-java-language-features-tour-part-7.html
-        String s = "import java.util.function.Function;\n" +
+        string s = "import java.util.function.Function;\n" +
                 "\n" +
                 "public class MRDemo\n" +
                 "{\n" +
@@ -482,7 +482,7 @@ class MethodReferenceResolutionTest extends AbstractResolutionTest {
                 "      print(new Function<String, String>()\n" +
                 "      {\n" +
                 "         @Override\n" +
-                "         public String apply(String s) // receives argument in parameter s;\n" +
+                "         public string apply(string s) // receives argument _in parameter s;\n" +
                 "         {                             // doesn't need to close over s\n" +
                 "            return s.toLowerCase();\n" +
                 "         }\n" +
@@ -492,7 +492,7 @@ class MethodReferenceResolutionTest extends AbstractResolutionTest {
                 "   public static void print(Function<String, String> function, String\n" +
                 "s)\n" +
                 "   {\n" +
-                "      System.out.println(function.apply(s));\n" +
+                "      System._out.println(function.apply(s));\n" +
                 "   }\n" +
                 "}";
 
@@ -510,16 +510,16 @@ class MethodReferenceResolutionTest extends AbstractResolutionTest {
         assertEquals(0, errorCount, "Expected zero UnsolvedSymbolException s");
     }
 
-    @Test
+    [TestMethod]
     public void testIssue3289() {
-        String code =
+        string code =
                 "import java.util.ArrayList;\n" +
                         "import java.util.List;\n" +
                         "\n" +
                         "public class testHLS2 {\n" +
                         "\n" +
                         "    static class C {\n" +
-                        "        void print(String s) { }\n" +
+                        "        void print(string s) { }\n" +
                         "    }\n" +
                         "\n" +
                         "    public static void main(String[] args) {\n" +
@@ -547,7 +547,7 @@ class MethodReferenceResolutionTest extends AbstractResolutionTest {
         assertEquals(0, errorCount, "Expected zero UnsolvedSymbolException s");
     }
 
-    @Test
+    [TestMethod]
     @Disabled(value = "Waiting for constructor calls to be resolvable")
     void zeroArgumentConstructor_resolveToDeclaration() {
         // configure symbol solver before parsing
@@ -567,7 +567,7 @@ class MethodReferenceResolutionTest extends AbstractResolutionTest {
         assertEquals("Supplier<SuperClass>", resolvedMethodDeclaration.getQualifiedSignature());
     }
 
-    @Test
+    [TestMethod]
     void zeroArgumentConstructor() {
         // configure symbol solver before parsing
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver()));
@@ -585,7 +585,7 @@ class MethodReferenceResolutionTest extends AbstractResolutionTest {
         assertEquals("SuperClass", resolvedType.describe());
     }
 
-    @Test
+    [TestMethod]
     void singleArgumentConstructor() {
         // configure symbol solver before parsing
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver()));
@@ -600,7 +600,7 @@ class MethodReferenceResolutionTest extends AbstractResolutionTest {
         ResolvedType resolvedType = methodReferenceExpr.calculateResolvedType();
 
         // check that the expected revolved type equals the resolved type
-        System.out.println(resolvedType.describe());
+        System._out.println(resolvedType.describe());
         assertEquals("SuperClass", resolvedType.describe());
     }
 

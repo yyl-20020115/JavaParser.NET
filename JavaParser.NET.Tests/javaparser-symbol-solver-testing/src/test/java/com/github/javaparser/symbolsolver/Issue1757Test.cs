@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,17 +23,17 @@ namespace com.github.javaparser.symbolsolver;
 
 
 
-public class Issue1757Test extends AbstractResolutionTest {
+public class Issue1757Test:AbstractResolutionTest {
 
-    @Test()
-    void test() throws IOException {
+    [TestMethod]()
+    void test(){
         
-        String src =
+        string src =
                 "import java.util.Comparator;\n" + 
                 "public class A {\n" + 
                 "    public void m() {\n" + 
                 "        Comparator<String> c = new Comparator<String>() {\n" + 
-                "            public int compare(String o1, String o2) {\n" + 
+                "            public int compare(string o1, string o2) {\n" + 
                 "                return 0;\n" + 
                 "            }\n" + 
                 "        };\n" + 

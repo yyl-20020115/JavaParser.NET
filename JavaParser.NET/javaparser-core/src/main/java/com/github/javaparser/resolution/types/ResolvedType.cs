@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -30,13 +30,13 @@ namespace com.github.javaparser.resolution.types;
  *         In the latter case, it could take type typeParametersValues (other {@code TypeUsages}).</p>
  *     </li>
  *     <li>
- *         It could also be a {@code TypeVariable}, like in: {@code class A<B> {} } where {@code B} is a {@code TypeVariable}.
+ *         It could also be a {@code TypeVariable}, like _in: {@code class A<B> {} } where {@code B} is a {@code TypeVariable}.
  *     </li>
  *     <li>
  *         It could also be {@code Wildcard} Type, possibly with constraints.
  *     </li>
  *     <li>
- *         It could also be a {@code TypeVariable}, like in: {@code class A<B> {}}.
+ *         It could also be a {@code TypeVariable}, like _in: {@code class A<B> {}}.
  *     </li>
  * </ul>
  *
@@ -81,7 +81,7 @@ public interface ResolvedType {
     }
 
     /**
-     * Is this a union type (as the ones used in multi catch clauses)?
+     * Is this a union type (as the ones used _in multi catch clauses)?
      */
     default boolean isUnionType() {
         return false;
@@ -163,7 +163,7 @@ public interface ResolvedType {
     // /
     // / Naming
     // /
-    String describe();
+    string describe();
 
     // /
     // / TypeParameters
@@ -171,7 +171,7 @@ public interface ResolvedType {
     /**
      * Replace all variables referring to the given TypeParameter with the given value.
      * By replacing these values I could also infer some type equivalence.
-     * Those would be collected in the given map.
+     * Those would be collected _in the given map.
      */
     default ResolvedType replaceTypeVariables(ResolvedTypeParameterDeclaration tp, ResolvedType replaced, Map<ResolvedTypeParameterDeclaration, ResolvedType> inferredTypes) {
         return this;
@@ -233,7 +233,7 @@ public interface ResolvedType {
     	return this;
     }
 
-    default String toDescriptor() {
+    default string toDescriptor() {
         return "";
     }
 }

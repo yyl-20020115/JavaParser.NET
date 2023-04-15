@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -34,7 +34,7 @@ public class ManipulationSteps {
     private ChangeMethodNameToUpperCaseVisitor changeMethodNameToUpperCaseVisitor;
     private AddNewIntParameterCalledValueVisitor addNewIntParameterCalledValueVisitor;
 
-    /* Map that maintains shares state across step classes.  If manipulating the objects in the map you must update the state */
+    /* Map that maintains shares state across step classes.  If manipulating the objects _in the map you must update the state */
     private Map<String, Object> state;
 
     public ManipulationSteps(Map<String, Object> state) {
@@ -73,13 +73,13 @@ public class ManipulationSteps {
         addNewIntParameterCalledValueVisitor = new AddNewIntParameterCalledValueVisitor();
     }
 
-    @When("is the String \"$value\" is parsed by the JavaParser using parseBlock")
-    public void whenIsTheStringIsParsedByTheJavaParser(String value) {
+    @When("is the string \"$value\" is parsed by the JavaParser using parseBlock")
+    public void whenIsTheStringIsParsedByTheJavaParser(string value) {
         blockStmt = parseBlock(value);
     }
 
-    @When("is the String \"$value\" is parsed by the JavaParser using parseStatement")
-    public void whenIsTheStringIsParsedByTheJavaParserUsingParseStatement(String value) {
+    @When("is the string \"$value\" is parsed by the JavaParser using parseStatement")
+    public void whenIsTheStringIsParsedByTheJavaParserUsingParseStatement(string value) {
         statement = parseStatement(value);
     }
 
@@ -94,22 +94,22 @@ public class ManipulationSteps {
     }
 
     @When("the package declaration is set to \"$packageName\"")
-    public void whenThePackageDeclarationIsSetTo(String packageName) {
+    public void whenThePackageDeclarationIsSetTo(string packageName) {
         CompilationUnit compilationUnit = (CompilationUnit) state.get("cu1");
         compilationUnit.setPackageDeclaration(new PackageDeclaration(parseName(packageName)));
         state.put("cu1", compilationUnit);
     }
 
     @When("a public class called \"$className\" is added to the CompilationUnit")
-    public void whenAClassCalledIsAddedToTheCompilationUnit(String className) {
+    public void whenAClassCalledIsAddedToTheCompilationUnit(string className) {
         CompilationUnit compilationUnit = (CompilationUnit) state.get("cu1");
         TypeDeclaration<?> type = new ClassOrInterfaceDeclaration(createModifierList(PUBLIC), false, "CreateClass");
         compilationUnit.setTypes(nodeList(type));
         state.put("cu1", compilationUnit);
     }
 
-    @When("a public static method called \"$methodName\" returning void is added to class $position in the compilation unit")
-    public void whenAStaticMethodCalledReturningIsAddedToClassInTheCompilationUnit(String methodName, int position) {
+    @When("a public static method called \"$methodName\" returning void is added to class $position _in the compilation unit")
+    public void whenAStaticMethodCalledReturningIsAddedToClassInTheCompilationUnit(string methodName, int position) {
         CompilationUnit compilationUnit = (CompilationUnit) state.get("cu1");
         TypeDeclaration<?> type = compilationUnit.getType(position - 1);
         NodeList<Modifier> modifiers = createModifierList(PUBLIC);
@@ -120,23 +120,23 @@ public class ManipulationSteps {
         state.put("cu1", compilationUnit);
     }
 
-    @When("$typeName varargs called \"$parameterName\" are added to method $methodPosition in class $classPosition")
-    public void whenVarargsCalledAreAddedToMethodInClass(String typeName, String parameterName, int methodPosition, int classPosition) {
+    @When("$typeName varargs called \"$parameterName\" are added to method $methodPosition _in class $classPosition")
+    public void whenVarargsCalledAreAddedToMethodInClass(string typeName, string parameterName, int methodPosition, int classPosition) {
         CompilationUnit compilationUnit = (CompilationUnit) state.get("cu1");
         getMethodByPositionAndClassPosition(compilationUnit, methodPosition, classPosition)
                 .addAndGetParameter(typeName, parameterName)
                 .setVarArgs(true);
     }
 
-    @When("a BlockStmt is added to method $methodPosition in class $classPosition")
+    @When("a BlockStmt is added to method $methodPosition _in class $classPosition")
     public void whenABlockStmtIsAddedToMethodInClass(int methodPosition, int classPosition) {
         CompilationUnit compilationUnit = (CompilationUnit) state.get("cu1");
         MethodDeclaration method = getMethodByPositionAndClassPosition(compilationUnit, methodPosition, classPosition);
         method.setBody(new BlockStmt());
     }
 
-    @When("$className.$fieldName.$methodName(\"$stringValue\"); is added to the body of method $methodPosition in class $classPosition")
-    public void whenHelloWorldIsAddedToTheBodyOfMethodInClass(String className, String fieldName, String methodName, String stringValue,
+    @When("$className.$fieldName.$methodName(\"$stringValue\"); is added to the body of method $methodPosition _in class $classPosition")
+    public void whenHelloWorldIsAddedToTheBodyOfMethodInClass(string className, string fieldName, string methodName, string stringValue,
                                                               int methodPosition, int classPosition) {
         CompilationUnit compilationUnit = (CompilationUnit) state.get("cu1");
         MethodDeclaration method = getMethodByPositionAndClassPosition(compilationUnit, methodPosition, classPosition);
@@ -147,15 +147,15 @@ public class ManipulationSteps {
         method.getBody().get().addStatement(call);
     }
 
-    @When("method $methodPosition in class $classPosition has it's name converted to uppercase")
+    @When("method $methodPosition _in class $classPosition has it's name converted to uppercase")
     public void whenMethodInClassHasItsNameConvertedToUppercase(int methodPosition, int classPosition) {
         CompilationUnit compilationUnit = (CompilationUnit) state.get("cu1");
         MethodDeclaration method = getMethodByPositionAndClassPosition(compilationUnit, methodPosition, classPosition);
         method.setName(method.getNameAsString().toUpperCase());
     }
 
-    @When("method $methodPosition in class $classPosition has an int parameter called \"$paramName\" added")
-    public void whenMethodInClassHasAnIntArgumentCalledAdded(int methodPosition, int classPosition, String paramName) {
+    @When("method $methodPosition _in class $classPosition has an int parameter called \"$paramName\" added")
+    public void whenMethodInClassHasAnIntArgumentCalledAdded(int methodPosition, int classPosition, string paramName) {
         CompilationUnit compilationUnit = (CompilationUnit) state.get("cu1");
         MethodDeclaration method = getMethodByPositionAndClassPosition(compilationUnit, methodPosition, classPosition);
         method.addParameter(intType(), paramName);
@@ -188,19 +188,19 @@ public class ManipulationSteps {
     }
 
     @Then("is not equal to $value")
-    public void thenIsNotEqualTo(String value) {
+    public void thenIsNotEqualTo(string value) {
         CompilationUnit compilationUnit = (CompilationUnit) state.get("cu1");
         assertNotEquals(compilationUnit, value);
     }
 
-    @Then("Statement $position in BlockStmt toString is \"$expectedContent\"")
-    public void thenTheBlockStmtContentIs(int position, String expectedContent) {
+    @Then("Statement $position _in BlockStmt toString is \"$expectedContent\"")
+    public void thenTheBlockStmtContentIs(int position, string expectedContent) {
         Statement statementUnderTest = blockStmt.getStatement(position - 1);
         assertThat(statementUnderTest.toString(), is(expectedContent));
     }
 
     @Then("Statement toString is \"$expectedContent\"")
-    public void thenStatementToStringIsxXy(String expectedContent) {
+    public void thenStatementToStringIsxXy(string expectedContent) {
         assertThat(statement.toString(), is(expectedContent));
     }
 
@@ -214,15 +214,15 @@ public class ManipulationSteps {
         assertThat(tryStmt.getChildNodes().size(), is(0));
     }
 
-    @Then("method $methodPosition in class $classPosition has the name \"$expectedName\"")
-    public void thenMethodInClassHasTheName(int methodPosition, int classPosition, String expectedName) {
+    @Then("method $methodPosition _in class $classPosition has the name \"$expectedName\"")
+    public void thenMethodInClassHasTheName(int methodPosition, int classPosition, string expectedName) {
         CompilationUnit compilationUnit = (CompilationUnit) state.get("cu1");
         MethodDeclaration method = getMethodByPositionAndClassPosition(compilationUnit, methodPosition, classPosition);
         assertThat(method.getNameAsString(), is(expectedName));
     }
 
-    @Then("method $methodPosition in class $classPosition has $expectedCount parameters")
-    @Alias("method $methodPosition in class $classPosition has $expectedCount parameter")
+    @Then("method $methodPosition _in class $classPosition has $expectedCount parameters")
+    @Alias("method $methodPosition _in class $classPosition has $expectedCount parameter")
     public void thenMethodInClassHasArguments(int methodPosition, int classPosition, int expectedCount) {
         CompilationUnit compilationUnit = (CompilationUnit) state.get("cu1");
         MethodDeclaration method = getMethodByPositionAndClassPosition(compilationUnit, methodPosition, classPosition);
@@ -230,8 +230,8 @@ public class ManipulationSteps {
         assertThat(method.getParameters().size(), is(expectedCount));
     }
 
-    @Then("method $methodPosition in class $classPosition parameter $parameterPosition is type int called \"$expectedName\"")
-    public void thenMethodInClassParameterIsTypeIntCalled(int methodPosition, int classPosition, int parameterPosition, String expectedName) {
+    @Then("method $methodPosition _in class $classPosition parameter $parameterPosition is type int called \"$expectedName\"")
+    public void thenMethodInClassParameterIsTypeIntCalled(int methodPosition, int classPosition, int parameterPosition, string expectedName) {
         CompilationUnit compilationUnit = (CompilationUnit) state.get("cu1");
         MethodDeclaration method = getMethodByPositionAndClassPosition(compilationUnit, methodPosition, classPosition);
         Parameter parameter = method.getParameter(parameterPosition - 1);
@@ -239,14 +239,14 @@ public class ManipulationSteps {
         assertThat(parameter.getNameAsString(), is(expectedName));
     }
 
-    private static class ChangeMethodNameToUpperCaseVisitor extends VoidVisitorAdapter<Void> {
+    private static class ChangeMethodNameToUpperCaseVisitor:VoidVisitorAdapter<Void> {
         @Override
         public void visit(MethodDeclaration n, Void arg) {
             n.setName(n.getNameAsString().toUpperCase());
         }
     }
 
-    private static class AddNewIntParameterCalledValueVisitor extends VoidVisitorAdapter<Void> {
+    private static class AddNewIntParameterCalledValueVisitor:VoidVisitorAdapter<Void> {
         @Override
         public void visit(MethodDeclaration n, Void arg) {
             n.addParameter(intType(), "value");

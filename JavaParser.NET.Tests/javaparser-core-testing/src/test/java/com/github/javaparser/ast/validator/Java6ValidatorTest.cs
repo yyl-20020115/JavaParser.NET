@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,21 +24,21 @@ namespace com.github.javaparser.ast.validator;
 
 
 class Java6ValidatorTest {
-    public static final JavaParser javaParser = new JavaParser(new ParserConfiguration().setLanguageLevel(JAVA_6));
+    public static /*final*/JavaParser javaParser = new JavaParser(new ParserConfiguration().setLanguageLevel(JAVA_6));
 
-    @Test
+    [TestMethod]
     void nobinaryIntegerLiterals() {
         ParseResult<Expression> result = javaParser.parse(EXPRESSION, provider("0b01"));
         assertProblems(result, "(line 1,col 1) Binary literal values are not supported.");
     }
 
-    @Test
+    [TestMethod]
     void noUnderscoresInIntegerLiterals() {
         ParseResult<Expression> result = javaParser.parse(EXPRESSION, provider("1_000_000"));
-        assertProblems(result, "(line 1,col 1) Underscores in literal values are not supported.");
+        assertProblems(result, "(line 1,col 1) Underscores _in literal values are not supported.");
     }
 
-    @Test
+    [TestMethod]
     void noMultiCatch() {
         ParseResult<Statement> result = javaParser.parse(STATEMENT, provider("try{}catch(Abc|Def e){}"));
         assertProblems(result, "(line 1,col 12) Multi-catch is not supported.");

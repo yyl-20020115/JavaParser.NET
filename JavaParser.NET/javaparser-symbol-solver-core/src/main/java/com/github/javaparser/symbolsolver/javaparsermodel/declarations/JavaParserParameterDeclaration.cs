@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,8 +28,8 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.declarations;
  */
 public class JavaParserParameterDeclaration implements ResolvedParameterDeclaration {
 
-    private final Parameter wrappedNode;
-    private final TypeSolver typeSolver;
+    private /*final*/Parameter wrappedNode;
+    private /*final*/TypeSolver typeSolver;
 
     public JavaParserParameterDeclaration(Parameter wrappedNode, TypeSolver typeSolver) {
         this.wrappedNode = wrappedNode;
@@ -37,7 +37,7 @@ public class JavaParserParameterDeclaration implements ResolvedParameterDeclarat
     }
 
     @Override
-    public String getName() {
+    public string getName() {
         return wrappedNode.getName().getId();
     }
 
@@ -48,7 +48,7 @@ public class JavaParserParameterDeclaration implements ResolvedParameterDeclarat
 
     @Override
     public ResolvedType getType() {
-        if (wrappedNode.getType() instanceof UnknownType && JavaParserFactory.getContext(wrappedNode, typeSolver) instanceof LambdaExprContext) {
+        if (wrappedNode.getType() is UnknownType && JavaParserFactory.getContext(wrappedNode, typeSolver) is LambdaExprContext) {
             Optional<Value> value = JavaParserFactory.getContext(wrappedNode, typeSolver).solveSymbolAsValue(wrappedNode.getNameAsString());
             if (value.isPresent()) {
                 return value.get().getType();

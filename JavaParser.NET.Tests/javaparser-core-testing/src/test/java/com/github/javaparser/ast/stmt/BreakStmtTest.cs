@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,32 +26,32 @@ namespace com.github.javaparser.ast.stmt;
 
 class BreakStmtTest {
 
-    @Test
+    [TestMethod]
     void simpleBreak() {
         BreakStmt statement = parseStatement("break;").asBreakStmt();
         assertFalse(statement.getLabel().isPresent());
     }
 
-    @Test
+    [TestMethod]
     void breakWithLabel() {
         BreakStmt statement = parseStatement("break hond;").asBreakStmt();
         assertEquals("hond", statement.getLabel().get().asString());
     }
 
-    @Test
+    [TestMethod]
     void constructor_simpleBreakWithoutLabel() {
         BreakStmt statement = new BreakStmt();
         assertFalse(statement.getLabel().isPresent());
         assertEquals("break;", statement.toString());
     }
 
-    @Test
+    [TestMethod]
     void constructor_simpleBreakWithLabel() {
         BreakStmt statement = new BreakStmt("customLabel");
         assertTrue(statement.getLabel().isPresent());
     }
 
-    @Test
+    [TestMethod]
     void constructor_simpleBreakWithSimpleNameLabel() {
         SimpleName label = new SimpleName("customLabel");
         BreakStmt statement = new BreakStmt(label);
@@ -59,7 +59,7 @@ class BreakStmtTest {
         assertEquals(label, statement.getLabel().get());
     }
 
-    @Test
+    [TestMethod]
     void removeLabel_shouldRemoveTheLabel() {
         BreakStmt statement = new BreakStmt("customLabel");
         assertTrue(statement.getLabel().isPresent());
@@ -68,18 +68,18 @@ class BreakStmtTest {
         assertFalse(statement.getLabel().isPresent());
     }
 
-    @Test
+    [TestMethod]
     void isBreakStmt_shouldBeTrue() {
         assertTrue(new BreakStmt().isBreakStmt());
     }
 
-    @Test
+    [TestMethod]
     void asBreakStmt_shouldBeSame() {
         BreakStmt breakStatement = new BreakStmt();
         assertSame(breakStatement, breakStatement.asBreakStmt());
     }
 
-    @Test
+    [TestMethod]
     void toBreakStmt_shouldBePresentAndBeTheSame() {
         BreakStmt breakStatement = new BreakStmt();
         Optional<BreakStmt> optBreak = breakStatement.toBreakStmt();
@@ -87,7 +87,7 @@ class BreakStmtTest {
         assertSame(breakStatement, optBreak.get());
     }
 
-    @Test
+    [TestMethod]
     void clone_shouldNotBeTheSameButShouldBeEquals() {
         BreakStmt breakStatement = new BreakStmt();
         BreakStmt clonedStatement = breakStatement.clone();
@@ -95,7 +95,7 @@ class BreakStmtTest {
         assertEquals(breakStatement, clonedStatement);
     }
 
-    @Test
+    [TestMethod]
     void remove_whenLabelIsPassedAsArgumentItShouldBeRemoved() {
         BreakStmt breakStatement = new BreakStmt("Label");
         assertTrue(breakStatement.getLabel().isPresent());
@@ -105,7 +105,7 @@ class BreakStmtTest {
         assertFalse(breakStatement.getLabel().isPresent());
     }
 
-    @Test
+    [TestMethod]
     void replace_testReplaceLabelWithNewOne() {
         SimpleName originalLabel = new SimpleName("original");
         SimpleName replacementLabel = new SimpleName("replacement");

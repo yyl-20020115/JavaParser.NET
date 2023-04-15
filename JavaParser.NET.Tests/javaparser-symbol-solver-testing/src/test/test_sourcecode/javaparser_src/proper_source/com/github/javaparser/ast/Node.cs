@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -57,7 +57,7 @@ public abstract class Node implements Cloneable {
     public Node() {
     }
 
-    public Node(final int beginLine, final int beginColumn, final int endLine, final int endColumn) {
+    public Node(/*final*/int beginLine, /*final*/int beginColumn, /*final*/int endLine, /*final*/int endColumn) {
         this.beginLine = beginLine;
         this.beginColumn = beginColumn;
         this.endLine = endLine;
@@ -96,7 +96,7 @@ public abstract class Node implements Cloneable {
      * 
      * @return the begin column of this node
      */
-    public final int getBeginColumn() {
+    public /*final*/int getBeginColumn() {
         return beginColumn;
     }
 
@@ -105,7 +105,7 @@ public abstract class Node implements Cloneable {
      * 
      * @return the begin line of this node
      */
-    public final int getBeginLine() {
+    public /*final*/int getBeginLine() {
         return beginLine;
     }
 
@@ -114,7 +114,7 @@ public abstract class Node implements Cloneable {
      *
      * @return comment property
      */
-    public final Comment getComment() {
+    public /*final*/Comment getComment() {
         return comment;
     }
 
@@ -123,7 +123,7 @@ public abstract class Node implements Cloneable {
      *
      * @return data property
      */
-    public final Object getData() {
+    public /*final*/Object getData() {
         return data;
     }
 
@@ -132,7 +132,7 @@ public abstract class Node implements Cloneable {
      * 
      * @return the end column of this node
      */
-    public final int getEndColumn() {
+    public /*final*/int getEndColumn() {
         return endColumn;
     }
 
@@ -141,7 +141,7 @@ public abstract class Node implements Cloneable {
      * 
      * @return the end line of this node
      */
-    public final int getEndLine() {
+    public /*final*/int getEndLine() {
         return endLine;
     }
 
@@ -151,7 +151,7 @@ public abstract class Node implements Cloneable {
      * @param beginColumn
      *            the begin column of this node
      */
-    public final void setBeginColumn(final int beginColumn) {
+    public /*final*/void setBeginColumn(/*final*/int beginColumn) {
         this.beginColumn = beginColumn;
     }
 
@@ -161,7 +161,7 @@ public abstract class Node implements Cloneable {
      * @param beginLine
      *            the begin line of this node
      */
-    public final void setBeginLine(final int beginLine) {
+    public /*final*/void setBeginLine(/*final*/int beginLine) {
         this.beginLine = beginLine;
     }
 
@@ -170,8 +170,8 @@ public abstract class Node implements Cloneable {
      *
      * @param comment to be set
      */
-    public final void setComment(final Comment comment) {
-        if (comment != null && (this instanceof Comment)) {
+    public /*final*/void setComment(/*final*/Comment comment) {
+        if (comment != null && (this is Comment)) {
             throw new RuntimeException("A comment can not be commented");
         }
         if (this.comment != null)
@@ -189,7 +189,7 @@ public abstract class Node implements Cloneable {
      *
      * @param data to be set
      */
-    public final void setData(final Object data) {
+    public /*final*/void setData(/*final*/Object data) {
         this.data = data;
     }
 
@@ -199,7 +199,7 @@ public abstract class Node implements Cloneable {
      * @param endColumn
      *            the end column of this node
      */
-    public final void setEndColumn(final int endColumn) {
+    public /*final*/void setEndColumn(/*final*/int endColumn) {
         this.endColumn = endColumn;
     }
 
@@ -209,36 +209,36 @@ public abstract class Node implements Cloneable {
      * @param endLine
      *            the end line of this node
      */
-    public final void setEndLine(final int endLine) {
+    public /*final*/void setEndLine(/*final*/int endLine) {
         this.endLine = endLine;
     }
 
     /**
-     * Return the String representation of this node.
+     * Return the string representation of this node.
      * 
-     * @return the String representation of this node
+     * @return the string representation of this node
      */
     @Override
-    public final String toString() {
-        final DumpVisitor visitor = new DumpVisitor();
+    public /*final*/string toString() {
+        /*final*/DumpVisitor visitor = new DumpVisitor();
         accept(visitor, null);
         return visitor.getSource();
     }
 
-    public final String toStringWithoutComments() {
-        final DumpVisitor visitor = new DumpVisitor(false);
+    public /*final*/string toStringWithoutComments() {
+        /*final*/DumpVisitor visitor = new DumpVisitor(false);
         accept(visitor, null);
         return visitor.getSource();
     }
 
     @Override
-    public final int hashCode() {
+    public /*final*/int hashCode() {
         return toString().hashCode();
     }
 
     @Override
-    public boolean equals(final Object obj) {
-        if (obj == null || !(obj instanceof Node)) {
+    public boolean equals(/*final*/Object obj) {
+        if (obj == null || !(obj is Node)) {
             return false;
         }
         return EqualsVisitor.equals(this, (Node) obj);
@@ -286,7 +286,7 @@ public abstract class Node implements Cloneable {
     }
 
     /**
-     * This is the list of Comment which are contained in the Node either because
+     * This is the list of Comment which are contained _in the Node either because
      * they are properly associated to one of its children or because they are floating
      * around inside the Node
      * @return all Comments within the node as a list
@@ -323,9 +323,9 @@ public abstract class Node implements Cloneable {
         }
     }
 
-    protected void setAsParentNodeOf(List<? extends Node> childNodes) {
+    protected void setAsParentNodeOf(List<?:Node> childNodes) {
         if (childNodes != null) {
-            Iterator<? extends Node> it = childNodes.iterator();
+            Iterator<?:Node> it = childNodes.iterator();
             while (it.hasNext()) {
                 Node current = it.next();
                 current.setParentNode(this);
@@ -339,8 +339,8 @@ public abstract class Node implements Cloneable {
         }
     }
 
-    public static final int ABSOLUTE_BEGIN_LINE = -1;
-    public static final int ABSOLUTE_END_LINE = -2;
+    public static /*final*/int ABSOLUTE_BEGIN_LINE = -1;
+    public static /*final*/int ABSOLUTE_END_LINE = -2;
 
     public boolean isPositionedAfter(int line, int column) {
         if (line == ABSOLUTE_BEGIN_LINE) return true;

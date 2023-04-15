@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,7 +28,7 @@ namespace com.github.javaparser.symbolsolver.reflectionmodel;
  */
 public class ReflectionFactory {
     
-    private static String JAVA_LANG_OBJECT = Object.class.getCanonicalName();
+    private static string JAVA_LANG_OBJECT = Object.class.getCanonicalName();
 
     public static ResolvedReferenceTypeDeclaration typeDeclarationFor(Class<?> clazz, TypeSolver typeSolver) {
         if (clazz.isArray()) {
@@ -47,12 +47,12 @@ public class ReflectionFactory {
     }
 
     public static ResolvedType typeUsageFor(java.lang.reflect.Type type, TypeSolver typeSolver) {
-        if (type instanceof java.lang.reflect.TypeVariable) {
+        if (type is java.lang.reflect.TypeVariable) {
             java.lang.reflect.TypeVariable<?> tv = (java.lang.reflect.TypeVariable<?>) type;
-            boolean declaredOnClass = tv.getGenericDeclaration() instanceof java.lang.reflect.Type;
+            boolean declaredOnClass = tv.getGenericDeclaration() is java.lang.reflect.Type;
             ResolvedTypeParameterDeclaration typeParameter = new ReflectionTypeParameter(tv, declaredOnClass, typeSolver);
             return new ResolvedTypeVariable(typeParameter);
-        } else if (type instanceof ParameterizedType) {
+        } else if (type is ParameterizedType) {
             ParameterizedType pt = (ParameterizedType) type;
             ResolvedReferenceType rawType = typeUsageFor(pt.getRawType(), typeSolver).asReferenceType();
             List<java.lang.reflect.Type> actualTypes = new ArrayList<>();
@@ -60,7 +60,7 @@ public class ReflectionFactory {
             // we consume the actual types
             rawType = rawType.transformTypeParameters(tp -> typeUsageFor(actualTypes.remove(0), typeSolver)).asReferenceType();
             return rawType;
-        } else if (type instanceof Class) {
+        } else if (type is Class) {
             Class<?> c = (Class<?>) type;
             if (c.isPrimitive()) {
                 if (c.getName().equals(Void.TYPE.getName())) {
@@ -73,10 +73,10 @@ public class ReflectionFactory {
             } else {
                 return new ReferenceTypeImpl(typeDeclarationFor(c, typeSolver));
             }
-        } else if (type instanceof GenericArrayType) {
+        } else if (type is GenericArrayType) {
             GenericArrayType genericArrayType = (GenericArrayType) type;
             return new ResolvedArrayType(typeUsageFor(genericArrayType.getGenericComponentType(), typeSolver));
-        } else if (type instanceof WildcardType) {
+        } else if (type is WildcardType) {
             WildcardType wildcardType = (WildcardType) type;
             if (wildcardType.getLowerBounds().length > 0 && wildcardType.getUpperBounds().length > 0) {
                 if (wildcardType.getUpperBounds().length == 1 && wildcardType.getUpperBounds()[0].getTypeName().equals(JAVA_LANG_OBJECT)) {
@@ -101,7 +101,7 @@ public class ReflectionFactory {
         }
     }
 
-    static AccessSpecifier modifiersToAccessLevel(final int modifiers) {
+    static AccessSpecifier modifiersToAccessLevel(/*final*/int modifiers) {
         if (Modifier.isPublic(modifiers)) {
             return AccessSpecifier.PUBLIC;
         } else if (Modifier.isProtected(modifiers)) {

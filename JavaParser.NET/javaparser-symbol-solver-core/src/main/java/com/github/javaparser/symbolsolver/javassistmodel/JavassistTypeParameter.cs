@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -41,7 +41,7 @@ public class JavassistTypeParameter implements ResolvedTypeParameterDeclaration 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ResolvedTypeParameterDeclaration)) return false;
+        if (!(o is ResolvedTypeParameterDeclaration)) return false;
 
         ResolvedTypeParameterDeclaration that = (ResolvedTypeParameterDeclaration) o;
 
@@ -64,29 +64,29 @@ public class JavassistTypeParameter implements ResolvedTypeParameterDeclaration 
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "JavassistTypeParameter{" +
                 wrapped.getName()
                 + '}';
     }
 
     @Override
-    public String getName() {
+    public string getName() {
         return wrapped.getName();
     }
 
     @Override
-    public String getContainerQualifiedName() {
-        if (this.container instanceof ResolvedReferenceTypeDeclaration) {
+    public string getContainerQualifiedName() {
+        if (this.container is ResolvedReferenceTypeDeclaration) {
             return ((ResolvedReferenceTypeDeclaration) this.container).getQualifiedName();
-        } else if (this.container instanceof ResolvedMethodLikeDeclaration) {
+        } else if (this.container is ResolvedMethodLikeDeclaration) {
             return ((ResolvedMethodLikeDeclaration) this.container).getQualifiedName();
         }
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public String getContainerId() {
+    public string getContainerId() {
         return getContainerQualifiedName();
     }
 
@@ -110,7 +110,7 @@ public class JavassistTypeParameter implements ResolvedTypeParameterDeclaration 
 
     @Override
     public Optional<ResolvedReferenceTypeDeclaration> containerType() {
-        if (container instanceof ResolvedReferenceTypeDeclaration) {
+        if (container is ResolvedReferenceTypeDeclaration) {
             return Optional.of((ResolvedReferenceTypeDeclaration) container);
         }
         return Optional.empty();

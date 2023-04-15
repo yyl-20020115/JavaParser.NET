@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,13 +27,13 @@ namespace com.github.javaparser;
  */
 public class Problem {
 
-    private final String message;
+    private /*final*/string message;
 
-    private final TokenRange location;
+    private /*final*/TokenRange location;
 
-    private final Throwable cause;
+    private /*final*/Throwable cause;
 
-    public Problem(String message, TokenRange location, Throwable cause) {
+    public Problem(string message, TokenRange location, Throwable cause) {
         assertNotNull(message);
         this.message = message;
         this.location = location;
@@ -41,8 +41,8 @@ public class Problem {
     }
 
     @Override
-    public String toString() {
-        final StringBuilder str = new StringBuilder(getVerboseMessage());
+    public string toString() {
+        /*final*/StringBuilder str = new StringBuilder(getVerboseMessage());
         if (cause != null) {
             str.append(SYSTEM_EOL).append("Problem stacktrace : ").append(SYSTEM_EOL);
             for (int i = 0; i < cause.getStackTrace().length; i++) {
@@ -58,14 +58,14 @@ public class Problem {
     /**
      * @return the message that was passed into the constructor.
      */
-    public String getMessage() {
+    public string getMessage() {
         return message;
     }
 
     /**
      * @return the message plus location information.
      */
-    public String getVerboseMessage() {
+    public string getVerboseMessage() {
         return getLocation().map(l -> l.getBegin().getRange().map(r -> r.begin.toString()).orElse("(line ?,col ?)") + " " + message).orElse(message);
     }
 
@@ -87,8 +87,8 @@ public class Problem {
      * Sorts problems on position.
      */
     public static Comparator<Problem> PROBLEM_BY_BEGIN_POSITION = (a, b) -> {
-        final Optional<Position> aBegin = a.getLocation().flatMap(l -> l.getBegin().getRange().map(r -> r.begin));
-        final Optional<Position> bBegin = b.getLocation().flatMap(l -> l.getBegin().getRange().map(r -> r.begin));
+        /*final*/Optional<Position> aBegin = a.getLocation().flatMap(l -> l.getBegin().getRange().map(r -> r.begin));
+        /*final*/Optional<Position> bBegin = b.getLocation().flatMap(l -> l.getBegin().getRange().map(r -> r.begin));
         if (aBegin.isPresent() && bBegin.isPresent()) {
             return aBegin.get().compareTo(bBegin.get());
         }

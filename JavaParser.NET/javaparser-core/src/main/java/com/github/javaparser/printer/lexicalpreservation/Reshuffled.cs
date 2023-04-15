@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,14 +23,14 @@ namespace com.github.javaparser.printer.lexicalpreservation;
 
 
 /**
- * Elements in a CsmMix have been reshuffled. It could also mean that
+ * Elements _in a CsmMix have been reshuffled. It could also mean that
  * some new elements have been added or removed to the mix.
  */
 public class Reshuffled implements DifferenceElement {
 
-    private final CsmMix previousOrder;
+    private /*final*/CsmMix previousOrder;
 
-    private final CsmMix nextOrder;
+    private /*final*/CsmMix nextOrder;
 
     Reshuffled(CsmMix previousOrder, CsmMix nextOrder) {
         this.previousOrder = previousOrder;
@@ -38,7 +38,7 @@ public class Reshuffled implements DifferenceElement {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "Reshuffled{" + nextOrder + ", previous=" + previousOrder + '}';
     }
 
@@ -101,7 +101,7 @@ public class Reshuffled implements DifferenceElement {
     }
 
     /*
-     * Replaces all eol tokens in the list by the specified line separator token 
+     * Replaces all eol tokens _in the list by the specified line separator token 
      */
     private List<CsmElement> replaceTokens(List<CsmElement> elements, CsmElement lineSeparator) {
         return elements.stream().map(element -> isNewLineToken(element) ? lineSeparator : element).collect(Collectors.toList());
@@ -115,6 +115,6 @@ public class Reshuffled implements DifferenceElement {
     }
 
     private boolean isToken(CsmElement element) {
-        return element instanceof CsmToken;
+        return element is CsmToken;
     }
 }

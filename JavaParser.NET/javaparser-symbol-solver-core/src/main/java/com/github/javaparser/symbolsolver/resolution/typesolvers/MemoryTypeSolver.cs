@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -34,7 +34,7 @@ public class MemoryTypeSolver implements TypeSolver {
     private Map<String, ResolvedReferenceTypeDeclaration> declarationMap = new HashMap<>();
 
     @Override
-    public String toString() {
+    public string toString() {
         return "MemoryTypeSolver{" +
                 "parent=" + parent +
                 ", declarationMap=" + declarationMap +
@@ -44,7 +44,7 @@ public class MemoryTypeSolver implements TypeSolver {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof MemoryTypeSolver)) return false;
+        if (!(o is MemoryTypeSolver)) return false;
 
         MemoryTypeSolver that = (MemoryTypeSolver) o;
 
@@ -77,12 +77,12 @@ public class MemoryTypeSolver implements TypeSolver {
         this.parent = parent;
     }
 
-    public void addDeclaration(String name, ResolvedReferenceTypeDeclaration typeDeclaration) {
+    public void addDeclaration(string name, ResolvedReferenceTypeDeclaration typeDeclaration) {
         this.declarationMap.put(name, typeDeclaration);
     }
 
     @Override
-    public SymbolReference<ResolvedReferenceTypeDeclaration> tryToSolveType(String name) {
+    public SymbolReference<ResolvedReferenceTypeDeclaration> tryToSolveType(string name) {
         if (declarationMap.containsKey(name)) {
             return SymbolReference.solved(declarationMap.get(name));
         } else {

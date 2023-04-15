@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,37 +24,37 @@ namespace com.github.javaparser.ast.expr;
 
 
 class CharLiteralExprTest {
-    @Test
+    [TestMethod]
     void parseSimpleChar() {
         CharLiteralExpr c = parseExpression("'a'");
         assertEquals("a", c.getValue());
     }
 
-    @Test
+    [TestMethod]
     void parseSimpleEscape() {
         CharLiteralExpr c = parseExpression("'\\t'");
         assertEquals("\\t", c.getValue());
     }
 
-    @Test
+    [TestMethod]
     void parseUnicode() {
         CharLiteralExpr c = parseExpression("'Ω'");
         assertEquals("Ω", c.getValue());
     }
 
-    @Test
+    [TestMethod]
     void parseNumericEscape() {
         CharLiteralExpr c = parseExpression("'\\177'");
         assertEquals("\\177", c.getValue());
     }
 
-    @Test
+    [TestMethod]
     void parseUnicodeEscape() {
         CharLiteralExpr c = parseExpression("'\\u03a9'");
         assertEquals("\\u03a9", c.getValue());
     }
 
-    @Test
+    [TestMethod]
     void parseUnicodeEscapedEscape() {
         JavaParser javaParser = new JavaParser(new ParserConfiguration()
                 .setPreprocessUnicodeEscapes(true));

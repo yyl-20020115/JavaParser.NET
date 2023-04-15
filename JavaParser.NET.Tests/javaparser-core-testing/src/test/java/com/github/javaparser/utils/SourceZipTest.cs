@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,13 +26,13 @@ namespace com.github.javaparser.utils;
 
 class SourceZipTest {
 
-    private final Path testDir = CodeGenerationUtils.mavenModuleRoot(SourceZipTest.class)
+    private /*final*/Path testDir = CodeGenerationUtils.mavenModuleRoot(SourceZipTest.class)
             .resolve(Paths.get("..", "javaparser-core-testing", "src", "test", "resources", "com", "github", "javaparser",
                     "source_zip"))
             .normalize();
 
-    @Test
-    void parseTestDirectory() throws IOException {
+    [TestMethod]
+    void parseTestDirectory(){
         SourceZip sourceZip = new SourceZip(testDir.resolve("test.zip"));
         List<Pair<Path, ParseResult<CompilationUnit>>> results = sourceZip.parse();
         assertEquals(3, results.size());
@@ -43,8 +43,8 @@ class SourceZipTest {
         assertTrue(units.stream().noneMatch(unit -> unit.getTypes().isEmpty()));
     }
 
-    @Test
-    void parseTestDirectoryWithCallback() throws IOException {
+    [TestMethod]
+    void parseTestDirectoryWithCallback(){
         SourceZip sourceZip = new SourceZip(testDir.resolve("test.zip"));
         List<Pair<Path, ParseResult<CompilationUnit>>> results = new ArrayList<>();
 
@@ -58,12 +58,12 @@ class SourceZipTest {
         assertTrue(units.stream().noneMatch(unit -> unit.getTypes().isEmpty()));
     }
 
-    @Test
+    [TestMethod]
     void dirAsZipIsNotAllowed() {
         assertThrows(IOException.class, () -> new SourceZip(testDir.resolve("test")).parse());
     }
 
-    @Test
+    [TestMethod]
     void fileAsZipIsNotAllowed() {
         assertThrows(IOException.class, () -> new SourceZip(testDir.resolve("test.txt")).parse());
     }

@@ -5,12 +5,12 @@ namespace com.foo;
 
 
 
-public class Widget extends com.foo.base.Widget {
-    private static final String PROJECT_ROOT = "/Users/peloquina/dev/javasymbolsolver-issue";
-    private static final String JAVA_ROOT = PROJECT_ROOT + "/src/main/java";
-    private static final String CLASS = JAVA_ROOT + "/com/foo/Widget.java";
+public class Widget:com.foo.base.Widget {
+    private static /*final*/string PROJECT_ROOT = "/Users/peloquina/dev/javasymbolsolver-issue";
+    private static /*final*/string JAVA_ROOT = PROJECT_ROOT + "/src/main/java";
+    private static /*final*/string CLASS = JAVA_ROOT + "/com/foo/Widget.java";
 
-    public static void main(String[] args) throws IOException, ParseException {
+    public static void main(String[] args), ParseException {
         File src = new File(JAVA_ROOT);
         CombinedTypeSolver combinedTypeSolver = new CombinedTypeSolver();
         combinedTypeSolver.add(new ReflectionTypeSolver(true));

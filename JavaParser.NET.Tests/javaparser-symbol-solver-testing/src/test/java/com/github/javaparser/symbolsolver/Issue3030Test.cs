@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,11 +23,11 @@ namespace com.github.javaparser.symbolsolver;
 
 
 
-public class Issue3030Test extends AbstractResolutionTest {
+public class Issue3030Test:AbstractResolutionTest {
 
-    @Test
+    [TestMethod]
     public void test3030() {
-        String sourceCode = "package com.example;\n" +
+        string sourceCode = "package com.example;\n" +
                 "\n" +
                 "import java.util.Comparator;\n" +
                 "import java.util.Spliterator;\n" +
@@ -41,7 +41,7 @@ public class Issue3030Test extends AbstractResolutionTest {
                 "    static <T> Spliterator<T> indexed(int size, int extraCharacteristics, IntFunction<T> function, Comparator<? super T> comparator) {\n" +
                 "        class WithCharacteristics implements Spliterator<T> {\n" +
                 "\n" +
-                "            private final Spliterator.OfInt delegate;\n" +
+                "            private /*final*/Spliterator.OfInt delegate;\n" +
                 "\n" +
                 "            WithCharacteristics(Spliterator.OfInt delegate) {\n" +
                 "                this.delegate = delegate;\n" +

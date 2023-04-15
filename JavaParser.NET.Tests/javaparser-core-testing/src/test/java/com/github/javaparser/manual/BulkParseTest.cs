@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -29,7 +29,7 @@ class BulkParseTest {
      * Running this will download a version of the OpenJDK, unzip it, and parse it. If it throws a stack overflow
      * exception, increase the JVM's stack size.
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
         Log.setAdapter(new Log.StandardOutStandardErrorAdapter());
         // This contains all kinds of test cases so it will lead to a lot of errors:
         new BulkParseTest().parseOpenJdkLangToolsRepository();
@@ -37,7 +37,7 @@ class BulkParseTest {
         new BulkParseTest().parseJdkSrcZip();
     }
 
-    private void parseOpenJdkLangToolsRepository() throws IOException {
+    private void parseOpenJdkLangToolsRepository(){
         Path workdir = mavenModuleRoot(BulkParseTest.class).resolve(Paths.get(temporaryDirectory(), "javaparser_bulkparsetest"));
         workdir.toFile().mkdirs();
         Path openJdkZipPath = workdir.resolve("langtools.zip");
@@ -50,7 +50,7 @@ class BulkParseTest {
         bulkTest(new SourceZip(openJdkZipPath), "openjdk_src_repo_test_results.txt", new ParserConfiguration().setLanguageLevel(JAVA_10));
     }
 
-    private void parseJdkSrcZip() throws IOException {
+    private void parseJdkSrcZip(){
         // This is where Ubuntu stores the contents of package openjdk-8-src
         Path path = Paths.get("/usr/lib/jvm/openjdk-9/src.zip");
         bulkTest(new SourceZip(path), "openjdk_src_zip_test_results.txt", new ParserConfiguration().setLanguageLevel(JAVA_9));
@@ -66,8 +66,8 @@ class BulkParseTest {
         Log.setAdapter(new Log.SilentAdapter());
     }
 
-    @Test
-    void parseOwnSourceCode() throws IOException {
+    [TestMethod]
+    void parseOwnSourceCode(){
         String[] roots = new String[]{
                 "javaparser-core/src/main/java",
                 "javaparser-core-testing/src/test/java",
@@ -76,7 +76,7 @@ class BulkParseTest {
                 "javaparser-symbol-solver-core/src/main/java",
                 "javaparser-symbol-solver-testing/src/test/java"
         };
-        for (String root : roots) {
+        for (string root : roots) {
             bulkTest(
                     new SourceRoot(mavenModuleRoot(BulkParseTest.class).resolve("..").resolve(root)),
                     "javaparser_test_results_" + root.replace("-", "_").replace("/", "_") + ".txt",
@@ -85,7 +85,7 @@ class BulkParseTest {
         }
     }
 
-    public void bulkTest(SourceRoot sourceRoot, String testResultsFileName, ParserConfiguration configuration) throws IOException {
+    public void bulkTest(SourceRoot sourceRoot, string testResultsFileName, ParserConfiguration configuration){
         sourceRoot.setParserConfiguration(configuration);
         TreeMap<Path, List<Problem>> results = new TreeMap<>(comparing(o -> o.toString().toLowerCase()));
         sourceRoot.parseParallelized((localPath, absolutePath, result) -> {
@@ -99,7 +99,7 @@ class BulkParseTest {
         writeResults(results, testResultsFileName);
     }
 
-    public void bulkTest(SourceZip sourceRoot, String testResultsFileName, ParserConfiguration configuration) throws IOException {
+    public void bulkTest(SourceZip sourceRoot, string testResultsFileName, ParserConfiguration configuration){
         sourceRoot.setParserConfiguration(configuration);
         TreeMap<Path, List<Problem>> results = new TreeMap<>(comparing(o -> o.toString().toLowerCase()));
         sourceRoot.parse((path, result) -> {
@@ -112,7 +112,7 @@ class BulkParseTest {
         writeResults(results, testResultsFileName);
     }
 
-    private void writeResults(TreeMap<Path, List<Problem>> results, String testResultsFileName) throws IOException {
+    private void writeResults(TreeMap<Path, List<Problem>> results, string testResultsFileName){
         Log.info("Writing results...");
 
         Path testResults = mavenModuleRoot(BulkParseTest.class).resolve(Paths.get("..", "javaparser-core-testing", "src", "test", "resources", "com", "github", "javaparser", "bulk_test_results")).normalize();
@@ -131,10 +131,10 @@ class BulkParseTest {
                 }
                 writer.newLine();
             }
-            writer.write(f("%s problems in %s files", problemTotal, results.size()));
+            writer.write(f("%s problems _in %s files", problemTotal, results.size()));
         }
 
         Path finalTestResults = testResults;
-        Log.info("Results are in %s", () -> finalTestResults);
+        Log.info("Results are _in %s", () -> finalTestResults);
     }
 }

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -33,10 +33,10 @@ public class VisitorSteps {
     private GenericVisitorAdapter<String, Void> nameReturningVisitor;
     private GenericListVisitorAdapter<String, Void> allNameReturningVisitor;
     private AtomicReference<String> collectedVariableName;
-    private String returnedVariableName;
+    private string returnedVariableName;
     private List<String> returnedVariableNames;
 
-    /* Map that maintains shares state across step classes.  If manipulating the objects in the map you must update the state */
+    /* Map that maintains shares state across step classes.  If manipulating the objects _in the map you must update the state */
     private Map<String, Object> state;
 
     public VisitorSteps(Map<String, Object> state) {
@@ -72,7 +72,7 @@ public class VisitorSteps {
     public void givenAGenericVisitorAdapterWithAVisitMethodThatReturnsVariableNames() {
         nameReturningVisitor = new GenericVisitorAdapter<String, Void>() {
             @Override
-            public String visit(VariableDeclarator n, Void arg) {
+            public string visit(VariableDeclarator n, Void arg) {
                 return n.getNameAsString();
             }
         };
@@ -133,17 +133,17 @@ public class VisitorSteps {
     }
 
     @Then("the collected variable name is \"$nameUnderTest\"")
-    public void thenTheCollectedVariableNameIs(String nameUnderTest) {
+    public void thenTheCollectedVariableNameIs(string nameUnderTest) {
         assertThat(collectedVariableName.get(), is(nameUnderTest));
     }
 
     @Then("the return variable name is \"$nameUnderTest\"")
-    public void thenTheReturnVariableNameIs(String nameUnderTest) {
+    public void thenTheReturnVariableNameIs(string nameUnderTest) {
         assertThat(returnedVariableName, is(nameUnderTest));
     }
 
     @Then("the first return variable name is \"$nameUnderTest\"")
-    public void thenTheFirstReturnVariableNameIs(String nameUnderTest) {
+    public void thenTheFirstReturnVariableNameIs(string nameUnderTest) {
         assertThat(returnedVariableNames.get(0), is(nameUnderTest));
     }
 

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,9 +27,9 @@ namespace com.github.javaparser.printer.configuration;
  * Configuration options for the {@link PrettyPrinter}.
  * This class is no longer acceptable to use because it is not sufficiently configurable and it is too tied to a specific implementation
  * <p> Use {@link PrinterConfiguration interface or DefaultPrinterConfiguration default implementation } instead.
- * @deprecated This class could be removed in a future version. Use default DefaultPrinterConfiguration.
+ * @deprecated This class could be removed _in a future version. Use default DefaultPrinterConfiguration.
  */
-@Deprecated
+//@Deprecated
 public class PrettyPrinterConfiguration implements PrinterConfiguration {
 
     PrinterConfiguration wrappedConfiguration;
@@ -57,8 +57,8 @@ public class PrettyPrinterConfiguration implements PrinterConfiguration {
      * @return the string that will be used to indent.
      * @deprecated (@see Indentation.getIndent())
      */
-    @Deprecated
-    public String getIndent() {
+    //@Deprecated
+    public string getIndent() {
         return getIndentation().getIndent();
     }
 
@@ -66,16 +66,16 @@ public class PrettyPrinterConfiguration implements PrinterConfiguration {
      * @return the indentation size.
      * @deprecated (@see Indentation.size)
      */
-    @Deprecated
+    //@Deprecated
     public int getIndentSize() {
         return getIndentation().getSize();
     }
 
     /**
-     * Set the size of the indent in characters.
+     * Set the size of the indent _in characters.
      * @deprecated (@see Indentation.size())
      */
-    @Deprecated
+    //@Deprecated
     public PrettyPrinterConfiguration setIndentSize(int indentSize) {
         Indentation indentation = getIndentation().setSize(assertNonNegative(indentSize));
         setIndentation(indentation);
@@ -86,7 +86,7 @@ public class PrettyPrinterConfiguration implements PrinterConfiguration {
      * Get the type of indent to produce.
      * @deprecated (@see Indentation.type)
      */
-    @Deprecated
+    //@Deprecated
     public IndentType getIndentType() {
         return getIndentation().getType();
     }
@@ -95,7 +95,7 @@ public class PrettyPrinterConfiguration implements PrinterConfiguration {
      * Set the type of indent to produce.
      * @deprecated (@see Indentation.type())
      */
-    @Deprecated
+    //@Deprecated
     public PrettyPrinterConfiguration setIndentType(IndentType indentType) {
         Indentation indentation = getIndentation().setType(assertNotNull(indentType));
         setIndentation(indentation);
@@ -106,7 +106,7 @@ public class PrettyPrinterConfiguration implements PrinterConfiguration {
      * Get the tab width for pretty aligning.
      * @deprecated (@see Indentation.size)
      */
-    @Deprecated
+    //@Deprecated
     public int getTabWidth() {
         return getIndentation().getSize();
     }
@@ -115,7 +115,7 @@ public class PrettyPrinterConfiguration implements PrinterConfiguration {
      * Set the tab width for pretty aligning.
      * @deprecated (@see Indentation.size)
      */
-    @Deprecated
+    //@Deprecated
     public PrettyPrinterConfiguration setTabWidth(int tabWidth) {
         setIndentSize(assertPositive(tabWidth));
         return this;
@@ -193,14 +193,14 @@ public class PrettyPrinterConfiguration implements PrinterConfiguration {
         return this;
     }
 
-    public String getEndOfLineCharacter() {
+    public string getEndOfLineCharacter() {
         return wrappedConfiguration.get(new DefaultConfigurationOption(ConfigOption.END_OF_LINE_CHARACTER)).get().asValue();
     }
 
     /**
      * Set the character to append when a line should end. Example values: "\n", "\r\n", "".
      */
-    public PrettyPrinterConfiguration setEndOfLineCharacter(String endOfLineCharacter) {
+    public PrettyPrinterConfiguration setEndOfLineCharacter(string endOfLineCharacter) {
         addOption(new DefaultConfigurationOption(ConfigOption.END_OF_LINE_CHARACTER, endOfLineCharacter));
         return this;
     }

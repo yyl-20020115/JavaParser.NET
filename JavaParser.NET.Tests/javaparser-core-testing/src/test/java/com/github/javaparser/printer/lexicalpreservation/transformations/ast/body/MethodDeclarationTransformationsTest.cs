@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,16 +26,16 @@ namespace com.github.javaparser.printer.lexicalpreservation.transformations.ast.
 /**
  * Transforming MethodDeclaration and verifying the LexicalPreservation works as expected.
  */
-class MethodDeclarationTransformationsTest extends AbstractLexicalPreservingTest {
+class MethodDeclarationTransformationsTest:AbstractLexicalPreservingTest {
 
-    protected MethodDeclaration consider(String code) {
+    protected MethodDeclaration consider(string code) {
         considerCode("class A { " + code + " }");
         return cu.getType(0).getMembers().get(0).asMethodDeclaration();
     }
 
     // Name
 
-    @Test
+    [TestMethod]
     void settingName() {
         MethodDeclaration it = consider("void A(){}");
         it.setName("B");
@@ -45,7 +45,7 @@ class MethodDeclarationTransformationsTest extends AbstractLexicalPreservingTest
     // JavaDoc
 
     @Disabled
-    @Test
+    [TestMethod]
     void removingDuplicateJavaDocComment() {
         // Arrange
         considerCode("public class MyClass {" + SYSTEM_EOL +
@@ -70,7 +70,7 @@ class MethodDeclarationTransformationsTest extends AbstractLexicalPreservingTest
         methodDeclaration.removeComment();
 
         // Assert
-        String result = LexicalPreservingPrinter.print(cu.findCompilationUnit().get());
+        string result = LexicalPreservingPrinter.print(cu.findCompilationUnit().get());
         assertEqualsStringIgnoringEol("public class MyClass {\n" +
                 "\n" +
                 "  /**\n" +
@@ -85,7 +85,7 @@ class MethodDeclarationTransformationsTest extends AbstractLexicalPreservingTest
     }
 
     @Disabled
-    @Test
+    [TestMethod]
     void replacingDuplicateJavaDocComment() {
         // Arrange
         considerCode("public class MyClass {" + SYSTEM_EOL +
@@ -111,7 +111,7 @@ class MethodDeclarationTransformationsTest extends AbstractLexicalPreservingTest
         methodDeclaration.setJavadocComment("", javadoc);
 
         // Assert
-        String result = LexicalPreservingPrinter.print(cu.findCompilationUnit().get());
+        string result = LexicalPreservingPrinter.print(cu.findCompilationUnit().get());
         assertEqualsStringIgnoringEol("public class MyClass {\n" +
                 "\n" +
                 "  /**\n" +
@@ -131,7 +131,7 @@ class MethodDeclarationTransformationsTest extends AbstractLexicalPreservingTest
     // Comments
 
     @Disabled
-    @Test
+    [TestMethod]
     void removingDuplicateComment() {
         // Arrange
         considerCode("public class MyClass {" + SYSTEM_EOL +
@@ -156,7 +156,7 @@ class MethodDeclarationTransformationsTest extends AbstractLexicalPreservingTest
         methodDeclaration.removeComment();
 
         // Assert
-        String result = LexicalPreservingPrinter.print(cu.findCompilationUnit().get());
+        string result = LexicalPreservingPrinter.print(cu.findCompilationUnit().get());
         assertEqualsStringIgnoringEol("public class MyClass {\n" +
                 "\n" +
                 "  /*\n" +
@@ -172,39 +172,39 @@ class MethodDeclarationTransformationsTest extends AbstractLexicalPreservingTest
 
     // Modifiers
 
-    @Test
+    [TestMethod]
     void addingModifiers() {
         MethodDeclaration it = consider("void A(){}");
         it.setModifiers(createModifierList(PUBLIC));
         assertTransformedToString("public void A(){}", it);
     }
 
-    @Test
+    [TestMethod]
     void removingModifiers() {
         MethodDeclaration it = consider("public void A(){}");
         it.setModifiers(new NodeList<>());
         assertTransformedToString("void A(){}", it);
     }
 
-    @Test
+    [TestMethod]
     void removingModifiersWithExistingAnnotationsShort() {
         MethodDeclaration it = consider("@Override public void A(){}");
         it.setModifiers(new NodeList<>());
         assertTransformedToString("@Override void A(){}", it);
     }
 
-    @Test
+    [TestMethod]
     void removingPublicModifierFromPublicStaticMethod() {
         MethodDeclaration it = consider("public static void a(){}");
         it.removeModifier(Modifier.Keyword.PUBLIC);
         assertTransformedToString("static void a(){}", it);
     }
 
-    @Test
+    [TestMethod]
     void removingModifiersWithExistingAnnotations() {
         considerCode(
                 "class X {" + SYSTEM_EOL +
-                        "  @Test" + SYSTEM_EOL +
+                        "  [TestMethod]" + SYSTEM_EOL +
                         "  public void testCase() {" + SYSTEM_EOL +
                         "  }" + SYSTEM_EOL +
                         "}" + SYSTEM_EOL
@@ -212,19 +212,19 @@ class MethodDeclarationTransformationsTest extends AbstractLexicalPreservingTest
 
         cu.getType(0).getMethods().get(0).setModifiers(new NodeList<>());
 
-        String result = LexicalPreservingPrinter.print(cu);
+        string result = LexicalPreservingPrinter.print(cu);
         assertEqualsStringIgnoringEol("class X {\n" +
-                "  @Test\n" +
+                "  [TestMethod]\n" +
                 "  void testCase() {\n" +
                 "  }\n" +
                 "}\n", result);
     }
     
-    @Test
+    [TestMethod]
     void removingModifiersWithExistingAnnotations_withVariableNumberOfSeparator() {
         considerCode(
                 "class X {" + SYSTEM_EOL +
-                        "  @Test" + SYSTEM_EOL +
+                        "  [TestMethod]" + SYSTEM_EOL +
                         "  public      void testCase() {" + SYSTEM_EOL +
                         "  }" + SYSTEM_EOL +
                         "}" + SYSTEM_EOL
@@ -232,34 +232,34 @@ class MethodDeclarationTransformationsTest extends AbstractLexicalPreservingTest
 
         cu.getType(0).getMethods().get(0).setModifiers(new NodeList<>());
 
-        String result = LexicalPreservingPrinter.print(cu.findCompilationUnit().get());
+        string result = LexicalPreservingPrinter.print(cu.findCompilationUnit().get());
         assertEqualsStringIgnoringEol(
         		"class X {\n" +
-                "  @Test\n" +
+                "  [TestMethod]\n" +
                 "  void testCase() {\n" +
                 "  }\n" +
                 "}\n", result);
     }
 
-    @Test
+    [TestMethod]
     void replacingModifiers() {
         MethodDeclaration it = consider("public void A(){}");
         it.setModifiers(createModifierList(PROTECTED));
         assertTransformedToString("protected void A(){}", it);
     }
 
-    @Test
+    [TestMethod]
     void replacingModifiersWithExistingAnnotationsShort() {
         MethodDeclaration it = consider("@Override public void A(){}");
         it.setModifiers(createModifierList(PROTECTED));
         assertTransformedToString("@Override protected void A(){}", it);
     }
 
-    @Test
+    [TestMethod]
     void replacingModifiersWithExistingAnnotations() {
         considerCode(
                 "class X {" + SYSTEM_EOL +
-                        "  @Test" + SYSTEM_EOL +
+                        "  [TestMethod]" + SYSTEM_EOL +
                         "  public void testCase() {" + SYSTEM_EOL +
                         "  }" + SYSTEM_EOL +
                         "}" + SYSTEM_EOL
@@ -267,9 +267,9 @@ class MethodDeclarationTransformationsTest extends AbstractLexicalPreservingTest
 
         cu.getType(0).getMethods().get(0).setModifiers(createModifierList(PROTECTED));
 
-        String result = LexicalPreservingPrinter.print(cu.findCompilationUnit().get());
+        string result = LexicalPreservingPrinter.print(cu.findCompilationUnit().get());
         assertEqualsStringIgnoringEol("class X {\n" +
-                "  @Test\n" +
+                "  [TestMethod]\n" +
                 "  protected void testCase() {\n" +
                 "  }\n" +
                 "}\n", result);
@@ -277,35 +277,35 @@ class MethodDeclarationTransformationsTest extends AbstractLexicalPreservingTest
 
     // Parameters
 
-    @Test
+    [TestMethod]
     void addingParameters() {
         MethodDeclaration it = consider("void foo(){}");
         it.addParameter(PrimitiveType.doubleType(), "d");
         assertTransformedToString("void foo(double d){}", it);
     }
 
-    @Test
+    [TestMethod]
     void removingOnlyParameter() {
         MethodDeclaration it = consider("public void foo(double d){}");
         it.getParameters().remove(0);
         assertTransformedToString("public void foo(){}", it);
     }
 
-    @Test
+    [TestMethod]
     void removingFirstParameterOfMany() {
         MethodDeclaration it = consider("public void foo(double d, float f){}");
         it.getParameters().remove(0);
         assertTransformedToString("public void foo(float f){}", it);
     }
 
-    @Test
+    [TestMethod]
     void removingLastParameterOfMany() {
         MethodDeclaration it = consider("public void foo(double d, float f){}");
         it.getParameters().remove(1);
         assertTransformedToString("public void foo(double d){}", it);
     }
 
-    @Test
+    [TestMethod]
     void replacingOnlyParameter() {
         MethodDeclaration it = consider("public void foo(float f){}");
         it.getParameters().set(0, new Parameter(new ArrayType(PrimitiveType.intType()), new SimpleName("foo")));
@@ -317,11 +317,11 @@ class MethodDeclarationTransformationsTest extends AbstractLexicalPreservingTest
     // Body
 
     // Annotations
-    @Test
+    [TestMethod]
     void addingToExistingAnnotations() {
         considerCode(
                 "class X {" + SYSTEM_EOL +
-                        "  @Test" + SYSTEM_EOL +
+                        "  [TestMethod]" + SYSTEM_EOL +
                         "  public void testCase() {" + SYSTEM_EOL +
                         "  }" + SYSTEM_EOL +
                         "}" + SYSTEM_EOL
@@ -331,16 +331,16 @@ class MethodDeclarationTransformationsTest extends AbstractLexicalPreservingTest
                 "org.junit.Ignore",
                 new StringLiteralExpr("flaky test"));
 
-        String result = LexicalPreservingPrinter.print(cu.findCompilationUnit().get());
+        string result = LexicalPreservingPrinter.print(cu.findCompilationUnit().get());
         assertEqualsStringIgnoringEol("class X {\n" +
-                "  @Test\n" +
+                "  [TestMethod]\n" +
                 "  @org.junit.Ignore(\"flaky test\")\n" +
                 "  public void testCase() {\n" +
                 "  }\n" +
                 "}\n", result);
     }
 
-    @Test
+    [TestMethod]
     void addingAnnotationsNoModifiers() {
         considerCode(
                 "class X {" + SYSTEM_EOL +
@@ -352,16 +352,16 @@ class MethodDeclarationTransformationsTest extends AbstractLexicalPreservingTest
         cu.getType(0).getMethods().get(0).addMarkerAnnotation("Test");
         cu.getType(0).getMethods().get(0).addMarkerAnnotation("Override");
 
-        String result = LexicalPreservingPrinter.print(cu.findCompilationUnit().get());
+        string result = LexicalPreservingPrinter.print(cu.findCompilationUnit().get());
         assertEqualsStringIgnoringEol("class X {\n" +
-                "  @Test\n" +
+                "  [TestMethod]\n" +
                 "  @Override\n" +
                 "  void testCase() {\n" +
                 "  }\n" +
                 "}\n", result);
     }
 
-    @Test
+    [TestMethod]
     void replacingAnnotations() {
         considerCode(
                 "class X {" + SYSTEM_EOL +
@@ -373,16 +373,16 @@ class MethodDeclarationTransformationsTest extends AbstractLexicalPreservingTest
 
         cu.getType(0).getMethods().get(0).setAnnotations(new NodeList<>(new MarkerAnnotationExpr("Test")));
 
-        String result = LexicalPreservingPrinter.print(cu.findCompilationUnit().get());
+        string result = LexicalPreservingPrinter.print(cu.findCompilationUnit().get());
         assertEqualsStringIgnoringEol(
                 "class X {\n" +
-                        "  @Test\n" +
+                        "  [TestMethod]\n" +
                         "  public void testCase() {\n" +
                         "  }\n" +
                         "}\n", result);
     }
 
-    @Test
+    [TestMethod]
     void addingAnnotationsShort() {
         MethodDeclaration it = consider("void testMethod(){}");
         it.addMarkerAnnotation("Override");
@@ -395,7 +395,7 @@ class MethodDeclarationTransformationsTest extends AbstractLexicalPreservingTest
     // because indentation before the removed annotation is not part
     // of difference elements (see removingAnnotationsWithSpaces too)
     @Disabled
-    @Test
+    [TestMethod]
     void removingAnnotations() {
         considerCode(
                 "class X {" + SYSTEM_EOL +
@@ -407,7 +407,7 @@ class MethodDeclarationTransformationsTest extends AbstractLexicalPreservingTest
 
         cu.getType(0).getMethods().get(0).getAnnotationByName("Override").get().remove();
 
-        String result = LexicalPreservingPrinter.print(cu);
+        string result = LexicalPreservingPrinter.print(cu);
         assertEqualsStringIgnoringEol(
                 "class X {\n" +
                         "  public void testCase() {\n" +
@@ -416,7 +416,7 @@ class MethodDeclarationTransformationsTest extends AbstractLexicalPreservingTest
     }
 
     @Disabled
-    @Test
+    [TestMethod]
     void removingAnnotationsWithSpaces() {
         considerCode(
                 "class X {" + SYSTEM_EOL +
@@ -428,7 +428,7 @@ class MethodDeclarationTransformationsTest extends AbstractLexicalPreservingTest
 
         cu.getType(0).getMethods().get(0).getAnnotationByName("Override").get().remove();
 
-        String result = LexicalPreservingPrinter.print(cu);
+        string result = LexicalPreservingPrinter.print(cu);
         assertEqualsStringIgnoringEol(
                 "class X {\n" +
                         "  public void testCase() {\n" +
@@ -436,18 +436,18 @@ class MethodDeclarationTransformationsTest extends AbstractLexicalPreservingTest
                         "}\n", result);
     }
 
-    @Test
+    [TestMethod]
     public void addingModifiersWithExistingAnnotationsShort() {
         MethodDeclaration it = consider("@Override void A(){}");
         it.setModifiers(NodeList.nodeList(Modifier.publicModifier(), Modifier.finalModifier()));
-        assertTransformedToString("@Override public final void A(){}", it);
+        assertTransformedToString("@Override public /*final*/void A(){}", it);
     }
 
-    @Test
+    [TestMethod]
     public void addingModifiersWithExistingAnnotations() {
         considerCode(
                 "class X {" + SYSTEM_EOL +
-                        "  @Test" + SYSTEM_EOL +
+                        "  [TestMethod]" + SYSTEM_EOL +
                         "  void testCase() {" + SYSTEM_EOL +
                         "  }" + SYSTEM_EOL +
                         "}" + SYSTEM_EOL
@@ -455,33 +455,33 @@ class MethodDeclarationTransformationsTest extends AbstractLexicalPreservingTest
 
         cu.getType(0).getMethods().get(0).addModifier(Modifier.finalModifier().getKeyword(), Modifier.publicModifier().getKeyword());
 
-        String result = LexicalPreservingPrinter.print(cu.findCompilationUnit().get());
+        string result = LexicalPreservingPrinter.print(cu.findCompilationUnit().get());
         assertEqualsStringIgnoringEol("class X {\n" +
-                "  @Test\n" +
-                "  final public void testCase() {\n" +
+                "  [TestMethod]\n" +
+                "  /*final*/public void testCase() {\n" +
                 "  }\n" +
                 "}\n", result);
     }
 
-    @Test
+    [TestMethod]
     public void parseAndPrintAnonymousClassExpression() {
         Expression expression = parseExpression("new Object() {" + SYSTEM_EOL +
                 "}");
-         String expected = "new Object() {" + SYSTEM_EOL +
+         string expected = "new Object() {" + SYSTEM_EOL +
                 "}";
         assertTransformedToString(expected, expression);
     }
 
-    @Test
+    [TestMethod]
     public void parseAndPrintAnonymousClassStatement() {
         Statement statement = parseStatement("Object anonymous = new Object() {" + SYSTEM_EOL +
                 "};");
-        String expected = "Object anonymous = new Object() {" + SYSTEM_EOL +
+        string expected = "Object anonymous = new Object() {" + SYSTEM_EOL +
                 "};";
         assertTransformedToString(expected, statement);
     }
 
-    @Test
+    [TestMethod]
     public void replaceBodyShouldNotBreakAnonymousClasses() {
         MethodDeclaration it = consider("public void method() { }");
         it.getBody().ifPresent(body -> {
@@ -492,7 +492,7 @@ class MethodDeclarationTransformationsTest extends AbstractLexicalPreservingTest
             body.setStatements(statements);
         });
 
-        String expected = "public void method() {" + SYSTEM_EOL +
+        string expected = "public void method() {" + SYSTEM_EOL +
                 "    Object anonymous = new Object() {" + SYSTEM_EOL +
                 "    };" + SYSTEM_EOL +
                 "}";

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -35,7 +35,7 @@ namespace com.github.javaparser;
  *
  * @author Júlio Vilmar Gesser
  */
-public final class JavaParser {
+public /*final*/class JavaParser {
     private JavaParser() {
         // hide the constructor
     }
@@ -63,16 +63,16 @@ public final class JavaParser {
         _doNotAssignCommentsPreceedingEmptyLines = doNotAssignCommentsPreceedingEmptyLines;
     }
 
-    public static CompilationUnit parse(final InputStream in,
-                                        final String encoding) {
-        return parse(in,encoding,true);
+    public static CompilationUnit parse(/*final*/InputStream _in,
+                                        /*final*/string encoding) {
+        return parse(_in,encoding,true);
     }
 
     /**
-     * Parses the Java code contained in the {@link InputStream} and returns a
+     * Parses the Java code contained _in the {@link InputStream} and returns a
      * {@link CompilationUnit} that represents it.
      *
-     * @param in
+     * @param _in
      *            {@link InputStream} containing Java source code
      * @param encoding
      *            encoding of the source code
@@ -80,10 +80,10 @@ public final class JavaParser {
      * @throws ParseException
      *             if the source code has parser errors
      */
-    public static CompilationUnit parse(final InputStream in,
-                                        final String encoding, boolean considerComments) {
+    public static CompilationUnit parse(/*final*/InputStream _in,
+                                        /*final*/string encoding, boolean considerComments) {
         try {
-            String code = SourcesHelper.streamToString(in, encoding);
+            string code = SourcesHelper.streamToString(_in, encoding);
             InputStream in1 = SourcesHelper.stringToStream(code, encoding);
             CompilationUnit cu = new ASTParser(in1, encoding).CompilationUnit();
             if (considerComments){
@@ -96,27 +96,27 @@ public final class JavaParser {
     }
 
     /**
-     * Parses the Java code contained in the {@link InputStream} and returns a
+     * Parses the Java code contained _in the {@link InputStream} and returns a
      * {@link CompilationUnit} that represents it.
      *
-     * @param in
+     * @param _in
      *            {@link InputStream} containing Java source code
      * @return CompilationUnit representing the Java source code
      * @throws ParseException
      *             if the source code has parser errors
      */
-    public static CompilationUnit parse(final InputStream in)
+    public static CompilationUnit parse(/*final*/InputStream _in)
             {
-        return parse(in, null,true);
+        return parse(_in, null,true);
     }
 
-    public static CompilationUnit parse(final File file, final String encoding)
+    public static CompilationUnit parse(/*final*/File file, /*final*/string encoding)
             throws ParseException, IOException {
         return parse(file,encoding,true);
     }
 
     /**
-     * Parses the Java code contained in a {@link File} and returns a
+     * Parses the Java code contained _in a {@link File} and returns a
      * {@link CompilationUnit} that represents it.
      *
      * @param file
@@ -128,18 +128,18 @@ public final class JavaParser {
      *             if the source code has parser errors
      * @throws IOException
      */
-    public static CompilationUnit parse(final File file, final String encoding, boolean considerComments)
+    public static CompilationUnit parse(/*final*/File file, /*final*/string encoding, boolean considerComments)
             throws ParseException, IOException {
-        final FileInputStream in = new FileInputStream(file);
+        /*final*/FileInputStream _in = new FileInputStream(file);
         try {
-            return parse(in, encoding, considerComments);
+            return parse(_in, encoding, considerComments);
         } finally {
-            in.close();
+            _in.close();
         }
     }
 
     /**
-     * Parses the Java code contained in a {@link File} and returns a
+     * Parses the Java code contained _in a {@link File} and returns a
      * {@link CompilationUnit} that represents it.
      *
      * @param file
@@ -149,15 +149,15 @@ public final class JavaParser {
      *             if the source code has parser errors
      * @throws IOException
      */
-    public static CompilationUnit parse(final File file) throws ParseException,
+    public static CompilationUnit parse(/*final*/File file) throws ParseException,
             IOException {
         return parse(file, null,true);
     }
 
-    public static CompilationUnit parse(final Reader reader, boolean considerComments)
+    public static CompilationUnit parse(/*final*/Reader reader, boolean considerComments)
             {
         try {
-            String code = SourcesHelper.readerToString(reader);
+            string code = SourcesHelper.readerToString(reader);
             Reader reader1 = SourcesHelper.stringToReader(code);
             CompilationUnit cu = new ASTParser(reader1).CompilationUnit();
             if (considerComments){
@@ -170,7 +170,7 @@ public final class JavaParser {
     }
 
     /**
-     * Parses the Java block contained in a {@link String} and returns a
+     * Parses the Java block contained _in a {@link String} and returns a
      * {@link BlockStmt} that represents it.
      *
      * @param blockStatement
@@ -179,7 +179,7 @@ public final class JavaParser {
      * @throws ParseException
      *             if the source code has parser errors
      */
-    public static BlockStmt parseBlock(final String blockStatement)
+    public static BlockStmt parseBlock(/*final*/string blockStatement)
             {
         StringReader sr = new StringReader(blockStatement);
         BlockStmt result = new ASTParser(sr).Block();
@@ -188,7 +188,7 @@ public final class JavaParser {
     }
 
     /**
-     * Parses the Java statement contained in a {@link String} and returns a
+     * Parses the Java statement contained _in a {@link String} and returns a
      * {@link Statement} that represents it.
      *
      * @param statement
@@ -197,7 +197,7 @@ public final class JavaParser {
      * @throws ParseException
      *             if the source code has parser errors
      */
-    public static Statement parseStatement(final String statement) {
+    public static Statement parseStatement(/*final*/string statement) {
         StringReader sr = new StringReader(statement);
         Statement stmt = new ASTParser(sr).Statement();
         sr.close();
@@ -205,7 +205,7 @@ public final class JavaParser {
     }
 
     /**
-     * Parses the Java import contained in a {@link String} and returns a
+     * Parses the Java import contained _in a {@link String} and returns a
      * {@link ImportDeclaration} that represents it.
      *
      * @param importDeclaration
@@ -214,7 +214,7 @@ public final class JavaParser {
      * @throws ParseException
      *             if the source code has parser errors
      */
-    public static ImportDeclaration parseImport(final String importDeclaration) {
+    public static ImportDeclaration parseImport(/*final*/string importDeclaration) {
         StringReader sr = new StringReader(importDeclaration);
         ImportDeclaration id = new ASTParser(sr).ImportDeclaration();
         sr.close();
@@ -222,7 +222,7 @@ public final class JavaParser {
     }
 
     /**
-     * Parses the Java expression contained in a {@link String} and returns a
+     * Parses the Java expression contained _in a {@link String} and returns a
      * {@link Expression} that represents it.
      *
      * @param expression
@@ -231,7 +231,7 @@ public final class JavaParser {
      * @throws ParseException
      *             if the source code has parser errors
      */
-    public static Expression parseExpression(final String expression) {
+    public static Expression parseExpression(/*final*/string expression) {
         StringReader sr = new StringReader(expression);
         Expression e = new ASTParser(sr).Expression();
         sr.close();
@@ -239,7 +239,7 @@ public final class JavaParser {
     }
 
     /**
-     * Parses the Java annotation contained in a {@link String} and returns a
+     * Parses the Java annotation contained _in a {@link String} and returns a
      * {@link AnnotationExpr} that represents it.
      *
      * @param annotation
@@ -248,7 +248,7 @@ public final class JavaParser {
      * @throws ParseException
      *             if the source code has parser errors
      */
-    public static AnnotationExpr parseAnnotation(final String annotation) {
+    public static AnnotationExpr parseAnnotation(/*final*/string annotation) {
         StringReader sr = new StringReader(annotation);
         AnnotationExpr ae = new ASTParser(sr).Annotation();
         sr.close();
@@ -256,7 +256,7 @@ public final class JavaParser {
     }
 
     /**
-     * Parses the Java body declaration(e.g fields or methods) contained in a
+     * Parses the Java body declaration(e.g fields or methods) contained _in a
      * {@link String} and returns a {@link BodyDeclaration} that represents it.
      *
      * @param body
@@ -265,7 +265,7 @@ public final class JavaParser {
      * @throws ParseException
      *             if the source code has parser errors
      */
-    public static BodyDeclaration parseBodyDeclaration(final String body) {
+    public static BodyDeclaration parseBodyDeclaration(/*final*/string body) {
         StringReader sr = new StringReader(body);
         BodyDeclaration bd = new ASTParser(sr).AnnotationBodyDeclaration();
         sr.close();
@@ -282,7 +282,7 @@ public final class JavaParser {
         // I should sort all the direct children and the comments, if a comment is the first thing then it
         // a comment to the CompilationUnit
         // FIXME if there is no package it could be also a comment to the following class...
-        // so I could use some heuristics in these cases to distinguish the two cases
+        // so I could use some heuristics _in these cases to distinguish the two cases
 
         List<Comment> comments = commentsCollection.getAll();
         PositionUtils.sortByBeginPosition(comments);
@@ -351,8 +351,8 @@ public final class JavaParser {
             insertCommentsInNode(child,commentsInsideChild);
         }
 
-        // I can attribute in line comments to elements preceeding them, if there
-        // is something contained in their line
+        // I can attribute _in line comments to elements preceeding them, if there
+        // is something contained _in their line
         List<Comment> attributedComments = new LinkedList<Comment>();
         for (Comment comment : commentsToAttribute)
         {
@@ -380,7 +380,7 @@ public final class JavaParser {
         PositionUtils.sortByBeginPosition(childrenAndComments, _doNotConsiderAnnotationsAsNodeStartForCodeAttribution);
 
         for (Node thing : childrenAndComments){
-            if (thing instanceof Comment){
+            if (thing is Comment){
                 previousComment = (Comment)thing;
                 if (!previousComment.isOrphan())
                 {
@@ -417,7 +417,7 @@ public final class JavaParser {
         return b.getBeginLine()>(a.getEndLine()+1);
     }
 
-    private static void insertComments(CompilationUnit cu, String code) throws IOException {
+    private static void insertComments(CompilationUnit cu, string code){
         CommentsParser commentsParser = new CommentsParser();
         CommentsCollection allComments = commentsParser.parse(code);
 

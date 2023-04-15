@@ -3,9 +3,9 @@ namespace com.github.javaparser;
 
 public class Sample {
     
-    private String name;
+    private string name;
     
-    public Sample(String name) {
+    public Sample(string name) {
         this.name = name;
     }
     

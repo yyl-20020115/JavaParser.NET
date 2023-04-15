@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,7 +28,7 @@ namespace com.github.javaparser.symbolsolver.resolution.typeinference;
  * 1. type parameters: the declarations of any type parameters of the method member.
  * 2. argument types: a list of the types of the arguments to the method member.
  * 3. return type: the return type of the method member.
- * 4. throws clause: exception types declared in the throws clause of the method member.
+ * 4. throws clause: exception types declared _in the throws clause of the method member.
  *
  * See JLS 8.2
  *

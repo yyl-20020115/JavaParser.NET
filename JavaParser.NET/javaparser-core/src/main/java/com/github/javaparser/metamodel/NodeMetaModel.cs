@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -31,16 +31,16 @@ namespace com.github.javaparser.metamodel;
  *
  * For this reason, any changes made directly to this file will be overwritten the next time generators are run.
  */
-@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
-public class NodeMetaModel extends BaseNodeMetaModel {
+//@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
+public class NodeMetaModel:BaseNodeMetaModel {
 
-    @Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     NodeMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
         super(superBaseNodeMetaModel, Node.class, "Node", "com.github.javaparser.ast", true, false);
     }
 
-    @Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
-    protected NodeMetaModel(Optional<BaseNodeMetaModel> superNodeMetaModel, Class<? extends Node> type, String name, String packageName, boolean isAbstract, boolean hasWildcard) {
+    //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
+    protected NodeMetaModel(Optional<BaseNodeMetaModel> superNodeMetaModel, Class<?:Node> type, string name, string packageName, boolean isAbstract, boolean hasWildcard) {
         super(superNodeMetaModel, type, name, packageName, isAbstract, hasWildcard);
     }
 

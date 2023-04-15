@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,14 +24,14 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.contexts;
 
 
 
-public class ForEachStatementContext extends AbstractJavaParserContext<ForEachStmt> {
+public class ForEachStatementContext:AbstractJavaParserContext<ForEachStmt> {
 
     public ForEachStatementContext(ForEachStmt wrappedNode, TypeSolver typeSolver) {
         super(wrappedNode, typeSolver);
     }
 
     @Override
-    public SymbolReference<? extends ResolvedValueDeclaration> solveSymbol(String name) {
+    public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name) {
         if (wrappedNode.getVariable().getVariables().size() != 1) {
             throw new IllegalStateException();
         }
@@ -39,7 +39,7 @@ public class ForEachStatementContext extends AbstractJavaParserContext<ForEachSt
         if (variableDeclarator.getName().getId().equals(name)) {
             return SymbolReference.solved(JavaParserSymbolDeclaration.localVar(variableDeclarator, typeSolver));
         } else {
-            if (demandParentNode(wrappedNode) instanceof BlockStmt) {
+            if (demandParentNode(wrappedNode) is BlockStmt) {
                 return StatementContext.solveInBlock(name, typeSolver, wrappedNode);
             } else {
                 return solveSymbolInParentContext(name);
@@ -48,7 +48,7 @@ public class ForEachStatementContext extends AbstractJavaParserContext<ForEachSt
     }
 
     @Override
-    public SymbolReference<ResolvedMethodDeclaration> solveMethod(String name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
+    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
         // TODO: Document why staticOnly is forced to be false.
         return solveMethodInParentContext(name, argumentsTypes, false);
     }

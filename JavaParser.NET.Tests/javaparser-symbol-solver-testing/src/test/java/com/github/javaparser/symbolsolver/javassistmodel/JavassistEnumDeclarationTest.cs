@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,14 +24,14 @@ namespace com.github.javaparser.symbolsolver.javassistmodel;
 
 
 
-class JavassistEnumDeclarationTest extends AbstractSymbolResolutionTest {
+class JavassistEnumDeclarationTest:AbstractSymbolResolutionTest {
 
     private TypeSolver typeSolver;
 
     private TypeSolver anotherTypeSolver;
 
     @BeforeEach
-    void setup() throws IOException {
+    void setup(){
         Path pathToJar = adaptPath("src/test/resources/javaparser-core-3.0.0-alpha.2.jar");
         typeSolver = new CombinedTypeSolver(new JarTypeSolver(pathToJar), new ReflectionTypeSolver());
 
@@ -43,43 +43,43 @@ class JavassistEnumDeclarationTest extends AbstractSymbolResolutionTest {
     /// Test misc
     ///
 
-    @Test
+    [TestMethod]
     void testIsClass() {
         ResolvedEnumDeclaration modifier = (ResolvedEnumDeclaration) typeSolver.solveType("com.github.javaparser.ast.Modifier");
         assertEquals(false, modifier.isClass());
     }
 
-    @Test
+    [TestMethod]
     void testIsInterface() {
         ResolvedEnumDeclaration modifier = (ResolvedEnumDeclaration) typeSolver.solveType("com.github.javaparser.ast.Modifier");
         assertEquals(false, modifier.isInterface());
     }
 
-    @Test
+    [TestMethod]
     void testIsEnum() {
         ResolvedEnumDeclaration modifier = (ResolvedEnumDeclaration) typeSolver.solveType("com.github.javaparser.ast.Modifier");
         assertEquals(true, modifier.isEnum());
     }
 
-    @Test
+    [TestMethod]
     void testIsTypeVariable() {
         ResolvedEnumDeclaration modifier = (ResolvedEnumDeclaration) typeSolver.solveType("com.github.javaparser.ast.Modifier");
         assertEquals(false, modifier.isTypeParameter());
     }
 
-    @Test
+    [TestMethod]
     void testIsType() {
         ResolvedEnumDeclaration modifier = (ResolvedEnumDeclaration) typeSolver.solveType("com.github.javaparser.ast.Modifier");
         assertEquals(true, modifier.isType());
     }
 
-    @Test
+    [TestMethod]
     void testAsType() {
         ResolvedEnumDeclaration modifier = (ResolvedEnumDeclaration) typeSolver.solveType("com.github.javaparser.ast.Modifier");
         assertEquals(modifier, modifier.asType());
     }
 
-    @Test
+    [TestMethod]
     void testAsClass() {
         assertThrows(UnsupportedOperationException.class, () -> {
             ResolvedEnumDeclaration modifier = (ResolvedEnumDeclaration) typeSolver.solveType("com.github.javaparser.ast.Modifier");
@@ -87,7 +87,7 @@ class JavassistEnumDeclarationTest extends AbstractSymbolResolutionTest {
     });
 }
 
-    @Test
+    [TestMethod]
     void testAsInterface() {
         assertThrows(UnsupportedOperationException.class, () -> {
             ResolvedEnumDeclaration modifier = (ResolvedEnumDeclaration) typeSolver.solveType("com.github.javaparser.ast.Modifier");
@@ -95,37 +95,37 @@ class JavassistEnumDeclarationTest extends AbstractSymbolResolutionTest {
     });
 }
 
-    @Test
+    [TestMethod]
     void testAsEnum() {
         ResolvedEnumDeclaration modifier = (ResolvedEnumDeclaration) typeSolver.solveType("com.github.javaparser.ast.Modifier");
         assertEquals(modifier, modifier.asEnum());
     }
 
-    @Test
+    [TestMethod]
     void testGetPackageName() {
         ResolvedEnumDeclaration modifier = (ResolvedEnumDeclaration) typeSolver.solveType("com.github.javaparser.ast.Modifier");
         assertEquals("com.github.javaparser.ast", modifier.getPackageName());
     }
 
-    @Test
+    [TestMethod]
     void testGetClassName() {
         ResolvedEnumDeclaration modifier = (ResolvedEnumDeclaration) typeSolver.solveType("com.github.javaparser.ast.Modifier");
         assertEquals("Modifier", modifier.getClassName());
     }
 
-    @Test
+    [TestMethod]
     void testGetQualifiedName() {
         ResolvedEnumDeclaration modifier = (ResolvedEnumDeclaration) typeSolver.solveType("com.github.javaparser.ast.Modifier");
         assertEquals("com.github.javaparser.ast.Modifier", modifier.getQualifiedName());
     }
 
-    @Test
+    [TestMethod]
     void testHasDirectlyAnnotation(){
         ResolvedEnumDeclaration compilationUnit = (ResolvedEnumDeclaration) anotherTypeSolver.solveType("com.github.javaparser.test.TestEnum");
         assertTrue(compilationUnit.hasDirectlyAnnotation("com.github.javaparser.test.TestAnnotation"));
     }
 
-    @Test
+    [TestMethod]
     void testHasAnnotation(){
         ResolvedEnumDeclaration compilationUnit = (ResolvedEnumDeclaration) anotherTypeSolver.solveType("com.github.javaparser.test.TestParentEnum");
         assertTrue(compilationUnit.hasAnnotation("com.github.javaparser.test.TestAnnotation"));

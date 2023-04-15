@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,12 +26,12 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.declarators;
 /**
  * @author Federico Tomassetti
  */
-public class VariableSymbolDeclarator extends AbstractSymbolDeclarator<VariableDeclarationExpr> {
+public class VariableSymbolDeclarator:AbstractSymbolDeclarator<VariableDeclarationExpr> {
 
     public VariableSymbolDeclarator(VariableDeclarationExpr wrappedNode, TypeSolver typeSolver) {
         super(wrappedNode, typeSolver);
         wrappedNode.getParentNode().ifPresent(p -> {
-            if (p instanceof FieldDeclaration) {
+            if (p is FieldDeclaration) {
                 throw new IllegalArgumentException();
             }
         });
@@ -44,7 +44,7 @@ public class VariableSymbolDeclarator extends AbstractSymbolDeclarator<VariableD
                 .map(v -> JavaParserSymbolDeclaration.localVar(v, typeSolver))
                 .collect(Collectors.toCollection(ArrayList::new));
 
-//        // FIXME: This returns ALL PatternExpr, regardless of whether it is in scope or not.
+//        // FIXME: This returns ALL PatternExpr, regardless of whether it is _in scope or not.
 //        List<JavaParserSymbolDeclaration> patterns = wrappedNode.getVariables()
 //                .stream()
 //                .filter(variableDeclarator -> variableDeclarator.getInitializer().isPresent())

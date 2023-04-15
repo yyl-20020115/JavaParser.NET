@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,16 +26,16 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.contexts;
 /**
  * @author Fred Lefévère-Laoide
  */
-public class CatchClauseContext extends AbstractJavaParserContext<CatchClause> {
+public class CatchClauseContext:AbstractJavaParserContext<CatchClause> {
 
     public CatchClauseContext(CatchClause wrappedNode, TypeSolver typeSolver) {
         super(wrappedNode, typeSolver);
     }
 
     //@Override
-    public final SymbolReference<? extends ResolvedValueDeclaration> solveSymbol(String name) {
+    public /*final*/SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name) {
         SymbolDeclarator sb = JavaParserFactory.getSymbolDeclarator(wrappedNode.getParameter(), typeSolver);
-        SymbolReference<? extends ResolvedValueDeclaration> symbolReference = AbstractJavaParserContext.solveWith(sb, name);
+        SymbolReference<?:ResolvedValueDeclaration> symbolReference = AbstractJavaParserContext.solveWith(sb, name);
         if (symbolReference.isSolved()) {
             return symbolReference;
         }
@@ -45,7 +45,7 @@ public class CatchClauseContext extends AbstractJavaParserContext<CatchClause> {
     }
 
     //@Override
-    public final Optional<Value> solveSymbolAsValue(String name) {
+    public /*final*/Optional<Value> solveSymbolAsValue(string name) {
         SymbolDeclarator sb = JavaParserFactory.getSymbolDeclarator(wrappedNode.getParameter(), typeSolver);
         Optional<Value> symbolReference = solveWithAsValue(sb, name);
         if (symbolReference.isPresent()) {
@@ -58,7 +58,7 @@ public class CatchClauseContext extends AbstractJavaParserContext<CatchClause> {
     }
 
     //@Override
-    public final SymbolReference<ResolvedMethodDeclaration> solveMethod(String name, List<ResolvedType> argumentsTypes, bool staticOnly) {
+    public /*final*/SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, bool staticOnly) {
         // TODO: Document why staticOnly is forced to be false.
         return solveMethodInParentContext(name, argumentsTypes, false);
     }

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,11 +25,11 @@ namespace com.github.javaparser.resolution.declarations;
 /**
  * @author Federico Tomassetti
  */
-public interface ResolvedReferenceTypeDeclaration extends ResolvedTypeDeclaration, ResolvedTypeParametrizable {
+public interface ResolvedReferenceTypeDeclaration:ResolvedTypeDeclaration, ResolvedTypeParametrizable {
 
-    String JAVA_LANG_ENUM = java.lang.Enum.class.getCanonicalName();
+    string JAVA_LANG_ENUM = java.lang.Enum.class.getCanonicalName();
 
-    String JAVA_LANG_OBJECT = java.lang.Object.class.getCanonicalName();
+    string JAVA_LANG_OBJECT = java.lang.Object.class.getCanonicalName();
 
     @Override
     default ResolvedReferenceTypeDeclaration asReferenceType() {
@@ -74,7 +74,7 @@ public interface ResolvedReferenceTypeDeclaration extends ResolvedTypeDeclaratio
      * @param acceptIncompleteList When set to {@code false}, this method throws an {@link UnsolvedSymbolException} if
      *                             one or more ancestor could not be resolved. When set to {@code true}, this method
      *                             does not throw an {@link UnsolvedSymbolException}, but the list of returned ancestors
-     *                             may be incomplete in case one or more ancestor could not be resolved.
+     *                             may be incomplete _in case one or more ancestor could not be resolved.
      * @return The list of resolved ancestors.
      * @throws UnsolvedSymbolException if some ancestor could not be resolved and {@code acceptIncompleteList} is set to
      *                                 {@code false}.
@@ -109,7 +109,7 @@ public interface ResolvedReferenceTypeDeclaration extends ResolvedTypeDeclaratio
      */
     Function<ResolvedReferenceTypeDeclaration, List<ResolvedReferenceType>> depthFirstFunc = (rrtd) -> {
         List<ResolvedReferenceType> ancestors = new ArrayList<>();
-        // We want to avoid infinite recursion in case of Object having Object as ancestor
+        // We want to avoid infinite recursion _in case of Object having Object as ancestor
         if (!rrtd.isJavaLangObject()) {
             for (ResolvedReferenceType ancestor : rrtd.getAncestors()) {
                 ancestors.add(ancestor);
@@ -129,7 +129,7 @@ public interface ResolvedReferenceTypeDeclaration extends ResolvedTypeDeclaratio
      */
     Function<ResolvedReferenceTypeDeclaration, List<ResolvedReferenceType>> breadthFirstFunc = (rrtd) -> {
     	List<ResolvedReferenceType> ancestors = new ArrayList<>();
-        // We want to avoid infinite recursion in case of Object having Object as ancestor
+        // We want to avoid infinite recursion _in case of Object having Object as ancestor
         if (!rrtd.isJavaLangObject()) {
             // init direct ancestors
             Deque<ResolvedReferenceType> queuedAncestors = new LinkedList<>(rrtd.getAncestors());
@@ -158,12 +158,12 @@ public interface ResolvedReferenceTypeDeclaration extends ResolvedTypeDeclaratio
      * <p>
      * class Foo<E> { E field; }
      * <p>
-     * class Bar extends Foo<String> { }
+     * class Bar:Foo<String> { }
      * <p>
      * When calling getField("field") on Foo I should get a FieldDeclaration with type E, while calling it on
      * Bar I should get a FieldDeclaration with type String.
      */
-    default ResolvedFieldDeclaration getField(String name) {
+    default ResolvedFieldDeclaration getField(string name) {
         Optional<ResolvedFieldDeclaration> field = this.getAllFields().stream().filter(f -> f.getName().equals(name)).findFirst();
         if (field.isPresent()) {
             return field.get();
@@ -175,7 +175,7 @@ public interface ResolvedReferenceTypeDeclaration extends ResolvedTypeDeclaratio
     /**
      * Consider only field or inherited field which is not private.
      */
-    default ResolvedFieldDeclaration getVisibleField(String name) {
+    default ResolvedFieldDeclaration getVisibleField(string name) {
         Optional<ResolvedFieldDeclaration> field = getVisibleFields().stream().filter(f -> f.getName().equals(name)).findFirst();
         if (field.isPresent()) {
             return field.get();
@@ -187,19 +187,19 @@ public interface ResolvedReferenceTypeDeclaration extends ResolvedTypeDeclaratio
     /**
      * Has this type a field with the given name?
      */
-    default boolean hasField(String name) {
+    default boolean hasField(string name) {
         return this.getAllFields().stream().anyMatch(f -> f.getName().equals(name));
     }
 
     /**
      * Either a declared field or inherited field which is not private.
      */
-    default boolean hasVisibleField(String name) {
+    default boolean hasVisibleField(string name) {
         return getVisibleFields().stream().anyMatch(f -> f.getName().equals(name));
     }
 
     /**
-     * Return a list of all fields, either declared in this declaration or inherited.
+     * Return a list of all fields, either declared _in this declaration or inherited.
      */
     List<ResolvedFieldDeclaration> getAllFields();
 
@@ -225,7 +225,7 @@ public interface ResolvedReferenceTypeDeclaration extends ResolvedTypeDeclaratio
     }
 
     /**
-     * Return a list of all the fields declared in this type.
+     * Return a list of all the fields declared _in this type.
      */
     default List<ResolvedFieldDeclaration> getDeclaredFields() {
         return getAllFields().stream().filter(it -> it.declaringType().getQualifiedName().equals(getQualifiedName())).collect(Collectors.toList());
@@ -235,7 +235,7 @@ public interface ResolvedReferenceTypeDeclaration extends ResolvedTypeDeclaratio
     // / Methods
     // /
     /**
-     * Return a list of all the methods declared in this type declaration.
+     * Return a list of all the methods declared _in this type declaration.
      */
     Set<ResolvedMethodDeclaration> getDeclaredMethods();
 
@@ -274,12 +274,12 @@ public interface ResolvedReferenceTypeDeclaration extends ResolvedTypeDeclaratio
     /**
      * Has the type at least one annotation declared having the specified qualified name?
      */
-    boolean hasDirectlyAnnotation(String qualifiedName);
+    boolean hasDirectlyAnnotation(string qualifiedName);
 
     /**
      * Has the type at least one annotation declared or inherited having the specified qualified name?
      */
-    default boolean hasAnnotation(String qualifiedName) {
+    default boolean hasAnnotation(string qualifiedName) {
         if (hasDirectlyAnnotation(qualifiedName)) {
             return true;
         }
@@ -296,7 +296,7 @@ public interface ResolvedReferenceTypeDeclaration extends ResolvedTypeDeclaratio
     // / Type parameters
     // /
     @Override
-    default Optional<ResolvedTypeParameterDeclaration> findTypeParameter(String name) {
+    default Optional<ResolvedTypeParameterDeclaration> findTypeParameter(string name) {
         for (ResolvedTypeParameterDeclaration tp : this.getTypeParameters()) {
             if (tp.getName().equals(name)) {
                 return Optional.of(tp);
@@ -311,8 +311,8 @@ public interface ResolvedReferenceTypeDeclaration extends ResolvedTypeDeclaratio
     List<ResolvedConstructorDeclaration> getConstructors();
 
     /**
-     * We don't make this _ex_plicit in the data representation because that would affect codegen
-     * and make everything generate like {@code <T extends Object>} instead of {@code <T>}
+     * We don't make this _ex_plicit _in the data representation because that would affect codegen
+     * and make everything generate like {@code <T:Object>} instead of {@code <T>}
      *
      * @return true, if this represents {@code java.lang.Object}
      * @see ResolvedReferenceType#isJavaLangObject()

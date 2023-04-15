@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License 
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -27,7 +27,7 @@ namespace com.github.javaparser.ast.body;
 /**
  * @author Julio Vilmar Gesser
  */
-public final class ClassOrInterfaceDeclaration extends TypeDeclaration<ClassOrInterfaceDeclaration>
+public /*final*/class ClassOrInterfaceDeclaration:TypeDeclaration<ClassOrInterfaceDeclaration>
         implements NodeWithImplements<ClassOrInterfaceDeclaration>, NodeWithExtends<ClassOrInterfaceDeclaration> {
 
     private bool interface_;
@@ -42,19 +42,19 @@ public final class ClassOrInterfaceDeclaration extends TypeDeclaration<ClassOrIn
     public ClassOrInterfaceDeclaration() {
     }
 
-    public ClassOrInterfaceDeclaration(final EnumSet<Modifier> modifiers, final bool isInterface,
-                                       final String name) {
+    public ClassOrInterfaceDeclaration(/*final*/EnumSet<Modifier> modifiers, /*final*/bool isInterface,
+                                       /*final*/string name) {
         super(modifiers, name);
         setInterface(isInterface);
     }
 
-    public ClassOrInterfaceDeclaration(final EnumSet<Modifier> modifiers,
-                                       final List<AnnotationExpr> annotations, final bool isInterface,
-                                       final String name,
-                                       final List<TypeParameter> typeParameters,
-                                       final List<ClassOrInterfaceType> extendsList,
-                                       final List<ClassOrInterfaceType> implementsList,
-                                       final List<BodyDeclaration<?>> members) {
+    public ClassOrInterfaceDeclaration(/*final*/EnumSet<Modifier> modifiers,
+                                       /*final*/List<AnnotationExpr> annotations, /*final*/bool isInterface,
+                                       /*final*/string name,
+                                       /*final*/List<TypeParameter> typeParameters,
+                                       /*final*/List<ClassOrInterfaceType> extendsList,
+                                       /*final*/List<ClassOrInterfaceType> implementsList,
+                                       /*final*/List<BodyDeclaration<?>> members) {
         super(annotations, modifiers, name, members);
         setInterface(isInterface);
         setTypeParameters(typeParameters);
@@ -62,13 +62,13 @@ public final class ClassOrInterfaceDeclaration extends TypeDeclaration<ClassOrIn
         setImplements(implementsList);
     }
 
-    public ClassOrInterfaceDeclaration(Range range, final EnumSet<Modifier> modifiers,
-                                       final List<AnnotationExpr> annotations, final bool isInterface,
-                                       final String name,
-                                       final List<TypeParameter> typeParameters,
-                                       final List<ClassOrInterfaceType> extendsList,
-                                       final List<ClassOrInterfaceType> implementsList,
-                                       final List<BodyDeclaration<?>> members) {
+    public ClassOrInterfaceDeclaration(Range range, /*final*/EnumSet<Modifier> modifiers,
+                                       /*final*/List<AnnotationExpr> annotations, /*final*/bool isInterface,
+                                       /*final*/string name,
+                                       /*final*/List<TypeParameter> typeParameters,
+                                       /*final*/List<ClassOrInterfaceType> extendsList,
+                                       /*final*/List<ClassOrInterfaceType> implementsList,
+                                       /*final*/List<BodyDeclaration<?>> members) {
         super(range, annotations, modifiers, name, members);
         setInterface(isInterface);
         setTypeParameters(typeParameters);
@@ -77,12 +77,12 @@ public final class ClassOrInterfaceDeclaration extends TypeDeclaration<ClassOrIn
     }
 
     //@Override
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     //@Override
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
@@ -109,11 +109,11 @@ public final class ClassOrInterfaceDeclaration extends TypeDeclaration<ClassOrIn
     /**
      * 
      * @param extendsList a null value is currently treated as an empty list. This behavior could change
-     *            in the future, so please avoid passing null
+     *            _in the future, so please avoid passing null
      * @return
      */
     //@Override
-    public ClassOrInterfaceDeclaration setExtends(final List<ClassOrInterfaceType> extendsList) {
+    public ClassOrInterfaceDeclaration setExtends(/*final*/List<ClassOrInterfaceType> extendsList) {
         this.extendsList = extendsList;
         setAsParentNodeOf(this.extendsList);
         return this;
@@ -122,16 +122,16 @@ public final class ClassOrInterfaceDeclaration extends TypeDeclaration<ClassOrIn
     /**
      * 
      * @param implementsList a null value is currently treated as an empty list. This behavior could change
-     *            in the future, so please avoid passing null
+     *            _in the future, so please avoid passing null
      */
     //@Override
-    public ClassOrInterfaceDeclaration setImplements(final List<ClassOrInterfaceType> implementsList) {
+    public ClassOrInterfaceDeclaration setImplements(/*final*/List<ClassOrInterfaceType> implementsList) {
         this.implementsList = implementsList;
         setAsParentNodeOf(this.implementsList);
         return this;
     }
 
-    public ClassOrInterfaceDeclaration setInterface(final bool interface_) {
+    public ClassOrInterfaceDeclaration setInterface(/*final*/bool interface_) {
         this.interface_ = interface_;
         return this;
     }
@@ -139,9 +139,9 @@ public final class ClassOrInterfaceDeclaration extends TypeDeclaration<ClassOrIn
     /**
      *
      * @param typeParameters a null value is currently treated as an empty list. This behavior could change
-     *            in the future, so please avoid passing null
+     *            _in the future, so please avoid passing null
      */
-    public ClassOrInterfaceDeclaration setTypeParameters(final List<TypeParameter> typeParameters) {
+    public ClassOrInterfaceDeclaration setTypeParameters(/*final*/List<TypeParameter> typeParameters) {
         this.typeParameters = typeParameters;
         setAsParentNodeOf(this.typeParameters);
         return this;

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,11 +26,11 @@ namespace com.github.javaparser.symbolsolver;
 
 public class Issue2044Test {
 
-    @Test
+    [TestMethod]
     public void issue2044_typeVariableExtendsObject() {
 
-        String x = "public class X <K extends Object> {\n" +
-                "    private int getPartition(final K key) {\n" +
+        string x = "public class X <K:Object> {\n" +
+                "    private int getPartition(/*final*/K key) {\n" +
                 "        int x = (new Object()).hashCode();\n" +
                 "        return key.hashCode() / getHashes().length;\n" +
                 "    }\n" +
@@ -40,10 +40,10 @@ public class Issue2044Test {
     }
 
 
-    @Test
+    [TestMethod]
     public void issue2044_simpleTypeVariable() {
-        String x = "public class X <K> {\n" +
-                "    private int getPartition(final K key) {\n" +
+        string x = "public class X <K> {\n" +
+                "    private int getPartition(/*final*/K key) {\n" +
                 "        int x = (new Object()).hashCode();\n" +
                 "        return key.hashCode() / getHashes().length;\n" +
                 "    }\n" +
@@ -52,7 +52,7 @@ public class Issue2044Test {
         doTestSimple(x);
     }
 
-    private void doTestSimple(String x) {
+    private void doTestSimple(string x) {
         TypeSolver typeSolver = new CombinedTypeSolver(new ReflectionTypeSolver());
         ParserConfiguration configuration = new ParserConfiguration().setSymbolResolver(new JavaSymbolSolver(typeSolver));
         JavaParser javaParser = new JavaParser(configuration);
@@ -71,7 +71,7 @@ public class Issue2044Test {
             // throws RuntimeException - stack trace below
             methodCallExpr.calculateResolvedType();
 /*
-java.lang.RuntimeException: Method 'hashCode' cannot be resolved in context key.hashCode() (line: 3) MethodCallExprContext{wrapped=key.hashCode()}. Parameter types: []
+java.lang.RuntimeException: Method 'hashCode' cannot be resolved _in context key.hashCode() (line: 3) MethodCallExprContext{wrapped=key.hashCode()}. Parameter types: []
 
 	at com.github.javaparser.symbolsolver.javaparsermodel.JavaParserFacade.solveMethodAsUsage(JavaParserFacade.java:586)
 	at com.github.javaparser.symbolsolver.javaparsermodel.TypeExtractor.visit(TypeExtractor.java:267)
@@ -102,7 +102,7 @@ UnsolvedSymbolException{context='null', name='We are unable to find the method d
         });
     }
 
-    private void doTest(String x) {
+    private void doTest(string x) {
 
         TypeSolver typeSolver = new CombinedTypeSolver(new ReflectionTypeSolver());
         ParserConfiguration configuration = new ParserConfiguration().setSymbolResolver(new JavaSymbolSolver(typeSolver));
@@ -110,13 +110,13 @@ UnsolvedSymbolException{context='null', name='We are unable to find the method d
         ParseResult<CompilationUnit> result = javaParser.parse(ParseStart.COMPILATION_UNIT, provider(x));
 
         result.ifSuccessful(compilationUnit -> {
-            final List<MethodDeclaration> methodDeclarations = compilationUnit.findAll(MethodDeclaration.class);
+            /*final*/List<MethodDeclaration> methodDeclarations = compilationUnit.findAll(MethodDeclaration.class);
 
             methodDeclarations.forEach(methodDeclaration -> {
 
                 // Method declaration
                 ResolvedMethodDeclaration resolvedMethodDeclaration = methodDeclaration.resolve();
-                String resolvedReturnType = resolvedMethodDeclaration.getReturnType().describe();
+                string resolvedReturnType = resolvedMethodDeclaration.getReturnType().describe();
                 assertEquals("int", resolvedReturnType);
 
                 // Parameters
@@ -136,7 +136,7 @@ UnsolvedSymbolException{context='null', name='We are unable to find the method d
                 assertEquals(3, methodCalls.size());
 
                 // (new Object()).hashCode()
-                final MethodCallExpr object_hashCode = methodCalls.get(0);
+                /*final*/MethodCallExpr object_hashCode = methodCalls.get(0);
                 assertTrue(object_hashCode.hasScope());
                 Expression object_hashCode_scope = object_hashCode.getScope().get();
                 assertEquals("java.lang.Object", object_hashCode_scope.calculateResolvedType().describe());
@@ -145,7 +145,7 @@ UnsolvedSymbolException{context='null', name='We are unable to find the method d
                 assertEquals("int", object_hashCode.calculateResolvedType().describe());
 
                 // key.hashCode()
-                final MethodCallExpr key_hashCode = methodCalls.get(1);
+                /*final*/MethodCallExpr key_hashCode = methodCalls.get(1);
                 assertTrue(key_hashCode.hasScope());
                 Expression key_hashCode_scope = key_hashCode.getScope().get();
                 assertEquals("K", key_hashCode_scope.calculateResolvedType().describe());
@@ -158,7 +158,7 @@ UnsolvedSymbolException{context='null', name='We are unable to find the method d
                 // throws RuntimeException - stack trace below
                 ResolvedType key_hashCode_resolvedType = ((MethodCallExpr) key_hashCode).calculateResolvedType();
                 /*
-java.lang.RuntimeException: Method 'hashCode' cannot be resolved in context key.hashCode() (line: 3) MethodCallExprContext{wrapped=key.hashCode()}. Parameter types: []
+java.lang.RuntimeException: Method 'hashCode' cannot be resolved _in context key.hashCode() (line: 3) MethodCallExprContext{wrapped=key.hashCode()}. Parameter types: []
 
 	at com.github.javaparser.symbolsolver.javaparsermodel.JavaParserFacade.solveMethodAsUsage(JavaParserFacade.java:586)
 	at com.github.javaparser.symbolsolver.javaparsermodel.TypeExtractor.visit(TypeExtractor.java:267)
@@ -188,7 +188,7 @@ UnsolvedSymbolException{context='null', name='We are unable to find the method d
 
 
                 ResolvedType key_hashCode_resolvedReturnType = key_hashCode_resolved.getReturnType();
-                String key_hashCode_resolvedReturnTypeString = key_hashCode_resolvedReturnType.describe();
+                string key_hashCode_resolvedReturnTypeString = key_hashCode_resolvedReturnType.describe();
 
 
                 assertEquals("int", key_hashCode.resolve().getReturnType().describe());

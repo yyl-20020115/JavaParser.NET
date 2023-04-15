@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,11 +24,11 @@ namespace com.github.javaparser.ast.validator;
 /**
  * Runs a validator on all nodes of a certain type.
  */
-public class SingleNodeTypeValidator<N extends Node> implements Validator {
+public class SingleNodeTypeValidator<N:Node> implements Validator {
 
-    private final Class<N> type;
+    private /*final*/Class<N> type;
 
-    private final TypedValidator<N> validator;
+    private /*final*/TypedValidator<N> validator;
 
     public SingleNodeTypeValidator(Class<N> type, TypedValidator<N> validator) {
         this.type = type;

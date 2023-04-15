@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,16 +26,16 @@ namespace com.github.javaparser.printer.lexicalpreservation.transformations.ast.
 /**
  * Transforming ClassOrInterfaceDeclaration and verifying the LexicalPreservation works as expected.
  */
-class ClassOrInterfaceDeclarationTransformationsTest extends AbstractLexicalPreservingTest {
+class ClassOrInterfaceDeclarationTransformationsTest:AbstractLexicalPreservingTest {
 
-    protected ClassOrInterfaceDeclaration consider(String code) {
+    protected ClassOrInterfaceDeclaration consider(string code) {
         considerCode(code);
         return cu.getType(0).asClassOrInterfaceDeclaration();
     }
 
     // Name
 
-    @Test
+    [TestMethod]
     void settingName() {
         ClassOrInterfaceDeclaration cid = consider("class A {}");
         cid.setName("B");
@@ -44,14 +44,14 @@ class ClassOrInterfaceDeclarationTransformationsTest extends AbstractLexicalPres
 
     // isInterface
 
-    @Test
+    [TestMethod]
     void classToInterface() {
         ClassOrInterfaceDeclaration cid = consider("class A {}");
         cid.setInterface(true);
         assertTransformedToString("interface A {}", cid);
     }
 
-    @Test
+    [TestMethod]
     void interfaceToClass() {
         ClassOrInterfaceDeclaration cid = consider("interface A {}");
         cid.setInterface(false);
@@ -60,21 +60,21 @@ class ClassOrInterfaceDeclarationTransformationsTest extends AbstractLexicalPres
 
     // typeParameters
 
-    @Test
+    [TestMethod]
     void addingTypeParameterWhenThereAreNone() {
         ClassOrInterfaceDeclaration cid = consider("class A {}");
         cid.addTypeParameter("T");
         assertTransformedToString("class A<T> {}", cid);
     }
 
-    @Test
+    [TestMethod]
     void addingTypeParameterAsFirstWhenThereAreSome() {
         ClassOrInterfaceDeclaration cid = consider("class A<U> {}");
         cid.getTypeParameters().addFirst(new TypeParameter("T", new NodeList<>()));
         assertTransformedToString("class A<T, U> {}", cid);
     }
 
-    @Test
+    [TestMethod]
     void addingTypeParameterAsLastWhenThereAreSome() {
         ClassOrInterfaceDeclaration cid = consider("class A<U> {}");
         cid.addTypeParameter("T");
@@ -83,44 +83,44 @@ class ClassOrInterfaceDeclarationTransformationsTest extends AbstractLexicalPres
 
     // extendedTypes
 
-    @Test
+    [TestMethod]
     void addingExtendedTypes() {
         ClassOrInterfaceDeclaration cid = consider("class A {}");
         cid.addExtendedType("Foo");
-        assertTransformedToString("class A extends Foo {}", cid);
+        assertTransformedToString("class A:Foo {}", cid);
     }
 
-    @Test
+    [TestMethod]
     void removingExtendedTypes() {
-        ClassOrInterfaceDeclaration cid = consider("public class A extends Foo {}");
+        ClassOrInterfaceDeclaration cid = consider("public class A:Foo {}");
         cid.getExtendedTypes().remove(0);
         assertTransformedToString("public class A {}", cid);
     }
 
-    @Test
+    [TestMethod]
     void replacingExtendedTypes() {
-        ClassOrInterfaceDeclaration cid = consider("public class A extends Foo {}");
+        ClassOrInterfaceDeclaration cid = consider("public class A:Foo {}");
         cid.getExtendedTypes().set(0, parseClassOrInterfaceType("Bar"));
-        assertTransformedToString("public class A extends Bar {}", cid);
+        assertTransformedToString("public class A:Bar {}", cid);
     }
 
     // implementedTypes
 
-    @Test
+    [TestMethod]
     void addingImplementedTypes() {
         ClassOrInterfaceDeclaration cid = consider("class A {}");
         cid.addImplementedType("Foo");
         assertTransformedToString("class A implements Foo {}", cid);
     }
 
-    @Test
+    [TestMethod]
     void removingImplementedTypes() {
         ClassOrInterfaceDeclaration cid = consider("public class A implements Foo {}");
         cid.getImplementedTypes().remove(0);
         assertTransformedToString("public class A {}", cid);
     }
 
-    @Test
+    [TestMethod]
     void replacingImplementedTypes() {
         ClassOrInterfaceDeclaration cid = consider("public class A implements Foo {}");
         cid.getImplementedTypes().set(0, parseClassOrInterfaceType("Bar"));
@@ -129,21 +129,21 @@ class ClassOrInterfaceDeclarationTransformationsTest extends AbstractLexicalPres
 
     // Modifiers
 
-    @Test
+    [TestMethod]
     void addingModifiers() {
         ClassOrInterfaceDeclaration cid = consider("class A {}");
         cid.setModifiers(createModifierList(PUBLIC));
         assertTransformedToString("public class A {}", cid);
     }
 
-    @Test
+    [TestMethod]
     void removingModifiers() {
         ClassOrInterfaceDeclaration cid = consider("public class A {}");
         cid.setModifiers(new NodeList<>());
         assertTransformedToString("class A {}", cid);
     }
 
-    @Test
+    [TestMethod]
     void replacingModifiers() {
         ClassOrInterfaceDeclaration cid = consider("public class A {}");
         cid.setModifiers(createModifierList(PROTECTED));
@@ -152,21 +152,21 @@ class ClassOrInterfaceDeclarationTransformationsTest extends AbstractLexicalPres
 
     // members
 
-    @Test
+    [TestMethod]
     void addingField() {
         ClassOrInterfaceDeclaration cid = consider("class A {}");
         cid.addField("int", "foo");
         assertTransformedToString("class A {" + SYSTEM_EOL + "    int foo;" + SYSTEM_EOL + "}", cid);
     }
 
-    @Test
+    [TestMethod]
     void removingField() {
         ClassOrInterfaceDeclaration cid = consider("public class A { int foo; }");
         cid.getMembers().remove(0);
         assertTransformedToString("public class A { }", cid);
     }
 
-    @Test
+    [TestMethod]
     void replacingFieldWithAnotherField() {
         ClassOrInterfaceDeclaration cid = consider("public class A {float f;}");
         cid.getMembers().set(0, new FieldDeclaration(new NodeList<>(), new VariableDeclarator(PrimitiveType.intType(), "bar")));
@@ -174,7 +174,7 @@ class ClassOrInterfaceDeclarationTransformationsTest extends AbstractLexicalPres
     }
 
     // Annotations
-    @Test
+    [TestMethod]
     void removingAnnotations() {
         ClassOrInterfaceDeclaration cid = consider(
                 "@Value" + SYSTEM_EOL +
@@ -183,7 +183,7 @@ class ClassOrInterfaceDeclarationTransformationsTest extends AbstractLexicalPres
         assertTransformedToString("public class A {}", cid);
     }
 
-    @Test
+    [TestMethod]
     void removingAnnotationsWithSpaces() {
         ClassOrInterfaceDeclaration cid = consider(
                   "   @Value " + SYSTEM_EOL +

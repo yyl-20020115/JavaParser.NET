@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,32 +26,32 @@ namespace com.github.javaparser.ast.expr;
 /**
  * Any literal value that is stored internally as a String.
  */
-public abstract class LiteralStringValueExpr extends LiteralExpr {
+public abstract class LiteralStringValueExpr:LiteralExpr {
 
-    protected String value;
+    protected string value;
 
-    @AllFieldsConstructor
-    public LiteralStringValueExpr(final String value) {
+    //@AllFieldsConstructor
+    public LiteralStringValueExpr(/*final*/string value) {
         this(null, value);
     }
 
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
-    public LiteralStringValueExpr(TokenRange tokenRange, String value) {
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    public LiteralStringValueExpr(TokenRange tokenRange, string value) {
         super(tokenRange);
         setValue(value);
         customInitialization();
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public String getValue() {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public string getValue() {
         return value;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public LiteralStringValueExpr setValue(final String value) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public LiteralStringValueExpr setValue(/*final*/string value) {
         assertNotNull(value);
         if (value == this.value) {
             return this;
@@ -62,37 +62,37 @@ public abstract class LiteralStringValueExpr extends LiteralExpr {
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public LiteralStringValueExpr clone() {
         return (LiteralStringValueExpr) accept(new CloneVisitor(), null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public LiteralStringValueExprMetaModel getMetaModel() {
         return JavaParserMetaModel.literalStringValueExprMetaModel;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isLiteralStringValueExpr() {
         return true;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public LiteralStringValueExpr asLiteralStringValueExpr() {
         return this;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifLiteralStringValueExpr(Consumer<LiteralStringValueExpr> action) {
         action.accept(this);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<LiteralStringValueExpr> toLiteralStringValueExpr() {
         return Optional.of(this);
     }

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -32,14 +32,14 @@ public interface NodeWithRange<N> {
     N setRange(Range range);
 
     /**
-     * The begin position of this node in the source file.
+     * The begin position of this node _in the source file.
      */
     default Optional<Position> getBegin() {
         return getRange().map(r -> r.begin);
     }
 
     /**
-     * The end position of this node in the source file.
+     * The end position of this node _in the source file.
      */
     default Optional<Position> getEnd() {
         return getRange().map(r -> r.end);
@@ -48,7 +48,7 @@ public interface NodeWithRange<N> {
     /**
      * @deprecated use {@link #containsWithinRange(Node)} instead.
      */
-    @Deprecated
+    //@Deprecated
     default boolean containsWithin(Node other) {
         return containsWithinRange(other);
     }
@@ -59,7 +59,7 @@ public interface NodeWithRange<N> {
      * {@code n.containsWithinRange(n) == true}.
      *
      * <b>Notice:</b> This method compares two nodes based on their ranges <i>only</i>, but <i>not</i> based on the
-     * storage unit of the two nodes. Therefore, this method may return {@code true} for a node that is contained in a
+     * storage unit of the two nodes. Therefore, this method may return {@code true} for a node that is contained _in a
      * different file than this {@code NodeWithRange}. You may wish to use {@link Node#isAncestorOf(Node)} instead.
      *
      * @param other the node whose range should be compared with this node's range.

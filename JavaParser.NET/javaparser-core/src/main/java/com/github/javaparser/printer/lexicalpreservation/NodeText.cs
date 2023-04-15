@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,9 +28,9 @@ namespace com.github.javaparser.printer.lexicalpreservation;
  */
 class NodeText {
 
-    private final List<TextElement> elements;
+    private /*final*/List<TextElement> elements;
 
-    public static final int NOT_FOUND = -1;
+    public static /*final*/int NOT_FOUND = -1;
 
     // 
     // Constructors
@@ -71,11 +71,11 @@ class NodeText {
         addElement(index, new ChildTextElement(child));
     }
 
-    void addToken(int tokenKind, String text) {
+    void addToken(int tokenKind, string text) {
         elements.add(new TokenTextElement(tokenKind, text));
     }
 
-    void addToken(int index, int tokenKind, String text) {
+    void addToken(int index, int tokenKind, string text) {
         elements.add(index, new TokenTextElement(tokenKind, text));
     }
 
@@ -165,7 +165,7 @@ class NodeText {
     /**
      * Generate the corresponding string.
      */
-    String expand() {
+    string expand() {
         StringBuffer sb = new StringBuffer();
         elements.forEach(e -> sb.append(e.expand()));
         return sb.toString();
@@ -187,7 +187,7 @@ class NodeText {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "NodeText{" + elements + '}';
     }
 }

@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,13 +24,13 @@ namespace com.github.javaparser.printer;
 
 
 
-class PrettyPrintVisitorTest extends TestParser {
+class PrettyPrintVisitorTest:TestParser {
 
     private Optional<ConfigurationOption> getOption(PrinterConfiguration config, ConfigOption cOption) {
         return config.get(new DefaultConfigurationOption(cOption));
     }
 
-    @Test
+    [TestMethod]
     void getMaximumCommonTypeWithoutAnnotations() {
         VariableDeclarationExpr vde1 = parseVariableDeclarationExpr("int a[], b[]");
         assertEquals("int[]", vde1.getMaximumCommonType().get().toString());
@@ -42,7 +42,7 @@ class PrettyPrintVisitorTest extends TestParser {
         assertEquals("int[][]", vde3.getMaximumCommonType().get().toString());
     }
 
-    @Test
+    [TestMethod]
     void getMaximumCommonTypeWithAnnotations() {
         VariableDeclarationExpr vde1 = parseVariableDeclarationExpr("int a @Foo [], b[]");
         assertEquals("int", vde1.getMaximumCommonType().get().toString());
@@ -51,16 +51,16 @@ class PrettyPrintVisitorTest extends TestParser {
         assertEquals("int[][] @Foo []", vde2.getMaximumCommonType().get().toString());
     }
 
-    private String print(Node node) {
+    private string print(Node node) {
         return new DefaultPrettyPrinter().print(node);
     }
 
-    private String print(Node node, PrinterConfiguration conf) {
+    private string print(Node node, PrinterConfiguration conf) {
         return new DefaultPrettyPrinter(conf).print(node);
     }
 
 
-    @Test
+    [TestMethod]
     void printSimpleClassExpr() {
         ClassExpr expr = parseExpression("Foo.class");
         assertEquals("Foo.class", print(expr));
@@ -70,7 +70,7 @@ class PrettyPrintVisitorTest extends TestParser {
     /**
      * Here is a simple test according to R0 (removing spaces)
      */
-    @Test
+    [TestMethod]
     void printOperatorsR0(){
         PrinterConfiguration conf1 = new DefaultPrinterConfiguration().removeOption(new DefaultConfigurationOption(ConfigOption.SPACE_AROUND_OPERATORS));
         Statement statement1 = parseStatement("a = 1 + 1;");
@@ -80,7 +80,7 @@ class PrettyPrintVisitorTest extends TestParser {
     /**
      * Here we test different operators according to requirement R1 (handling different operators)
      */
-    @Test
+    [TestMethod]
     void printOperatorsR1(){
 
         Statement statement1 = parseStatement("a = 1 + 1;");
@@ -107,7 +107,7 @@ class PrettyPrintVisitorTest extends TestParser {
     /**
      * Here is a simple test according to R2 (that it should be optional/modifiable)
      */
-    @Test
+    [TestMethod]
     void printOperatorsR2(){
         PrinterConfiguration conf1 = new DefaultPrinterConfiguration().removeOption(new DefaultConfigurationOption(ConfigOption.SPACE_AROUND_OPERATORS));
         Statement statement1 = parseStatement("a = 1 + 1;");
@@ -127,7 +127,7 @@ class PrettyPrintVisitorTest extends TestParser {
 
     }
 
-    @Test
+    [TestMethod]
     void printOperatorA(){
         PrinterConfiguration conf = new DefaultPrinterConfiguration().removeOption(new DefaultConfigurationOption(ConfigOption.SPACE_AROUND_OPERATORS));
         Statement statement6 = parseStatement("if(1>2&&1<3||1<3){}");
@@ -135,33 +135,33 @@ class PrettyPrintVisitorTest extends TestParser {
                 + "}", print(statement6, conf));
     }
 
-    @Test
+    [TestMethod]
     void printOperator2(){
         Expression expression = parseExpression("1+1");
         PrinterConfiguration spaces = new DefaultPrinterConfiguration().removeOption(new DefaultConfigurationOption(ConfigOption.SPACE_AROUND_OPERATORS));
         assertEquals("1+1", print(expression, spaces));
     }
 
-    @Test
+    [TestMethod]
     void printArrayClassExpr() {
         ClassExpr expr = parseExpression("Foo[].class");
         assertEquals("Foo[].class", print(expr));
     }
 
-    @Test
+    [TestMethod]
     void printGenericClassExpr() {
         ClassExpr expr = parseExpression("Foo<String>.class");
         assertEquals("Foo<String>.class", print(expr));
     }
 
-    @Test
+    [TestMethod]
     void printSimplestClass() {
         Node node = parse("class A {}");
         assertEquals("class A {" + SYSTEM_EOL +
                 "}" + SYSTEM_EOL, print(node));
     }
 
-    @Test
+    [TestMethod]
     void printAClassWithField() {
         Node node = parse("class A { int a; }");
         assertEquals("class A {" + SYSTEM_EOL
@@ -170,15 +170,15 @@ class PrettyPrintVisitorTest extends TestParser {
                 "}" + SYSTEM_EOL, print(node));
     }
 
-    @Test
+    [TestMethod]
     void printAReceiverParameter() {
         Node node = parseBodyDeclaration("int x(@O X A.B.this, int y) { }");
         assertEquals("int x(@O X A.B.this, int y) {" + SYSTEM_EOL + "}", print(node));
     }
 
-    @Test
+    [TestMethod]
     void printLambdaIntersectionTypeAssignment() {
-        String code = "class A {" + SYSTEM_EOL +
+        string code = "class A {" + SYSTEM_EOL +
                 "  void f() {" + SYSTEM_EOL +
                 "    Runnable r = (Runnable & Serializable) (() -> {});" + SYSTEM_EOL +
                 "    r = (Runnable & Serializable)() -> {};" + SYSTEM_EOL +
@@ -190,18 +190,18 @@ class PrettyPrintVisitorTest extends TestParser {
         assertEquals("Runnable r = (Runnable & Serializable) (() -> {" + SYSTEM_EOL + "});", print(methodDeclaration.getBody().get().getStatements().get(0)));
     }
 
-    @Test
+    [TestMethod]
     void printIntersectionType() {
-        String code = "(Runnable & Serializable) (() -> {})";
+        string code = "(Runnable & Serializable) (() -> {})";
         Expression expression = parseExpression(code);
         Type type = ((CastExpr) expression).getType();
 
         assertEquals("Runnable & Serializable", print(type));
     }
 
-    @Test
+    [TestMethod]
     void printLambdaIntersectionTypeReturn() {
-        String code = "class A {" + SYSTEM_EOL
+        string code = "class A {" + SYSTEM_EOL
                 + "  Object f() {" + SYSTEM_EOL
                 + "    return (Comparator<Map.Entry<K, V>> & Serializable)(c1, c2) -> c1.getKey().compareTo(c2.getKey()); " + SYSTEM_EOL
                 + "}}";
@@ -211,20 +211,20 @@ class PrettyPrintVisitorTest extends TestParser {
         assertEquals("return (Comparator<Map.Entry<K, V>> & Serializable) (c1, c2) -> c1.getKey().compareTo(c2.getKey());", print(methodDeclaration.getBody().get().getStatements().get(0)));
     }
 
-    @Test
+    [TestMethod]
     void printClassWithoutJavaDocButWithComment() {
-        String code = String.format("/** javadoc */ public class A { %s// stuff%s}", SYSTEM_EOL, SYSTEM_EOL);
+        string code = String.format("/** javadoc */ public class A { %s// stuff%s}", SYSTEM_EOL, SYSTEM_EOL);
         CompilationUnit cu = parse(code);
         PrinterConfiguration ignoreJavaDoc = new DefaultPrinterConfiguration().removeOption(new DefaultConfigurationOption(ConfigOption.PRINT_JAVADOC));
-        String content = cu.toString(ignoreJavaDoc);
+        string content = cu.toString(ignoreJavaDoc);
         assertEquals(String.format("public class A {%s    // stuff%s}%s", SYSTEM_EOL, SYSTEM_EOL, SYSTEM_EOL), content);
     }
 
-    @Test
+    [TestMethod]
     void printImportsDefaultOrder() {
-        String code = "import x.y.z;import a.b.c;import static b.c.d;class c {}";
+        string code = "import x.y.z;import a.b.c;import static b.c.d;class c {}";
         CompilationUnit cu = parse(code);
-        String content = cu.toString();
+        string content = cu.toString();
         assertEqualsStringIgnoringEol("import x.y.z;\n" +
                 "import a.b.c;\n" +
                 "import static b.c.d;\n" +
@@ -233,12 +233,12 @@ class PrettyPrintVisitorTest extends TestParser {
                 "}\n", content);
     }
 
-    @Test
+    [TestMethod]
     void printImportsOrdered() {
-        String code = "import x.y.z;import a.b.c;import static b.c.d;class c {}";
+        string code = "import x.y.z;import a.b.c;import static b.c.d;class c {}";
         CompilationUnit cu = parse(code);
         PrinterConfiguration orderImports = new DefaultPrinterConfiguration().addOption(new DefaultConfigurationOption(ConfigOption.ORDER_IMPORTS));
-        String content = cu.toString(orderImports);
+        string content = cu.toString(orderImports);
         assertEqualsStringIgnoringEol("import static b.c.d;\n" +
                 "import a.b.c;\n" +
                 "import x.y.z;\n" +
@@ -247,7 +247,7 @@ class PrettyPrintVisitorTest extends TestParser {
                 "}\n", content);
     }
 
-    @Test
+    [TestMethod]
     void multilineJavadocGetsFormatted() {
         CompilationUnit cu = new CompilationUnit();
         cu.addClass("X").addMethod("abc").setJavadocComment("line1\n   line2 *\n * line3");
@@ -264,7 +264,7 @@ class PrettyPrintVisitorTest extends TestParser {
                 "}\n", cu.toString());
     }
 
-    @Test
+    [TestMethod]
     void emptyJavadocGetsFormatted() {
         CompilationUnit cu = new CompilationUnit();
         cu.addClass("X").addMethod("abc").setJavadocComment("");
@@ -278,7 +278,7 @@ class PrettyPrintVisitorTest extends TestParser {
                 "}\n", cu.toString());
     }
 
-    @Test
+    [TestMethod]
     void multilineJavadocWithLotsOfEmptyLinesGetsFormattedNeatly() {
         CompilationUnit cu = new CompilationUnit();
         cu.addClass("X").addMethod("abc").setJavadocComment("\n\n\n ab\n\n\n cd\n\n\n");
@@ -295,7 +295,7 @@ class PrettyPrintVisitorTest extends TestParser {
                 "}\n", cu.toString());
     }
 
-    @Test
+    [TestMethod]
     void singlelineJavadocGetsFormatted() {
         CompilationUnit cu = new CompilationUnit();
         cu.addClass("X").addMethod("abc").setJavadocComment("line1");
@@ -310,7 +310,7 @@ class PrettyPrintVisitorTest extends TestParser {
                 "}\n", cu.toString());
     }
 
-    @Test
+    [TestMethod]
     void javadocAlwaysGetsASpaceBetweenTheAsteriskAndTheRestOfTheLine() {
         CompilationUnit cu = new CompilationUnit();
         cu.addClass("X").addMethod("abc").setJavadocComment("line1\nline2");
@@ -326,7 +326,7 @@ class PrettyPrintVisitorTest extends TestParser {
                 "}\n", cu.toString());
     }
 
-    @Test
+    [TestMethod]
     void javadocAlwaysGetsAnAdditionalSpaceOrNeverGetsIt() {
         CompilationUnit cu = new CompilationUnit();
         cu.addClass("X").addMethod("abc").setJavadocComment("line1\n" +
@@ -345,7 +345,7 @@ class PrettyPrintVisitorTest extends TestParser {
                 "}\n", cu.toString());
     }
 
-    @Test
+    [TestMethod]
     void singlelineCommentGetsFormatted() {
         CompilationUnit cu = new CompilationUnit();
         cu.addClass("X").addMethod("abc").setComment(new LineComment("   line1  \n "));
@@ -358,10 +358,10 @@ class PrettyPrintVisitorTest extends TestParser {
                 "}\n", cu.toString());
     }
 
-    @Test
+    [TestMethod]
     void blockcommentGetsNoFormatting() {
         CompilationUnit cu = parse("class A {\n" +
-                "    public void helloWorld(String greeting, String name) {\n" +
+                "    public void helloWorld(string greeting, string name) {\n" +
                 "        //sdfsdfsdf\n" +
                 "            //sdfds\n" +
                 "        /*\n" +
@@ -372,7 +372,7 @@ class PrettyPrintVisitorTest extends TestParser {
 
         assertEqualsStringIgnoringEol("class A {\n" +
                 "\n" +
-                "    public void helloWorld(String greeting, String name) {\n" +
+                "    public void helloWorld(string greeting, string name) {\n" +
                 "        //sdfsdfsdf\n" +
                 "        //sdfds\n" +
                 "        /*\n" +
@@ -382,7 +382,7 @@ class PrettyPrintVisitorTest extends TestParser {
                 "}\n", cu.toString());
     }
 
-    private String expected = "public class SomeClass {\n" +
+    private string expected = "public class SomeClass {\n" +
             "\n" +
             "    /**\n" +
             "     * tester line\n" +
@@ -395,9 +395,9 @@ class PrettyPrintVisitorTest extends TestParser {
             "    }\n" +
             "}\n";
 
-    @Test
+    [TestMethod]
     void javadocIssue1907_allLeadingSpaces() {
-        String input_allLeadingSpaces = "public class SomeClass{" +
+        string input_allLeadingSpaces = "public class SomeClass{" +
                 "/**\n" +
                 " * tester line\n" +
                 " * multi line comment\n" +
@@ -411,9 +411,9 @@ class PrettyPrintVisitorTest extends TestParser {
         assertEqualsStringIgnoringEol(expected, cu_allLeadingSpaces.toString());
     }
 
-    @Test
+    [TestMethod]
     void javadocIssue1907_singleMissingLeadingSpace() {
-        String input_singleMissingLeadingSpace = "public class SomeClass{" +
+        string input_singleMissingLeadingSpace = "public class SomeClass{" +
                 "/**\n" +
                 "* tester line\n" +
                 " * multi line comment\n" +
@@ -427,9 +427,9 @@ class PrettyPrintVisitorTest extends TestParser {
         assertEqualsStringIgnoringEol(expected, cu_singleMissingLeadingSpace.toString());
     }
 
-    @Test
+    [TestMethod]
     void javadocIssue1907_leadingTab() {
-        String input_leadingTab = "public class SomeClass{" +
+        string input_leadingTab = "public class SomeClass{" +
                 "/**\n" +
                 "\t * tester line\n" +
                 " * multi line comment\n" +
@@ -443,17 +443,17 @@ class PrettyPrintVisitorTest extends TestParser {
         assertEqualsStringIgnoringEol(expected, cu_leadingTab.toString());
     }
 
-    @Test
+    [TestMethod]
     void printYield() {
         Statement statement = parseStatement("yield 5*5;");
         assertEqualsStringIgnoringEol("yield 5 * 5;", statement.toString());
     }
 
-    @Test
+    [TestMethod]
     void printTextBlock() {
         CompilationUnit cu = parseCompilationUnit(
                 ParserConfiguration.LanguageLevel.JAVA_13_PREVIEW,
-                "class X{String html = \"\"\"\n" +
+                "class X{string html = \"\"\"\n" +
                 "              <html>\n" +
                 "                  <body>\n" +
                 "                      <p>Hello, world</p>\n" +
@@ -462,7 +462,7 @@ class PrettyPrintVisitorTest extends TestParser {
                 "              \"\"\";}"
         );
 
-        assertEqualsStringIgnoringEol("String html = \"\"\"\n" +
+        assertEqualsStringIgnoringEol("string html = \"\"\"\n" +
                 "    <html>\n" +
                 "        <body>\n" +
                 "            <p>Hello, world</p>\n" +
@@ -471,24 +471,24 @@ class PrettyPrintVisitorTest extends TestParser {
                 "    \"\"\";", cu.getClassByName("X").get().getFieldByName("html").get().toString());
     }
 
-    @Test
+    [TestMethod]
     void printTextBlock2() {
         CompilationUnit cu = parseCompilationUnit(
                 ParserConfiguration.LanguageLevel.JAVA_13_PREVIEW,
-                "class X{String html = \"\"\"\n" +
+                "class X{string html = \"\"\"\n" +
                 "              <html>\n" +
                 "              </html>\"\"\";}"
         );
 
-        assertEqualsStringIgnoringEol("String html = \"\"\"\n" +
+        assertEqualsStringIgnoringEol("string html = \"\"\"\n" +
                 "    <html>\n" +
                 "    </html>\"\"\";", cu.getClassByName("X").get().getFieldByName("html").get().toString());
     }
 
 
-    @Test
+    [TestMethod]
     void innerClassWithConstructorReceiverParameterTest() {
-        String innerClassWithConstructorReceiverParam =
+        string innerClassWithConstructorReceiverParam =
                 "public class A {\n\n" +
                         "    class InnerA {\n\n" +
                         "        InnerA(A A.this) {\n" +

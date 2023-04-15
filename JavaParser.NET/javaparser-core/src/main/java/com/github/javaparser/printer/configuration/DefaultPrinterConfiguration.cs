@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -109,7 +109,7 @@ public class DefaultPrinterConfiguration implements PrinterConfiguration {
     }
 
     // contains all available options
-    // an option contained in the set is considered as activated
+    // an option contained _in the set is considered as activated
     private Set<ConfigurationOption> defaultOptions = new HashSet<>(Arrays.asList(new DefaultConfigurationOption(ConfigOption.PRINT_COMMENTS, ConfigOption.PRINT_COMMENTS.defaultValue), new DefaultConfigurationOption(ConfigOption.PRINT_JAVADOC, ConfigOption.PRINT_JAVADOC.defaultValue), new DefaultConfigurationOption(ConfigOption.SPACE_AROUND_OPERATORS, ConfigOption.SPACE_AROUND_OPERATORS.defaultValue), new DefaultConfigurationOption(ConfigOption.INDENT_CASE_IN_SWITCH, ConfigOption.INDENT_CASE_IN_SWITCH.defaultValue), new DefaultConfigurationOption(ConfigOption.MAX_ENUM_CONSTANTS_TO_ALIGN_HORIZONTALLY, ConfigOption.MAX_ENUM_CONSTANTS_TO_ALIGN_HORIZONTALLY.defaultValue), new DefaultConfigurationOption(ConfigOption.END_OF_LINE_CHARACTER, ConfigOption.END_OF_LINE_CHARACTER.defaultValue), new DefaultConfigurationOption(ConfigOption.INDENTATION, ConfigOption.INDENTATION.defaultValue)));
 
     public DefaultPrinterConfiguration() {

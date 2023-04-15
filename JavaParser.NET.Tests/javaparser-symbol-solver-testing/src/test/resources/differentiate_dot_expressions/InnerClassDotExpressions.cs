@@ -8,15 +8,15 @@ public class InnerClassDotExpressions {
 
 class InnerClassContainer {
     class InnerClass {
-        public static String methodCall() {
+        public static string methodCall() {
             return "CalledMethod";
         }
         class InnerInnerClass {
-            public static String innerMethodCall() {
+            public static string innerMethodCall() {
                 return "CalledInnerInnerClass";
             }
             class InnerInnerInnerClass {
-                public static String innerInnerMethodCall() {
+                public static string innerInnerMethodCall() {
                     return "CalledInnerInnerInnerClass";
                 }
             }

@@ -9,10 +9,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -23,7 +23,7 @@ namespace com.github.javaparser;
 
 
 
-public class LineSeparatorProcessorTest extends AbstractLexicalPreservingTest{
+public class LineSeparatorProcessorTest:AbstractLexicalPreservingTest{
 
     // TODO: Add more tests outside the "happy path" (e.g. mixed EOL, no EOL, etc.)
 
@@ -31,25 +31,25 @@ public class LineSeparatorProcessorTest extends AbstractLexicalPreservingTest{
      * This test case must prevent an UnsupportedOperation Removed throwed by LexicalPreservation when we try to replace an expression
      */
     public void doTest(LineSeparator lineSeparator) {
-        String eol = lineSeparator.asRawString();
+        string eol = lineSeparator.asRawString();
 
         considerCode("" +
                 "    public class Foo { //comment" + eol +
-                "        private String a;" + eol +
-                "        private String b;" + eol +
-                "        private String c;" + eol +
-                "        private String d;" + eol +
+                "        private string a;" + eol +
+                "        private string b;" + eol +
+                "        private string c;" + eol +
+                "        private string d;" + eol +
                 "    }");
 
         // Note: Expect the platform's EOL character when printing
-        String expected = "" +
+        string expected = "" +
                 "    public class Foo { //comment" + eol +
-                "    private String newField;" + eol +
+                "    private string newField;" + eol +
                 "    " + eol +
-                "    private String a;" + eol +
-                "        private String b;" + eol +
-                "        private String c;" + eol +
-                "        private String d;" + eol +
+                "    private string a;" + eol +
+                "        private string b;" + eol +
+                "        private string c;" + eol +
+                "        private string d;" + eol +
                 "    }";
 
 
@@ -62,12 +62,12 @@ public class LineSeparatorProcessorTest extends AbstractLexicalPreservingTest{
         cd.get().getMembers().addFirst(fd);
 
         // should be printed like this
-//        System.out.println("\n\nOriginal:\n" + original);
-//        System.out.println("\n\nExpected:\n" + expected);
+//        System._out.println("\n\nOriginal:\n" + original);
+//        System._out.println("\n\nExpected:\n" + expected);
 
         // but the result is
-        final String actual = LexicalPreservingPrinter.print(cu);
-//        System.out.println("\n\nActual:\n" + actual);
+        /*final*/string actual = LexicalPreservingPrinter.print(cu);
+//        System._out.println("\n\nActual:\n" + actual);
 
 
         // The LineEndingProcessingProvider sets the line ending to the root node.
@@ -75,8 +75,8 @@ public class LineSeparatorProcessorTest extends AbstractLexicalPreservingTest{
         LineSeparator lineSeparator_cu = cu.getLineEndingStyle();
         LineSeparator lineSeparator_fd = fd.getLineEndingStyle();
 
-//        System.out.println("lineSeparator_cu.describe() = " + lineSeparator_cu.describe());
-//        System.out.println("lineSeparator_fd.describe() = " + lineSeparator_fd.describe());
+//        System._out.println("lineSeparator_cu.describe() = " + lineSeparator_cu.describe());
+//        System._out.println("lineSeparator_fd.describe() = " + lineSeparator_fd.describe());
 
         // Assert that it has been detected and injected correctly.
         LineSeparator detectedLineSeparator = LineSeparator.detect(actual);
@@ -90,17 +90,17 @@ public class LineSeparatorProcessorTest extends AbstractLexicalPreservingTest{
 
     }
 
-    @Test
+    [TestMethod]
     public void testWithCr() {
         doTest(LineSeparator.CR);
     }
 
-    @Test
+    [TestMethod]
     public void testWithCrLf() {
         doTest(LineSeparator.CRLF);
     }
 
-    @Test
+    [TestMethod]
     public void testWithLf() {
         doTest(LineSeparator.LF);
     }

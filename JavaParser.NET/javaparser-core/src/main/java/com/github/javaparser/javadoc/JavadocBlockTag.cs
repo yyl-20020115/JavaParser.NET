@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -59,13 +59,13 @@ public class JavadocBlockTag {
             this.keyword = screamingToCamelCase(name());
         }
 
-        private String keyword;
+        private string keyword;
 
         boolean hasName() {
             return this == PARAM || this == EXCEPTION || this == THROWS;
         }
 
-        static Type fromName(String tagName) {
+        static Type fromName(string tagName) {
             for (Type t : Type.values()) {
                 if (t.keyword.equals(tagName)) {
                     return t;
@@ -81,9 +81,9 @@ public class JavadocBlockTag {
 
     private Optional<String> name = Optional.empty();
 
-    private String tagName;
+    private string tagName;
 
-    public JavadocBlockTag(Type type, String content) {
+    public JavadocBlockTag(Type type, string content) {
         this.type = type;
         this.tagName = type.keyword;
         if (type.hasName()) {
@@ -93,12 +93,12 @@ public class JavadocBlockTag {
         this.content = JavadocDescription.parseText(content);
     }
 
-    public JavadocBlockTag(String tagName, String content) {
+    public JavadocBlockTag(string tagName, string content) {
         this(Type.fromName(tagName), content);
         this.tagName = tagName;
     }
 
-    public static JavadocBlockTag createParamBlockTag(String paramName, String content) {
+    public static JavadocBlockTag createParamBlockTag(string paramName, string content) {
         return new JavadocBlockTag(Type.PARAM, paramName + " " + content);
     }
 
@@ -114,11 +114,11 @@ public class JavadocBlockTag {
         return name;
     }
 
-    public String getTagName() {
+    public string getTagName() {
         return tagName;
     }
 
-    public String toText() {
+    public string toText() {
         StringBuilder sb = new StringBuilder();
         sb.append("@");
         sb.append(tagName);
@@ -153,7 +153,7 @@ public class JavadocBlockTag {
     }
 
     @Override
-    public String toString() {
+    public string toString() {
         return "JavadocBlockTag{" + "type=" + type + ", content='" + content + '\'' + ", name=" + name + '}';
     }
 }

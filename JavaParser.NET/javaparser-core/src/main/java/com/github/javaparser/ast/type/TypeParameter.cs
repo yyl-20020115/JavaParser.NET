@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,7 +26,7 @@ namespace com.github.javaparser.ast.type;
 /**
  * A type parameter. Examples:
  * <br>{@code <}<b>{@code U}</b>{@code > U getU() { ... }}
- * <br>{@code class D <}<b>{@code @Brain T extends B & A & @Tripe C}</b>{@code > { ... }}
+ * <br>{@code class D <}<b>{@code @Brain T:B & A & @Tripe C}</b>{@code > { ... }}
  * <p>U and T are type parameter names.
  * <br>B, A, and C are type parameter bounds.
  * <br>Tripe is an annotation on type parameter bound C.
@@ -35,7 +35,7 @@ namespace com.github.javaparser.ast.type;
  * @author Julio Vilmar Gesser
  * @see com.github.javaparser.ast.nodeTypes.NodeWithTypeParameters
  */
-public class TypeParameter extends ReferenceType implements NodeWithSimpleName<TypeParameter>, NodeWithAnnotations<TypeParameter> {
+public class TypeParameter:ReferenceType implements NodeWithSimpleName<TypeParameter>, NodeWithAnnotations<TypeParameter> {
 
     private SimpleName name;
 
@@ -45,15 +45,15 @@ public class TypeParameter extends ReferenceType implements NodeWithSimpleName<T
         this(null, new SimpleName(), new NodeList<>(), new NodeList<>());
     }
 
-    public TypeParameter(final String name) {
+    public TypeParameter(/*final*/string name) {
         this(null, new SimpleName(name), new NodeList<>(), new NodeList<>());
     }
 
-    public TypeParameter(final String name, final NodeList<ClassOrInterfaceType> typeBound) {
+    public TypeParameter(/*final*/string name, /*final*/NodeList<ClassOrInterfaceType> typeBound) {
         this(null, new SimpleName(name), typeBound, new NodeList<>());
     }
 
-    @AllFieldsConstructor
+    //@AllFieldsConstructor
     public TypeParameter(SimpleName name, NodeList<ClassOrInterfaceType> typeBound, NodeList<AnnotationExpr> annotations) {
         this(null, name, typeBound, annotations);
     }
@@ -61,7 +61,7 @@ public class TypeParameter extends ReferenceType implements NodeWithSimpleName<T
     /**
      * This constructor is used by the parser and is considered private.
      */
-    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public TypeParameter(TokenRange tokenRange, SimpleName name, NodeList<ClassOrInterfaceType> typeBound, NodeList<AnnotationExpr> annotations) {
         super(tokenRange, annotations);
         setName(name);
@@ -70,14 +70,14 @@ public class TypeParameter extends ReferenceType implements NodeWithSimpleName<T
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+    //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
         v.visit(this, arg);
     }
 
@@ -86,7 +86,7 @@ public class TypeParameter extends ReferenceType implements NodeWithSimpleName<T
      *
      * @return the name of the paramenter
      */
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public SimpleName getName() {
         return name;
     }
@@ -95,15 +95,15 @@ public class TypeParameter extends ReferenceType implements NodeWithSimpleName<T
      * Return the list of {@link ClassOrInterfaceType} that this parameter
      * extends. Return {@code null} null if there are no type.
      *
-     * @return list of types that this paramente extends or {@code null}
+     * @return list of types that this paramente:or {@code null}
      */
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public NodeList<ClassOrInterfaceType> getTypeBound() {
         return typeBound;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public TypeParameter setName(final SimpleName name) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public TypeParameter setName(/*final*/SimpleName name) {
         assertNotNull(name);
         if (name == this.name) {
             return this;
@@ -116,8 +116,8 @@ public class TypeParameter extends ReferenceType implements NodeWithSimpleName<T
         return this;
     }
 
-    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public TypeParameter setTypeBound(final NodeList<ClassOrInterfaceType> typeBound) {
+    //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public TypeParameter setTypeBound(/*final*/NodeList<ClassOrInterfaceType> typeBound) {
         assertNotNull(typeBound);
         if (typeBound == this.typeBound) {
             return this;
@@ -137,7 +137,7 @@ public class TypeParameter extends ReferenceType implements NodeWithSimpleName<T
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
     public boolean remove(Node node) {
         if (node == null) {
             return false;
@@ -152,31 +152,31 @@ public class TypeParameter extends ReferenceType implements NodeWithSimpleName<T
     }
 
     @Override
-    public String asString() {
+    public string asString() {
         StringBuilder str = new StringBuilder(getNameAsString());
-        getTypeBound().ifNonEmpty(l -> str.append(l.stream().map(ClassOrInterfaceType::asString).collect(joining("&", " extends ", ""))));
+        getTypeBound().ifNonEmpty(l -> str.append(l.stream().map(ClassOrInterfaceType::asString).collect(joining("&", ":", ""))));
         return str.toString();
     }
 
     @Override
-    public String toDescriptor() {
+    public string toDescriptor() {
         return String.format("L%s;", resolve().qualifiedName());
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public TypeParameter clone() {
         return (TypeParameter) accept(new CloneVisitor(), null);
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public TypeParameterMetaModel getMetaModel() {
         return JavaParserMetaModel.typeParameterMetaModel;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public boolean replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
@@ -195,19 +195,19 @@ public class TypeParameter extends ReferenceType implements NodeWithSimpleName<T
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isTypeParameter() {
         return true;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public TypeParameter asTypeParameter() {
         return this;
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifTypeParameter(Consumer<TypeParameter> action) {
         action.accept(this);
     }
@@ -218,7 +218,7 @@ public class TypeParameter extends ReferenceType implements NodeWithSimpleName<T
     }
 
     @Override
-    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<TypeParameter> toTypeParameter() {
         return Optional.of(this);
     }

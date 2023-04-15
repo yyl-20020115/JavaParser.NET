@@ -1,5 +1,5 @@
 
 
-public interface Base<T, S extends Base<T, S>>{
+public interface Base<T, S:Base<T, S>>{
 
 }

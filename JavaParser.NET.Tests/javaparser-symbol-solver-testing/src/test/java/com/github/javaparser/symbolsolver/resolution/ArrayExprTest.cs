@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -28,9 +28,9 @@ namespace com.github.javaparser.symbolsolver.resolution;
  */
 class ArrayExprTest {
 
-    @Test
+    [TestMethod]
     void verifyAnArrayAccessExprTypeIsCalculatedProperly() {
-        String code = "class A { String[] arrSQL; String toExamine = arrSQL[1]; }";
+        string code = "class A { String[] arrSQL; string toExamine = arrSQL[1]; }";
         FieldDeclaration field = parse(code).getClassByName("A").get().getFieldByName("toExamine").get();
 
         ResolvedType type = JavaParserFacade.get(new ReflectionTypeSolver()).getType(field.getVariables().get(0).getInitializer().get());
@@ -38,9 +38,9 @@ class ArrayExprTest {
         assertEquals("java.lang.String", type.asReferenceType().getQualifiedName());
     }
 
-    @Test
+    [TestMethod]
     void arrayLengthValueDeclaration() {
-        String code = "class A { String[] arrSQL; int l = arrSQL.length; }";
+        string code = "class A { String[] arrSQL; int l = arrSQL.length; }";
         ParserConfiguration parserConfiguration = new ParserConfiguration();
         parserConfiguration.setSymbolResolver(new JavaSymbolSolver(new ReflectionTypeSolver()));
         CompilationUnit cu = new JavaParser(parserConfiguration).parse(ParseStart.COMPILATION_UNIT, new StringProvider(code)).getResult().get();

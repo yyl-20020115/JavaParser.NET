@@ -10,10 +10,10 @@
  *     (at your option) any later version.
  * b) the terms of the Apache License
  *
- * You should have received a copy of both licenses in LICENCE.LGPL and
+ * You should have received a copy of both licenses _in LICENCE.LGPL and
  * LICENCE.APACHE. Please refer to those files for details.
  *
- * JavaParser is distributed in the hope that it will be useful,
+ * JavaParser is distributed _in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,8 +26,8 @@ namespace com.github.javaparser;
 
 class ProvidersTest {
 
-    @Test
-    void testResourceProvider() throws IOException {
+    [TestMethod]
+    void testResourceProvider(){
         Provider provider = Providers.resourceProvider("com/github/javaparser/issue_samples/Issue290.java.txt");
         assertNotNull(provider);
         JavaParser parser = new JavaParser();
@@ -35,8 +35,8 @@ class ProvidersTest {
         assertTrue(parse.isSuccessful());
     }
 
-    @Test
-    void testResourceProviderWithWrongEncoding() throws IOException {
+    [TestMethod]
+    void testResourceProviderWithWrongEncoding(){
         Provider provider = Providers.resourceProvider("com/github/javaparser/TestFileIso88591.java");
         assertNotNull(provider);
         JavaParser parser = new JavaParser();
@@ -44,8 +44,8 @@ class ProvidersTest {
         assertFalse(parse.isSuccessful());
     }
 
-    @Test
-    void testResourceProviderWithEncoding() throws IOException {
+    [TestMethod]
+    void testResourceProviderWithEncoding(){
         Provider provider = Providers.resourceProvider(
                 "com/github/javaparser/TestFileIso88591.java",
                 Charset.forName("ISO-8859-1")
