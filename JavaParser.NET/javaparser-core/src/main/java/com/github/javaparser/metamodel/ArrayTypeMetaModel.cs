@@ -36,7 +36,7 @@ public class ArrayTypeMetaModel:ReferenceTypeMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     ArrayTypeMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, ArrayType.class, "ArrayType", "com.github.javaparser.ast.type", false, false);
+        base(superBaseNodeMetaModel, ArrayType.class, "ArrayType", "com.github.javaparser.ast.type", false, false);
     }
 
     public PropertyMetaModel componentTypePropertyMetaModel;

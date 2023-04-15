@@ -36,7 +36,7 @@ public class FieldDeclarationMetaModel:BodyDeclarationMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     FieldDeclarationMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, FieldDeclaration.class, "FieldDeclaration", "com.github.javaparser.ast.body", false, false);
+        base(superBaseNodeMetaModel, FieldDeclaration.class, "FieldDeclaration", "com.github.javaparser.ast.body", false, false);
     }
 
     public PropertyMetaModel modifiersPropertyMetaModel;

@@ -31,14 +31,14 @@ class JavaParserPatternDeclarationTest implements ResolvedPatternDeclarationTest
                 .setLanguageLevel(ParserConfiguration.LanguageLevel.JAVA_14_PREVIEW);
     }
 
-    @Override
+    //@Override
     public Optional<Node> getWrappedDeclaration(AssociableToAST associableToAST) {
         return Optional.of(
                 safeCast(associableToAST, JavaParserPatternDeclaration.class).getWrappedNode()
         );
     }
 
-    @Override
+    //@Override
     public JavaParserPatternDeclaration createValue() {
         PatternExpr wrappedNode = StaticJavaParser.parse("class A {a() {if (object is string d) return;}}")
                 .findFirst(PatternExpr.class).get();
@@ -46,7 +46,7 @@ class JavaParserPatternDeclarationTest implements ResolvedPatternDeclarationTest
         return new JavaParserPatternDeclaration(wrappedNode, typeSolver);
     }
 
-    @Override
+    //@Override
     public string getCanonicalNameOfExpectedType(ResolvedValueDeclaration resolvedDeclaration) {
         return String.class.getCanonicalName();
     }

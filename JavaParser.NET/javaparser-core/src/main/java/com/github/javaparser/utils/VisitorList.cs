@@ -43,26 +43,26 @@ public class VisitorList<N:Node> implements List<N> {
         innerList = new ArrayList<>();
     }
 
-    @Override
-    public boolean add(N elem) {
+    //@Override
+    public bool add(N elem) {
         return innerList.add(new EqualsHashcodeOverridingFacade(elem));
     }
 
-    @Override
+    //@Override
     public void add(int index, N elem) {
         innerList.add(index, new EqualsHashcodeOverridingFacade(elem));
     }
 
-    @Override
-    public boolean addAll(Collection<?:N> col) {
-        boolean modified = false;
+    //@Override
+    public bool addAll(Collection<?:N> col) {
+        bool modified = false;
         for (N elem : col) if (add(elem))
             modified = true;
         return modified;
     }
 
-    @Override
-    public boolean addAll(int index, Collection<?:N> col) {
+    //@Override
+    public bool addAll(int index, Collection<?:N> col) {
         if (col.isEmpty())
             return false;
         for (N elem : col) {
@@ -75,161 +75,161 @@ public class VisitorList<N:Node> implements List<N> {
         return true;
     }
 
-    @Override
+    //@Override
     public void clear() {
         innerList.clear();
     }
 
-    @Override
-    public boolean contains(Object elem) {
+    //@Override
+    public bool contains(Object elem) {
         return innerList.contains(new EqualsHashcodeOverridingFacade((N) elem));
     }
 
-    @Override
-    public boolean containsAll(Collection<?> col) {
+    //@Override
+    public bool containsAll(Collection<?> col) {
         for (Object elem : col) if (!contains(elem))
             return false;
         return true;
     }
 
-    @Override
+    //@Override
     public N get(int index) {
         return innerList.get(index).overridden;
     }
 
-    @Override
+    //@Override
     public int indexOf(Object elem) {
         return innerList.indexOf(new EqualsHashcodeOverridingFacade((N) elem));
     }
 
-    @Override
-    public boolean isEmpty() {
+    //@Override
+    public bool isEmpty() {
         return innerList.isEmpty();
     }
 
-    @Override
+    //@Override
     public Iterator<N> iterator() {
         return new Iterator<N>() {
 
             /*final*/Iterator<EqualsHashcodeOverridingFacade> itr = innerList.iterator();
 
-            @Override
-            public boolean hasNext() {
+            //@Override
+            public bool hasNext() {
                 return itr.hasNext();
             }
 
-            @Override
+            //@Override
             public N next() {
                 return itr.next().overridden;
             }
 
-            @Override
+            //@Override
             public void remove() {
                 itr.remove();
             }
         };
     }
 
-    @Override
+    //@Override
     public int lastIndexOf(Object elem) {
         return innerList.lastIndexOf(new EqualsHashcodeOverridingFacade((N) elem));
     }
 
-    @Override
+    //@Override
     public ListIterator<N> listIterator() {
         return listIterator(0);
     }
 
-    @Override
+    //@Override
     public ListIterator<N> listIterator(int index) {
         return new ListIterator<N>() {
 
             /*final*/ListIterator<EqualsHashcodeOverridingFacade> itr = innerList.listIterator(index);
 
-            @Override
-            public boolean hasNext() {
+            //@Override
+            public bool hasNext() {
                 return itr.hasNext();
             }
 
-            @Override
+            //@Override
             public N next() {
                 return itr.next().overridden;
             }
 
-            @Override
+            //@Override
             public void remove() {
                 itr.remove();
             }
 
-            @Override
+            //@Override
             public void add(N elem) {
                 itr.add(new EqualsHashcodeOverridingFacade((N) elem));
             }
 
-            @Override
-            public boolean hasPrevious() {
+            //@Override
+            public bool hasPrevious() {
                 return itr.hasPrevious();
             }
 
-            @Override
+            //@Override
             public int nextIndex() {
                 return itr.nextIndex();
             }
 
-            @Override
+            //@Override
             public N previous() {
                 return itr.previous().overridden;
             }
 
-            @Override
+            //@Override
             public int previousIndex() {
                 return itr.previousIndex();
             }
 
-            @Override
+            //@Override
             public void set(N elem) {
                 itr.set(new EqualsHashcodeOverridingFacade((N) elem));
             }
         };
     }
 
-    @Override
-    public boolean remove(Object elem) {
+    //@Override
+    public bool remove(Object elem) {
         return innerList.remove(new EqualsHashcodeOverridingFacade((N) elem));
     }
 
-    @Override
+    //@Override
     public N remove(int index) {
         return innerList.remove(index).overridden;
     }
 
-    @Override
-    public boolean removeAll(Collection<?> col) {
-        boolean modified = false;
+    //@Override
+    public bool removeAll(Collection<?> col) {
+        bool modified = false;
         for (Object elem : col) if (remove(elem))
             modified = true;
         return modified;
     }
 
-    @Override
-    public boolean retainAll(Collection<?> col) {
+    //@Override
+    public bool retainAll(Collection<?> col) {
         int oldSize = size();
         clear();
         addAll((Collection<?:N>) col);
         return size() != oldSize;
     }
 
-    @Override
+    //@Override
     public N set(int index, N elem) {
         return innerList.set(index, new EqualsHashcodeOverridingFacade((N) elem)).overridden;
     }
 
-    @Override
+    //@Override
     public int size() {
         return innerList.size();
     }
 
-    @Override
+    //@Override
     public List<N> subList(int fromIndex, int toIndex) {
         return new VisitorList<N>(hashcodeVisitor, equalsVisitor) {
 
@@ -239,17 +239,17 @@ public class VisitorList<N:Node> implements List<N> {
         };
     }
 
-    @Override
+    //@Override
     public Object[] toArray() {
         return innerList.stream().map(facade -> facade.overridden).collect(Collectors.toList()).toArray();
     }
 
-    @Override
+    //@Override
     public <T> T[] toArray(T[] arr) {
         return innerList.stream().map(facade -> facade.overridden).collect(Collectors.toList()).toArray(arr);
     }
 
-    @Override
+    //@Override
     public string toString() {
         StringBuilder sb = new StringBuilder("[");
         if (size() == 0)
@@ -268,23 +268,23 @@ public class VisitorList<N:Node> implements List<N> {
             this.overridden = overridden;
         }
 
-        @Override
+        //@Override
         public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
             throw new AssertionError();
         }
 
-        @Override
+        //@Override
         public <A> void accept(VoidVisitor<A> v, A arg) {
             throw new AssertionError();
         }
 
-        @Override
+        //@Override
         public /*final*/int hashCode() {
             return overridden.accept(hashcodeVisitor, null);
         }
 
-        @Override
-        public boolean equals(/*final*/Object obj) {
+        //@Override
+        public bool equals(/*final*/Object obj) {
             if (obj == null || !(obj is VisitorList.EqualsHashcodeOverridingFacade)) {
                 return false;
             }

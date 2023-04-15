@@ -34,7 +34,7 @@ public class JavassistInterfaceDeclaration:AbstractTypeDeclaration
     private TypeSolver typeSolver;
     private JavassistTypeDeclarationAdapter javassistTypeDeclarationAdapter;
 
-    @Override
+    //@Override
     public string toString() {
         return "JavassistInterfaceDeclaration{" +
                 "ctClass=" + ctClass.getName() +
@@ -44,24 +44,24 @@ public class JavassistInterfaceDeclaration:AbstractTypeDeclaration
 
     public JavassistInterfaceDeclaration(CtClass ctClass, TypeSolver typeSolver) {
         if (!ctClass.isInterface()) {
-            throw new IllegalArgumentException("Not an interface: " + ctClass.getName());
+            throw new ArgumentException("Not an interface: " + ctClass.getName());
         }
         this.ctClass = ctClass;
         this.typeSolver = typeSolver;
         this.javassistTypeDeclarationAdapter = new JavassistTypeDeclarationAdapter(ctClass, typeSolver, this);
     }
 
-    @Override
+    //@Override
     public List<ResolvedReferenceType> getInterfacesExtended() {
         return javassistTypeDeclarationAdapter.getInterfaces();
     }
 
-    @Override
+    //@Override
     public string getPackageName() {
         return ctClass.getPackageName();
     }
 
-    @Override
+    //@Override
     public string getClassName() {
         string className = ctClass.getName().replace('$', '.');
         if (getPackageName() != null) {
@@ -70,7 +70,7 @@ public class JavassistInterfaceDeclaration:AbstractTypeDeclaration
         return className;
     }
 
-    @Override
+    //@Override
     public string getQualifiedName() {
         return ctClass.getName().replace('$', '.');
     }
@@ -81,66 +81,66 @@ public class JavassistInterfaceDeclaration:AbstractTypeDeclaration
         return JavassistUtils.solveMethodAsUsage(name, argumentsTypes, typeSolver, invokationContext, typeParameterValues, this, ctClass);
     }
 
-    @Override
+    //@Override
     //@Deprecated
-    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
+    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, bool staticOnly) {
         return JavassistUtils.solveMethod(name, argumentsTypes, staticOnly, typeSolver, this, ctClass);
     }
 
-    @Override
-    public boolean isAssignableBy(ResolvedType type) {
+    //@Override
+    public bool isAssignableBy(ResolvedType type) {
         return javassistTypeDeclarationAdapter.isAssignableBy(type);
     }
 
-    @Override
+    //@Override
     public List<ResolvedFieldDeclaration> getAllFields() {
       return javassistTypeDeclarationAdapter.getDeclaredFields();
     }
 
-    @Override
-    public boolean isAssignableBy(ResolvedReferenceTypeDeclaration other) {
+    //@Override
+    public bool isAssignableBy(ResolvedReferenceTypeDeclaration other) {
         return javassistTypeDeclarationAdapter.isAssignableBy(other);
     }
 
-    @Override
-    public List<ResolvedReferenceType> getAncestors(boolean acceptIncompleteList) {
+    //@Override
+    public List<ResolvedReferenceType> getAncestors(bool acceptIncompleteList) {
         return javassistTypeDeclarationAdapter.getAncestors(acceptIncompleteList);
     }
 
-    @Override
-    public Set<ResolvedMethodDeclaration> getDeclaredMethods() {
+    //@Override
+    public HashSet<ResolvedMethodDeclaration> getDeclaredMethods() {
         return Arrays.stream(ctClass.getDeclaredMethods())
                 .map(m -> new JavassistMethodDeclaration(m, typeSolver))
                 .collect(Collectors.toSet());
     }
 
-    @Override
-    public boolean hasDirectlyAnnotation(string canonicalName) {
+    //@Override
+    public bool hasDirectlyAnnotation(string canonicalName) {
         return ctClass.hasAnnotation(canonicalName);
     }
 
-    @Override
+    //@Override
     public string getName() {
         String[] nameElements = ctClass.getSimpleName().replace('$', '.').split("\\.");
         return nameElements[nameElements.length - 1];
     }
 
-    @Override
+    //@Override
     public List<ResolvedTypeParameterDeclaration> getTypeParameters() {
         return javassistTypeDeclarationAdapter.getTypeParameters();
     }
 
-    @Override
+    //@Override
     public AccessSpecifier accessSpecifier() {
         return JavassistFactory.modifiersToAccessLevel(ctClass.getModifiers());
     }
 
-    @Override
+    //@Override
     public ResolvedInterfaceDeclaration asInterface() {
         return this;
     }
 
-    @Override
+    //@Override
     public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name, TypeSolver typeSolver) {
         for (CtField field : ctClass.getDeclaredFields()) {
             if (field.getName().equals(name)) {
@@ -172,17 +172,17 @@ public class JavassistInterfaceDeclaration:AbstractTypeDeclaration
         return ctClass.getClassFile().getInterfaces();
     }
 
-    @Override
+    //@Override
     public Optional<ResolvedReferenceTypeDeclaration> containerType() {
         return javassistTypeDeclarationAdapter.containerType();
     }
 
-    @Override
-    public Set<ResolvedReferenceTypeDeclaration> internalTypes() {
+    //@Override
+    public HashSet<ResolvedReferenceTypeDeclaration> internalTypes() {
         return javassistTypeDeclarationAdapter.internalTypes();
     }
 
-    @Override
+    //@Override
     public ResolvedReferenceTypeDeclaration getInternalType(string name) {
         /*
         The name of the ReferenceTypeDeclaration could be composed on the internal class and the outer class, e.g. A$B. That's why we search the internal type _in the ending part.
@@ -194,8 +194,8 @@ public class JavassistInterfaceDeclaration:AbstractTypeDeclaration
                 new UnsolvedSymbolException("Internal type not found: " + name));
     }
 
-    @Override
-    public boolean hasInternalType(string name) {
+    //@Override
+    public bool hasInternalType(string name) {
         /*
         The name of the ReferenceTypeDeclaration could be composed on the internal class and the outer class, e.g. A$B. That's why we search the internal type _in the ending part.
         In case the name is composed of the internal type only, i.e. f.getName() returns B, it will also works.
@@ -203,7 +203,7 @@ public class JavassistInterfaceDeclaration:AbstractTypeDeclaration
         return this.internalTypes().stream().anyMatch(f -> f.getName().endsWith(name));
     }
 
-    @Override
+    //@Override
     public List<ResolvedConstructorDeclaration> getConstructors() {
         return Collections.emptyList();
     }

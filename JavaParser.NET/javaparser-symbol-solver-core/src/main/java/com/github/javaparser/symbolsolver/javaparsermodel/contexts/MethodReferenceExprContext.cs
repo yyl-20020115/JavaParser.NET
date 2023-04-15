@@ -31,15 +31,15 @@ public class MethodReferenceExprContext:AbstractJavaParserContext<MethodReferenc
     ///
 
     public MethodReferenceExprContext(MethodReferenceExpr wrappedNode, TypeSolver typeSolver) {
-        super(wrappedNode, typeSolver);
+        base(wrappedNode, typeSolver);
     }
 
     ///
     /// Public methods
     ///
 
-    @Override
-    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
+    //@Override
+    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, bool staticOnly) {
         if ("new".equals(name)) {
             throw new UnsupportedOperationException("Constructor calls not yet resolvable");
         }
@@ -184,7 +184,7 @@ public class MethodReferenceExprContext:AbstractJavaParserContext<MethodReferenc
             }
             i++;
         }
-        throw new IllegalArgumentException();
+        throw new ArgumentException();
     }
 
 }

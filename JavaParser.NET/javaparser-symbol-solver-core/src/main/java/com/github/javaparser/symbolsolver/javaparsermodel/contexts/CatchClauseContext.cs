@@ -29,7 +29,7 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.contexts;
 public class CatchClauseContext:AbstractJavaParserContext<CatchClause> {
 
     public CatchClauseContext(CatchClause wrappedNode, TypeSolver typeSolver) {
-        super(wrappedNode, typeSolver);
+        base(wrappedNode, typeSolver);
     }
 
     //@Override

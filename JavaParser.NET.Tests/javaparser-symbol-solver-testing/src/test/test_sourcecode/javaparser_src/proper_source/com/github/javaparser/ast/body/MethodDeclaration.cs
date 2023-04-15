@@ -44,7 +44,7 @@ public /*final*/class MethodDeclaration:BodyDeclaration implements DocumentableN
 
 	private BlockStmt body;
 
-    private boolean isDefault = false;
+    private bool isDefault = false;
 
     public MethodDeclaration() {
 	}
@@ -65,7 +65,7 @@ public /*final*/class MethodDeclaration:BodyDeclaration implements DocumentableN
 	public MethodDeclaration(/*final*/int modifiers, /*final*/List<AnnotationExpr> annotations,
 			/*final*/List<TypeParameter> typeParameters, /*final*/Type type, /*final*/string name,
 			/*final*/List<Parameter> parameters, /*final*/int arrayCount, /*final*/List<NameExpr> throws_, /*final*/BlockStmt block) {
-		super(annotations);
+		base(annotations);
 		setModifiers(modifiers);
 		setTypeParameters(typeParameters);
 		setType(type);
@@ -80,7 +80,7 @@ public /*final*/class MethodDeclaration:BodyDeclaration implements DocumentableN
 			/*final*/int modifiers, /*final*/List<AnnotationExpr> annotations,
 			/*final*/List<TypeParameter> typeParameters, /*final*/Type type, /*final*/string name,
 			/*final*/List<Parameter> parameters, /*final*/int arrayCount, /*final*/List<NameExpr> throws_, /*final*/BlockStmt block) {
-		super(beginLine, beginColumn, endLine, endColumn, annotations);
+		base(beginLine, beginColumn, endLine, endColumn, annotations);
 		setModifiers(modifiers);
 		setTypeParameters(typeParameters);
 		setType(type);
@@ -91,11 +91,11 @@ public /*final*/class MethodDeclaration:BodyDeclaration implements DocumentableN
 		setBody(block);
 	}
 
-	@Override public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+	@Override public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
 		return v.visit(this, arg);
 	}
 
-	@Override public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+	@Override public void accept<A>(VoidVisitor<A> v, A arg) {
 		v.visit(this, arg);
 	}
 
@@ -190,22 +190,22 @@ public /*final*/class MethodDeclaration:BodyDeclaration implements DocumentableN
 	}
 
 
-    public boolean isDefault() {
+    public bool isDefault() {
         return isDefault;
     }
 
-    public void setDefault(boolean isDefault) {
+    public void setDefault(bool isDefault) {
         this.isDefault = isDefault;
     }
 
 
-    @Override
+    //@Override
     public string getDeclarationAsString() {
         return getDeclarationAsString(true, true, true);
     }
 
-    @Override
-    public string getDeclarationAsString(boolean includingModifiers, boolean includingThrows) {
+    //@Override
+    public string getDeclarationAsString(bool includingModifiers, bool includingThrows) {
         return getDeclarationAsString(includingModifiers, includingThrows, true);
     }
     
@@ -217,8 +217,8 @@ public /*final*/class MethodDeclaration:BodyDeclaration implements DocumentableN
      * [throws exceptionsList]
      * @return method declaration as String
      */
-    @Override
-    public string getDeclarationAsString(boolean includingModifiers, boolean includingThrows, boolean includingParameterName) {
+    //@Override
+    public string getDeclarationAsString(bool includingModifiers, bool includingThrows, bool includingParameterName) {
         StringBuffer sb = new StringBuffer();
         if (includingModifiers) {
             AccessSpecifier accessSpecifier = ModifierSet.getAccessSpecifier(getModifiers());
@@ -245,7 +245,7 @@ public /*final*/class MethodDeclaration:BodyDeclaration implements DocumentableN
         sb.append(" ");
         sb.append(getName());
         sb.append("(");
-        boolean firstParam = true;
+        bool firstParam = true;
         for (Parameter param : getParameters())
         {
             if (firstParam) {
@@ -264,7 +264,7 @@ public /*final*/class MethodDeclaration:BodyDeclaration implements DocumentableN
         }
         sb.append(")");
         if (includingThrows) {
-            boolean firstThrow = true;
+            bool firstThrow = true;
             for (NameExpr thr : getThrows()) {
                 if (firstThrow) {
                     firstThrow = false;
@@ -278,12 +278,12 @@ public /*final*/class MethodDeclaration:BodyDeclaration implements DocumentableN
         return sb.toString();
     }
 
-    @Override
+    //@Override
     public void setJavaDoc(JavadocComment javadocComment) {
         this.javadocComment = javadocComment;
     }
 
-    @Override
+    //@Override
     public JavadocComment getJavaDoc() {
         return javadocComment;
     }

@@ -1,6 +1,6 @@
 public class A {
     public int FUNC() {
-        Class<?> cls = null;
+        Type cls = null;
         if (cls == null) return 0;
         else {
             B.FUNC3(cls);
@@ -8,13 +8,13 @@ public class A {
         }
     }
 
-    public void FUNC2(Class<?> arg) {
+    public void FUNC2(Type arg) {
         return;
     }
 }
 
 class B {
-    public static void FUNC3(Class<?> arg) {
+    public static void FUNC3(Type arg) {
         return;
     }
 }

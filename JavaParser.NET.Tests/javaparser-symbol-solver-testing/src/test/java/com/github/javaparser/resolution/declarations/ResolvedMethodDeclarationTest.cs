@@ -23,7 +23,7 @@ namespace com.github.javaparser.resolution.declarations;
 
 public interface ResolvedMethodDeclarationTest:ResolvedMethodLikeDeclarationTest {
 
-    @Override
+    //@Override
     ResolvedMethodDeclaration createValue();
 
     // TODO: Implement tests for ResolvedMethodDeclaration

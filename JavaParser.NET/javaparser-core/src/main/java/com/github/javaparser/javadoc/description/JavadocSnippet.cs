@@ -37,13 +37,13 @@ public class JavadocSnippet implements JavadocDescriptionElement {
         this.text = text;
     }
 
-    @Override
+    //@Override
     public string toText() {
         return this.text;
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -52,12 +52,12 @@ public class JavadocSnippet implements JavadocDescriptionElement {
         return text.equals(that.text);
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         return text.hashCode();
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "JavadocSnippet{" + "text='" + text + '\'' + '}';
     }

@@ -31,7 +31,7 @@ public class ModuleDeclaration:Node implements NodeWithName<ModuleDeclaration>, 
 
     private NodeList<AnnotationExpr> annotations;
 
-    private boolean isOpen;
+    private bool isOpen;
 
     private NodeList<ModuleDirective> directives;
 
@@ -39,12 +39,12 @@ public class ModuleDeclaration:Node implements NodeWithName<ModuleDeclaration>, 
         this(null, new NodeList<>(), new Name(), false, new NodeList<>());
     }
 
-    public ModuleDeclaration(Name name, boolean isOpen) {
+    public ModuleDeclaration(Name name, bool isOpen) {
         this(null, new NodeList<>(), name, isOpen, new NodeList<>());
     }
 
     //@AllFieldsConstructor
-    public ModuleDeclaration(NodeList<AnnotationExpr> annotations, Name name, boolean isOpen, NodeList<ModuleDirective> directives) {
+    public ModuleDeclaration(NodeList<AnnotationExpr> annotations, Name name, bool isOpen, NodeList<ModuleDirective> directives) {
         this(null, annotations, name, isOpen, directives);
     }
 
@@ -52,8 +52,8 @@ public class ModuleDeclaration:Node implements NodeWithName<ModuleDeclaration>, 
      * This constructor is used by the parser and is considered private.
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
-    public ModuleDeclaration(TokenRange tokenRange, NodeList<AnnotationExpr> annotations, Name name, boolean isOpen, NodeList<ModuleDirective> directives) {
-        super(tokenRange);
+    public ModuleDeclaration(TokenRange tokenRange, NodeList<AnnotationExpr> annotations, Name name, bool isOpen, NodeList<ModuleDirective> directives) {
+        base(tokenRange);
         setAnnotations(annotations);
         setName(name);
         setOpen(isOpen);
@@ -61,15 +61,15 @@ public class ModuleDeclaration:Node implements NodeWithName<ModuleDeclaration>, 
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -111,9 +111,9 @@ public class ModuleDeclaration:Node implements NodeWithName<ModuleDeclaration>, 
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
-    public boolean remove(Node node) {
+    public bool remove(Node node) {
         if (node == null) {
             return false;
         }
@@ -133,12 +133,12 @@ public class ModuleDeclaration:Node implements NodeWithName<ModuleDeclaration>, 
     }
 
     //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public boolean isOpen() {
+    public bool isOpen() {
         return isOpen;
     }
 
     //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public ModuleDeclaration setOpen(/*final*/boolean isOpen) {
+    public ModuleDeclaration setOpen(/*final*/bool isOpen) {
         if (isOpen == this.isOpen) {
             return this;
         }
@@ -166,21 +166,21 @@ public class ModuleDeclaration:Node implements NodeWithName<ModuleDeclaration>, 
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public ModuleDeclaration clone() {
         return (ModuleDeclaration) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public ModuleDeclarationMetaModel getMetaModel() {
         return JavaParserMetaModel.moduleDeclarationMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }

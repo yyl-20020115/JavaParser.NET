@@ -36,7 +36,7 @@ public class SwitchEntryMetaModel:NodeMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     SwitchEntryMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, SwitchEntry.class, "SwitchEntry", "com.github.javaparser.ast.stmt", false, false);
+        base(superBaseNodeMetaModel, SwitchEntry.class, "SwitchEntry", "com.github.javaparser.ast.stmt", false, false);
     }
 
     public PropertyMetaModel labelsPropertyMetaModel;

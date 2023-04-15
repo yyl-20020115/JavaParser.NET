@@ -42,25 +42,25 @@ public /*final*/class EnumConstantDeclaration:BodyDeclaration implements Documen
     }
 
     public EnumConstantDeclaration(List<AnnotationExpr> annotations, string name, List<Expression> args, List<BodyDeclaration> classBody) {
-        super(annotations);
+        base(annotations);
         setName(name);
         setArgs(args);
         setClassBody(classBody);
     }
 
     public EnumConstantDeclaration(int beginLine, int beginColumn, int endLine, int endColumn, List<AnnotationExpr> annotations, string name, List<Expression> args, List<BodyDeclaration> classBody) {
-        super(beginLine, beginColumn, endLine, endColumn, annotations);
+        base(beginLine, beginColumn, endLine, endColumn, annotations);
         setName(name);
         setArgs(args);
         setClassBody(classBody);
     }
 
-    @Override
+    //@Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
@@ -91,12 +91,12 @@ public /*final*/class EnumConstantDeclaration:BodyDeclaration implements Documen
         this.name = name;
     }
 
-    @Override
+    //@Override
     public void setJavaDoc(JavadocComment javadocComment) {
         this.javadocComment = javadocComment;
     }
 
-    @Override
+    //@Override
     public JavadocComment getJavaDoc() {
         return javadocComment;
     }

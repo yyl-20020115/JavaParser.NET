@@ -24,7 +24,7 @@ public
 class JavaCharStream
 {
   /** Whether parser is static. */
-  public static /*final*/boolean staticFlag = false;
+  public static /*final*/bool staticFlag = false;
 
 
   static /*final*/int hexval(char c) throws java.io.IOException {
@@ -85,8 +85,8 @@ class JavaCharStream
   protected int column = 0;
   protected int line = 1;
 
-  protected boolean prevCharIsCR = false;
-  protected boolean prevCharIsLF = false;
+  protected bool prevCharIsCR = false;
+  protected bool prevCharIsLF = false;
 
   protected Provider inputStream;
 
@@ -96,12 +96,12 @@ class JavaCharStream
   protected int nextCharInd = -1;
   protected int inBuf = 0;
   protected int tabSize = 1;
-  protected boolean trackLineColumn = true;
+  protected bool trackLineColumn = true;
 
   public void setTabSize(int i) { tabSize = i; }
   public int getTabSize(int i) { return tabSize; }
 
-  protected void ExpandBuff(boolean wrapAround)
+  protected void ExpandBuff(bool wrapAround)
   {
     char[] newbuffer = new char[bufsize + 2048];
     int newbufline[] = new int[bufsize + 2048];
@@ -553,8 +553,8 @@ class JavaCharStream
     line = bufline[j];
     column = bufcolumn[j];
   }
-  boolean getTrackLineColumn() { return trackLineColumn; }
-  void setTrackLineColumn(boolean tlc) { trackLineColumn = tlc; }
+  bool getTrackLineColumn() { return trackLineColumn; }
+  void setTrackLineColumn(bool tlc) { trackLineColumn = tlc; }
 
 }
 /* JavaCC - OriginalChecksum=9ab0136fd4b1e2a45a251f41181a5bd8 (do not edit this line) */

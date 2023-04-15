@@ -25,14 +25,14 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.declarations;
 
 class JavaParserParameterDeclarationTest implements ResolvedParameterDeclarationTest {
 
-    @Override
+    //@Override
     public Optional<Node> getWrappedDeclaration(AssociableToAST associableToAST) {
         return Optional.of(
                 safeCast(associableToAST, JavaParserParameterDeclaration.class).getWrappedNode()
         );
     }
 
-    @Override
+    //@Override
     public JavaParserParameterDeclaration createValue() {
         Parameter parameter = StaticJavaParser.parseMethodDeclaration("<T> void a(T a) {}")
                 .findFirst(Parameter.class).get();
@@ -40,7 +40,7 @@ class JavaParserParameterDeclarationTest implements ResolvedParameterDeclaration
         return new JavaParserParameterDeclaration(parameter, typeSolver);
     }
 
-    @Override
+    //@Override
     public string getCanonicalNameOfExpectedType(ResolvedValueDeclaration resolvedDeclaration) {
         return "T";
     }

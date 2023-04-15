@@ -4,7 +4,7 @@
   Line 46) sortByBeginPosition(nodes, false) ==> void
   Line 50) Collections.sort(nodes, new Comparator<Node>() {
 
-    @Override
+    //@Override
     public int compare(Node o1, Node o2) {
         return PositionUtils.compare(o1, o2, ignoringAnnotations);
     }

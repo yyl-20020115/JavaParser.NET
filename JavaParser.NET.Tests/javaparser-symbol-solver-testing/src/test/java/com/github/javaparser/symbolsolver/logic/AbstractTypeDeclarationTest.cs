@@ -23,7 +23,7 @@ namespace com.github.javaparser.symbolsolver.logic;
 
 
 
-public abstract class AbstractTypeDeclarationTest extends AbstractSymbolResolutionTest implements ResolvedReferenceTypeDeclarationTest {
+public abstract class AbstractTypeDeclarationTest:AbstractSymbolResolutionTest implements ResolvedReferenceTypeDeclarationTest {
 
     //@Override
     public abstract AbstractTypeDeclaration createValue();

@@ -37,13 +37,13 @@ public class Reshuffled implements DifferenceElement {
         this.nextOrder = nextOrder;
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "Reshuffled{" + nextOrder + ", previous=" + previousOrder + '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -54,14 +54,14 @@ public class Reshuffled implements DifferenceElement {
         return nextOrder.equals(that.nextOrder);
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         int result = previousOrder.hashCode();
         result = 31 * result + nextOrder.hashCode();
         return result;
     }
 
-    @Override
+    //@Override
     public CsmMix getElement() {
         return nextOrder;
     }
@@ -74,18 +74,18 @@ public class Reshuffled implements DifferenceElement {
         return nextOrder;
     }
 
-    @Override
-    public boolean isAdded() {
+    //@Override
+    public bool isAdded() {
         return false;
     }
 
-    @Override
-    public boolean isRemoved() {
+    //@Override
+    public bool isRemoved() {
         return false;
     }
 
-    @Override
-    public boolean isKept() {
+    //@Override
+    public bool isKept() {
         return false;
     }
 
@@ -93,7 +93,7 @@ public class Reshuffled implements DifferenceElement {
      * If the {@code DifferenceElement} wraps an EOL token then this method returns a new {@code DifferenceElement}
      * with all eof token replaced by the specified line separator. The line separator parameter must be a CsmToken with a valid line separator.
      */
-    @Override
+    //@Override
     public DifferenceElement replaceEolTokens(CsmElement lineSeparator) {
         CsmMix modifiedNextOrder = new CsmMix(replaceTokens(nextOrder.getElements(), lineSeparator));
         CsmMix modifiedPreviousOrder = new CsmMix(replaceTokens(previousOrder.getElements(), lineSeparator));
@@ -110,11 +110,11 @@ public class Reshuffled implements DifferenceElement {
     /*
      * Return true if the wrapped {@code CsmElement} is a new line token
      */
-    private boolean isNewLineToken(CsmElement element) {
+    private bool isNewLineToken(CsmElement element) {
         return isToken(element) && ((CsmToken) element).isNewLine();
     }
 
-    private boolean isToken(CsmElement element) {
+    private bool isToken(CsmElement element) {
         return element is CsmToken;
     }
 }

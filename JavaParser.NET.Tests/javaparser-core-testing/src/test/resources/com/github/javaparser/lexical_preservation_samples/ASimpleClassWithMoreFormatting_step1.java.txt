@@ -8,9 +8,9 @@ public class
 MyRenamedClass
 {
 
-    boolean aField;
+    bool aField;
 
-    public ASimpleClass(boolean aField)
+    public ASimpleClass(bool aField)
     {
         this.aField = aField;
     }
@@ -19,7 +19,7 @@ MyRenamedClass
     // Some empty lines
 
 
-    public boolean getAField()
+    public bool getAField()
     {
         return aField;
     }

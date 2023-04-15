@@ -28,7 +28,7 @@ class VisitorSetTest {
 
     [TestMethod]
     void normalEqualsDoesDeepCompare() {
-        Set<CompilationUnit> set = new HashSet<>();
+        HashSet<CompilationUnit> set = new HashSet<>();
         set.add(parse("class X{}"));
         set.add(parse("class X{}"));
         assertEquals(1, set.size());
@@ -36,7 +36,7 @@ class VisitorSetTest {
 
     [TestMethod]
     void objectIdentityEqualsDoesShallowCompare() {
-        Set<CompilationUnit> set = new VisitorSet<>(new ObjectIdentityHashCodeVisitor(),
+        HashSet<CompilationUnit> set = new VisitorSet<>(new ObjectIdentityHashCodeVisitor(),
                 new ObjectIdentityEqualsVisitor());
         set.add(parse("class X{}"));
         set.add(parse("class X{}"));
@@ -46,7 +46,7 @@ class VisitorSetTest {
     [TestMethod]
     void visitorSetContains() {
         CompilationUnit x1 = parse("class X{}");
-        Set<CompilationUnit> set = new VisitorSet<>(new ObjectIdentityHashCodeVisitor(),
+        HashSet<CompilationUnit> set = new VisitorSet<>(new ObjectIdentityHashCodeVisitor(),
                 new ObjectIdentityEqualsVisitor());
         set.add(x1);
         assertTrue(set.contains(x1));
@@ -57,7 +57,7 @@ class VisitorSetTest {
         List<CompilationUnit> list = new ArrayList<>();
         list.add(parse("class X{}"));
         list.add(parse("class X{}"));
-        Set<CompilationUnit> set = new VisitorSet<>(new ObjectIdentityHashCodeVisitor(),
+        HashSet<CompilationUnit> set = new VisitorSet<>(new ObjectIdentityHashCodeVisitor(),
                 new ObjectIdentityEqualsVisitor());
         set.addAll(list);
         assertTrue(set.size() == 2 && set.containsAll(list));
@@ -65,7 +65,7 @@ class VisitorSetTest {
 
     [TestMethod]
     void visitorSetIterator() {
-        Set<CompilationUnit> set = new VisitorSet<>(new ObjectIdentityHashCodeVisitor(),
+        HashSet<CompilationUnit> set = new VisitorSet<>(new ObjectIdentityHashCodeVisitor(),
                 new ObjectIdentityEqualsVisitor());
         CompilationUnit x1 = parse("class X{}");
         set.add(x1);
@@ -83,7 +83,7 @@ class VisitorSetTest {
     [TestMethod]
     void visitorSetRemove() {
         CompilationUnit x1 = parse("class X{}");
-        Set<CompilationUnit> set = new VisitorSet<>(new ObjectIdentityHashCodeVisitor(),
+        HashSet<CompilationUnit> set = new VisitorSet<>(new ObjectIdentityHashCodeVisitor(),
                 new ObjectIdentityEqualsVisitor());
         set.add(x1);
         assertTrue(set.remove(x1));
@@ -94,7 +94,7 @@ class VisitorSetTest {
         List<CompilationUnit> list = new ArrayList<>();
         list.add(parse("class X{}"));
         list.add(parse("class X{}"));
-        Set<CompilationUnit> set = new VisitorSet<>(new ObjectIdentityHashCodeVisitor(),
+        HashSet<CompilationUnit> set = new VisitorSet<>(new ObjectIdentityHashCodeVisitor(),
                 new ObjectIdentityEqualsVisitor());
         set.addAll(list);
         set.removeAll(list);
@@ -106,7 +106,7 @@ class VisitorSetTest {
         List<CompilationUnit> list = new ArrayList<>();
         list.add(parse("class X{}"));
         list.add(parse("class X{}"));
-        Set<CompilationUnit> set = new VisitorSet<>(new ObjectIdentityHashCodeVisitor(),
+        HashSet<CompilationUnit> set = new VisitorSet<>(new ObjectIdentityHashCodeVisitor(),
                 new ObjectIdentityEqualsVisitor());
         set.addAll(list);
         set.add(parse("class X{}"));
@@ -119,7 +119,7 @@ class VisitorSetTest {
         List<CompilationUnit> list = new ArrayList<>();
         list.add(parse("class X{}"));
         list.add(parse("class X{}"));
-        Set<CompilationUnit> set = new VisitorSet<>(new ObjectIdentityHashCodeVisitor(),
+        HashSet<CompilationUnit> set = new VisitorSet<>(new ObjectIdentityHashCodeVisitor(),
                 new ObjectIdentityEqualsVisitor());
         set.addAll(list);
         for (CompilationUnit u : set.toArray(new CompilationUnit[2]))

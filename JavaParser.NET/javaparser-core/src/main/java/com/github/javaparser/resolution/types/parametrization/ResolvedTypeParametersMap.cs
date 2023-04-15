@@ -60,8 +60,8 @@ public class ResolvedTypeParametersMap {
         }
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o)
             return true;
         if (!(o is ResolvedTypeParametersMap))
@@ -70,12 +70,12 @@ public class ResolvedTypeParametersMap {
         return nameToValue.equals(that.nameToValue) && nameToDeclaration.equals(that.nameToDeclaration);
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         return nameToValue.hashCode();
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "TypeParametersMap{" + "nameToValue=" + nameToValue + '}';
     }
@@ -124,7 +124,7 @@ public class ResolvedTypeParametersMap {
         return new Builder(nameToValue, nameToDeclaration);
     }
 
-    public boolean isEmpty() {
+    public bool isEmpty() {
         return nameToValue.isEmpty();
     }
 

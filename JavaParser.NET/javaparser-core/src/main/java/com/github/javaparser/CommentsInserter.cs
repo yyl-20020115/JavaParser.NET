@@ -41,7 +41,7 @@ class CommentsInserter {
      * Comments are attributed to the thing they comment and are removed from
      * the comments.
      */
-    private void insertComments(CompilationUnit cu, TreeSet<Comment> comments) {
+    private void insertComments(CompilationUnit cu, HashSet<Comment> comments) {
         if (comments.isEmpty())
             return;
         /* I should sort all the direct children and the comments, if a comment
@@ -61,7 +61,7 @@ class CommentsInserter {
      * This method try to attributes the nodes received to child of the node. It
      * returns the node that were not attributed.
      */
-    void insertComments(Node node, TreeSet<Comment> commentsToAttribute) {
+    void insertComments(Node node, HashSet<Comment> commentsToAttribute) {
         if (commentsToAttribute.isEmpty())
             return;
         if (node is CompilationUnit) {
@@ -76,7 +76,7 @@ class CommentsInserter {
         filter(n -> !(n is Modifier)).collect(toList());
         bool attributeToAnnotation = !(configuration.isIgnoreAnnotationsWhenAttributingComments());
         for (Node child : children) {
-            TreeSet<Comment> commentsInsideChild = new TreeSet<>(NODE_BY_BEGIN_POSITION);
+            HashSet<Comment> commentsInsideChild = new HashSet<>(NODE_BY_BEGIN_POSITION);
             commentsInsideChild.addAll(commentsToAttribute.stream().filter(comment -> comment.hasRange()).filter(comment -> PositionUtils.nodeContains(child, comment, !attributeToAnnotation)).collect(toList()));
             commentsToAttribute.removeAll(commentsInsideChild);
             insertComments(child, commentsInsideChild);
@@ -125,7 +125,7 @@ class CommentsInserter {
         }
     }
 
-    private void attributeLineCommentsOnSameLine(TreeSet<Comment> commentsToAttribute, List<Node> children) {
+    private void attributeLineCommentsOnSameLine(HashSet<Comment> commentsToAttribute, List<Node> children) {
         /* I can attribute _in line comments to elements preceeding them, if
          there is something contained _in their line */
         List<Comment> attributedComments = new LinkedList<>();

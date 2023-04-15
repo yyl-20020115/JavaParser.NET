@@ -42,7 +42,7 @@ public class Issue3024Test:AbstractResolutionTest {
                 "    }\n" +
                 "\n" +
                 "    public class InnerClass {\n" +
-                "        private boolean hasErrors;\n" +
+                "        private bool hasErrors;\n" +
                 "    }\n" +
                 "}");
 

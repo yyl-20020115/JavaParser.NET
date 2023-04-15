@@ -59,14 +59,14 @@ public class Position implements Comparable<Position> {
      */
     public Position(int line, int column) {
         if (line < Position.ABSOLUTE_END_LINE) {
-            throw new IllegalArgumentException("Can't position at line " + line);
+            throw new ArgumentException("Can't position at line " + line);
         }
         if (column < -1) {
             // TODO: This allows/permits column 0, which seemingly contradicts first column being 1
             // ... (see also nextLine() which indicates 1 being the first column of the next line)
             // ... (see also valid() which requires a column > 0)
             // TODO: Maybe we need an "ABSOLUTE_BEGIN_LINE" and "ABSOLUTE_END_LINE"?
-            throw new IllegalArgumentException("Can't position at column " + column);
+            throw new ArgumentException("Can't position at column " + column);
         }
         this.line = line;
         this.column = column;
@@ -116,7 +116,7 @@ public class Position implements Comparable<Position> {
      * Does not know what it is pointing at, so it can't check if the position is after the end of the source.
      * @return true if the position is usable or a special position.
      */
-    public boolean valid() {
+    public bool valid() {
         return ABSOLUTE_END_LINE == line || ABSOLUTE_BEGIN_LINE == line || line >= FIRST_LINE && column >= FIRST_COLUMN;
     }
 
@@ -124,7 +124,7 @@ public class Position implements Comparable<Position> {
      * @see #valid()
      * @return The inverse of {@link #valid()}
      */
-    public boolean invalid() {
+    public bool invalid() {
         return !valid();
     }
 
@@ -145,7 +145,7 @@ public class Position implements Comparable<Position> {
      * @param otherPosition the other position to compare to
      * @return true if this position is after the given position
      */
-    public boolean isAfter(Position otherPosition) {
+    public bool isAfter(Position otherPosition) {
         assertNotNull(otherPosition);
         if (line == otherPosition.line) {
             return column > otherPosition.column;
@@ -153,7 +153,7 @@ public class Position implements Comparable<Position> {
         return line > otherPosition.line || otherPosition.line == Position.ABSOLUTE_BEGIN_LINE;
     }
 
-    public boolean isAfterOrEqual(Position otherPosition) {
+    public bool isAfterOrEqual(Position otherPosition) {
         assertNotNull(otherPosition);
         return isAfter(otherPosition) || equals(otherPosition);
     }
@@ -162,7 +162,7 @@ public class Position implements Comparable<Position> {
      * @param otherPosition the other position to compare to
      * @return true if this position is before the given position
      */
-    public boolean isBefore(Position otherPosition) {
+    public bool isBefore(Position otherPosition) {
         assertNotNull(otherPosition);
         if (line == otherPosition.line) {
             return column < otherPosition.column;
@@ -170,12 +170,12 @@ public class Position implements Comparable<Position> {
         return line < otherPosition.line || otherPosition.line == Position.ABSOLUTE_END_LINE;
     }
 
-    public boolean isBeforeOrEqual(Position otherPosition) {
+    public bool isBeforeOrEqual(Position otherPosition) {
         assertNotNull(otherPosition);
         return isBefore(otherPosition) || equals(otherPosition);
     }
 
-    @Override
+    //@Override
     public int compareTo(Position otherPosition) {
         assertNotNull(otherPosition);
         if (isBefore(otherPosition)) {
@@ -187,8 +187,8 @@ public class Position implements Comparable<Position> {
         return 0;
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -197,12 +197,12 @@ public class Position implements Comparable<Position> {
         return Objects.equals(line, otherPosition.line) && Objects.equals(column, otherPosition.column);
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         return Objects.hash(line, column);
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "(line " + line + ",col " + column + ")";
     }

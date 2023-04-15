@@ -3,7 +3,7 @@ public class AnonymousClassExample {
     private static final Integer f = 1;
     private void sentNotificationResultEventInTransaction() {
         new TransactionCallbackWithoutResult() {
-            @Override
+            //@Override
             protected void doInTransactionWithoutResult(TransactionStatus status) {
                 f.toString();
             }

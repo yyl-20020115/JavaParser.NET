@@ -44,7 +44,7 @@ public class ReflectionFieldDeclaration implements ResolvedFieldDeclaration {
         this.type = type;
     }
 
-    @Override
+    //@Override
     public ResolvedType getType() {
         return type;
     }
@@ -54,27 +54,27 @@ public class ReflectionFieldDeclaration implements ResolvedFieldDeclaration {
         return ReflectionFactory.typeUsageFor(field.getGenericType(), typeSolver);
     }
 
-    @Override
+    //@Override
     public string getName() {
         return field.getName();
     }
 
-    @Override
-    public boolean isStatic() {
+    //@Override
+    public bool isStatic() {
         return Modifier.isStatic(field.getModifiers());
     }
     
-    @Override
-    public boolean isVolatile() {
+    //@Override
+    public bool isVolatile() {
         return Modifier.isVolatile(field.getModifiers());
     }
 
-    @Override
-    public boolean isField() {
+    //@Override
+    public bool isField() {
         return true;
     }
 
-    @Override
+    //@Override
     public ResolvedTypeDeclaration declaringType() {
         return ReflectionFactory.typeDeclarationFor(field.getDeclaringClass(), typeSolver);
     }
@@ -83,17 +83,17 @@ public class ReflectionFieldDeclaration implements ResolvedFieldDeclaration {
         return new ReflectionFieldDeclaration(field, typeSolver, fieldType);
     }
 
-    @Override
-    public boolean isParameter() {
+    //@Override
+    public bool isParameter() {
         return false;
     }
 
-    @Override
-    public boolean isType() {
+    //@Override
+    public bool isType() {
         return false;
     }
 
-    @Override
+    //@Override
     public AccessSpecifier accessSpecifier() {
         return ReflectionFactory.modifiersToAccessLevel(field.getModifiers());
     }

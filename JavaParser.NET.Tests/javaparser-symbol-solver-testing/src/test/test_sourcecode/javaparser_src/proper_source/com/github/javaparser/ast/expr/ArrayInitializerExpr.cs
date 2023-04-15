@@ -38,7 +38,7 @@ public /*final*/class ArrayInitializerExpr:Expression {
     }
 
     public ArrayInitializerExpr(int beginLine, int beginColumn, int endLine, int endColumn, List<Expression> values) {
-        super(beginLine, beginColumn, endLine, endColumn);
+        base(beginLine, beginColumn, endLine, endColumn);
         setValues(values);
     }
 

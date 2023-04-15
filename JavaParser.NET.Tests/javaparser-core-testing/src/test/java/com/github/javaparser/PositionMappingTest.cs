@@ -98,7 +98,7 @@ public class PositionMappingTest {
 		List<String> outLine = outLineIt.next();
 		Iterator<String> outPartIt = outLine.iterator();
 		string outPart = outPartIt.next();
-		boolean outFinished = false;
+		bool outFinished = false;
 		for (List<String> inLine : input) {
 			for (string inPart : inLine) {
 				assertFalse(outFinished);

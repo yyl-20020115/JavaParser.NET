@@ -80,7 +80,7 @@ class AstResolutionUtils {
         return base;
     }
 
-    static boolean hasDirectlyAnnotation(NodeWithAnnotations<?> nodeWithAnnotations, TypeSolver typeSolver,
+    static bool hasDirectlyAnnotation(NodeWithAnnotations<?> nodeWithAnnotations, TypeSolver typeSolver,
                                          string canonicalName) {
         for (AnnotationExpr annotationExpr : nodeWithAnnotations.getAnnotations()) {
             SymbolReference<ResolvedTypeDeclaration> ref = JavaParserFactory.getContext(annotationExpr, typeSolver)

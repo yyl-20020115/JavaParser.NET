@@ -36,28 +36,28 @@ public /*final*/class EnumDeclaration:TypeDeclaration implements DocumentableNod
     }
 
     public EnumDeclaration(int modifiers, string name) {
-        super(modifiers, name);
+        base(modifiers, name);
     }
 
     public EnumDeclaration(int modifiers, List<AnnotationExpr> annotations, string name, List<ClassOrInterfaceType> implementsList, List<EnumConstantDeclaration> entries, List<BodyDeclaration> members) {
-        super(annotations, modifiers, name, members);
+        base(annotations, modifiers, name, members);
         setImplements(implementsList);
         setEntries(entries);
     }
 
     public EnumDeclaration(int beginLine, int beginColumn, int endLine, int endColumn, int modifiers, List<AnnotationExpr> annotations, string name, List<ClassOrInterfaceType> implementsList, List<EnumConstantDeclaration> entries, List<BodyDeclaration> members) {
-        super(beginLine, beginColumn, endLine, endColumn, annotations, modifiers, name, members);
+        base(beginLine, beginColumn, endLine, endColumn, annotations, modifiers, name, members);
         setImplements(implementsList);
         setEntries(entries);
     }
 
-    @Override
+    //@Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
 
-    @Override
+    //@Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
@@ -80,12 +80,12 @@ public /*final*/class EnumDeclaration:TypeDeclaration implements DocumentableNod
 		setAsParentNodeOf(this.implementsList);
     }
 
-    @Override
+    //@Override
     public void setJavaDoc(JavadocComment javadocComment) {
         this.javadocComment = javadocComment;
     }
 
-    @Override
+    //@Override
     public JavadocComment getJavaDoc() {
         return javadocComment;
     }

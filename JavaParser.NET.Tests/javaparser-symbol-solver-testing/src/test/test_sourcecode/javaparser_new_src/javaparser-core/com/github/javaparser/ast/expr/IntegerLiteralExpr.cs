@@ -35,22 +35,22 @@ public class IntegerLiteralExpr:StringLiteralExpr {
 	}
 
 	public IntegerLiteralExpr(/*final*/string value) {
-		super(value);
+		base(value);
 	}
 
 	public IntegerLiteralExpr(/*final*/Range range, /*final*/string value) {
-		super(range, value);
+		base(range, value);
 	}
 
-	@Override public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+	@Override public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
 		return v.visit(this, arg);
 	}
 
-	@Override public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+	@Override public void accept<A>(VoidVisitor<A> v, A arg) {
 		v.visit(this, arg);
 	}
 
-	public /*final*/boolean isMinValue() {
+	public /*final*/bool isMinValue() {
 		return value != null && //
 				value.length() == 10 && //
 				value.equals(UNSIGNED_MIN_VALUE);

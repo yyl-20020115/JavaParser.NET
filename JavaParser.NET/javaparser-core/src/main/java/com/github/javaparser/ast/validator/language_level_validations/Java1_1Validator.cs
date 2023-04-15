@@ -32,7 +32,7 @@ public class Java1_1Validator:Java1_0Validator {
     }));
 
     public Java1_1Validator() {
-        super();
+        base();
         replace(noInnerClasses, innerClasses);
         remove(noReflection);
     }

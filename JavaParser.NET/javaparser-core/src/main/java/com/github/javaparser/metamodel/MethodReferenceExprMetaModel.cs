@@ -36,7 +36,7 @@ public class MethodReferenceExprMetaModel:ExpressionMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     MethodReferenceExprMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, MethodReferenceExpr.class, "MethodReferenceExpr", "com.github.javaparser.ast.expr", false, false);
+        base(superBaseNodeMetaModel, MethodReferenceExpr.class, "MethodReferenceExpr", "com.github.javaparser.ast.expr", false, false);
     }
 
     public PropertyMetaModel identifierPropertyMetaModel;

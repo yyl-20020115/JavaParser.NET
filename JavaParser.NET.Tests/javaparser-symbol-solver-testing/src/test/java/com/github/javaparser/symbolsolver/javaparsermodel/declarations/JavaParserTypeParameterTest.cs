@@ -25,7 +25,7 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.declarations;
 
 class JavaParserTypeParameterTest:AbstractTypeDeclarationTest implements ResolvedTypeParameterDeclarationTest {
 
-    @Override
+    //@Override
     public JavaParserTypeParameter createValue() {
         TypeParameter typeParameter = StaticJavaParser.parse("class A<T> {}")
                 .findFirst(TypeParameter.class).get();
@@ -33,15 +33,15 @@ class JavaParserTypeParameterTest:AbstractTypeDeclarationTest implements Resolve
         return new JavaParserTypeParameter(typeParameter, typeSolver);
     }
 
-    @Override
+    //@Override
     public Optional<Node> getWrappedDeclaration(AssociableToAST associableToAST) {
         return Optional.of(
                 safeCast(associableToAST, JavaParserTypeParameter.class).getWrappedNode()
         );
     }
 
-    @Override
-    public boolean isFunctionalInterface(AbstractTypeDeclaration typeDeclaration) {
+    //@Override
+    public bool isFunctionalInterface(AbstractTypeDeclaration typeDeclaration) {
         return false;
     }
 

@@ -44,19 +44,19 @@ public class ConstructorResolutionLogic {
 
     private static ResolvedType findCommonType(List<ResolvedType> variadicValues) {
         if (variadicValues.isEmpty()) {
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         }
         // TODO implement this decently
         return variadicValues.get(0);
     }
 
-    public static boolean isApplicable(ResolvedConstructorDeclaration constructor, List<ResolvedType> argumentsTypes,
+    public static bool isApplicable(ResolvedConstructorDeclaration constructor, List<ResolvedType> argumentsTypes,
                                        TypeSolver typeSolver) {
         return isApplicable(constructor, argumentsTypes, typeSolver, false);
     }
 
-    private static boolean isApplicable(ResolvedConstructorDeclaration constructor, List<ResolvedType> argumentsTypes,
-                                        TypeSolver typeSolver, boolean withWildcardTolerance) {
+    private static bool isApplicable(ResolvedConstructorDeclaration constructor, List<ResolvedType> argumentsTypes,
+                                        TypeSolver typeSolver, bool withWildcardTolerance) {
         if (constructor.hasVariadicParameter()) {
             int pos = constructor.getNumberOfParams() - 1;
             if (constructor.getNumberOfParams() == argumentsTypes.size()) {
@@ -90,7 +90,7 @@ public class ConstructorResolutionLogic {
             return false;
         }
         Map<String, ResolvedType> matchedParameters = new HashMap<>();
-        boolean needForWildCardTolerance = false;
+        bool needForWildCardTolerance = false;
         for (int i = 0; i < constructor.getNumberOfParams(); i++) {
             ResolvedType expectedType = constructor.getParam(i).getType();
             ResolvedType actualType = argumentsTypes.get(i);
@@ -99,7 +99,7 @@ public class ConstructorResolutionLogic {
                 matchedParameters.put(expectedType.asTypeParameter().getName(), actualType);
                 continue;
             }
-            boolean isAssignableWithoutSubstitution =
+            bool isAssignableWithoutSubstitution =
                     expectedType.isAssignableBy(actualType) || (constructor.getParam(i).isVariadic()
                             && new ResolvedArrayType(expectedType).isAssignableBy(actualType));
             if (!isAssignableWithoutSubstitution && expectedType.isReferenceType()
@@ -149,7 +149,7 @@ public class ConstructorResolutionLogic {
     }
 
     public static SymbolReference<ResolvedConstructorDeclaration> findMostApplicable(
-            List<ResolvedConstructorDeclaration> constructors, List<ResolvedType> argumentsTypes, TypeSolver typeSolver, boolean wildcardTolerance) {
+            List<ResolvedConstructorDeclaration> constructors, List<ResolvedType> argumentsTypes, TypeSolver typeSolver, bool wildcardTolerance) {
         List<ResolvedConstructorDeclaration> applicableConstructors = constructors.stream().filter((m) -> isApplicable(m, argumentsTypes, typeSolver, wildcardTolerance)).collect(Collectors.toList());
         if (applicableConstructors.isEmpty()) {
             return SymbolReference.unsolved();
@@ -159,7 +159,7 @@ public class ConstructorResolutionLogic {
         } else {
             ResolvedConstructorDeclaration winningCandidate = applicableConstructors.get(0);
             ResolvedConstructorDeclaration other = null;
-            boolean possibleAmbiguity = false;
+            bool possibleAmbiguity = false;
             for (int i = 1; i < applicableConstructors.size(); i++) {
                 other = applicableConstructors.get(i);
                 if (isMoreSpecific(winningCandidate, other, typeSolver)) {
@@ -191,9 +191,9 @@ public class ConstructorResolutionLogic {
         }
     }
 
-    private static boolean isMoreSpecific(ResolvedConstructorDeclaration constructorA,
+    private static bool isMoreSpecific(ResolvedConstructorDeclaration constructorA,
                                           ResolvedConstructorDeclaration constructorB, TypeSolver typeSolver) {
-        boolean oneMoreSpecificFound = false;
+        bool oneMoreSpecificFound = false;
         if (constructorA.getNumberOfParams() < constructorB.getNumberOfParams()) {
             return true;
         }

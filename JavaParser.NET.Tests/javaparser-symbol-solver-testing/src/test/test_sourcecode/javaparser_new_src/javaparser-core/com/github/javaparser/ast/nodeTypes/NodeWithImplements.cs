@@ -27,7 +27,7 @@ public interface NodeWithImplements<T> {
      * @param clazz the type to implements from
      * @return this
      */
-    public default T addImplements(Class<?> clazz) {
+    public default T addImplements(Type clazz) {
         ((Node) this).tryAddImportToParentCompilationUnit(clazz);
         return addImplements(clazz.getSimpleName());
     }

@@ -36,7 +36,7 @@ public class DoStmtMetaModel:StatementMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     DoStmtMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, DoStmt.class, "DoStmt", "com.github.javaparser.ast.stmt", false, false);
+        base(superBaseNodeMetaModel, DoStmt.class, "DoStmt", "com.github.javaparser.ast.stmt", false, false);
     }
 
     public PropertyMetaModel bodyPropertyMetaModel;

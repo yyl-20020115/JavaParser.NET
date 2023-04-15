@@ -39,7 +39,7 @@ public interface ResolvedTypeParametrizable {
      */
     Optional<ResolvedTypeParameterDeclaration> findTypeParameter(string name);
 
-    default boolean isGeneric() {
+    default bool isGeneric() {
         return !getTypeParameters().isEmpty();
     }
 }

@@ -36,8 +36,8 @@ class DifferenceElementCalculator {
             this.position = position;
         }
 
-        @Override
-        public boolean equals(Object other) {
+        //@Override
+        public bool equals(Object other) {
             if (other == null || !(other is ChildPositionInfo))
                 return false;
             ChildPositionInfo cpi = (ChildPositionInfo) other;
@@ -52,13 +52,13 @@ class DifferenceElementCalculator {
             		);
         }
 
-        @Override
+        //@Override
         public int hashCode() {
             return node.hashCode() + position.hashCode();
         }
     }
 
-    static boolean matching(CsmElement a, CsmElement b) {
+    static bool matching(CsmElement a, CsmElement b) {
         if (a is CsmChild) {
             if (b is CsmChild) {
                 CsmChild childA = (CsmChild) a;
@@ -99,7 +99,7 @@ class DifferenceElementCalculator {
         throw new UnsupportedOperationException(a.getClass().getSimpleName() + " " + b.getClass().getSimpleName());
     }
 
-    private static boolean replacement(CsmElement a, CsmElement b) {
+    private static bool replacement(CsmElement a, CsmElement b) {
         if (a is CsmIndent || b is CsmIndent || a is CsmUnindent || b is CsmUnindent) {
             return false;
         }
@@ -236,7 +236,7 @@ class DifferenceElementCalculator {
     }
 
     private static int considerRemoval(CsmElement removedElement, int originalIndex, List<DifferenceElement> elements) {
-        boolean dealtWith = false;
+        bool dealtWith = false;
         if (removedElement is CsmChild) {
             CsmChild removedChild = (CsmChild) removedElement;
             if (removedChild.getChild() is Type && removedChild.getChild().getParentNode().isPresent() && removedChild.getChild().getParentNode().get() is VariableDeclarator) {

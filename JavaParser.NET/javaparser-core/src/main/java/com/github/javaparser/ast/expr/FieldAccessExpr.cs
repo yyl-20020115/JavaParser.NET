@@ -33,7 +33,7 @@ public class FieldAccessExpr:Expression implements NodeWithSimpleName<FieldAcces
 
     private Expression scope;
 
-    @OptionalProperty
+    //@OptionalProperty
     private NodeList<Type> typeArguments;
 
     private SimpleName name;
@@ -56,22 +56,22 @@ public class FieldAccessExpr:Expression implements NodeWithSimpleName<FieldAcces
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public FieldAccessExpr(TokenRange tokenRange, Expression scope, NodeList<Type> typeArguments, SimpleName name) {
-        super(tokenRange);
+        base(tokenRange);
         setScope(scope);
         setTypeArguments(typeArguments);
         setName(name);
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -143,21 +143,21 @@ public class FieldAccessExpr:Expression implements NodeWithSimpleName<FieldAcces
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public FieldAccessExpr clone() {
         return (FieldAccessExpr) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public FieldAccessExprMetaModel getMetaModel() {
         return JavaParserMetaModel.fieldAccessExprMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
-    public boolean remove(Node node) {
+    public bool remove(Node node) {
         if (node == null) {
             return false;
         }
@@ -172,9 +172,9 @@ public class FieldAccessExpr:Expression implements NodeWithSimpleName<FieldAcces
         return super.remove(node);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }
@@ -197,19 +197,19 @@ public class FieldAccessExpr:Expression implements NodeWithSimpleName<FieldAcces
         return super.replace(node, replacementNode);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isFieldAccessExpr() {
+    public bool isFieldAccessExpr() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public FieldAccessExpr asFieldAccessExpr() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifFieldAccessExpr(Consumer<FieldAccessExpr> action) {
         action.accept(this);
@@ -228,12 +228,12 @@ public class FieldAccessExpr:Expression implements NodeWithSimpleName<FieldAcces
      * @see ObjectCreationExpr#resolve()
      * @see ExplicitConstructorInvocationStmt#resolve()
      */
-    @Override
+    //@Override
     public ResolvedValueDeclaration resolve() {
         return getSymbolResolver().resolveDeclaration(this, ResolvedValueDeclaration.class);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<FieldAccessExpr> toFieldAccessExpr() {
         return Optional.of(this);
@@ -242,14 +242,14 @@ public class FieldAccessExpr:Expression implements NodeWithSimpleName<FieldAcces
     /**
      * Indicate if this FieldAccessExpr is an element directly contained _in a larger FieldAccessExpr.
      */
-    public boolean isInternal() {
+    public bool isInternal() {
         return this.getParentNode().isPresent() && this.getParentNode().get() is FieldAccessExpr;
     }
 
     /**
      * Indicate if this FieldAccessExpr is top level, i.e., it is not directly contained _in a larger FieldAccessExpr.
      */
-    public boolean isTopLevel() {
+    public bool isTopLevel() {
         return !isInternal();
     }
 }

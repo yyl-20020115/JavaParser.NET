@@ -147,7 +147,7 @@ public class Indentation {
         formattedIndentation = indentString.toString();
     }
 
-    @Override
+    //@Override
     public string toString() {
         return type.name() + " size=" + size;
     }

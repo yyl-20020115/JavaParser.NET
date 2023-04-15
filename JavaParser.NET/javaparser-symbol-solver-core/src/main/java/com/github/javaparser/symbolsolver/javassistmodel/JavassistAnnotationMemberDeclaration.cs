@@ -46,7 +46,7 @@ public class JavassistAnnotationMemberDeclaration implements ResolvedAnnotationM
         this.typeSolver = typeSolver;
     }
 
-    @Override
+    //@Override
     public Expression getDefaultValue() {
          AnnotationDefaultAttribute defaultAttribute = (AnnotationDefaultAttribute) annotationMember.getMethodInfo().getAttribute(AnnotationDefaultAttribute.tag);
          if (defaultAttribute == null) return null;
@@ -56,7 +56,7 @@ public class JavassistAnnotationMemberDeclaration implements ResolvedAnnotationM
          return fn.apply(memberValue);
     }
     
-    @Override
+    //@Override
     public ResolvedType getType() {
         try {
             string descriptor = annotationMember.getMethodInfo().getDescriptor();
@@ -72,7 +72,7 @@ public class JavassistAnnotationMemberDeclaration implements ResolvedAnnotationM
         throw new UnsupportedOperationException(String.format("Obtaining the type of the annotation member %s is not supported yet.", annotationMember.getLongName()));
     }
 
-    @Override
+    //@Override
     public string getName() {
         return annotationMember.getName();
     }

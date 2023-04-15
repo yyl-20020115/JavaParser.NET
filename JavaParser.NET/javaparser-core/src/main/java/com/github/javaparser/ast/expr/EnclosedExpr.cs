@@ -47,20 +47,20 @@ public class EnclosedExpr:Expression {
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public EnclosedExpr(TokenRange tokenRange, Expression inner) {
-        super(tokenRange);
+        base(tokenRange);
         setInner(inner);
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -89,21 +89,21 @@ public class EnclosedExpr:Expression {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public EnclosedExpr clone() {
         return (EnclosedExpr) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public EnclosedExprMetaModel getMetaModel() {
         return JavaParserMetaModel.enclosedExprMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }
@@ -114,25 +114,25 @@ public class EnclosedExpr:Expression {
         return super.replace(node, replacementNode);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isEnclosedExpr() {
+    public bool isEnclosedExpr() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public EnclosedExpr asEnclosedExpr() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifEnclosedExpr(Consumer<EnclosedExpr> action) {
         action.accept(this);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<EnclosedExpr> toEnclosedExpr() {
         return Optional.of(this);
@@ -142,8 +142,8 @@ public class EnclosedExpr:Expression {
      * On Parenthesized Expressions, if the contained expression is a poly expression (§15.2), the parenthesized expression is also a poly expression. Otherwise, it is a standalone expression.
      * (https://docs.oracle.com/javase/specs/jls/se8/html/jls-15.html#jls-15.8.5)
      */
-    @Override
-    public boolean isPolyExpression() {
+    //@Override
+    public bool isPolyExpression() {
         return getInner().isPolyExpression();
     }
 }

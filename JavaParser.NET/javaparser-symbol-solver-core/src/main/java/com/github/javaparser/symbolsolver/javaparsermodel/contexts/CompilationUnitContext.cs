@@ -40,7 +40,7 @@ public class CompilationUnitContext:AbstractJavaParserContext<CompilationUnit> {
     ///
 
     public CompilationUnitContext(CompilationUnit wrappedNode, TypeSolver typeSolver) {
-        super(wrappedNode, typeSolver);
+        base(wrappedNode, typeSolver);
     }
 
     ///

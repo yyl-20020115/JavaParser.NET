@@ -36,6 +36,6 @@ public class UnparsableStmtMetaModel:StatementMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     UnparsableStmtMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, UnparsableStmt.class, "UnparsableStmt", "com.github.javaparser.ast.stmt", false, false);
+        base(superBaseNodeMetaModel, UnparsableStmt.class, "UnparsableStmt", "com.github.javaparser.ast.stmt", false, false);
     }
 }

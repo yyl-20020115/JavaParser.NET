@@ -24,11 +24,11 @@ class MethodCalls {
     }
 
     void getDeclaredConstructorTest() {
-        Class<?> clazz = Class.forName("");
+        Type clazz = Class.forName("");
         clazz.getDeclaredConstructor();
         clazz.getDeclaredConstructor(int.class);
         clazz.getDeclaredConstructor(int.class, int.class);
-        clazz.getDeclaredConstructor(new Class<?>[] { int.class });
+        clazz.getDeclaredConstructor(new Type[] { int.class });
     }
 
     void inheritedInterfaceMethod(){

@@ -141,7 +141,7 @@ public interface NodeWithVariables<N:Node> {
         }
         Helper helper = new Helper();
         int level = 0;
-        boolean keepGoing = true;
+        bool keepGoing = true;
         // In practice we want to check for how many levels of arrays all the variables have the same type,
         // including also the annotations
         while (keepGoing) {

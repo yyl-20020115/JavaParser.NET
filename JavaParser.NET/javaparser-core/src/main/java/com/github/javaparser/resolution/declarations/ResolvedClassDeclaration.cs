@@ -35,8 +35,8 @@ public interface ResolvedClassDeclaration:ResolvedReferenceTypeDeclaration, Reso
     /**
      * This method should always return true.
      */
-    @Override
-    default boolean isClass() {
+    //@Override
+    default bool isClass() {
         return true;
     }
 
@@ -78,6 +78,6 @@ public interface ResolvedClassDeclaration:ResolvedReferenceTypeDeclaration, Reso
      * List of constructors available for the class.
      * This list should also include the default constructor.
      */
-    @Override
+    //@Override
     List<ResolvedConstructorDeclaration> getConstructors();
 }

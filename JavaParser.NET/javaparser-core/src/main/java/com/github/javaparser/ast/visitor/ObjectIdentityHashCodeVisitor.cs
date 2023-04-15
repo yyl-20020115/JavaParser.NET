@@ -377,67 +377,67 @@ public class ObjectIdentityHashCodeVisitor implements GenericVisitor<Integer, Vo
         return n.hashCode();
     }
 
-    @Override()
+    //@Override()
     public Integer visit(/*final*/ModuleExportsDirective n, /*final*/Void arg) {
         return n.hashCode();
     }
 
-    @Override()
+    //@Override()
     public Integer visit(/*final*/ModuleProvidesDirective n, /*final*/Void arg) {
         return n.hashCode();
     }
 
-    @Override()
+    //@Override()
     public Integer visit(/*final*/ModuleUsesDirective n, /*final*/Void arg) {
         return n.hashCode();
     }
 
-    @Override
+    //@Override
     public Integer visit(/*final*/ModuleOpensDirective n, /*final*/Void arg) {
         return n.hashCode();
     }
 
-    @Override
+    //@Override
     public Integer visit(/*final*/UnparsableStmt n, /*final*/Void arg) {
         return n.hashCode();
     }
 
-    @Override
+    //@Override
     public Integer visit(/*final*/ReceiverParameter n, /*final*/Void arg) {
         return n.hashCode();
     }
 
-    @Override
+    //@Override
     public Integer visit(/*final*/VarType n, /*final*/Void arg) {
         return n.hashCode();
     }
 
-    @Override
+    //@Override
     public Integer visit(/*final*/Modifier n, /*final*/Void arg) {
         return n.hashCode();
     }
 
-    @Override
+    //@Override
     public Integer visit(/*final*/SwitchExpr n, /*final*/Void arg) {
         return n.hashCode();
     }
 
-    @Override
+    //@Override
     public Integer visit(/*final*/YieldStmt n, /*final*/Void arg) {
         return n.hashCode();
     }
 
-    @Override
+    //@Override
     public Integer visit(/*final*/TextBlockLiteralExpr n, /*final*/Void arg) {
         return n.hashCode();
     }
 
-    @Override
+    //@Override
     public Integer visit(/*final*/PatternExpr n, /*final*/Void arg) {
         return n.hashCode();
     }
 
-    @Override
+    //@Override
     public Integer visit(/*final*/RecordDeclaration n, /*final*/Void arg) {
         return n.hashCode();
     }

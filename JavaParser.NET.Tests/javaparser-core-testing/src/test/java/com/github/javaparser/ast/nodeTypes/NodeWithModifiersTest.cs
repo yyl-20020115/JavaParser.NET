@@ -40,7 +40,7 @@ class NodeWithModifiersTest {
         ClassOrInterfaceDeclaration decl = new ClassOrInterfaceDeclaration(new NodeList<>(),
                 false, "Foo");
         decl.register(new AstObserverAdapter() {
-            @Override
+            //@Override
             public void propertyChange(Node observedNode, ObservableProperty property, Object oldValue, Object newValue) {
                 changes.add("property " + property.name() + " is changed to " + newValue);
             }

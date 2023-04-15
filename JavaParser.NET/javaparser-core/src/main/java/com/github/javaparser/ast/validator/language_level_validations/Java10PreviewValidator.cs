@@ -28,7 +28,7 @@ namespace com.github.javaparser.ast.validator.language_level_validations;
 public class Java10PreviewValidator:Java10Validator {
 
     public Java10PreviewValidator() {
-        super();
+        base();
         // Incubator
         // No incubator language features added within Java 10
         // Preview

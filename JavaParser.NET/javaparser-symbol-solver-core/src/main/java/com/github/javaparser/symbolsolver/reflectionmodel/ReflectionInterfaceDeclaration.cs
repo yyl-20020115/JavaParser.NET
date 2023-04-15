@@ -34,7 +34,7 @@ public class ReflectionInterfaceDeclaration:AbstractTypeDeclaration
     /// Fields
     ///
 
-    private Class<?> clazz;
+    private Type clazz;
     private TypeSolver typeSolver;
     private ReflectionClassAdapter reflectionClassAdapter;
 
@@ -42,9 +42,9 @@ public class ReflectionInterfaceDeclaration:AbstractTypeDeclaration
     /// Constructor
     ///
 
-    public ReflectionInterfaceDeclaration(Class<?> clazz, TypeSolver typeSolver) {
+    public ReflectionInterfaceDeclaration(Type clazz, TypeSolver typeSolver) {
         if (!clazz.isInterface()) {
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         }
 
         this.clazz = clazz;
@@ -56,12 +56,12 @@ public class ReflectionInterfaceDeclaration:AbstractTypeDeclaration
     /// Public methods
     ///
 
-    @Override
-    public boolean isAssignableBy(ResolvedReferenceTypeDeclaration other) {
+    //@Override
+    public bool isAssignableBy(ResolvedReferenceTypeDeclaration other) {
         return isAssignableBy(new ReferenceTypeImpl(other));
     }
 
-    @Override
+    //@Override
     public string getPackageName() {
         if (clazz.getPackage() != null) {
             return clazz.getPackage().getName();
@@ -69,7 +69,7 @@ public class ReflectionInterfaceDeclaration:AbstractTypeDeclaration
         return null;
     }
 
-    @Override
+    //@Override
     public string getClassName() {
         string canonicalName = clazz.getCanonicalName();
         if (canonicalName != null && getPackageName() != null) {
@@ -78,19 +78,19 @@ public class ReflectionInterfaceDeclaration:AbstractTypeDeclaration
         return null;
     }
 
-    @Override
+    //@Override
     public string getQualifiedName() {
         return clazz.getCanonicalName();
     }
 
-    @Override
+    //@Override
     //@Deprecated
-    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> parameterTypes, boolean staticOnly) {
+    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> parameterTypes, bool staticOnly) {
         return ReflectionMethodResolutionLogic.solveMethod(name, parameterTypes, staticOnly,
                 typeSolver,this, clazz);
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "ReflectionInterfaceDeclaration{" +
                 "clazz=" + clazz.getCanonicalName() +
@@ -101,8 +101,8 @@ public class ReflectionInterfaceDeclaration:AbstractTypeDeclaration
         return new ReferenceTypeImpl(this);
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o) return true;
         if (!(o is ReflectionInterfaceDeclaration)) return false;
 
@@ -117,7 +117,7 @@ public class ReflectionInterfaceDeclaration:AbstractTypeDeclaration
         return true;
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         return clazz.hashCode();
     }
@@ -154,8 +154,8 @@ public class ReflectionInterfaceDeclaration:AbstractTypeDeclaration
         }
     }
 
-    @Override
-    public boolean canBeAssignedTo(ResolvedReferenceTypeDeclaration other) {
+    //@Override
+    public bool canBeAssignedTo(ResolvedReferenceTypeDeclaration other) {
         if (other is LambdaArgumentTypePlaceholder) {
             return isFunctionalInterface();
         }
@@ -180,8 +180,8 @@ public class ReflectionInterfaceDeclaration:AbstractTypeDeclaration
         return false;
     }
 
-    @Override
-    public boolean isAssignableBy(ResolvedType type) {
+    //@Override
+    public bool isAssignableBy(ResolvedType type) {
         if (type is NullType) {
             return true;
         }
@@ -207,22 +207,22 @@ public class ReflectionInterfaceDeclaration:AbstractTypeDeclaration
         return false;
     }
 
-    @Override
-    public boolean isTypeParameter() {
+    //@Override
+    public bool isTypeParameter() {
         return false;
     }
 
-    @Override
+    //@Override
     public ResolvedFieldDeclaration getField(string name) {
         return reflectionClassAdapter.getField(name);
     }
 
-    @Override
+    //@Override
     public List<ResolvedFieldDeclaration> getAllFields() {
         return reflectionClassAdapter.getAllFields();
     }
 
-    @Override
+    //@Override
     public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name, TypeSolver typeSolver) {
         for (Field field : clazz.getFields()) {
             if (field.getName().equals(name)) {
@@ -232,34 +232,34 @@ public class ReflectionInterfaceDeclaration:AbstractTypeDeclaration
         return SymbolReference.unsolved();
     }
 
-    @Override
-    public List<ResolvedReferenceType> getAncestors(boolean acceptIncompleteList) {
+    //@Override
+    public List<ResolvedReferenceType> getAncestors(bool acceptIncompleteList) {
         // we do not attempt to perform any symbol solving when analyzing ancestors _in the reflection model, so we can
-        // simply ignore the boolean parameter here; an UnsolvedSymbolException cannot occur
+        // simply ignore the bool parameter here; an UnsolvedSymbolException cannot occur
         return reflectionClassAdapter.getAncestors();
     }
 
-    @Override
-    public Set<ResolvedMethodDeclaration> getDeclaredMethods() {
+    //@Override
+    public HashSet<ResolvedMethodDeclaration> getDeclaredMethods() {
         return reflectionClassAdapter.getDeclaredMethods();
     }
 
-    @Override
-    public boolean hasField(string name) {
+    //@Override
+    public bool hasField(string name) {
         return reflectionClassAdapter.hasField(name);
     }
 
-    @Override
+    //@Override
     public string getName() {
         return clazz.getSimpleName();
     }
 
-    @Override
-    public boolean isInterface() {
+    //@Override
+    public bool isInterface() {
         return true;
     }
 
-    @Override
+    //@Override
     public List<ResolvedReferenceType> getInterfacesExtended() {
         List<ResolvedReferenceType> res = new ArrayList<>();
         for (Class i : clazz.getInterfaces()) {
@@ -268,39 +268,39 @@ public class ReflectionInterfaceDeclaration:AbstractTypeDeclaration
         return res;
     }
     
-    @Override
+    //@Override
     public Optional<ResolvedReferenceTypeDeclaration> containerType() {
         return reflectionClassAdapter.containerType();
     }
 
-    @Override
-    public Set<ResolvedReferenceTypeDeclaration> internalTypes() {
+    //@Override
+    public HashSet<ResolvedReferenceTypeDeclaration> internalTypes() {
         return Arrays.stream(this.clazz.getDeclaredClasses())
                 .map(ic -> ReflectionFactory.typeDeclarationFor(ic, typeSolver))
                 .collect(Collectors.toSet());
     }
 
-    @Override
+    //@Override
     public ResolvedInterfaceDeclaration asInterface() {
         return this;
     }
 
-    @Override
-    public boolean hasDirectlyAnnotation(string canonicalName) {
+    //@Override
+    public bool hasDirectlyAnnotation(string canonicalName) {
         return reflectionClassAdapter.hasDirectlyAnnotation(canonicalName);
     }
 
-    @Override
+    //@Override
     public List<ResolvedTypeParameterDeclaration> getTypeParameters() {
         return reflectionClassAdapter.getTypeParameters();
     }
 
-    @Override
+    //@Override
     public AccessSpecifier accessSpecifier() {
         return ReflectionFactory.modifiersToAccessLevel(this.clazz.getModifiers());
     }
 
-    @Override
+    //@Override
     public List<ResolvedConstructorDeclaration> getConstructors() {
         return Collections.emptyList();
     }

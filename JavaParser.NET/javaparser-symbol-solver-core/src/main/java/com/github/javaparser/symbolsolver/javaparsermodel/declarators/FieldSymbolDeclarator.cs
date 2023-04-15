@@ -29,10 +29,10 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.declarators;
 public class FieldSymbolDeclarator:AbstractSymbolDeclarator<FieldDeclaration> {
 
     public FieldSymbolDeclarator(FieldDeclaration wrappedNode, TypeSolver typeSolver) {
-        super(wrappedNode, typeSolver);
+        base(wrappedNode, typeSolver);
     }
 
-    @Override
+    //@Override
     public List<ResolvedValueDeclaration> getSymbolDeclarations() {
         List<ResolvedValueDeclaration> symbols = new LinkedList<>();
         for (VariableDeclarator v : wrappedNode.getVariables()) {

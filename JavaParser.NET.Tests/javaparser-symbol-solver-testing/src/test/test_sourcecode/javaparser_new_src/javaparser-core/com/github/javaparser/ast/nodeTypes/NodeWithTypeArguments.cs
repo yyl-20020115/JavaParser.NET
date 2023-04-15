@@ -47,7 +47,7 @@ public interface NodeWithTypeArguments<T> {
     /**
      * @return whether the type arguments look like &lt;>.
      */
-    default boolean isUsingDiamondOperator() {
+    default bool isUsingDiamondOperator() {
         if(getTypeArguments()==null){
             return false;
         }

@@ -22,7 +22,7 @@ namespace com.github.javaparser.ast;
  * @see Node#getUserData(UserDataKey)
  */
 public abstract class UserDataKey<T> {
-    @Override
+    //@Override
     public int hashCode()
     {
         return getClass().hashCode();
@@ -31,8 +31,8 @@ public abstract class UserDataKey<T> {
     /**
      * @see java.lang.Object#equals(java.lang.Object)
      */
-    @Override
-    public boolean equals(Object obj)
+    //@Override
+    public bool equals(Object obj)
     {
         return obj != null && getClass().equals(obj.getClass());
     }

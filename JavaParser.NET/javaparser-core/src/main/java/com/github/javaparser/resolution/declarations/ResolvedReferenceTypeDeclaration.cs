@@ -31,13 +31,13 @@ public interface ResolvedReferenceTypeDeclaration:ResolvedTypeDeclaration, Resol
 
     string JAVA_LANG_OBJECT = java.lang.Object.class.getCanonicalName();
 
-    @Override
+    //@Override
     default ResolvedReferenceTypeDeclaration asReferenceType() {
         return this;
     }
 
-    @Override
-    default boolean isReferenceType() {
+    //@Override
+    default bool isReferenceType() {
         return true;
     }
 
@@ -79,7 +79,7 @@ public interface ResolvedReferenceTypeDeclaration:ResolvedTypeDeclaration, Resol
      * @throws UnsolvedSymbolException if some ancestor could not be resolved and {@code acceptIncompleteList} is set to
      *                                 {@code false}.
      */
-    List<ResolvedReferenceType> getAncestors(boolean acceptIncompleteList);
+    List<ResolvedReferenceType> getAncestors(bool acceptIncompleteList);
 
     /**
      * The list of all the ancestors of the current declaration, direct and indirect.
@@ -180,21 +180,21 @@ public interface ResolvedReferenceTypeDeclaration:ResolvedTypeDeclaration, Resol
         if (field.isPresent()) {
             return field.get();
         } else {
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         }
     }
 
     /**
      * Has this type a field with the given name?
      */
-    default boolean hasField(string name) {
+    default bool hasField(string name) {
         return this.getAllFields().stream().anyMatch(f -> f.getName().equals(name));
     }
 
     /**
      * Either a declared field or inherited field which is not private.
      */
-    default boolean hasVisibleField(string name) {
+    default bool hasVisibleField(string name) {
         return getVisibleFields().stream().anyMatch(f -> f.getName().equals(name));
     }
 
@@ -237,13 +237,13 @@ public interface ResolvedReferenceTypeDeclaration:ResolvedTypeDeclaration, Resol
     /**
      * Return a list of all the methods declared _in this type declaration.
      */
-    Set<ResolvedMethodDeclaration> getDeclaredMethods();
+    HashSet<ResolvedMethodDeclaration> getDeclaredMethods();
 
     /**
      * Return a list of all the methods declared of this type declaration, either declared or inherited.
      * Note that it should not include overridden methods.
      */
-    Set<MethodUsage> getAllMethods();
+    HashSet<MethodUsage> getAllMethods();
 
     // /
     // / Assignability
@@ -252,13 +252,13 @@ public interface ResolvedReferenceTypeDeclaration:ResolvedTypeDeclaration, Resol
      * Can we assign instances of the given type to variables having the type defined
      * by this declaration?
      */
-    boolean isAssignableBy(ResolvedType type);
+    bool isAssignableBy(ResolvedType type);
 
     /**
      * Can we assign instances of the type defined by this declaration to variables having the type defined
      * by the given type?
      */
-    default boolean canBeAssignedTo(ResolvedReferenceTypeDeclaration other) {
+    default bool canBeAssignedTo(ResolvedReferenceTypeDeclaration other) {
         return other.isAssignableBy(this);
     }
 
@@ -266,7 +266,7 @@ public interface ResolvedReferenceTypeDeclaration:ResolvedTypeDeclaration, Resol
      * Can we assign instances of the given type to variables having the type defined
      * by this declaration?
      */
-    boolean isAssignableBy(ResolvedReferenceTypeDeclaration other);
+    bool isAssignableBy(ResolvedReferenceTypeDeclaration other);
 
     // /
     // / Annotations
@@ -274,12 +274,12 @@ public interface ResolvedReferenceTypeDeclaration:ResolvedTypeDeclaration, Resol
     /**
      * Has the type at least one annotation declared having the specified qualified name?
      */
-    boolean hasDirectlyAnnotation(string qualifiedName);
+    bool hasDirectlyAnnotation(string qualifiedName);
 
     /**
      * Has the type at least one annotation declared or inherited having the specified qualified name?
      */
-    default boolean hasAnnotation(string qualifiedName) {
+    default bool hasAnnotation(string qualifiedName) {
         if (hasDirectlyAnnotation(qualifiedName)) {
             return true;
         }
@@ -290,12 +290,12 @@ public interface ResolvedReferenceTypeDeclaration:ResolvedTypeDeclaration, Resol
      * This means that the type has a functional method. Conceptually, a functional interface has exactly one abstract method.
      * Typically these classes has the FunctionInterface annotation but this is not mandatory.
      */
-    boolean isFunctionalInterface();
+    bool isFunctionalInterface();
 
     // /
     // / Type parameters
     // /
-    @Override
+    //@Override
     default Optional<ResolvedTypeParameterDeclaration> findTypeParameter(string name) {
         for (ResolvedTypeParameterDeclaration tp : this.getTypeParameters()) {
             if (tp.getName().equals(name)) {
@@ -318,7 +318,7 @@ public interface ResolvedReferenceTypeDeclaration:ResolvedTypeDeclaration, Resol
      * @see ResolvedReferenceType#isJavaLangObject()
      * @see <a href="https://github.com/javaparser/javaparser/issues/2044">https://github.com/javaparser/javaparser/issues/2044</a>
      */
-    default boolean isJavaLangObject() {
+    default bool isJavaLangObject() {
         return this.isClass() && !isAnonymousClass() && // Consider anonymous classes
         hasName() && getQualifiedName().equals(JAVA_LANG_OBJECT);
     }
@@ -327,7 +327,7 @@ public interface ResolvedReferenceTypeDeclaration:ResolvedTypeDeclaration, Resol
      * @return true, if this represents {@code java.lang.Enum}
      * @see ResolvedReferenceType#isJavaLangEnum()
      */
-    default boolean isJavaLangEnum() {
+    default bool isJavaLangEnum() {
         return this.isEnum() && getQualifiedName().equals(JAVA_LANG_ENUM);
     }
 }

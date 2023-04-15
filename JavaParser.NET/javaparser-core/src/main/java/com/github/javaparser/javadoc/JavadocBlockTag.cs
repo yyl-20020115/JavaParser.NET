@@ -61,7 +61,7 @@ public class JavadocBlockTag {
 
         private string keyword;
 
-        boolean hasName() {
+        bool hasName() {
             return this == PARAM || this == EXCEPTION || this == THROWS;
         }
 
@@ -130,8 +130,8 @@ public class JavadocBlockTag {
         return sb.toString();
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -144,7 +144,7 @@ public class JavadocBlockTag {
         return name.equals(that.name);
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         int result = type.hashCode();
         result = 31 * result + content.hashCode();
@@ -152,7 +152,7 @@ public class JavadocBlockTag {
         return result;
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "JavadocBlockTag{" + "type=" + type + ", content='" + content + '\'' + ", name=" + name + '}';
     }

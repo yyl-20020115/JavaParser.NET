@@ -36,7 +36,7 @@ public class UnionTypeMetaModel:TypeMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     UnionTypeMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, UnionType.class, "UnionType", "com.github.javaparser.ast.type", false, false);
+        base(superBaseNodeMetaModel, UnionType.class, "UnionType", "com.github.javaparser.ast.type", false, false);
     }
 
     public PropertyMetaModel elementsPropertyMetaModel;

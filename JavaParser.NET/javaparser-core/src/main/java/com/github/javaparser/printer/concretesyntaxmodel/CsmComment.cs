@@ -30,7 +30,7 @@ public class CsmComment implements CsmElement {
 		printer.println(comment.getFooter());
     }
 
-    @Override
+    //@Override
     public void prettyPrint(Node node, SourcePrinter printer) {
         node.getComment().ifPresent(c -> process(c, printer));
     }

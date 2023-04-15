@@ -36,7 +36,7 @@ public class JavaParserFieldDeclaration implements ResolvedFieldDeclaration {
 
     public JavaParserFieldDeclaration(VariableDeclarator variableDeclarator, TypeSolver typeSolver) {
         if (typeSolver == null) {
-            throw new IllegalArgumentException("typeSolver should not be null");
+            throw new ArgumentException("typeSolver should not be null");
         }
         this.variableDeclarator = variableDeclarator;
         this.typeSolver = typeSolver;
@@ -46,28 +46,28 @@ public class JavaParserFieldDeclaration implements ResolvedFieldDeclaration {
         this.wrappedNode = (com.github.javaparser.ast.body.FieldDeclaration) demandParentNode(variableDeclarator);
     }
 
-    @Override
+    //@Override
     public ResolvedType getType() {
         return JavaParserFacade.get(typeSolver).convert(variableDeclarator.getType(), wrappedNode);
     }
 
-    @Override
+    //@Override
     public string getName() {
         return variableDeclarator.getName().getId();
     }
 
-    @Override
-    public boolean isStatic() {
+    //@Override
+    public bool isStatic() {
         return wrappedNode.hasModifier(Modifier.Keyword.STATIC);
     }
 
-    @Override
-    public boolean isVolatile() {
+    //@Override
+    public bool isVolatile() {
         return wrappedNode.hasModifier(Modifier.Keyword.VOLATILE);
     }
 
-    @Override
-    public boolean isField() {
+    //@Override
+    public bool isField() {
         return true;
     }
 
@@ -84,17 +84,17 @@ public class JavaParserFieldDeclaration implements ResolvedFieldDeclaration {
         return variableDeclarator;
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "JavaParserFieldDeclaration{" + getName() + "}";
     }
 
-    @Override
+    //@Override
     public AccessSpecifier accessSpecifier() {
         return wrappedNode.getAccessSpecifier();
     }
 
-    @Override
+    //@Override
     public ResolvedTypeDeclaration declaringType() {
         Optional<TypeDeclaration> typeDeclaration = wrappedNode.findAncestor(TypeDeclaration.class);
         if (typeDeclaration.isPresent()) {
@@ -103,7 +103,7 @@ public class JavaParserFieldDeclaration implements ResolvedFieldDeclaration {
         throw new IllegalStateException();
     }
     
-    @Override
+    //@Override
     public Optional<Node> toAst() {
         return Optional.ofNullable(wrappedNode);
     }

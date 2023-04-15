@@ -44,7 +44,7 @@ public class JavaParserClassDeclaration:AbstractClassDeclaration
     public JavaParserClassDeclaration(ClassOrInterfaceDeclaration wrappedNode,
                                       TypeSolver typeSolver) {
         if (wrappedNode.isInterface()) {
-            throw new IllegalArgumentException("Interface given");
+            throw new ArgumentException("Interface given");
         }
         this.wrappedNode = wrappedNode;
         this.typeSolver = typeSolver;
@@ -55,8 +55,8 @@ public class JavaParserClassDeclaration:AbstractClassDeclaration
     /// Public methods: from Object
     ///
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -65,12 +65,12 @@ public class JavaParserClassDeclaration:AbstractClassDeclaration
         return wrappedNode.equals(that.wrappedNode);
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         return wrappedNode.hashCode();
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "JavaParserClassDeclaration{" +
                 "wrappedNode=" + wrappedNode +
@@ -81,7 +81,7 @@ public class JavaParserClassDeclaration:AbstractClassDeclaration
     /// Public methods: fields
     ///
     
-    @Override
+    //@Override
     public List<ResolvedFieldDeclaration> getAllFields() {
         List<ResolvedFieldDeclaration> fields = javaParserTypeAdapter.getFieldsForDeclaredVariables();
 
@@ -90,37 +90,37 @@ public class JavaParserClassDeclaration:AbstractClassDeclaration
                         .forEach(f -> {
                             fields.add(new ResolvedFieldDeclaration() {
 
-                                @Override
+                                //@Override
                                 public AccessSpecifier accessSpecifier() {
                                     return f.accessSpecifier();
                                 }
 
-                                @Override
+                                //@Override
                                 public string getName() {
                                     return f.getName();
                                 }
 
-                                @Override
+                                //@Override
                                 public ResolvedType getType() {
                                     return ancestor.useThisTypeParametersOnTheGivenType(f.getType());
                                 }
 
-                                @Override
-                                public boolean isStatic() {
+                                //@Override
+                                public bool isStatic() {
                                     return f.isStatic();
                                 }
 
-                                @Override
-                                public boolean isVolatile() {
+                                //@Override
+                                public bool isVolatile() {
                                     return f.isVolatile();
                                 }
 
-                                @Override
+                                //@Override
                                 public ResolvedTypeDeclaration declaringType() {
                                     return f.declaringType();
                                 }
                                 
-                                @Override
+                                //@Override
                                 public Optional<Node> toAst() {
                                     return f.toAst();
                                 }
@@ -139,7 +139,7 @@ public class JavaParserClassDeclaration:AbstractClassDeclaration
         return ctx.solveMethod(name, parameterTypes, false);
     }
 
-    @Override
+    //@Override
     public Optional<MethodUsage> solveMethodAsUsage(string name, List<ResolvedType> argumentTypes,
                                                     Context invocationContext, List<ResolvedType> typeParameters) {
         return getContext().solveMethodAsUsage(name, argumentTypes);
@@ -158,12 +158,12 @@ public class JavaParserClassDeclaration:AbstractClassDeclaration
         throw new UnsupportedOperationException();
     }
 
-    @Override
+    //@Override
     public string getName() {
         return wrappedNode.getName().getId();
     }
 
-    @Override
+    //@Override
     public Optional<ResolvedReferenceType> getSuperClass() {
         if(isJavaLangObject()) {
             // If this is java.lang.Object, it has no super class.
@@ -177,7 +177,7 @@ public class JavaParserClassDeclaration:AbstractClassDeclaration
         }
     }
 
-    @Override
+    //@Override
     public List<ResolvedReferenceType> getInterfaces() {
         List<ResolvedReferenceType> interfaces = new ArrayList<>();
         // TODO FIXME: Remove null check -- should be an empty list...
@@ -189,48 +189,48 @@ public class JavaParserClassDeclaration:AbstractClassDeclaration
         return interfaces;
     }
 
-    @Override
+    //@Override
     public List<ResolvedConstructorDeclaration> getConstructors() {
         return AstResolutionUtils.getConstructors(this.wrappedNode, typeSolver, this);
     }
 
-    @Override
-    public boolean hasDirectlyAnnotation(string canonicalName) {
+    //@Override
+    public bool hasDirectlyAnnotation(string canonicalName) {
         return AstResolutionUtils.hasDirectlyAnnotation(wrappedNode, typeSolver, canonicalName);
     }
 
-    @Override
-    public boolean isInterface() {
+    //@Override
+    public bool isInterface() {
         return wrappedNode.isInterface();
     }
 
-    @Override
+    //@Override
     public string getPackageName() {
         return javaParserTypeAdapter.getPackageName();
     }
 
-    @Override
+    //@Override
     public string getClassName() {
         return javaParserTypeAdapter.getClassName();
     }
 
-    @Override
+    //@Override
     public string getQualifiedName() {
         return javaParserTypeAdapter.getQualifiedName();
     }
 
-    @Override
-    public boolean isAssignableBy(ResolvedReferenceTypeDeclaration other) {
+    //@Override
+    public bool isAssignableBy(ResolvedReferenceTypeDeclaration other) {
         return javaParserTypeAdapter.isAssignableBy(other);
     }
 
-    @Override
-    public boolean isAssignableBy(ResolvedType type) {
+    //@Override
+    public bool isAssignableBy(ResolvedType type) {
         return javaParserTypeAdapter.isAssignableBy(type);
     }
 
-    @Override
-    public boolean canBeAssignedTo(ResolvedReferenceTypeDeclaration other) {
+    //@Override
+    public bool canBeAssignedTo(ResolvedReferenceTypeDeclaration other) {
         // TODO consider generic types
         if (this.getQualifiedName().equals(other.getQualifiedName())) {
             return true;
@@ -262,8 +262,8 @@ public class JavaParserClassDeclaration:AbstractClassDeclaration
         return false;
     }
 
-    @Override
-    public boolean isTypeParameter() {
+    //@Override
+    public bool isTypeParameter() {
         return false;
     }
 
@@ -292,19 +292,19 @@ public class JavaParserClassDeclaration:AbstractClassDeclaration
                 .solveType(name);
     }
 
-    @Override
+    //@Override
     public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes,
-                                                                  boolean staticOnly) {
+                                                                  bool staticOnly) {
         return getContext().solveMethod(name, argumentsTypes, staticOnly);
     }
 
-    @Override
+    //@Override
     public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name, TypeSolver typeSolver) {
         return getContext().solveSymbol(name);
     }
 
-    @Override
-    public List<ResolvedReferenceType> getAncestors(boolean acceptIncompleteList) {
+    //@Override
+    public List<ResolvedReferenceType> getAncestors(bool acceptIncompleteList) {
         List<ResolvedReferenceType> ancestors = new ArrayList<>();
 
         // We want to avoid infinite recursion _in case of Object having Object as ancestor
@@ -357,7 +357,7 @@ public class JavaParserClassDeclaration:AbstractClassDeclaration
         return ancestors;
     }
 
-    private boolean isAncestor(ResolvedReferenceType candidateAncestor, string ownQualifiedName) {
+    private bool isAncestor(ResolvedReferenceType candidateAncestor, string ownQualifiedName) {
         Optional<ResolvedReferenceTypeDeclaration> resolvedReferenceTypeDeclaration = candidateAncestor.getTypeDeclaration();
         if (resolvedReferenceTypeDeclaration.isPresent()) {
             ResolvedTypeDeclaration rtd = resolvedReferenceTypeDeclaration.get().asType();
@@ -367,9 +367,9 @@ public class JavaParserClassDeclaration:AbstractClassDeclaration
         return false;
     }
 
-    @Override
-    public Set<ResolvedMethodDeclaration> getDeclaredMethods() {
-        Set<ResolvedMethodDeclaration> methods = new HashSet<>();
+    //@Override
+    public HashSet<ResolvedMethodDeclaration> getDeclaredMethods() {
+        HashSet<ResolvedMethodDeclaration> methods = new HashSet<>();
         for (BodyDeclaration<?> member : wrappedNode.getMembers()) {
             if (member is MethodDeclaration) {
                 methods.add(new JavaParserMethodDeclaration((MethodDeclaration) member, typeSolver));
@@ -378,7 +378,7 @@ public class JavaParserClassDeclaration:AbstractClassDeclaration
         return methods;
     }
 
-    @Override
+    //@Override
     public List<ResolvedTypeParameterDeclaration> getTypeParameters() {
         return this.wrappedNode.getTypeParameters().stream().map(
                 (tp) -> new JavaParserTypeParameter(tp, typeSolver)
@@ -394,12 +394,12 @@ public class JavaParserClassDeclaration:AbstractClassDeclaration
         return wrappedNode;
     }
 
-    @Override
+    //@Override
     public AccessSpecifier accessSpecifier() {
         return wrappedNode.getAccessSpecifier();
     }
 
-    @Override
+    //@Override
     public Optional<Node> toAst() {
         return Optional.of(wrappedNode);
     }
@@ -408,18 +408,18 @@ public class JavaParserClassDeclaration:AbstractClassDeclaration
     /// Protected methods
     ///
 
-    @Override
+    //@Override
     protected ResolvedReferenceType object() {
         ResolvedReferenceTypeDeclaration solvedJavaLangObject = typeSolver.getSolvedJavaLangObject();
         return new ReferenceTypeImpl(solvedJavaLangObject);
     }
 
-    @Override
-    public Set<ResolvedReferenceTypeDeclaration> internalTypes() {
+    //@Override
+    public HashSet<ResolvedReferenceTypeDeclaration> internalTypes() {
         return javaParserTypeAdapter.internalTypes();
     }
 
-    @Override
+    //@Override
     public Optional<ResolvedReferenceTypeDeclaration> containerType() {
         return javaParserTypeAdapter.containerType();
     }

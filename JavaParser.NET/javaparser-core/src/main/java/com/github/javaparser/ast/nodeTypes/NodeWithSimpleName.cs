@@ -27,7 +27,7 @@ namespace com.github.javaparser.ast.nodeTypes;
  * <p>
  * The main reason for this interface is to permit users to manipulate homogeneously all nodes with a getName method.
  */
-public interface NodeWithSimpleName<N:Node> {
+public interface NodeWithSimpleName<N> where N:Node {
 
     SimpleName getName();
 

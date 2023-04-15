@@ -30,7 +30,7 @@ public /*final*/class CodeGenerationUtils {
     private CodeGenerationUtils() {
     }
 
-    public static string getterName(Class<?> type, string name) {
+    public static string getterName(Type type, string name) {
         if (name.startsWith("is") && boolean.class.equals(type)) {
             return name;
         } else if (Boolean.TYPE.equals(type)) {
@@ -47,7 +47,7 @@ public /*final*/class CodeGenerationUtils {
         } else if (getterName.startsWith("has")) {
             return decapitalize(getterName.substring("has".length()));
         }
-        throw new IllegalArgumentException("Unexpected getterName '" + getterName + "'");
+        throw new ArgumentException("Unexpected getterName '" + getterName + "'");
     }
 
     public static string setterName(string fieldName) {
@@ -122,7 +122,7 @@ public /*final*/class CodeGenerationUtils {
     /**
      * @return the root directory of the classloader for class c.
      */
-    public static Path classLoaderRoot(Class<?> c) {
+    public static Path classLoaderRoot(Type c) {
         try {
             return Paths.get(c.getProtectionDomain().getCodeSource().getLocation().toURI());
         } catch (URISyntaxException e) {
@@ -134,7 +134,7 @@ public /*final*/class CodeGenerationUtils {
      * Useful for locating source code _in your Maven project. Finds the classpath for class c, then backs up _out of
      * "target/(test-)classes", giving the directory containing the pom.xml.
      */
-    public static Path mavenModuleRoot(Class<?> c) {
+    public static Path mavenModuleRoot(Type c) {
         return classLoaderRoot(c).resolve(Paths.get("..", "..")).normalize();
     }
 

@@ -33,7 +33,7 @@ public class RecordAsTypeIdentifierNotAllowed:VisitorValidator {
         error = "'record' is a restricted identifier and cannot be used for type declarations";
     }
 
-    @Override
+    //@Override
     public void visit(Name n, ProblemReporter arg) {
         if (n.getIdentifier().equals("record") && !validUsage(n)) {
             arg.report(n, error);
@@ -41,7 +41,7 @@ public class RecordAsTypeIdentifierNotAllowed:VisitorValidator {
         super.visit(n, arg);
     }
 
-    @Override
+    //@Override
     public void visit(SimpleName n, ProblemReporter arg) {
         if (n.getIdentifier().equals("record") && !validUsage(n)) {
             arg.report(n, error);
@@ -49,7 +49,7 @@ public class RecordAsTypeIdentifierNotAllowed:VisitorValidator {
         super.visit(n, arg);
     }
 
-    private boolean validUsage(Node node) {
+    private bool validUsage(Node node) {
         if (!node.getParentNode().isPresent()) {
             return true;
         }

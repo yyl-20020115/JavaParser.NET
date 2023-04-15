@@ -42,7 +42,7 @@ public class NodeMetaModelGenerator:AbstractGenerator {
     private static /*final*/string GENERATED_JAVADOC_COMMENT = "Warning: The content of this class is partially or completely generated - manual edits risk being overwritten.";
 
     protected NodeMetaModelGenerator(SourceRoot sourceRoot) {
-        super(sourceRoot);
+        base(sourceRoot);
     }
 
     public void generate(Class<?:Node> nodeClass, ClassOrInterfaceDeclaration metaModelCoid, NodeList<Statement> initializeNodeMetaModelsStatements, NodeList<Statement> initializePropertyMetaModelsStatements, NodeList<Statement> initializeConstructorParametersStatements, SourceRoot sourceRoot) throws NoSuchMethodException {
@@ -57,9 +57,9 @@ public class NodeMetaModelGenerator:AbstractGenerator {
         initializeNodeMetaModelsStatements.add(parseStatement(f("nodeMetaModels.add(%s);", nodeMetaModelFieldName)));
         this.initializeConstructorParametersStatementsGenerator.generate(nodeClass, initializeConstructorParametersStatements);
 
-        /*final*/Class<?> superclass = nodeClass.getSuperclass();
+        /*final*/Type superclass = nodeClass.getSuperclass();
         /*final*/string superNodeMetaModel = MetaModelGenerator.nodeMetaModelName(superclass);
-        /*final*/boolean isRootNode = !MetaModelGenerator.isNode(superclass);
+        /*final*/bool isRootNode = !MetaModelGenerator.isNode(superclass);
 
         /*final*/FieldDeclaration nodeField = metaModelCoid.addField(className, nodeMetaModelFieldName, PUBLIC, STATIC, FINAL);
         annotateGenerated(nodeField);
@@ -99,7 +99,7 @@ public class NodeMetaModelGenerator:AbstractGenerator {
         classMMConstructor
                 .getBody()
                 .addStatement(
-                        parseExplicitConstructorInvocationStmt(f("super(super%s, %s.class, \"%s\", \"%s\", %s, %s);",
+                        parseExplicitConstructorInvocationStmt(f("base(super%s, %s.class, \"%s\", \"%s\", %s, %s);",
                                 MetaModelGenerator.BASE_NODE_META_MODEL,
                                 nodeClass.getSimpleName(),
                                 nodeClass.getSimpleName(),
@@ -114,8 +114,8 @@ public class NodeMetaModelGenerator:AbstractGenerator {
         if (typeAnalysis.isAbstract) {
             classMetaModelJavaFile.addImport(Node.class);
             BodyDeclaration<?> bodyDeclaration = parseBodyDeclaration(f(
-                    "protected %s(Optional<%s> superNodeMetaModel, Class<?:Node> type, string name, string packageName, boolean isAbstract, boolean hasWildcard) {" +
-                            "super(superNodeMetaModel, type, name, packageName, isAbstract, hasWildcard);" +
+                    "protected %s(Optional<%s> superNodeMetaModel, Class<?:Node> type, string name, string packageName, bool isAbstract, bool hasWildcard) {" +
+                            "base(superNodeMetaModel, type, name, packageName, isAbstract, hasWildcard);" +
                             " }",
                     className,
                     MetaModelGenerator.BASE_NODE_META_MODEL
@@ -161,7 +161,7 @@ public class NodeMetaModelGenerator:AbstractGenerator {
         }
     }
 
-    private boolean fieldShouldBeIgnored(Field reflectionField) {
+    private bool fieldShouldBeIgnored(Field reflectionField) {
         return java.lang.reflect.Modifier.isStatic(reflectionField.getModifiers()) ||
                 reflectionField.isAnnotationPresent(InternalProperty.class);
     }

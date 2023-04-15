@@ -39,12 +39,12 @@ namespace com.github.javaparser.ast.type;
  */
 public class ClassOrInterfaceType:ReferenceType implements NodeWithSimpleName<ClassOrInterfaceType>, NodeWithAnnotations<ClassOrInterfaceType>, NodeWithTypeArguments<ClassOrInterfaceType> {
 
-    @OptionalProperty
+    //@OptionalProperty
     private ClassOrInterfaceType scope;
 
     private SimpleName name;
 
-    @OptionalProperty
+    //@OptionalProperty
     private NodeList<Type> typeArguments;
 
     public ClassOrInterfaceType() {
@@ -76,7 +76,7 @@ public class ClassOrInterfaceType:ReferenceType implements NodeWithSimpleName<Cl
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public ClassOrInterfaceType(TokenRange tokenRange, ClassOrInterfaceType scope, SimpleName name, NodeList<Type> typeArguments, NodeList<AnnotationExpr> annotations) {
-        super(tokenRange, annotations);
+        base(tokenRange, annotations);
         setScope(scope);
         setName(name);
         setTypeArguments(typeArguments);
@@ -85,13 +85,13 @@ public class ClassOrInterfaceType:ReferenceType implements NodeWithSimpleName<Cl
 
     //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
     //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 

@@ -47,7 +47,7 @@ public class Issue1370Test {
         /*final*/JavaParserFacade facade = JavaParserFacade.get(new ReflectionTypeSolver(false));
 
         StaticJavaParser.parse(source).accept(new VoidVisitorAdapter<Void>() {
-            @Override
+            //@Override
             public void visit(/*final*/MethodCallExpr n, /*final*/Void arg) {
                 super.visit(n, arg);
 

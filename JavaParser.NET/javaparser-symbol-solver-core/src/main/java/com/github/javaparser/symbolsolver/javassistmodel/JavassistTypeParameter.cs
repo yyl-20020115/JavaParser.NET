@@ -38,8 +38,8 @@ public class JavassistTypeParameter implements ResolvedTypeParameterDeclaration 
         this.container = container;
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o) return true;
         if (!(o is ResolvedTypeParameterDeclaration)) return false;
 
@@ -58,24 +58,24 @@ public class JavassistTypeParameter implements ResolvedTypeParameterDeclaration 
         return true;
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         return Objects.hash(getQualifiedName(), declaredOnType(), declaredOnMethod());
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "JavassistTypeParameter{" +
                 wrapped.getName()
                 + '}';
     }
 
-    @Override
+    //@Override
     public string getName() {
         return wrapped.getName();
     }
 
-    @Override
+    //@Override
     public string getContainerQualifiedName() {
         if (this.container is ResolvedReferenceTypeDeclaration) {
             return ((ResolvedReferenceTypeDeclaration) this.container).getQualifiedName();
@@ -85,17 +85,17 @@ public class JavassistTypeParameter implements ResolvedTypeParameterDeclaration 
         throw new UnsupportedOperationException();
     }
 
-    @Override
+    //@Override
     public string getContainerId() {
         return getContainerQualifiedName();
     }
 
-    @Override
+    //@Override
     public ResolvedTypeParametrizable getContainer() {
         return this.container;
     }
 
-    @Override
+    //@Override
     public List<ResolvedTypeParameterDeclaration.Bound> getBounds() {
         List<Bound> bounds = new ArrayList<>();
         SignatureAttribute.ObjectType classBound = wrapped.getClassBound();
@@ -108,7 +108,7 @@ public class JavassistTypeParameter implements ResolvedTypeParameterDeclaration 
         return bounds;
     }
 
-    @Override
+    //@Override
     public Optional<ResolvedReferenceTypeDeclaration> containerType() {
         if (container is ResolvedReferenceTypeDeclaration) {
             return Optional.of((ResolvedReferenceTypeDeclaration) container);
@@ -116,7 +116,7 @@ public class JavassistTypeParameter implements ResolvedTypeParameterDeclaration 
         return Optional.empty();
     }
     
-    @Override
+    //@Override
     public ResolvedReferenceType object() {
         return new ReferenceTypeImpl(typeSolver.getSolvedJavaLangObject());
     }

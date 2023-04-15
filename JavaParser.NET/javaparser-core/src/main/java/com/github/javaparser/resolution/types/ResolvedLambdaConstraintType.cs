@@ -28,7 +28,7 @@ public class ResolvedLambdaConstraintType implements ResolvedType {
         this.bound = bound;
     }
 
-    @Override
+    //@Override
     public string describe() {
         return "? super " + bound.describe();
     }
@@ -37,12 +37,12 @@ public class ResolvedLambdaConstraintType implements ResolvedType {
         return bound;
     }
 
-    @Override
-    public boolean isConstraint() {
+    //@Override
+    public bool isConstraint() {
         return true;
     }
 
-    @Override
+    //@Override
     public ResolvedLambdaConstraintType asConstraintType() {
         return this;
     }
@@ -51,12 +51,12 @@ public class ResolvedLambdaConstraintType implements ResolvedType {
         return new ResolvedLambdaConstraintType(bound);
     }
 
-    @Override
-    public boolean isAssignableBy(ResolvedType other) {
+    //@Override
+    public bool isAssignableBy(ResolvedType other) {
         return bound.isAssignableBy(other);
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "LambdaConstraintType{" + "bound=" + bound + '}';
     }

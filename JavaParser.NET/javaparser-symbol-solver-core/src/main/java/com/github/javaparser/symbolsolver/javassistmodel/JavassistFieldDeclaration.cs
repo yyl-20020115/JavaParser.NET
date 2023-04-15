@@ -35,7 +35,7 @@ public class JavassistFieldDeclaration implements ResolvedFieldDeclaration {
         this.typeSolver = typeSolver;
     }
 
-    @Override
+    //@Override
     public ResolvedType getType() {
         try {
             string signature = ctField.getGenericSignature();
@@ -49,42 +49,42 @@ public class JavassistFieldDeclaration implements ResolvedFieldDeclaration {
         }
     }
 
-    @Override
-    public boolean isStatic() {
+    //@Override
+    public bool isStatic() {
         return Modifier.isStatic(ctField.getModifiers());
     }
     
-    @Override
-    public boolean isVolatile() {
+    //@Override
+    public bool isVolatile() {
         return Modifier.isVolatile(ctField.getModifiers());
     }
 
-    @Override
+    //@Override
     public string getName() {
         return ctField.getName();
     }
 
-    @Override
-    public boolean isField() {
+    //@Override
+    public bool isField() {
         return true;
     }
 
-    @Override
-    public boolean isParameter() {
+    //@Override
+    public bool isParameter() {
         return false;
     }
 
-    @Override
-    public boolean isType() {
+    //@Override
+    public bool isType() {
         return false;
     }
 
-    @Override
+    //@Override
     public AccessSpecifier accessSpecifier() {
         return JavassistFactory.modifiersToAccessLevel(ctField.getModifiers());
     }
 
-    @Override
+    //@Override
     public ResolvedTypeDeclaration declaringType() {
         return JavassistFactory.toTypeDeclaration(ctField.getDeclaringClass(), typeSolver);
     }

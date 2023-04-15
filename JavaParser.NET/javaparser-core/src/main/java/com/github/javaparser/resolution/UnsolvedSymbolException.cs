@@ -57,7 +57,7 @@ public class UnsolvedSymbolException:RuntimeException {
     }
 
     public UnsolvedSymbolException(string name, string context, Throwable cause) {
-        super("Unsolved symbol" + (context != null ? " _in " + context : "") + " : " + name, cause);
+        base("Unsolved symbol" + (context != null ? " _in " + context : "") + " : " + name, cause);
         this.name = name;
         this.context = context;
         this.cause = cause;
@@ -67,7 +67,7 @@ public class UnsolvedSymbolException:RuntimeException {
         return name;
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "UnsolvedSymbolException{" + "context='" + context + "'" + ", name='" + name + "'" + ", cause='" + cause + "'" + "}";
     }

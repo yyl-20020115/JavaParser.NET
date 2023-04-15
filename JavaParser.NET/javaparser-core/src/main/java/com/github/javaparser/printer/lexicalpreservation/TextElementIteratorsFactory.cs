@@ -36,17 +36,17 @@ class TextElementIteratorsFactory {
 
         private Iterator<E> next;
 
-        private boolean lastReturnedFromCurrent = false;
+        private bool lastReturnedFromCurrent = false;
 
-        private boolean lastReturnedFromNext = false;
+        private bool lastReturnedFromNext = false;
 
         public CascadingIterator(Iterator<E> current, Provider<E> nextProvider) {
             this.nextProvider = nextProvider;
             this.current = current;
         }
 
-        @Override
-        public boolean hasNext() {
+        //@Override
+        public bool hasNext() {
             if (current.hasNext()) {
                 return true;
             }
@@ -56,7 +56,7 @@ class TextElementIteratorsFactory {
             return next.hasNext();
         }
 
-        @Override
+        //@Override
         public E next() {
             if (current.hasNext()) {
                 lastReturnedFromCurrent = true;
@@ -71,7 +71,7 @@ class TextElementIteratorsFactory {
             return next.next();
         }
 
-        @Override
+        //@Override
         public void remove() {
             if (lastReturnedFromCurrent) {
                 current.remove();
@@ -81,20 +81,20 @@ class TextElementIteratorsFactory {
                 next.remove();
                 return;
             }
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         }
     }
 
     static class EmptyIterator<E> implements Iterator<E> {
 
-        @Override
-        public boolean hasNext() {
+        //@Override
+        public bool hasNext() {
             return false;
         }
 
-        @Override
+        //@Override
         public E next() {
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         }
     }
 
@@ -102,24 +102,24 @@ class TextElementIteratorsFactory {
 
         private /*final*/E element;
 
-        private boolean returned;
+        private bool returned;
 
         SingleElementIterator(E element) {
             this.element = element;
         }
 
-        @Override
-        public boolean hasNext() {
+        //@Override
+        public bool hasNext() {
             return !returned;
         }
 
-        @Override
+        //@Override
         public E next() {
             returned = true;
             return element;
         }
 
-        @Override
+        //@Override
         public void remove() {
         }
     }
@@ -135,8 +135,8 @@ class TextElementIteratorsFactory {
             currIndex = 0;
         }
 
-        @Override
-        public boolean hasNext() {
+        //@Override
+        public bool hasNext() {
             if (currIndex >= elements.size()) {
                 return false;
             }
@@ -147,15 +147,15 @@ class TextElementIteratorsFactory {
             return hasNext();
         }
 
-        @Override
+        //@Override
         public E next() {
             if (!hasNext()) {
-                throw new IllegalArgumentException();
+                throw new ArgumentException();
             }
             return elements.get(currIndex).next();
         }
 
-        @Override
+        //@Override
         public void remove() {
             elements.get(currIndex).remove();
         }
@@ -166,7 +166,7 @@ class TextElementIteratorsFactory {
         if (textElement is TokenTextElement) {
             return new SingleElementIterator<TokenTextElement>((TokenTextElement) textElement) {
 
-                @Override
+                //@Override
                 public void remove() {
                     nodeText.removeElement(index);
                 }
@@ -176,7 +176,7 @@ class TextElementIteratorsFactory {
             NodeText textForChild = childTextElement.getNodeTextForWrappedNode();
             return reverseIterator(textForChild);
         } else {
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         }
     }
 

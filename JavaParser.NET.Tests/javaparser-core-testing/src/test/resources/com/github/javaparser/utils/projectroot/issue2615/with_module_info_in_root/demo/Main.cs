@@ -29,7 +29,7 @@ public class Main {
 
     private static class Callback implements SourceRoot.Callback {
 
-        @Override
+        //@Override
         public Result process(Path localPath, Path absolutePath, ParseResult<CompilationUnit> result) {
             System._out.printf("Found %s%n", absolutePath);
             return Result.SAVE;

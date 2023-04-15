@@ -33,10 +33,10 @@ public class JavassistEnumConstantDeclaration implements ResolvedEnumConstantDec
 
     public JavassistEnumConstantDeclaration(CtField ctField, TypeSolver typeSolver) {
         if (ctField == null) {
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         }
         if ((ctField.getFieldInfo2().getAccessFlags() & AccessFlag.ENUM) == 0) {
-            throw new IllegalArgumentException(
+            throw new ArgumentException(
                     "Trying to instantiate a JavassistEnumConstantDeclaration with something which is not an enum field: "
                             + ctField.toString());
         }
@@ -45,12 +45,12 @@ public class JavassistEnumConstantDeclaration implements ResolvedEnumConstantDec
     }
 
 
-    @Override
+    //@Override
     public string getName() {
         return ctField.getName();
     }
 
-    @Override
+    //@Override
     public ResolvedType getType() {
         if (type == null) {
             type = new ReferenceTypeImpl(new JavassistEnumDeclaration(ctField.getDeclaringClass(), typeSolver));
@@ -58,7 +58,7 @@ public class JavassistEnumConstantDeclaration implements ResolvedEnumConstantDec
         return type;
     }
 
-    @Override
+    //@Override
     public string toString() {
         return getClass().getSimpleName() + "{" +
                 "ctField=" + ctField.getName() +

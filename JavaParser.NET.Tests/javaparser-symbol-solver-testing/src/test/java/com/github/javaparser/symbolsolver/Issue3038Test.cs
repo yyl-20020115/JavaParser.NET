@@ -41,7 +41,7 @@ public class Issue3038Test:AbstractResolutionTest {
 	@Timeout(value = TIME_LIMIT_MS, unit = TimeUnit.MILLISECONDS)
 	public void test3038() {
 		run(generate("        new Thread(){\n" +
-				"            @Override\n" +
+				"            //@Override\n" +
 				"            public void run() {\n" +
 				"                Foo foo = Foo.getInstance();\n" +
 				"            }\n" +

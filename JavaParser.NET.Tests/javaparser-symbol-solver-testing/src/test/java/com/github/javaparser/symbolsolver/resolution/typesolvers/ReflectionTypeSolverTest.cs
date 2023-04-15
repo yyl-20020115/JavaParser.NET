@@ -27,7 +27,7 @@ namespace com.github.javaparser.symbolsolver.resolution.typesolvers;
 class ReflectionTypeSolverTest:ClassLoaderTypeSolverTest<ReflectionTypeSolver> {
 
     public ReflectionTypeSolverTest() {
-        super(ReflectionTypeSolver::new);
+        base(ReflectionTypeSolver::new);
     }
 
     [TestMethod]
@@ -54,7 +54,7 @@ class ReflectionTypeSolverTest:ClassLoaderTypeSolverTest<ReflectionTypeSolver> {
                 new StreamProvider(Files.newInputStream(file), StandardCharsets.UTF_8.name())).getResult().get();
         
         Assertions.assertThrows(UnsolvedSymbolException.class, () -> unit.accept(new VoidVisitorAdapter<Object>() {
-            @Override
+            //@Override
             public void visit(ObjectCreationExpr exp, Object arg) {
             	super.visit(exp, arg);
                 exp.resolve().getSignature();

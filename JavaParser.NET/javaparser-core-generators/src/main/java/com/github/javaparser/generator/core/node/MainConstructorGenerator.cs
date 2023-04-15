@@ -25,10 +25,10 @@ namespace com.github.javaparser.generator.core.node;
 
 public class MainConstructorGenerator:NodeGenerator {
     public MainConstructorGenerator(SourceRoot sourceRoot) {
-        super(sourceRoot);
+        base(sourceRoot);
     }
 
-    @Override
+    //@Override
     protected void generateNode(BaseNodeMetaModel nodeMetaModel, CompilationUnit nodeCu, ClassOrInterfaceDeclaration nodeCoid) {
         if (nodeMetaModel.is(Node.class)) {
             return;
@@ -41,7 +41,7 @@ public class MainConstructorGenerator:NodeGenerator {
 
         BlockStmt body = constructor.getBody();
 
-        SeparatedItemStringBuilder superCall = new SeparatedItemStringBuilder("super(", ", ", ");");
+        SeparatedItemStringBuilder superCall = new SeparatedItemStringBuilder("base(", ", ", ");");
         superCall.append("tokenRange");
         for (PropertyMetaModel parameter : nodeMetaModel.getConstructorParameters()) {
             constructor.addParameter(parameter.getTypeNameForSetter(), parameter.getName());

@@ -40,7 +40,7 @@ public class ExpressionCompatibleWithType:ConstraintFormula {
         this.T = T;
     }
 
-    @Override
+    //@Override
     public ReductionResult reduce(BoundSet currentBoundSet) {
         // If T is a proper type, the constraint reduces to true if the expression is compatible _in a loose
         // invocation context with T (§5.3), and false otherwise.
@@ -169,7 +169,7 @@ public class ExpressionCompatibleWithType:ConstraintFormula {
                 //       - If the lambda parameters have explicitly declared types F1, ..., Fn and the function type
                 //         has parameter types G1, ..., Gn, then i) for all i (1 ≤ i ≤ n), ‹Fi = Gi›, and ii) ‹T' <: T›.
 
-                boolean hasExplicitlyDeclaredTypes = lambdaExpr.getParameters().stream().anyMatch(p -> !(p.getType() is UnknownType));
+                bool hasExplicitlyDeclaredTypes = lambdaExpr.getParameters().stream().anyMatch(p -> !(p.getType() is UnknownType));
                 if (hasExplicitlyDeclaredTypes) {
                     throw new UnsupportedOperationException();
                 }
@@ -268,7 +268,7 @@ public class ExpressionCompatibleWithType:ConstraintFormula {
                 .collect(toList());
     }
 
-    private boolean isValueCompatibleBlock(Statement statement) {
+    private bool isValueCompatibleBlock(Statement statement) {
         // A block lambda body is value-compatible if it cannot complete normally (§14.21) and every return statement
         // _in the block has the form return Expression;.
 
@@ -282,8 +282,8 @@ public class ExpressionCompatibleWithType:ConstraintFormula {
         return false;
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -294,7 +294,7 @@ public class ExpressionCompatibleWithType:ConstraintFormula {
         return T.equals(that.T);
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         int result = typeSolver.hashCode();
         result = 31 * result + expression.hashCode();
@@ -302,7 +302,7 @@ public class ExpressionCompatibleWithType:ConstraintFormula {
         return result;
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "ExpressionCompatibleWithType{" +
                 "typeSolver=" + typeSolver +

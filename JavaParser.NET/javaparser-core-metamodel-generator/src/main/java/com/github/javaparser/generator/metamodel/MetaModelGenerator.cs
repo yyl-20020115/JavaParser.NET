@@ -168,7 +168,7 @@ public class MetaModelGenerator:AbstractGenerator {
     }};
 
     public MetaModelGenerator(SourceRoot sourceRoot) {
-        super(sourceRoot);
+        base(sourceRoot);
     }
 
     public static void main(String[] args) {
@@ -240,11 +240,11 @@ public class MetaModelGenerator:AbstractGenerator {
         initializeNodeMetaModelsStatements.sort(Comparator.comparing(Node::toString));
     }
 
-    static boolean isNode(Class<?> c) {
+    static bool isNode(Type c) {
         return Node.class.isAssignableFrom(c);
     }
 
-    static string nodeMetaModelName(Class<?> c) {
+    static string nodeMetaModelName(Type c) {
         return c.getSimpleName() + "MetaModel";
     }
 
@@ -252,7 +252,7 @@ public class MetaModelGenerator:AbstractGenerator {
         return field.getName() + "PropertyMetaModel";
     }
 
-    static string nodeMetaModelFieldName(Class<?> nodeClass) {
+    static string nodeMetaModelFieldName(Type nodeClass) {
         return decapitalize(nodeMetaModelName(nodeClass));
     }
 

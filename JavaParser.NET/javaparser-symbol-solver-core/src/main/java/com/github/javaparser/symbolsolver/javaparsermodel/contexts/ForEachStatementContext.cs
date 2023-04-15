@@ -27,10 +27,10 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.contexts;
 public class ForEachStatementContext:AbstractJavaParserContext<ForEachStmt> {
 
     public ForEachStatementContext(ForEachStmt wrappedNode, TypeSolver typeSolver) {
-        super(wrappedNode, typeSolver);
+        base(wrappedNode, typeSolver);
     }
 
-    @Override
+    //@Override
     public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name) {
         if (wrappedNode.getVariable().getVariables().size() != 1) {
             throw new IllegalStateException();
@@ -47,13 +47,13 @@ public class ForEachStatementContext:AbstractJavaParserContext<ForEachStmt> {
         }
     }
 
-    @Override
-    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
+    //@Override
+    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, bool staticOnly) {
         // TODO: Document why staticOnly is forced to be false.
         return solveMethodInParentContext(name, argumentsTypes, false);
     }
 
-    @Override
+    //@Override
     public List<VariableDeclarator> localVariablesExposedToChild(Node child) {
         if (child == wrappedNode.getBody()) {
             return wrappedNode.getVariable().getVariables();

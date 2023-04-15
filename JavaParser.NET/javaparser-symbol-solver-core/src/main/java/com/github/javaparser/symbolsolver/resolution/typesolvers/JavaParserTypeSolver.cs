@@ -124,7 +124,7 @@ public class JavaParserTypeSolver implements TypeSolver {
         this.foundTypes = foundTypesCache;
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "JavaParserTypeSolver{" +
                 "srcDir=" + srcDir +
@@ -132,12 +132,12 @@ public class JavaParserTypeSolver implements TypeSolver {
                 '}';
     }
 
-    @Override
+    //@Override
     public TypeSolver getParent() {
         return parent;
     }
 
-    @Override
+    //@Override
     public void setParent(TypeSolver parent) {
         Objects.requireNonNull(parent);
         if (this.parent != null) {
@@ -188,7 +188,7 @@ public class JavaParserTypeSolver implements TypeSolver {
         return parseDirectory(srcDirectory, true);
     }
 
-    private List<CompilationUnit> parseDirectory(Path srcDirectory, boolean recursively) {
+    private List<CompilationUnit> parseDirectory(Path srcDirectory, bool recursively) {
         try {
             Optional<List<CompilationUnit>> cachedValue = parsedDirectories.get(srcDirectory.toAbsolutePath());
             if (cachedValue.isPresent()) {
@@ -217,7 +217,7 @@ public class JavaParserTypeSolver implements TypeSolver {
 
     }
 
-    @Override
+    //@Override
     public SymbolReference<ResolvedReferenceTypeDeclaration> tryToSolveType(string name) {
         Optional<SymbolReference<ResolvedReferenceTypeDeclaration>> cachedValue = foundTypes.get(name);
         if (cachedValue.isPresent()) {

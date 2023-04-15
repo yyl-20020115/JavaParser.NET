@@ -36,7 +36,7 @@ public class ResolvedTypeVariable implements ResolvedType {
         this.typeParameter = typeParameter;
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "TypeVariable {" + typeParameter.toString() + "}";
     }
@@ -45,8 +45,8 @@ public class ResolvedTypeVariable implements ResolvedType {
         return this.typeParameter.getQualifiedName();
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -61,17 +61,17 @@ public class ResolvedTypeVariable implements ResolvedType {
         return true;
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         return typeParameter.hashCode();
     }
 
-    @Override
-    public boolean isArray() {
+    //@Override
+    public bool isArray() {
         return false;
     }
 
-    @Override
+    //@Override
     public ResolvedType replaceTypeVariables(ResolvedTypeParameterDeclaration tpToBeReplaced, ResolvedType replaced, Map<ResolvedTypeParameterDeclaration, ResolvedType> inferredTypes) {
         if (tpToBeReplaced.getName().equals(this.typeParameter.getName())) {
             inferredTypes.put(this.asTypeParameter(), replaced);
@@ -81,33 +81,33 @@ public class ResolvedTypeVariable implements ResolvedType {
         }
     }
 
-    @Override
-    public boolean isReferenceType() {
+    //@Override
+    public bool isReferenceType() {
         return false;
     }
 
-    @Override
+    //@Override
     public string describe() {
         return typeParameter.getName();
     }
 
-    @Override
+    //@Override
     public ResolvedTypeParameterDeclaration asTypeParameter() {
         return typeParameter;
     }
 
-    @Override
+    //@Override
     public ResolvedTypeVariable asTypeVariable() {
         return this;
     }
 
-    @Override
-    public boolean isTypeVariable() {
+    //@Override
+    public bool isTypeVariable() {
         return true;
     }
 
-    @Override
-    public boolean isAssignableBy(ResolvedType other) {
+    //@Override
+    public bool isAssignableBy(ResolvedType other) {
         if (other.isTypeVariable()) {
             return describe().equals(other.describe());
         } else {
@@ -115,8 +115,8 @@ public class ResolvedTypeVariable implements ResolvedType {
         }
     }
 
-    @Override
-    public boolean mention(List<ResolvedTypeParameterDeclaration> typeParameters) {
+    //@Override
+    public bool mention(List<ResolvedTypeParameterDeclaration> typeParameters) {
         return typeParameters.contains(typeParameter);
     }
 
@@ -126,7 +126,7 @@ public class ResolvedTypeVariable implements ResolvedType {
     // The erasure of a type variable (§4.4) is the erasure of its leftmost bound.
     // If no bound is declared for a type variable, Object is assumed.
     //
-    @Override
+    //@Override
     public ResolvedType erasure() {
         if (typeParameter.isBounded()) {
             return typeParameter.getBounds().get(0).getType();
@@ -137,12 +137,12 @@ public class ResolvedTypeVariable implements ResolvedType {
     /*
      * Returns the resolved type for a type variable.
      */
-    @Override
+    //@Override
     public ResolvedType solveGenericTypes(Context context) {
     	return context.solveGenericType(describe()).orElse(this);
     }
 
-    @Override
+    //@Override
     public string toDescriptor() {
         return String.format("L%s;", qualifiedName());
     }

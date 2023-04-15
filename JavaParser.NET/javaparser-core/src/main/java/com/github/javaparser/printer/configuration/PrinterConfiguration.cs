@@ -40,7 +40,7 @@ public interface PrinterConfiguration {
     /*
      * True if an option is activated
      */
-    boolean isActivated(ConfigurationOption option);
+    bool isActivated(ConfigurationOption option);
 
     /*
      * returns the specified option
@@ -50,5 +50,5 @@ public interface PrinterConfiguration {
     /*
      * returns all activated options
      */
-    Set<ConfigurationOption> get();
+    HashSet<ConfigurationOption> get();
 }

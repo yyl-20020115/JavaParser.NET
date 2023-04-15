@@ -88,7 +88,7 @@ public class JavassistMethodDeclarationTest:AbstractSymbolResolutionTest {
         JavassistMethodDeclaration method = findMethodWithName(classDecl, "methodWithExceptions");
 
         assertThat(method.getNumberOfSpecifiedExceptions(), is(2));
-        assertThat(method.getSpecifiedException(0).describe(), is("java.lang.IllegalArgumentException"));
+        assertThat(method.getSpecifiedException(0).describe(), is("java.lang.ArgumentException"));
         assertThat(method.getSpecifiedException(1).describe(), is("java.io.IOException"));
     }
 

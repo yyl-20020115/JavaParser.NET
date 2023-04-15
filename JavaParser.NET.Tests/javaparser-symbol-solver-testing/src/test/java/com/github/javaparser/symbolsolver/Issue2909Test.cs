@@ -23,7 +23,7 @@ namespace com.github.javaparser.symbolsolver;
 
 
 [TestClass]
-public class Issue2909Test extends AbstractResolutionTest {
+public class Issue2909Test:AbstractResolutionTest {
 
     [TestMethod]
     void testResolvingLocallyFromCompleteReferenceToInnerClass() {

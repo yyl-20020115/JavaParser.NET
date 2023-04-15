@@ -36,7 +36,7 @@ public class CompactConstructorDeclarationMetaModel:BodyDeclarationMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     CompactConstructorDeclarationMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, CompactConstructorDeclaration.class, "CompactConstructorDeclaration", "com.github.javaparser.ast.body", false, false);
+        base(superBaseNodeMetaModel, CompactConstructorDeclaration.class, "CompactConstructorDeclaration", "com.github.javaparser.ast.body", false, false);
     }
 
     public PropertyMetaModel bodyPropertyMetaModel;

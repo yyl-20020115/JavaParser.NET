@@ -35,14 +35,14 @@ public class SameAsBound:Bound {
 
     public SameAsBound(ResolvedType s, ResolvedType t) {
         if (!s.isInferenceVariable() && !t.isInferenceVariable()) {
-            throw new IllegalArgumentException("One of S or T should be an inference variable");
+            throw new ArgumentException("One of S or T should be an inference variable");
         }
         this.s = s;
         this.t = t;
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -52,7 +52,7 @@ public class SameAsBound:Bound {
         return t.equals(that.t);
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "SameAsBound{" +
                 "s=" + s +
@@ -60,16 +60,16 @@ public class SameAsBound:Bound {
                 '}';
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         int result = s.hashCode();
         result = 31 * result + t.hashCode();
         return result;
     }
 
-    @Override
-    public Set<InferenceVariable> usedInferenceVariables() {
-        Set<InferenceVariable> variables = new HashSet<>();
+    //@Override
+    public HashSet<InferenceVariable> usedInferenceVariables() {
+        HashSet<InferenceVariable> variables = new HashSet<>();
         variables.addAll(TypeHelper.usedInferenceVariables(s));
         variables.addAll(TypeHelper.usedInferenceVariables(t));
         return variables;
@@ -83,12 +83,12 @@ public class SameAsBound:Bound {
         return t;
     }
 
-    @Override
-    public boolean isADependency() {
+    //@Override
+    public bool isADependency() {
         return !isAnInstantiation().isPresent();
     }
 
-    @Override
+    //@Override
     public Optional<Instantiation> isAnInstantiation() {
         if (s.isInferenceVariable() && isProperType(t)) {
             return Optional.of(new Instantiation((InferenceVariable) s, t));
@@ -99,8 +99,8 @@ public class SameAsBound:Bound {
         return Optional.empty();
     }
 
-    @Override
-    public boolean isSatisfied(InferenceVariableSubstitution inferenceVariableSubstitution) {
+    //@Override
+    public bool isSatisfied(InferenceVariableSubstitution inferenceVariableSubstitution) {
         throw new UnsupportedOperationException();
     }
 }

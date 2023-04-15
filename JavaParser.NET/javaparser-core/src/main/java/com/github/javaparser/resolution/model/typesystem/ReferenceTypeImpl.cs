@@ -37,25 +37,25 @@ public class ReferenceTypeImpl:ResolvedReferenceType {
         ).collect(Collectors.toList()));
     }
 
-    @Override
+    //@Override
     protected ResolvedReferenceType create(ResolvedReferenceTypeDeclaration typeDeclaration, List<ResolvedType> typeParametersCorrected) {
         return new ReferenceTypeImpl(typeDeclaration, typeParametersCorrected);
     }
 
-    @Override
+    //@Override
     protected ResolvedReferenceType create(ResolvedReferenceTypeDeclaration typeDeclaration) {
         return new ReferenceTypeImpl(typeDeclaration);
     }
 
     public ReferenceTypeImpl(ResolvedReferenceTypeDeclaration typeDeclaration) {
-        super(typeDeclaration);
+        base(typeDeclaration);
     }
 
     public ReferenceTypeImpl(ResolvedReferenceTypeDeclaration typeDeclaration, List<ResolvedType> typeArguments) {
-        super(typeDeclaration, typeArguments);
+        base(typeDeclaration, typeArguments);
     }
 
-    @Override
+    //@Override
     public ResolvedTypeParameterDeclaration asTypeParameter() {
     	return this.typeDeclaration.asTypeParameter();
     }
@@ -63,8 +63,8 @@ public class ReferenceTypeImpl:ResolvedReferenceType {
     /**
      * This method checks if ThisType t = new OtherType() would compile.
      */
-    @Override
-    public boolean isAssignableBy(ResolvedType other) {
+    //@Override
+    public bool isAssignableBy(ResolvedType other) {
         if (other is NullType) {
             return !this.isPrimitive();
         }
@@ -133,14 +133,14 @@ public class ReferenceTypeImpl:ResolvedReferenceType {
         return false;
     }
 
-    private boolean isAssignableByReferenceType(string qname) {
+    private bool isAssignableByReferenceType(string qname) {
     	return Stream.of(ASSIGNABLE_REFERENCE_TYPE).anyMatch(ref -> ref.equals(qname));
     }
 
-    @Override
-    public Set<MethodUsage> getDeclaredMethods() {
+    //@Override
+    public HashSet<MethodUsage> getDeclaredMethods() {
         // TODO replace variables
-        Set<MethodUsage> methods = new HashSet<>();
+        HashSet<MethodUsage> methods = new HashSet<>();
 
         getTypeDeclaration().ifPresent(referenceTypeDeclaration -> {
             for (ResolvedMethodDeclaration methodDeclaration : referenceTypeDeclaration.getDeclaredMethods()) {
@@ -152,7 +152,7 @@ public class ReferenceTypeImpl:ResolvedReferenceType {
         return methods;
     }
 
-    @Override
+    //@Override
     public ResolvedType toRawType() {
         if (this.isRawType()) {
             return this;
@@ -160,15 +160,15 @@ public class ReferenceTypeImpl:ResolvedReferenceType {
         return new ReferenceTypeImpl(typeDeclaration, Collections.emptyList());
     }
 
-    @Override
-    public boolean mention(List<ResolvedTypeParameterDeclaration> typeParameters) {
+    //@Override
+    public bool mention(List<ResolvedTypeParameterDeclaration> typeParameters) {
         return typeParametersValues().stream().anyMatch(tp -> tp.mention(typeParameters));
     }
 
     /**
      * Execute a transformation on all the type parameters of this element.
      */
-    @Override
+    //@Override
     public ResolvedType transformTypeParameters(ResolvedTypeTransformer transformer) {
         ResolvedType result = this;
         int i = 0;
@@ -188,12 +188,12 @@ public class ReferenceTypeImpl:ResolvedReferenceType {
     /*
      * Get all ancestors with the default traverser (depth first)
      */
-    @Override
+    //@Override
     public List<ResolvedReferenceType> getAllAncestors() {
         return getAllAncestors(ResolvedReferenceTypeDeclaration.depthFirstFunc);
     }
 
-    @Override
+    //@Override
 	public List<ResolvedReferenceType> getAllAncestors(Function<ResolvedReferenceTypeDeclaration, List<ResolvedReferenceType>> traverser) {
         // We need to go through the inheritance line and propagate the type parameters
 
@@ -206,7 +206,7 @@ public class ReferenceTypeImpl:ResolvedReferenceType {
         return ancestors;
     }
 
-    @Override
+    //@Override
 	public List<ResolvedReferenceType> getDirectAncestors() {
         // We need to go through the inheritance line and propagate the type parameters
 
@@ -222,8 +222,8 @@ public class ReferenceTypeImpl:ResolvedReferenceType {
             // The superclass of interfaces is always null
             if (thisTypeDeclaration.isClass()) {
                 Optional<ResolvedReferenceType> optionalSuperClass = thisTypeDeclaration.asClass().getSuperClass();
-                boolean superClassIsJavaLangObject = optionalSuperClass.isPresent() && optionalSuperClass.get().isJavaLangObject();
-                boolean thisIsJavaLangObject = thisTypeDeclaration.asClass().isJavaLangObject();
+                bool superClassIsJavaLangObject = optionalSuperClass.isPresent() && optionalSuperClass.get().isJavaLangObject();
+                bool thisIsJavaLangObject = thisTypeDeclaration.asClass().isJavaLangObject();
                 if (superClassIsJavaLangObject && !thisIsJavaLangObject) {
                 	ancestors.add(optionalSuperClass.get());
                 }
@@ -233,14 +233,14 @@ public class ReferenceTypeImpl:ResolvedReferenceType {
         return ancestors;
     }
 
-    @Override
+    //@Override
 	public ResolvedReferenceType deriveTypeParameters(ResolvedTypeParametersMap typeParametersMap) {
         return create(typeDeclaration, typeParametersMap);
     }
 
-    @Override
-    public Set<ResolvedFieldDeclaration> getDeclaredFields() {
-        Set<ResolvedFieldDeclaration> allFields = new LinkedHashSet<>();
+    //@Override
+    public HashSet<ResolvedFieldDeclaration> getDeclaredFields() {
+        HashSet<ResolvedFieldDeclaration> allFields = new LinkedHashSet<>();
 
         if (getTypeDeclaration().isPresent()) {
             allFields.addAll(getTypeDeclaration().get().getDeclaredFields());

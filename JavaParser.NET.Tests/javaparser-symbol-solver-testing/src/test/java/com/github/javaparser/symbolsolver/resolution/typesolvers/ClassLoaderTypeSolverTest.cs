@@ -26,7 +26,7 @@ namespace com.github.javaparser.symbolsolver.resolution.typesolvers;
 abstract class ClassLoaderTypeSolverTest<T:ClassLoaderTypeSolver>:AbstractTypeSolverTest<T> {
 
     public ClassLoaderTypeSolverTest(Supplier<T> solverSupplier) {
-        super(solverSupplier);
+        base(solverSupplier);
     }
 
     /**

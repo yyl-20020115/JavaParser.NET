@@ -22,10 +22,10 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.contexts;
 
 
 
-public class BinaryExprContext extends AbstractJavaParserContext<BinaryExpr> {
+public class BinaryExprContext:AbstractJavaParserContext<BinaryExpr> {
 
     public BinaryExprContext(BinaryExpr wrappedNode, TypeSolver typeSolver) {
-        super(wrappedNode, typeSolver);
+        base(wrappedNode, typeSolver);
     }
 
     //@Override

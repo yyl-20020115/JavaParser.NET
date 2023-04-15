@@ -36,7 +36,7 @@ public class SwitchStmtMetaModel:StatementMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     SwitchStmtMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, SwitchStmt.class, "SwitchStmt", "com.github.javaparser.ast.stmt", false, false);
+        base(superBaseNodeMetaModel, SwitchStmt.class, "SwitchStmt", "com.github.javaparser.ast.stmt", false, false);
     }
 
     public PropertyMetaModel entriesPropertyMetaModel;

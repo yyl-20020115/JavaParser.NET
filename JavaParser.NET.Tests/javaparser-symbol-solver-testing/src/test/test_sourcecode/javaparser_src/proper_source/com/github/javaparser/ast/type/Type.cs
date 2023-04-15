@@ -38,11 +38,11 @@ public abstract class Type:Node {
     }
 
     public Type(int beginLine, int beginColumn, int endLine, int endColumn) {
-        super(beginLine, beginColumn, endLine, endColumn);
+        base(beginLine, beginColumn, endLine, endColumn);
     }
 
     public Type(int beginLine, int beginColumn, int endLine, int endColumn, List<AnnotationExpr> annotations) {
-        super(beginLine, beginColumn, endLine, endColumn);
+        base(beginLine, beginColumn, endLine, endColumn);
         this.annotations = annotations;
     }
 

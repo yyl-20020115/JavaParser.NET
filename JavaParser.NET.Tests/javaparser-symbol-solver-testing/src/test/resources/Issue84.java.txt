@@ -4,7 +4,7 @@ public class VariadicIssue {
      variadicMethod(true, 1, 2, 3);
   }
 
-  static String variadicMethod(boolean b, int... ints) {
+  static String variadicMethod(bool b, int... ints) {
     return "";
   }
 }

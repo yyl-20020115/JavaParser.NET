@@ -35,14 +35,14 @@ public class SubtypeOfBound:Bound {
 
     public SubtypeOfBound(ResolvedType s, ResolvedType t) {
         if (!s.isInferenceVariable() && !t.isInferenceVariable()) {
-            throw new IllegalArgumentException("One of S or T should be an inference variable");
+            throw new ArgumentException("One of S or T should be an inference variable");
         }
         this.s = s;
         this.t = t;
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -52,7 +52,7 @@ public class SubtypeOfBound:Bound {
         return t.equals(that.t);
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "SubtypeOfBound{" +
                 "s=" + s +
@@ -60,7 +60,7 @@ public class SubtypeOfBound:Bound {
                 '}';
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         int result = s.hashCode();
         result = 31 * result + t.hashCode();
@@ -71,9 +71,9 @@ public class SubtypeOfBound:Bound {
         return s;
     }
 
-    @Override
-    public Set<InferenceVariable> usedInferenceVariables() {
-        Set<InferenceVariable> variables = new HashSet<>();
+    //@Override
+    public HashSet<InferenceVariable> usedInferenceVariables() {
+        HashSet<InferenceVariable> variables = new HashSet<>();
         variables.addAll(TypeHelper.usedInferenceVariables(s));
         variables.addAll(TypeHelper.usedInferenceVariables(t));
         return variables;
@@ -83,7 +83,7 @@ public class SubtypeOfBound:Bound {
         return t;
     }
 
-    @Override
+    //@Override
     public Optional<ProperUpperBound> isProperUpperBound() {
         if (s.isInferenceVariable() && isProperType(t)) {
             return Optional.of(new ProperUpperBound((InferenceVariable) s, t));
@@ -91,7 +91,7 @@ public class SubtypeOfBound:Bound {
         return Optional.empty();
     }
 
-    @Override
+    //@Override
     public Optional<ProperLowerBound> isProperLowerBound() {
         if (isProperType(s) && t.isInferenceVariable()) {
             return Optional.of(new ProperLowerBound((InferenceVariable) t, s));
@@ -99,13 +99,13 @@ public class SubtypeOfBound:Bound {
         return Optional.empty();
     }
 
-    @Override
-    public boolean isADependency() {
+    //@Override
+    public bool isADependency() {
         return !isProperLowerBound().isPresent() && !isProperUpperBound().isPresent();
     }
 
-    @Override
-    public boolean isSatisfied(InferenceVariableSubstitution inferenceVariableSubstitution) {
+    //@Override
+    public bool isSatisfied(InferenceVariableSubstitution inferenceVariableSubstitution) {
         throw new UnsupportedOperationException();
     }
 }

@@ -43,18 +43,18 @@ public /*final*/class ConditionalExpr:Expression {
     }
 
     public ConditionalExpr(int beginLine, int beginColumn, int endLine, int endColumn, Expression condition, Expression thenExpr, Expression elseExpr) {
-        super(beginLine, beginColumn, endLine, endColumn);
+        base(beginLine, beginColumn, endLine, endColumn);
         setCondition(condition);
         setThenExpr(thenExpr);
         setElseExpr(elseExpr);
     }
 
-    @Override
+    //@Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }

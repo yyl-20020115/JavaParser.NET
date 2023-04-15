@@ -113,7 +113,7 @@ public class TestUtils {
         assertEqualsStringIgnoringEol(expected, actual);
     }
 
-    public static string readTextResource(Class<?> relativeClass, string resourceName) {
+    public static string readTextResource(Type relativeClass, string resourceName) {
         /*final*/URL resourceAsStream = relativeClass.getResource(resourceName);
         try {
             byte[] bytes = Files.readAllBytes(Paths.get(resourceAsStream.toURI()));
@@ -124,7 +124,7 @@ public class TestUtils {
         }
     }
 
-    public static void assertInstanceOf(Class<?> expectedType, Object instance) {
+    public static void assertInstanceOf(Type expectedType, Object instance) {
         assertTrue(expectedType.isAssignableFrom(instance.getClass()), f("%s is not an instance of %s.", instance.getClass(), expectedType));
     }
 
@@ -206,8 +206,8 @@ public class TestUtils {
     }
 
     public static void assertProblems(List<Problem> result, String... expectedArg) {
-        Set<String> actual = result.stream().map(Problem::toString).collect(Collectors.toSet());
-        Set<String> expected = new HashSet<>(asList(expectedArg));
+        HashSet<String> actual = result.stream().map(Problem::toString).collect(Collectors.toSet());
+        HashSet<String> expected = new HashSet<>(asList(expectedArg));
         assertCollections(expected, actual);
     }
 
@@ -305,7 +305,7 @@ public class TestUtils {
     /**
      * Does this node's token starting position match the line and col?
      */
-    public static boolean startsAtPosition(Node node, int line, int col) {
+    public static bool startsAtPosition(Node node, int line, int col) {
         Position begin = getNodeStartTokenPosition(node);
         return begin.line == line && begin.column == col;
     }
@@ -332,7 +332,7 @@ public class TestUtils {
                 throw new IllegalStateException(problems.toString());
             }
             return parse.getResult()
-                    .orElseThrow(() -> new IllegalArgumentException("No result when attempting to parse " + filePath));
+                    .orElseThrow(() -> new ArgumentException("No result when attempting to parse " + filePath));
             } catch (IOException ex) {
             throw new IllegalStateException("Error while parsing " + filePath, ex);
         }
@@ -351,7 +351,7 @@ public class TestUtils {
                 .collect(toList());
 
         if (nodesAtPosition.size() != 1) {
-            throw new IllegalArgumentException("Expecting exactly one node to be positioned at " + line + "," + col + " but got " + nodesAtPosition);
+            throw new ArgumentException("Expecting exactly one node to be positioned at " + line + "," + col + " but got " + nodesAtPosition);
         }
         return nodesAtPosition.get(0);
     }

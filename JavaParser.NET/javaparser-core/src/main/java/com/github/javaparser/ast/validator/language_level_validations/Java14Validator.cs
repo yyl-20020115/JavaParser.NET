@@ -44,7 +44,7 @@ public class Java14Validator:Java13Validator {
     /*final*/Validator recordDeclarationValidator = new SingleNodeTypeValidator<>(RecordDeclaration.class, new RecordDeclarationValidator());
 
     public Java14Validator() {
-        super();
+        base();
         // Released Language Features
         {
             /*

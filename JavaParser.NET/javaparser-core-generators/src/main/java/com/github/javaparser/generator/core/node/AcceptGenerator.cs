@@ -28,9 +28,9 @@ public class AcceptGenerator:NodeGenerator {
     private /*final*/MethodDeclaration voidAccept;
 
     public AcceptGenerator(SourceRoot sourceRoot) {
-        super(sourceRoot);
-        genericAccept = parseBodyDeclaration("@Override public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) { return v.visit(this, arg); }").asMethodDeclaration();
-        voidAccept = parseBodyDeclaration("@Override public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) { v.visit(this, arg); }").asMethodDeclaration();
+        base(sourceRoot);
+        genericAccept = parseBodyDeclaration("@Override public R accept<R, A>(GenericVisitor<R, A> v, A arg) { return v.visit(this, arg); }").asMethodDeclaration();
+        voidAccept = parseBodyDeclaration("@Override public void accept<A>(VoidVisitor<A> v, A arg) { v.visit(this, arg); }").asMethodDeclaration();
     }
 
     //@Override

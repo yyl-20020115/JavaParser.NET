@@ -59,7 +59,7 @@ public class Issue2162Test:AbstractSymbolResolutionTest {
             "}\n" +
             "\n" +
             "class B:Screen<D> {\n" +
-            "    @Override\n" +
+            "    //@Override\n" +
             "    D getView() {\n" +
             "        return new D();\n" +
             "    }\n" +

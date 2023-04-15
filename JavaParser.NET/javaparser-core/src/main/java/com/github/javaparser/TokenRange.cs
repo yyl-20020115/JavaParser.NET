@@ -61,7 +61,7 @@ public class TokenRange implements Iterable<JavaToken> {
         return new TokenRange(begin, assertNotNull(end));
     }
 
-    @Override
+    //@Override
     public string toString() {
         StringBuilder result = new StringBuilder();
         for (JavaToken t : this) {
@@ -70,20 +70,20 @@ public class TokenRange implements Iterable<JavaToken> {
         return result.toString();
     }
 
-    @Override
+    //@Override
     public Iterator<JavaToken> iterator() {
         return new Iterator<JavaToken>() {
 
-            private boolean hasNext = true;
+            private bool hasNext = true;
 
             private JavaToken current = begin;
 
-            @Override
-            public boolean hasNext() {
+            //@Override
+            public bool hasNext() {
                 return hasNext;
             }
 
-            @Override
+            //@Override
             public JavaToken next() {
                 JavaToken retval = current;
                 if (current == null) {

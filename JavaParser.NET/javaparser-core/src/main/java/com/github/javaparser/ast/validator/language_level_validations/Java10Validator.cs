@@ -31,7 +31,7 @@ public class Java10Validator:Java9Validator {
     /*final*/Validator varOnlyOnLocalVariableDefinitionAndForAndTry = new SingleNodeTypeValidator<>(VarType.class, new VarValidator(false));
 
     public Java10Validator() {
-        super();
+        base();
         // Released Language Features
         {
             /*

@@ -53,7 +53,7 @@ public /*final*/class TypeParameter:ReferenceType<TypeParameter> implements Node
 	}
 
 	public TypeParameter(Range range, /*final*/string name, /*final*/List<ClassOrInterfaceType> typeBound) {
-		super(range);
+		base(range);
 		setName(name);
 		setTypeBound(typeBound);
 	}
@@ -64,11 +64,11 @@ public /*final*/class TypeParameter:ReferenceType<TypeParameter> implements Node
 		setAnnotations(annotations);
 	}
 
-	@Override public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+	@Override public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
 		return v.visit(this, arg);
 	}
 
-	@Override public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+	@Override public void accept<A>(VoidVisitor<A> v, A arg) {
 		v.visit(this, arg);
 	}
 
@@ -99,7 +99,7 @@ public /*final*/class TypeParameter:ReferenceType<TypeParameter> implements Node
 	 * @param name
 	 *            the name to set
 	 */
-    @Override
+    //@Override
     public TypeParameter setName(/*final*/string name) {
 		this.name = name;
         return this;

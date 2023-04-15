@@ -27,7 +27,7 @@ namespace com.github.javaparser.symbolsolver.javassistmodel;
 class JavassistAnnotationDeclarationTest:AbstractTypeDeclarationTest
         implements ResolvedAnnotationDeclarationTest {
 
-    @Override
+    //@Override
     public JavassistAnnotationDeclaration createValue() {
         try {
             TypeSolver typeSolver = new ReflectionTypeSolver();
@@ -38,26 +38,26 @@ class JavassistAnnotationDeclarationTest:AbstractTypeDeclarationTest
         }
     }
 
-    @Override
+    //@Override
     public Optional<Node> getWrappedDeclaration(AssociableToAST associableToAST) {
         return Optional.empty();
     }
 
-    @Override
-    public boolean isFunctionalInterface(AbstractTypeDeclaration typeDeclaration) {
+    //@Override
+    public bool isFunctionalInterface(AbstractTypeDeclaration typeDeclaration) {
         return false;
     }
 
     @Disabled(value = "This feature is not yet implemented. See https://github.com/javaparser/javaparser/issues/1841")
     [TestMethod]
-    @Override
+    //@Override
     public void containerTypeCantBeNull() {
         super.containerTypeCantBeNull();
     }
 
     @Disabled(value = "This feature is not yet implemented. See https://github.com/javaparser/javaparser/issues/1838")
     [TestMethod]
-    @Override
+    //@Override
     public void getDeclaredMethodsCantBeNull() {
         super.getDeclaredMethodsCantBeNull();
     }

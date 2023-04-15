@@ -2082,7 +2082,7 @@ static /*final*/int[] jjnextStates = {
    79, 80, 84, 85, 87, 88, 89, 90, 100, 101, 104, 105, 111, 112, 115, 116, 
    120, 121, 122, 123, 128, 129, 
 };
-private static /*final*/boolean jjCanMove_0(int hiByte, int i1, int i2, long l1, long l2)
+private static /*final*/bool jjCanMove_0(int hiByte, int i1, int i2, long l1, long l2)
 {
    switch(hiByte)
    {
@@ -2094,7 +2094,7 @@ private static /*final*/boolean jjCanMove_0(int hiByte, int i1, int i2, long l1,
          return false;
    }
 }
-private static /*final*/boolean jjCanMove_1(int hiByte, int i1, int i2, long l1, long l2)
+private static /*final*/bool jjCanMove_1(int hiByte, int i1, int i2, long l1, long l2)
 {
    switch(hiByte)
    {
@@ -2184,7 +2184,7 @@ private static /*final*/boolean jjCanMove_1(int hiByte, int i1, int i2, long l1,
          return false;
    }
 }
-private static /*final*/boolean jjCanMove_2(int hiByte, int i1, int i2, long l1, long l2)
+private static /*final*/bool jjCanMove_2(int hiByte, int i1, int i2, long l1, long l2)
 {
    switch(hiByte)
    {
@@ -2445,7 +2445,7 @@ public Token getNextToken()
      int error_line = input_stream.getEndLine();
      int error_column = input_stream.getEndColumn();
      string error_after = null;
-     boolean EOFSeen = false;
+     bool EOFSeen = false;
      try { input_stream.readChar(); input_stream.backup(1); }
      catch (java.io.IOException e1) {
         EOFSeen = true;

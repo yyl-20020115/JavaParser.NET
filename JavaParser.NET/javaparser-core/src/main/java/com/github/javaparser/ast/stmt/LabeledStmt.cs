@@ -52,21 +52,21 @@ public class LabeledStmt:Statement {
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public LabeledStmt(TokenRange tokenRange, SimpleName label, Statement statement) {
-        super(tokenRange);
+        base(tokenRange);
         setLabel(label);
         setStatement(statement);
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -108,21 +108,21 @@ public class LabeledStmt:Statement {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public LabeledStmt clone() {
         return (LabeledStmt) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public LabeledStmtMetaModel getMetaModel() {
         return JavaParserMetaModel.labeledStmtMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }
@@ -137,25 +137,25 @@ public class LabeledStmt:Statement {
         return super.replace(node, replacementNode);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isLabeledStmt() {
+    public bool isLabeledStmt() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public LabeledStmt asLabeledStmt() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifLabeledStmt(Consumer<LabeledStmt> action) {
         action.accept(this);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<LabeledStmt> toLabeledStmt() {
         return Optional.of(this);

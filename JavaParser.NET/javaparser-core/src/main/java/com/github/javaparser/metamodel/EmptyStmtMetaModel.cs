@@ -36,6 +36,6 @@ public class EmptyStmtMetaModel:StatementMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     EmptyStmtMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, EmptyStmt.class, "EmptyStmt", "com.github.javaparser.ast.stmt", false, false);
+        base(superBaseNodeMetaModel, EmptyStmt.class, "EmptyStmt", "com.github.javaparser.ast.stmt", false, false);
     }
 }

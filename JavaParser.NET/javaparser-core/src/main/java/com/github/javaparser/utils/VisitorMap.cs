@@ -42,32 +42,32 @@ public class VisitorMap<N:Node, V> implements Map<N, V> {
         this.equalsVisitor = equalsVisitor;
     }
 
-    @Override
+    //@Override
     public int size() {
         return innerMap.size();
     }
 
-    @Override
-    public boolean isEmpty() {
+    //@Override
+    public bool isEmpty() {
         return innerMap.isEmpty();
     }
 
-    @Override
-    public boolean containsKey(Object key) {
+    //@Override
+    public bool containsKey(Object key) {
         return innerMap.containsKey(new EqualsHashcodeOverridingFacade((N) key));
     }
 
-    @Override
-    public boolean containsValue(Object value) {
+    //@Override
+    public bool containsValue(Object value) {
         return innerMap.containsValue(value);
     }
 
-    @Override
+    //@Override
     public V get(Object key) {
         return innerMap.get(new EqualsHashcodeOverridingFacade((N) key));
     }
 
-    @Override
+    //@Override
     public V put(N key, V value) {
         return innerMap.put(new EqualsHashcodeOverridingFacade(key), value);
     }
@@ -80,23 +80,23 @@ public class VisitorMap<N:Node, V> implements Map<N, V> {
             this.overridden = overridden;
         }
 
-        @Override
+        //@Override
         public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
             throw new AssertionError();
         }
 
-        @Override
+        //@Override
         public <A> void accept(VoidVisitor<A> v, A arg) {
             throw new AssertionError();
         }
 
-        @Override
+        //@Override
         public /*final*/int hashCode() {
             return overridden.accept(hashcodeVisitor, null);
         }
 
-        @Override
-        public boolean equals(/*final*/Object obj) {
+        //@Override
+        public bool equals(/*final*/Object obj) {
             if (obj == null || !(obj is VisitorMap.EqualsHashcodeOverridingFacade)) {
                 return false;
             }
@@ -104,33 +104,33 @@ public class VisitorMap<N:Node, V> implements Map<N, V> {
         }
     }
 
-    @Override
+    //@Override
     public V remove(Object key) {
         return innerMap.remove(new EqualsHashcodeOverridingFacade((N) key));
     }
 
-    @Override
+    //@Override
     public void putAll(Map<?:N, ?:V> m) {
         m.forEach(this::put);
     }
 
-    @Override
+    //@Override
     public void clear() {
         innerMap.clear();
     }
 
-    @Override
-    public Set<N> keySet() {
+    //@Override
+    public HashSet<N> keySet() {
         return innerMap.keySet().stream().map(k -> k.overridden).collect(Collectors.toSet());
     }
 
-    @Override
+    //@Override
     public Collection<V> values() {
         return innerMap.values();
     }
 
-    @Override
-    public Set<Entry<N, V>> entrySet() {
+    //@Override
+    public HashSet<Entry<N, V>> entrySet() {
         return innerMap.entrySet().stream().map(e -> new HashMap.SimpleEntry<>(e.getKey().overridden, e.getValue())).collect(Collectors.toSet());
     }
 }

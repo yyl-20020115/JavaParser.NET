@@ -39,7 +39,7 @@ public class TypeCompatibleWithType:ConstraintFormula {
         this.t = t;
     }
 
-    @Override
+    //@Override
     public ReductionResult reduce(BoundSet currentBoundSet) {
         // A constraint formula of the form ‹S → T› is reduced as follows:
         //
@@ -81,11 +81,11 @@ public class TypeCompatibleWithType:ConstraintFormula {
             // FIXME I really cannot understand what the specification means...
 
             // there exists a type of the form G<...> that is a supertype of S?
-            boolean condition1 = t.isAssignableBy(s);
+            bool condition1 = t.isAssignableBy(s);
 
             // the raw type G is a supertype of S
             ResolvedType G = t.asReferenceType().toRawType();
-            boolean condition2 = G.isAssignableBy(s);
+            bool condition2 = G.isAssignableBy(s);
 
             if (!condition1 && condition2) {
                 return ReductionResult.trueResult();
@@ -107,8 +107,8 @@ public class TypeCompatibleWithType:ConstraintFormula {
         return ReductionResult.empty().withConstraint(new TypeSubtypeOfType(typeSolver, s, t));
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -118,14 +118,14 @@ public class TypeCompatibleWithType:ConstraintFormula {
         return t.equals(that.t);
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         int result = s.hashCode();
         result = 31 * result + t.hashCode();
         return result;
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "TypeCompatibleWithType{" +
                 "s=" + s +

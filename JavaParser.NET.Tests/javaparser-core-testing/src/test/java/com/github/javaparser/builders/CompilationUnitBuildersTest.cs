@@ -90,7 +90,7 @@ class CompilationUnitBuildersTest {
 
   [TestMethod]
   void throwIllegalArgumentExceptionOnImportingAnonymousClass() {
-    assertThrows(IllegalArgumentException.class, () -> cu.addImport(new Comparator<Long>() {
+    assertThrows(ArgumentException.class, () -> cu.addImport(new Comparator<Long>() {
 
       //@Override
       public int compare(Long o1, Long o2) {
@@ -108,8 +108,8 @@ class CompilationUnitBuildersTest {
         return o1.compareTo(o2);
       }
     }
-    Class<?> localClass = LocalClass.class;
-    assertThrows(IllegalArgumentException.class, () -> cu.addImport(localClass));
+    Type localClass = LocalClass.class;
+    assertThrows(ArgumentException.class, () -> cu.addImport(localClass));
   }
 
   [TestMethod]

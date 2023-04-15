@@ -565,7 +565,7 @@ class JavaParserEnumDeclarationTest:AbstractTypeDeclarationTest implements Resol
     void testGetDeclaredMethods() {
         JavaParserClassDeclaration constructorDeclaration = (JavaParserClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
 
-        Set<ResolvedMethodDeclaration> allMethods = constructorDeclaration.getDeclaredMethods();
+        HashSet<ResolvedMethodDeclaration> allMethods = constructorDeclaration.getDeclaredMethods();
         assertEquals(20, allMethods.size());
 
         List<ResolvedMethodDeclaration> sortedMethods = allMethods.stream()
@@ -598,7 +598,7 @@ class JavaParserEnumDeclarationTest:AbstractTypeDeclarationTest implements Resol
     void testGetAllMethods() {
         JavaParserClassDeclaration constructorDeclaration = (JavaParserClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
 
-        Set<MethodUsage> allMethods = constructorDeclaration.getAllMethods();
+        HashSet<MethodUsage> allMethods = constructorDeclaration.getAllMethods();
 
         List<MethodUsage> sortedMethods = allMethods.stream()
                 .sorted(Comparator.comparing(MethodUsage::getQualifiedSignature))
@@ -640,7 +640,7 @@ class JavaParserEnumDeclarationTest:AbstractTypeDeclarationTest implements Resol
                 "com.github.javaparser.ast.Node.setUserData(com.github.javaparser.ast.UserDataKey<M>, M)",
                 "com.github.javaparser.ast.Node.toString()",
                 "com.github.javaparser.ast.Node.toStringWithoutComments()",
-                "com.github.javaparser.ast.Node.tryAddImportToParentCompilationUnit(java.lang.Class<?>)",
+                "com.github.javaparser.ast.Node.tryAddImportToParentCompilationUnit(java.lang.Type)",
                 "com.github.javaparser.ast.body.BodyDeclaration.getAnnotations()",
                 "com.github.javaparser.ast.body.BodyDeclaration.setAnnotations(java.util.List<com.github.javaparser.ast.expr.AnnotationExpr>)",
                 "com.github.javaparser.ast.body.ConstructorDeclaration.accept(com.github.javaparser.ast.visitor.GenericVisitor<R, A>, A)",
@@ -692,14 +692,14 @@ class JavaParserEnumDeclarationTest:AbstractTypeDeclarationTest implements Resol
                 "com.github.javaparser.ast.nodeTypes.NodeWithName.setName(java.lang.String)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithParameters.addAndGetParameter(com.github.javaparser.ast.body.Parameter)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithParameters.addAndGetParameter(com.github.javaparser.ast.type.Type, java.lang.String)",
-                "com.github.javaparser.ast.nodeTypes.NodeWithParameters.addAndGetParameter(java.lang.Class<?>, java.lang.String)",
+                "com.github.javaparser.ast.nodeTypes.NodeWithParameters.addAndGetParameter(java.lang.Type, java.lang.String)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithParameters.addAndGetParameter(java.lang.String, java.lang.String)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithParameters.addParameter(com.github.javaparser.ast.body.Parameter)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithParameters.addParameter(com.github.javaparser.ast.type.Type, java.lang.String)",
-                "com.github.javaparser.ast.nodeTypes.NodeWithParameters.addParameter(java.lang.Class<?>, java.lang.String)",
+                "com.github.javaparser.ast.nodeTypes.NodeWithParameters.addParameter(java.lang.Type, java.lang.String)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithParameters.addParameter(java.lang.String, java.lang.String)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithParameters.getParamByName(java.lang.String)",
-                "com.github.javaparser.ast.nodeTypes.NodeWithParameters.getParamByType(java.lang.Class<?>)",
+                "com.github.javaparser.ast.nodeTypes.NodeWithParameters.getParamByType(java.lang.Type)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithParameters.getParamByType(java.lang.String)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithParameters.setParameters(java.util.List<com.github.javaparser.ast.body.Parameter>)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithThrowable.addThrows(com.github.javaparser.ast.type.ReferenceType)",
@@ -832,11 +832,11 @@ class JavaParserEnumDeclarationTest:AbstractTypeDeclarationTest implements Resol
     /// Assignability
     ///
 
-    // boolean isAssignableBy(Type type);
+    // bool isAssignableBy(Type type);
 
-    // boolean canBeAssignedTo(TypeDeclaration other)
+    // bool canBeAssignedTo(TypeDeclaration other)
 
-    // boolean isAssignableBy(TypeDeclaration other);
+    // bool isAssignableBy(TypeDeclaration other);
 
     ///
     /// Annotations
@@ -858,7 +858,7 @@ class JavaParserEnumDeclarationTest:AbstractTypeDeclarationTest implements Resol
     /// Containment
     ///
 
-    // Set<TypeDeclaration> internalTypes()
+    // HashSet<TypeDeclaration> internalTypes()
     [TestMethod]
     void testGetInternalTypes() {
         Path src = adaptPath("src/test/resources/enums");
@@ -867,11 +867,11 @@ class JavaParserEnumDeclarationTest:AbstractTypeDeclarationTest implements Resol
         combinedtypeSolver.add(new JavaParserTypeSolver(src, new LeanParserConfiguration()));
 
         JavaParserEnumDeclaration enum1 = (JavaParserEnumDeclaration) combinedtypeSolver.solveType("EnumWithAncestor");
-        Set<ResolvedReferenceTypeDeclaration> internalTypes1 = enum1.internalTypes();
+        HashSet<ResolvedReferenceTypeDeclaration> internalTypes1 = enum1.internalTypes();
         assertEquals(0, internalTypes1.size());
 
         JavaParserEnumDeclaration enum2 = (JavaParserEnumDeclaration) combinedtypeSolver.solveType("EnumWithInnerType");
-        Set<ResolvedReferenceTypeDeclaration> internalTypes2 = enum2.internalTypes();
+        HashSet<ResolvedReferenceTypeDeclaration> internalTypes2 = enum2.internalTypes();
         assertEquals(1, internalTypes2.size());
         assertEquals("EnumWithInnerType.EnumInner", internalTypes2.iterator().next().getQualifiedName());
     }
@@ -915,14 +915,14 @@ class JavaParserEnumDeclarationTest:AbstractTypeDeclarationTest implements Resol
         assertEquals(true, dec.hasDirectlyAnnotation("MyAnno"));
     }
 
-    @Override
+    //@Override
     public Optional<Node> getWrappedDeclaration(AssociableToAST associableToAST) {
         return Optional.of(
                 safeCast(associableToAST, JavaParserEnumDeclaration.class).getWrappedNode()
         );
     }
 
-    @Override
+    //@Override
     public JavaParserEnumDeclaration createValue() {
         EnumDeclaration enumDeclaration = StaticJavaParser.parse("enum A {}")
                 .findFirst(EnumDeclaration.class)
@@ -931,15 +931,15 @@ class JavaParserEnumDeclarationTest:AbstractTypeDeclarationTest implements Resol
         return new JavaParserEnumDeclaration(enumDeclaration, typeSolver);
     }
 
-    @Override
-    public boolean isFunctionalInterface(AbstractTypeDeclaration typeDeclaration) {
+    //@Override
+    public bool isFunctionalInterface(AbstractTypeDeclaration typeDeclaration) {
         return false;
     }
 
     @Disabled(value = "This test was disable _in this class due to a bug reported at https://github" +
             ".com/javaparser/javaparser/issues/3061. It should be renabled when the issue is fixed.")
     [TestMethod]
-    @Override
+    //@Override
     public void containerTypeCantBeNull() {
         super.containerTypeCantBeNull();
     }

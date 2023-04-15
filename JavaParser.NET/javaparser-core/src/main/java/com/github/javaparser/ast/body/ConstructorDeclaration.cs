@@ -61,20 +61,20 @@ public class ConstructorDeclaration:CallableDeclaration<ConstructorDeclaration> 
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public ConstructorDeclaration(TokenRange tokenRange, NodeList<Modifier> modifiers, NodeList<AnnotationExpr> annotations, NodeList<TypeParameter> typeParameters, SimpleName name, NodeList<Parameter> parameters, NodeList<ReferenceType> thrownExceptions, BlockStmt body, ReceiverParameter receiverParameter) {
-        super(tokenRange, modifiers, annotations, typeParameters, name, parameters, thrownExceptions, receiverParameter);
+        base(tokenRange, modifiers, annotations, typeParameters, name, parameters, thrownExceptions, receiverParameter);
         setBody(body);
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -103,27 +103,27 @@ public class ConstructorDeclaration:CallableDeclaration<ConstructorDeclaration> 
         return this;
     }
 
-    @Override
+    //@Override
     public ConstructorDeclaration setModifiers(/*final*/NodeList<Modifier> modifiers) {
         return super.setModifiers(modifiers);
     }
 
-    @Override
+    //@Override
     public ConstructorDeclaration setName(/*final*/SimpleName name) {
         return super.setName(name);
     }
 
-    @Override
+    //@Override
     public ConstructorDeclaration setParameters(/*final*/NodeList<Parameter> parameters) {
         return super.setParameters(parameters);
     }
 
-    @Override
+    //@Override
     public ConstructorDeclaration setThrownExceptions(/*final*/NodeList<ReferenceType> thrownExceptions) {
         return super.setThrownExceptions(thrownExceptions);
     }
 
-    @Override
+    //@Override
     public ConstructorDeclaration setTypeParameters(/*final*/NodeList<TypeParameter> typeParameters) {
         return super.setTypeParameters(typeParameters);
     }
@@ -134,8 +134,8 @@ public class ConstructorDeclaration:CallableDeclaration<ConstructorDeclaration> 
      * [accessSpecifier] className ([paramType [paramName]])
      * [throws exceptionsList]
      */
-    @Override
-    public string getDeclarationAsString(boolean includingModifiers, boolean includingThrows, boolean includingParameterName) {
+    //@Override
+    public string getDeclarationAsString(bool includingModifiers, bool includingThrows, bool includingParameterName) {
         StringBuilder sb = new StringBuilder();
         if (includingModifiers) {
             AccessSpecifier accessSpecifier = getAccessSpecifier();
@@ -143,7 +143,7 @@ public class ConstructorDeclaration:CallableDeclaration<ConstructorDeclaration> 
         }
         sb.append(getName());
         sb.append("(");
-        boolean firstParam = true;
+        bool firstParam = true;
         for (Parameter param : getParameters()) {
             if (firstParam) {
                 firstParam = false;
@@ -173,21 +173,21 @@ public class ConstructorDeclaration:CallableDeclaration<ConstructorDeclaration> 
         return sb.append(")V").toString();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public ConstructorDeclaration clone() {
         return (ConstructorDeclaration) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public ConstructorDeclarationMetaModel getMetaModel() {
         return JavaParserMetaModel.constructorDeclarationMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }
@@ -198,30 +198,30 @@ public class ConstructorDeclaration:CallableDeclaration<ConstructorDeclaration> 
         return super.replace(node, replacementNode);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isConstructorDeclaration() {
+    public bool isConstructorDeclaration() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public ConstructorDeclaration asConstructorDeclaration() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifConstructorDeclaration(Consumer<ConstructorDeclaration> action) {
         action.accept(this);
     }
 
-    @Override
+    //@Override
     public ResolvedConstructorDeclaration resolve() {
         return getSymbolResolver().resolveDeclaration(this, ResolvedConstructorDeclaration.class);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<ConstructorDeclaration> toConstructorDeclaration() {
         return Optional.of(this);

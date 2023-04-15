@@ -37,17 +37,17 @@ public interface ResolvedMethodDeclaration:ResolvedMethodLikeDeclaration {
     /**
      * Is the method abstract? All interface methods not marked as default are abstract.
      */
-    boolean isAbstract();
+    bool isAbstract();
 
     /**
      * Is this a default method?
      */
-    boolean isDefaultMethod();
+    bool isDefaultMethod();
 
     /*
      * Is this method static?
      */
-    boolean isStatic();
+    bool isStatic();
 
     /*
      * Returns the method descriptor (https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.3.3)
@@ -68,7 +68,7 @@ public interface ResolvedMethodDeclaration:ResolvedMethodLikeDeclaration {
      * d1 does not have the same signature as d2 (§8.4.2), and R1 = |R2|.
      * TODO: Probably this method needs to refer to a method "isTypeSubstituable" implemented _in ResolvedType
      */
-    default boolean isReturnTypeSubstituable(ResolvedType otherResolvedType) {
+    default bool isReturnTypeSubstituable(ResolvedType otherResolvedType) {
     	ResolvedType returnType = getReturnType();
     	if (returnType.isVoid()) {
     		return otherResolvedType.isVoid();

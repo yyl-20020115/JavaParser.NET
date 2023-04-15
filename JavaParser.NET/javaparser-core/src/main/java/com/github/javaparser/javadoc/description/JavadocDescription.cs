@@ -70,7 +70,7 @@ public class JavadocDescription {
         this.elements.addAll(elements);
     }
 
-    public boolean addElement(JavadocDescriptionElement element) {
+    public bool addElement(JavadocDescriptionElement element) {
         return this.elements.add(element);
     }
 
@@ -84,12 +84,12 @@ public class JavadocDescription {
         return sb.toString();
     }
 
-    public boolean isEmpty() {
+    public bool isEmpty() {
         return toText().isEmpty();
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -98,12 +98,12 @@ public class JavadocDescription {
         return elements.equals(that.elements);
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         return elements.hashCode();
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "JavadocDescription{" + "elements=" + elements + '}';
     }

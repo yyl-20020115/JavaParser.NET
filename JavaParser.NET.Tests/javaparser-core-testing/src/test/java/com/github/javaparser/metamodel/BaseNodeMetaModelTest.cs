@@ -27,7 +27,7 @@ namespace com.github.javaparser.metamodel;
 class TestMetaModel:BaseNodeMetaModel {
 
     public TestMetaModel() {
-        super(Optional.empty(), StringLiteralExpr.class, "stri", "com.japa", true, true);
+        base(Optional.empty(), StringLiteralExpr.class, "stri", "com.japa", true, true);
     }
 }
 

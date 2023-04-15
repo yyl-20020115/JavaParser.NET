@@ -29,7 +29,7 @@ namespace com.github.javaparser.symbolsolver.resolution;
  *
  * @author Malte Skoruppa
  */
-class AnnotationsResolutionTest extends AbstractResolutionTest {
+class AnnotationsResolutionTest:AbstractResolutionTest {
 
     @BeforeEach
     void configureSymbolSolver(){

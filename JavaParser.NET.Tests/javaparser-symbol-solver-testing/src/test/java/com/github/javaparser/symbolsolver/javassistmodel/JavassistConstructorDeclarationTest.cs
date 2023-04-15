@@ -25,12 +25,12 @@ namespace com.github.javaparser.symbolsolver.javassistmodel;
 
 class JavassistConstructorDeclarationTest implements ResolvedConstructorDeclarationTest {
 
-    @Override
+    //@Override
     public Optional<Node> getWrappedDeclaration(AssociableToAST associableToAST) {
         return Optional.empty();
     }
 
-    @Override
+    //@Override
     public ResolvedConstructorDeclaration createValue() {
         try {
             TypeSolver typeSolver = new ReflectionTypeSolver();

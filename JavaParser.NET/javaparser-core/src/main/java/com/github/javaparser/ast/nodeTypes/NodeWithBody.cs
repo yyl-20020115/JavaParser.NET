@@ -36,7 +36,7 @@ public interface NodeWithBody<N:Node> {
     /**
      * @return true if the body is an {@link EmptyStmt} or an empty {@link BlockStmt}
      */
-    default boolean hasEmptyBody() {
+    default bool hasEmptyBody() {
         Statement body = getBody();
         return body.toBlockStmt().map(bs -> bs.isEmpty()).orElse(body.isEmptyStmt());
     }

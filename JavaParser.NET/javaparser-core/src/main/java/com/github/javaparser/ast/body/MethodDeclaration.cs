@@ -36,7 +36,7 @@ public class MethodDeclaration:CallableDeclaration<MethodDeclaration> implements
 
     private Type type;
 
-    @OptionalProperty
+    //@OptionalProperty
     private BlockStmt body;
 
     public MethodDeclaration() {
@@ -65,21 +65,21 @@ public class MethodDeclaration:CallableDeclaration<MethodDeclaration> implements
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public MethodDeclaration(TokenRange tokenRange, NodeList<Modifier> modifiers, NodeList<AnnotationExpr> annotations, NodeList<TypeParameter> typeParameters, Type type, SimpleName name, NodeList<Parameter> parameters, NodeList<ReferenceType> thrownExceptions, BlockStmt body, ReceiverParameter receiverParameter) {
-        super(tokenRange, modifiers, annotations, typeParameters, name, parameters, thrownExceptions, receiverParameter);
+        base(tokenRange, modifiers, annotations, typeParameters, name, parameters, thrownExceptions, receiverParameter);
         setType(type);
         setBody(body);
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -126,27 +126,27 @@ public class MethodDeclaration:CallableDeclaration<MethodDeclaration> implements
         return this;
     }
 
-    @Override
+    //@Override
     public MethodDeclaration setModifiers(/*final*/NodeList<Modifier> modifiers) {
         return super.setModifiers(modifiers);
     }
 
-    @Override
+    //@Override
     public MethodDeclaration setName(/*final*/SimpleName name) {
         return super.setName(name);
     }
 
-    @Override
+    //@Override
     public MethodDeclaration setParameters(/*final*/NodeList<Parameter> parameters) {
         return super.setParameters(parameters);
     }
 
-    @Override
+    //@Override
     public MethodDeclaration setThrownExceptions(/*final*/NodeList<ReferenceType> thrownExceptions) {
         return super.setThrownExceptions(thrownExceptions);
     }
 
-    @Override
+    //@Override
     public MethodDeclaration setTypeParameters(/*final*/NodeList<TypeParameter> typeParameters) {
         return super.setTypeParameters(typeParameters);
     }
@@ -160,8 +160,8 @@ public class MethodDeclaration:CallableDeclaration<MethodDeclaration> implements
      *
      * @return method declaration as String
      */
-    @Override
-    public string getDeclarationAsString(boolean includingModifiers, boolean includingThrows, boolean includingParameterName) {
+    //@Override
+    public string getDeclarationAsString(bool includingModifiers, bool includingThrows, bool includingParameterName) {
         StringBuilder sb = new StringBuilder();
         if (includingModifiers) {
             AccessSpecifier accessSpecifier = getAccessSpecifier();
@@ -186,7 +186,7 @@ public class MethodDeclaration:CallableDeclaration<MethodDeclaration> implements
         sb.append(" ");
         sb.append(getName());
         sb.append("(");
-        boolean firstParam = true;
+        bool firstParam = true;
         for (Parameter param : getParameters()) {
             if (firstParam) {
                 firstParam = false;
@@ -224,33 +224,33 @@ public class MethodDeclaration:CallableDeclaration<MethodDeclaration> implements
         return sb.toString();
     }
 
-    public boolean isNative() {
+    public bool isNative() {
         return hasModifier(Modifier.Keyword.NATIVE);
     }
 
-    public boolean isSynchronized() {
+    public bool isSynchronized() {
         return hasModifier(Modifier.Keyword.SYNCHRONIZED);
     }
 
-    public boolean isDefault() {
+    public bool isDefault() {
         return hasModifier(Modifier.Keyword.DEFAULT);
     }
 
-    public MethodDeclaration setNative(boolean set) {
+    public MethodDeclaration setNative(bool set) {
         return setModifier(Modifier.Keyword.NATIVE, set);
     }
 
-    public MethodDeclaration setSynchronized(boolean set) {
+    public MethodDeclaration setSynchronized(bool set) {
         return setModifier(Modifier.Keyword.SYNCHRONIZED, set);
     }
 
-    public MethodDeclaration setDefault(boolean set) {
+    public MethodDeclaration setDefault(bool set) {
         return setModifier(Modifier.Keyword.DEFAULT, set);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
-    public boolean remove(Node node) {
+    public bool remove(Node node) {
         if (node == null) {
             return false;
         }
@@ -268,21 +268,21 @@ public class MethodDeclaration:CallableDeclaration<MethodDeclaration> implements
         return setBody((BlockStmt) null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public MethodDeclaration clone() {
         return (MethodDeclaration) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public MethodDeclarationMetaModel getMetaModel() {
         return JavaParserMetaModel.methodDeclarationMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }
@@ -299,30 +299,30 @@ public class MethodDeclaration:CallableDeclaration<MethodDeclaration> implements
         return super.replace(node, replacementNode);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isMethodDeclaration() {
+    public bool isMethodDeclaration() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public MethodDeclaration asMethodDeclaration() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifMethodDeclaration(Consumer<MethodDeclaration> action) {
         action.accept(this);
     }
 
-    @Override
+    //@Override
     public ResolvedMethodDeclaration resolve() {
         return getSymbolResolver().resolveDeclaration(this, ResolvedMethodDeclaration.class);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<MethodDeclaration> toMethodDeclaration() {
         return Optional.of(this);

@@ -284,7 +284,7 @@ class ReflectionClassDeclarationTest:AbstractSymbolResolutionTest {
         // Note that it must not include overloaded methods. 
         // Since the ReflectionTestObject class implicitly inherits from the Object class, 
         // the list of methods also contains the methods of the Object class that we filter for more readability.
-        Set<String> actual = testObject.getAllMethods()
+        HashSet<String> actual = testObject.getAllMethods()
                 .stream()
                 .map(MethodUsage::getQualifiedSignature)
                 .filter(s -> !"com.github.javaparser.symbolsolver.reflectionmodel.ReflectionTestObject.$jacocoInit()".equals(s)) // Ignore the methods injected via reflection by jacoco -- see also #1701 and #2637
@@ -300,7 +300,7 @@ class ReflectionClassDeclarationTest:AbstractSymbolResolutionTest {
         ResolvedClassDeclaration testObject = new ReflectionClassDeclaration(ReflectionTestObject.class, typeResolver);
 
         ImmutableSet<String> expected = ImmutableSet.of("a", "b", "c");
-        Set<String> actual = testObject.getAllFields()
+        HashSet<String> actual = testObject.getAllFields()
                 .stream()
                 .map(ResolvedDeclaration::getName)
                 .filter(s -> !"$jacocoData".equals(s)) // Ignore the fields injected via reflection by jacoco -- see also #1701 and #2637

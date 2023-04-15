@@ -28,7 +28,7 @@ namespace com.github.javaparser.generator.core.visitor;
  */
 public class CloneVisitorGenerator:VisitorGenerator {
     public CloneVisitorGenerator(SourceRoot sourceRoot) {
-        super(sourceRoot, "com.github.javaparser.ast.visitor", "CloneVisitor", "Visitable", "Object", true);
+        base(sourceRoot, "com.github.javaparser.ast.visitor", "CloneVisitor", "Visitable", "Object", true);
     }
 
     //@Override

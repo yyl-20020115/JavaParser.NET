@@ -39,9 +39,9 @@ public enum NameCategory {
     AMBIGUOUS_NAME(true),
     COMPILATION_ERROR(false);
 
-    private boolean needDisambiguation;
+    private bool needDisambiguation;
 
-    NameCategory(boolean needDisambiguation) {
+    NameCategory(bool needDisambiguation) {
         this.needDisambiguation = needDisambiguation;
     }
 
@@ -50,18 +50,18 @@ public enum NameCategory {
      * These ambiguous categories are recognized solely through a syntactic process. In order to disambiguate them
      * a semantic process (i.e., consider the symbols which are actually visible _in a given context) is needed.
      */
-    public boolean isNeedingDisambiguation() {
+    public bool isNeedingDisambiguation() {
         return needDisambiguation;
     }
 
     /**
      * Is the given name acceptable for the given category?
      */
-    public boolean isNameAcceptable(string name) {
+    public bool isNameAcceptable(string name) {
         return this != TYPE_NAME || !name.equals("var");
     }
 
-    public boolean isValid() {
+    public bool isValid() {
         return this != COMPILATION_ERROR;
     }
 

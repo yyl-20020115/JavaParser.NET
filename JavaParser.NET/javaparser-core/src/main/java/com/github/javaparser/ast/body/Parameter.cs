@@ -37,7 +37,7 @@ public class Parameter:Node implements NodeWithType<Parameter, Type>, NodeWithAn
 
     private Type type;
 
-    private boolean isVarArgs;
+    private bool isVarArgs;
 
     private NodeList<AnnotationExpr> varArgsAnnotations;
 
@@ -70,7 +70,7 @@ public class Parameter:Node implements NodeWithType<Parameter, Type>, NodeWithAn
     }
 
     //@AllFieldsConstructor
-    public Parameter(NodeList<Modifier> modifiers, NodeList<AnnotationExpr> annotations, Type type, boolean isVarArgs, NodeList<AnnotationExpr> varArgsAnnotations, SimpleName name) {
+    public Parameter(NodeList<Modifier> modifiers, NodeList<AnnotationExpr> annotations, Type type, bool isVarArgs, NodeList<AnnotationExpr> varArgsAnnotations, SimpleName name) {
         this(null, modifiers, annotations, type, isVarArgs, varArgsAnnotations, name);
     }
 
@@ -78,8 +78,8 @@ public class Parameter:Node implements NodeWithType<Parameter, Type>, NodeWithAn
      * This constructor is used by the parser and is considered private.
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
-    public Parameter(TokenRange tokenRange, NodeList<Modifier> modifiers, NodeList<AnnotationExpr> annotations, Type type, boolean isVarArgs, NodeList<AnnotationExpr> varArgsAnnotations, SimpleName name) {
-        super(tokenRange);
+    public Parameter(TokenRange tokenRange, NodeList<Modifier> modifiers, NodeList<AnnotationExpr> annotations, Type type, bool isVarArgs, NodeList<AnnotationExpr> varArgsAnnotations, SimpleName name) {
+        base(tokenRange);
         setModifiers(modifiers);
         setAnnotations(annotations);
         setType(type);
@@ -89,15 +89,15 @@ public class Parameter:Node implements NodeWithType<Parameter, Type>, NodeWithAn
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -107,7 +107,7 @@ public class Parameter:Node implements NodeWithType<Parameter, Type>, NodeWithAn
     }
 
     //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public boolean isVarArgs() {
+    public bool isVarArgs() {
         return isVarArgs;
     }
 
@@ -126,7 +126,7 @@ public class Parameter:Node implements NodeWithType<Parameter, Type>, NodeWithAn
     }
 
     //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public Parameter setVarArgs(/*final*/boolean isVarArgs) {
+    public Parameter setVarArgs(/*final*/bool isVarArgs) {
         if (isVarArgs == this.isVarArgs) {
             return this;
         }
@@ -205,9 +205,9 @@ public class Parameter:Node implements NodeWithType<Parameter, Type>, NodeWithAn
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
-    public boolean remove(Node node) {
+    public bool remove(Node node) {
         if (node == null) {
             return false;
         }
@@ -251,21 +251,21 @@ public class Parameter:Node implements NodeWithType<Parameter, Type>, NodeWithAn
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public Parameter clone() {
         return (Parameter) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public ParameterMetaModel getMetaModel() {
         return JavaParserMetaModel.parameterMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }
@@ -298,7 +298,7 @@ public class Parameter:Node implements NodeWithType<Parameter, Type>, NodeWithAn
         return super.replace(node, replacementNode);
     }
 
-    @Override
+    //@Override
     public ResolvedParameterDeclaration resolve() {
         return getSymbolResolver().resolveDeclaration(this, ResolvedParameterDeclaration.class);
     }
@@ -312,8 +312,8 @@ public class Parameter:Node implements NodeWithType<Parameter, Type>, NodeWithAn
      *
      * @return true if the node parameter is explicitly /*final*/(keyword attached) or implicitly /*final*/(e.g. parameters to a record)
      */
-    @Override
-    public boolean isFinal() {
+    //@Override
+    public bool isFinal() {
         // RecordDeclaration-specific code
         if (getParentNode().isPresent()) {
             Node parentNode = getParentNode().get();

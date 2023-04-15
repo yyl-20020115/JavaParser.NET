@@ -182,7 +182,7 @@ public abstract class Node implements Cloneable {
      * 
      * @return the string representation of this node
      */
-    @Override
+    //@Override
     public /*final*/string toString() {
         /*final*/DumpVisitor visitor = new DumpVisitor();
         accept(visitor, null);
@@ -195,20 +195,20 @@ public abstract class Node implements Cloneable {
         return visitor.getSource();
     }
 
-    @Override
+    //@Override
     public /*final*/int hashCode() {
         return toString().hashCode();
     }
 
-    @Override
-    public boolean equals(/*final*/Object obj) {
+    //@Override
+    public bool equals(/*final*/Object obj) {
         if (obj == null || !(obj is Node)) {
             return false;
         }
         return EqualsVisitor.equals(this, (Node) obj);
     }
 
-    @Override
+    //@Override
     public Node clone() {
         return this.accept(new CloneVisitor(), null);
     }
@@ -232,7 +232,7 @@ public abstract class Node implements Cloneable {
         return childrenNodes;
     }
 
-    public boolean contains(Node other) {
+    public bool contains(Node other) {
         return range.contains(other.range);
     }
 
@@ -313,19 +313,19 @@ public abstract class Node implements Cloneable {
     public static /*final*/int ABSOLUTE_BEGIN_LINE = -1;
     public static /*final*/int ABSOLUTE_END_LINE = -2;
 
-    public boolean isPositionedAfter(Position position) {
+    public bool isPositionedAfter(Position position) {
         return range.isAfter(position);
     }
 
-    public boolean isPositionedBefore(Position position) {
+    public bool isPositionedBefore(Position position) {
         return range.isBefore(position);
     }
 
-    public boolean hasComment() {
+    public bool hasComment() {
         return comment != null;
     }
 
-    public void tryAddImportToParentCompilationUnit(Class<?> clazz) {
+    public void tryAddImportToParentCompilationUnit(Type clazz) {
         CompilationUnit parentNode = getParentNodeOfType(CompilationUnit.class);
         if (parentNode != null) {
             parentNode.addImport(clazz);
@@ -377,7 +377,7 @@ public abstract class Node implements Cloneable {
      *            The singleton key for the user data
      * @param object
      *            The user data object
-     * @throws IllegalArgumentException
+     * @throws ArgumentException
      * @see UserDataKey
      */
     public <M> void setUserData(UserDataKey<M> key, M object) {

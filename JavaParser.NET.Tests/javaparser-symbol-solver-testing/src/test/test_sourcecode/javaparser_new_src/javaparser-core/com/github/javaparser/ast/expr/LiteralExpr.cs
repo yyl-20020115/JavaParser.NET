@@ -31,6 +31,6 @@ public abstract class LiteralExpr:Expression {
 	}
 
 	public LiteralExpr(Range range) {
-		super(range);
+		base(range);
 	}
 }

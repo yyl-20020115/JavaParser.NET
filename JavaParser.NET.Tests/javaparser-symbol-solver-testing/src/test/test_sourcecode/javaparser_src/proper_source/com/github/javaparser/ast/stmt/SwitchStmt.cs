@@ -44,18 +44,18 @@ public /*final*/class SwitchStmt:Statement {
 	public SwitchStmt(/*final*/int beginLine, /*final*/int beginColumn,
 			/*final*/int endLine, /*final*/int endColumn, /*final*/Expression selector,
 			/*final*/List<SwitchEntryStmt> entries) {
-		super(beginLine, beginColumn, endLine, endColumn);
+		base(beginLine, beginColumn, endLine, endColumn);
 		setSelector(selector);
 		setEntries(entries);
 	}
 
 	@Override
-	public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+	public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
 		return v.visit(this, arg);
 	}
 
 	@Override
-	public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+	public void accept<A>(VoidVisitor<A> v, A arg) {
 		v.visit(this, arg);
 	}
 

@@ -32,7 +32,7 @@ public class JavassistAnnotationDeclaration:AbstractTypeDeclaration implements R
     private TypeSolver typeSolver;
     private JavassistTypeDeclarationAdapter javassistTypeDeclarationAdapter;
 
-    @Override
+    //@Override
     public string toString() {
         return getClass().getSimpleName() + "{" +
                 "ctClass=" + ctClass.getName() +
@@ -42,19 +42,19 @@ public class JavassistAnnotationDeclaration:AbstractTypeDeclaration implements R
 
     public JavassistAnnotationDeclaration(CtClass ctClass, TypeSolver typeSolver) {
         if (!ctClass.isAnnotation()) {
-            throw new IllegalArgumentException("Not an annotation: " + ctClass.getName());
+            throw new ArgumentException("Not an annotation: " + ctClass.getName());
         }
         this.ctClass = ctClass;
         this.typeSolver = typeSolver;
         this.javassistTypeDeclarationAdapter = new JavassistTypeDeclarationAdapter(ctClass, typeSolver, this);
     }
 
-    @Override
+    //@Override
     public string getPackageName() {
         return ctClass.getPackageName();
     }
 
-    @Override
+    //@Override
     public string getClassName() {
         string qualifiedName = getQualifiedName();
         if (qualifiedName.contains(".")) {
@@ -64,49 +64,49 @@ public class JavassistAnnotationDeclaration:AbstractTypeDeclaration implements R
         }
     }
 
-    @Override
+    //@Override
     public string getQualifiedName() {
         return ctClass.getName().replace('$', '.');
     }
 
-    @Override
-    public boolean isAssignableBy(ResolvedType type) {
+    //@Override
+    public bool isAssignableBy(ResolvedType type) {
         // TODO #1836
         throw new UnsupportedOperationException();
     }
 
-    @Override
+    //@Override
     public List<ResolvedFieldDeclaration> getAllFields() {
         return javassistTypeDeclarationAdapter.getDeclaredFields();
     }
 
-    @Override
-    public boolean isAssignableBy(ResolvedReferenceTypeDeclaration other) {
+    //@Override
+    public bool isAssignableBy(ResolvedReferenceTypeDeclaration other) {
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    public List<ResolvedReferenceType> getAncestors(boolean acceptIncompleteList) {
+    //@Override
+    public List<ResolvedReferenceType> getAncestors(bool acceptIncompleteList) {
         return javassistTypeDeclarationAdapter.getAncestors(acceptIncompleteList);
     }
 
-    @Override
-    public Set<ResolvedReferenceTypeDeclaration> internalTypes() {
+    //@Override
+    public HashSet<ResolvedReferenceTypeDeclaration> internalTypes() {
         return javassistTypeDeclarationAdapter.internalTypes();
     }
 
-    @Override
-    public Set<ResolvedMethodDeclaration> getDeclaredMethods() {
+    //@Override
+    public HashSet<ResolvedMethodDeclaration> getDeclaredMethods() {
         // TODO #1838
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    public boolean hasDirectlyAnnotation(string canonicalName) {
+    //@Override
+    public bool hasDirectlyAnnotation(string canonicalName) {
         return ctClass.hasAnnotation(canonicalName);
     }
 
-    @Override
+    //@Override
     public string getName() {
         return getClassName();
     }
@@ -116,32 +116,32 @@ public class JavassistAnnotationDeclaration:AbstractTypeDeclaration implements R
      *
      * @return An empty list.
      */
-    @Override
+    //@Override
     public List<ResolvedTypeParameterDeclaration> getTypeParameters() {
         // Annotation declarations cannot have type parameters - i.e. we can always return an empty list.
         return Collections.emptyList();
     }
 
-    @Override
+    //@Override
     public Optional<ResolvedReferenceTypeDeclaration> containerType() {
         // TODO #1841
         throw new UnsupportedOperationException("containerType() is not supported for " + this.getClass().getCanonicalName());
     }
 
-    @Override
+    //@Override
     public List<ResolvedConstructorDeclaration> getConstructors() {
         return Collections.emptyList();
     }
 
-    @Override
+    //@Override
     public List<ResolvedAnnotationMemberDeclaration> getAnnotationMembers() {
         return Stream.of(ctClass.getDeclaredMethods())
                 .map(m -> new JavassistAnnotationMemberDeclaration(m, typeSolver))
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public boolean isInheritable() {
+    //@Override
+    public bool isInheritable() {
         try {
             return ctClass.getAnnotation(Inherited.class) != null;
         } catch (ClassNotFoundException e) {

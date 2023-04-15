@@ -51,22 +51,22 @@ public class ConditionalExpr:Expression implements NodeWithCondition<Conditional
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public ConditionalExpr(TokenRange tokenRange, Expression condition, Expression thenExpr, Expression elseExpr) {
-        super(tokenRange);
+        base(tokenRange);
         setCondition(condition);
         setThenExpr(thenExpr);
         setElseExpr(elseExpr);
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -127,21 +127,21 @@ public class ConditionalExpr:Expression implements NodeWithCondition<Conditional
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public ConditionalExpr clone() {
         return (ConditionalExpr) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public ConditionalExprMetaModel getMetaModel() {
         return JavaParserMetaModel.conditionalExprMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }
@@ -160,25 +160,25 @@ public class ConditionalExpr:Expression implements NodeWithCondition<Conditional
         return super.replace(node, replacementNode);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isConditionalExpr() {
+    public bool isConditionalExpr() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public ConditionalExpr asConditionalExpr() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifConditionalExpr(Consumer<ConditionalExpr> action) {
         action.accept(this);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<ConditionalExpr> toConditionalExpr() {
         return Optional.of(this);
@@ -188,8 +188,8 @@ public class ConditionalExpr:Expression implements NodeWithCondition<Conditional
      * A reference conditional expression is a poly expression if it appears _in an assignment context or an invocation context (§5.2. §5.3).
      * Otherwise, it is a standalone expression.
      */
-    @Override
-    public boolean isPolyExpression() {
+    //@Override
+    public bool isPolyExpression() {
         return appearsInAssignmentContext() || appearsInInvocationContext();
     }
 }

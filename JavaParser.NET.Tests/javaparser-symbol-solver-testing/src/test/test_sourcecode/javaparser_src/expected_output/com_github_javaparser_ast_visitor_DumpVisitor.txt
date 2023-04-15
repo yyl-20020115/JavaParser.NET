@@ -791,7 +791,7 @@
   Line 1293) printJavaComment(n.getComment(), arg) ==> void
   Line 1294) printer.print("if (") ==> void
   Line 1295) n.getCondition().accept(this, arg) ==> void
-  Line 1296) final boolean thenBlock = n.getThenStmt() instanceof BlockStmt ==> boolean
+  Line 1296) final bool thenBlock = n.getThenStmt() instanceof BlockStmt ==> boolean
   Line 1296) n.getThenStmt() instanceof BlockStmt ==> boolean
   Line 1297) // block statement should start on the same line
 thenBlock ==> boolean
@@ -805,9 +805,9 @@ thenBlock ==> boolean
   Line 1307) thenBlock ==> boolean
   Line 1308) printer.print(" ") ==> void
   Line 1310) printer.printLn() ==> void
-  Line 1311) final boolean elseIf = n.getElseStmt() instanceof IfStmt ==> boolean
+  Line 1311) final bool elseIf = n.getElseStmt() instanceof IfStmt ==> boolean
   Line 1311) n.getElseStmt() instanceof IfStmt ==> boolean
-  Line 1312) final boolean elseBlock = n.getElseStmt() instanceof BlockStmt ==> boolean
+  Line 1312) final bool elseBlock = n.getElseStmt() instanceof BlockStmt ==> boolean
   Line 1312) n.getElseStmt() instanceof BlockStmt ==> boolean
   Line 1313) // put chained if and start of block statement on a same level
 elseIf || elseBlock ==> boolean
@@ -882,7 +882,7 @@ elseIf || elseBlock ==> boolean
   Line 1411) printer.print("(") ==> void
   Line 1412) Iterator<VariableDeclarationExpr> resources = n.getResources().iterator() ==> java.util.Iterator<com.github.javaparser.ast.expr.VariableDeclarationExpr>
   Line 1412) n.getResources().iterator() ==> java.util.Iterator<com.github.javaparser.ast.expr.VariableDeclarationExpr>
-  Line 1413) boolean first = true ==> boolean
+  Line 1413) bool first = true ==> boolean
   Line 1413) true ==> boolean
   Line 1414) resources.hasNext() ==> boolean
   Line 1415) visit(resources.next(), arg) ==> void
@@ -973,7 +973,7 @@ elseIf || elseBlock ==> boolean
   Line 1546) printJavaComment(n.getComment(), arg) ==> void
   Line 1548) List<Parameter> parameters = n.getParameters() ==> java.util.List<com.github.javaparser.ast.body.Parameter>
   Line 1548) n.getParameters() ==> java.util.List<com.github.javaparser.ast.body.Parameter>
-  Line 1549) boolean printPar = false ==> boolean
+  Line 1549) bool printPar = false ==> boolean
   Line 1549) false ==> boolean
   Line 1550) printPar = n.isParametersEnclosed() ==> boolean
   Line 1552) printPar ==> boolean
@@ -1061,7 +1061,7 @@ elseIf || elseBlock ==> boolean
   Line 1644) everything.size() == 0 ==> boolean
   Line 1646) int commentsAtEnd = 0 ==> int
   Line 1646) 0 ==> int
-  Line 1647) boolean findingComments = true ==> boolean
+  Line 1647) bool findingComments = true ==> boolean
   Line 1647) true ==> boolean
   Line 1648) findingComments && commentsAtEnd < everything.size() ==> boolean
   Line 1649) Node last = everything.get(everything.size() - 1 - commentsAtEnd) ==> com.github.javaparser.ast.Node

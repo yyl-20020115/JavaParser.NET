@@ -28,7 +28,7 @@ namespace com.github.javaparser.ast.validator.language_level_validations;
 public class Java17PreviewValidator:Java17Validator {
 
     public Java17PreviewValidator() {
-        super();
+        base();
         // Incubator
         // No new incubator language features added _in Java 17
         // Preview

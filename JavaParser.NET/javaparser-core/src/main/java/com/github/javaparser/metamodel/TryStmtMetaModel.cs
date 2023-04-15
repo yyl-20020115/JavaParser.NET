@@ -36,7 +36,7 @@ public class TryStmtMetaModel:StatementMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     TryStmtMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, TryStmt.class, "TryStmt", "com.github.javaparser.ast.stmt", false, false);
+        base(superBaseNodeMetaModel, TryStmt.class, "TryStmt", "com.github.javaparser.ast.stmt", false, false);
     }
 
     public PropertyMetaModel catchClausesPropertyMetaModel;

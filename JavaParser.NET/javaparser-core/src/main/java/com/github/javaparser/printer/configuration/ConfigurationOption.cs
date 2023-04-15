@@ -30,7 +30,7 @@ public interface ConfigurationOption {
     /*
      * returns True if the option has a currentValue
      */
-    boolean hasValue();
+    bool hasValue();
 
     /*
      * returns the currentValue as an Integer

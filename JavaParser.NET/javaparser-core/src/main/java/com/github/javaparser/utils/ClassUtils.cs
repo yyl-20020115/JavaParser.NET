@@ -26,7 +26,7 @@ public class ClassUtils {
     /**
      * Maps primitive {@code Class}es to their corresponding wrapper {@code Class}.
      */
-    private static /*final*/Map<Class<?>, Class<?>> primitiveWrapperMap = new HashMap<>();
+    private static /*final*/Map<Type, Type> primitiveWrapperMap = new HashMap<>();
 
     static {
         primitiveWrapperMap.put(Boolean.TYPE, Boolean.class);
@@ -43,11 +43,11 @@ public class ClassUtils {
     /**
      * Maps wrapper {@code Class}es to their corresponding primitive types.
      */
-    private static /*final*/Map<Class<?>, Class<?>> wrapperPrimitiveMap = new HashMap<>();
+    private static /*final*/Map<Type, Type> wrapperPrimitiveMap = new HashMap<>();
 
     static {
-        for (/*final*/Class<?> primitiveClass : primitiveWrapperMap.keySet()) {
-            /*final*/Class<?> wrapperClass = primitiveWrapperMap.get(primitiveClass);
+        for (/*final*/Type primitiveClass : primitiveWrapperMap.keySet()) {
+            /*final*/Type wrapperClass = primitiveWrapperMap.get(primitiveClass);
             if (!primitiveClass.equals(wrapperClass)) {
                 wrapperPrimitiveMap.put(wrapperClass, primitiveClass);
             }
@@ -63,7 +63,7 @@ public class ClassUtils {
      * @return true if the given {@code type} is a primitive or primitive wrapper ({@link Boolean}, {@link Byte}, {@link
      * Character}, {@link Short}, {@link Integer}, {@link Long}, {@link Double}, {@link Float}).
      */
-    public static boolean isPrimitiveOrWrapper(/*final*/Class<?> type) {
+    public static bool isPrimitiveOrWrapper(/*final*/Type type) {
         if (type == null) {
             return false;
         }
@@ -80,7 +80,7 @@ public class ClassUtils {
      * {@link Short}, {@link Integer}, {@link Long}, {@link Double}, {@link Float}).
      * @since 3.1
      */
-    public static boolean isPrimitiveWrapper(/*final*/Class<?> type) {
+    public static bool isPrimitiveWrapper(/*final*/Type type) {
         return wrapperPrimitiveMap.containsKey(type);
     }
 }

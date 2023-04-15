@@ -64,7 +64,7 @@ public class ControlFlowLogic {
      * whose try blocks contain the break statement, or there are try statements whose try blocks contain the break
      * statement and all finally clauses of those try statements can complete normally.
      */
-    public boolean exitTheStatement(BreakStmt breakStmt) {
+    public bool exitTheStatement(BreakStmt breakStmt) {
         if (!isReachable(breakStmt)) {
             return false;
         }
@@ -79,7 +79,7 @@ public class ControlFlowLogic {
         return true;
     }
 
-    public boolean continueADoStatement(ContinueStmt continueStmt, DoStmt doStmt) {
+    public bool continueADoStatement(ContinueStmt continueStmt, DoStmt doStmt) {
         for (TryStmt tryStmt : containedTryStmts(continueStmt)) {
             if (contains(tryStmt.getTryBlock(), continueStmt)) {
                 if (!tryStmt.getFinallyBlock().isPresent() && !canCompleteNormally(tryStmt.getFinallyBlock().get())) {
@@ -90,7 +90,7 @@ public class ControlFlowLogic {
         return true;
     }
 
-    private boolean contains(Statement container, Statement contained) {
+    private bool contains(Statement container, Statement contained) {
         throw new UnsupportedOperationException();
     }
 
@@ -98,7 +98,7 @@ public class ControlFlowLogic {
         throw new UnsupportedOperationException();
     }
 
-    private <P:Node> boolean parentIs(Node node, Class<P> parentClass) {
+    private <P:Node> bool parentIs(Node node, Class<P> parentClass) {
         if (node.getParentNode().isPresent()) {
             return parentClass.isInstance(node.getParentNode().get());
         } else {
@@ -107,12 +107,12 @@ public class ControlFlowLogic {
     }
 
     // See JLS 14.21
-    public boolean canCompleteNormally(Statement statement) {
+    public bool canCompleteNormally(Statement statement) {
         if (!isReachable(statement)) {
             return false;
         }
         GenericVisitor<Boolean, Void> visitor = new GenericVisitorAdapter<Boolean, Void>(){
-            @Override
+            //@Override
             public Boolean visit(BlockStmt n, Void arg) {
                 // An empty block that is not a switch block can complete normally iff it is reachable
                 if (n.isEmpty() && !parentIs(statement, SwitchStmt.class)) {
@@ -126,7 +126,7 @@ public class ControlFlowLogic {
                 throw new UnsupportedOperationException();
             }
 
-            @Override
+            //@Override
             public Boolean visit(LabeledStmt n, Void arg) {
                 // A labeled statement can complete normally if at least one of the following is true:
                 // – The contained statement can complete normally.
@@ -134,25 +134,25 @@ public class ControlFlowLogic {
                 throw new UnsupportedOperationException();
             }
 
-            @Override
+            //@Override
             public Boolean visit(EmptyStmt n, Void arg) {
                 // An empty statement can complete normally iff it is reachable.
                 return isReachable(n);
             }
 
-            @Override
+            //@Override
             public Boolean visit(LocalClassDeclarationStmt n, Void arg) {
                 // A local class declaration statement can complete normally if it is reachable.
                 return isReachable(n);
             }
 
-            @Override
+            //@Override
             public Boolean visit(LocalRecordDeclarationStmt n, Void arg) {
                 // A local record declaration statement can complete normally if it is reachable.
                 return isReachable(n);
             }
 
-            @Override
+            //@Override
             public Boolean visit(IfStmt n, Void arg) {
                 if (n.getElseStmt().isPresent()) {
                     // An if-then-else statement can complete normally iff the then-statement can
@@ -164,13 +164,13 @@ public class ControlFlowLogic {
                 }
             }
 
-            @Override
+            //@Override
             public Boolean visit(AssertStmt n, Void arg) {
                 // An assert statement can complete normally iff it is reachable.
                 return isReachable(n);
             }
 
-            @Override
+            //@Override
             public Boolean visit(ExpressionStmt n, Void arg) {
                 // A local variable declaration statement can complete normally iff it is reachable.
                 if (n.getExpression() is VariableDeclarationExpr) {
@@ -184,7 +184,7 @@ public class ControlFlowLogic {
         return statement.accept(visitor, null);
     }
 
-    private boolean isReachableBecauseOfPosition(Statement statement) {
+    private bool isReachableBecauseOfPosition(Statement statement) {
         // The first statement _in a non-empty block that is not a switch block is reachable iff the block is reachable.
 
         // Every other statement S _in a non-empty block that is not a switch block is reachable iff the statement
@@ -200,10 +200,10 @@ public class ControlFlowLogic {
         throw new UnsupportedOperationException();
     }
 
-    public boolean isReachable(Statement statement) {
+    public bool isReachable(Statement statement) {
 
         GenericVisitor<Boolean, Void> visitor = new GenericVisitorAdapter<Boolean, Void>(){
-            @Override
+            //@Override
             public Boolean visit(BlockStmt n, Void arg) {
                 // The block that is the body of a constructor, method, instance initializer, or static initializer is
                 // reachable
@@ -221,12 +221,12 @@ public class ControlFlowLogic {
                 return isReachableBecauseOfPosition(statement);
             }
 
-            @Override
+            //@Override
             public Boolean visit(LocalClassDeclarationStmt n, Void arg) {
                 return super.visit(n, arg);
             }
 
-            @Override
+            //@Override
             public Boolean visit(LocalRecordDeclarationStmt n, Void arg) {
                 return super.visit(n, arg);
             }

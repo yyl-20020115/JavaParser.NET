@@ -23,13 +23,13 @@ namespace com.github.javaparser.ast.validator.language_level_validations.chunks;
 
 public class NoUnderscoresInIntegerLiteralsValidator:VisitorValidator {
 
-    @Override
+    //@Override
     public void visit(IntegerLiteralExpr n, ProblemReporter arg) {
         validate(n, arg);
         super.visit(n, arg);
     }
 
-    @Override
+    //@Override
     public void visit(LongLiteralExpr n, ProblemReporter arg) {
         validate(n, arg);
         super.visit(n, arg);

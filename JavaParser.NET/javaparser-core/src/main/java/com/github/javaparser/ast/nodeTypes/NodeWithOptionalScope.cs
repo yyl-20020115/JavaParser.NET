@@ -25,7 +25,7 @@ namespace com.github.javaparser.ast.nodeTypes;
 /**
  * Represents a node which has an optional scope expression eg. method calls (object.method()).
  */
-public interface NodeWithOptionalScope<N:Node>:NodeWithTraversableScope {
+public interface NodeWithOptionalScope<N>:NodeWithTraversableScope where N:Node {
 
     Optional<Expression> getScope();
 

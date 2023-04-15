@@ -163,7 +163,7 @@ public class JavaSymbolSolver : SymbolResolver {
             }
         }
         if (node is NameExpr) {
-            SymbolReference<? extends ResolvedValueDeclaration> result = JavaParserFacade.get(typeSolver).solve((NameExpr) node);
+            SymbolReference<?:ResolvedValueDeclaration> result = JavaParserFacade.get(typeSolver).solve((NameExpr) node);
             if (result.isSolved()) {
                 if (resultClass.isInstance(result.getCorrespondingDeclaration())) {
                     return resultClass.cast(result.getCorrespondingDeclaration());
@@ -183,7 +183,7 @@ public class JavaSymbolSolver : SymbolResolver {
             }
         }
         if (node is FieldAccessExpr) {
-            SymbolReference<? extends ResolvedValueDeclaration> result = JavaParserFacade.get(typeSolver).solve((FieldAccessExpr) node);
+            SymbolReference<?:ResolvedValueDeclaration> result = JavaParserFacade.get(typeSolver).solve((FieldAccessExpr) node);
             if (result.isSolved()) {
                 if (resultClass.isInstance(result.getCorrespondingDeclaration())) {
                     return resultClass.cast(result.getCorrespondingDeclaration());
@@ -248,7 +248,7 @@ public class JavaSymbolSolver : SymbolResolver {
             }
         }
         if (node is PatternExpr) {
-            SymbolReference<? extends ResolvedValueDeclaration> result = JavaParserFacade.get(typeSolver).solve((PatternExpr) node);
+            SymbolReference<?:ResolvedValueDeclaration> result = JavaParserFacade.get(typeSolver).solve((PatternExpr) node);
             if (result.isSolved()) {
                 if (resultClass.isInstance(result.getCorrespondingDeclaration())) {
                     return resultClass.cast(result.getCorrespondingDeclaration());
@@ -261,7 +261,7 @@ public class JavaSymbolSolver : SymbolResolver {
                 + " from " + node.getClass().getSimpleName());
     }
 
-    @Override
+    //@Override
     public <T> T toResolvedType(Type javaparserType, Class<T> resultClass) {
         ResolvedType resolvedType = JavaParserFacade.get(typeSolver).convertToUsage(javaparserType);
         if (resultClass.isInstance(resolvedType)) {
@@ -271,12 +271,12 @@ public class JavaSymbolSolver : SymbolResolver {
                 + resultClass.getSimpleName() + " from " + javaparserType);
     }
 
-    @Override
+    //@Override
     public ResolvedType calculateType(Expression expression) {
         return JavaParserFacade.get(typeSolver).getType(expression);
     }
     
-    @Override
+    //@Override
     public ResolvedReferenceTypeDeclaration toTypeDeclaration(Node node) {
         if (node is ClassOrInterfaceDeclaration) {
             if (((ClassOrInterfaceDeclaration) node).isInterface()) {
@@ -296,6 +296,6 @@ public class JavaSymbolSolver : SymbolResolver {
         if (node is EnumConstantDeclaration) {
             return new JavaParserEnumDeclaration((EnumDeclaration) demandParentNode((EnumConstantDeclaration) node), typeSolver);
         }
-        throw new IllegalArgumentException("Cannot get a reference type declaration from " + node.getClass().getCanonicalName());
+        throw new ArgumentException("Cannot get a reference type declaration from " + node.getClass().getCanonicalName());
     }
 }

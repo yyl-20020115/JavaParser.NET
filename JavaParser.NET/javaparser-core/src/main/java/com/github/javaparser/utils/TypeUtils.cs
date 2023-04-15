@@ -33,7 +33,7 @@ public class TypeUtils {
     public static string getMethodDescriptor(Method method) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("(");
-        for (Class<?> parameter : method.getParameterTypes()) {
+        for (Type parameter : method.getParameterTypes()) {
             appendDescriptor(parameter, stringBuilder);
         }
         stringBuilder.append(")");
@@ -41,8 +41,8 @@ public class TypeUtils {
         return stringBuilder.toString();
     }
 
-    private static void appendDescriptor(/*final*/Class<?> clazz, /*final*/StringBuilder stringBuilder) {
-        Class<?> currentClass = clazz;
+    private static void appendDescriptor(/*final*/Type clazz, /*final*/StringBuilder stringBuilder) {
+        Type currentClass = clazz;
         while (currentClass.isArray()) {
             stringBuilder.append("[");
             currentClass = currentClass.getComponentType();
@@ -55,7 +55,7 @@ public class TypeUtils {
         }
     }
 
-    public static string getPrimitiveTypeDescriptor(/*final*/Class<?> clazz) {
+    public static string getPrimitiveTypeDescriptor(/*final*/Type clazz) {
         if (clazz == Void.TYPE || clazz == Void.class) {
             return new VoidType().toDescriptor();
         }
@@ -67,6 +67,6 @@ public class TypeUtils {
         prim = Primitive.byBoxedTypeName(className);
         return prim.map(pType -> pType.toDescriptor())
                 .orElseThrow(
-                        () -> new IllegalArgumentException(String.format("Unknown primitive type \"%s\"", className)));
+                        () -> new ArgumentException(String.format("Unknown primitive type \"%s\"", className)));
     }
 }

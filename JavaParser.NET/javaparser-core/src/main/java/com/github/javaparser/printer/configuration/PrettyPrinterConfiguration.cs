@@ -121,35 +121,35 @@ public class PrettyPrinterConfiguration implements PrinterConfiguration {
         return this;
     }
 
-    public boolean isOrderImports() {
+    public bool isOrderImports() {
         return wrappedConfiguration.get(new DefaultConfigurationOption(ConfigOption.ORDER_IMPORTS)).isPresent();
     }
 
-    public boolean isPrintComments() {
+    public bool isPrintComments() {
         return wrappedConfiguration.get(new DefaultConfigurationOption(ConfigOption.PRINT_COMMENTS)).isPresent();
     }
 
-    public boolean isIgnoreComments() {
+    public bool isIgnoreComments() {
         return !wrappedConfiguration.get(new DefaultConfigurationOption(ConfigOption.PRINT_COMMENTS)).isPresent();
     }
 
-    public boolean isSpaceAroundOperators() {
+    public bool isSpaceAroundOperators() {
         return wrappedConfiguration.get(new DefaultConfigurationOption(ConfigOption.SPACE_AROUND_OPERATORS)).isPresent();
     }
 
-    public boolean isPrintJavadoc() {
+    public bool isPrintJavadoc() {
         return wrappedConfiguration.get(new DefaultConfigurationOption(ConfigOption.PRINT_JAVADOC)).isPresent();
     }
 
-    public boolean isColumnAlignParameters() {
+    public bool isColumnAlignParameters() {
         return wrappedConfiguration.get(new DefaultConfigurationOption(ConfigOption.COLUMN_ALIGN_PARAMETERS)).isPresent();
     }
 
-    public boolean isColumnAlignFirstMethodChain() {
+    public bool isColumnAlignFirstMethodChain() {
         return wrappedConfiguration.get(new DefaultConfigurationOption(ConfigOption.COLUMN_ALIGN_FIRST_METHOD_CHAIN)).isPresent();
     }
 
-    public boolean isIndentCaseInSwitch() {
+    public bool isIndentCaseInSwitch() {
         return wrappedConfiguration.get(new DefaultConfigurationOption(ConfigOption.INDENT_CASE_IN_SWITCH)).isPresent();
     }
 
@@ -157,7 +157,7 @@ public class PrettyPrinterConfiguration implements PrinterConfiguration {
      * When true, all comments will be printed, unless printJavadoc is false, then only line and block comments will be
      * printed.
      */
-    public PrettyPrinterConfiguration setPrintComments(boolean printComments) {
+    public PrettyPrinterConfiguration setPrintComments(bool printComments) {
         wrappedConfiguration = printComments ? addOption(new DefaultConfigurationOption(ConfigOption.PRINT_COMMENTS)) : removeOption(new DefaultConfigurationOption(ConfigOption.PRINT_COMMENTS));
         return this;
     }
@@ -165,7 +165,7 @@ public class PrettyPrinterConfiguration implements PrinterConfiguration {
     /**
      * When true, Javadoc will be printed.
      */
-    public PrettyPrinterConfiguration setPrintJavadoc(boolean printJavadoc) {
+    public PrettyPrinterConfiguration setPrintJavadoc(bool printJavadoc) {
         wrappedConfiguration = printJavadoc ? addOption(new DefaultConfigurationOption(ConfigOption.PRINT_JAVADOC)) : removeOption(new DefaultConfigurationOption(ConfigOption.PRINT_JAVADOC));
         return this;
     }
@@ -173,22 +173,22 @@ public class PrettyPrinterConfiguration implements PrinterConfiguration {
     /**
      * Set if there should be spaces between operators
      */
-    public PrettyPrinterConfiguration setSpaceAroundOperators(boolean spaceAroundOperators) {
+    public PrettyPrinterConfiguration setSpaceAroundOperators(bool spaceAroundOperators) {
         wrappedConfiguration = spaceAroundOperators ? addOption(new DefaultConfigurationOption(ConfigOption.SPACE_AROUND_OPERATORS)) : removeOption(new DefaultConfigurationOption(ConfigOption.SPACE_AROUND_OPERATORS));
         return this;
     }
 
-    public PrettyPrinterConfiguration setColumnAlignParameters(boolean columnAlignParameters) {
+    public PrettyPrinterConfiguration setColumnAlignParameters(bool columnAlignParameters) {
         wrappedConfiguration = columnAlignParameters ? addOption(new DefaultConfigurationOption(ConfigOption.COLUMN_ALIGN_PARAMETERS)) : removeOption(new DefaultConfigurationOption(ConfigOption.COLUMN_ALIGN_PARAMETERS));
         return this;
     }
 
-    public PrettyPrinterConfiguration setColumnAlignFirstMethodChain(boolean columnAlignFirstMethodChain) {
+    public PrettyPrinterConfiguration setColumnAlignFirstMethodChain(bool columnAlignFirstMethodChain) {
         wrappedConfiguration = columnAlignFirstMethodChain ? addOption(new DefaultConfigurationOption(ConfigOption.COLUMN_ALIGN_FIRST_METHOD_CHAIN)) : removeOption(new DefaultConfigurationOption(ConfigOption.COLUMN_ALIGN_FIRST_METHOD_CHAIN));
         return this;
     }
 
-    public PrettyPrinterConfiguration setIndentCaseInSwitch(boolean indentInSwitch) {
+    public PrettyPrinterConfiguration setIndentCaseInSwitch(bool indentInSwitch) {
         wrappedConfiguration = indentInSwitch ? addOption(new DefaultConfigurationOption(ConfigOption.INDENT_CASE_IN_SWITCH)) : removeOption(new DefaultConfigurationOption(ConfigOption.INDENT_CASE_IN_SWITCH));
         return this;
     }
@@ -208,7 +208,7 @@ public class PrettyPrinterConfiguration implements PrinterConfiguration {
     /**
      * When true, orders imports by alphabetically.
      */
-    public PrettyPrinterConfiguration setOrderImports(boolean orderImports) {
+    public PrettyPrinterConfiguration setOrderImports(bool orderImports) {
         wrappedConfiguration = orderImports ? addOption(new DefaultConfigurationOption(ConfigOption.ORDER_IMPORTS)) : removeOption(new DefaultConfigurationOption(ConfigOption.ORDER_IMPORTS));
         return this;
     }
@@ -245,27 +245,27 @@ public class PrettyPrinterConfiguration implements PrinterConfiguration {
         return this;
     }
 
-    @Override
+    //@Override
     public PrinterConfiguration addOption(ConfigurationOption option) {
         return wrappedConfiguration.addOption(option);
     }
 
-    @Override
-    public boolean isActivated(ConfigurationOption option) {
+    //@Override
+    public bool isActivated(ConfigurationOption option) {
         return wrappedConfiguration.isActivated(option);
     }
 
-    @Override
+    //@Override
     public Optional<ConfigurationOption> get(ConfigurationOption option) {
         return wrappedConfiguration.get(option);
     }
 
-    @Override
-    public Set<ConfigurationOption> get() {
+    //@Override
+    public HashSet<ConfigurationOption> get() {
         return wrappedConfiguration.get();
     }
 
-    @Override
+    //@Override
     public PrinterConfiguration removeOption(ConfigurationOption option) {
         return wrappedConfiguration.removeOption(option);
     }

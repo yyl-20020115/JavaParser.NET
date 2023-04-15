@@ -36,7 +36,7 @@ public class LocalRecordDeclarationStmtMetaModel:StatementMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     LocalRecordDeclarationStmtMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, LocalRecordDeclarationStmt.class, "LocalRecordDeclarationStmt", "com.github.javaparser.ast.stmt", false, false);
+        base(superBaseNodeMetaModel, LocalRecordDeclarationStmt.class, "LocalRecordDeclarationStmt", "com.github.javaparser.ast.stmt", false, false);
     }
 
     public PropertyMetaModel recordDeclarationPropertyMetaModel;

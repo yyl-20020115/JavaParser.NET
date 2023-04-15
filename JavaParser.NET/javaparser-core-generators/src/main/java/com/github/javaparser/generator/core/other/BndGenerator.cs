@@ -29,7 +29,7 @@ namespace com.github.javaparser.generator.core.other;
 public class BndGenerator:Generator {
 
     public BndGenerator(SourceRoot sourceRoot) {
-        super(sourceRoot);
+        base(sourceRoot);
     }
 
     //@Override

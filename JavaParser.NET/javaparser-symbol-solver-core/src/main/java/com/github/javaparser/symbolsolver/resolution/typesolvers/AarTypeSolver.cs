@@ -45,7 +45,7 @@ public class AarTypeSolver implements TypeSolver {
         JarFile jarFile = new JarFile(aarFile);
         ZipEntry classesJarEntry = jarFile.getEntry("classes.jar");
         if (classesJarEntry == null) {
-            throw new IllegalArgumentException(String.format("The given file (%s) is malformed: entry classes.jar was not found", aarFile.getAbsolutePath()));
+            throw new ArgumentException(String.format("The given file (%s) is malformed: entry classes.jar was not found", aarFile.getAbsolutePath()));
         }
         delegate = new JarTypeSolver(jarFile.getInputStream(classesJarEntry));
     }

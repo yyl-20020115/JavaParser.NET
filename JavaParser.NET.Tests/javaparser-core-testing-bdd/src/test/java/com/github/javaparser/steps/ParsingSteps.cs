@@ -283,7 +283,7 @@ public class ParsingSteps {
     }
 
     @Then("the type's diamond operator flag should be $expectedValue")
-    public void thenTheUsesDiamondOperatorShouldBeBooleanAsString(boolean expectedValue) {
+    public void thenTheUsesDiamondOperatorShouldBeBooleanAsString(bool expectedValue) {
         ObjectCreationExpr expr = (ObjectCreationExpr) state.get("selectedNode");
         assertEquals(expectedValue, expr.getType().isUsingDiamondOperator());
     }

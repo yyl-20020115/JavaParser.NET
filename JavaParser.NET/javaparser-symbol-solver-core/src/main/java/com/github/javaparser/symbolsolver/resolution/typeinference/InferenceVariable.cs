@@ -54,18 +54,18 @@ public class InferenceVariable implements ResolvedType {
         this.typeParameterDeclaration = typeParameterDeclaration;
     }
 
-    @Override
-    public boolean isInferenceVariable() {
+    //@Override
+    public bool isInferenceVariable() {
         return true;
     }
     
-    @Override
+    //@Override
     public string describe() {
         return name;
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -76,15 +76,15 @@ public class InferenceVariable implements ResolvedType {
                 : that.typeParameterDeclaration == null;
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         int result = name.hashCode();
         result = 31 * result + (typeParameterDeclaration != null ? typeParameterDeclaration.hashCode() : 0);
         return result;
     }
 
-    @Override
-    public boolean isAssignableBy(ResolvedType other) {
+    //@Override
+    public bool isAssignableBy(ResolvedType other) {
         if (other.equals(this)) {
             return true;
         }
@@ -100,7 +100,7 @@ public class InferenceVariable implements ResolvedType {
         return typeParameterDeclaration;
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "InferenceVariable{" +
                 "name='" + name + '\'' +
@@ -108,8 +108,8 @@ public class InferenceVariable implements ResolvedType {
                 '}';
     }
 
-    @Override
-    public boolean mention(List<ResolvedTypeParameterDeclaration> typeParameters) {
+    //@Override
+    public bool mention(List<ResolvedTypeParameterDeclaration> typeParameters) {
         return false;
     }
 }

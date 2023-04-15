@@ -37,7 +37,7 @@ public class Issue3200Test {
                 "    private void bad() {\n" +
                 "        Test test = new Test();\n" +
                 "        test.setRunnable(\"\", new Runnable() {\n" +
-                "            @Override\n" +
+                "            //@Override\n" +
                 "            public void run() {\n" +
                 "                getContext(Test.this);\n" +
                 "            }\n" +

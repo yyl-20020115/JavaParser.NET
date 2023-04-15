@@ -36,7 +36,7 @@ public class ObjectCreationExprMetaModel:ExpressionMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     ObjectCreationExprMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, ObjectCreationExpr.class, "ObjectCreationExpr", "com.github.javaparser.ast.expr", false, false);
+        base(superBaseNodeMetaModel, ObjectCreationExpr.class, "ObjectCreationExpr", "com.github.javaparser.ast.expr", false, false);
     }
 
     public PropertyMetaModel anonymousClassBodyPropertyMetaModel;

@@ -60,7 +60,7 @@ public class JavassistFactory {
     } else if (ctClazz.isEnum()) {
       return new JavassistEnumDeclaration(ctClazz, typeSolver);
     } else if (ctClazz.isArray()) {
-      throw new IllegalArgumentException("This method should not be called passing an array");
+      throw new ArgumentException("This method should not be called passing an array");
     } else {
       return new JavassistClassDeclaration(ctClazz, typeSolver);
     }

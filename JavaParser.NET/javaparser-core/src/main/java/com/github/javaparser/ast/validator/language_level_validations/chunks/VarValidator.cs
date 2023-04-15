@@ -24,20 +24,20 @@ namespace com.github.javaparser.ast.validator.language_level_validations.chunks;
 
 public class VarValidator implements TypedValidator<VarType> {
 
-    private boolean varAllowedInLambdaParameters;
+    private bool varAllowedInLambdaParameters;
 
-    public VarValidator(boolean varAllowedInLambdaParameters) {
+    public VarValidator(bool varAllowedInLambdaParameters) {
         this.varAllowedInLambdaParameters = varAllowedInLambdaParameters;
     }
 
-    @Override
+    //@Override
     public void accept(VarType node, ProblemReporter reporter) {
         // All allowed locations are within a VariableDeclaration inside a VariableDeclarationExpr inside something else.
         Optional<VariableDeclarator> variableDeclarator = node.findAncestor(VariableDeclarator.class);
         if (!variableDeclarator.isPresent()) {
             // Java 11's var _in lambda's
             if (varAllowedInLambdaParameters) {
-                boolean valid = node.findAncestor(Parameter.class).flatMap(Node::getParentNode).map((Node p) -> p is LambdaExpr).orElse(false);
+                bool valid = node.findAncestor(Parameter.class).flatMap(Node::getParentNode).map((Node p) -> p is LambdaExpr).orElse(false);
                 if (valid) {
                     return;
                 }
@@ -69,7 +69,7 @@ public class VarValidator implements TypedValidator<VarType> {
                     return;
                 }
                 container.ifPresent(c -> {
-                    boolean positionIsFine = c is ForStmt || c is ForEachStmt || c is ExpressionStmt || c is TryStmt;
+                    bool positionIsFine = c is ForStmt || c is ForEachStmt || c is ExpressionStmt || c is TryStmt;
                     if (!positionIsFine) {
                         reportIllegalPosition(node, reporter);
                     }

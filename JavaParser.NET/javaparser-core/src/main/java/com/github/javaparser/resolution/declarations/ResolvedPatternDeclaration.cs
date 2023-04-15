@@ -30,18 +30,18 @@ namespace com.github.javaparser.resolution.declarations;
  */
 public interface ResolvedPatternDeclaration:ResolvedValueDeclaration {
 
-    @Override
-    default boolean isPattern() {
+    //@Override
+    default bool isPattern() {
         return true;
     }
 
-    @Override
+    //@Override
     default ResolvedPatternDeclaration asPattern() {
         return this;
     }
 
-    @Override
-    default boolean hasName() {
+    //@Override
+    default bool hasName() {
         return true;
     }
 

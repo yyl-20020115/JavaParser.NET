@@ -39,7 +39,7 @@ public class Issue3866Test:AbstractResolutionTest {
 				+ "\n"
 				+ "  class MyActivityImpl implements MyActivity {\n"
 				+ "    MyActivity.MyTimestamps timestamps;\n"
-				+ "    @Override\n"
+				+ "    //@Override\n"
 				+ "    public MyActivity.MyTimestamps getTimestamps() {\n"
 				+ "      return timestamps;\n"
 				+ "  }\n"

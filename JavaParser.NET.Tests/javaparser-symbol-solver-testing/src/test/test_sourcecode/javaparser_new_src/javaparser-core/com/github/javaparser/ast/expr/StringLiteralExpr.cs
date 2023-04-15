@@ -36,7 +36,7 @@ public class StringLiteralExpr:LiteralExpr {
 
 	public StringLiteralExpr(/*final*/string value) {
         if (value.contains("\n") || value.contains("\r")) {
-            throw new IllegalArgumentException("Illegal literal expression: newlines (line feed or carriage return) have to be escaped");
+            throw new ArgumentException("Illegal literal expression: newlines (line feed or carriage return) have to be escaped");
         }
 		this.value = value;
 	}
@@ -49,15 +49,15 @@ public class StringLiteralExpr:LiteralExpr {
 	}
 
 	public StringLiteralExpr(/*final*/Range range, /*final*/string value) {
-		super(range);
+		base(range);
 		this.value = value;
 	}
 
-	@Override public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+	@Override public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
 		return v.visit(this, arg);
 	}
 
-	@Override public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+	@Override public void accept<A>(VoidVisitor<A> v, A arg) {
 		v.visit(this, arg);
 	}
 

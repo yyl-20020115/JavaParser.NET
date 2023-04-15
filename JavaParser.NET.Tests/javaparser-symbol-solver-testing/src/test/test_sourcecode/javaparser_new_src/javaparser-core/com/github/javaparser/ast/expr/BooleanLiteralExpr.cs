@@ -37,7 +37,7 @@ public /*final*/class BooleanLiteralExpr:LiteralExpr {
     }
 
     public BooleanLiteralExpr(Range range, bool value) {
-        super(range);
+        base(range);
         setValue(value);
     }
 

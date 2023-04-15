@@ -757,7 +757,7 @@ public abstract class VoidVisitorAdapter<A> implements VoidVisitor<A> {
 		}
 	}
 
-    @Override
+    //@Override
     public void visit(LambdaExpr n, /*final*/A arg) {
         if (n.getParameters() != null) {
             for (/*final*/Parameter a : n.getParameters()) {
@@ -769,7 +769,7 @@ public abstract class VoidVisitorAdapter<A> implements VoidVisitor<A> {
         }
     }
 
-    @Override
+    //@Override
     public void visit(MethodReferenceExpr n, /*final*/A arg) {
         if (n.getTypeParameters() != null) {
             for (/*final*/TypeParameter a : n.getTypeParameters()) {
@@ -781,7 +781,7 @@ public abstract class VoidVisitorAdapter<A> implements VoidVisitor<A> {
         }
     }
 
-    @Override
+    //@Override
     public void visit(TypeExpr n, /*final*/A arg) {
         if (n.getType() != null) {
             n.getType().accept(this, arg);

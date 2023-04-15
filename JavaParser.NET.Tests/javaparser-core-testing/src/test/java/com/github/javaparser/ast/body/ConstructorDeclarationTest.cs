@@ -27,10 +27,10 @@ class ConstructorDeclarationTest {
     [TestMethod]
     void acceptsSuper() {
         ConstructorDeclaration cons = new ConstructorDeclaration("Cons");
-        cons.createBody().addStatement("super();");
+        cons.createBody().addStatement("base();");
 
         assertEquals(String.format("public Cons() {%1$s" +
-                "    super();%1$s" +
+                "    base();%1$s" +
                 "}", SYSTEM_EOL), cons.toString());
     }
 }

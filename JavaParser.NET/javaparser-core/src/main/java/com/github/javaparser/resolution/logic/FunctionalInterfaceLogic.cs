@@ -56,7 +56,7 @@ public /*final*/class FunctionalInterfaceLogic {
      */
     public static Optional<MethodUsage> getFunctionalMethod(ResolvedReferenceTypeDeclaration typeDeclaration) {
         //We need to find all abstract methods
-        Set<MethodUsage> methods = typeDeclaration.getAllMethods().stream()
+        HashSet<MethodUsage> methods = typeDeclaration.getAllMethods().stream()
                 .filter(m -> m.getDeclaration().isAbstract())
                 // Remove methods inherited by Object:
                 // Consider the case of Comparator which define equals. It would be considered a functional method.
@@ -85,7 +85,7 @@ public /*final*/class FunctionalInterfaceLogic {
         return Optional.ofNullable(methodUsage);
     }
 
-    public static boolean isFunctionalInterfaceType(ResolvedType type) {
+    public static bool isFunctionalInterfaceType(ResolvedType type) {
         if (type.isReferenceType()) {
             Optional<ResolvedReferenceTypeDeclaration> optionalTypeDeclaration = type.asReferenceType().getTypeDeclaration();
             if (optionalTypeDeclaration.isPresent() && optionalTypeDeclaration.get().hasAnnotation(JAVA_LANG_FUNCTIONAL_INTERFACE)) {
@@ -108,7 +108,7 @@ public /*final*/class FunctionalInterfaceLogic {
             .map(method -> getSignature(method))
             .collect(Collectors.toList());
 
-    private static boolean isPublicMemberOfObject(MethodUsage m) {
+    private static bool isPublicMemberOfObject(MethodUsage m) {
         return OBJECT_PUBLIC_METHODS_SIGNATURES.contains(m.getDeclaration().getSignature());
     }
 }

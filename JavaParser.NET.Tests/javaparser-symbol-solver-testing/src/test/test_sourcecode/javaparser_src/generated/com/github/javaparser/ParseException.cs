@@ -43,7 +43,7 @@ public class ParseException:Exception {
                         String[] tokenImageVal
                        )
   {
-    super(initialise(currentTokenVal, expectedTokenSequencesVal, tokenImageVal));
+    base(initialise(currentTokenVal, expectedTokenSequencesVal, tokenImageVal));
     currentToken = currentTokenVal;
     expectedTokenSequences = expectedTokenSequencesVal;
     tokenImage = tokenImageVal;
@@ -60,12 +60,12 @@ public class ParseException:Exception {
    */
 
   public ParseException() {
-    super();
+    base();
   }
 
   /** Constructor with message. */
   public ParseException(string message) {
-    super(message);
+    base(message);
   }
 
 

@@ -44,16 +44,16 @@ public class JavaParserEnumDeclaration:AbstractTypeDeclaration
         this.javaParserTypeAdapter = new JavaParserTypeAdapter<>(wrappedNode, typeSolver);
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "JavaParserEnumDeclaration{" +
                 "wrappedNode=" + wrappedNode +
                 '}';
     }
 
-    @Override
-    public Set<ResolvedMethodDeclaration> getDeclaredMethods() {
-        Set<ResolvedMethodDeclaration> methods = new HashSet<>();
+    //@Override
+    public HashSet<ResolvedMethodDeclaration> getDeclaredMethods() {
+        HashSet<ResolvedMethodDeclaration> methods = new HashSet<>();
         for (BodyDeclaration<?> member : wrappedNode.getMembers()) {
             if (member is com.github.javaparser.ast.body.MethodDeclaration) {
                 methods.add(new JavaParserMethodDeclaration((com.github.javaparser.ast.body.MethodDeclaration) member, typeSolver));
@@ -66,33 +66,33 @@ public class JavaParserEnumDeclaration:AbstractTypeDeclaration
         return JavaParserFactory.getContext(wrappedNode, typeSolver);
     }
 
-    @Override
+    //@Override
     public string getName() {
         return wrappedNode.getName().getId();
     }
 
-    @Override
-    public boolean isField() {
+    //@Override
+    public bool isField() {
         return false;
     }
 
-    @Override
-    public boolean isParameter() {
+    //@Override
+    public bool isParameter() {
         return false;
     }
 
-    @Override
-    public boolean isType() {
+    //@Override
+    public bool isType() {
         return true;
     }
 
-    @Override
-    public boolean hasDirectlyAnnotation(string canonicalName) {
+    //@Override
+    public bool hasDirectlyAnnotation(string canonicalName) {
         return AstResolutionUtils.hasDirectlyAnnotation(wrappedNode, typeSolver, canonicalName);
     }
 
-    @Override
-    public boolean canBeAssignedTo(ResolvedReferenceTypeDeclaration other) {
+    //@Override
+    public bool canBeAssignedTo(ResolvedReferenceTypeDeclaration other) {
         string otherName = other.getQualifiedName();
         // Enums cannot be extended
         if (otherName.equals(this.getQualifiedName())) {
@@ -114,48 +114,48 @@ public class JavaParserEnumDeclaration:AbstractTypeDeclaration
         return false;
     }
 
-    @Override
-    public boolean isClass() {
+    //@Override
+    public bool isClass() {
         return false;
     }
 
-    @Override
-    public boolean isInterface() {
+    //@Override
+    public bool isInterface() {
         return false;
     }
 
-    @Override
+    //@Override
     public string getPackageName() {
         return javaParserTypeAdapter.getPackageName();
     }
 
-    @Override
+    //@Override
     public string getClassName() {
         return javaParserTypeAdapter.getClassName();
     }
 
-    @Override
+    //@Override
     public string getQualifiedName() {
         return javaParserTypeAdapter.getQualifiedName();
     }
 
-    @Override
-    public boolean isAssignableBy(ResolvedReferenceTypeDeclaration other) {
+    //@Override
+    public bool isAssignableBy(ResolvedReferenceTypeDeclaration other) {
         return javaParserTypeAdapter.isAssignableBy(other);
     }
 
-    @Override
-    public boolean isAssignableBy(ResolvedType type) {
+    //@Override
+    public bool isAssignableBy(ResolvedType type) {
         return javaParserTypeAdapter.isAssignableBy(type);
     }
 
-    @Override
-    public boolean isTypeParameter() {
+    //@Override
+    public bool isTypeParameter() {
         return false;
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -166,20 +166,20 @@ public class JavaParserEnumDeclaration:AbstractTypeDeclaration
         return true;
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         return wrappedNode.hashCode();
     }
 
-    @Override
+    //@Override
     public Optional<MethodUsage> solveMethodAsUsage(string name, List<ResolvedType> argumentTypes,
                                                     Context invokationContext, List<ResolvedType> typeParameters) {
         return getContext().solveMethodAsUsage(name, argumentTypes);
     }
 
-    @Override
+    //@Override
     public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes,
-                                                                  boolean staticOnly) {
+                                                                  bool staticOnly) {
         if (name.equals("values") && argumentsTypes.isEmpty()) {
             return SymbolReference.solved(new JavaParserEnumDeclaration.ValuesMethod(this, typeSolver));
         }
@@ -192,12 +192,12 @@ public class JavaParserEnumDeclaration:AbstractTypeDeclaration
         return getContext().solveMethod(name, argumentsTypes, staticOnly);
     }
 
-    @Override
+    //@Override
     public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name, TypeSolver typeSolver) {
         return getContext().solveSymbol(name);
     }
 
-    @Override
+    //@Override
     public List<ResolvedFieldDeclaration> getAllFields() {
         List<ResolvedFieldDeclaration> fields = javaParserTypeAdapter.getFieldsForDeclaredVariables();
 
@@ -211,8 +211,8 @@ public class JavaParserEnumDeclaration:AbstractTypeDeclaration
         return fields;
     }
 
-    @Override
-    public List<ResolvedReferenceType> getAncestors(boolean acceptIncompleteList) {
+    //@Override
+    public List<ResolvedReferenceType> getAncestors(bool acceptIncompleteList) {
         List<ResolvedReferenceType> ancestors = new ArrayList<>();
 
         ResolvedReferenceType enumClass = ReflectionFactory.typeUsageFor(Enum.class, typeSolver).asReferenceType();
@@ -286,7 +286,7 @@ public class JavaParserEnumDeclaration:AbstractTypeDeclaration
                 .solveType(name);
     }
 
-    @Override
+    //@Override
     public List<ResolvedTypeParameterDeclaration> getTypeParameters() {
         return Collections.emptyList();
     }
@@ -300,7 +300,7 @@ public class JavaParserEnumDeclaration:AbstractTypeDeclaration
         return wrappedNode;
     }
 
-    @Override
+    //@Override
     public List<ResolvedEnumConstantDeclaration> getEnumConstants() {
         return wrappedNode.getEntries().stream()
                 .map(entry -> new JavaParserEnumConstantDeclaration(entry, typeSolver))
@@ -327,22 +327,22 @@ public class JavaParserEnumDeclaration:AbstractTypeDeclaration
             this.typeSolver = typeSolver;
         }
 
-        @Override
+        //@Override
         public ResolvedReferenceTypeDeclaration declaringType() {
             return enumDeclaration;
         }
 
-        @Override
+        //@Override
         public ResolvedType getReturnType() {
             return new ResolvedArrayType(new ReferenceTypeImpl(enumDeclaration));
         }
 
-        @Override
+        //@Override
         public int getNumberOfParams() {
             return 0;
         }
 
-        @Override
+        //@Override
         public ResolvedParameterDeclaration getParam(int i) {
             throw new UnsupportedOperationException();
         }
@@ -355,52 +355,52 @@ public class JavaParserEnumDeclaration:AbstractTypeDeclaration
             return new MethodUsage(this);
         }
 
-        @Override
-        public boolean isAbstract() {
+        //@Override
+        public bool isAbstract() {
             throw new UnsupportedOperationException();
         }
 
-        @Override
-        public boolean isDefaultMethod() {
+        //@Override
+        public bool isDefaultMethod() {
             return false;
         }
 
-        @Override
-        public boolean isStatic() {
+        //@Override
+        public bool isStatic() {
             return false;
         }
 
-        @Override
+        //@Override
         public string getName() {
             return "values";
         }
 
-        @Override
+        //@Override
         public List<ResolvedTypeParameterDeclaration> getTypeParameters() {
             return Collections.emptyList();
         }
 
-        @Override
+        //@Override
         public AccessSpecifier accessSpecifier() {
             return enumDeclaration.getWrappedNode().getAccessSpecifier();
         }
 
-        @Override
+        //@Override
         public int getNumberOfSpecifiedExceptions() {
             return 0;
         }
 
-        @Override
+        //@Override
         public ResolvedType getSpecifiedException(int index) {
             throw new UnsupportedOperationException("The values method of an enum does not throw any exception");
         }
 
-        @Override
+        //@Override
         public Optional<Node> toAst() {
             return enumDeclaration.toAst();
         }
 
-        @Override
+        //@Override
         public string toDescriptor() {
             return String.format("()%s", getReturnType().toDescriptor());
         }
@@ -425,42 +425,42 @@ public class JavaParserEnumDeclaration:AbstractTypeDeclaration
             this.typeSolver = typeSolver;
         }
 
-        @Override
+        //@Override
         public ResolvedReferenceTypeDeclaration declaringType() {
             return enumDeclaration;
         }
 
-        @Override
+        //@Override
         public ResolvedType getReturnType() {
             return new ReferenceTypeImpl(enumDeclaration);
         }
 
-        @Override
+        //@Override
         public int getNumberOfParams() {
             return 1;
         }
 
-        @Override
+        //@Override
         public ResolvedParameterDeclaration getParam(int i) {
             if (i == 0) {
                 return new ResolvedParameterDeclaration() {
 
-                    @Override
+                    //@Override
                     public string getName() {
                         return "name";
                     }
 
-                    @Override
+                    //@Override
                     public ResolvedType getType() {
                         return new ReferenceTypeImpl(typeSolver.solveType("java.lang.String"));
                     }
 
-                    @Override
-                    public boolean isVariadic() {
+                    //@Override
+                    public bool isVariadic() {
                         return false;
                     }
 
-                    @Override
+                    //@Override
                     public Optional<Node> toAst() {
                         return enumDeclaration.toAst();
                     }
@@ -468,90 +468,90 @@ public class JavaParserEnumDeclaration:AbstractTypeDeclaration
                 };
             }
 
-            throw new IllegalArgumentException("Invalid parameter index!");
+            throw new ArgumentException("Invalid parameter index!");
         }
 
         public MethodUsage getUsage(Node node) {
             throw new UnsupportedOperationException();
         }
 
-        @Override
+        //@Override
         public MethodUsage resolveTypeVariables(Context context, List<ResolvedType> parameterTypes) {
             return new MethodUsage(this);
         }
 
-        @Override
-        public boolean isAbstract() {
+        //@Override
+        public bool isAbstract() {
             return false;
         }
 
-        @Override
-        public boolean isDefaultMethod() {
+        //@Override
+        public bool isDefaultMethod() {
             return false;
         }
 
-        @Override
-        public boolean isStatic() {
+        //@Override
+        public bool isStatic() {
             return true;
         }
 
-        @Override
+        //@Override
         public string getName() {
             return "valueOf";
         }
 
-        @Override
+        //@Override
         public List<ResolvedTypeParameterDeclaration> getTypeParameters() {
             return Collections.emptyList();
         }
 
-        @Override
+        //@Override
         public AccessSpecifier accessSpecifier() {
             return AccessSpecifier.PUBLIC;
         }
 
-        @Override
+        //@Override
         public int getNumberOfSpecifiedExceptions() {
             return 0;
         }
 
-        @Override
+        //@Override
         public ResolvedType getSpecifiedException(int index) {
             throw new UnsupportedOperationException("The valueOf method of an enum does not throw any exception");
         }
 
-        @Override
+        //@Override
         public Optional<Node> toAst() {
             return enumDeclaration.toAst();
         }
 
-        @Override
+        //@Override
         public string toDescriptor() {
             return String.format("(Ljava/lang/String;)%s", getReturnType().toDescriptor());
         }
     }
 
-    @Override
+    //@Override
     public AccessSpecifier accessSpecifier() {
         return wrappedNode.getAccessSpecifier();
     }
 
-    @Override
-    public Set<ResolvedReferenceTypeDeclaration> internalTypes() {
+    //@Override
+    public HashSet<ResolvedReferenceTypeDeclaration> internalTypes() {
         return javaParserTypeAdapter.internalTypes();
     }
 
-    @Override
+    //@Override
     public Optional<ResolvedReferenceTypeDeclaration> containerType() {
         return javaParserTypeAdapter.containerType();
     }
 
-    @Override
+    //@Override
     public List<ResolvedConstructorDeclaration> getConstructors() {
         return AstResolutionUtils.getConstructors(this.wrappedNode, typeSolver, this);
     }
 
-    @Override
+    //@Override
     public Optional<Node> toAst() {
         return Optional.of(wrappedNode);
     }

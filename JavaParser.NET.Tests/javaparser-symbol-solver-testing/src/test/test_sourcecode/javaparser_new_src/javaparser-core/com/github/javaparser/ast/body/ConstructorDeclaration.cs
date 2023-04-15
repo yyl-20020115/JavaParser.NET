@@ -57,7 +57,7 @@ public /*final*/class ConstructorDeclaration:BodyDeclaration<ConstructorDeclarat
                                   List<TypeParameter> typeParameters,
                                   string name, List<Parameter> parameters, List<ReferenceType> throws_,
                                   BlockStmt block) {
-        super(annotations);
+        base(annotations);
         setModifiers(modifiers);
         setTypeParameters(typeParameters);
         setName(name);
@@ -69,7 +69,7 @@ public /*final*/class ConstructorDeclaration:BodyDeclaration<ConstructorDeclarat
     public ConstructorDeclaration(Range range, EnumSet<Modifier> modifiers,
                                   List<AnnotationExpr> annotations, List<TypeParameter> typeParameters, string name,
                                   List<Parameter> parameters, List<ReferenceType> throws_, BlockStmt block) {
-        super(range, annotations);
+        base(range, annotations);
         setModifiers(modifiers);
         setTypeParameters(typeParameters);
         setName(name);
@@ -78,12 +78,12 @@ public /*final*/class ConstructorDeclaration:BodyDeclaration<ConstructorDeclarat
         setBody(block);
     }
 
-    @Override
+    //@Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
@@ -94,12 +94,12 @@ public /*final*/class ConstructorDeclaration:BodyDeclaration<ConstructorDeclarat
      * @see Modifier
      * @return modifiers
      */
-    @Override
+    //@Override
     public EnumSet<Modifier> getModifiers() {
         return modifiers;
     }
 
-    @Override
+    //@Override
     public string getName() {
         return name == null ? null : name.getName();
     }
@@ -108,13 +108,13 @@ public /*final*/class ConstructorDeclaration:BodyDeclaration<ConstructorDeclarat
         return name;
     }
 
-    @Override
+    //@Override
     public List<Parameter> getParameters() {
         parameters = ensureNotNull(parameters);
         return parameters;
     }
 
-    @Override
+    //@Override
     public List<ReferenceType> getThrows() {
         throws_ = ensureNotNull(throws_);
         return throws_;
@@ -125,13 +125,13 @@ public /*final*/class ConstructorDeclaration:BodyDeclaration<ConstructorDeclarat
         return typeParameters;
     }
 
-    @Override
+    //@Override
     public ConstructorDeclaration setModifiers(EnumSet<Modifier> modifiers) {
         this.modifiers = modifiers;
         return this;
     }
 
-    @Override
+    //@Override
     public ConstructorDeclaration setName(string name) {
         setNameExpr(new NameExpr(name));
         return this;
@@ -143,14 +143,14 @@ public /*final*/class ConstructorDeclaration:BodyDeclaration<ConstructorDeclarat
         return this;
     }
 
-    @Override
+    //@Override
     public ConstructorDeclaration setParameters(List<Parameter> parameters) {
         this.parameters = parameters;
         setAsParentNodeOf(this.parameters);
         return this;
     }
 
-    @Override
+    //@Override
     public ConstructorDeclaration setThrows(List<ReferenceType> throws_) {
         this.throws_ = throws_;
         setAsParentNodeOf(this.throws_);
@@ -169,9 +169,9 @@ public /*final*/class ConstructorDeclaration:BodyDeclaration<ConstructorDeclarat
      * [accessSpecifier] className ([paramType [paramName]])
      * [throws exceptionsList]
      */
-    @Override
-    public string getDeclarationAsString(boolean includingModifiers, boolean includingThrows,
-                                         boolean includingParameterName) {
+    //@Override
+    public string getDeclarationAsString(bool includingModifiers, bool includingThrows,
+                                         bool includingParameterName) {
         StringBuilder sb = new StringBuilder();
         if (includingModifiers) {
             AccessSpecifier accessSpecifier = Modifier.getAccessSpecifier(getModifiers());
@@ -180,7 +180,7 @@ public /*final*/class ConstructorDeclaration:BodyDeclaration<ConstructorDeclarat
         }
         sb.append(getName());
         sb.append("(");
-        boolean firstParam = true;
+        bool firstParam = true;
         for (Parameter param : getParameters()) {
             if (firstParam) {
                 firstParam = false;
@@ -195,7 +195,7 @@ public /*final*/class ConstructorDeclaration:BodyDeclaration<ConstructorDeclarat
         }
         sb.append(")");
         if (includingThrows) {
-            boolean firstThrow = true;
+            bool firstThrow = true;
             for (ReferenceType thr : getThrows()) {
                 if (firstThrow) {
                     firstThrow = false;
@@ -209,17 +209,17 @@ public /*final*/class ConstructorDeclaration:BodyDeclaration<ConstructorDeclarat
         return sb.toString();
     }
 
-    @Override
-    public string getDeclarationAsString(boolean includingModifiers, boolean includingThrows) {
+    //@Override
+    public string getDeclarationAsString(bool includingModifiers, bool includingThrows) {
         return getDeclarationAsString(includingModifiers, includingThrows, true);
     }
 
-    @Override
+    //@Override
     public string getDeclarationAsString() {
         return getDeclarationAsString(true, true, true);
     }
 
-    @Override
+    //@Override
     public JavadocComment getJavaDoc() {
         if (getComment() is JavadocComment) {
             return (JavadocComment) getComment();
@@ -227,12 +227,12 @@ public /*final*/class ConstructorDeclaration:BodyDeclaration<ConstructorDeclarat
         return null;
     }
 
-    @Override
+    //@Override
     public BlockStmt getBody() {
         return body;
     }
 
-    @Override
+    //@Override
     public ConstructorDeclaration setBody(BlockStmt body) {
         this.body = body;
         setAsParentNodeOf(body);

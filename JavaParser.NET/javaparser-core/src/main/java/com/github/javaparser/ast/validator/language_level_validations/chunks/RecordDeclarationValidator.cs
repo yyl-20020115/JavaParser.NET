@@ -23,7 +23,7 @@ namespace com.github.javaparser.ast.validator.language_level_validations.chunks;
 
 public class RecordDeclarationValidator implements TypedValidator<RecordDeclaration> {
 
-    @Override
+    //@Override
     public void accept(RecordDeclaration node, ProblemReporter reporter) {
         forbidAbstractModifier(node, reporter);
         forbidNonStaticFieldsInRecords(node, reporter);

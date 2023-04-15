@@ -49,7 +49,7 @@ public abstract class BaseParameter:Node {
 	}
 
 	public BaseParameter(int beginLine, int beginColumn, int endLine, int endColumn, int modifiers, List<AnnotationExpr> annotations, VariableDeclaratorId id) {
-	    super(beginLine, beginColumn, endLine, endColumn);
+	    base(beginLine, beginColumn, endLine, endColumn);
         setModifiers(modifiers);
         setAnnotations(annotations);
         setId(id);

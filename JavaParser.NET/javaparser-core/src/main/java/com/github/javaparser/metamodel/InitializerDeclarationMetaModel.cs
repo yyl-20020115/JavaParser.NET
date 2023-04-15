@@ -36,7 +36,7 @@ public class InitializerDeclarationMetaModel:BodyDeclarationMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     InitializerDeclarationMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, InitializerDeclaration.class, "InitializerDeclaration", "com.github.javaparser.ast.body", false, false);
+        base(superBaseNodeMetaModel, InitializerDeclaration.class, "InitializerDeclaration", "com.github.javaparser.ast.body", false, false);
     }
 
     public PropertyMetaModel bodyPropertyMetaModel;

@@ -44,20 +44,20 @@ public class ModuleUsesDirective:ModuleDirective implements NodeWithName<ModuleU
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public ModuleUsesDirective(TokenRange tokenRange, Name name) {
-        super(tokenRange);
+        base(tokenRange);
         setName(name);
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -75,19 +75,19 @@ public class ModuleUsesDirective:ModuleDirective implements NodeWithName<ModuleU
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public ModuleUsesDirective clone() {
         return (ModuleUsesDirective) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isModuleUsesStmt() {
+    public bool isModuleUsesStmt() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public ModuleUsesDirective asModuleUsesStmt() {
         return this;
@@ -98,7 +98,7 @@ public class ModuleUsesDirective:ModuleDirective implements NodeWithName<ModuleU
         action.accept(this);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<ModuleUsesDirective> toModuleUsesStmt() {
         return Optional.of(this);
@@ -123,9 +123,9 @@ public class ModuleUsesDirective:ModuleDirective implements NodeWithName<ModuleU
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }
@@ -136,31 +136,31 @@ public class ModuleUsesDirective:ModuleDirective implements NodeWithName<ModuleU
         return super.replace(node, replacementNode);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isModuleUsesDirective() {
+    public bool isModuleUsesDirective() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public ModuleUsesDirective asModuleUsesDirective() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<ModuleUsesDirective> toModuleUsesDirective() {
         return Optional.of(this);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifModuleUsesDirective(Consumer<ModuleUsesDirective> action) {
         action.accept(this);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public ModuleUsesDirectiveMetaModel getMetaModel() {
         return JavaParserMetaModel.moduleUsesDirectiveMetaModel;

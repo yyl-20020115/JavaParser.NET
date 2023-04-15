@@ -75,7 +75,7 @@ public interface Cache<K, V> {
      *
      * @return {@code True} if the key is present.
      */
-    boolean contains(K key);
+    bool contains(K key);
 
     /**
      * Returns the number of entries _in this cache.
@@ -90,6 +90,6 @@ public interface Cache<K, V> {
      *
      * @return {@code True} if is empty.
      */
-    boolean isEmpty();
+    bool isEmpty();
 
 }

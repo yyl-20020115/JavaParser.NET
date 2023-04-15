@@ -34,19 +34,19 @@ public /*final*/class PositionUtils {
         sortByBeginPosition(nodes, false);
     }
 
-    public static <T:Node> void sortByBeginPosition(List<T> nodes, /*final*/boolean ignoringAnnotations){
+    public static <T:Node> void sortByBeginPosition(List<T> nodes, /*final*/bool ignoringAnnotations){
         Collections.sort(nodes, (o1, o2) -> PositionUtils.compare(o1, o2, ignoringAnnotations));
     }
 
-    public static boolean areInOrder(Node a, Node b){
+    public static bool areInOrder(Node a, Node b){
         return areInOrder(a, b, false);
     }
 
-    public static boolean areInOrder(Node a, Node b, boolean ignoringAnnotations){
+    public static bool areInOrder(Node a, Node b, bool ignoringAnnotations){
         return compare(a, b, ignoringAnnotations) <= 0;
     }
 
-    private static int compare(Node a, Node b, boolean ignoringAnnotations) {
+    private static int compare(Node a, Node b, bool ignoringAnnotations) {
         if (ignoringAnnotations) {
             int signLine = signum(beginLineWithoutConsideringAnnotation(a) - beginLineWithoutConsideringAnnotation(b));
             if (signLine == 0) {
@@ -99,7 +99,7 @@ public /*final*/class PositionUtils {
         }
     }
 
-    public static boolean nodeContains(Node container, Node contained, boolean ignoringAnnotations){
+    public static bool nodeContains(Node container, Node contained, bool ignoringAnnotations){
         if (!ignoringAnnotations || PositionUtils.getLastAnnotation(container)==null){
             return container.contains(contained);
         }

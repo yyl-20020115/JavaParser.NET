@@ -51,7 +51,7 @@ public class TypeInference {
         if (instantiationSetOpt.isPresent()) {
             return instantiationSetToMethodUsage(methodDeclaration, instantiationSetOpt.get());
         } else {
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         }
     }
 
@@ -65,7 +65,7 @@ public class TypeInference {
 
     public Optional<InstantiationSet> instantiationInference(List<Expression> argumentExpressions, ResolvedMethodDeclaration methodDeclaration) {
 //        if (methodCallExpr.getTypeArguments().isPresent()) {
-//            throw new IllegalArgumentException("Type inference unnecessary as type arguments have been specified");
+//            throw new ArgumentException("Type inference unnecessary as type arguments have been specified");
 //        }
 
         // Given a method invocation that provides no explicit type arguments, the process to determine whether a
@@ -148,9 +148,9 @@ public class TypeInference {
      * Determine whether a potentially applicable generic method m is applicable for a method invocation that
      * provides no explicit type arguments.
      */
-    public boolean invocationApplicabilityInference(MethodCallExpr methodCallExpr, ResolvedMethodDeclaration methodDeclaration) {
+    public bool invocationApplicabilityInference(MethodCallExpr methodCallExpr, ResolvedMethodDeclaration methodDeclaration) {
         if (!methodCallExpr.getNameAsString().equals(methodDeclaration.getName())) {
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         }
         Optional<InstantiationSet> partial = instantiationInference(methodCallExpr, methodDeclaration);
         if (!partial.isPresent()) {
@@ -340,7 +340,7 @@ public class TypeInference {
         int n = lambdaExpr.getParameters().size();
 
         if (interfaceDeclaration.getTypeParameters().isEmpty()) {
-            throw new IllegalArgumentException("Functional Interface without type arguments");
+            throw new ArgumentException("Functional Interface without type arguments");
         }
 
         // Let Q1, ..., Qk be the parameter types of the function type of the type F<α1, ..., αm>,
@@ -354,7 +354,7 @@ public class TypeInference {
         // If n ≠ k, no valid parameterization exists.
 
         if (n != k) {
-            throw new IllegalArgumentException("No valida parameterization can exist has n=" + " and k=" + k);
+            throw new ArgumentException("No valida parameterization can exist has n=" + " and k=" + k);
         }
 
         // Otherwise, a set of constraint formulas is formed with, for
@@ -387,13 +387,13 @@ public class TypeInference {
      * @param m1
      * @param m2
      */
-    public boolean moreSpecificMethodInference(MethodCallExpr methodCall, ResolvedMethodDeclaration m1, ResolvedMethodDeclaration m2) {
+    public bool moreSpecificMethodInference(MethodCallExpr methodCall, ResolvedMethodDeclaration m1, ResolvedMethodDeclaration m2) {
         // When testing that one applicable method is more specific than another (§15.12.2.5), where the second method
         // is generic, it is necessary to test whether some instantiation of the second method's type parameters can be
         // inferred to make the first method more specific than the second.
 
         if (!m2.isGeneric()) {
-            throw new IllegalArgumentException("M2 is not generic (m2: " + m2 + ")");
+            throw new ArgumentException("M2 is not generic (m2: " + m2 + ")");
         }
 
         // Let m1 be the first method and m2 be the second method. Where m2 has type parameters P1, ..., Pp,
@@ -507,7 +507,7 @@ public class TypeInference {
      */
     private BoundSet boundSetup(List<ResolvedTypeParameterDeclaration> typeParameterDeclarations, List<InferenceVariable> inferenceVariables) {
         if (typeParameterDeclarations.size() != inferenceVariables.size()) {
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         }
 
         // When inference begins, a bound set is typically generated from a list of
@@ -550,7 +550,7 @@ public class TypeInference {
         return boundSet;
     }
 
-    private boolean appearInThrowsClause(ResolvedTypeParameterDeclaration p, ResolvedMethodDeclaration methodDeclaration) {
+    private bool appearInThrowsClause(ResolvedTypeParameterDeclaration p, ResolvedMethodDeclaration methodDeclaration) {
         for (ResolvedType thrownType : methodDeclaration.getSpecifiedExceptions()) {
             if (thrownType.isTypeVariable() && thrownType.asTypeVariable().asTypeParameter().equals(p)) {
                 return true;
@@ -567,15 +567,15 @@ public class TypeInference {
         return types;
     }
 
-    private boolean isImplicitlyTyped(LambdaExpr lambdaExpr) {
+    private bool isImplicitlyTyped(LambdaExpr lambdaExpr) {
         return lambdaExpr.getParameters().stream().anyMatch(p -> p.getType() is UnknownType);
     }
 
-    private boolean isInexact(MethodReferenceExpr methodReferenceExpr) {
+    private bool isInexact(MethodReferenceExpr methodReferenceExpr) {
         throw new UnsupportedOperationException();
     }
 
-    private boolean isPertinentToApplicability(Expression argument) {
+    private bool isPertinentToApplicability(Expression argument) {
         // An argument expression is considered pertinent to applicability for a potentially applicable method m
         // unless it has one of the following forms:
         //

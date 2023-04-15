@@ -35,7 +35,7 @@ class JavadocExtractorTest {
         try {
             CompilationUnit cu = parse(file);
             new VoidVisitorAdapter<Object>() {
-                @Override
+                //@Override
                 public void visit(JavadocComment n, Object arg) {
                     super.visit(n, arg);
                     n.parse();

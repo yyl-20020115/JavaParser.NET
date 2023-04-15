@@ -36,7 +36,7 @@ class AarTypeSolverTest:AbstractTypeSolverTest<AarTypeSolver> {
     };
 
     public AarTypeSolverTest() {
-        super(AAR_SUPLIER);
+        base(AAR_SUPLIER);
     }
 
     [TestMethod]

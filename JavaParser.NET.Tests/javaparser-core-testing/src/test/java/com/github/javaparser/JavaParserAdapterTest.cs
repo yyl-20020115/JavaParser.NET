@@ -174,11 +174,11 @@ class JavaParserAdapterTest {
 
     [TestMethod]
     void parseExplicitConstructorInvocationStmt_withValidSource() {
-        ExplicitConstructorInvocationStmt statement = adapter.parseExplicitConstructorInvocationStmt("super();");
+        ExplicitConstructorInvocationStmt statement = adapter.parseExplicitConstructorInvocationStmt("base();");
 
         assertTrue(statement.getArguments().isEmpty());
 
-        Mockito.verify(javaParser).parseExplicitConstructorInvocationStmt("super();");
+        Mockito.verify(javaParser).parseExplicitConstructorInvocationStmt("base();");
     }
 
     [TestMethod]

@@ -39,15 +39,15 @@ public class DefaultConfigurationOption implements ConfigurationOption {
             value(value);
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (o == null || !(o is DefaultConfigurationOption))
             return false;
         DefaultConfigurationOption other = (DefaultConfigurationOption) o;
         return configOption.equals(other.configOption);
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         return configOption.hashCode();
     }
@@ -55,13 +55,13 @@ public class DefaultConfigurationOption implements ConfigurationOption {
     /**
      * Set a currentValue to an option
      */
-    @Override
+    //@Override
     public ConfigurationOption value(Object value) {
         Utils.assertNotNull(value);
         this.currentValue = value;
         // verify the currentValue's type
         if (!(configOption.type.isAssignableFrom(value.getClass()))) {
-            throw new IllegalArgumentException(String.format("%s is not an instance of %s", value, configOption.type.getName()));
+            throw new ArgumentException(String.format("%s is not an instance of %s", value, configOption.type.getName()));
         }
         return this;
     }
@@ -69,15 +69,15 @@ public class DefaultConfigurationOption implements ConfigurationOption {
     /**
      * returns True if the option has a currentValue
      */
-    @Override
-    public boolean hasValue() {
+    //@Override
+    public bool hasValue() {
         return this.currentValue != null;
     }
 
     /**
      * returns the currentValue as an Integer
      */
-    @Override
+    //@Override
     public Integer asInteger() {
         return cast();
     }
@@ -85,7 +85,7 @@ public class DefaultConfigurationOption implements ConfigurationOption {
     /**
      * returns the currentValue as a String
      */
-    @Override
+    //@Override
     public string asString() {
         return cast();
     }
@@ -93,21 +93,21 @@ public class DefaultConfigurationOption implements ConfigurationOption {
     /**
      * returns the currentValue as a Boolean
      */
-    @Override
+    //@Override
     public Boolean asBoolean() {
         return cast();
     }
 
-    @Override
+    //@Override
     public <T:Object> T asValue() {
         return cast();
     }
 
     private <T:Object> T cast() {
         if (!hasValue())
-            throw new IllegalArgumentException(String.format("The option %s has no currentValue", configOption.name()));
+            throw new ArgumentException(String.format("The option %s has no currentValue", configOption.name()));
         if (configOption.type.isAssignableFrom(currentValue.getClass()))
             return (T) configOption.type.cast(currentValue);
-        throw new IllegalArgumentException(String.format("%s cannot be cast to %s", currentValue, configOption.type.getName()));
+        throw new ArgumentException(String.format("%s cannot be cast to %s", currentValue, configOption.type.getName()));
     }
 }

@@ -32,7 +32,7 @@ public class LambdaThrowsCompatibleWithType:ConstraintFormula {
     private LambdaExpr lambdaExpression;
     private ResolvedType T;
 
-    @Override
+    //@Override
     public ReductionResult reduce(BoundSet currentBoundSet) {
         // A constraint formula of the form ‹LambdaExpression →throws T› is reduced as follows:
         //
@@ -56,8 +56,8 @@ public class LambdaThrowsCompatibleWithType:ConstraintFormula {
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -67,14 +67,14 @@ public class LambdaThrowsCompatibleWithType:ConstraintFormula {
         return T.equals(that.T);
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         int result = lambdaExpression.hashCode();
         result = 31 * result + T.hashCode();
         return result;
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "LambdaThrowsCompatibleWithType{" +
                 "lambdaExpression=" + lambdaExpression +

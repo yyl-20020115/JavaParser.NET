@@ -2,7 +2,7 @@ namespace foo;
 public interface IB {
     Integer getCode();
 
-    default boolean equalByCode(Integer code) {
+    default bool equalByCode(Integer code) {
         return getCode().equals(code);
     }
 }

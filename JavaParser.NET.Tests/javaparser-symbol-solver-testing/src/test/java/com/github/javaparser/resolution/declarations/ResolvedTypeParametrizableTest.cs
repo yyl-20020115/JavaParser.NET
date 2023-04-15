@@ -37,7 +37,7 @@ public interface ResolvedTypeParametrizableTest {
     [TestMethod]
     default void findTypeParameterShouldThrowIllegalArgumentExceptionWhenNullIsProvided() {
         ResolvedTypeParametrizable typeParametrizable = createValue();
-        assertThrows(IllegalArgumentException.class, () -> typeParametrizable.findTypeParameter(null));
+        assertThrows(ArgumentException.class, () -> typeParametrizable.findTypeParameter(null));
     }
 
 }

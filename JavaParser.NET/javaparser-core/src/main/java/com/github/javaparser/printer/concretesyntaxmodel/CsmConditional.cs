@@ -59,37 +59,37 @@ public class CsmConditional implements CsmElement {
 
         IS_EMPTY {
 
-            @Override
-            boolean evaluate(Node node, ObservableProperty property) {
+            //@Override
+            bool evaluate(Node node, ObservableProperty property) {
                 NodeList<?:Node> value = property.getValueAsMultipleReference(node);
                 return value == null || value.isEmpty();
             }
         }
         , IS_NOT_EMPTY {
 
-            @Override
-            boolean evaluate(Node node, ObservableProperty property) {
+            //@Override
+            bool evaluate(Node node, ObservableProperty property) {
                 NodeList<?:Node> value = property.getValueAsMultipleReference(node);
                 return value != null && !value.isEmpty();
             }
         }
         , IS_PRESENT {
 
-            @Override
-            boolean evaluate(Node node, ObservableProperty property) {
+            //@Override
+            bool evaluate(Node node, ObservableProperty property) {
                 return !property.isNullOrNotPresent(node);
             }
         }
         , FLAG {
 
-            @Override
-            boolean evaluate(Node node, ObservableProperty property) {
+            //@Override
+            bool evaluate(Node node, ObservableProperty property) {
                 return property.getValueAsBooleanAttribute(node);
             }
         }
         ;
 
-        abstract boolean evaluate(Node node, ObservableProperty property);
+        abstract bool evaluate(Node node, ObservableProperty property);
     }
 
     public CsmConditional(ObservableProperty property, Condition condition, CsmElement thenElement, CsmElement elseElement) {
@@ -101,7 +101,7 @@ public class CsmConditional implements CsmElement {
 
     public CsmConditional(List<ObservableProperty> properties, Condition condition, CsmElement thenElement, CsmElement elseElement) {
         if (properties.size() < 1) {
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         }
         this.properties = properties;
         this.condition = condition;
@@ -113,9 +113,9 @@ public class CsmConditional implements CsmElement {
         this(property, condition, thenElement, new CsmNone());
     }
 
-    @Override
+    //@Override
     public void prettyPrint(Node node, SourcePrinter printer) {
-        boolean test = false;
+        bool test = false;
         for (ObservableProperty prop : properties) {
             test = test || condition.evaluate(node, prop);
         }

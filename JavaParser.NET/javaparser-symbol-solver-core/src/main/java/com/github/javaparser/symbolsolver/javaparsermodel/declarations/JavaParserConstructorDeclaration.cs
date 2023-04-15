@@ -39,25 +39,25 @@ public class JavaParserConstructorDeclaration<N:ResolvedReferenceTypeDeclaration
         this.typeSolver = typeSolver;
     }
 
-    @Override
+    //@Override
     public N declaringType() {
         return declaringType;
     }
 
-    @Override
+    //@Override
     public int getNumberOfParams() {
         return this.wrappedNode.getParameters().size();
     }
 
-    @Override
+    //@Override
     public ResolvedParameterDeclaration getParam(int i) {
         if (i < 0 || i >= getNumberOfParams()) {
-            throw new IllegalArgumentException(String.format("No param with index %d. Number of params: %d", i, getNumberOfParams()));
+            throw new ArgumentException(String.format("No param with index %d. Number of params: %d", i, getNumberOfParams()));
         }
         return new JavaParserParameterDeclaration(wrappedNode.getParameters().get(i), typeSolver);
     }
 
-    @Override
+    //@Override
     public string getName() {
         return this.declaringType.getName();
     }
@@ -71,32 +71,32 @@ public class JavaParserConstructorDeclaration<N:ResolvedReferenceTypeDeclaration
         return wrappedNode;
     }
     
-    @Override
+    //@Override
     public AccessSpecifier accessSpecifier() {
         return wrappedNode.getAccessSpecifier();
     }
 
-    @Override
+    //@Override
     public List<ResolvedTypeParameterDeclaration> getTypeParameters() {
         return this.wrappedNode.getTypeParameters().stream().map((astTp) -> new JavaParserTypeParameter(astTp, typeSolver)).collect(Collectors.toList());
     }
 
-    @Override
+    //@Override
     public int getNumberOfSpecifiedExceptions() {
         return wrappedNode.getThrownExceptions().size();
     }
 
-    @Override
+    //@Override
     public ResolvedType getSpecifiedException(int index) {
         if (index < 0 || index >= getNumberOfSpecifiedExceptions()) {
-            throw new IllegalArgumentException(String.format("No exception with index %d. Number of exceptions: %d",
+            throw new ArgumentException(String.format("No exception with index %d. Number of exceptions: %d",
                     index, getNumberOfSpecifiedExceptions()));
         }
         return JavaParserFacade.get(typeSolver)
                 .convert(wrappedNode.getThrownExceptions().get(index), wrappedNode);
     }
 
-    @Override
+    //@Override
     public Optional<Node> toAst() {
         return Optional.of(wrappedNode);
     }

@@ -840,7 +840,7 @@ public /*final*/class JavaParserMetaModel {
         moduleUsesDirectiveMetaModel.getDeclaredPropertyMetaModels().add(moduleUsesDirectiveMetaModel.namePropertyMetaModel);
     }
 
-    public static Optional<BaseNodeMetaModel> getNodeMetaModel(Class<?> c) {
+    public static Optional<BaseNodeMetaModel> getNodeMetaModel(Type c) {
         for (BaseNodeMetaModel nodeMetaModel : nodeMetaModels) {
             if (nodeMetaModel.getTypeName().equals(c.getSimpleName())) {
                 return Optional.of(nodeMetaModel);

@@ -36,7 +36,7 @@ public class Java10PostProcessor:PostProcessors {
 
     protected /*final*/Processor varNodeCreator = new Processor() {
 
-        @Override
+        //@Override
         public void postProcess(ParseResult<?:Node> result, ParserConfiguration configuration) {
             result.getResult().ifPresent(node -> {
                 node.findAll(ClassOrInterfaceType.class)
@@ -49,7 +49,7 @@ public class Java10PostProcessor:PostProcessors {
             });
         }
         
-        private boolean matchForbiddenContext(ClassOrInterfaceType cit) {
+        private bool matchForbiddenContext(ClassOrInterfaceType cit) {
             return cit.getParentNode().isPresent()
                     && FORBIDEN_PARENT_CONTEXT_TO_DETECT_POTENTIAL_VAR_TYPE.stream().anyMatch(cl -> cl.isInstance(cit.getParentNode().get()));
         }

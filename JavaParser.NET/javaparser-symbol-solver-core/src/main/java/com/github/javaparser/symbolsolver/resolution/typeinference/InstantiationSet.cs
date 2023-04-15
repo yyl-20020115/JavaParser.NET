@@ -30,7 +30,7 @@ public class InstantiationSet {
 
     private List<Instantiation> instantiations;
 
-    public boolean allInferenceVariablesAreResolved(BoundSet boundSet) {
+    public bool allInferenceVariablesAreResolved(BoundSet boundSet) {
         throw new UnsupportedOperationException();
     }
 
@@ -51,12 +51,12 @@ public class InstantiationSet {
         return newInstance;
     }
 
-    public boolean isEmpty() {
+    public bool isEmpty() {
         return instantiations.isEmpty();
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -65,12 +65,12 @@ public class InstantiationSet {
         return instantiations.equals(that.instantiations);
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         return instantiations.hashCode();
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "InstantiationSet{" +
                 "instantiations=" + instantiations +

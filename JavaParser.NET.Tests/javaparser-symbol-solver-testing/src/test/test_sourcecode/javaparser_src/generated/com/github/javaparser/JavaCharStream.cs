@@ -23,7 +23,7 @@ public
 class JavaCharStream
 {
   /** Whether parser is static. */
-  public static /*final*/boolean staticFlag = false;
+  public static /*final*/bool staticFlag = false;
 
   static /*final*/int hexval(char c) throws java.io.IOException {
     switch(c)
@@ -83,8 +83,8 @@ class JavaCharStream
   protected int column = 0;
   protected int line = 1;
 
-  protected boolean prevCharIsCR = false;
-  protected boolean prevCharIsLF = false;
+  protected bool prevCharIsCR = false;
+  protected bool prevCharIsLF = false;
 
   protected java.io.Reader inputStream;
 
@@ -98,7 +98,7 @@ class JavaCharStream
   protected void setTabSize(int i) { tabSize = i; }
   protected int getTabSize(int i) { return tabSize; }
 
-  protected void ExpandBuff(boolean wrapAround)
+  protected void ExpandBuff(bool wrapAround)
   {
     char[] newbuffer = new char[bufsize + 2048];
     int newbufline[] = new int[bufsize + 2048];

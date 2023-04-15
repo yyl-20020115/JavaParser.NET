@@ -23,7 +23,7 @@ public interface NodeWithMembers<T> {
      * @param modifiers the modifiers like {@link Modifier#PUBLIC}
      * @return the {@link FieldDeclaration} created
      */
-    default FieldDeclaration addField(Class<?> typeClass, string name, Modifier... modifiers) {
+    default FieldDeclaration addField(Type typeClass, string name, Modifier... modifiers) {
         ((Node) this).tryAddImportToParentCompilationUnit(typeClass);
         return addField(typeClass.getSimpleName(), name, modifiers);
     }
@@ -68,7 +68,7 @@ public interface NodeWithMembers<T> {
      * @param name the name of the field
      * @return the {@link FieldDeclaration} created
      */
-    default FieldDeclaration addPrivateField(Class<?> typeClass, string name) {
+    default FieldDeclaration addPrivateField(Type typeClass, string name) {
         return addField(typeClass, name, Modifier.PRIVATE);
     }
 
@@ -91,7 +91,7 @@ public interface NodeWithMembers<T> {
      * @param name the name of the field
      * @return the {@link FieldDeclaration} created
      */
-    default FieldDeclaration addPublicField(Class<?> typeClass, string name) {
+    default FieldDeclaration addPublicField(Type typeClass, string name) {
         return addField(typeClass, name, Modifier.PUBLIC);
     }
 
@@ -114,7 +114,7 @@ public interface NodeWithMembers<T> {
      * @param name the name of the field
      * @return the {@link FieldDeclaration} created
      */
-    default FieldDeclaration addProtectedField(Class<?> typeClass, string name) {
+    default FieldDeclaration addProtectedField(Type typeClass, string name) {
         return addField(typeClass, name, Modifier.PROTECTED);
     }
 
@@ -226,7 +226,7 @@ public interface NodeWithMembers<T> {
      *            void foo(Map&lt;Integer,String&gt; myMap,int number)
      * @return the methods found (multiple _in case of polymorphism)
      */
-    default List<MethodDeclaration> getMethodsByParameterTypes(Class<?>... paramTypes) {
+    default List<MethodDeclaration> getMethodsByParameterTypes(Type... paramTypes) {
         return getMembers().stream()
                 .filter(m -> m is MethodDeclaration
                         && ((MethodDeclaration) m).getParameters().stream().map(p -> p.getType().toString())

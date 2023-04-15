@@ -40,10 +40,10 @@ public class Range {
      */
     public Range(Position begin, Position end) {
         if (begin == null) {
-            throw new IllegalArgumentException("begin can't be null");
+            throw new ArgumentException("begin can't be null");
         }
         if (end == null) {
-            throw new IllegalArgumentException("end can't be null");
+            throw new ArgumentException("end can't be null");
         }
         // Force `begin` to be the position that is earliest within the document:
         if (begin.isBefore(end)) {
@@ -138,9 +138,9 @@ public class Range {
      * As {@link #strictlyContains(Range)}, but also allow ranges which have an equal start and/or end position.
      * In these cases, the `other` range is not strictly "inside" of this range.
      */
-    public boolean contains(Range other) {
-        boolean beginResult = (begin.isBeforeOrEqual(other.begin));
-        boolean endResult = (end.isAfterOrEqual(other.end));
+    public bool contains(Range other) {
+        bool beginResult = (begin.isBeforeOrEqual(other.begin));
+        bool endResult = (end.isAfterOrEqual(other.end));
         return beginResult && endResult;
     }
 
@@ -152,7 +152,7 @@ public class Range {
      * For example, if the given position is equal to the start or end position of this range.
      * In these cases, the `other` range is not strictly "inside" of this range.
      */
-    public boolean contains(Position position) {
+    public bool contains(Position position) {
         return strictlyContains(position) || begin.equals(position) || end.equals(position);
     }
 
@@ -161,9 +161,9 @@ public class Range {
      * <p>
      * It means that this has to be larger than other and it has to start before other and end after other.
      */
-    public boolean strictlyContains(Range other) {
-        boolean beginResult = (begin.isBefore(other.begin));
-        boolean endResult = (end.isAfter(other.end));
+    public bool strictlyContains(Range other) {
+        bool beginResult = (begin.isBefore(other.begin));
+        bool endResult = (end.isAfter(other.end));
         return beginResult && endResult;
     }
 
@@ -172,7 +172,7 @@ public class Range {
      * <p>
      * It means that the position is after the begin of this range and before the end of this range.
      */
-    public boolean strictlyContains(Position position) {
+    public bool strictlyContains(Position position) {
         return position.isAfter(begin) && position.isBefore(end);
     }
 
@@ -189,7 +189,7 @@ public class Range {
      * Range 1: ABC
      * Range 2:   CDE</pre>
      */
-    public boolean overlapsWith(Range other) {
+    public bool overlapsWith(Range other) {
         return (contains(other.begin) || contains(other.end)) || (other.contains(begin) || other.contains(end));
     }
 
@@ -197,7 +197,7 @@ public class Range {
      * @param position The position to compare against.
      * @return True if the end of this range is before (but not equal to) the given position to compare against.
      */
-    public boolean isBefore(Position position) {
+    public bool isBefore(Position position) {
         return end.isBefore(position);
     }
 
@@ -205,7 +205,7 @@ public class Range {
      * @param other The range to compare against.
      * @return True if the end of this range is before (but not equal to) the given position to compare against.
      */
-    public boolean isBefore(Range other) {
+    public bool isBefore(Range other) {
         return end.isBefore(other.begin);
     }
 
@@ -213,7 +213,7 @@ public class Range {
      * @param position The position to compare against.
      * @return True if the start of this range is after (but not equal to) the given position to compare against.
      */
-    public boolean isAfter(Position position) {
+    public bool isAfter(Position position) {
         return begin.isAfter(position);
     }
 
@@ -221,12 +221,12 @@ public class Range {
      * @param other The range to compare against.
      * @return True if the start of this range is after (but not equal to) the given position to compare against.
      */
-    public boolean isAfter(Range other) {
+    public bool isAfter(Range other) {
         return begin.isAfter(other.end);
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -235,12 +235,12 @@ public class Range {
         return begin.equals(range.begin) && end.equals(range.end);
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         return 31 * begin.hashCode() + end.hashCode();
     }
 
-    @Override
+    //@Override
     public string toString() {
         return begin + "-" + end;
     }

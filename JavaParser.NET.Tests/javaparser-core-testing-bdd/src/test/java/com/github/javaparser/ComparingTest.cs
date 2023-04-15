@@ -36,7 +36,7 @@ public class ComparingTest:BasicJBehaveTest {
     }
 
     public ComparingTest() {
-        super("**/comparing*.story");
+        base("**/comparing*.story");
     }
 }
 

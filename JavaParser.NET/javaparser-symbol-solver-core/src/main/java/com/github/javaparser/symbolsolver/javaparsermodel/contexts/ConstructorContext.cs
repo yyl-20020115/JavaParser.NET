@@ -33,10 +33,10 @@ public class ConstructorContext:AbstractMethodLikeDeclarationContext<Constructor
     ///
 
     public ConstructorContext(ConstructorDeclaration wrappedNode, TypeSolver typeSolver) {
-        super(wrappedNode, typeSolver);
+        base(wrappedNode, typeSolver);
     }
 
-    @Override
+    //@Override
     public List<Parameter> parametersExposedToChild(Node child) {
         // TODO/FIXME: Presumably the parameters must be exposed to all children and their descendants, not just the direct child?
         if (child == wrappedNode.getBody()) {

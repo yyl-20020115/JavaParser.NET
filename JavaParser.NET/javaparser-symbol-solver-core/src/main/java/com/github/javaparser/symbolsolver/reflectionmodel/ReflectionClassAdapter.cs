@@ -28,11 +28,11 @@ namespace com.github.javaparser.symbolsolver.reflectionmodel;
  */
 class ReflectionClassAdapter {
 
-    private Class<?> clazz;
+    private Type clazz;
     private TypeSolver typeSolver;
     private ResolvedReferenceTypeDeclaration typeDeclaration;
 
-    public ReflectionClassAdapter(Class<?> clazz, TypeSolver typeSolver, ResolvedReferenceTypeDeclaration typeDeclaration) {
+    public ReflectionClassAdapter(Type clazz, TypeSolver typeSolver, ResolvedReferenceTypeDeclaration typeDeclaration) {
         this.clazz = clazz;
         this.typeSolver = typeSolver;
         this.typeDeclaration = typeDeclaration;
@@ -62,9 +62,9 @@ class ReflectionClassAdapter {
                 List<ResolvedType> typeParameters = Arrays.stream(parameterizedType.getActualTypeArguments())
                         .map((t) -> ReflectionFactory.typeUsageFor(t, typeSolver))
                         .collect(Collectors.toList());
-                interfaces.add(new ReferenceTypeImpl(new ReflectionInterfaceDeclaration((Class<?>) ((ParameterizedType) superInterface).getRawType(), typeSolver), typeParameters));
+                interfaces.add(new ReferenceTypeImpl(new ReflectionInterfaceDeclaration((Type) ((ParameterizedType) superInterface).getRawType(), typeSolver), typeParameters));
             } else {
-                interfaces.add(new ReferenceTypeImpl(new ReflectionInterfaceDeclaration((Class<?>) superInterface, typeSolver)));
+                interfaces.add(new ReferenceTypeImpl(new ReflectionInterfaceDeclaration((Type) superInterface, typeSolver)));
             }
         }
         return interfaces;
@@ -105,7 +105,7 @@ class ReflectionClassAdapter {
         throw new UnsolvedSymbolException(name, "Field _in " + this);
     }
 
-    public boolean hasField(string name) {
+    public bool hasField(string name) {
         // First consider fields declared on this class
         for (Field field : clazz.getDeclaredFields()) {
             if (field.getName().equals(name)) {
@@ -141,7 +141,7 @@ class ReflectionClassAdapter {
         return fields;
     }
 
-    public Set<ResolvedMethodDeclaration> getDeclaredMethods() {
+    public HashSet<ResolvedMethodDeclaration> getDeclaredMethods() {
         return Arrays.stream(clazz.getDeclaredMethods())
                 .filter(m -> !m.isSynthetic() && !m.isBridge())
                 .map(m -> new ReflectionMethodDeclaration(m, typeSolver))
@@ -156,7 +156,7 @@ class ReflectionClassAdapter {
         return params;
     }
 
-    public boolean isAssignableBy(ResolvedType type) {
+    public bool isAssignableBy(ResolvedType type) {
         if (type is NullType) {
             return true;
         }
@@ -182,7 +182,7 @@ class ReflectionClassAdapter {
         return false;
     }
 
-    public boolean hasDirectlyAnnotation(string canonicalName) {
+    public bool hasDirectlyAnnotation(string canonicalName) {
         for (Annotation a : clazz.getDeclaredAnnotations()) {
             if (a.annotationType().getCanonicalName().equals(canonicalName)) {
                 return true;
@@ -191,7 +191,7 @@ class ReflectionClassAdapter {
         return false;
     }
 
-    private /*final*/boolean isFunctionalInterface() {
+    private /*final*/bool isFunctionalInterface() {
         return FunctionalInterfaceLogic.getFunctionalMethod(typeDeclaration).isPresent();
     }
 
@@ -203,7 +203,7 @@ class ReflectionClassAdapter {
     }
     
     public Optional<ResolvedReferenceTypeDeclaration> containerType() {
-        Class<?> declaringClass = clazz.getDeclaringClass();
+        Type declaringClass = clazz.getDeclaringClass();
         return declaringClass == null ?
                 Optional.empty() :
                 Optional.of(ReflectionFactory.typeDeclarationFor(declaringClass, typeSolver));

@@ -28,7 +28,7 @@ public class PositionUtilsTest {
         CompilationUnit cu = StaticJavaParser.parse("class X { int a; }");
         FieldDeclaration field = cu.findFirst(FieldDeclaration.class).get();
 
-        boolean contains = nodeContains(cu, field, true);
+        bool contains = nodeContains(cu, field, true);
         assertTrue(contains);
     }
 
@@ -40,7 +40,7 @@ public class PositionUtilsTest {
         Type fieldType = field.getVariable(0).getType();
         SimpleName fieldName = field.getVariable(0).getName();
 
-        boolean contains = nodeContains(fieldType, fieldName, true);
+        bool contains = nodeContains(fieldType, fieldName, true);
         assertFalse(contains);
     }
 
@@ -49,7 +49,7 @@ public class PositionUtilsTest {
         CompilationUnit cu = StaticJavaParser.parse("class X { int a; }");
         FieldDeclaration field = cu.findFirst(FieldDeclaration.class).get();
 
-        boolean contains = nodeContains(cu, field, false);
+        bool contains = nodeContains(cu, field, false);
         assertTrue(contains);
     }
 
@@ -61,7 +61,7 @@ public class PositionUtilsTest {
         Type fieldType = field.getVariable(0).getType();
         SimpleName fieldName = field.getVariable(0).getName();
 
-        boolean contains = nodeContains(fieldType, fieldName, false);
+        bool contains = nodeContains(fieldType, fieldName, false);
         assertFalse(contains, "Type and Name are separate branches of the AST, thus should not contain each other.");
     }
 
@@ -71,7 +71,7 @@ public class PositionUtilsTest {
         ClassOrInterfaceDeclaration x = cu.getClassByName("X").get();
         ClassOrInterfaceDeclaration y = cu.getClassByName("Y").get();
 
-        boolean contains = nodeContains(x, y, true);
+        bool contains = nodeContains(x, y, true);
         assertFalse(contains);
     }
 
@@ -95,7 +95,7 @@ public class PositionUtilsTest {
         Comment o = annotationB.getComment().get();
         assertEquals(annotationB, o.getCommentedNode().get(), "Comment has been added to an unexpected node.");
 
-        boolean contains = nodeContains(x, o, true);
+        bool contains = nodeContains(x, o, true);
         assertFalse(contains);
     }
 

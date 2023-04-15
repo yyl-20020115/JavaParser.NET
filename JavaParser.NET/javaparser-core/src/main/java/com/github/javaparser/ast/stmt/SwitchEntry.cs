@@ -95,22 +95,22 @@ public class SwitchEntry:Node implements NodeWithStatements<SwitchEntry> {
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public SwitchEntry(TokenRange tokenRange, NodeList<Expression> labels, Type type, NodeList<Statement> statements) {
-        super(tokenRange);
+        base(tokenRange);
         setLabels(labels);
         setType(type);
         setStatements(statements);
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -158,9 +158,9 @@ public class SwitchEntry:Node implements NodeWithStatements<SwitchEntry> {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
-    public boolean remove(Node node) {
+    public bool remove(Node node) {
         if (node == null) {
             return false;
         }
@@ -179,13 +179,13 @@ public class SwitchEntry:Node implements NodeWithStatements<SwitchEntry> {
         return super.remove(node);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public SwitchEntry clone() {
         return (SwitchEntry) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public SwitchEntryMetaModel getMetaModel() {
         return JavaParserMetaModel.switchEntryMetaModel;
@@ -207,9 +207,9 @@ public class SwitchEntry:Node implements NodeWithStatements<SwitchEntry> {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }

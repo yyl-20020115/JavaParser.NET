@@ -48,7 +48,7 @@ public /*final*/class ReferenceType:Type {
 
 	public ReferenceType(/*final*/int beginLine, /*final*/int beginColumn, /*final*/int endLine, /*final*/int endColumn,
 			/*final*/Type type, /*final*/int arrayCount) {
-		super(beginLine, beginColumn, endLine, endColumn);
+		base(beginLine, beginColumn, endLine, endColumn);
 		setType(type);
 		setArrayCount(arrayCount);
 	}
@@ -57,17 +57,17 @@ public /*final*/class ReferenceType:Type {
                          int endColumn, Type type, int arrayCount,
                          List<AnnotationExpr> annotations,
                          List<List<AnnotationExpr>> arraysAnnotations) {
-        super(beginLine, beginColumn, endLine, endColumn, annotations);
+        base(beginLine, beginColumn, endLine, endColumn, annotations);
         setType(type);
         setArrayCount(arrayCount);
         this.arraysAnnotations = arraysAnnotations;
     }
 
-	@Override public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+	@Override public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
 		return v.visit(this, arg);
 	}
 
-	@Override public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+	@Override public void accept<A>(VoidVisitor<A> v, A arg) {
 		v.visit(this, arg);
 	}
 

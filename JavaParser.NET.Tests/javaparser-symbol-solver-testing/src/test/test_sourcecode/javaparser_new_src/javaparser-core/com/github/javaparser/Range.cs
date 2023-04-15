@@ -12,10 +12,10 @@ public class Range {
 
     public Range(Position begin, Position end) {
         if (begin == null) {
-            throw new IllegalArgumentException("begin can't be null");
+            throw new ArgumentException("begin can't be null");
         }
         if (end == null) {
-            throw new IllegalArgumentException("end can't be null");
+            throw new ArgumentException("end can't be null");
         }
         this.begin = begin;
         this.end = end;
@@ -53,20 +53,20 @@ public class Range {
         return range(this.begin, end);
     }
 
-    public boolean contains(Range other) {
+    public bool contains(Range other) {
         return begin.isBefore(other.begin) && end.isAfter(other.end);
     }
 
-    public boolean isBefore(Position position) {
+    public bool isBefore(Position position) {
         return end.isBefore(position);
     }
 
-    public boolean isAfter(Position position) {
+    public bool isAfter(Position position) {
         return begin.isAfter(position);
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -76,12 +76,12 @@ public class Range {
 
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         return 31 * begin.hashCode() + end.hashCode();
     }
 
-    @Override
+    //@Override
     public string toString() {
         return begin+"-"+end;
     }

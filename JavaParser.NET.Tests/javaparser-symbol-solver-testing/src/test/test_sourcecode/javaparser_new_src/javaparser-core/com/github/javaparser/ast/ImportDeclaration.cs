@@ -39,9 +39,9 @@ namespace com.github.javaparser.ast;
 public /*final*/class ImportDeclaration:Node {
 
     private NameExpr name;
-    private boolean static_;
-    private boolean asterisk;
-    private boolean isEmptyImportDeclaration;
+    private bool static_;
+    private bool asterisk;
+    private bool isEmptyImportDeclaration;
 
     private ImportDeclaration() {
         this.isEmptyImportDeclaration = true;
@@ -50,7 +50,7 @@ public /*final*/class ImportDeclaration:Node {
     }
 
     private ImportDeclaration(Range range) {
-        super(range);
+        base(range);
         this.isEmptyImportDeclaration = true;
         static_ = false;
         asterisk = false;
@@ -70,15 +70,15 @@ public /*final*/class ImportDeclaration:Node {
         return new ImportDeclaration(range);
     }
 
-    public ImportDeclaration(NameExpr name, boolean isStatic, boolean isAsterisk) {
+    public ImportDeclaration(NameExpr name, bool isStatic, bool isAsterisk) {
         setAsterisk(isAsterisk);
         setName(name);
         setStatic(isStatic);
         this.isEmptyImportDeclaration = false;
     }
 
-    public ImportDeclaration(Range range, NameExpr name, boolean isStatic, boolean isAsterisk) {
-        super(range);
+    public ImportDeclaration(Range range, NameExpr name, bool isStatic, bool isAsterisk) {
+        base(range);
         setAsterisk(isAsterisk);
         setName(name);
         setStatic(isStatic);
@@ -88,16 +88,16 @@ public /*final*/class ImportDeclaration:Node {
     /**
      * Is this an empty import declaration or a normal import declaration?
      */
-    public boolean isEmptyImportDeclaration(){
+    public bool isEmptyImportDeclaration(){
         return this.isEmptyImportDeclaration;
     }
 
-    @Override
+    //@Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
@@ -121,7 +121,7 @@ public /*final*/class ImportDeclaration:Node {
      * @return <code>true</code> if the import ends with "*", <code>false</code>
      *         otherwise
      */
-    public boolean isAsterisk() {
+    public bool isAsterisk() {
         return asterisk;
     }
 
@@ -131,7 +131,7 @@ public /*final*/class ImportDeclaration:Node {
      * @return <code>true</code> if the import is static, <code>false</code>
      *         otherwise
      */
-    public boolean isStatic() {
+    public bool isStatic() {
         return static_;
     }
 
@@ -142,7 +142,7 @@ public /*final*/class ImportDeclaration:Node {
      *            <code>true</code> if this import is asterisk
      * @throws UnsupportedOperationException when setting true on an empty import declaration
      */
-    public ImportDeclaration setAsterisk(boolean asterisk) {
+    public ImportDeclaration setAsterisk(bool asterisk) {
         if (isEmptyImportDeclaration && asterisk) {
             throw new UnsupportedOperationException("Empty import cannot have asterisk");
         }
@@ -173,7 +173,7 @@ public /*final*/class ImportDeclaration:Node {
      *            <code>true</code> if this import is static
      * @throws UnsupportedOperationException when setting true on an empty import declaration
      */
-    public ImportDeclaration setStatic(boolean static_) {
+    public ImportDeclaration setStatic(bool static_) {
         if (isEmptyImportDeclaration && static_) {
             throw new UnsupportedOperationException("Empty import cannot be static");
         }

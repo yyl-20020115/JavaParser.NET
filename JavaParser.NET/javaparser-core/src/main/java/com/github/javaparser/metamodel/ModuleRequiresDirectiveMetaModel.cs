@@ -36,7 +36,7 @@ public class ModuleRequiresDirectiveMetaModel:ModuleDirectiveMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     ModuleRequiresDirectiveMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, ModuleRequiresDirective.class, "ModuleRequiresDirective", "com.github.javaparser.ast.modules", false, false);
+        base(superBaseNodeMetaModel, ModuleRequiresDirective.class, "ModuleRequiresDirective", "com.github.javaparser.ast.modules", false, false);
     }
 
     public PropertyMetaModel modifiersPropertyMetaModel;

@@ -56,7 +56,7 @@ public /*final*/class CompilationUnit:Node {
     }
 
     public CompilationUnit(int beginLine, int beginColumn, int endLine, int endColumn, PackageDeclaration pakage, List<ImportDeclaration> imports, List<TypeDeclaration> types) {
-        super(beginLine, beginColumn, endLine, endColumn);
+        base(beginLine, beginColumn, endLine, endColumn);
         setPackage(pakage);
         setImports(imports);
         setTypes(types);

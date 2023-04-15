@@ -38,7 +38,7 @@ class TokenTextElement:TextElement {
         this(new JavaToken(tokenKind));
     }
 
-    @Override
+    //@Override
     string expand() {
         return token.getText();
     }
@@ -56,8 +56,8 @@ class TokenTextElement:TextElement {
         return token;
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -66,77 +66,77 @@ class TokenTextElement:TextElement {
         return token.equals(that.token);
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         return token.hashCode();
     }
 
-    @Override
+    //@Override
     public string toString() {
         return token.toString();
     }
 
-    @Override
-    boolean isToken(int tokenKind) {
+    //@Override
+    bool isToken(int tokenKind) {
         return token.getKind() == tokenKind;
     }
 
-    @Override
-    boolean isNode(Node node) {
+    //@Override
+    bool isNode(Node node) {
         return false;
     }
 
-    @Override
-    public boolean isWhiteSpace() {
+    //@Override
+    public bool isWhiteSpace() {
         return token.getCategory().isWhitespace();
     }
 
-    @Override
-    public boolean isSpaceOrTab() {
+    //@Override
+    public bool isSpaceOrTab() {
         return token.getCategory().isWhitespaceButNotEndOfLine();
     }
 
-    @Override
-    public boolean isComment() {
+    //@Override
+    public bool isComment() {
         return token.getCategory().isComment();
     }
 
-    @Override
-    public boolean isSeparator() {
+    //@Override
+    public bool isSeparator() {
         return token.getCategory().isSeparator();
     }
 
-    @Override
-    public boolean isNewline() {
+    //@Override
+    public bool isNewline() {
         return token.getCategory().isEndOfLine();
     }
 
-    @Override
-    public boolean isChildOfClass(Class<?:Node> nodeClass) {
+    //@Override
+    public bool isChildOfClass(Class<?:Node> nodeClass) {
         return false;
     }
 
-    @Override
-    public boolean isIdentifier() {
+    //@Override
+    public bool isIdentifier() {
         return getToken().getCategory().isIdentifier();
     }
 
-    @Override
-    public boolean isKeyword() {
+    //@Override
+    public bool isKeyword() {
         return getToken().getCategory().isKeyword();
     }
 
-    @Override
-    public boolean isLiteral() {
+    //@Override
+    public bool isLiteral() {
         return getToken().getCategory().isLiteral();
     }
 
-    @Override
-    public boolean isPrimitive() {
+    //@Override
+    public bool isPrimitive() {
         return Kind.valueOf(getTokenKind()).isPrimitive();
     }
 
-    @Override
+    //@Override
     Optional<Range> getRange() {
         return token.getRange();
     }

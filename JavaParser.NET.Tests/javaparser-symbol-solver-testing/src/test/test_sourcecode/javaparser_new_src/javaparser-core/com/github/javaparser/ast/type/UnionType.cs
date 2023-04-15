@@ -11,12 +11,12 @@ public class UnionType:Type<UnionType> implements NodeWithAnnotations<UnionType>
     private List<ReferenceType> elements;
 
     public UnionType(Range range, List<ReferenceType> elements) {
-        super(range);
+        base(range);
         setElements(elements);
     }
 
     public UnionType(List<ReferenceType> elements) {
-        super();
+        base();
         setElements(elements);
     }
 
@@ -35,12 +35,12 @@ public class UnionType:Type<UnionType> implements NodeWithAnnotations<UnionType>
         return this;
     }
 
-    @Override
+    //@Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }

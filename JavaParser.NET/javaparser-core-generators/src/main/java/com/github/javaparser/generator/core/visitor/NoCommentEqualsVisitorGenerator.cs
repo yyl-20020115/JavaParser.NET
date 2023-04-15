@@ -26,10 +26,10 @@ namespace com.github.javaparser.generator.core.visitor;
 public class NoCommentEqualsVisitorGenerator:VisitorGenerator {
 
     public NoCommentEqualsVisitorGenerator(SourceRoot sourceRoot) {
-        super(sourceRoot, "com.github.javaparser.ast.visitor", "NoCommentEqualsVisitor", "Boolean", "Visitable", true);
+        base(sourceRoot, "com.github.javaparser.ast.visitor", "NoCommentEqualsVisitor", "Boolean", "Visitable", true);
     }
 
-    @Override
+    //@Override
     protected void generateVisitMethodBody(BaseNodeMetaModel node, MethodDeclaration visitMethod,
                                            CompilationUnit compilationUnit) {
         visitMethod.getParameters().forEach(p -> p.setFinal(true));

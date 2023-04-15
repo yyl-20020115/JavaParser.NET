@@ -377,7 +377,7 @@ public interface Context {
      * We find the method declaration which is the best match for the given name and list of typeParametersValues.
      */
     default SymbolReference<ResolvedConstructorDeclaration> solveConstructor(List<ResolvedType> argumentsTypes) {
-        throw new IllegalArgumentException("Constructor resolution is available only on Class Context");
+        throw new ArgumentException("Constructor resolution is available only on Class Context");
     }
 
     /* Methods resolution */
@@ -385,12 +385,12 @@ public interface Context {
     /**
      * We find the method declaration which is the best match for the given name and list of typeParametersValues.
      */
-    default SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
+    default SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, bool staticOnly) {
         // Default to solving within the parent context.
         return solveMethodInParentContext(name, argumentsTypes, staticOnly);
     }
 
-    default SymbolReference<ResolvedMethodDeclaration> solveMethodInParentContext(string name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
+    default SymbolReference<ResolvedMethodDeclaration> solveMethodInParentContext(string name, List<ResolvedType> argumentsTypes, bool staticOnly) {
         Optional<Context> optionalParentContext = getParent();
         if (!optionalParentContext.isPresent()) {
             return SymbolReference.unsolved();

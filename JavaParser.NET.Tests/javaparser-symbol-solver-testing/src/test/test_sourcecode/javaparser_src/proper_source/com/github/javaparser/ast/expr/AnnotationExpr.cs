@@ -32,7 +32,7 @@ public abstract class AnnotationExpr:Expression {
 
 	public AnnotationExpr(int beginLine, int beginColumn, int endLine,
 			int endColumn) {
-		super(beginLine, beginColumn, endLine, endColumn);
+		base(beginLine, beginColumn, endLine, endColumn);
 	}
 
 	public NameExpr getName() {

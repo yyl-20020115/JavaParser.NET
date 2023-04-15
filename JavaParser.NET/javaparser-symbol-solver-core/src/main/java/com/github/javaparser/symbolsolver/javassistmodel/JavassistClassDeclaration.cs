@@ -35,38 +35,38 @@ public class JavassistClassDeclaration:AbstractClassDeclaration
 
     public JavassistClassDeclaration(CtClass ctClass, TypeSolver typeSolver) {
         if (ctClass == null) {
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         }
         if (ctClass.isInterface() || ctClass.isAnnotation() || ctClass.isPrimitive() || ctClass.isEnum()) {
-            throw new IllegalArgumentException("Trying to instantiate a JavassistClassDeclaration with something which is not a class: " + ctClass.toString());
+            throw new ArgumentException("Trying to instantiate a JavassistClassDeclaration with something which is not a class: " + ctClass.toString());
         }
         this.ctClass = ctClass;
         this.typeSolver = typeSolver;
         this.javassistTypeDeclarationAdapter = new JavassistTypeDeclarationAdapter(ctClass, typeSolver, this);
     }
 
-    @Override
+    //@Override
     protected ResolvedReferenceType object() {
         return new ReferenceTypeImpl(typeSolver.getSolvedJavaLangObject());
     }
 
-    @Override
-    public boolean hasDirectlyAnnotation(string canonicalName) {
+    //@Override
+    public bool hasDirectlyAnnotation(string canonicalName) {
         return ctClass.hasAnnotation(canonicalName);
     }
 
-    @Override
-    public Set<ResolvedMethodDeclaration> getDeclaredMethods() {
+    //@Override
+    public HashSet<ResolvedMethodDeclaration> getDeclaredMethods() {
         return javassistTypeDeclarationAdapter.getDeclaredMethods();
     }
 
-    @Override
-    public boolean isAssignableBy(ResolvedReferenceTypeDeclaration other) {
+    //@Override
+    public bool isAssignableBy(ResolvedReferenceTypeDeclaration other) {
         return isAssignableBy(new ReferenceTypeImpl(other));
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -75,17 +75,17 @@ public class JavassistClassDeclaration:AbstractClassDeclaration
         return ctClass.equals(that.ctClass);
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         return ctClass.hashCode();
     }
 
-    @Override
+    //@Override
     public string getPackageName() {
         return ctClass.getPackageName();
     }
 
-    @Override
+    //@Override
     public string getClassName() {
         string className = ctClass.getName().replace('$', '.');
         if (getPackageName() != null) {
@@ -94,7 +94,7 @@ public class JavassistClassDeclaration:AbstractClassDeclaration
         return className;
     }
 
-    @Override
+    //@Override
     public string getQualifiedName() {
         return ctClass.getName().replace('$', '.');
     }
@@ -105,7 +105,7 @@ public class JavassistClassDeclaration:AbstractClassDeclaration
         return JavassistUtils.solveMethodAsUsage(name, argumentsTypes, typeSolver, invokationContext, typeParameterValues, this, ctClass);
     }
 
-    @Override
+    //@Override
     public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name, TypeSolver typeSolver) {
         for (CtField field : ctClass.getDeclaredFields()) {
             if (field.getName().equals(name)) {
@@ -147,14 +147,14 @@ public class JavassistClassDeclaration:AbstractClassDeclaration
         return ctClass.getClassFile().getSuperclass();
     }
 
-    @Override
-    public List<ResolvedReferenceType> getAncestors(boolean acceptIncompleteList) {
+    //@Override
+    public List<ResolvedReferenceType> getAncestors(bool acceptIncompleteList) {
         return javassistTypeDeclarationAdapter.getAncestors(acceptIncompleteList);
     }
 
-    @Override
+    //@Override
     //@Deprecated
-    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
+    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, bool staticOnly) {
         return JavassistUtils.solveMethod(name, argumentsTypes, staticOnly, typeSolver, this, ctClass);
     }
 
@@ -162,8 +162,8 @@ public class JavassistClassDeclaration:AbstractClassDeclaration
         return new ReferenceTypeImpl(this);
     }
 
-    @Override
-    public boolean isAssignableBy(ResolvedType type) {
+    //@Override
+    public bool isAssignableBy(ResolvedType type) {
         if (type.isNull()) {
             return true;
         }
@@ -194,88 +194,88 @@ public class JavassistClassDeclaration:AbstractClassDeclaration
         return false;
     }
 
-    @Override
-    public boolean isTypeParameter() {
+    //@Override
+    public bool isTypeParameter() {
         return false;
     }
 
-    @Override
+    //@Override
     public List<ResolvedFieldDeclaration> getAllFields() {
         return javassistTypeDeclarationAdapter.getDeclaredFields();
     }
 
-    @Override
+    //@Override
     public string getName() {
         String[] nameElements = ctClass.getSimpleName().replace('$', '.').split("\\.");
         return nameElements[nameElements.length - 1];
     }
 
-    @Override
-    public boolean isField() {
+    //@Override
+    public bool isField() {
         return false;
     }
 
-    @Override
-    public boolean isParameter() {
+    //@Override
+    public bool isParameter() {
         return false;
     }
 
-    @Override
-    public boolean isType() {
+    //@Override
+    public bool isType() {
         return true;
     }
 
-    @Override
-    public boolean isClass() {
+    //@Override
+    public bool isClass() {
         return !ctClass.isInterface();
     }
 
-    @Override
+    //@Override
     public Optional<ResolvedReferenceType> getSuperClass() {
         return javassistTypeDeclarationAdapter.getSuperClass();
     }
 
-    @Override
+    //@Override
     public List<ResolvedReferenceType> getInterfaces() {
         return javassistTypeDeclarationAdapter.getInterfaces();
     }
 
-    @Override
-    public boolean isInterface() {
+    //@Override
+    public bool isInterface() {
         return ctClass.isInterface();
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "JavassistClassDeclaration {" + ctClass.getName() + '}';
     }
 
-    @Override
+    //@Override
     public List<ResolvedTypeParameterDeclaration> getTypeParameters() {
         return javassistTypeDeclarationAdapter.getTypeParameters();
     }
 
-    @Override
+    //@Override
     public AccessSpecifier accessSpecifier() {
         return JavassistFactory.modifiersToAccessLevel(ctClass.getModifiers());
     }
 
-    @Override
+    //@Override
     public List<ResolvedConstructorDeclaration> getConstructors() {
         return javassistTypeDeclarationAdapter.getConstructors();
     }
 
-    @Override
+    //@Override
     public Optional<ResolvedReferenceTypeDeclaration> containerType() {
         return javassistTypeDeclarationAdapter.containerType();
     }
 
-    @Override
-    public Set<ResolvedReferenceTypeDeclaration> internalTypes() {
+    //@Override
+    public HashSet<ResolvedReferenceTypeDeclaration> internalTypes() {
         return javassistTypeDeclarationAdapter.internalTypes();
     }
 
-    @Override
+    //@Override
     public ResolvedReferenceTypeDeclaration getInternalType(string name) {
         /*
         The name of the ReferenceTypeDeclaration could be composed of the internal class and the outer class, e.g. A$B. That's why we search the internal type _in the ending part.
@@ -287,8 +287,8 @@ public class JavassistClassDeclaration:AbstractClassDeclaration
                 new UnsolvedSymbolException("Internal type not found: " + name));
     }
 
-    @Override
-    public boolean hasInternalType(string name) {
+    //@Override
+    public bool hasInternalType(string name) {
         /*
         The name of the ReferenceTypeDeclaration could be composed of the internal class and the outer class, e.g. A$B. That's why we search the internal type _in the ending part.
         In case the name is composed of the internal type only, i.e. f.getName() returns B, it will also works.

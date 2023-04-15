@@ -39,7 +39,7 @@ public class ListReplacementChange implements Change {
         this.newValue = newValue;
     }
 
-    @Override
+    //@Override
     public Object getValue(ObservableProperty property, Node node) {
         if (property == observableProperty) {
             Object currentRawValue = new NoChange().getValue(property, node);
@@ -63,7 +63,7 @@ public class ListReplacementChange implements Change {
         }
     }
 
-    @Override
+    //@Override
 	public ObservableProperty getProperty() {
 		return observableProperty;
 	}

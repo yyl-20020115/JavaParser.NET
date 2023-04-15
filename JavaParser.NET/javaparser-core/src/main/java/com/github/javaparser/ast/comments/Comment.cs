@@ -35,7 +35,7 @@ public abstract class Comment:Node {
 
     private string content;
 
-    @InternalProperty
+    //@InternalProperty
     private Node commentedNode;
 
     //@AllFieldsConstructor
@@ -48,7 +48,7 @@ public abstract class Comment:Node {
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public Comment(TokenRange tokenRange, string content) {
-        super(tokenRange);
+        base(tokenRange);
         setContent(content);
         customInitialization();
     }
@@ -106,10 +106,10 @@ public abstract class Comment:Node {
             return this;
         }
         if (commentedNode == this) {
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         }
         if (commentedNode is Comment) {
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         }
         this.commentedNode = commentedNode;
         return this;
@@ -123,7 +123,7 @@ public abstract class Comment:Node {
     public Node setComment(/*final*/Comment comment) {
         // comments on comments are not allowed, so we override setComment(Comment) here
         if (comment != null) {
-            throw new IllegalArgumentException("A comment cannot be commented.");
+            throw new ArgumentException("A comment cannot be commented.");
         }
         return super.setComment(comment);
     }

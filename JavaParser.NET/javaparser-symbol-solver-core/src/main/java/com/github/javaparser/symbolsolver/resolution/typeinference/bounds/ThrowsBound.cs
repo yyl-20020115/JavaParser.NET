@@ -38,8 +38,8 @@ public class ThrowsBound:Bound {
         this.inferenceVariable = inferenceVariable;
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -48,31 +48,31 @@ public class ThrowsBound:Bound {
         return inferenceVariable.equals(that.inferenceVariable);
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "ThrowsBound{" +
                 "inferenceVariable=" + inferenceVariable +
                 '}';
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         return inferenceVariable.hashCode();
     }
 
-    @Override
-    public Set<InferenceVariable> usedInferenceVariables() {
-        Set<InferenceVariable> variables = new HashSet<>();
+    //@Override
+    public HashSet<InferenceVariable> usedInferenceVariables() {
+        HashSet<InferenceVariable> variables = new HashSet<>();
         variables.add(inferenceVariable);
         return variables;
     }
 
-    @Override
-    public boolean isSatisfied(InferenceVariableSubstitution inferenceVariableSubstitution) {
+    //@Override
+    public bool isSatisfied(InferenceVariableSubstitution inferenceVariableSubstitution) {
         throw new UnsupportedOperationException();
     }
 
-    public boolean isThrowsBoundOn(InferenceVariable inferenceVariable) {
+    public bool isThrowsBoundOn(InferenceVariable inferenceVariable) {
         return inferenceVariable.equals(this.inferenceVariable);
     }
 }

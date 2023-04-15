@@ -121,7 +121,7 @@ public class SharedSteps {
                 typeCount++;
             }
         }
-        throw new IllegalArgumentException("No member " + typeClass + " at position: " + position);
+        throw new ArgumentException("No member " + typeClass + " at position: " + position);
     }
 
     public static MethodDeclaration getMethodByPositionAndClassPosition(CompilationUnit compilationUnit,
@@ -139,6 +139,6 @@ public class SharedSteps {
             }
             memberCount++;
         }
-        throw new IllegalArgumentException("Method not found at position " + methodPosition + "_in class " + classPosition);
+        throw new ArgumentException("Method not found at position " + methodPosition + "_in class " + classPosition);
     }
 }

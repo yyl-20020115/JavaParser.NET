@@ -46,7 +46,7 @@ public class VisitorSteps {
     @Given("a VoidVisitorAdapter with a visit method that changes variable names to uppercase")
     public void givenAVoidVisitorAdapterWithAVisitMethodThatChangesVariableNamesToUppercase() {
         toUpperCaseVariableNameVisitor = new VoidVisitorAdapter<AtomicReference<String>>() {
-            @Override
+            //@Override
             public void visit(VariableDeclarator n, AtomicReference<String> arg) {
                 n.setName(n.getNameAsString().toUpperCase());
             }
@@ -56,12 +56,12 @@ public class VisitorSteps {
     @Given("a VoidVisitorAdapter with a visit method and collects the variable names")
     public void givenAVoidVisitorAdapterWithAVisitMethodThatCollectsTheVariableName() {
         collectVariableNameVisitor = new VoidVisitorAdapter<AtomicReference<String>>() {
-            @Override
+            //@Override
             public void visit(VariableDeclarator n, AtomicReference<String> arg) {
                 arg.set(arg.get() + n.getName() + ";");
             }
 
-            @Override
+            //@Override
             public void visit(Parameter n, AtomicReference<String> arg) {
                 arg.set(arg.get() + n.getName() + ";");
             }
@@ -71,7 +71,7 @@ public class VisitorSteps {
     @Given("a GenericVisitorAdapter with a visit method that returns variable names")
     public void givenAGenericVisitorAdapterWithAVisitMethodThatReturnsVariableNames() {
         nameReturningVisitor = new GenericVisitorAdapter<String, Void>() {
-            @Override
+            //@Override
             public string visit(VariableDeclarator n, Void arg) {
                 return n.getNameAsString();
             }
@@ -81,7 +81,7 @@ public class VisitorSteps {
     @Given("a GenericListVisitorAdapter with a visit method that returns all variable names")
     public void givenAGenericListVisitorAdapterWithAVisitMethodThatReturnsAllVariableNames() {
         allNameReturningVisitor = new GenericListVisitorAdapter<String, Void>() {
-            @Override
+            //@Override
             public List<String> visit(VariableDeclarator n, Void arg) {
                 return Collections.singletonList(n.getNameAsString());
             }

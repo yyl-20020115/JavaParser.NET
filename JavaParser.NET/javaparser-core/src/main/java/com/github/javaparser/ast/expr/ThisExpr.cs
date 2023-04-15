@@ -35,7 +35,7 @@ namespace com.github.javaparser.ast.expr;
  */
 public class ThisExpr:Expression implements Resolvable<ResolvedTypeDeclaration> {
 
-    @OptionalProperty
+    //@OptionalProperty
     private Name typeName;
 
     public ThisExpr() {
@@ -52,20 +52,20 @@ public class ThisExpr:Expression implements Resolvable<ResolvedTypeDeclaration> 
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public ThisExpr(TokenRange tokenRange, Name typeName) {
-        super(tokenRange);
+        base(tokenRange);
         setTypeName(typeName);
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -87,9 +87,9 @@ public class ThisExpr:Expression implements Resolvable<ResolvedTypeDeclaration> 
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
-    public boolean remove(Node node) {
+    public bool remove(Node node) {
         if (node == null) {
             return false;
         }
@@ -107,21 +107,21 @@ public class ThisExpr:Expression implements Resolvable<ResolvedTypeDeclaration> 
         return setTypeName((Name) null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public ThisExpr clone() {
         return (ThisExpr) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public ThisExprMetaModel getMetaModel() {
         return JavaParserMetaModel.thisExprMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }
@@ -134,30 +134,30 @@ public class ThisExpr:Expression implements Resolvable<ResolvedTypeDeclaration> 
         return super.replace(node, replacementNode);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isThisExpr() {
+    public bool isThisExpr() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public ThisExpr asThisExpr() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifThisExpr(Consumer<ThisExpr> action) {
         action.accept(this);
     }
 
-    @Override
+    //@Override
     public ResolvedTypeDeclaration resolve() {
         return getSymbolResolver().resolveDeclaration(this, ResolvedTypeDeclaration.class);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<ThisExpr> toThisExpr() {
         return Optional.of(this);

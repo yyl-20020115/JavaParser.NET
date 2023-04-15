@@ -47,19 +47,19 @@ public class MethodReferenceExpr:Expression implements NodeWithTypeArguments<Met
 
     public MethodReferenceExpr(Range range, Expression scope,
                                List<Type<?>> typeArguments, string identifier) {
-        super(range);
+        base(range);
         setIdentifier(identifier);
         setScope(scope);
         setTypeArguments(typeArguments);
     }
 
-    @Override
+    //@Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
 
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
@@ -74,12 +74,12 @@ public class MethodReferenceExpr:Expression implements NodeWithTypeArguments<Met
         return this;
     }
 
-    @Override
+    //@Override
     public List<Type<?>> getTypeArguments() {
         return typeArguments;
     }
 
-    @Override
+    //@Override
     public MethodReferenceExpr setTypeArguments(/*final*/List<Type<?>> types) {
         this.typeArguments = types;
         setAsParentNodeOf(this.typeArguments);

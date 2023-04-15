@@ -49,7 +49,7 @@ public /*final*/class ArrayCreationExpr:Expression {
     }
 
     public ArrayCreationExpr(int beginLine, int beginColumn, int endLine, int endColumn, Type type, int arrayCount, ArrayInitializerExpr initializer) {
-        super(beginLine, beginColumn, endLine, endColumn);
+        base(beginLine, beginColumn, endLine, endColumn);
         setType(type);
         setArrayCount(arrayCount);
         setInitializer(initializer);
@@ -64,7 +64,7 @@ public /*final*/class ArrayCreationExpr:Expression {
     }
 
     public ArrayCreationExpr(int beginLine, int beginColumn, int endLine, int endColumn, Type type, List<Expression> dimensions, int arrayCount) {
-        super(beginLine, beginColumn, endLine, endColumn);
+        base(beginLine, beginColumn, endLine, endColumn);
         setType(type);
         setArrayCount(arrayCount);
         setDimensions(dimensions);

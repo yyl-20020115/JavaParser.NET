@@ -25,7 +25,7 @@ namespace com.github.javaparser.symbolsolver.resolution.typesolvers;
 class MemoryTypeSolverTest:AbstractTypeSolverTest<MemoryTypeSolver> {
 
     public MemoryTypeSolverTest() {
-        super(MemoryTypeSolver::new);
+        base(MemoryTypeSolver::new);
     }
 
     /**
@@ -83,10 +83,10 @@ class MemoryTypeSolverTest:AbstractTypeSolverTest<MemoryTypeSolver> {
      *
      * @return The created memory solver.
      */
-    public MemoryTypeSolver createTypeSolver(Class<?>... multipleClazz) {
+    public MemoryTypeSolver createTypeSolver(Type... multipleClazz) {
         MemoryTypeSolver memorySolver = super.createTypeSolver();
 
-        for (Class<?> clazz : multipleClazz) {
+        for (Type clazz : multipleClazz) {
             registerClassInMemory(memorySolver, clazz);
         }
 
@@ -99,7 +99,7 @@ class MemoryTypeSolverTest:AbstractTypeSolverTest<MemoryTypeSolver> {
      * @param memorySolver  The memory solver where the information should be registered.
      * @param clazz         The class to be registered.
      */
-    private static void registerClassInMemory(MemoryTypeSolver memorySolver, Class<?> clazz) {
+    private static void registerClassInMemory(MemoryTypeSolver memorySolver, Type clazz) {
         ResolvedReferenceTypeDeclaration declaration = ReflectionFactory.typeDeclarationFor(clazz, memorySolver);
         memorySolver.addDeclaration(clazz.getCanonicalName(), declaration);
     }

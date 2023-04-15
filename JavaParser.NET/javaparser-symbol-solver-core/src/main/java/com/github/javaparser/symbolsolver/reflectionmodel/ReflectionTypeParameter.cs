@@ -32,7 +32,7 @@ public class ReflectionTypeParameter implements ResolvedTypeParameterDeclaration
     private TypeSolver typeSolver;
     private ResolvedTypeParametrizable container;
 
-    public ReflectionTypeParameter(TypeVariable typeVariable, boolean declaredOnClass, TypeSolver typeSolver) {
+    public ReflectionTypeParameter(TypeVariable typeVariable, bool declaredOnClass, TypeSolver typeSolver) {
         GenericDeclaration genericDeclaration = typeVariable.getGenericDeclaration();
         if (genericDeclaration is Class) {
             container = ReflectionFactory.typeDeclarationFor((Class) genericDeclaration, typeSolver);
@@ -45,8 +45,8 @@ public class ReflectionTypeParameter implements ResolvedTypeParameterDeclaration
         this.typeSolver = typeSolver;
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o) return true;
         if (!(o is ResolvedTypeParameterDeclaration)) return false;
 
@@ -65,19 +65,19 @@ public class ReflectionTypeParameter implements ResolvedTypeParameterDeclaration
         return true;
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         int result = typeVariable.hashCode();
         result = 31 * result + container.hashCode();
         return result;
     }
 
-    @Override
+    //@Override
     public string getName() {
         return typeVariable.getName();
     }
 
-    @Override
+    //@Override
     public string getContainerQualifiedName() {
         if (container is ResolvedReferenceTypeDeclaration) {
             return ((ResolvedReferenceTypeDeclaration) container).getQualifiedName();
@@ -86,7 +86,7 @@ public class ReflectionTypeParameter implements ResolvedTypeParameterDeclaration
         }
     }
 
-    @Override
+    //@Override
     public string getContainerId() {
         if (container is ResolvedReferenceTypeDeclaration) {
             return ((ResolvedReferenceTypeDeclaration) container).getId();
@@ -95,24 +95,24 @@ public class ReflectionTypeParameter implements ResolvedTypeParameterDeclaration
         }
     }
     
-    @Override
+    //@Override
     public ResolvedTypeParametrizable getContainer() {
         return this.container;
     }
 
-    @Override
+    //@Override
     public List<Bound> getBounds() {
         return Arrays.stream(typeVariable.getBounds()).map((refB) -> Bound.extendsBound(ReflectionFactory.typeUsageFor(refB, typeSolver))).collect(Collectors.toList());
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "ReflectionTypeParameter{" +
                 "typeVariable=" + typeVariable +
                 '}';
     }
 
-    @Override
+    //@Override
     public Optional<ResolvedReferenceTypeDeclaration> containerType() {
         if (container is ResolvedReferenceTypeDeclaration) {
             return Optional.of((ResolvedReferenceTypeDeclaration) container);
@@ -120,7 +120,7 @@ public class ReflectionTypeParameter implements ResolvedTypeParameterDeclaration
         return Optional.empty();
     }
     
-    @Override
+    //@Override
     public ResolvedReferenceType object() {
         return new ReferenceTypeImpl(typeSolver.getSolvedJavaLangObject());
     }

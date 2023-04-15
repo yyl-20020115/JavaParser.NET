@@ -39,11 +39,11 @@ public abstract class Type<T:Type>:Node {
     }
 
     public Type(Range range) {
-        super(range);
+        base(range);
     }
     
     public Type(Range range, List<AnnotationExpr> annotations) {
-        super(range);
+        base(range);
         setAnnotations(annotations);
     }
 

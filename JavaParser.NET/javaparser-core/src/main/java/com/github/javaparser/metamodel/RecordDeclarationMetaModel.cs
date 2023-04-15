@@ -36,7 +36,7 @@ public class RecordDeclarationMetaModel:TypeDeclarationMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     RecordDeclarationMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, RecordDeclaration.class, "RecordDeclaration", "com.github.javaparser.ast.body", false, false);
+        base(superBaseNodeMetaModel, RecordDeclaration.class, "RecordDeclaration", "com.github.javaparser.ast.body", false, false);
     }
 
     public PropertyMetaModel implementedTypesPropertyMetaModel;

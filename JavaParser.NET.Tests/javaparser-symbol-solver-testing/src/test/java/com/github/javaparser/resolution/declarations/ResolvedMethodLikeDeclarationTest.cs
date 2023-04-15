@@ -23,7 +23,7 @@ namespace com.github.javaparser.resolution.declarations;
 
 public interface ResolvedMethodLikeDeclarationTest:ResolvedDeclarationTest, ResolvedTypeParametrizableTest, HasAccessSpecifierTest {
 
-    @Override
+    //@Override
     ResolvedMethodLikeDeclaration createValue();
 
     // TODO: Implement tests for ResolvedMethodLikeDeclaration

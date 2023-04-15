@@ -51,7 +51,7 @@ public /*final*/class ForStmt:Statement {
 			/*final*/int endLine, /*final*/int endColumn,
 			/*final*/List<Expression> init, /*final*/Expression compare,
 			/*final*/List<Expression> update, /*final*/Statement body) {
-		super(beginLine, beginColumn, endLine, endColumn);
+		base(beginLine, beginColumn, endLine, endColumn);
 		setCompare(compare);
 		setInit(init);
 		setUpdate(update);
@@ -59,12 +59,12 @@ public /*final*/class ForStmt:Statement {
 	}
 
 	@Override
-	public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+	public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
 		return v.visit(this, arg);
 	}
 
 	@Override
-	public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+	public void accept<A>(VoidVisitor<A> v, A arg) {
 		v.visit(this, arg);
 	}
 

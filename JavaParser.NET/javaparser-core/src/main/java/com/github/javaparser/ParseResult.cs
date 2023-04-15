@@ -49,7 +49,7 @@ public class ParseResult<T> {
     /**
      * @return if parsing was successful, meaning no errors of any kind were encountered.
      */
-    public boolean isSuccessful() {
+    public bool isSuccessful() {
         return problems.isEmpty() && result != null;
     }
 
@@ -90,7 +90,7 @@ public class ParseResult<T> {
         return Optional.ofNullable(result);
     }
 
-    @Override
+    //@Override
     public string toString() {
         if (isSuccessful()) {
             return "Parsing successful";

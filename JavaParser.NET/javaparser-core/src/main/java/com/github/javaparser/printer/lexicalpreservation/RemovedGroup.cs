@@ -39,14 +39,14 @@ namespace com.github.javaparser.printer.lexicalpreservation;
 
     private /*final*/List<Removed> removedList;
 
-    private boolean isProcessed = false;
+    private bool isProcessed = false;
 
     private RemovedGroup(Integer firstElementIndex, List<Removed> removedList) {
         if (firstElementIndex == null) {
-            throw new IllegalArgumentException("firstElementIndex should not be null");
+            throw new ArgumentException("firstElementIndex should not be null");
         }
         if (removedList == null || removedList.isEmpty()) {
-            throw new IllegalArgumentException("removedList should not be null or empty");
+            throw new ArgumentException("removedList should not be null or empty");
         }
         this.firstElementIndex = firstElementIndex;
         this.removedList = removedList;
@@ -58,7 +58,7 @@ namespace com.github.javaparser.printer.lexicalpreservation;
      * @param firstElementIndex the difference index at which the RemovedGroup starts
      * @param removedList list of the consecutive Removed elements
      * @return a RemovedGroup object
-     * @throws IllegalArgumentException if the firstElementIndex is null or the removedList is empty or null
+     * @throws ArgumentException if the firstElementIndex is null or the removedList is empty or null
      */
     public static RemovedGroup of(Integer firstElementIndex, List<Removed> removedList) {
         return new RemovedGroup(firstElementIndex, removedList);
@@ -76,7 +76,7 @@ namespace com.github.javaparser.printer.lexicalpreservation;
      *
      * @return wheter the RemovedGroup was already processed
      */
-    /*final*/boolean isProcessed() {
+    /*final*/bool isProcessed() {
         return isProcessed;
     }
 
@@ -116,7 +116,7 @@ namespace com.github.javaparser.printer.lexicalpreservation;
      * Returns true if the specified element is the last element of this RemovedGroup
      *
      */
-    /*final*/boolean isLastElement(Removed element) {
+    /*final*/bool isLastElement(Removed element) {
         return getLastElement().equals(element);
     }
 
@@ -133,7 +133,7 @@ namespace com.github.javaparser.printer.lexicalpreservation;
      *
      * @return true if the RemovedGroup equates to a complete line
      */
-    /*final*/boolean isACompleteLine() {
+    /*final*/bool isACompleteLine() {
         return hasOnlyWhitespace(getFirstElement(), hasOnlyWhitespaceInFrontFunction) && hasOnlyWhitespace(getLastElement(), hasOnlyWhitespaceBehindFunction);
     }
 
@@ -145,8 +145,8 @@ namespace com.github.javaparser.printer.lexicalpreservation;
 
     private /*final*/Function<TokenRange, Boolean> hasOnlyWhitespaceBehindFunction = tokenRange -> hasOnlyWhitespaceJavaTokenBehindFunction.apply(tokenRange.getEnd());
 
-    private boolean hasOnlyWhitespace(Removed startElement, Function<TokenRange, Boolean> hasOnlyWhitespaceFunction) {
-        boolean hasOnlyWhitespace = false;
+    private bool hasOnlyWhitespace(Removed startElement, Function<TokenRange, Boolean> hasOnlyWhitespaceFunction) {
+        bool hasOnlyWhitespace = false;
         if (startElement.isChild()) {
             LexicalDifferenceCalculator.CsmChild csmChild = (LexicalDifferenceCalculator.CsmChild) startElement.getElement();
             Node child = csmChild.getChild();
@@ -163,7 +163,7 @@ namespace com.github.javaparser.printer.lexicalpreservation;
         return hasOnlyWhitespace;
     }
 
-    private boolean hasOnlyWhiteSpaceForTokenFunction(JavaToken token, Function<JavaToken, Optional<JavaToken>> tokenFunction) {
+    private bool hasOnlyWhiteSpaceForTokenFunction(JavaToken token, Function<JavaToken, Optional<JavaToken>> tokenFunction) {
         Optional<JavaToken> tokenResult = tokenFunction.apply(token);
         if (tokenResult.isPresent()) {
             if (TokenTypes.isWhitespaceButNotEndOfLine(tokenResult.get().getKind())) {
@@ -228,18 +228,18 @@ namespace com.github.javaparser.printer.lexicalpreservation;
         return Optional.empty();
     }
 
-    @Override
+    //@Override
     public /*final*/Iterator<Removed> iterator() {
         return new Iterator<Removed>() {
 
             private int currentIndex = 0;
 
-            @Override
-            public boolean hasNext() {
+            //@Override
+            public bool hasNext() {
                 return currentIndex < removedList.size() && removedList.get(currentIndex) != null;
             }
 
-            @Override
+            //@Override
             public Removed next() {
                 return removedList.get(currentIndex++);
             }

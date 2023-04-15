@@ -51,7 +51,7 @@ namespace com.github.javaparser.ast.body;
  *     record Range(int lo, int hi) {
  *         public Range {
  *             if (lo > hi)
- *                 throw new IllegalArgumentException(String.format("(%d,%d)",lo,hi));
+ *                 throw new ArgumentException(String.format("(%d,%d)",lo,hi));
  *         }
  *     }
  * }</pre>
@@ -70,7 +70,7 @@ public class RecordDeclaration:TypeDeclaration<RecordDeclaration> implements Nod
 
     private NodeList<ClassOrInterfaceType> implementedTypes;
 
-    @OptionalProperty
+    //@OptionalProperty
     private ReceiverParameter receiverParameter;
 
     private NodeList<Parameter> parameters;
@@ -93,7 +93,7 @@ public class RecordDeclaration:TypeDeclaration<RecordDeclaration> implements Nod
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public RecordDeclaration(TokenRange tokenRange, NodeList<Modifier> modifiers, NodeList<AnnotationExpr> annotations, SimpleName name, NodeList<Parameter> parameters, NodeList<TypeParameter> typeParameters, NodeList<ClassOrInterfaceType> implementedTypes, NodeList<BodyDeclaration<?>> members, ReceiverParameter receiverParameter) {
-        super(tokenRange, modifiers, annotations, name, members);
+        base(tokenRange, modifiers, annotations, name, members);
         setParameters(parameters);
         setTypeParameters(typeParameters);
         setImplementedTypes(implementedTypes);
@@ -101,15 +101,15 @@ public class RecordDeclaration:TypeDeclaration<RecordDeclaration> implements Nod
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -155,12 +155,12 @@ public class RecordDeclaration:TypeDeclaration<RecordDeclaration> implements Nod
     /**
      * @return is this class's parent a LocalRecordDeclarationStmt ?
      */
-    public boolean isLocalRecordDeclaration() {
+    public bool isLocalRecordDeclaration() {
         return getParentNode().map(p -> p is LocalRecordDeclarationStmt).orElse(false);
     }
 
     // TODO document and remove duplication between here and com.github.javaparser.ast.body.ClassOrInterfaceDeclaration
-    @Override
+    //@Override
     public Optional<String> getFullyQualifiedName() {
         if (isLocalRecordDeclaration()) {
             return Optional.empty();
@@ -168,38 +168,38 @@ public class RecordDeclaration:TypeDeclaration<RecordDeclaration> implements Nod
         return super.getFullyQualifiedName();
     }
 
-    @Override
+    //@Override
     public ResolvedReferenceTypeDeclaration resolve() {
         return getSymbolResolver().resolveDeclaration(this, ResolvedReferenceTypeDeclaration.class);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isRecordDeclaration() {
+    public bool isRecordDeclaration() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public RecordDeclaration asRecordDeclaration() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<RecordDeclaration> toRecordDeclaration() {
         return Optional.of(this);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifRecordDeclaration(Consumer<RecordDeclaration> action) {
         action.accept(this);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
-    public boolean remove(Node node) {
+    public bool remove(Node node) {
         if (node == null) {
             return false;
         }
@@ -230,9 +230,9 @@ public class RecordDeclaration:TypeDeclaration<RecordDeclaration> implements Nod
         return super.remove(node);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }
@@ -263,13 +263,13 @@ public class RecordDeclaration:TypeDeclaration<RecordDeclaration> implements Nod
         return super.replace(node, replacementNode);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public RecordDeclaration clone() {
         return (RecordDeclaration) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public RecordDeclarationMetaModel getMetaModel() {
         return JavaParserMetaModel.recordDeclarationMetaModel;
@@ -334,8 +334,8 @@ public class RecordDeclaration:TypeDeclaration<RecordDeclaration> implements Nod
      *
      * @return always true -- Records are always implicitly final, therefore can never not be final.
      */
-    @Override
-    public boolean isFinal() {
+    //@Override
+    public bool isFinal() {
         return true;
     }
 
@@ -345,8 +345,8 @@ public class RecordDeclaration:TypeDeclaration<RecordDeclaration> implements Nod
      *
      * @return True if the record declaration is nested, otherwise use the default method implementation.
      */
-    @Override
-    public boolean isStatic() {
+    //@Override
+    public bool isStatic() {
         if (getParentNode().isPresent()) {
             Node parentNode = getParentNode().get();
             if (!(parentNode is CompilationUnit)) {

@@ -36,6 +36,6 @@ public class VarTypeMetaModel:TypeMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     VarTypeMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, VarType.class, "VarType", "com.github.javaparser.ast.type", false, false);
+        base(superBaseNodeMetaModel, VarType.class, "VarType", "com.github.javaparser.ast.type", false, false);
     }
 }

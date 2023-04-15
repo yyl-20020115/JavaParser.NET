@@ -54,7 +54,7 @@ public interface NodeWithElementType<T> {
      * @param typeClass the type
      * @return this
      */
-    default T setElementType(Class<?> typeClass) {
+    default T setElementType(Type typeClass) {
         ((Node) this).tryAddImportToParentCompilationUnit(typeClass);
         return setElementType(new ClassOrInterfaceType(typeClass.getSimpleName()));
     }

@@ -30,7 +30,7 @@ namespace com.github.javaparser.ast.expr;
  */
 public class SimpleName:Node implements NodeWithIdentifier<SimpleName> {
 
-    @NonEmptyProperty
+    //@NonEmptyProperty
     private string identifier;
 
     public SimpleName() {
@@ -47,20 +47,20 @@ public class SimpleName:Node implements NodeWithIdentifier<SimpleName> {
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public SimpleName(TokenRange tokenRange, string identifier) {
-        super(tokenRange);
+        base(tokenRange);
         setIdentifier(identifier);
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -84,13 +84,13 @@ public class SimpleName:Node implements NodeWithIdentifier<SimpleName> {
         return identifier;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public SimpleName clone() {
         return (SimpleName) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public SimpleNameMetaModel getMetaModel() {
         return JavaParserMetaModel.simpleNameMetaModel;

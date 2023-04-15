@@ -23,7 +23,7 @@ namespace com.github.javaparser.printer.concretesyntaxmodel;
 
 public class CsmNone implements CsmElement {
 
-    @Override
+    //@Override
     public void prettyPrint(Node node, SourcePrinter printer) {
     }
 }

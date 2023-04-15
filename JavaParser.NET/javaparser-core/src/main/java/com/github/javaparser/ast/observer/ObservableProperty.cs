@@ -131,11 +131,11 @@ public enum ObservableProperty {
 
         SINGLE_ATTRIBUTE(false, false), SINGLE_REFERENCE(false, true), MULTIPLE_ATTRIBUTE(true, false), MULTIPLE_REFERENCE(true, true);
 
-        private boolean multiple;
+        private bool multiple;
 
-        private boolean node;
+        private bool node;
 
-        Type(boolean multiple, boolean node) {
+        Type(bool multiple, bool node) {
             this.multiple = multiple;
             this.node = node;
         }
@@ -143,14 +143,14 @@ public enum ObservableProperty {
 
     private Type type;
 
-    private boolean derived;
+    private bool derived;
 
     public static ObservableProperty fromCamelCaseName(string camelCaseName) {
         Optional<ObservableProperty> observableProperty = Arrays.stream(values()).filter(v -> v.camelCaseName().equals(camelCaseName)).findFirst();
         if (observableProperty.isPresent()) {
             return observableProperty.get();
         } else {
-            throw new IllegalArgumentException("No property found with the given camel case name: " + camelCaseName);
+            throw new ArgumentException("No property found with the given camel case name: " + camelCaseName);
         }
     }
 
@@ -159,7 +159,7 @@ public enum ObservableProperty {
         this.derived = false;
     }
 
-    ObservableProperty(Type type, boolean derived) {
+    ObservableProperty(Type type, bool derived) {
         this.type = type;
         this.derived = derived;
     }
@@ -168,23 +168,23 @@ public enum ObservableProperty {
         this(Type.SINGLE_REFERENCE, false);
     }
 
-    public boolean isDerived() {
+    public bool isDerived() {
         return derived;
     }
 
-    public boolean isAboutNodes() {
+    public bool isAboutNodes() {
         return type.node;
     }
 
-    public boolean isAboutValues() {
+    public bool isAboutValues() {
         return !isAboutNodes();
     }
 
-    public boolean isMultiple() {
+    public bool isMultiple() {
         return type.multiple;
     }
 
-    public boolean isSingle() {
+    public bool isSingle() {
         return !isMultiple();
     }
 
@@ -212,7 +212,7 @@ public enum ObservableProperty {
         }
     }
 
-    private boolean hasMethod(Node node, string name) {
+    private bool hasMethod(Node node, string name) {
         try {
             node.getClass().getMethod(name);
             return true;
@@ -274,15 +274,15 @@ public enum ObservableProperty {
         }
     }
 
-    public boolean isNull(Node node) {
+    public bool isNull(Node node) {
         return null == getRawValue(node);
     }
 
-    public boolean isNullOrNotPresent(Node node) {
+    public bool isNullOrNotPresent(Node node) {
     	return Utils.valueIsNullOrEmptyStringOrOptional(getRawValue(node));
     }
 
-    public boolean isNullOrEmpty(Node node) {
+    public bool isNullOrEmpty(Node node) {
         return Utils.valueIsNullOrEmpty(getRawValue(node));
     }
 }

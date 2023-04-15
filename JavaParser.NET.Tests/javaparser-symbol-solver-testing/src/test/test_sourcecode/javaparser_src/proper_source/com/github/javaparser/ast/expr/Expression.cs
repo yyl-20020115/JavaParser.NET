@@ -31,7 +31,7 @@ public abstract class Expression:Node {
 	}
 
 	public Expression(/*final*/int beginLine, /*final*/int beginColumn, /*final*/int endLine, /*final*/int endColumn) {
-		super(beginLine, beginColumn, endLine, endColumn);
+		base(beginLine, beginColumn, endLine, endColumn);
 	}
 
 }

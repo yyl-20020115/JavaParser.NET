@@ -47,7 +47,7 @@ public /*final*/class EnumConstantDeclaration:BodyDeclaration<EnumConstantDeclar
 
     public EnumConstantDeclaration(List<AnnotationExpr> annotations, string name, List<Expression> args,
                                    List<BodyDeclaration<?>> classBody) {
-        super(annotations);
+        base(annotations);
         setName(name);
         setArgs(args);
         setClassBody(classBody);
@@ -55,18 +55,18 @@ public /*final*/class EnumConstantDeclaration:BodyDeclaration<EnumConstantDeclar
 
     public EnumConstantDeclaration(Range range, List<AnnotationExpr> annotations, string name, List<Expression> args,
                                    List<BodyDeclaration<?>> classBody) {
-        super(range, annotations);
+        base(range, annotations);
         setName(name);
         setArgs(args);
         setClassBody(classBody);
     }
 
-    @Override
+    //@Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
@@ -81,7 +81,7 @@ public /*final*/class EnumConstantDeclaration:BodyDeclaration<EnumConstantDeclar
         return classBody;
     }
 
-    @Override
+    //@Override
     public string getName() {
         return name;
     }
@@ -98,13 +98,13 @@ public /*final*/class EnumConstantDeclaration:BodyDeclaration<EnumConstantDeclar
         return this;
     }
 
-    @Override
+    //@Override
     public EnumConstantDeclaration setName(string name) {
         this.name = name;
         return this;
     }
 
-    @Override
+    //@Override
     public JavadocComment getJavaDoc() {
         if(getComment() is JavadocComment){
             return (JavadocComment) getComment();

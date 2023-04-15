@@ -28,17 +28,17 @@ class LogTest {
     private static class TestAdapter implements Log.Adapter {
         string output = "";
 
-        @Override
+        //@Override
         public void info(Supplier<String> messageSupplier) {
             output += "I" + messageSupplier.get();
         }
 
-        @Override
+        //@Override
         public void trace(Supplier<String> messageSupplier) {
             output += "T" + messageSupplier.get();
         }
 
-        @Override
+        //@Override
         public void error(Supplier<Throwable> throwableSupplier, Supplier<String> messageSupplier) {
             Throwable throwable = throwableSupplier.get();
             string s = messageSupplier.get();

@@ -38,7 +38,7 @@ public abstract class CallableDeclaration<T:CallableDeclaration<?>> : BodyDeclar
 
     private NodeList<ReferenceType> thrownExceptions;
 
-    @OptionalProperty
+    //@OptionalProperty
     private ReceiverParameter receiverParameter;
 
     //@AllFieldsConstructor
@@ -51,7 +51,7 @@ public abstract class CallableDeclaration<T:CallableDeclaration<?>> : BodyDeclar
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public CallableDeclaration(TokenRange tokenRange, NodeList<Modifier> modifiers, NodeList<AnnotationExpr> annotations, NodeList<TypeParameter> typeParameters, SimpleName name, NodeList<Parameter> parameters, NodeList<ReferenceType> thrownExceptions, ReceiverParameter receiverParameter) {
-        super(tokenRange, annotations);
+        base(tokenRange, annotations);
         setModifiers(modifiers);
         setTypeParameters(typeParameters);
         setName(name);

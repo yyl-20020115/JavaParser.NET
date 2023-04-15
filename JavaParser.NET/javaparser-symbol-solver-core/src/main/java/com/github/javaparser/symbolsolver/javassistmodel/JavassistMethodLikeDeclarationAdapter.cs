@@ -52,7 +52,7 @@ public class JavassistMethodLikeDeclarationAdapter {
     }
 
     public ResolvedParameterDeclaration getParam(int i) {
-        boolean variadic = false;
+        bool variadic = false;
         if ((ctBehavior.getModifiers() & javassist.Modifier.VARARGS) > 0) {
             variadic = i == (methodSignature.getParameterTypes().length - 1);
         }
@@ -83,17 +83,17 @@ public class JavassistMethodLikeDeclarationAdapter {
 
     public ResolvedType getSpecifiedException(int index) {
         if (index < 0) {
-            throw new IllegalArgumentException(String.format("index < 0: %d", index));
+            throw new ArgumentException(String.format("index < 0: %d", index));
         }
 
         ExceptionsAttribute exceptionsAttribute = ctBehavior.getMethodInfo().getExceptionsAttribute();
         if (exceptionsAttribute == null) {
-            throw new IllegalArgumentException(String.format("No exception with index %d. Number of exceptions: 0", index));
+            throw new ArgumentException(String.format("No exception with index %d. Number of exceptions: 0", index));
         }
 
         String[] exceptions = exceptionsAttribute.getExceptions();
         if (exceptions == null || index >= exceptions.length) {
-            throw new IllegalArgumentException(String.format("No exception with index %d. Number of exceptions: %d",
+            throw new ArgumentException(String.format("No exception with index %d. Number of exceptions: %d",
                     index, getNumberOfSpecifiedExceptions()));
         }
 

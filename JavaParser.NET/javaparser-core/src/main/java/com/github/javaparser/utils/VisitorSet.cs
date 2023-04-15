@@ -26,9 +26,9 @@ namespace com.github.javaparser.utils;
  * A set that overrides the equals and hashcode calculation of the added nodes
  * by using another equals and hashcode visitor for those methods.
  */
-public class VisitorSet<N:Node> implements Set<N> {
+public class VisitorSet<N:Node> implements HashSet<N> {
 
-    private /*final*/Set<EqualsHashcodeOverridingFacade> innerSet = new HashSet<>();
+    private /*final*/HashSet<EqualsHashcodeOverridingFacade> innerSet = new HashSet<>();
 
     private /*final*/GenericVisitor<Integer, Void> hashcodeVisitor;
 
@@ -42,101 +42,101 @@ public class VisitorSet<N:Node> implements Set<N> {
         this.equalsVisitor = equalsVisitor;
     }
 
-    @Override
-    public boolean add(N elem) {
+    //@Override
+    public bool add(N elem) {
         return innerSet.add(new EqualsHashcodeOverridingFacade(elem));
     }
 
-    @Override
-    public boolean addAll(Collection<?:N> col) {
-        boolean modified = false;
+    //@Override
+    public bool addAll(Collection<?:N> col) {
+        bool modified = false;
         for (N elem : col) if (add(elem))
             modified = true;
         return modified;
     }
 
-    @Override
+    //@Override
     public void clear() {
         innerSet.clear();
     }
 
-    @Override
-    public boolean contains(Object elem) {
+    //@Override
+    public bool contains(Object elem) {
         return innerSet.contains(new EqualsHashcodeOverridingFacade((N) elem));
     }
 
-    @Override
-    public boolean containsAll(Collection<?> col) {
+    //@Override
+    public bool containsAll(Collection<?> col) {
         for (Object elem : col) if (!contains(elem))
             return false;
         return true;
     }
 
-    @Override
-    public boolean isEmpty() {
+    //@Override
+    public bool isEmpty() {
         return innerSet.isEmpty();
     }
 
-    @Override
+    //@Override
     public Iterator<N> iterator() {
         return new Iterator<N>() {
 
             /*final*/Iterator<EqualsHashcodeOverridingFacade> itr = innerSet.iterator();
 
-            @Override
-            public boolean hasNext() {
+            //@Override
+            public bool hasNext() {
                 return itr.hasNext();
             }
 
-            @Override
+            //@Override
             public N next() {
                 return itr.next().overridden;
             }
 
-            @Override
+            //@Override
             public void remove() {
                 itr.remove();
             }
         };
     }
 
-    @Override
-    public boolean remove(Object elem) {
+    //@Override
+    public bool remove(Object elem) {
         return innerSet.remove(new EqualsHashcodeOverridingFacade((N) elem));
     }
 
-    @Override
-    public boolean removeAll(Collection<?> col) {
-        boolean modified = false;
+    //@Override
+    public bool removeAll(Collection<?> col) {
+        bool modified = false;
         for (Object elem : col) if (remove(elem))
             modified = true;
         return modified;
     }
 
-    @Override
-    public boolean retainAll(Collection<?> col) {
+    //@Override
+    public bool retainAll(Collection<?> col) {
         int oldSize = size();
         clear();
         addAll((Collection<?:N>) col);
         return size() != oldSize;
     }
 
-    @Override
+    //@Override
     public int size() {
         return innerSet.size();
     }
 
-    @Override
+    //@Override
     public Object[] toArray() {
         return innerSet.stream().map(facade -> facade.overridden).collect(Collectors.toList()).toArray();
     }
 
-    @Override
+    //@Override
     public <T> T[] toArray(T[] arr) {
         return innerSet.stream().map(facade -> facade.overridden).collect(Collectors.toList()).toArray(arr);
     }
 
-    @Override
+    //@Override
     public string toString() {
         StringBuilder sb = new StringBuilder("[");
         if (size() == 0)
@@ -155,23 +155,23 @@ public class VisitorSet<N:Node> implements Set<N> {
             this.overridden = overridden;
         }
 
-        @Override
+        //@Override
         public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
             throw new AssertionError();
         }
 
-        @Override
+        //@Override
         public <A> void accept(VoidVisitor<A> v, A arg) {
             throw new AssertionError();
         }
 
-        @Override
+        //@Override
         public /*final*/int hashCode() {
             return overridden.accept(hashcodeVisitor, null);
         }
 
-        @Override
-        public boolean equals(/*final*/Object obj) {
+        //@Override
+        public bool equals(/*final*/Object obj) {
             if (obj == null || !(obj is VisitorSet.EqualsHashcodeOverridingFacade)) {
                 return false;
             }

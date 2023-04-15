@@ -26,17 +26,17 @@ namespace com.github.javaparser.resolution.declarations;
  */
 public interface ResolvedAnnotationDeclaration:ResolvedReferenceTypeDeclaration {
 
-    @Override
-    default boolean isAnnotation() {
+    //@Override
+    default bool isAnnotation() {
         return true;
     }
 
-    @Override
+    //@Override
     default ResolvedAnnotationDeclaration asAnnotation() {
         return this;
     }
 
     List<ResolvedAnnotationMemberDeclaration> getAnnotationMembers();
 
-    boolean isInheritable();
+    bool isInheritable();
 }

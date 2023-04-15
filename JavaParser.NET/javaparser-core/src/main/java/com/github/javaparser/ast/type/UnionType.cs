@@ -42,7 +42,7 @@ namespace com.github.javaparser.ast.type;
  */
 public class UnionType:Type implements NodeWithAnnotations<UnionType> {
 
-    @NonEmptyProperty
+    //@NonEmptyProperty
     private NodeList<ReferenceType> elements;
 
     public UnionType() {
@@ -54,7 +54,7 @@ public class UnionType:Type implements NodeWithAnnotations<UnionType> {
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public UnionType(TokenRange tokenRange, NodeList<ReferenceType> elements) {
-        super(tokenRange);
+        base(tokenRange);
         setElements(elements);
         customInitialization();
     }
@@ -83,26 +83,26 @@ public class UnionType:Type implements NodeWithAnnotations<UnionType> {
         return this;
     }
 
-    @Override
+    //@Override
     public UnionType setAnnotations(NodeList<AnnotationExpr> annotations) {
         return (UnionType) super.setAnnotations(annotations);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
-    public boolean remove(Node node) {
+    public bool remove(Node node) {
         if (node == null) {
             return false;
         }
@@ -115,26 +115,26 @@ public class UnionType:Type implements NodeWithAnnotations<UnionType> {
         return super.remove(node);
     }
 
-    @Override
+    //@Override
     public string asString() {
         return elements.stream().map(Type::asString).collect(joining("|"));
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public UnionType clone() {
         return (UnionType) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public UnionTypeMetaModel getMetaModel() {
         return JavaParserMetaModel.unionTypeMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }
@@ -147,30 +147,30 @@ public class UnionType:Type implements NodeWithAnnotations<UnionType> {
         return super.replace(node, replacementNode);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isUnionType() {
+    public bool isUnionType() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public UnionType asUnionType() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifUnionType(Consumer<UnionType> action) {
         action.accept(this);
     }
 
-    @Override
+    //@Override
     public ResolvedUnionType resolve() {
         return getSymbolResolver().toResolvedType(this, ResolvedUnionType.class);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<UnionType> toUnionType() {
         return Optional.of(this);

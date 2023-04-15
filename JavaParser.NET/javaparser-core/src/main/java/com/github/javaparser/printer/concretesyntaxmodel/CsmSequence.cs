@@ -31,7 +31,7 @@ public class CsmSequence implements CsmElement {
             throw new NullPointerException();
         }
         if (elements.stream().anyMatch(Objects::isNull)) {
-            throw new IllegalArgumentException("Null element _in the sequence");
+            throw new ArgumentException("Null element _in the sequence");
         }
         this.elements = elements;
     }
@@ -40,12 +40,12 @@ public class CsmSequence implements CsmElement {
         return elements;
     }
 
-    @Override
+    //@Override
     public void prettyPrint(Node node, SourcePrinter printer) {
         elements.forEach(e -> e.prettyPrint(node, printer));
     }
 
-    @Override
+    //@Override
     public string toString() {
         return elements.stream().map(e -> e.toString()).collect(Collectors.joining(",", "CsmSequence[", "]"));
     }

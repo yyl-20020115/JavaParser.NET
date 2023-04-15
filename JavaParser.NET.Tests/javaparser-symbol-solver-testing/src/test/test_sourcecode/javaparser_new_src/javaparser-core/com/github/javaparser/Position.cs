@@ -41,10 +41,10 @@ public class Position implements Comparable<Position> {
 
 	public Position(int line, int column) {
 		if (line < Node.ABSOLUTE_END_LINE) {
-			throw new IllegalArgumentException("Can't position at line " + line);
+			throw new ArgumentException("Can't position at line " + line);
 		}
 		if (column < -1) {
-			throw new IllegalArgumentException("Can't position at column " + column);
+			throw new ArgumentException("Can't position at column " + column);
 		}
 		this.line = line;
 		this.column = column;
@@ -68,11 +68,11 @@ public class Position implements Comparable<Position> {
 	/**
 	 * Check if the position is usable. Does not know what it is pointing at, so it can't check if the position is after the end of the source.
 	 */
-	public boolean valid() {
+	public bool valid() {
 		return line > 0 && column > 0;
 	}
 
-	public boolean invalid() {
+	public bool invalid() {
 		return !valid();
 	}
 
@@ -83,7 +83,7 @@ public class Position implements Comparable<Position> {
 		return anotherPosition;
 	}
 	
-	public boolean isAfter(Position position) {
+	public bool isAfter(Position position) {
 		assertNotNull(position);
 		if (position.line == Node.ABSOLUTE_BEGIN_LINE) return true;
 		if (line > position.line) {
@@ -95,7 +95,7 @@ public class Position implements Comparable<Position> {
 
 	}
 
-	public boolean isBefore(Position position) {
+	public bool isBefore(Position position) {
 		assertNotNull(position);
 		if (position.line == Node.ABSOLUTE_END_LINE) return true;
 		if (line < position.line) {
@@ -119,7 +119,7 @@ public class Position implements Comparable<Position> {
 	}
 
 	@Override
-	public boolean equals(Object o) {
+	public bool equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 

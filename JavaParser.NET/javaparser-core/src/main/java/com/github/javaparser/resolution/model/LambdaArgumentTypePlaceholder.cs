@@ -37,23 +37,23 @@ public class LambdaArgumentTypePlaceholder implements ResolvedType {
         this.pos = pos;
     }
 
-    @Override
-    public boolean isArray() {
+    //@Override
+    public bool isArray() {
         return false;
     }
 
-    @Override
-    public boolean isReferenceType() {
+    //@Override
+    public bool isReferenceType() {
         return false;
     }
 
-    @Override
+    //@Override
     public string describe() {
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    public boolean isTypeVariable() {
+    //@Override
+    public bool isTypeVariable() {
         return false;
     }
 
@@ -61,8 +61,8 @@ public class LambdaArgumentTypePlaceholder implements ResolvedType {
         this.method = method;
     }
 
-    @Override
-    public boolean isAssignableBy(ResolvedType other) {
+    //@Override
+    public bool isAssignableBy(ResolvedType other) {
         throw new UnsupportedOperationException();
     }
 

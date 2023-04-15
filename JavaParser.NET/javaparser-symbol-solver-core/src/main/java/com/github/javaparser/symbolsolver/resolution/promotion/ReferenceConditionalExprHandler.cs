@@ -31,7 +31,7 @@ public class ReferenceConditionalExprHandler implements ConditionalExprHandler {
         this.elseExpr = elseExpr;
     }
 
-    @Override
+    //@Override
     public ResolvedType resolveType() {
         // If one of the second and third operands is of the null type and the type of the other is a reference type, then the type of the conditional expression is that reference type.
         if (thenExpr.isNull()) {

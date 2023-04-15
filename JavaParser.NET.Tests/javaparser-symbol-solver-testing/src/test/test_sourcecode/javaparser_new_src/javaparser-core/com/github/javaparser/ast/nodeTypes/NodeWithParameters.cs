@@ -11,7 +11,7 @@ public interface NodeWithParameters<T> {
         return addParameter(new Parameter(type, new VariableDeclaratorId(name)));
     }
 
-    default T addParameter(Class<?> paramClass, string name) {
+    default T addParameter(Type paramClass, string name) {
         ((Node) this).tryAddImportToParentCompilationUnit(paramClass);
         return addParameter(new ClassOrInterfaceType(paramClass.getSimpleName()), name);
     }
@@ -37,7 +37,7 @@ public interface NodeWithParameters<T> {
         return addAndGetParameter(new Parameter(type, new VariableDeclaratorId(name)));
     }
 
-    default Parameter addAndGetParameter(Class<?> paramClass, string name) {
+    default Parameter addAndGetParameter(Type paramClass, string name) {
         ((Node) this).tryAddImportToParentCompilationUnit(paramClass);
         return addAndGetParameter(new ClassOrInterfaceType(paramClass.getSimpleName()), name);
     }
@@ -87,7 +87,7 @@ public interface NodeWithParameters<T> {
      * @param type the type of the param <b>take care about generics, it wont work</b>
      * @return null if not found, the param found otherwise
      */
-    default Parameter getParamByType(Class<?> type) {
+    default Parameter getParamByType(Type type) {
         return getParameters().stream()
                 .filter(p -> p.getType().toString().equals(type.getSimpleName())).findFirst().orElse(null);
     }

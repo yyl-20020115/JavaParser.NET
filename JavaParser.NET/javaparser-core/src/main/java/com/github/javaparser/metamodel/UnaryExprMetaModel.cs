@@ -36,7 +36,7 @@ public class UnaryExprMetaModel:ExpressionMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     UnaryExprMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, UnaryExpr.class, "UnaryExpr", "com.github.javaparser.ast.expr", false, false);
+        base(superBaseNodeMetaModel, UnaryExpr.class, "UnaryExpr", "com.github.javaparser.ast.expr", false, false);
     }
 
     public PropertyMetaModel expressionPropertyMetaModel;

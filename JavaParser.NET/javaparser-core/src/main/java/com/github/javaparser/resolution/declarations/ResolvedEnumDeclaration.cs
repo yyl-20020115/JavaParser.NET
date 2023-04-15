@@ -28,23 +28,23 @@ namespace com.github.javaparser.resolution.declarations;
  */
 public interface ResolvedEnumDeclaration:ResolvedReferenceTypeDeclaration, HasAccessSpecifier {
 
-    @Override
-    default boolean isEnum() {
+    //@Override
+    default bool isEnum() {
         return true;
     }
 
-    @Override
+    //@Override
     default ResolvedEnumDeclaration asEnum() {
         return this;
     }
 
     List<ResolvedEnumConstantDeclaration> getEnumConstants();
 
-    default boolean hasEnumConstant(string name) {
+    default bool hasEnumConstant(string name) {
         return getEnumConstants().stream().anyMatch(c -> c.getName().equals(name));
     }
 
     default ResolvedEnumConstantDeclaration getEnumConstant(/*final*/string name) {
-        return getEnumConstants().stream().filter(c -> c.getName().equals(name)).findFirst().orElseThrow(() -> new IllegalArgumentException("No constant named " + name));
+        return getEnumConstants().stream().filter(c -> c.getName().equals(name)).findFirst().orElseThrow(() -> new ArgumentException("No constant named " + name));
     }
 }

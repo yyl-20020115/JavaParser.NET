@@ -28,7 +28,7 @@ namespace com.github.javaparser.symbolsolver.reflectionmodel;
  */
 public class ReflectionAnnotationMemberDeclaration implements ResolvedAnnotationMemberDeclaration {
 
-    private static Map<Class<?>, Function<Object, ?:Expression>> valueAsExressionConverter = new HashMap<>();
+    private static Map<Type, Function<Object, ?:Expression>> valueAsExressionConverter = new HashMap<>();
     static {
         valueAsExressionConverter.put(Boolean.class, (value) -> new BooleanLiteralExpr(Boolean.class.cast(value)));
         valueAsExressionConverter.put(Character.class, (value) -> new CharLiteralExpr(Character.class.cast(value)));
@@ -46,7 +46,7 @@ public class ReflectionAnnotationMemberDeclaration implements ResolvedAnnotation
         this.typeSolver = typeSolver;
     }
 
-    @Override
+    //@Override
     public Expression getDefaultValue() {
         Object value = annotationMember.getDefaultValue();
         Function<Object, ?:Expression> fn = valueAsExressionConverter.get(value.getClass());
@@ -54,7 +54,7 @@ public class ReflectionAnnotationMemberDeclaration implements ResolvedAnnotation
         return fn.apply(value);
     }
 
-    @Override
+    //@Override
     public ResolvedType getType() {
         Class returnType = annotationMember.getReturnType();
         if (returnType.isPrimitive()) {
@@ -67,7 +67,7 @@ public class ReflectionAnnotationMemberDeclaration implements ResolvedAnnotation
         throw new UnsupportedOperationException(String.format("Obtaining the type of the annotation member %s is not supported yet.", annotationMember.getName()));
     }
 
-    @Override
+    //@Override
     public string getName() {
         return annotationMember.getName();
     }

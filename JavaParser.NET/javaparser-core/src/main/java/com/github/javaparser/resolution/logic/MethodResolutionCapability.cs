@@ -25,5 +25,5 @@ namespace com.github.javaparser.resolution.logic;
 
 public interface MethodResolutionCapability {
 	SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes,
-	                                                       boolean staticOnly);
+	                                                       bool staticOnly);
 }

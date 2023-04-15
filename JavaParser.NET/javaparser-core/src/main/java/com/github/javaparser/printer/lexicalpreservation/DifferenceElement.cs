@@ -40,13 +40,13 @@ public interface DifferenceElement {
      */
     CsmElement getElement();
 
-    boolean isAdded();
+    bool isAdded();
 
-    boolean isRemoved();
+    bool isRemoved();
 
-    boolean isKept();
+    bool isKept();
 
-    default boolean isChild() {
+    default bool isChild() {
         return getElement() is LexicalDifferenceCalculator.CsmChild;
     }
 

@@ -35,7 +35,7 @@ public class ClassOrInterfaceDeclarationContext:AbstractJavaParserContext<ClassO
     ///
 
     public ClassOrInterfaceDeclarationContext(ClassOrInterfaceDeclaration wrappedNode, TypeSolver typeSolver) {
-        super(wrappedNode, typeSolver);
+        base(wrappedNode, typeSolver);
         this.javaParserTypeDeclarationAdapter = new JavaParserTypeDeclarationAdapter(wrappedNode, typeSolver,
                 getDeclaration(), this);
     }
@@ -46,7 +46,7 @@ public class ClassOrInterfaceDeclarationContext:AbstractJavaParserContext<ClassO
 
     //@Override
     public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name) {
-        if (typeSolver == null) throw new IllegalArgumentException();
+        if (typeSolver == null) throw new ArgumentException();
 
         if (this.getDeclaration().hasVisibleField(name)) {
             return SymbolReference.solved(this.getDeclaration().getVisibleField(name));
@@ -58,7 +58,7 @@ public class ClassOrInterfaceDeclarationContext:AbstractJavaParserContext<ClassO
 
     //@Override
     public Optional<Value> solveSymbolAsValue(string name) {
-        if (typeSolver == null) throw new IllegalArgumentException();
+        if (typeSolver == null) throw new ArgumentException();
 
         if (this.getDeclaration().hasField(name)) {
             return Optional.of(Value.from(this.getDeclaration().getField(name)));
@@ -71,7 +71,7 @@ public class ClassOrInterfaceDeclarationContext:AbstractJavaParserContext<ClassO
     //@Override
     public Optional<ResolvedType> solveGenericType(string name) {
         // First check if the method-like declaration has type parameters defined.
-        // For example: {@code public <T> boolean containsAll(Collection<T> c);}
+        // For example: {@code public <T> bool containsAll(Collection<T> c);}
         for (TypeParameter tp : wrappedNode.getTypeParameters()) {
             if (tp.getName().getId().equals(name)) {
                 return Optional.of(new ResolvedTypeVariable(new JavaParserTypeParameter(tp, typeSolver)));

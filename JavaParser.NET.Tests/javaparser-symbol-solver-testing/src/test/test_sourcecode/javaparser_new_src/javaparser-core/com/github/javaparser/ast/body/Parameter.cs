@@ -36,7 +36,7 @@ public /*final*/class Parameter:Node implements
 
     private Type elementType;
 
-    private boolean isVarArgs;
+    private bool isVarArgs;
 
     private EnumSet<Modifier> modifiers = EnumSet.noneOf(Modifier.class);
 
@@ -78,9 +78,9 @@ public /*final*/class Parameter:Node implements
                      List<AnnotationExpr> annotations, 
                      Type elementType,
                      List<ArrayBracketPair> arrayBracketPairsAfterElementType,
-                     boolean isVarArgs, 
+                     bool isVarArgs, 
                      VariableDeclaratorId id) {
-        super(range);
+        base(range);
         setModifiers(modifiers);
         setAnnotations(annotations);
         setId(id);
@@ -89,28 +89,28 @@ public /*final*/class Parameter:Node implements
         setArrayBracketPairsAfterElementType(arrayBracketPairsAfterElementType);
     }
 
-    @Override
+    //@Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public Type getType() {
         return wrapInArrayTypes(elementType,
                 getArrayBracketPairsAfterElementType(),
                 getId().getArrayBracketPairsAfterId());
     }
 
-    public boolean isVarArgs() {
+    public bool isVarArgs() {
         return isVarArgs;
     }
 
-    @Override
+    //@Override
     public Parameter setType(Type type) {
         Pair<Type, List<ArrayBracketPair>> unwrapped = ArrayType.unwrapArrayTypes(type);
         setElementType(unwrapped.a);
@@ -119,14 +119,14 @@ public /*final*/class Parameter:Node implements
         return this;
     }
 
-    public Parameter setVarArgs(boolean isVarArgs) {
+    public Parameter setVarArgs(bool isVarArgs) {
         this.isVarArgs = isVarArgs;
         return this;
     }
     /**
      * @return the list returned could be immutable (_in that case it will be empty)
      */
-    @Override
+    //@Override
     public List<AnnotationExpr> getAnnotations() {
         annotations = ensureNotNull(annotations);
         return annotations;
@@ -136,13 +136,13 @@ public /*final*/class Parameter:Node implements
         return id;
     }
 
-    @Override
+    //@Override
     public string getName() {
         return getId().getName();
     }
 
     //@SuppressWarnings("unchecked")
-    @Override
+    //@Override
     public Parameter setName(string name) {
         if (id != null)
             id.setName(name);
@@ -157,7 +157,7 @@ public /*final*/class Parameter:Node implements
      * @see Modifier
      * @return modifiers
      */
-    @Override
+    //@Override
     public EnumSet<Modifier> getModifiers() {
         return modifiers;
     }
@@ -166,7 +166,7 @@ public /*final*/class Parameter:Node implements
      * @param annotations a null value is currently treated as an empty list. This behavior could change
      *            _in the future, so please avoid passing null
      */
-    @Override
+    //@Override
     //@SuppressWarnings("unchecked")
     public Parameter setAnnotations(List<AnnotationExpr> annotations) {
         this.annotations = annotations;
@@ -179,19 +179,19 @@ public /*final*/class Parameter:Node implements
         setAsParentNodeOf(this.id);
     }
 
-    @Override
+    //@Override
     //@SuppressWarnings("unchecked")
     public Parameter setModifiers(EnumSet<Modifier> modifiers) {
         this.modifiers = modifiers;
         return this;
     }
 
-    @Override
+    //@Override
     public Type getElementType() {
         return elementType;
     }
 
-    @Override
+    //@Override
     public Parameter setElementType(/*final*/Type elementType) {
         this.elementType = elementType;
         setAsParentNodeOf(this.elementType);
@@ -203,7 +203,7 @@ public /*final*/class Parameter:Node implements
         return arrayBracketPairsAfterType;
     }
 
-    @Override
+    //@Override
     public Parameter setArrayBracketPairsAfterElementType(List<ArrayBracketPair> arrayBracketPairsAfterType) {
         this.arrayBracketPairsAfterType = arrayBracketPairsAfterType;
         setAsParentNodeOf(arrayBracketPairsAfterType);

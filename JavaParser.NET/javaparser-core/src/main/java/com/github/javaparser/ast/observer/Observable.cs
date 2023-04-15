@@ -39,5 +39,5 @@ public interface Observable {
      * Was this observer registered?
      * Note that equals is used to determine if the given observer was registered.
      */
-    boolean isRegistered(AstObserver observer);
+    bool isRegistered(AstObserver observer);
 }

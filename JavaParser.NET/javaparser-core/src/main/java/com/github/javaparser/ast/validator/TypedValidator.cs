@@ -37,7 +37,7 @@ public interface TypedValidator<N:Node>:BiConsumer<N, ProblemReporter> {
     default Processor processor() {
         return new Processor() {
 
-            @Override
+            //@Override
             public void postProcess(ParseResult<?:Node> result, ParserConfiguration configuration) {
                 result.getResult().ifPresent(node -> accept((N) node, new ProblemReporter(problem -> result.getProblems().add(problem))));
             }

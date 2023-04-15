@@ -49,7 +49,7 @@ public interface NodeWithRange<N> {
      * @deprecated use {@link #containsWithinRange(Node)} instead.
      */
     //@Deprecated
-    default boolean containsWithin(Node other) {
+    default bool containsWithin(Node other) {
         return containsWithinRange(other);
     }
 
@@ -66,7 +66,7 @@ public interface NodeWithRange<N> {
      * @return {@code true} if the given node's range is contained within this node's range, and {@code false}
      * otherwise.
      */
-    default boolean containsWithinRange(Node other) {
+    default bool containsWithinRange(Node other) {
         if (hasRange() && other.hasRange()) {
             return getRange().get().contains(other.getRange().get());
         }
@@ -76,7 +76,7 @@ public interface NodeWithRange<N> {
     /*
      * Returns true if the node has a range
      */
-    default boolean hasRange() {
+    default bool hasRange() {
         return getRange().isPresent();
     }
 }

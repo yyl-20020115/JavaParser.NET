@@ -28,7 +28,7 @@ namespace com.github.javaparser.ast.validator.language_level_validations;
 public class Java13PreviewValidator:Java13Validator {
 
     public Java13PreviewValidator() {
-        super();
+        base();
         // Incubator
         // No new incubator language features added within Java 13
         // Preview

@@ -29,7 +29,7 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.contexts;
 public class VariableDeclarationExprContext:AbstractJavaParserContext<VariableDeclarationExpr> {
 
     public VariableDeclarationExprContext(VariableDeclarationExpr wrappedNode, TypeSolver typeSolver) {
-        super(wrappedNode, typeSolver);
+        base(wrappedNode, typeSolver);
     }
 
     public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name) {
@@ -45,7 +45,7 @@ public class VariableDeclarationExprContext:AbstractJavaParserContext<VariableDe
         return solveSymbolInParentContext(name);
     }
 
-    @Override
+    //@Override
     public List<VariableDeclarator> localVariablesExposedToChild(Node child) {
         for (int i = 0; i < wrappedNode.getVariables().size(); i++) {
             if (child == wrappedNode.getVariable(i)) {
@@ -58,13 +58,13 @@ public class VariableDeclarationExprContext:AbstractJavaParserContext<VariableDe
 
 
 
-    @Override
+    //@Override
     public List<PatternExpr> patternExprsExposedFromChildren() {
         // Variable declarations never make pattern expressions available.
         return Collections.emptyList();
     }
 
-    @Override
+    //@Override
     public List<PatternExpr> negatedPatternExprsExposedFromChildren() {
         // Variable declarations never make pattern expressions available.
         return Collections.emptyList();

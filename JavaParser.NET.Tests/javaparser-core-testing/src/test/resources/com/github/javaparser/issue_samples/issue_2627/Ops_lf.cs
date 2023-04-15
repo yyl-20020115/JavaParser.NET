@@ -185,7 +185,7 @@ public /*final*/class Ops {
    *
    * @param scope is a scope used to add the underlying operation.
    * @param data An array containing the values to put into the new constant.
-   * @return a boolean constant
+   * @return a bool constant
    */
   public Constant<TBool> array(boolean... data) {
     return Constant.arrayOf(scope, data);
@@ -880,7 +880,7 @@ public /*final*/class Ops {
    * @param scope is a scope used to add the underlying operation.
    * @param data An array containing the values to put into the new constant. The dimensions of the
    *      new constant will match those of the array.
-   * @return a boolean constant
+   * @return a bool constant
    */
   public Constant<TBool> constant(boolean[][][][][] data) {
     return Constant.tensorOf(scope, data);
@@ -950,7 +950,7 @@ public /*final*/class Ops {
    * @param scope is a scope used to add the underlying operation.
    * @param data An array containing the values to put into the new constant. The dimensions of the
    *      new constant will match those of the array.
-   * @return a boolean constant
+   * @return a bool constant
    */
   public Constant<TBool> constant(boolean[][][] data) {
     return Constant.tensorOf(scope, data);
@@ -1081,7 +1081,7 @@ public /*final*/class Ops {
    * @param scope is a scope used to add the underlying operation.
    * @param data An array containing the values to put into the new constant. The dimensions of the
    *      new constant will match those of the array.
-   * @return a boolean constant
+   * @return a bool constant
    */
   public Constant<TBool> constant(boolean[][] data) {
     return Constant.tensorOf(scope, data);
@@ -1267,7 +1267,7 @@ public /*final*/class Ops {
    * @param scope is a scope used to add the underlying operation.
    * @param data An array containing the values to put into the new constant. The dimensions of the
    *      new constant will match those of the array.
-   * @return a boolean constant
+   * @return a bool constant
    */
   public Constant<TBool> constant(boolean[] data) {
     return Constant.vectorOf(scope, data);
@@ -1350,7 +1350,7 @@ public /*final*/class Ops {
    * @param scope is a scope used to add the underlying operation.
    * @param data An array containing the values to put into the new constant. The dimensions of the
    *      new constant will match those of the array.
-   * @return a boolean constant
+   * @return a bool constant
    */
   public Constant<TBool> constant(boolean[][][][][][] data) {
     return Constant.tensorOf(scope, data);
@@ -1373,9 +1373,9 @@ public /*final*/class Ops {
    *
    * @param scope is a scope used to add the underlying operation.
    * @param data The value to put into the new constant.
-   * @return a boolean constant
+   * @return a bool constant
    */
-  public Constant<TBool> constant(boolean data) {
+  public Constant<TBool> constant(bool data) {
     return Constant.scalarOf(scope, data);
   }
 
@@ -1385,7 +1385,7 @@ public /*final*/class Ops {
    * @param scope is a scope used to add the underlying operation.
    * @param data An array containing the values to put into the new constant. The dimensions of the
    *      new constant will match those of the array.
-   * @return a boolean constant
+   * @return a bool constant
    */
   public Constant<TBool> constant(boolean[][][][] data) {
     return Constant.tensorOf(scope, data);
@@ -1408,7 +1408,7 @@ public /*final*/class Ops {
    *
    * @param scope is a scope used to add the underlying operation.
    * @param data an n-dimensional array of {@code boolean} elements.
-   * @return a boolean constant
+   * @return a bool constant
    */
   public Constant<TBool> constant(BooleanNdArray data) {
     return Constant.tensorOf(scope, data);
@@ -1482,7 +1482,7 @@ public /*final*/class Ops {
    * @param shape the tensor shape.
    * @param data a buffer containing the tensor data.
    * @return an integer constant
-   * @throws IllegalArgumentException If the tensor shape is not compatible with the buffer
+   * @throws ArgumentException If the tensor shape is not compatible with the buffer
    */
   public Constant<TInt32> constant(Shape shape, IntDataBuffer data) {
     return Constant.tensorOf(scope, shape, data);
@@ -1495,7 +1495,7 @@ public /*final*/class Ops {
    * @param shape the tensor shape.
    * @param data a buffer containing the tensor data.
    * @return a double constant
-   * @throws IllegalArgumentException If the tensor shape is not compatible with the buffer
+   * @throws ArgumentException If the tensor shape is not compatible with the buffer
    */
   public Constant<TFloat64> constant(Shape shape, DoubleDataBuffer data) {
     return Constant.tensorOf(scope, shape, data);
@@ -1507,8 +1507,8 @@ public /*final*/class Ops {
    * @param scope is a scope used to add the underlying operation.
    * @param shape the tensor shape.
    * @param data a buffer containing the tensor data.
-   * @return an boolean constant
-   * @throws IllegalArgumentException If the tensor shape is not compatible with the buffer
+   * @return an bool constant
+   * @throws ArgumentException If the tensor shape is not compatible with the buffer
    */
   public Constant<TBool> constant(Shape shape, BooleanDataBuffer data) {
     return Constant.tensorOf(scope, shape, data);
@@ -1521,7 +1521,7 @@ public /*final*/class Ops {
    * @param shape the tensor shape.
    * @param data a buffer containing the tensor data.
    * @return a float constant
-   * @throws IllegalArgumentException If the tensor shape is not compatible with the buffer
+   * @throws ArgumentException If the tensor shape is not compatible with the buffer
    */
   public Constant<TFloat32> constant(Shape shape, FloatDataBuffer data) {
     return Constant.tensorOf(scope, shape, data);
@@ -1534,7 +1534,7 @@ public /*final*/class Ops {
    * @param shape the tensor shape.
    * @param data a buffer containing the tensor data.
    * @return a long constant
-   * @throws IllegalArgumentException If the tensor shape is not compatible with the buffer
+   * @throws ArgumentException If the tensor shape is not compatible with the buffer
    */
   public Constant<TInt64> constant(Shape shape, LongDataBuffer data) {
     return Constant.tensorOf(scope, shape, data);
@@ -1547,7 +1547,7 @@ public /*final*/class Ops {
    * @param shape the tensor shape.
    * @param data a buffer containing the tensor data.
    * @return a byte constant
-   * @throws IllegalArgumentException If the tensor shape is not compatible with the buffer
+   * @throws ArgumentException If the tensor shape is not compatible with the buffer
    */
   public Constant<TUint8> constant(Shape shape, ByteDataBuffer data) {
     return Constant.tensorOf(scope, shape, data);
@@ -1561,7 +1561,7 @@ public /*final*/class Ops {
    * @param shape the tensor shape.
    * @param data a buffer containing the tensor data.
    * @return a string constant
-   * @throws IllegalArgumentException If the tensor shape is not compatible with the buffer
+   * @throws ArgumentException If the tensor shape is not compatible with the buffer
    */
   public Constant<TString> constant(Shape shape, DataBuffer<String> data) {
     return Constant.tensorOf(scope, shape, data);
@@ -1575,7 +1575,7 @@ public /*final*/class Ops {
    * @param shape the tensor shape.
    * @param data a buffer containing the tensor data.
    * @return a string constant
-   * @throws IllegalArgumentException If the tensor shape is not compatible with the buffer
+   * @throws ArgumentException If the tensor shape is not compatible with the buffer
    */
   public Constant<TString> constant(Charset charset, Shape shape, DataBuffer<String> data) {
     return Constant.tensorOf(scope, charset, shape, data);
@@ -1589,7 +1589,7 @@ public /*final*/class Ops {
    * @param shape the tensor shape.
    * @param data a buffer containing the tensor data.
    * @return a constant of type `type`
-   * @throws IllegalArgumentException If the tensor datatype or shape is not compatible with the
+   * @throws ArgumentException If the tensor datatype or shape is not compatible with the
    *      buffer
    */
   public <T:TType> Constant<T> constant(DataType<T> type, Shape shape,
@@ -2219,7 +2219,7 @@ public /*final*/class Ops {
    * @param x inputs of the function for which partial derivatives are computed
    * @param options carries optional attributes values
    * @return a new instance of {@code Gradients}
-   * @throws IllegalArgumentException if execution environment is not a graph
+   * @throws ArgumentException if execution environment is not a graph
    */
   public Gradients gradients(Iterable<?:Operand<?>> y, Iterable<?:Operand<?>> x,
       Gradients.Options... options) {
@@ -2250,7 +2250,7 @@ public /*final*/class Ops {
    * @param x inputs of the function for which partial derivatives are computed
    * @param options carries optional attributes values
    * @return a new instance of {@code Gradients}
-   * @throws IllegalArgumentException if execution environment is not a graph
+   * @throws ArgumentException if execution environment is not a graph
    */
   public Gradients gradients(Operand<?> y, Iterable<?:Operand<?>> x,
       Gradients.Options... options) {
@@ -2461,7 +2461,7 @@ public /*final*/class Ops {
    *
    * @param scope current scope
    * @return an op grouping all initializers added to the graph
-   * @throws IllegalArgumentException if the execution environment _in scope is not a graph
+   * @throws ArgumentException if the execution environment _in scope is not a graph
    */
   public Init init() {
     return Init.create(scope);
@@ -2476,7 +2476,7 @@ public /*final*/class Ops {
    *
    * @param scope
    * @param initializer
-   * @throws IllegalArgumentException if the execution environment _in scope is not a graph
+   * @throws ArgumentException if the execution environment _in scope is not a graph
    * @see org.tensorflow.op.core.Init#create(Scope) init
    */
   public void initAdd(Op initializer) {
@@ -2573,7 +2573,7 @@ public /*final*/class Ops {
   /**
    * Checks whether a tensor has been initialized.
    *  <p>
-   *  Outputs boolean scalar indicating whether the tensor has been initialized.
+   *  Outputs bool scalar indicating whether the tensor has been initialized.
    *
    * @param ref Should be from a `Variable` node. May be uninitialized.
    * @return a new instance of IsVariableInitialized
@@ -2688,7 +2688,7 @@ public /*final*/class Ops {
    *  This operator represents the loop termination condition used by the
    *  "pivot" switches of a loop.
    *
-   * @param input A boolean scalar, representing the branch predicate of the Switch op.
+   * @param input A bool scalar, representing the branch predicate of the Switch op.
    * @return a new instance of LoopCond
    */
   public LoopCond loopCond(Operand<TBool> input) {
@@ -7308,7 +7308,7 @@ public /*final*/class Ops {
    * @param dims a 1-D operand that represents the shape of the output tensor
    * @param type the output tensor datatype
    * @return a constant tensor initialized with zeros
-   * @throws IllegalArgumentException if the tensor type or shape cannot be initialized with zeros.
+   * @throws ArgumentException if the tensor type or shape cannot be initialized with zeros.
    */
   public <T:TType, U:TNumber> Zeros<T> zeros(Operand<U> dims, DataType<T> type) {
     return Zeros.create(scope, dims, type);

@@ -27,10 +27,10 @@ namespace com.github.javaparser.generator.core.visitor;
  */
 public class ObjectIdentityHashCodeVisitorGenerator:VisitorGenerator {
     public ObjectIdentityHashCodeVisitorGenerator(SourceRoot sourceRoot) {
-        super(sourceRoot, "com.github.javaparser.ast.visitor", "ObjectIdentityHashCodeVisitor", "Integer", "Void", true);
+        base(sourceRoot, "com.github.javaparser.ast.visitor", "ObjectIdentityHashCodeVisitor", "Integer", "Void", true);
     }
 
-    @Override
+    //@Override
     protected void generateVisitMethodBody(BaseNodeMetaModel node, MethodDeclaration visitMethod, CompilationUnit compilationUnit) {
         visitMethod.getParameters().forEach(p -> p.setFinal(true));
 

@@ -25,12 +25,12 @@ namespace com.github.javaparser.generator.core.node;
 
 public class ReplaceMethodGenerator:NodeGenerator {
     public ReplaceMethodGenerator(SourceRoot sourceRoot) {
-        super(sourceRoot);
+        base(sourceRoot);
     }
 
-    @Override
+    //@Override
     protected void generateNode(BaseNodeMetaModel nodeMetaModel, CompilationUnit nodeCu, ClassOrInterfaceDeclaration nodeCoid) {
-        MethodDeclaration replaceNodeMethod = (MethodDeclaration) parseBodyDeclaration("public boolean replace(Node node, Node replacementNode) {}");
+        MethodDeclaration replaceNodeMethod = (MethodDeclaration) parseBodyDeclaration("public bool replace(Node node, Node replacementNode) {}");
         nodeCu.addImport(Node.class);
         annotateWhenOverridden(nodeMetaModel, replaceNodeMethod);
 

@@ -1,6 +1,6 @@
 namespace com.github.javaparser;
 
 public class ParserConfiguration {
-    public boolean doNotAssignCommentsPrecedingEmptyLines = true;
-    public boolean doNotConsiderAnnotationsAsNodeStartForCodeAttribution = false;
+    public bool doNotAssignCommentsPrecedingEmptyLines = true;
+    public bool doNotConsiderAnnotationsAsNodeStartForCodeAttribution = false;
 }

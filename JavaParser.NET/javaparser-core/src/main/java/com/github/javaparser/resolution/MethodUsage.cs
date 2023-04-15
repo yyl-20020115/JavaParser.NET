@@ -64,7 +64,7 @@ public class MethodUsage implements ResolvedTypeParametrized {
         this.typeParametersMap = typeParametersMap;
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "MethodUsage{" + "declaration=" + declaration + ", paramTypes=" + paramTypes + '}';
     }
@@ -91,7 +91,7 @@ public class MethodUsage implements ResolvedTypeParametrized {
 
     public MethodUsage replaceParamType(int i, ResolvedType replaced) {
         if (i < 0 || i >= getNoParams()) {
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         }
         if (paramTypes.get(i) == replaced) {
             return this;
@@ -103,7 +103,7 @@ public class MethodUsage implements ResolvedTypeParametrized {
 
     public MethodUsage replaceExceptionType(int i, ResolvedType replaced) {
         if (i < 0 || i >= exceptionTypes.size()) {
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         }
         if (exceptionTypes.get(i) == replaced) {
             return this;
@@ -137,7 +137,7 @@ public class MethodUsage implements ResolvedTypeParametrized {
 
     public MethodUsage replaceTypeParameter(ResolvedTypeParameterDeclaration typeParameter, ResolvedType type) {
         if (type == null) {
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         }
         // TODO if the method declaration has a type param with that name ignore this call
         MethodUsage res = new MethodUsage(declaration, paramTypes, returnType, exceptionTypes, typeParametersMap.toBuilder().setValue(typeParameter, type).build());
@@ -158,7 +158,7 @@ public class MethodUsage implements ResolvedTypeParametrized {
         return res;
     }
 
-    @Override
+    //@Override
     public ResolvedTypeParametersMap typeParametersMap() {
         return typeParametersMap;
     }
@@ -227,7 +227,7 @@ public class MethodUsage implements ResolvedTypeParametrized {
 	 * https://docs.oracle.com/javase/specs/jls/se8/html/jls-8.html
 	 * This method returns an approximation of this rule.
 	 */
-    public boolean isSameSignature(MethodUsage otherMethodUsage) {
+    public bool isSameSignature(MethodUsage otherMethodUsage) {
     	return getSignature().equals(otherMethodUsage.getSignature());
     }
 
@@ -236,7 +236,7 @@ public class MethodUsage implements ResolvedTypeParametrized {
      * m2 has the same signature as m1, or
      * the signature of m1 is the same as the erasure (§4.6) of the signature of m2.
      */
-    public boolean isSubSignature(MethodUsage otherMethodUsage) {
+    public bool isSubSignature(MethodUsage otherMethodUsage) {
     	return getErasedSignature().equals(otherMethodUsage.getErasedSignature());
     }
 
@@ -249,7 +249,7 @@ public class MethodUsage implements ResolvedTypeParametrized {
      * R1 can be converted to a subtype of R2 by unchecked conversion (§5.1.9).
      * d1 does not have the same signature as d2 (§8.4.2), and R1 = |R2|.
      */
-	public boolean isReturnTypeSubstituable(MethodUsage otherMethodUsage) {
+	public bool isReturnTypeSubstituable(MethodUsage otherMethodUsage) {
 		return getDeclaration().isReturnTypeSubstituable(otherMethodUsage.getDeclaration().getReturnType());
 	}
 }

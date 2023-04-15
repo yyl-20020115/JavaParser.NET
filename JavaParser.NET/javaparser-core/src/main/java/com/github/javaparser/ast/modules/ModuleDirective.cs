@@ -38,18 +38,18 @@ public abstract class ModuleDirective:Node {
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public ModuleDirective(TokenRange tokenRange) {
-        super(tokenRange);
+        base(tokenRange);
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public ModuleDirective clone() {
         return (ModuleDirective) accept(new CloneVisitor(), null);
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isModuleExportsStmt() {
+    public bool isModuleExportsStmt() {
         return false;
     }
 
@@ -59,7 +59,7 @@ public abstract class ModuleDirective:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isModuleOpensStmt() {
+    public bool isModuleOpensStmt() {
         return false;
     }
 
@@ -69,7 +69,7 @@ public abstract class ModuleDirective:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isModuleProvidesStmt() {
+    public bool isModuleProvidesStmt() {
         return false;
     }
 
@@ -79,7 +79,7 @@ public abstract class ModuleDirective:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isModuleRequiresStmt() {
+    public bool isModuleRequiresStmt() {
         return false;
     }
 
@@ -89,7 +89,7 @@ public abstract class ModuleDirective:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isModuleUsesStmt() {
+    public bool isModuleUsesStmt() {
         return false;
     }
 
@@ -144,7 +144,7 @@ public abstract class ModuleDirective:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isModuleExportsDirective() {
+    public bool isModuleExportsDirective() {
         return false;
     }
 
@@ -163,7 +163,7 @@ public abstract class ModuleDirective:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isModuleOpensDirective() {
+    public bool isModuleOpensDirective() {
         return false;
     }
 
@@ -182,7 +182,7 @@ public abstract class ModuleDirective:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isModuleProvidesDirective() {
+    public bool isModuleProvidesDirective() {
         return false;
     }
 
@@ -201,7 +201,7 @@ public abstract class ModuleDirective:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isModuleRequiresDirective() {
+    public bool isModuleRequiresDirective() {
         return false;
     }
 
@@ -220,7 +220,7 @@ public abstract class ModuleDirective:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isModuleUsesDirective() {
+    public bool isModuleUsesDirective() {
         return false;
     }
 
@@ -238,7 +238,7 @@ public abstract class ModuleDirective:Node {
     public void ifModuleUsesDirective(Consumer<ModuleUsesDirective> action) {
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public ModuleDirectiveMetaModel getMetaModel() {
         return JavaParserMetaModel.moduleDirectiveMetaModel;

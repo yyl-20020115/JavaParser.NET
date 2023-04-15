@@ -36,12 +36,12 @@ public class CommentMetaModel:NodeMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     CommentMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, Comment.class, "Comment", "com.github.javaparser.ast.comments", true, false);
+        base(superBaseNodeMetaModel, Comment.class, "Comment", "com.github.javaparser.ast.comments", true, false);
     }
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
-    protected CommentMetaModel(Optional<BaseNodeMetaModel> superNodeMetaModel, Class<?:Node> type, string name, string packageName, boolean isAbstract, boolean hasWildcard) {
-        super(superNodeMetaModel, type, name, packageName, isAbstract, hasWildcard);
+    protected CommentMetaModel(Optional<BaseNodeMetaModel> superNodeMetaModel, Class<?:Node> type, string name, string packageName, bool isAbstract, bool hasWildcard) {
+        base(superNodeMetaModel, type, name, packageName, isAbstract, hasWildcard);
     }
 
     public PropertyMetaModel contentPropertyMetaModel;

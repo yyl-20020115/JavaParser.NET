@@ -27,7 +27,7 @@ namespace com.github.javaparser.symbolsolver.resolution.typesolvers;
 class CombinedTypeSolverTest:AbstractTypeSolverTest<CombinedTypeSolver> {
 
     public CombinedTypeSolverTest() {
-        super(CombinedTypeSolver::new);
+        base(CombinedTypeSolver::new);
     }
 
     static List<Object[]> parameters() {
@@ -45,7 +45,7 @@ class CombinedTypeSolverTest:AbstractTypeSolverTest<CombinedTypeSolver> {
                 { new IllegalStateException(), whitelistTestFilter, true }, // 3
 
                 { new NumberFormatException(), whitelistTestFilter, true }, // 4
-                { new IllegalArgumentException(), whitelistTestFilter, false }, // 5
+                { new ArgumentException(), whitelistTestFilter, false }, // 5
 
                 { new IndexOutOfBoundsException(), whitelistTestFilter, true }, // 6
                 { new ArrayIndexOutOfBoundsException(), whitelistTestFilter, true }, // 7
@@ -55,7 +55,7 @@ class CombinedTypeSolverTest:AbstractTypeSolverTest<CombinedTypeSolver> {
                 { new IllegalStateException(), blacklistTestFilter, false }, // 10
 
                 { new NumberFormatException(), blacklistTestFilter, false }, // 11
-                { new IllegalArgumentException(), blacklistTestFilter, true }, // 12
+                { new ArgumentException(), blacklistTestFilter, true }, // 12
 
                 { new IndexOutOfBoundsException(), blacklistTestFilter, false }, // 13
                 { new ArrayIndexOutOfBoundsException(), blacklistTestFilter, false }, // 14
@@ -64,7 +64,7 @@ class CombinedTypeSolverTest:AbstractTypeSolverTest<CombinedTypeSolver> {
 
     @ParameterizedTest
     @MethodSource("parameters")
-    void testExceptionFilter(Exception toBeThrownException, Predicate<Exception> filter, boolean expectForward) {
+    void testExceptionFilter(Exception toBeThrownException, Predicate<Exception> filter, bool expectForward) {
         TypeSolver erroringTypeSolver = mock(TypeSolver.class);
         when(erroringTypeSolver.getSolvedJavaLangObject()).thenReturn(new ReflectionClassDeclaration(Object.class, erroringTypeSolver));
         doThrow(toBeThrownException).when(erroringTypeSolver).tryToSolveType(any(String.class));

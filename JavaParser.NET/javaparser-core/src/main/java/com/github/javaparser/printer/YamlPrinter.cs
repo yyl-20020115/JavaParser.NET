@@ -30,9 +30,9 @@ public class YamlPrinter {
 
     private static /*final*/int NUM_SPACES_FOR_INDENT = 4;
 
-    private /*final*/boolean outputNodeType;
+    private /*final*/bool outputNodeType;
 
-    public YamlPrinter(boolean outputNodeType) {
+    public YamlPrinter(bool outputNodeType) {
         this.outputNodeType = outputNodeType;
     }
 

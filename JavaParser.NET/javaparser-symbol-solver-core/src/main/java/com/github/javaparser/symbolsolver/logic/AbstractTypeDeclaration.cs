@@ -37,10 +37,10 @@ public abstract class AbstractTypeDeclaration implements ResolvedReferenceTypeDe
 	 * signature (based on method name and qualified parameter types)
 	 */
     //@Override
-    public /*final*/Set<MethodUsage> getAllMethods() {
-        Set<MethodUsage> methods = new HashSet<>();
+    public /*final*/HashSet<MethodUsage> getAllMethods() {
+        HashSet<MethodUsage> methods = new HashSet<>();
 
-        Set<String> methodsSignatures = new HashSet<>();
+        HashSet<String> methodsSignatures = new HashSet<>();
 
         for (ResolvedMethodDeclaration methodDeclaration : getDeclaredMethods()) {
             MethodUsage methodUsage = new MethodUsage(methodDeclaration);

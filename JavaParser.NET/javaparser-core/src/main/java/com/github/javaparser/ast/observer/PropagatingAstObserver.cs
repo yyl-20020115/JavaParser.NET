@@ -24,7 +24,7 @@ namespace com.github.javaparser.ast.observer;
 /**
  * This AstObserver attach itself to all new nodes added to the nodes already observed.
  */
-public abstract class PropagatingAstObserver implements AstObserver {
+public abstract class PropagatingAstObserver : AstObserver {
 
     /**
      * Wrap a given observer to make it self-propagating. If the given observer is an instance of PropagatingAstObserver
@@ -36,31 +36,31 @@ public abstract class PropagatingAstObserver implements AstObserver {
         }
         return new PropagatingAstObserver() {
 
-            @Override
+            //@Override
             public void concretePropertyChange(Node observedNode, ObservableProperty property, Object oldValue, Object newValue) {
                 observer.propertyChange(observedNode, property, oldValue, newValue);
             }
 
-            @Override
+            //@Override
             public void concreteListChange(NodeList<?> observedNode, ListChangeType type, int index, Node nodeAddedOrRemoved) {
                 observer.listChange(observedNode, type, index, nodeAddedOrRemoved);
             }
 
-            @Override
+            //@Override
             public void parentChange(Node observedNode, Node previousParent, Node newParent) {
                 observer.parentChange(observedNode, previousParent, newParent);
             }
         };
     }
 
-    @Override
+    //@Override
     public /*final*/void propertyChange(Node observedNode, ObservableProperty property, Object oldValue, Object newValue) {
         considerRemoving(oldValue);
         considerAdding(newValue);
         concretePropertyChange(observedNode, property, oldValue, newValue);
     }
 
-    @Override
+    //@Override
     public /*final*/void listChange(NodeList<?> observedNode, ListChangeType type, int index, Node nodeAddedOrRemoved) {
         if (type == ListChangeType.REMOVAL) {
             considerRemoving(nodeAddedOrRemoved);
@@ -70,7 +70,7 @@ public abstract class PropagatingAstObserver implements AstObserver {
         concreteListChange(observedNode, type, index, nodeAddedOrRemoved);
     }
 
-    @Override
+    //@Override
     public void listReplacement(NodeList<?> observedNode, int index, Node oldNode, Node newNode) {
         if (oldNode == newNode) {
             return;
@@ -92,7 +92,7 @@ public abstract class PropagatingAstObserver implements AstObserver {
         // do nothing
     }
 
-    @Override
+    //@Override
     public void parentChange(Node observedNode, Node previousParent, Node newParent) {
         // do nothing
     }

@@ -42,17 +42,17 @@ public class CompilationUnit:Node {
 
     private static /*final*/string JAVA_LANG = "java.lang";
 
-    @OptionalProperty
+    //@OptionalProperty
     private PackageDeclaration packageDeclaration;
 
     private NodeList<ImportDeclaration> imports;
 
     private NodeList<TypeDeclaration<?>> types;
 
-    @OptionalProperty
+    //@OptionalProperty
     private ModuleDeclaration module;
 
-    @InternalProperty
+    //@InternalProperty
     private Storage storage;
 
     public CompilationUnit() {
@@ -73,7 +73,7 @@ public class CompilationUnit:Node {
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public CompilationUnit(TokenRange tokenRange, PackageDeclaration packageDeclaration, NodeList<ImportDeclaration> imports, NodeList<TypeDeclaration<?>> types, ModuleDeclaration module) {
-        super(tokenRange);
+        base(tokenRange);
         setPackageDeclaration(packageDeclaration);
         setImports(imports);
         setTypes(types);
@@ -83,13 +83,13 @@ public class CompilationUnit:Node {
 
     //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
     //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -352,16 +352,16 @@ public class CompilationUnit:Node {
      *
      * @param clazz the class to import
      * @return this, the {@link CompilationUnit}
-     * @throws IllegalArgumentException if clazz is an anonymous or local class
+     * @throws ArgumentException if clazz is an anonymous or local class
      */
-    public CompilationUnit addImport(Class<?> clazz) {
+    public CompilationUnit addImport(Type clazz) {
         if (clazz.isArray()) {
             return addImport(clazz.getComponentType());
         }
         if (ClassUtils.isPrimitiveOrWrapper(clazz) || JAVA_LANG.equals(clazz.getPackage().getName()))
             return this;
         else if (clazz.isAnonymousClass() || clazz.isLocalClass())
-            throw new IllegalArgumentException(clazz.getName() + " is an anonymous or local class therefore it can't be added with addImport");
+            throw new ArgumentException(clazz.getName() + " is an anonymous or local class therefore it can't be added with addImport");
         return addImport(clazz.getCanonicalName());
     }
 

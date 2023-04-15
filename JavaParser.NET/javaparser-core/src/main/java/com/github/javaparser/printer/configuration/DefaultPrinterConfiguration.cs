@@ -102,7 +102,7 @@ public class DefaultPrinterConfiguration implements PrinterConfiguration {
         ConfigOption(Class clazz, Object value) {
             this.type = clazz;
             if (!(this.type.isAssignableFrom(value.getClass()))) {
-                throw new IllegalArgumentException(String.format("%s is not an instance of %s", value, type.getName()));
+                throw new ArgumentException(String.format("%s is not an instance of %s", value, type.getName()));
             }
             this.defaultValue = value;
         }
@@ -110,7 +110,7 @@ public class DefaultPrinterConfiguration implements PrinterConfiguration {
 
     // contains all available options
     // an option contained _in the set is considered as activated
-    private Set<ConfigurationOption> defaultOptions = new HashSet<>(Arrays.asList(new DefaultConfigurationOption(ConfigOption.PRINT_COMMENTS, ConfigOption.PRINT_COMMENTS.defaultValue), new DefaultConfigurationOption(ConfigOption.PRINT_JAVADOC, ConfigOption.PRINT_JAVADOC.defaultValue), new DefaultConfigurationOption(ConfigOption.SPACE_AROUND_OPERATORS, ConfigOption.SPACE_AROUND_OPERATORS.defaultValue), new DefaultConfigurationOption(ConfigOption.INDENT_CASE_IN_SWITCH, ConfigOption.INDENT_CASE_IN_SWITCH.defaultValue), new DefaultConfigurationOption(ConfigOption.MAX_ENUM_CONSTANTS_TO_ALIGN_HORIZONTALLY, ConfigOption.MAX_ENUM_CONSTANTS_TO_ALIGN_HORIZONTALLY.defaultValue), new DefaultConfigurationOption(ConfigOption.END_OF_LINE_CHARACTER, ConfigOption.END_OF_LINE_CHARACTER.defaultValue), new DefaultConfigurationOption(ConfigOption.INDENTATION, ConfigOption.INDENTATION.defaultValue)));
+    private HashSet<ConfigurationOption> defaultOptions = new HashSet<>(Arrays.asList(new DefaultConfigurationOption(ConfigOption.PRINT_COMMENTS, ConfigOption.PRINT_COMMENTS.defaultValue), new DefaultConfigurationOption(ConfigOption.PRINT_JAVADOC, ConfigOption.PRINT_JAVADOC.defaultValue), new DefaultConfigurationOption(ConfigOption.SPACE_AROUND_OPERATORS, ConfigOption.SPACE_AROUND_OPERATORS.defaultValue), new DefaultConfigurationOption(ConfigOption.INDENT_CASE_IN_SWITCH, ConfigOption.INDENT_CASE_IN_SWITCH.defaultValue), new DefaultConfigurationOption(ConfigOption.MAX_ENUM_CONSTANTS_TO_ALIGN_HORIZONTALLY, ConfigOption.MAX_ENUM_CONSTANTS_TO_ALIGN_HORIZONTALLY.defaultValue), new DefaultConfigurationOption(ConfigOption.END_OF_LINE_CHARACTER, ConfigOption.END_OF_LINE_CHARACTER.defaultValue), new DefaultConfigurationOption(ConfigOption.INDENTATION, ConfigOption.INDENTATION.defaultValue)));
 
     public DefaultPrinterConfiguration() {
     }
@@ -118,7 +118,7 @@ public class DefaultPrinterConfiguration implements PrinterConfiguration {
     /*
      * add the specified option if it does not exist or replace the existing option
      */
-    @Override
+    //@Override
     public PrinterConfiguration addOption(ConfigurationOption option) {
         removeOption(option);
         defaultOptions.add(option);
@@ -128,7 +128,7 @@ public class DefaultPrinterConfiguration implements PrinterConfiguration {
     /*
      * remove the specified option
      */
-    @Override
+    //@Override
     public PrinterConfiguration removeOption(ConfigurationOption option) {
         defaultOptions.remove(option);
         return this;
@@ -137,15 +137,15 @@ public class DefaultPrinterConfiguration implements PrinterConfiguration {
     /*
      * True if an option is activated
      */
-    @Override
-    public boolean isActivated(ConfigurationOption option) {
+    //@Override
+    public bool isActivated(ConfigurationOption option) {
         return defaultOptions.contains(option);
     }
 
     /*
      * returns the specified option
      */
-    @Override
+    //@Override
     public Optional<ConfigurationOption> get(ConfigurationOption option) {
         return defaultOptions.stream().filter(o -> o.equals(option)).findFirst();
     }
@@ -153,8 +153,8 @@ public class DefaultPrinterConfiguration implements PrinterConfiguration {
     /**
      * returns all options configured
      */
-    @Override
-    public Set<ConfigurationOption> get() {
+    //@Override
+    public HashSet<ConfigurationOption> get() {
         return defaultOptions;
     }
 }

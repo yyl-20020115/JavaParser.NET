@@ -34,7 +34,7 @@ public class CsmAttribute implements CsmElement {
         this.property = property;
     }
 
-    @Override
+    //@Override
     public void prettyPrint(Node node, SourcePrinter printer) {
         Object value = property.getRawValue(node);
         printer.print(PrintingHelper.printToString(value));
@@ -81,7 +81,7 @@ public class CsmAttribute implements CsmElement {
         throw new UnsupportedOperationException("getTokenType does not know how to handle property " + property + " with text: " + text);
     }
 
-    @Override
+    //@Override
     public string toString() {
         return String.format("%s(property:%s)", this.getClass().getSimpleName(), getProperty());
     }

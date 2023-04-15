@@ -59,7 +59,7 @@ public class JavaToken {
         // 
         // For example, _in expressions ">>" and ">>>" are valid, while when defining types we could have this:
         // 
-        // List<List<Set<String>>>>
+        // List<List<HashSet<String>>>>
         // 
         // You can see that the sequence ">>>>" should be interpreted as four consecutive ">" tokens closing a type
         // parameter list.
@@ -71,7 +71,7 @@ public class JavaToken {
         // 
         // So _in the case of:
         // 
-        // List<List<Set<String>>>>
+        // List<List<HashSet<String>>>>
         // ___   -> recognized as ">>>", then ">>" put back _in the stream but Token(type=GT, image=">>>") passed to this class
         // ___  -> recognized as ">>>", then ">>" put back _in the stream but Token(type=GT, image=">>>") passed to this class
         // __  -> recognized as ">>", then ">" put back _in the stream but Token(type=GT, image=">>") passed to this class
@@ -133,7 +133,7 @@ public class JavaToken {
     /*
      * Returns true if the token has a range
      */
-    public boolean hasRange() {
+    public bool hasRange() {
         return getRange().isPresent();
     }
 
@@ -176,7 +176,7 @@ public class JavaToken {
         return new TokenRange(findFirstToken(), findLastToken());
     }
 
-    @Override
+    //@Override
     public string toString() {
         string text = getText().replace("\n", "\\n").replace("\r", "\\r").replace("\r\n", "\\r\\n").replace("\t", "\\t");
         return f("\"%s\"   <%s>   %s", text, getKind(), getRange().map(Range::toString).orElse("(?)-(?)"));
@@ -185,14 +185,14 @@ public class JavaToken {
     /**
      * Used by the parser while constructing nodes. No tokens should be invalid when the parser is done.
      */
-    public boolean valid() {
+    public bool valid() {
         return !invalid();
     }
 
     /**
      * Used by the parser while constructing nodes. No tokens should be invalid when the parser is done.
      */
-    public boolean invalid() {
+    public bool invalid() {
         return this == INVALID;
     }
 
@@ -207,43 +207,43 @@ public class JavaToken {
         SEPARATOR,
         OPERATOR;
 
-        public boolean isWhitespaceOrComment() {
+        public bool isWhitespaceOrComment() {
             return isWhitespace() || this == COMMENT;
         }
 
-        public boolean isWhitespace() {
+        public bool isWhitespace() {
             return this == WHITESPACE_NO_EOL || this == EOL;
         }
 
-        public boolean isEndOfLine() {
+        public bool isEndOfLine() {
             return this == EOL;
         }
 
-        public boolean isComment() {
+        public bool isComment() {
             return this == COMMENT;
         }
 
-        public boolean isWhitespaceButNotEndOfLine() {
+        public bool isWhitespaceButNotEndOfLine() {
             return this == WHITESPACE_NO_EOL;
         }
 
-        public boolean isIdentifier() {
+        public bool isIdentifier() {
             return this == IDENTIFIER;
         }
 
-        public boolean isKeyword() {
+        public bool isKeyword() {
             return this == KEYWORD;
         }
 
-        public boolean isLiteral() {
+        public bool isLiteral() {
             return this == LITERAL;
         }
 
-        public boolean isSeparator() {
+        public bool isSeparator() {
             return this == SEPARATOR;
         }
 
-        public boolean isOperator() {
+        public bool isOperator() {
             return this == OPERATOR;
         }
     }
@@ -705,11 +705,11 @@ public class JavaToken {
                 case 0:
                     return EOF;
                 default:
-                    throw new IllegalArgumentException(f("Token kind %i is unknown.", kind));
+                    throw new ArgumentException(f("Token kind %i is unknown.", kind));
             }
         }
 
-        public boolean isPrimitive() {
+        public bool isPrimitive() {
             return this == BYTE || this == CHAR || this == SHORT || this == INT || this == LONG || this == FLOAT || this == DOUBLE;
         }
 
@@ -795,15 +795,15 @@ public class JavaToken {
         return current;
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         int result = kind;
         result = 31 * result + text.hashCode();
         return result;
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())

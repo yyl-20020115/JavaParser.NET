@@ -6,7 +6,7 @@ public class JSONObject {
         return this;
     }
 
-    public JSONObject put(string key, boolean value) {
+    public JSONObject put(string key, bool value) {
         return this;
     }
 

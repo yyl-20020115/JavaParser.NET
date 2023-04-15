@@ -23,13 +23,13 @@ namespace com.github.javaparser.ast.validator.language_level_validations.chunks;
 
 public class UnderscoreKeywordValidator:VisitorValidator {
 
-    @Override
+    //@Override
     public void visit(Name n, ProblemReporter arg) {
         validateIdentifier(n, n.getIdentifier(), arg);
         super.visit(n, arg);
     }
 
-    @Override
+    //@Override
     public void visit(SimpleName n, ProblemReporter arg) {
         validateIdentifier(n, n.getIdentifier(), arg);
         super.visit(n, arg);

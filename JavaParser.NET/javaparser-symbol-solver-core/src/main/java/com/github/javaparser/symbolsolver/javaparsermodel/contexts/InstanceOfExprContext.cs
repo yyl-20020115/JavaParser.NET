@@ -28,10 +28,10 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.contexts;
 public class InstanceOfExprContext:AbstractJavaParserContext<InstanceOfExpr> {
 
     public InstanceOfExprContext(InstanceOfExpr wrappedNode, TypeSolver typeSolver) {
-        super(wrappedNode, typeSolver);
+        base(wrappedNode, typeSolver);
     }
 
-    @Override
+    //@Override
     public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name) {
         Optional<PatternExpr> optionalPatternExpr = wrappedNode.getPattern();
         if(optionalPatternExpr.isPresent()) {
@@ -61,7 +61,7 @@ public class InstanceOfExprContext:AbstractJavaParserContext<InstanceOfExpr> {
         return solveSymbolInParentContext(name);
     }
 
-    @Override
+    //@Override
     public List<PatternExpr> patternExprsExposedFromChildren() {
         List<PatternExpr> results = new ArrayList<>();
 

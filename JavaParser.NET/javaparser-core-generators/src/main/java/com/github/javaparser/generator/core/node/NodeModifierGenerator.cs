@@ -24,10 +24,10 @@ namespace com.github.javaparser.generator.core.node;
 
 public class NodeModifierGenerator:NodeGenerator {
     public NodeModifierGenerator(SourceRoot sourceRoot) {
-        super(sourceRoot);
+        base(sourceRoot);
     }
 
-    @Override
+    //@Override
     protected void generateNode(BaseNodeMetaModel nodeMetaModel, CompilationUnit nodeCu, ClassOrInterfaceDeclaration nodeCoid) {
         nodeCoid
                 .setFinal(false)

@@ -38,8 +38,8 @@ public class JavaParserTypeParameter:AbstractTypeDeclaration implements Resolved
         this.typeSolver = typeSolver;
     }
 
-    @Override
-    public Set<ResolvedMethodDeclaration> getDeclaredMethods() {
+    //@Override
+    public HashSet<ResolvedMethodDeclaration> getDeclaredMethods() {
         return Collections.emptySet();
     }
 
@@ -47,8 +47,8 @@ public class JavaParserTypeParameter:AbstractTypeDeclaration implements Resolved
         return getContext().solveMethod(name, parameterTypes, false);
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o) return true;
         if (!(o is JavaParserTypeParameter)) return false;
 
@@ -59,24 +59,24 @@ public class JavaParserTypeParameter:AbstractTypeDeclaration implements Resolved
         return true;
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         int result = wrappedNode != null ? wrappedNode.hashCode() : 0;
         result = 31 * result + (typeSolver != null ? typeSolver.hashCode() : 0);
         return result;
     }
 
-    @Override
+    //@Override
     public string getName() {
         return wrappedNode.getName().getId();
     }
 
-    @Override
-    public boolean isAssignableBy(ResolvedReferenceTypeDeclaration other) {
+    //@Override
+    public bool isAssignableBy(ResolvedReferenceTypeDeclaration other) {
         return isAssignableBy(new ReferenceTypeImpl(other));
     }
 
-    @Override
+    //@Override
     public string getContainerQualifiedName() {
         ResolvedTypeParametrizable container = getContainer();
         if (container is ResolvedReferenceTypeDeclaration) {
@@ -88,7 +88,7 @@ public class JavaParserTypeParameter:AbstractTypeDeclaration implements Resolved
         }
     }
 
-    @Override
+    //@Override
     public string getContainerId() {
         ResolvedTypeParametrizable container = getContainer();
         if (container is ResolvedReferenceTypeDeclaration) {
@@ -100,7 +100,7 @@ public class JavaParserTypeParameter:AbstractTypeDeclaration implements Resolved
         }
     }
 
-    @Override
+    //@Override
     public ResolvedTypeParametrizable getContainer() {
         Node parentNode = demandParentNode(wrappedNode);
         if (parentNode is com.github.javaparser.ast.body.ClassOrInterfaceDeclaration) {
@@ -122,12 +122,12 @@ public class JavaParserTypeParameter:AbstractTypeDeclaration implements Resolved
         throw new UnsupportedOperationException();
     }
 
-    @Override
+    //@Override
     public string getQualifiedName() {
         return String.format("%s.%s", getContainerQualifiedName(), getName());
     }
 
-    @Override
+    //@Override
     public List<Bound> getBounds() {
         return wrappedNode.getTypeBound().stream().map((astB) -> toBound(astB, typeSolver)).collect(Collectors.toList());
     }
@@ -145,47 +145,47 @@ public class JavaParserTypeParameter:AbstractTypeDeclaration implements Resolved
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    public boolean isAssignableBy(ResolvedType type) {
+    //@Override
+    public bool isAssignableBy(ResolvedType type) {
         throw new UnsupportedOperationException();
     }
 
-    @Override
+    //@Override
     public ResolvedFieldDeclaration getField(string name) {
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    public boolean hasField(string name) {
+    //@Override
+    public bool hasField(string name) {
         return false;
     }
 
-    @Override
+    //@Override
     public List<ResolvedFieldDeclaration> getAllFields() {
         return new ArrayList<>();
     }
 
-    @Override
-    public List<ResolvedReferenceType> getAncestors(boolean acceptIncompleteList) {
+    //@Override
+    public List<ResolvedReferenceType> getAncestors(bool acceptIncompleteList) {
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    public boolean isTypeParameter() {
+    //@Override
+    public bool isTypeParameter() {
         return true;
     }
 
-    @Override
+    //@Override
     public ResolvedTypeParameterDeclaration asTypeParameter() {
         return this;
     }
 
-    @Override
-    public boolean hasDirectlyAnnotation(string canonicalName) {
+    //@Override
+    public bool hasDirectlyAnnotation(string canonicalName) {
         throw new UnsupportedOperationException();
     }
 
-    @Override
+    //@Override
     public List<ResolvedTypeParameterDeclaration> getTypeParameters() {
         return Collections.emptyList();
     }
@@ -199,12 +199,12 @@ public class JavaParserTypeParameter:AbstractTypeDeclaration implements Resolved
         return wrappedNode;
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "JPTypeParameter(" + wrappedNode.getName() + ", bounds=" + wrappedNode.getTypeBound() + ")";
     }
 
-    @Override
+    //@Override
     public Optional<ResolvedReferenceTypeDeclaration> containerType() {
         ResolvedTypeParametrizable container = getContainer();
         if (container is ResolvedReferenceTypeDeclaration) {
@@ -213,17 +213,17 @@ public class JavaParserTypeParameter:AbstractTypeDeclaration implements Resolved
         return Optional.empty();
     }
 
-    @Override
+    //@Override
     public List<ResolvedConstructorDeclaration> getConstructors() {
         return Collections.emptyList();
     }
 
-    @Override
+    //@Override
     public ResolvedReferenceType object() {
         return new ReferenceTypeImpl(typeSolver.getSolvedJavaLangObject());
     }
 
-    @Override
+    //@Override
     public Optional<Node> toAst() {
         return Optional.of(wrappedNode);
     }

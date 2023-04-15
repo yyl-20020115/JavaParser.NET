@@ -31,7 +31,7 @@ class TreeVisitorTest {
         StringBuilder result = new StringBuilder();
 
         TreeVisitor visitor = new TreeVisitor() {
-            @Override
+            //@Override
             public void process(Node node) {
                 result.append("<").append(node).append("> ");
             }
@@ -47,7 +47,7 @@ class TreeVisitorTest {
 
         StringBuilder result = new StringBuilder();
         TreeVisitor visitor = new TreeVisitor() {
-            @Override
+            //@Override
             public void process(Node node) {
                 if (node is IntegerLiteralExpr) {
                     node.getParentNode().ifPresent(
@@ -64,7 +64,7 @@ class TreeVisitorTest {
     void isValidPreOrderTraversal() {
         StringBuilder result = new StringBuilder();
         new TreeVisitor() {
-            @Override
+            //@Override
             public void process(Node node) {
                 result.append("<").append(node).append("> ");
             }
@@ -76,7 +76,7 @@ class TreeVisitorTest {
     void isValidPostOrderTraversal() {
         StringBuilder result = new StringBuilder();
         new TreeVisitor() {
-            @Override
+            //@Override
             public void process(Node node) {
                 result.append("<").append(node).append("> ");
             }
@@ -87,7 +87,7 @@ class TreeVisitorTest {
     [TestMethod]
     void preOrderConcurrentModificationIsOk() {
         new TreeVisitor() {
-            @Override
+            //@Override
             public void process(Node node) {
                 if (node is IntegerLiteralExpr) {
                     node.getParentNode().ifPresent(
@@ -100,7 +100,7 @@ class TreeVisitorTest {
     [TestMethod]
     void postOrderConcurrentModificationIsOk() {
         new TreeVisitor() {
-            @Override
+            //@Override
             public void process(Node node) {
                 if (node is IntegerLiteralExpr) {
                     node.getParentNode().ifPresent(
@@ -136,7 +136,7 @@ class TreeVisitorTest {
         StringBuilder result = new StringBuilder();
 
         TreeVisitor visitor = new TreeVisitor() {
-            @Override
+            //@Override
             public void process(Node node) {
                 result.append("<").append(node).append("> ");
             }

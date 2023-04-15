@@ -32,7 +32,7 @@ public class VoidVisitorTest {
         
         AtomicInteger foundObjs = new AtomicInteger(0);
 		unit.accept(new VoidVisitorAdapter<Object>() {
-            @Override
+            //@Override
             public void visit(ObjectCreationExpr exp, Object arg) {
             	super.visit(exp, arg);
                 ((AtomicInteger)arg).incrementAndGet();

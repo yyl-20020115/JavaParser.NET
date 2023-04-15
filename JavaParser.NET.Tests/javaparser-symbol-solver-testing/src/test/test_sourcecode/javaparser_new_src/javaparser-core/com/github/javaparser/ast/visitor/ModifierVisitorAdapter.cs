@@ -785,7 +785,7 @@ public class ModifierVisitorAdapter<A> implements GenericVisitor<Node, A> {
         return n;
     }
 
-    @Override
+    //@Override
     public Node visit(/*final*/UnionType n, /*final*/A arg) {
 		visitComment(n, arg);
 		visitAnnotations(n, arg);

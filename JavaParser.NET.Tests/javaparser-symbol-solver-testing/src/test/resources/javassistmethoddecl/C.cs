@@ -13,6 +13,6 @@ public class C<S> {
     public void methodWithTypeParameter(List<S> l) {
     }
 
-    public void methodWithExceptions() throws IllegalArgumentException, IOException {
+    public void methodWithExceptions() throws ArgumentException, IOException {
     }
 }

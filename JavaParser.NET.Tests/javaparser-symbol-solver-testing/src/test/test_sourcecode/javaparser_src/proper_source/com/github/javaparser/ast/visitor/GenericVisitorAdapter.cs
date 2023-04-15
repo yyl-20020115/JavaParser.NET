@@ -1537,17 +1537,17 @@ public abstract class GenericVisitorAdapter<R, A> implements GenericVisitor<R, A
 		return null;
 	}
 
-    @Override
+    //@Override
     public R visit(LambdaExpr n, A arg) {
         return null;
     }
 
-    @Override
+    //@Override
     public R visit(MethodReferenceExpr n, A arg){
         return null;
     }
 
-    @Override
+    //@Override
     public R visit(TypeExpr n, A arg){
         return null;
     }

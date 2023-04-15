@@ -25,17 +25,17 @@ namespace com.github.javaparser.ast.type;
 /**
  * A wildcard type argument. Examples:
  * <br>{@code void printCollection(Collection<}<b>{@code ?}</b>{@code > c) { ... }}
- * <br>{@code boolean addAll(Collection<}<b>{@code ?:E}</b>{@code > c)}
+ * <br>{@code bool addAll(Collection<}<b>{@code ?:E}</b>{@code > c)}
  * <br>{@code Reference(T referent, ReferenceQueue<}<b>{@code ? super T}</b>{@code > queue)}
  *
  * @author Julio Vilmar Gesser
  */
 public class WildcardType:Type implements NodeWithAnnotations<WildcardType> {
 
-    @OptionalProperty
+    //@OptionalProperty
     private ReferenceType extendedType;
 
-    @OptionalProperty
+    //@OptionalProperty
     private ReferenceType superType;
 
     public WildcardType() {
@@ -56,21 +56,21 @@ public class WildcardType:Type implements NodeWithAnnotations<WildcardType> {
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public WildcardType(TokenRange tokenRange, ReferenceType extendedType, ReferenceType superType, NodeList<AnnotationExpr> annotations) {
-        super(tokenRange, annotations);
+        base(tokenRange, annotations);
         setExtendedType(extendedType);
         setSuperType(superType);
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -122,14 +122,14 @@ public class WildcardType:Type implements NodeWithAnnotations<WildcardType> {
         return this;
     }
 
-    @Override
+    //@Override
     public WildcardType setAnnotations(NodeList<AnnotationExpr> annotations) {
         return (WildcardType) super.setAnnotations(annotations);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
-    public boolean remove(Node node) {
+    public bool remove(Node node) {
         if (node == null) {
             return false;
         }
@@ -148,7 +148,7 @@ public class WildcardType:Type implements NodeWithAnnotations<WildcardType> {
         return super.remove(node);
     }
 
-    @Override
+    //@Override
     public string asString() {
         StringBuilder str = new StringBuilder("?");
         getExtendedType().ifPresent(t -> str.append(":").append(t.asString()));
@@ -166,21 +166,21 @@ public class WildcardType:Type implements NodeWithAnnotations<WildcardType> {
         return setSuperType((ReferenceType) null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public WildcardType clone() {
         return (WildcardType) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public WildcardTypeMetaModel getMetaModel() {
         return JavaParserMetaModel.wildcardTypeMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }
@@ -204,36 +204,36 @@ public class WildcardType:Type implements NodeWithAnnotations<WildcardType> {
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public WildcardType(TokenRange tokenRange, ReferenceType extendedType, ReferenceType superType) {
-        super(tokenRange);
+        base(tokenRange);
         setExtendedType(extendedType);
         setSuperType(superType);
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isWildcardType() {
+    public bool isWildcardType() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public WildcardType asWildcardType() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifWildcardType(Consumer<WildcardType> action) {
         action.accept(this);
     }
 
-    @Override
+    //@Override
     public ResolvedWildcard resolve() {
         return getSymbolResolver().toResolvedType(this, ResolvedWildcard.class);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<WildcardType> toWildcardType() {
         return Optional.of(this);

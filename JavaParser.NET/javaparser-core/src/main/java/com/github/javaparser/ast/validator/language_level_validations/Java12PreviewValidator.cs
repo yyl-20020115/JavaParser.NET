@@ -28,7 +28,7 @@ namespace com.github.javaparser.ast.validator.language_level_validations;
 public class Java12PreviewValidator:Java12Validator {
 
     public Java12PreviewValidator() {
-        super();
+        base();
         // Incubator
         // No new incubator language features added within Java 12
         // Preview

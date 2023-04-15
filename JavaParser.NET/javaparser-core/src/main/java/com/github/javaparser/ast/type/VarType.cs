@@ -44,68 +44,68 @@ public class VarType:Type {
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public VarType(TokenRange tokenRange) {
-        super(tokenRange);
+        base(tokenRange);
         customInitialization();
     }
 
-    @Override
+    //@Override
     public VarType setAnnotations(NodeList<AnnotationExpr> annotations) {
         return (VarType) super.setAnnotations(annotations);
     }
 
-    @Override
+    //@Override
     public string asString() {
         return "var";
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public VarType clone() {
         return (VarType) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public VarTypeMetaModel getMetaModel() {
         return JavaParserMetaModel.varTypeMetaModel;
     }
 
-    @Override
+    //@Override
     public ResolvedType resolve() {
         return getSymbolResolver().toResolvedType(this, ResolvedType.class);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isVarType() {
+    public bool isVarType() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public VarType asVarType() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<VarType> toVarType() {
         return Optional.of(this);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifVarType(Consumer<VarType> action) {
         action.accept(this);

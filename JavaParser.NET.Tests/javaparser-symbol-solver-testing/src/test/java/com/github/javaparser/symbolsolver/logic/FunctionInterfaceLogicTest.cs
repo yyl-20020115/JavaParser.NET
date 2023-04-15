@@ -61,7 +61,7 @@ class FunctionInterfaceLogicTest {
 
         T foo(S str);
 
-        @Override
+        //@Override
 		default T apply(S str) {
             return foo(str);
         }

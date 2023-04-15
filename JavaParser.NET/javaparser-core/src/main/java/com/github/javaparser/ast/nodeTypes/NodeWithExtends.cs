@@ -35,7 +35,7 @@ public interface NodeWithExtends<N:Node> {
      */
     NodeList<ClassOrInterfaceType> getExtendedTypes();
 
-    void tryAddImportToParentCompilationUnit(Class<?> clazz);
+    void tryAddImportToParentCompilationUnit(Type clazz);
 
     default ClassOrInterfaceType getExtendedTypes(int i) {
         return getExtendedTypes().get(i);
@@ -59,7 +59,7 @@ public interface NodeWithExtends<N:Node> {
      * @deprecated use addExtendedType
      */
     //@Deprecated
-    default N addExtends(Class<?> clazz) {
+    default N addExtends(Type clazz) {
         return addExtendedType(clazz);
     }
 
@@ -77,7 +77,7 @@ public interface NodeWithExtends<N:Node> {
      * @param clazz the class to extend from
      * @return this
      */
-    default N addExtendedType(Class<?> clazz) {
+    default N addExtendedType(Type clazz) {
         tryAddImportToParentCompilationUnit(clazz);
         return addExtendedType(clazz.getSimpleName());
     }

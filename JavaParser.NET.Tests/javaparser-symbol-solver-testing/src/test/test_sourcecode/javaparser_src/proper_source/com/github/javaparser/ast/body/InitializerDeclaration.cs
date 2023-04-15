@@ -27,31 +27,31 @@ namespace com.github.javaparser.ast.body;
  */
 public /*final*/class InitializerDeclaration:BodyDeclaration implements DocumentableNode {
 
-    private boolean isStatic;
+    private bool isStatic;
 
     private BlockStmt block;
 
     public InitializerDeclaration() {
     }
 
-    public InitializerDeclaration(boolean isStatic, BlockStmt block) {
-        super(null);
+    public InitializerDeclaration(bool isStatic, BlockStmt block) {
+        base(null);
         setStatic(isStatic);
         setBlock(block);
     }
 
-    public InitializerDeclaration(int beginLine, int beginColumn, int endLine, int endColumn, boolean isStatic, BlockStmt block) {
-        super(beginLine, beginColumn, endLine, endColumn, null);
+    public InitializerDeclaration(int beginLine, int beginColumn, int endLine, int endColumn, bool isStatic, BlockStmt block) {
+        base(beginLine, beginColumn, endLine, endColumn, null);
         setStatic(isStatic);
         setBlock(block);
     }
 
-    @Override
+    //@Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
@@ -60,7 +60,7 @@ public /*final*/class InitializerDeclaration:BodyDeclaration implements Document
         return block;
     }
 
-    public boolean isStatic() {
+    public bool isStatic() {
         return isStatic;
     }
 
@@ -69,16 +69,16 @@ public /*final*/class InitializerDeclaration:BodyDeclaration implements Document
 		setAsParentNodeOf(this.block);
     }
 
-    public void setStatic(boolean isStatic) {
+    public void setStatic(bool isStatic) {
         this.isStatic = isStatic;
     }
 
-    @Override
+    //@Override
     public void setJavaDoc(JavadocComment javadocComment) {
         this.javadocComment = javadocComment;
     }
 
-    @Override
+    //@Override
     public JavadocComment getJavaDoc() {
         return javadocComment;
     }

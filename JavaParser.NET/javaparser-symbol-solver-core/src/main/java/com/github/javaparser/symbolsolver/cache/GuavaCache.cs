@@ -50,40 +50,40 @@ public class GuavaCache<K, V> implements Cache<K, V>  {
         this.guavaCache = Objects.requireNonNull(guavaCache, "The argument GuavaCache can't be null.");
     }
 
-    @Override
+    //@Override
     public void put(K key, V value) {
         guavaCache.put(key, value);
     }
 
-    @Override
+    //@Override
     public Optional<V> get(K key) {
         return Optional.ofNullable(
                 guavaCache.getIfPresent(key)
         );
     }
 
-    @Override
+    //@Override
     public void remove(K key) {
         guavaCache.invalidate(key);
     }
 
-    @Override
+    //@Override
     public void removeAll() {
         guavaCache.invalidateAll();
     }
 
-    @Override
-    public boolean contains(K key) {
+    //@Override
+    public bool contains(K key) {
         return get(key).isPresent();
     }
 
-    @Override
+    //@Override
     public long size() {
         return guavaCache.size();
     }
 
-    @Override
-    public boolean isEmpty() {
+    //@Override
+    public bool isEmpty() {
         return size() == 0;
     }
 

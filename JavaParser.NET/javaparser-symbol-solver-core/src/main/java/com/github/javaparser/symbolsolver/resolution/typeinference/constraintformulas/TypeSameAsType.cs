@@ -38,7 +38,7 @@ public class TypeSameAsType:ConstraintFormula {
         T = t;
     }
 
-    @Override
+    //@Override
     public ReductionResult reduce(BoundSet currentBoundSet) {
         // A constraint formula of the form ‹S = T›, where S and T are types, is reduced as follows:
 
@@ -126,8 +126,8 @@ public class TypeSameAsType:ConstraintFormula {
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -137,14 +137,14 @@ public class TypeSameAsType:ConstraintFormula {
         return T.equals(that.T);
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         int result = S.hashCode();
         result = 31 * result + T.hashCode();
         return result;
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "TypeSameAsType{" +
                 "S=" + S +

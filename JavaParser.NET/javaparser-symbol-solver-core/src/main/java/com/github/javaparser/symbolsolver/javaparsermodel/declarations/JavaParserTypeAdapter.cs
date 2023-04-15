@@ -53,7 +53,7 @@ public class JavaParserTypeAdapter<T:Node & NodeWithSimpleName<T> & NodeWithMemb
         }
     }
 
-    public boolean isAssignableBy(ResolvedReferenceTypeDeclaration other) {
+    public bool isAssignableBy(ResolvedReferenceTypeDeclaration other) {
         List<ResolvedReferenceType> ancestorsOfOther = other.getAllAncestors();
         ancestorsOfOther.add(new ReferenceTypeImpl(other));
         for (ResolvedReferenceType ancestorOfOther : ancestorsOfOther) {
@@ -64,7 +64,7 @@ public class JavaParserTypeAdapter<T:Node & NodeWithSimpleName<T> & NodeWithMemb
         return false;
     }
 
-    public boolean isAssignableBy(ResolvedType type) {
+    public bool isAssignableBy(ResolvedType type) {
         if (type.isNull()) {
             return true;
         }
@@ -155,11 +155,11 @@ public class JavaParserTypeAdapter<T:Node & NodeWithSimpleName<T> & NodeWithMemb
         return fields;
     }
 
-    public Set<ResolvedReferenceTypeDeclaration> internalTypes() {
+    public HashSet<ResolvedReferenceTypeDeclaration> internalTypes() {
         // Use a special Set implementation that avoids calculating the hashCode of the node,
         // since this can be very time-consuming for big node trees, and we are sure there are
         // no duplicates _in the members list.
-        Set<ResolvedReferenceTypeDeclaration> res = Collections.newSetFromMap(new IdentityHashMap<>());
+        HashSet<ResolvedReferenceTypeDeclaration> res = Collections.newSetFromMap(new IdentityHashMap<>());
         for (BodyDeclaration<?> member : this.wrappedNode.getMembers()) {
             if (member is TypeDeclaration) {
                 res.add(JavaParserFacade.get(typeSolver).getTypeDeclaration((TypeDeclaration) member));

@@ -159,8 +159,8 @@ public class DefaultStrategy:BuilderASTTransformation.AbstractBuilderStrategy {
         ClassNode builder = createBuilder(anno, buildee);
         createBuilderFactoryMethod(anno, buildee, builder);
 //        List<FieldNode> fields = getFields(transform, anno, buildee);
-        boolean allNames = transform.memberHasValue(anno, "allNames", true);
-        boolean allProperties = !transform.memberHasValue(anno, "allProperties", false);
+        bool allNames = transform.memberHasValue(anno, "allNames", true);
+        bool allProperties = !transform.memberHasValue(anno, "allProperties", false);
         List<PropertyInfo> props = getPropertyInfos(transform, anno, buildee, excludes, includes, allNames, allProperties);
         for (PropertyInfo pi : props) {
             ClassNode correctedType = getCorrectedType(buildee, pi.getType(), builder);

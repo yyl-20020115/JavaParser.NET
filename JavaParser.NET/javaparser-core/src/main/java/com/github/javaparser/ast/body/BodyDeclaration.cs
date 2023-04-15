@@ -47,7 +47,7 @@ public abstract class BodyDeclaration<T> : Node, NodeWithAnnotations<T> where T:
      */
     ////@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public BodyDeclaration(TokenRange tokenRange, NodeList<AnnotationExpr> annotations) {
-        super(tokenRange);
+        base(tokenRange);
         setAnnotations(annotations);
         customInitialization();
     }

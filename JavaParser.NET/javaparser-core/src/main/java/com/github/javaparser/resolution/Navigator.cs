@@ -131,7 +131,7 @@ public /*final*/class Navigator {
     }
 
     public static <N:Node> N demandNodeOfGivenClass(Node node, Class<N> clazz) {
-        return node.findFirst(clazz).orElseThrow(IllegalArgumentException::new);
+        return node.findFirst(clazz).orElseThrow(ArgumentException::new);
     }
 
     public static Node demandParentNode(Node node) {
@@ -156,7 +156,7 @@ public /*final*/class Navigator {
     }
 
     public static SwitchStmt demandSwitch(Node node) {
-        return findSwitchHelper(node).orElseThrow(IllegalArgumentException::new);
+        return findSwitchHelper(node).orElseThrow(ArgumentException::new);
     }
 
     public static Optional<VariableDeclarator> demandVariableDeclaration(Node node, string name) {

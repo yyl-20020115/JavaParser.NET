@@ -131,7 +131,7 @@ class JavaParserFacadeResolutionTest:AbstractResolutionTest {
                 "        public void foo() {\n" +
                 "            try {\n" +
                 "                \n" +
-                "            } catch (IllegalStateException | IllegalArgumentException e) {\n" +
+                "            } catch (IllegalStateException | ArgumentException e) {\n" +
                 "                \n" +
                 "            }\n" +
                 "        }\n" +
@@ -145,7 +145,7 @@ class JavaParserFacadeResolutionTest:AbstractResolutionTest {
 
     [TestMethod]
     void classToResolvedTypeViaReflection() {
-        Class<?> clazz = this.getClass();
+        Type clazz = this.getClass();
         Solver symbolSolver = new SymbolSolver(new ReflectionTypeSolver());
         ResolvedType resolvedType = symbolSolver.classToResolvedType(clazz);
 

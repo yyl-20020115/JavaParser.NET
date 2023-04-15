@@ -29,33 +29,33 @@ namespace com.github.javaparser.ast.body;
 public /*final*/class Parameter:BaseParameter {
     private Type type;
 
-    private boolean isVarArgs;
+    private bool isVarArgs;
 
     public Parameter() {
     }
 
     public Parameter(Type type, VariableDeclaratorId id) {
-    	super(id);
+    	base(id);
         setType(type);
     }
 
     public Parameter(int modifiers, Type type, VariableDeclaratorId id) {
-    	super(modifiers, id);
+    	base(modifiers, id);
         setType(type);
     }
 
-    public Parameter(int beginLine, int beginColumn, int endLine, int endColumn, int modifiers, List<AnnotationExpr> annotations, Type type, boolean isVarArgs, VariableDeclaratorId id) {
-        super(beginLine, beginColumn, endLine, endColumn, modifiers, annotations, id);
+    public Parameter(int beginLine, int beginColumn, int endLine, int endColumn, int modifiers, List<AnnotationExpr> annotations, Type type, bool isVarArgs, VariableDeclaratorId id) {
+        base(beginLine, beginColumn, endLine, endColumn, modifiers, annotations, id);
         setType(type);
         setVarArgs(isVarArgs);
     }
 
-    @Override
+    //@Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
@@ -64,7 +64,7 @@ public /*final*/class Parameter:BaseParameter {
         return type;
     }
 
-    public boolean isVarArgs() {
+    public bool isVarArgs() {
         return isVarArgs;
     }
 
@@ -73,7 +73,7 @@ public /*final*/class Parameter:BaseParameter {
 		setAsParentNodeOf(this.type);
     }
 
-    public void setVarArgs(boolean isVarArgs) {
+    public void setVarArgs(bool isVarArgs) {
         this.isVarArgs = isVarArgs;
     }
 }

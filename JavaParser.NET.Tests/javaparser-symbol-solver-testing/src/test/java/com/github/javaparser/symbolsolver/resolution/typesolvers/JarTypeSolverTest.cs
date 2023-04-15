@@ -37,7 +37,7 @@ class JarTypeSolverTest:AbstractTypeSolverTest<JarTypeSolver> {
     };
 
     public JarTypeSolverTest() {
-        super(JAR_TYPE_PROVIDER);
+        base(JAR_TYPE_PROVIDER);
     }
 
     [TestMethod]

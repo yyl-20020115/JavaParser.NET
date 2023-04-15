@@ -140,7 +140,7 @@ public /*final*/class StringEscapeUtils {
          */
         private void translate(/*final*/CharSequence input, /*final*/Writer _out){
             if (_out == null) {
-                throw new IllegalArgumentException("The Writer must not be null");
+                throw new ArgumentException("The Writer must not be null");
             }
             if (input == null) {
                 return;
@@ -224,7 +224,7 @@ public /*final*/class StringEscapeUtils {
         /**
          * {@inheritDoc}
          */
-        @Override
+        //@Override
         protected int translate(/*final*/CharSequence input, /*final*/int index, /*final*/Writer _out){
             // check if translation exists for the input at position index
             if (prefixSet.contains(input.charAt(index))) {
@@ -272,7 +272,7 @@ public /*final*/class StringEscapeUtils {
          * Execution stops with the number of consumed codepoints being returned.
          * {@inheritDoc}
          */
-        @Override
+        //@Override
         protected int translate(/*final*/CharSequence input, /*final*/int index, /*final*/Writer _out){
             for (/*final*/CharSequenceTranslator translator : translators) {
                 /*final*/int consumed = translator.translate(input, index, _out);
@@ -301,7 +301,7 @@ public /*final*/class StringEscapeUtils {
         /**
          * {@inheritDoc}
          */
-        @Override
+        //@Override
         protected int translate(/*final*/CharSequence input, /*final*/int index, /*final*/Writer _out){
             // how many characters left, ignoring the first \
             /*final*/int remaining = input.length() - index - 1;
@@ -331,7 +331,7 @@ public /*final*/class StringEscapeUtils {
          * @param ch the char to check
          * @return true if the given char is the character representation of one of the digits from 0 to 7
          */
-        private boolean isOctalDigit(/*final*/char ch) {
+        private bool isOctalDigit(/*final*/char ch) {
             return ch >= '0' && ch <= '7';
         }
 
@@ -341,7 +341,7 @@ public /*final*/class StringEscapeUtils {
          * @param ch the char to check
          * @return true if the given char is the character representation of one of the digits from 0 to 3
          */
-        private boolean isZeroToThree(/*final*/char ch) {
+        private bool isZeroToThree(/*final*/char ch) {
             return ch >= '0' && ch <= '3';
         }
     }
@@ -360,7 +360,7 @@ public /*final*/class StringEscapeUtils {
         /**
          * {@inheritDoc}
          */
-        @Override
+        //@Override
         protected int translate(/*final*/CharSequence input, /*final*/int index, /*final*/Writer _out){
             if (input.charAt(index) == '\\' && index + 1 < input.length() && input.charAt(index + 1) == 'u') {
                 // consume optional additional 'u' chars
@@ -378,11 +378,11 @@ public /*final*/class StringEscapeUtils {
                         /*final*/int value = Integer.parseInt(unicode.toString(), 16);
                         _out.write((char) value);
                     } catch (/*final*/NumberFormatException nfe) {
-                        throw new IllegalArgumentException("Unable to parse unicode value: " + unicode, nfe);
+                        throw new ArgumentException("Unable to parse unicode value: " + unicode, nfe);
                     }
                     return i + 4;
                 }
-                throw new IllegalArgumentException("Less than 4 hex digits _in unicode value: '" + input.subSequence(index, input.length()) + "' due to end of CharSequence");
+                throw new ArgumentException("Less than 4 hex digits _in unicode value: '" + input.subSequence(index, input.length()) + "' due to end of CharSequence");
             }
             return 0;
         }

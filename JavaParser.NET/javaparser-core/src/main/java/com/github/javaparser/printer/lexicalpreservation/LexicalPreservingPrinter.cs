@@ -77,7 +77,7 @@ public class LexicalPreservingPrinter {
     /*
      * Returns true if the lexical preserving printer is initialized on the node
      */
-    public static boolean isAvailableOn(Node node) {
+    public static bool isAvailableOn(Node node) {
     	return node.containsData(NODE_TEXT_DATA);
     }
 
@@ -90,7 +90,7 @@ public class LexicalPreservingPrinter {
 
     private static class Observer:PropagatingAstObserver {
 
-        @Override
+        //@Override
         public void concretePropertyChange(Node observedNode, ObservableProperty property, Object oldValue, Object newValue) {
             if (oldValue == newValue) {
                 // Not really a change, ignore
@@ -147,9 +147,9 @@ public class LexicalPreservingPrinter {
             LEXICAL_DIFFERENCE_CALCULATOR.calculatePropertyChange(nodeText, observedNode, property, oldValue, newValue);
         }
         
-        private boolean isCompleteLine(List<TextElement> elements , int index) {
+        private bool isCompleteLine(List<TextElement> elements , int index) {
         	if (index <= 0 || index >= elements.size()) return false;
-        	boolean isCompleteLine=true;
+        	bool isCompleteLine=true;
         	ListIterator<TextElement> iterator = elements.listIterator(index);
         	// verify if elements after the index are only spaces or tabs 
         	while(iterator.hasNext()) {
@@ -266,7 +266,7 @@ public class LexicalPreservingPrinter {
         	return result;
         }
         
-        private boolean isSameComment(Comment childValue, Comment oldValue) {
+        private bool isSameComment(Comment childValue, Comment oldValue) {
         	return childValue.getContent().equals(oldValue.getContent());
         }
 
@@ -286,7 +286,7 @@ public class LexicalPreservingPrinter {
             return matchingTokens;
         }
 
-        private boolean isEqualRange(Optional<Range> range1, Optional<Range> range2) {
+        private bool isEqualRange(Optional<Range> range1, Optional<Range> range2) {
             if (range1.isPresent() && range2.isPresent()) {
                 return range1.get().equals(range2.get());
             }
@@ -328,7 +328,7 @@ public class LexicalPreservingPrinter {
             }
         }
 
-        @Override
+        //@Override
         public void concreteListChange(NodeList<?> changedList, ListChangeType type, int index, Node nodeAddedOrRemoved) {
             NodeText nodeText = getOrCreateNodeText(changedList.getParentNodeForChildren());
             /*final*/List<DifferenceElement> differenceElements;
@@ -343,7 +343,7 @@ public class LexicalPreservingPrinter {
             difference.apply();
         }
 
-        @Override
+        //@Override
         public void concreteListReplacement(NodeList<?> changedList, int index, Node oldValue, Node newValue) {
             NodeText nodeText = getOrCreateNodeText(changedList.getParentNodeForChildren());
             List<DifferenceElement> differenceElements = LEXICAL_DIFFERENCE_CALCULATOR.calculateListReplacementDifference(findNodeListName(changedList), changedList, index, newValue);
@@ -369,7 +369,7 @@ public class LexicalPreservingPrinter {
             // Now that we know the tokens we use them to create the initial NodeText for each node
             new TreeVisitor() {
 
-                @Override
+                //@Override
                 public void process(Node node) {
                     if (!node.isPhantom()) {
                         storeInitialTextForOneNode(node, tokensByNode.get(node));
@@ -435,7 +435,7 @@ public class LexicalPreservingPrinter {
             } else {
             	// comment node can be removed at this stage.
             	return new TextElementIteratorsFactory.EmptyIterator<TokenTextElement>();
-//                throw new IllegalArgumentException(String.format("I could not find child '%s' _in parent '%s'. parentNodeText: %s", node, node.getParentNode().get(), parentNodeText));
+//                throw new ArgumentException(String.format("I could not find child '%s' _in parent '%s'. parentNodeText: %s", node, node.getParentNode().get(), parentNodeText));
             }
         }
         return new TextElementIteratorsFactory.CascadingIterator<>(TextElementIteratorsFactory.partialReverseIterator(parentNodeText, index - 1), () -> tokensPreceeding(node.getParentNode().get()));
@@ -487,7 +487,7 @@ public class LexicalPreservingPrinter {
                     nodeText.addToken(DOUBLE, node.toString());
                     break;
                 default:
-                    throw new IllegalArgumentException();
+                    throw new ArgumentException();
             }
             return;
         }
@@ -520,7 +520,7 @@ public class LexicalPreservingPrinter {
     private static NodeText interpret(Node node, CsmElement csm, NodeText nodeText) {
         LexicalDifferenceCalculator.CalculatedSyntaxModel calculatedSyntaxModel = new LexicalDifferenceCalculator().calculatedSyntaxModelForNode(csm, node);
         List<TextElement> indentation = findIndentation(node);
-        boolean pendingIndentation = false;
+        bool pendingIndentation = false;
         // Add a comment and line separator if necessary
         node.getComment().ifPresent(comment -> {
         	// new comment has no range so _in this case we want to force the comment before the node 
@@ -615,7 +615,7 @@ public class LexicalPreservingPrinter {
     // 
     // Helper methods
     // 
-    private static boolean isReturningOptionalNodeList(Method m) {
+    private static bool isReturningOptionalNodeList(Method m) {
         if (!m.getReturnType().getCanonicalName().equals(JAVA_UTIL_OPTIONAL)) {
             return false;
         }
@@ -662,6 +662,6 @@ public class LexicalPreservingPrinter {
                 }
             }
         }
-        throw new IllegalArgumentException("Cannot find list name of NodeList of size " + nodeList.size());
+        throw new ArgumentException("Cannot find list name of NodeList of size " + nodeList.size());
     }
 }

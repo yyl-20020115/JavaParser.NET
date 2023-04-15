@@ -54,8 +54,8 @@ public class Issue2406Test:AbstractSymbolResolutionTest {
         CompilationUnit cu = StaticJavaParser.parse(s);
         List<MethodCallExpr> mces = cu.findAll(MethodCallExpr.class, new Predicate() {
 
-            @Override
-            public boolean test(Object t) {
+            //@Override
+            public bool test(Object t) {
                 return ((MethodCallExpr)t).getNameAsString().equals("copyOf");
             }
             

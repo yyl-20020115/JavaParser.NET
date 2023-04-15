@@ -54,7 +54,7 @@ public class Issue3087Test:AbstractResolutionTest {
       ResolvedReferenceTypeDeclaration resolvedClass = coid.resolve();
       try {
           resolvedClass.getAncestors();
-      } catch (IllegalArgumentException e) {
+      } catch (ArgumentException e) {
           fail("Unable to resolve class EntrySet<Object, Object>", e);
       }
     }

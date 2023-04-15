@@ -28,7 +28,7 @@ namespace com.github.javaparser.symbolsolver.resolution.typeinference;
  */
 public class ExpressionHelper {
 
-    public static boolean isExplicitlyTyped(LambdaExpr lambdaExpr) {
+    public static bool isExplicitlyTyped(LambdaExpr lambdaExpr) {
         return lambdaExpr.getParameters().stream().allMatch(p -> !(p.getType() is UnknownType));
     }
 
@@ -36,7 +36,7 @@ public class ExpressionHelper {
         throw new UnsupportedOperationException();
     }
 
-    public static boolean isCompatibleInAssignmentContext(Expression expression, ResolvedType type, TypeSolver typeSolver) {
+    public static bool isCompatibleInAssignmentContext(Expression expression, ResolvedType type, TypeSolver typeSolver) {
         return type.isAssignableBy(JavaParserFacade.get(typeSolver).getType(expression, false));
     }
 }

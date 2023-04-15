@@ -52,7 +52,7 @@ public class ForEachStmt:Statement implements NodeWithBody<ForEachStmt> {
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public ForEachStmt(TokenRange tokenRange, VariableDeclarationExpr variable, Expression iterable, Statement body) {
-        super(tokenRange);
+        base(tokenRange);
         setVariable(variable);
         setIterable(iterable);
         setBody(body);
@@ -63,15 +63,15 @@ public class ForEachStmt:Statement implements NodeWithBody<ForEachStmt> {
         this(null, variable, new NameExpr(iterable), body);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -157,19 +157,19 @@ public class ForEachStmt:Statement implements NodeWithBody<ForEachStmt> {
      *
      * @return {@code true} if this foreach statement's variable is {@code final}, and {@code false} otherwise.
      */
-    public boolean hasFinalVariable() {
+    public bool hasFinalVariable() {
         return getVariable().getModifiers().isNonEmpty() && getVariable().getModifiers().get(0).getKeyword() == Modifier.Keyword.FINAL;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public ForEachStmt clone() {
         return (ForEachStmt) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }
@@ -188,31 +188,31 @@ public class ForEachStmt:Statement implements NodeWithBody<ForEachStmt> {
         return super.replace(node, replacementNode);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isForEachStmt() {
+    public bool isForEachStmt() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public ForEachStmt asForEachStmt() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<ForEachStmt> toForEachStmt() {
         return Optional.of(this);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifForEachStmt(Consumer<ForEachStmt> action) {
         action.accept(this);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public ForEachStmtMetaModel getMetaModel() {
         return JavaParserMetaModel.forEachStmtMetaModel;

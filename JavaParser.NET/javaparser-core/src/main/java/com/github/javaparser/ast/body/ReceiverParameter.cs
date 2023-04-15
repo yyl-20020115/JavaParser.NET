@@ -66,22 +66,22 @@ public class ReceiverParameter:Node implements NodeWithType<ReceiverParameter, T
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public ReceiverParameter(TokenRange tokenRange, NodeList<AnnotationExpr> annotations, Type type, Name name) {
-        super(tokenRange);
+        base(tokenRange);
         setAnnotations(annotations);
         setType(type);
         setName(name);
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -130,13 +130,13 @@ public class ReceiverParameter:Node implements NodeWithType<ReceiverParameter, T
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public ReceiverParameter clone() {
         return (ReceiverParameter) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public ReceiverParameterMetaModel getMetaModel() {
         return JavaParserMetaModel.receiverParameterMetaModel;
@@ -161,9 +161,9 @@ public class ReceiverParameter:Node implements NodeWithType<ReceiverParameter, T
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
-    public boolean remove(Node node) {
+    public bool remove(Node node) {
         if (node == null) {
             return false;
         }
@@ -176,9 +176,9 @@ public class ReceiverParameter:Node implements NodeWithType<ReceiverParameter, T
         return super.remove(node);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }

@@ -59,7 +59,7 @@ public interface NodeWithTypeParameters<N:Node> {
 
     N setTypeParameters(NodeList<TypeParameter> typeParameters);
 
-    default boolean isGeneric() {
+    default bool isGeneric() {
         return getTypeParameters().size() > 0;
     }
 }

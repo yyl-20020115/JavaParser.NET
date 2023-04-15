@@ -36,7 +36,7 @@ public class FieldDeclaration:BodyDeclaration<FieldDeclaration> implements NodeW
 
     private NodeList<Modifier> modifiers;
 
-    @NonEmptyProperty
+    //@NonEmptyProperty
     private NodeList<VariableDeclarator> variables;
 
     public FieldDeclaration() {
@@ -61,7 +61,7 @@ public class FieldDeclaration:BodyDeclaration<FieldDeclaration> implements NodeW
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public FieldDeclaration(TokenRange tokenRange, NodeList<Modifier> modifiers, NodeList<AnnotationExpr> annotations, NodeList<VariableDeclarator> variables) {
-        super(tokenRange, annotations);
+        base(tokenRange, annotations);
         setModifiers(modifiers);
         setVariables(variables);
         customInitialization();
@@ -78,15 +78,15 @@ public class FieldDeclaration:BodyDeclaration<FieldDeclaration> implements NodeW
         this(assertNotNull(modifiers), new VariableDeclarator(type, assertNotNull(name)));
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -96,19 +96,19 @@ public class FieldDeclaration:BodyDeclaration<FieldDeclaration> implements NodeW
      * @return modifiers
      * @see Modifier
      */
-    @Override
+    //@Override
 	//@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public NodeList<Modifier> getModifiers() {
         return modifiers;
     }
 
-    @Override
+    //@Override
 	//@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public NodeList<VariableDeclarator> getVariables() {
         return variables;
     }
 
-    @Override
+    //@Override
 	//@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public FieldDeclaration setModifiers(/*final*/NodeList<Modifier> modifiers) {
         assertNotNull(modifiers);
@@ -123,7 +123,7 @@ public class FieldDeclaration:BodyDeclaration<FieldDeclaration> implements NodeW
         return this;
     }
 
-    @Override
+    //@Override
 	//@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public FieldDeclaration setVariables(/*final*/NodeList<VariableDeclarator> variables) {
         assertNotNull(variables);
@@ -193,57 +193,57 @@ public class FieldDeclaration:BodyDeclaration<FieldDeclaration> implements NodeW
         return setter;
     }
 
-    public boolean isTransient() {
+    public bool isTransient() {
         return hasModifier(Modifier.Keyword.TRANSIENT);
     }
 
-    public boolean isVolatile() {
+    public bool isVolatile() {
         return hasModifier(Modifier.Keyword.VOLATILE);
     }
 
-    public FieldDeclaration setTransient(boolean set) {
+    public FieldDeclaration setTransient(bool set) {
         return setModifier(Modifier.Keyword.TRANSIENT, set);
     }
 
-    public FieldDeclaration setVolatile(boolean set) {
+    public FieldDeclaration setVolatile(bool set) {
         return setModifier(Modifier.Keyword.VOLATILE, set);
     }
 
     /*
      * Every field declaration _in the body of an interface is implicitly public, static, and final.
      */
-    @Override
-    public boolean isStatic() {
+    //@Override
+    public bool isStatic() {
     	return hasModifier(STATIC) || isDeclaredInInterface();
     }
 
     /*
      * Every field declaration _in the body of an interface is implicitly public, static, and final.
      */
-    @Override
-    public boolean isFinal() {
+    //@Override
+    public bool isFinal() {
     	return hasModifier(Keyword.FINAL) || isDeclaredInInterface();
     }
 
     /*
      * Every field declaration _in the body of an interface is implicitly public, static, and final.
      */
-    @Override
-    public boolean isPublic() {
+    //@Override
+    public bool isPublic() {
     	return hasModifier(Keyword.PUBLIC) || isDeclaredInInterface();
     }
 
     /*
      * Returns true if the field is declared _in an interface
      */
-    private boolean isDeclaredInInterface() {
+    private bool isDeclaredInInterface() {
     	Optional<ClassOrInterfaceDeclaration> parentClass = findAncestor(ClassOrInterfaceDeclaration.class);
     	return parentClass.map(parent -> parent.isInterface()).orElse(false);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
-    public boolean remove(Node node) {
+    public bool remove(Node node) {
         if (node == null) {
             return false;
         }
@@ -262,21 +262,21 @@ public class FieldDeclaration:BodyDeclaration<FieldDeclaration> implements NodeW
         return super.remove(node);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public FieldDeclaration clone() {
         return (FieldDeclaration) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public FieldDeclarationMetaModel getMetaModel() {
         return JavaParserMetaModel.fieldDeclarationMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }
@@ -295,30 +295,30 @@ public class FieldDeclaration:BodyDeclaration<FieldDeclaration> implements NodeW
         return super.replace(node, replacementNode);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isFieldDeclaration() {
+    public bool isFieldDeclaration() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public FieldDeclaration asFieldDeclaration() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifFieldDeclaration(Consumer<FieldDeclaration> action) {
         action.accept(this);
     }
 
-    @Override
+    //@Override
     public ResolvedFieldDeclaration resolve() {
         return getSymbolResolver().resolveDeclaration(this, ResolvedFieldDeclaration.class);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<FieldDeclaration> toFieldDeclaration() {
         return Optional.of(this);

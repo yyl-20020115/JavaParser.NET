@@ -34,7 +34,7 @@ class Issue276Test:AbstractResolutionTest{
         		new ReflectionTypeSolver(), 
         		new JavaParserTypeSolver(adaptPath("src/test/resources/issue276"), new LeanParserConfiguration()));
         List<MethodDeclaration> methods = cls.findAll(MethodDeclaration.class);
-        boolean isSolved = false;
+        bool isSolved = false;
         for (MethodDeclaration method: methods) {
         	if (method.getNameAsString().equals("overrideMe")) {
         		MethodContext context = new MethodContext(method, typeSolver);

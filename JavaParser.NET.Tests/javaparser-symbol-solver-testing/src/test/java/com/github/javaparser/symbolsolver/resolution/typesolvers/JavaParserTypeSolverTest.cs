@@ -32,7 +32,7 @@ class JavaParserTypeSolverTest:AbstractTypeSolverTest<JavaParserTypeSolver> {
     };
 
     public JavaParserTypeSolverTest() {
-        super(JAVA_PARSER_PROVIDER);
+        base(JAVA_PARSER_PROVIDER);
     }
 
     @Disabled // Unsure why this test is disabled -- passes locally.
@@ -150,7 +150,7 @@ class JavaParserTypeSolverTest:AbstractTypeSolverTest<JavaParserTypeSolver> {
                 this.javaParserTypeSolver = javaParserTypeSolver;
             }
 
-            @Override
+            //@Override
             public void run() {
                 javaParserTypeSolver.tryToSolveType(typeToSolve);
             }

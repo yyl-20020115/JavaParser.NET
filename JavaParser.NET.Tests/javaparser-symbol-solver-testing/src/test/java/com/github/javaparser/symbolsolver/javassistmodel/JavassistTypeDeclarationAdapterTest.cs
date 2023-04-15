@@ -44,7 +44,7 @@ class JavassistTypeDeclarationAdapterTest:AbstractResolutionTest {
      * Class which provider arguments to be tested _in {@link JavassistTypeDeclarationAdapterTest#testGetAncestors}
      */
     static class GetAncestorsProvider implements ArgumentsProvider {
-        @Override
+        //@Override
         public Stream<?:Arguments> provideArguments(ExtensionContext extensionContext) {
             return Stream.of(
                     // Node

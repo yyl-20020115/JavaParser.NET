@@ -31,7 +31,7 @@ class PropagatingAstObserverTest {
         CompilationUnit cu = parse(code);
         List<String> changes = new ArrayList<>();
         AstObserver observer = new PropagatingAstObserver() {
-            @Override
+            //@Override
             public void concretePropertyChange(Node observedNode, ObservableProperty property, Object oldValue, Object newValue) {
                 changes.add(String.format("%s.%s changed from %s to %s", observedNode.getClass().getSimpleName(), property.name().toLowerCase(), oldValue, newValue));
             }

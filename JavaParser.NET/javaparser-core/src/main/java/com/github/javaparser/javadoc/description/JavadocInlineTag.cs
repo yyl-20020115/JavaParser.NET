@@ -30,10 +30,10 @@ public class JavadocInlineTag implements JavadocDescriptionElement {
 
     public static JavadocDescriptionElement fromText(string text) {
         if (!text.startsWith("{@")) {
-            throw new IllegalArgumentException(String.format("Expected to start with '{@'. Text '%s'", text));
+            throw new ArgumentException(String.format("Expected to start with '{@'. Text '%s'", text));
         }
         if (!text.endsWith("}")) {
-            throw new IllegalArgumentException(String.format("Expected to end with '}'. Text '%s'", text));
+            throw new ArgumentException(String.format("Expected to end with '}'. Text '%s'", text));
         }
         text = text.substring(2, text.length() - 1);
         string tagName = nextWord(text);
@@ -98,13 +98,13 @@ public class JavadocInlineTag implements JavadocDescriptionElement {
         return tagName;
     }
 
-    @Override
+    //@Override
     public string toText() {
         return "{@" + tagName + this.content + "}";
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -117,7 +117,7 @@ public class JavadocInlineTag implements JavadocDescriptionElement {
         return content != null ? content.equals(that.content) : that.content == null;
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         int result = tagName != null ? tagName.hashCode() : 0;
         result = 31 * result + (type != null ? type.hashCode() : 0);
@@ -125,7 +125,7 @@ public class JavadocInlineTag implements JavadocDescriptionElement {
         return result;
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "JavadocInlineTag{" + "tagName='" + tagName + '\'' + ", type=" + type + ", content='" + content + '\'' + '}';
     }

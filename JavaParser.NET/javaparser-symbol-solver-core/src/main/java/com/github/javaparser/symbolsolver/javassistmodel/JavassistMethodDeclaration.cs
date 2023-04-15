@@ -37,59 +37,59 @@ public class JavassistMethodDeclaration implements ResolvedMethodDeclaration, Ty
         this.methodLikeAdaper = new JavassistMethodLikeDeclarationAdapter(ctMethod, typeSolver, this);
     }
 
-    @Override
-    public boolean isDefaultMethod() {
+    //@Override
+    public bool isDefaultMethod() {
         return ctMethod.getDeclaringClass().isInterface() && !isAbstract();
     }
 
-    @Override
-    public boolean isStatic() {
+    //@Override
+    public bool isStatic() {
         return Modifier.isStatic(ctMethod.getModifiers());
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "JavassistMethodDeclaration{" +
                 "ctMethod=" + ctMethod +
                 '}';
     }
 
-    @Override
+    //@Override
     public string getName() {
         return ctMethod.getName();
     }
 
-    @Override
-    public boolean isField() {
+    //@Override
+    public bool isField() {
         return false;
     }
 
-    @Override
-    public boolean isParameter() {
+    //@Override
+    public bool isParameter() {
         return false;
     }
 
-    @Override
-    public boolean isType() {
+    //@Override
+    public bool isType() {
         return false;
     }
 
-    @Override
+    //@Override
     public ResolvedReferenceTypeDeclaration declaringType() {
         return JavassistFactory.toTypeDeclaration(ctMethod.getDeclaringClass(), typeSolver);
     }
 
-    @Override
+    //@Override
     public ResolvedType getReturnType() {
         return methodLikeAdaper.getReturnType();
     }
 
-    @Override
+    //@Override
     public int getNumberOfParams() {
         return methodLikeAdaper.getNumberOfParams();
     }
 
-    @Override
+    //@Override
     public ResolvedParameterDeclaration getParam(int i) {
         return methodLikeAdaper.getParam(i);
     }
@@ -98,37 +98,37 @@ public class JavassistMethodDeclaration implements ResolvedMethodDeclaration, Ty
         throw new UnsupportedOperationException();
     }
 
-    @Override
+    //@Override
     public MethodUsage resolveTypeVariables(Context context, List<ResolvedType> parameterTypes) {
         return new MethodDeclarationCommonLogic(this, typeSolver).resolveTypeVariables(context, parameterTypes);
     }
 
-    @Override
-    public boolean isAbstract() {
+    //@Override
+    public bool isAbstract() {
         return Modifier.isAbstract(ctMethod.getModifiers());
     }
 
-    @Override
+    //@Override
     public List<ResolvedTypeParameterDeclaration> getTypeParameters() {
         return methodLikeAdaper.getTypeParameters();
     }
 
-    @Override
+    //@Override
     public AccessSpecifier accessSpecifier() {
         return JavassistFactory.modifiersToAccessLevel(ctMethod.getModifiers());
     }
 
-    @Override
+    //@Override
     public int getNumberOfSpecifiedExceptions() {
         return methodLikeAdaper.getNumberOfSpecifiedExceptions();
     }
 
-    @Override
+    //@Override
     public ResolvedType getSpecifiedException(int index) {
         return methodLikeAdaper.getSpecifiedException(index);
     }
 
-    @Override
+    //@Override
     public string toDescriptor() {
         return ctMethod.getMethodInfo().getDescriptor();
     }

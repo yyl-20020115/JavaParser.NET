@@ -50,7 +50,7 @@ public /*final*/class AnnotationMemberDeclaration:BodyDeclaration<AnnotationMemb
 
     public AnnotationMemberDeclaration(EnumSet<Modifier> modifiers, List<AnnotationExpr> annotations, Type type, string name,
                                        Expression defaultValue) {
-        super(annotations);
+        base(annotations);
         setModifiers(modifiers);
         setType(type);
         setName(name);
@@ -59,7 +59,7 @@ public /*final*/class AnnotationMemberDeclaration:BodyDeclaration<AnnotationMemb
 
     public AnnotationMemberDeclaration(Range range, EnumSet<Modifier> modifiers, List<AnnotationExpr> annotations, Type type,
                                        string name, Expression defaultValue) {
-        super(range, annotations);
+        base(range, annotations);
         setModifiers(modifiers);
         setType(type);
         setName(name);

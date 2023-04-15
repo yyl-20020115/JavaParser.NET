@@ -49,21 +49,21 @@ public class SynchronizedStmt:Statement implements NodeWithBlockStmt<Synchronize
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public SynchronizedStmt(TokenRange tokenRange, Expression expression, BlockStmt body) {
-        super(tokenRange);
+        base(tokenRange);
         setExpression(expression);
         setBody(body);
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -105,21 +105,21 @@ public class SynchronizedStmt:Statement implements NodeWithBlockStmt<Synchronize
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public SynchronizedStmt clone() {
         return (SynchronizedStmt) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public SynchronizedStmtMetaModel getMetaModel() {
         return JavaParserMetaModel.synchronizedStmtMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }
@@ -134,25 +134,25 @@ public class SynchronizedStmt:Statement implements NodeWithBlockStmt<Synchronize
         return super.replace(node, replacementNode);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isSynchronizedStmt() {
+    public bool isSynchronizedStmt() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public SynchronizedStmt asSynchronizedStmt() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifSynchronizedStmt(Consumer<SynchronizedStmt> action) {
         action.accept(this);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<SynchronizedStmt> toSynchronizedStmt() {
         return Optional.of(this);

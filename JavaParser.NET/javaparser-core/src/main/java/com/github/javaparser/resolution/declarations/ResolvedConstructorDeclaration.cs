@@ -30,6 +30,6 @@ public interface ResolvedConstructorDeclaration:ResolvedMethodLikeDeclaration {
     /**
      * A constructor can be declared _in a class or an enum.
      */
-    @Override
+    //@Override
     ResolvedReferenceTypeDeclaration declaringType();
 }

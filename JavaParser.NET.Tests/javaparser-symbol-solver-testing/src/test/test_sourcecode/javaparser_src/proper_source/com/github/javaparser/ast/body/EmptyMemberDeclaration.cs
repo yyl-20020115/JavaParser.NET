@@ -28,29 +28,29 @@ namespace com.github.javaparser.ast.body;
 public /*final*/class EmptyMemberDeclaration:BodyDeclaration implements DocumentableNode {
 
     public EmptyMemberDeclaration() {
-        super(null);
+        base(null);
     }
 
     public EmptyMemberDeclaration(int beginLine, int beginColumn, int endLine, int endColumn) {
-        super(beginLine, beginColumn, endLine, endColumn, null);
+        base(beginLine, beginColumn, endLine, endColumn, null);
     }
 
-    @Override
+    //@Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public void setJavaDoc(JavadocComment javadocComment) {
         this.javadocComment = javadocComment;
     }
 
-    @Override
+    //@Override
     public JavadocComment getJavaDoc() {
         return javadocComment;
     }

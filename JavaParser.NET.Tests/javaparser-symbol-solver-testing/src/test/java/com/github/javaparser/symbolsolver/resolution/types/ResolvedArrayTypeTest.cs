@@ -163,7 +163,7 @@ class ResolvedArrayTypeTest:AbstractResolutionTest {
 		assertFalse(array(rObject).isAssignableBy(array(ResolvedPrimitiveType.LONG)));
 	}
 
-	private boolean isAssignableBy(ResolvedType type, ResolvedType... types) {
+	private bool isAssignableBy(ResolvedType type, ResolvedType... types) {
 		return Arrays.stream(types).anyMatch(t -> type.isAssignableBy(t));
 	}
 

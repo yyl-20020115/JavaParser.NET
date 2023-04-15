@@ -41,10 +41,10 @@ public class ResolvedWildcard implements ResolvedType {
 
     private ResolvedWildcard(BoundType type, ResolvedType boundedType) {
         if (type == null && boundedType != null) {
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         }
         if (type != null && boundedType == null) {
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         }
         this.type = type;
         this.boundedType = boundedType;
@@ -58,23 +58,23 @@ public class ResolvedWildcard implements ResolvedType {
         return new ResolvedWildcard(BoundType.EXTENDS, type);
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "WildcardUsage{" + "type=" + type + ", boundedType=" + boundedType + '}';
     }
 
-    @Override
-	public boolean isWildcard() {
+    //@Override
+	public bool isWildcard() {
         return true;
     }
 
-    @Override
+    //@Override
 	public ResolvedWildcard asWildcard() {
         return this;
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o)
             return true;
         if (!(o is ResolvedWildcard))
@@ -87,14 +87,14 @@ public class ResolvedWildcard implements ResolvedType {
         return true;
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         int result = type != null ? type.hashCode() : 0;
         result = 31 * result + (boundedType != null ? boundedType.hashCode() : 0);
         return result;
     }
 
-    @Override
+    //@Override
     public string describe() {
         if (type == null) {
             return "?";
@@ -107,15 +107,15 @@ public class ResolvedWildcard implements ResolvedType {
         }
     }
 
-    public boolean isSuper() {
+    public bool isSuper() {
         return type == BoundType.SUPER;
     }
 
-    public boolean isExtends() {
+    public bool isExtends() {
         return type == BoundType.EXTENDS;
     }
 
-    public boolean isBounded() {
+    public bool isBounded() {
         return isSuper() || isExtends();
     }
 
@@ -126,8 +126,8 @@ public class ResolvedWildcard implements ResolvedType {
         return boundedType;
     }
 
-    @Override
-    public boolean isAssignableBy(ResolvedType other) {
+    //@Override
+    public bool isAssignableBy(ResolvedType other) {
         if (boundedType == null) {
             // return other.isReferenceType() && other.asReferenceType().getQualifiedName().equals(Object.class.getCanonicalName());
             return false;
@@ -140,10 +140,10 @@ public class ResolvedWildcard implements ResolvedType {
         }
     }
 
-    @Override
+    //@Override
     public ResolvedType replaceTypeVariables(ResolvedTypeParameterDeclaration tpToReplace, ResolvedType replaced, Map<ResolvedTypeParameterDeclaration, ResolvedType> inferredTypes) {
         if (replaced == null) {
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         }
         if (boundedType == null) {
             return this;
@@ -159,16 +159,16 @@ public class ResolvedWildcard implements ResolvedType {
         }
     }
 
-    @Override
-    public boolean mention(List<ResolvedTypeParameterDeclaration> typeParameters) {
+    //@Override
+    public bool mention(List<ResolvedTypeParameterDeclaration> typeParameters) {
         return boundedType != null && boundedType.mention(typeParameters);
     }
 
-    public boolean isUpperBounded() {
+    public bool isUpperBounded() {
         return isSuper();
     }
 
-    public boolean isLowerBounded() {
+    public bool isLowerBounded() {
         return isExtends();
     }
 
@@ -180,7 +180,7 @@ public class ResolvedWildcard implements ResolvedType {
     /*
      * Returns the bounded resolved type.
      */
-    @Override
+    //@Override
     public ResolvedType solveGenericTypes(Context context) {
     	if (isExtends() || isSuper()) {
             ResolvedType boundResolved = getBoundedType().solveGenericTypes(context);

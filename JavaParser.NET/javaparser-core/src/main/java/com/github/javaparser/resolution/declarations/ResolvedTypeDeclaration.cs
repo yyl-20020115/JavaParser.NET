@@ -37,7 +37,7 @@ public interface ResolvedTypeDeclaration:ResolvedDeclaration {
     /**
      * Get the list of types defined inside the current type.
      */
-    default Set<ResolvedReferenceTypeDeclaration> internalTypes() {
+    default HashSet<ResolvedReferenceTypeDeclaration> internalTypes() {
         throw new UnsupportedOperationException("InternalTypes not available for " + this.getClass().getCanonicalName());
     }
 
@@ -54,7 +54,7 @@ public interface ResolvedTypeDeclaration:ResolvedDeclaration {
      * Does this type contain an internal type with the given name?
      * (Does not include internal types inside internal types).
      */
-    default boolean hasInternalType(string name) {
+    default bool hasInternalType(string name) {
         return this.internalTypes().stream().anyMatch(f -> f.getName().equals(name));
     }
 
@@ -70,47 +70,47 @@ public interface ResolvedTypeDeclaration:ResolvedDeclaration {
      * Is this the declaration of a class?
      * Note that an Enum is not considered a Class _in this case.
      */
-    default boolean isClass() {
+    default bool isClass() {
         return false;
     }
 
     /**
      * Is this the declaration of an interface?
      */
-    default boolean isInterface() {
+    default bool isInterface() {
         return false;
     }
 
     /**
      * Is this the declaration of an enum?
      */
-    default boolean isEnum() {
+    default bool isEnum() {
         return false;
     }
 
     /**
      * Is this the declaration of an annotation?
      */
-    default boolean isAnnotation() {
+    default bool isAnnotation() {
         return false;
     }
 
     /**
      * Is this the declaration of a reference type?
      */
-    default boolean isReferenceType() {
+    default bool isReferenceType() {
         return false;
     }
 
     /**
      * Is this the declaration of a type parameter?
      */
-    default boolean isTypeParameter() {
+    default bool isTypeParameter() {
         return false;
     }
 
-    @Override
-    default boolean isType() {
+    //@Override
+    default bool isType() {
         return true;
     }
 
@@ -133,11 +133,11 @@ public interface ResolvedTypeDeclaration:ResolvedDeclaration {
      * };
      * </pre>
      */
-    default boolean isAnonymousClass() {
+    default bool isAnonymousClass() {
         return false;
     }
 
-    @Override
+    //@Override
     default ResolvedTypeDeclaration asType() {
         return this;
     }

@@ -127,7 +127,7 @@ class NodeTest {
     void removingTheSecondOfAListOfIdenticalStatementsDoesNotMessUpTheParents() {
         CompilationUnit unit = parse(String.format("public class Example {%1$s" +
                 "  public static void example() {%1$s" +
-                "    boolean swapped;%1$s" +
+                "    bool swapped;%1$s" +
                 "    swapped=false;%1$s" +
                 "    swapped=false;%1$s" +
                 "  }%1$s" +

@@ -28,7 +28,7 @@ namespace com.github.javaparser.symbolsolver.reflectionmodel;
  */
 class ReflectionMethodResolutionLogic {
 
-    static SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> parameterTypes, boolean staticOnly,
+    static SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> parameterTypes, bool staticOnly,
                                                                   TypeSolver typeSolver, ResolvedReferenceTypeDeclaration scopeType,
                                                                   Class clazz){
         List<ResolvedMethodDeclaration> methods = new ArrayList<>();

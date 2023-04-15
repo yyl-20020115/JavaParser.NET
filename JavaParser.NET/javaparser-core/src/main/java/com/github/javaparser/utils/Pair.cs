@@ -39,8 +39,8 @@ public class Pair<A, B> {
         this.b = b;
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -53,13 +53,13 @@ public class Pair<A, B> {
         return true;
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         int result = a != null ? a.hashCode() : 0;
         return 31 * result + (b != null ? b.hashCode() : 0);
     }
 
-    @Override
+    //@Override
     public string toString() {
         return f("<%s, %s>", a, b);
     }

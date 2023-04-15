@@ -27,10 +27,10 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.contexts;
 public class ForStatementContext:AbstractJavaParserContext<ForStmt> {
 
     public ForStatementContext(ForStmt wrappedNode, TypeSolver typeSolver) {
-        super(wrappedNode, typeSolver);
+        base(wrappedNode, typeSolver);
     }
 
-    @Override
+    //@Override
     public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name) {
         for (Expression expression : wrappedNode.getInitialization()) {
             if (expression is VariableDeclarationExpr) {
@@ -52,13 +52,13 @@ public class ForStatementContext:AbstractJavaParserContext<ForStmt> {
         }
     }
 
-    @Override
-    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
+    //@Override
+    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, bool staticOnly) {
         // TODO: Document why staticOnly is forced to be false.
         return solveMethodInParentContext(name, argumentsTypes, false);
     }
 
-    @Override
+    //@Override
     public List<VariableDeclarator> localVariablesExposedToChild(Node child) {
         List<VariableDeclarator> res = new LinkedList<>();
         for (Expression expression : wrappedNode.getInitialization()) {

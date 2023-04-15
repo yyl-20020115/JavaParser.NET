@@ -32,15 +32,15 @@ public /*final*/class AnnotationDeclaration:TypeDeclaration implements Documenta
     }
 
     public AnnotationDeclaration(int modifiers, string name) {
-        super(modifiers, name);
+        base(modifiers, name);
     }
 
     public AnnotationDeclaration(int modifiers, List<AnnotationExpr> annotations, string name, List<BodyDeclaration> members) {
-        super(annotations, modifiers, name, members);
+        base(annotations, modifiers, name, members);
     }
 
     public AnnotationDeclaration(int beginLine, int beginColumn, int endLine, int endColumn, int modifiers, List<AnnotationExpr> annotations, string name, List<BodyDeclaration> members) {
-        super(beginLine, beginColumn, endLine, endColumn, annotations, modifiers, name, members);
+        base(beginLine, beginColumn, endLine, endColumn, annotations, modifiers, name, members);
     }
 
     //@Override

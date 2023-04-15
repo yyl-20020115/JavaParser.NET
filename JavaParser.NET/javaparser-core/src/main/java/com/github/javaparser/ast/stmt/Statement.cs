@@ -40,24 +40,24 @@ public abstract class Statement:Node {
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public Statement(TokenRange tokenRange) {
-        super(tokenRange);
+        base(tokenRange);
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public Statement clone() {
         return (Statement) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public StatementMetaModel getMetaModel() {
         return JavaParserMetaModel.statementMetaModel;
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isAssertStmt() {
+    public bool isAssertStmt() {
         return false;
     }
 
@@ -67,7 +67,7 @@ public abstract class Statement:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isBlockStmt() {
+    public bool isBlockStmt() {
         return false;
     }
 
@@ -77,7 +77,7 @@ public abstract class Statement:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isBreakStmt() {
+    public bool isBreakStmt() {
         return false;
     }
 
@@ -87,7 +87,7 @@ public abstract class Statement:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isContinueStmt() {
+    public bool isContinueStmt() {
         return false;
     }
 
@@ -97,7 +97,7 @@ public abstract class Statement:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isDoStmt() {
+    public bool isDoStmt() {
         return false;
     }
 
@@ -107,7 +107,7 @@ public abstract class Statement:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isEmptyStmt() {
+    public bool isEmptyStmt() {
         return false;
     }
 
@@ -117,7 +117,7 @@ public abstract class Statement:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isExplicitConstructorInvocationStmt() {
+    public bool isExplicitConstructorInvocationStmt() {
         return false;
     }
 
@@ -127,7 +127,7 @@ public abstract class Statement:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isExpressionStmt() {
+    public bool isExpressionStmt() {
         return false;
     }
 
@@ -137,7 +137,7 @@ public abstract class Statement:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isForStmt() {
+    public bool isForStmt() {
         return false;
     }
 
@@ -147,7 +147,7 @@ public abstract class Statement:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isIfStmt() {
+    public bool isIfStmt() {
         return false;
     }
 
@@ -157,7 +157,7 @@ public abstract class Statement:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isLabeledStmt() {
+    public bool isLabeledStmt() {
         return false;
     }
 
@@ -167,12 +167,12 @@ public abstract class Statement:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isLocalClassDeclarationStmt() {
+    public bool isLocalClassDeclarationStmt() {
         return false;
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isLocalRecordDeclarationStmt() {
+    public bool isLocalRecordDeclarationStmt() {
         return false;
     }
 
@@ -187,7 +187,7 @@ public abstract class Statement:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isReturnStmt() {
+    public bool isReturnStmt() {
         return false;
     }
 
@@ -197,7 +197,7 @@ public abstract class Statement:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isSwitchStmt() {
+    public bool isSwitchStmt() {
         return false;
     }
 
@@ -207,7 +207,7 @@ public abstract class Statement:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isSynchronizedStmt() {
+    public bool isSynchronizedStmt() {
         return false;
     }
 
@@ -217,7 +217,7 @@ public abstract class Statement:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isThrowStmt() {
+    public bool isThrowStmt() {
         return false;
     }
 
@@ -227,7 +227,7 @@ public abstract class Statement:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isTryStmt() {
+    public bool isTryStmt() {
         return false;
     }
 
@@ -237,7 +237,7 @@ public abstract class Statement:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isUnparsableStmt() {
+    public bool isUnparsableStmt() {
         return false;
     }
 
@@ -247,7 +247,7 @@ public abstract class Statement:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isWhileStmt() {
+    public bool isWhileStmt() {
         return false;
     }
 
@@ -437,7 +437,7 @@ public abstract class Statement:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isForEachStmt() {
+    public bool isForEachStmt() {
         return false;
     }
 
@@ -456,7 +456,7 @@ public abstract class Statement:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isYieldStmt() {
+    public bool isYieldStmt() {
         return false;
     }
 

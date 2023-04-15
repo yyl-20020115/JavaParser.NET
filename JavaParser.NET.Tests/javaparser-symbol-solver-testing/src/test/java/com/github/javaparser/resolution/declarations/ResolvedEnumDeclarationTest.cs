@@ -25,7 +25,7 @@ namespace com.github.javaparser.resolution.declarations;
 
 public interface ResolvedEnumDeclarationTest:ResolvedReferenceTypeDeclarationTest {
 
-    @Override
+    //@Override
     ResolvedEnumDeclaration createValue();
 
     [TestMethod]

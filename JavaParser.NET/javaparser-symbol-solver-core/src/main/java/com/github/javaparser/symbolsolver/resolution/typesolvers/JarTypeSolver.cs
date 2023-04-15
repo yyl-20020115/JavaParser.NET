@@ -54,7 +54,7 @@ public class JarTypeSolver implements TypeSolver {
      */
     private static string convertEntryPathToClassName(string entryPath) {
         if (!entryPath.endsWith(CLASS_EXTENSION)) {
-            throw new IllegalArgumentException(String.format("The entry path should end with %s", CLASS_EXTENSION));
+            throw new ArgumentException(String.format("The entry path should end with %s", CLASS_EXTENSION));
         }
         string className = entryPath.substring(0, entryPath.length() - CLASS_EXTENSION.length());
         className = className.replace('/', '.');
@@ -74,7 +74,7 @@ public class JarTypeSolver implements TypeSolver {
      */
     private static string convertEntryPathToClassPoolName(string entryPath) {
         if (!entryPath.endsWith(CLASS_EXTENSION)) {
-            throw new IllegalArgumentException(String.format("The entry path should end with %s", CLASS_EXTENSION));
+            throw new ArgumentException(String.format("The entry path should end with %s", CLASS_EXTENSION));
         }
         string className = entryPath.substring(0, entryPath.length() - CLASS_EXTENSION.length());
         return className.replace('/', '.');
@@ -219,16 +219,16 @@ public class JarTypeSolver implements TypeSolver {
      *
      * @return The set of known classes.
      */
-    public Set<String> getKnownClasses() {
+    public HashSet<String> getKnownClasses() {
         return knownClasses.keySet();
     }
 
-    @Override
+    //@Override
     public TypeSolver getParent() {
         return parent;
     }
 
-    @Override
+    //@Override
     public void setParent(TypeSolver parent) {
         Objects.requireNonNull(parent);
         if (this.parent != null) {
@@ -240,7 +240,7 @@ public class JarTypeSolver implements TypeSolver {
         this.parent = parent;
     }
 
-    @Override
+    //@Override
     public SymbolReference<ResolvedReferenceTypeDeclaration> tryToSolveType(string name) {
 
         string storedKey = knownClasses.get(name);
@@ -261,7 +261,7 @@ public class JarTypeSolver implements TypeSolver {
         }
     }
 
-    @Override
+    //@Override
     public ResolvedReferenceTypeDeclaration solveType(string name) throws UnsolvedSymbolException {
         SymbolReference<ResolvedReferenceTypeDeclaration> ref = tryToSolveType(name);
         if (ref.isSolved()) {

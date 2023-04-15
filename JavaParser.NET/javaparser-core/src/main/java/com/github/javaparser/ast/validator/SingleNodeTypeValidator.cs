@@ -35,7 +35,7 @@ public class SingleNodeTypeValidator<N:Node> implements Validator {
         this.validator = validator;
     }
 
-    @Override
+    //@Override
     public void accept(Node node, ProblemReporter problemReporter) {
         if (type.isInstance(node)) {
             validator.accept(type.cast(node), problemReporter);

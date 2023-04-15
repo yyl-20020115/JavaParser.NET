@@ -25,7 +25,7 @@ namespace com.github.javaparser.resolution.declarations;
 
 public interface ResolvedValueDeclarationTest:ResolvedDeclarationTest {
 
-    @Override
+    //@Override
     ResolvedValueDeclaration createValue();
 
     string getCanonicalNameOfExpectedType(ResolvedValueDeclaration resolvedDeclaration);

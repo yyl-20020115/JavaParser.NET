@@ -160,7 +160,7 @@ class JavassistClassDeclarationTest:AbstractClassDeclarationTest {
     [TestMethod]
     void testGetDeclaredMethods() {
         JavassistClassDeclaration compilationUnit = (JavassistClassDeclaration) newTypeSolver.solveType("com.github.javaparser.Position");
-        Set<ResolvedMethodDeclaration> methodsSet = compilationUnit.getDeclaredMethods();
+        HashSet<ResolvedMethodDeclaration> methodsSet = compilationUnit.getDeclaredMethods();
         assertEquals(12, methodsSet.size());
 
         Map<String, MethodUsage> methods = new HashMap<>();
@@ -520,7 +520,7 @@ class JavassistClassDeclarationTest:AbstractClassDeclarationTest {
         }
     }
 
-    @Override
+    //@Override
     public AbstractClassDeclaration createValue() {
         try {
             TypeSolver typeSolver = new ReflectionTypeSolver();
@@ -531,13 +531,13 @@ class JavassistClassDeclarationTest:AbstractClassDeclarationTest {
         }
     }
 
-    @Override
+    //@Override
     public Optional<Node> getWrappedDeclaration(AssociableToAST associableToAST) {
         return Optional.empty();
     }
 
-    @Override
-    public boolean isFunctionalInterface(AbstractTypeDeclaration typeDeclaration) {
+    //@Override
+    public bool isFunctionalInterface(AbstractTypeDeclaration typeDeclaration) {
         return false;
     }
 

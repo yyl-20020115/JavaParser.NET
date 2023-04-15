@@ -31,7 +31,7 @@ public class Java1_2Validator:Java1_1Validator {
     /*final*/Validator strictfpNotAllowed = new ReservedKeywordValidator("strictfp");
 
     public Java1_2Validator() {
-        super();
+        base();
         replace(modifiersWithoutStrictfpAndDefaultAndStaticInterfaceMethodsAndPrivateInterfaceMethods, modifiersWithoutDefaultAndStaticInterfaceMethodsAndPrivateInterfaceMethods);
         add(strictfpNotAllowed);
     }

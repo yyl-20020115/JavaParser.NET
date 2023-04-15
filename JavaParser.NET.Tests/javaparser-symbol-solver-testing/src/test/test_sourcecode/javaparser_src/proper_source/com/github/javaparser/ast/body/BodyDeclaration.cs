@@ -38,7 +38,7 @@ public abstract class BodyDeclaration:Node implements AnnotableNode {
     }
 
     public BodyDeclaration(int beginLine, int beginColumn, int endLine, int endColumn, List<AnnotationExpr> annotations) {
-        super(beginLine, beginColumn, endLine, endColumn);
+        base(beginLine, beginColumn, endLine, endColumn);
     	setAnnotations(annotations);
     }
 

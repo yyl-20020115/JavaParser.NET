@@ -43,41 +43,41 @@ public abstract class ReferenceType:Type {
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public ReferenceType(TokenRange tokenRange, NodeList<AnnotationExpr> annotations) {
-        super(tokenRange, annotations);
+        base(tokenRange, annotations);
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public ReferenceType clone() {
         return (ReferenceType) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public ReferenceTypeMetaModel getMetaModel() {
         return JavaParserMetaModel.referenceTypeMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isReferenceType() {
+    public bool isReferenceType() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public ReferenceType asReferenceType() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifReferenceType(Consumer<ReferenceType> action) {
         action.accept(this);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<ReferenceType> toReferenceType() {
         return Optional.of(this);

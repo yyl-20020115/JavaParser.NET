@@ -40,25 +40,25 @@ public /*final*/class JavaParser {
         // hide the constructor
     }
 
-    private static boolean _doNotAssignCommentsPreceedingEmptyLines = true;
+    private static bool _doNotAssignCommentsPreceedingEmptyLines = true;
 
-    private static boolean _doNotConsiderAnnotationsAsNodeStartForCodeAttribution = false;
+    private static bool _doNotConsiderAnnotationsAsNodeStartForCodeAttribution = false;
 
-    public static boolean getDoNotConsiderAnnotationsAsNodeStartForCodeAttribution()
+    public static bool getDoNotConsiderAnnotationsAsNodeStartForCodeAttribution()
     {
         return _doNotConsiderAnnotationsAsNodeStartForCodeAttribution;
     }
 
-    public static void setDoNotConsiderAnnotationsAsNodeStartForCodeAttribution(boolean doNotConsiderAnnotationsAsNodeStartForCodeAttribution) {
+    public static void setDoNotConsiderAnnotationsAsNodeStartForCodeAttribution(bool doNotConsiderAnnotationsAsNodeStartForCodeAttribution) {
         _doNotConsiderAnnotationsAsNodeStartForCodeAttribution = doNotConsiderAnnotationsAsNodeStartForCodeAttribution;
     }
 
-    public static boolean getDoNotAssignCommentsPreceedingEmptyLines()
+    public static bool getDoNotAssignCommentsPreceedingEmptyLines()
     {
         return _doNotAssignCommentsPreceedingEmptyLines;
     }
 
-    public static void setDoNotAssignCommentsPreceedingEmptyLines(boolean doNotAssignCommentsPreceedingEmptyLines)
+    public static void setDoNotAssignCommentsPreceedingEmptyLines(bool doNotAssignCommentsPreceedingEmptyLines)
     {
         _doNotAssignCommentsPreceedingEmptyLines = doNotAssignCommentsPreceedingEmptyLines;
     }
@@ -81,7 +81,7 @@ public /*final*/class JavaParser {
      *             if the source code has parser errors
      */
     public static CompilationUnit parse(/*final*/InputStream _in,
-                                        /*final*/string encoding, boolean considerComments) {
+                                        /*final*/string encoding, bool considerComments) {
         try {
             string code = SourcesHelper.streamToString(_in, encoding);
             InputStream in1 = SourcesHelper.stringToStream(code, encoding);
@@ -128,7 +128,7 @@ public /*final*/class JavaParser {
      *             if the source code has parser errors
      * @throws IOException
      */
-    public static CompilationUnit parse(/*final*/File file, /*final*/string encoding, boolean considerComments)
+    public static CompilationUnit parse(/*final*/File file, /*final*/string encoding, bool considerComments)
             throws ParseException, IOException {
         /*final*/FileInputStream _in = new FileInputStream(file);
         try {
@@ -154,7 +154,7 @@ public /*final*/class JavaParser {
         return parse(file, null,true);
     }
 
-    public static CompilationUnit parse(/*final*/Reader reader, boolean considerComments)
+    public static CompilationUnit parse(/*final*/Reader reader, bool considerComments)
             {
         try {
             string code = SourcesHelper.readerToString(reader);
@@ -297,7 +297,7 @@ public /*final*/class JavaParser {
         insertCommentsInNode(cu,comments);
     }
 
-    private static boolean attributeLineCommentToNodeOrChild(Node node, LineComment lineComment)
+    private static bool attributeLineCommentToNodeOrChild(Node node, LineComment lineComment)
     {
         // The node start and end at the same line as the comment,
         // let's give to it the comment
@@ -407,7 +407,7 @@ public /*final*/class JavaParser {
         }
     }
 
-    private static boolean thereAreLinesBetween(Node a, Node b)
+    private static bool thereAreLinesBetween(Node a, Node b)
     {
         if (!PositionUtils.areInOrder(a, b))
         {

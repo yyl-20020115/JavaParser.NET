@@ -992,7 +992,7 @@ class ContextTest:AbstractSymbolResolutionTest {
 
             [TestMethod]
             void instanceOfPatternExprVariableDeclaration_variableDeclaration() {
-                ExpressionStmt expressionStmt = parse(ParserConfiguration.LanguageLevel.JAVA_14_PREVIEW, "boolean x = a is string s == true;", ParseStart.STATEMENT).asExpressionStmt();
+                ExpressionStmt expressionStmt = parse(ParserConfiguration.LanguageLevel.JAVA_14_PREVIEW, "bool x = a is string s == true;", ParseStart.STATEMENT).asExpressionStmt();
 
                 string message = "No pattern must be available outside of this variable declaration expression (note that the declaration expr contains many declarators).";
                 VariableDeclarationExpr variableDeclarationExpr = expressionStmt.getExpression().asVariableDeclarationExpr();
@@ -1002,7 +1002,7 @@ class ContextTest:AbstractSymbolResolutionTest {
 
             [TestMethod]
             void instanceOfPatternExprVariableDeclaration_variableDeclarator() {
-                ExpressionStmt expressionStmt = parse(ParserConfiguration.LanguageLevel.JAVA_14_PREVIEW, "boolean x = a is string s == true;", ParseStart.STATEMENT).asExpressionStmt();
+                ExpressionStmt expressionStmt = parse(ParserConfiguration.LanguageLevel.JAVA_14_PREVIEW, "bool x = a is string s == true;", ParseStart.STATEMENT).asExpressionStmt();
 
                 string message = "No pattern must be available outside of this variable declaration expression (note that the declaration expr contains many declarators).";
                 VariableDeclarationExpr variableDeclarationExpr = expressionStmt.getExpression().asVariableDeclarationExpr();
@@ -1026,8 +1026,8 @@ class ContextTest:AbstractSymbolResolutionTest {
             void instanceOfPatternExprVariableDeclaration_variableDeclaratorStatements1() {
                 string x = "" +
                         "{\n" +
-                        "    boolean x = a is string s;\n" +
-                        "    boolean result = s.contains(\"b\");\n" +
+                        "    bool x = a is string s;\n" +
+                        "    bool result = s.contains(\"b\");\n" +
                         "}\n" +
                         "";
                 BlockStmt blockStmt = parse(ParserConfiguration.LanguageLevel.JAVA_14_PREVIEW, x, ParseStart.BLOCK).asBlockStmt();
@@ -1054,9 +1054,9 @@ class ContextTest:AbstractSymbolResolutionTest {
             void instanceOfPatternExprVariableDeclaration_variableDeclaratorStatements2() {
                 string x = "" +
                         "{\n" +
-                        "    boolean x = (a is string s);\n" +
-                        "    boolean y = !(a is string s);\n" +
-                        "    boolean result = s.contains(\"b\");\n" +
+                        "    bool x = (a is string s);\n" +
+                        "    bool y = !(a is string s);\n" +
+                        "    bool result = s.contains(\"b\");\n" +
                         "}\n" +
                         "";
                 BlockStmt blockStmt = parse(ParserConfiguration.LanguageLevel.JAVA_14_PREVIEW, x, ParseStart.BLOCK).asBlockStmt();
@@ -1088,8 +1088,8 @@ class ContextTest:AbstractSymbolResolutionTest {
             void instanceOfPatternExprVariableDeclaration_variableDeclaratorStatements3() {
                 string x = "" +
                         "{\n" +
-                        "    boolean x = !(a is string s);\n" +
-                        "    boolean result = s.contains(\"b\");\n" +
+                        "    bool x = !(a is string s);\n" +
+                        "    bool result = s.contains(\"b\");\n" +
                         "}\n" +
                         "";
                 BlockStmt blockStmt = parse(ParserConfiguration.LanguageLevel.JAVA_14_PREVIEW, x, ParseStart.BLOCK).asBlockStmt();
@@ -1120,7 +1120,7 @@ class ContextTest:AbstractSymbolResolutionTest {
 
             [TestMethod]
             void instanceOfPatternExprResolution_expr1() {
-                ExpressionStmt expressionStmt = parse(ParserConfiguration.LanguageLevel.JAVA_14_PREVIEW, "boolean x = a is string s && a is string s2;", ParseStart.STATEMENT).asExpressionStmt();
+                ExpressionStmt expressionStmt = parse(ParserConfiguration.LanguageLevel.JAVA_14_PREVIEW, "bool x = a is string s && a is string s2;", ParseStart.STATEMENT).asExpressionStmt();
 
                 string message = "No pattern must be available outside of this variable declaration expression (note that the declaration expr contains many declarators).";
                 VariableDeclarationExpr variableDeclarationExpr = expressionStmt.getExpression().asVariableDeclarationExpr();
@@ -1152,7 +1152,7 @@ class ContextTest:AbstractSymbolResolutionTest {
 
             [TestMethod]
             void instanceOfPatternExprResolution_expr2() {
-                ExpressionStmt expressionStmt = parse(ParserConfiguration.LanguageLevel.JAVA_14_PREVIEW, "boolean x = !(a is string s) && a is string s2;", ParseStart.STATEMENT).asExpressionStmt();
+                ExpressionStmt expressionStmt = parse(ParserConfiguration.LanguageLevel.JAVA_14_PREVIEW, "bool x = !(a is string s) && a is string s2;", ParseStart.STATEMENT).asExpressionStmt();
 
                 string message = "No pattern must be available outside of this variable declaration expression (note that the declaration expr contains many declarators).";
                 VariableDeclarationExpr variableDeclarationExpr = expressionStmt.getExpression().asVariableDeclarationExpr();
@@ -1166,7 +1166,7 @@ class ContextTest:AbstractSymbolResolutionTest {
 
             [TestMethod]
             void instanceOfPatternExprResolution_expr3() {
-                ExpressionStmt expressionStmt = parse(ParserConfiguration.LanguageLevel.JAVA_14_PREVIEW, "boolean x = \"\" is string s || \"\" is string s2;", ParseStart.STATEMENT).asExpressionStmt();
+                ExpressionStmt expressionStmt = parse(ParserConfiguration.LanguageLevel.JAVA_14_PREVIEW, "bool x = \"\" is string s || \"\" is string s2;", ParseStart.STATEMENT).asExpressionStmt();
 
 //                string message = "Both s and s2 must be available from this declaration expression (AND).";
                 string message = "No pattern must be available outside of this statement.";
@@ -1249,7 +1249,7 @@ class ContextTest:AbstractSymbolResolutionTest {
 
             [TestMethod]
             void instanceOfPatternExprResolution1() {
-                CompilationUnit compilationUnit = parse(ParserConfiguration.LanguageLevel.JAVA_14_PREVIEW, "class X { void x() { boolean foo = ((a is string s) && s.length() > 0); } }", ParseStart.COMPILATION_UNIT);
+                CompilationUnit compilationUnit = parse(ParserConfiguration.LanguageLevel.JAVA_14_PREVIEW, "class X { void x() { bool foo = ((a is string s) && s.length() > 0); } }", ParseStart.COMPILATION_UNIT);
 
                 List<EnclosedExpr> enclosedExprs = compilationUnit.findAll(EnclosedExpr.class);
                 assertEquals(2, enclosedExprs.size());
@@ -1276,7 +1276,7 @@ class ContextTest:AbstractSymbolResolutionTest {
 
             [TestMethod]
             void instanceOfPatternExprResolution1_negated() {
-                CompilationUnit compilationUnit = parse(ParserConfiguration.LanguageLevel.JAVA_14_PREVIEW, "class X { void x() { boolean foo = (!(a is string s) && s.length() > 0); } }", ParseStart.COMPILATION_UNIT);
+                CompilationUnit compilationUnit = parse(ParserConfiguration.LanguageLevel.JAVA_14_PREVIEW, "class X { void x() { bool foo = (!(a is string s) && s.length() > 0); } }", ParseStart.COMPILATION_UNIT);
 
                 List<EnclosedExpr> enclosedExprs = compilationUnit.findAll(EnclosedExpr.class);
                 assertEquals(2, enclosedExprs.size());
@@ -1297,7 +1297,7 @@ class ContextTest:AbstractSymbolResolutionTest {
 
             [TestMethod]
             void instanceOfPatternExprResolution2() {
-                CompilationUnit compilationUnit = parse(ParserConfiguration.LanguageLevel.JAVA_14_PREVIEW, "class X { void x() { boolean foo = ((a is string s) || s.length() > 0); } }", ParseStart.COMPILATION_UNIT);
+                CompilationUnit compilationUnit = parse(ParserConfiguration.LanguageLevel.JAVA_14_PREVIEW, "class X { void x() { bool foo = ((a is string s) || s.length() > 0); } }", ParseStart.COMPILATION_UNIT);
 
                 List<EnclosedExpr> enclosedExprs = compilationUnit.findAll(EnclosedExpr.class);
                 assertEquals(2, enclosedExprs.size());

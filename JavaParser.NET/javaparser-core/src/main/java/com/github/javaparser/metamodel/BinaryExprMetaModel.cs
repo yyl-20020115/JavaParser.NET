@@ -36,7 +36,7 @@ public class BinaryExprMetaModel:ExpressionMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     BinaryExprMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, BinaryExpr.class, "BinaryExpr", "com.github.javaparser.ast.expr", false, false);
+        base(superBaseNodeMetaModel, BinaryExpr.class, "BinaryExpr", "com.github.javaparser.ast.expr", false, false);
     }
 
     public PropertyMetaModel leftPropertyMetaModel;

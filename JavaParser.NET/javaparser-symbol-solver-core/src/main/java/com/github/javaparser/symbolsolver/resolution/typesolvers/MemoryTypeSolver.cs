@@ -33,7 +33,7 @@ public class MemoryTypeSolver implements TypeSolver {
     private TypeSolver parent;
     private Map<String, ResolvedReferenceTypeDeclaration> declarationMap = new HashMap<>();
 
-    @Override
+    //@Override
     public string toString() {
         return "MemoryTypeSolver{" +
                 "parent=" + parent +
@@ -41,8 +41,8 @@ public class MemoryTypeSolver implements TypeSolver {
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o) return true;
         if (!(o is MemoryTypeSolver)) return false;
 
@@ -53,19 +53,19 @@ public class MemoryTypeSolver implements TypeSolver {
 
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         int result = parent != null ? parent.hashCode() : 0;
         result = 31 * result + (declarationMap != null ? declarationMap.hashCode() : 0);
         return result;
     }
 
-    @Override
+    //@Override
     public TypeSolver getParent() {
         return parent;
     }
 
-    @Override
+    //@Override
     public void setParent(TypeSolver parent) {
         Objects.requireNonNull(parent);
         if (this.parent != null) {
@@ -81,7 +81,7 @@ public class MemoryTypeSolver implements TypeSolver {
         this.declarationMap.put(name, typeDeclaration);
     }
 
-    @Override
+    //@Override
     public SymbolReference<ResolvedReferenceTypeDeclaration> tryToSolveType(string name) {
         if (declarationMap.containsKey(name)) {
             return SymbolReference.solved(declarationMap.get(name));

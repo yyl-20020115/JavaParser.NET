@@ -23,7 +23,7 @@ namespace com.github.javaparser.resolution.declarations;
 
 public interface ResolvedAnnotationMemberDeclarationTest:ResolvedValueDeclarationTest {
 
-    @Override
+    //@Override
     ResolvedAnnotationMemberDeclaration createValue();
 
 }

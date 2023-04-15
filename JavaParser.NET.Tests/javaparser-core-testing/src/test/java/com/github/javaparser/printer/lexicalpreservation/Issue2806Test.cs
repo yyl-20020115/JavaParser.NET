@@ -30,11 +30,11 @@ class Issue2806Test:AbstractLexicalPreservingTest{
 
     [TestMethod]
     void importIsAddedOnTheSameLine() {
-        considerCode("import java.lang.IllegalArgumentException;\n" +
+        considerCode("import java.lang.ArgumentException;\n" +
                 "\n" +
                 "public class A {\n" +
                 "}");
-        string junit5 = "import java.lang.IllegalArgumentException;\n" +
+        string junit5 = "import java.lang.ArgumentException;\n" +
                 "import java.nio.file.Paths;\n" +
                 "\n" +
                 "public class A {\n" +

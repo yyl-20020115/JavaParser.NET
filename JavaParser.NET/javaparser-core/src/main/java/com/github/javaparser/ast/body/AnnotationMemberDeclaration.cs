@@ -40,7 +40,7 @@ public class AnnotationMemberDeclaration : BodyDeclaration<AnnotationMemberDecla
 
     private SimpleName name;
 
-    //@OptionalProperty
+    ////@OptionalProperty
     private Expression defaultValue;
 
     public AnnotationMemberDeclaration()
@@ -75,14 +75,14 @@ public class AnnotationMemberDeclaration : BodyDeclaration<AnnotationMemberDecla
 
     //@Override
     ////@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg)
+    public R accept<R, A>(/*final*/GenericVisitor<R, A> v, /*final*/A arg)
     {
         return v.visit(this, arg);
     }
 
     //@Override
     ////@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(final VoidVisitor<A> v, final A arg)
+    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg)
     {
         v.visit(this, arg);
     }
@@ -130,7 +130,7 @@ public class AnnotationMemberDeclaration : BodyDeclaration<AnnotationMemberDecla
      * @return this, the AnnotationMemberDeclaration
      */
     ////@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public AnnotationMemberDeclaration setDefaultValue(final Expression defaultValue)
+    public AnnotationMemberDeclaration setDefaultValue(/*final*/Expression defaultValue)
     {
         if (defaultValue == this.defaultValue)
         {
@@ -145,7 +145,7 @@ public class AnnotationMemberDeclaration : BodyDeclaration<AnnotationMemberDecla
     }
 
     ////@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public AnnotationMemberDeclaration setModifiers(final NodeList<Modifier> modifiers)
+    public AnnotationMemberDeclaration setModifiers(/*final*/NodeList<Modifier> modifiers)
     {
         assertNotNull(modifiers);
         if (modifiers == this.modifiers)
@@ -161,7 +161,7 @@ public class AnnotationMemberDeclaration : BodyDeclaration<AnnotationMemberDecla
     }
 
     ////@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public AnnotationMemberDeclaration setName(final SimpleName name)
+    public AnnotationMemberDeclaration setName(/*final*/SimpleName name)
     {
         assertNotNull(name);
         if (name == this.name)
@@ -177,7 +177,7 @@ public class AnnotationMemberDeclaration : BodyDeclaration<AnnotationMemberDecla
     }
 
     ////@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public AnnotationMemberDeclaration setType(final Type type)
+    public AnnotationMemberDeclaration setType(/*final*/Type type)
     {
         assertNotNull(type);
         if (type == this.type)

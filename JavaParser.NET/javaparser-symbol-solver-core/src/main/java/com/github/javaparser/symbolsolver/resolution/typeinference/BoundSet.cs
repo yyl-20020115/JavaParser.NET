@@ -456,8 +456,8 @@ public class BoundSet {
         }
     }
 
-    private Set<InferenceVariable> allInferenceVariables() {
-        Set<InferenceVariable> variables = new HashSet<>();
+    private HashSet<InferenceVariable> allInferenceVariables() {
+        HashSet<InferenceVariable> variables = new HashSet<>();
         for (Bound b : bounds) {
             variables.addAll(b.usedInferenceVariables());
         }
@@ -479,10 +479,10 @@ public class BoundSet {
                 return b.isAnInstantiation().get();
             }
         }
-        throw new IllegalArgumentException();
+        throw new ArgumentException();
     }
 
-    private bool thereIsSomeJSuchThatβequalAlphaJ(Set<InferenceVariable> alphas, InferenceVariable beta) {
+    private bool thereIsSomeJSuchThatβequalAlphaJ(HashSet<InferenceVariable> alphas, InferenceVariable beta) {
         for (InferenceVariable alphaJ : alphas) {
             for (Bound b : bounds) {
                 if (b is SameAsBound) {
@@ -499,21 +499,21 @@ public class BoundSet {
         return false;
     }
 
-    private <T> List<Set<T>> buildAllSubsetsOfSize(Set<T> allElements, int desiredSize) {
+    private <T> List<HashSet<T>> buildAllSubsetsOfSize(HashSet<T> allElements, int desiredSize) {
         if (desiredSize == allElements.size()) {
             return Arrays.asList(allElements);
         } else {
-            List<Set<T>> res = new LinkedList<>();
+            List<HashSet<T>> res = new LinkedList<>();
             for (T element : allElements) {
-                Set<T> subset = allButOne(allElements, element);
+                HashSet<T> subset = allButOne(allElements, element);
                 res.addAll(buildAllSubsetsOfSize(subset, desiredSize));
             }
             return res;
         }
     }
 
-    private <T> Set<T> allButOne(Set<T> elements, T element) {
-        Set<T> set = new HashSet<T>(elements);
+    private <T> HashSet<T> allButOne(HashSet<T> elements, T element) {
+        HashSet<T> set = new HashSet<T>(elements);
         set.remove(element);
         return set;
     }
@@ -521,10 +521,10 @@ public class BoundSet {
     /**
      * there exists no non-empty proper subset of { α1, ..., αn } with this property.
      */
-    private Optional<Set<InferenceVariable>> smallestSetWithProperty(Set<InferenceVariable> uninstantiatedVariables,
+    private Optional<HashSet<InferenceVariable>> smallestSetWithProperty(HashSet<InferenceVariable> uninstantiatedVariables,
                                                                      List<VariableDependency> dependencies) {
         for (int i=1;i<=uninstantiatedVariables.size();i++) {
-            for (Set<InferenceVariable> aSubSet : buildAllSubsetsOfSize(uninstantiatedVariables, i)){
+            for (HashSet<InferenceVariable> aSubSet : buildAllSubsetsOfSize(uninstantiatedVariables, i)){
                 if (hasProperty(aSubSet, dependencies)) {
                     return Optional.of(aSubSet);
                 }
@@ -538,7 +538,7 @@ public class BoundSet {
      * or there is some j such that β = αj
      * @return
      */
-    private bool hasProperty(Set<InferenceVariable> alphas, List<VariableDependency> dependencies) {
+    private bool hasProperty(HashSet<InferenceVariable> alphas, List<VariableDependency> dependencies) {
         for (InferenceVariable alphaI: alphas) {
             for (InferenceVariable beta: dependencies.stream()
                     .filter(d -> d.depending.equals(alphaI))
@@ -624,7 +624,7 @@ public class BoundSet {
         // Given a set of inference variables to resolve, let V be the union of this set and all variables upon which
         // the resolution of at least one variable _in this set depends.
 
-        Set<InferenceVariable> V = new HashSet<>();
+        HashSet<InferenceVariable> V = new HashSet<>();
         V.addAll(variablesToResolve);
         for (VariableDependency dependency : dependencies) {
             if (variablesToResolve.contains(dependency.depending)) {
@@ -653,13 +653,13 @@ public class BoundSet {
         // or there is some j such that β = αj; and ii) there exists no non-empty proper subset of { α1, ..., αn }
         // with this property.
 
-        Set<InferenceVariable> uninstantiatedPortionOfV = new HashSet<>();
+        HashSet<InferenceVariable> uninstantiatedPortionOfV = new HashSet<>();
         for (InferenceVariable v : V) {
             if (!hasInstantiationFor(v)) {
                 uninstantiatedPortionOfV.add(v);
             }
         }
-        for (Set<InferenceVariable> alphas: allSetsWithProperty(uninstantiatedPortionOfV, dependencies)) {
+        for (HashSet<InferenceVariable> alphas: allSetsWithProperty(uninstantiatedPortionOfV, dependencies)) {
 
             // Resolution proceeds by generating an instantiation for each of α1, ..., αn based on the
             // bounds _in the bound set:
@@ -674,7 +674,7 @@ public class BoundSet {
             if (!hasSomeCaptureForAlphas) {
                 BoundSet newBounds = BoundSet.empty();
                 for (InferenceVariable alphaI : alphas) {
-                    Set<ResolvedType> properLowerBounds = bounds.stream()
+                    HashSet<ResolvedType> properLowerBounds = bounds.stream()
                             .filter(b -> b.isProperLowerBoundFor(alphaI).isPresent())
                             .map(b -> b.isProperLowerBoundFor(alphaI).get().getProperType())
                             .collect(Collectors.toSet());
@@ -698,7 +698,7 @@ public class BoundSet {
                     //   - Otherwise, where αi has proper upper bounds U1, ..., Uk, Ti = glb(U1, ..., Uk) (§5.1.10).
 
                     if (Ti == null) {
-                        Set<ResolvedType> properUpperBounds = bounds.stream()
+                        HashSet<ResolvedType> properUpperBounds = bounds.stream()
                                 .filter(b -> b.isProperUpperBoundFor(alphaI).isPresent())
                                 .map(b -> b.isProperUpperBoundFor(alphaI).get().getProperType())
                                 .collect(Collectors.toSet());
@@ -759,10 +759,10 @@ public class BoundSet {
         return Optional.empty();
     }
 
-    private Set<Set<InferenceVariable>> allPossibleSetsWithProperty(Set<InferenceVariable> allElements, List<VariableDependency> dependencies) {
-        Set<Set<InferenceVariable>> result = new HashSet<>();
+    private HashSet<HashSet<InferenceVariable>> allPossibleSetsWithProperty(HashSet<InferenceVariable> allElements, List<VariableDependency> dependencies) {
+        HashSet<HashSet<InferenceVariable>> result = new HashSet<>();
         for (int i=1;i<=allElements.size();i++) {
-            for (Set<InferenceVariable> aSubSet : buildAllSubsetsOfSize(allElements, i)){
+            for (HashSet<InferenceVariable> aSubSet : buildAllSubsetsOfSize(allElements, i)){
                 if (hasProperty(aSubSet, dependencies)) {
                     result.add(aSubSet);
                 }
@@ -771,8 +771,8 @@ public class BoundSet {
         return result;
     }
 
-    private bool thereAreProperSubsets(Set<InferenceVariable> aSet, Set<Set<InferenceVariable>> allPossibleSets) {
-        for (Set<InferenceVariable> anotherSet : allPossibleSets) {
+    private bool thereAreProperSubsets(HashSet<InferenceVariable> aSet, HashSet<HashSet<InferenceVariable>> allPossibleSets) {
+        for (HashSet<InferenceVariable> anotherSet : allPossibleSets) {
             if (!anotherSet.equals(aSet)) {
                 if (isTheFirstAProperSubsetOfTheSecond(anotherSet, aSet)) {
                     return true;
@@ -782,14 +782,14 @@ public class BoundSet {
         return false;
     }
 
-    private bool isTheFirstAProperSubsetOfTheSecond(Set<InferenceVariable> subset, Set<InferenceVariable> originalSet) {
+    private bool isTheFirstAProperSubsetOfTheSecond(HashSet<InferenceVariable> subset, HashSet<InferenceVariable> originalSet) {
         return originalSet.containsAll(subset) && originalSet.size() > subset.size();
     }
 
-    private Set<Set<InferenceVariable>> allSetsWithProperty(Set<InferenceVariable> allElements, List<VariableDependency> dependencies) {
-        Set<Set<InferenceVariable>> allPossibleSets = allPossibleSetsWithProperty(allElements, dependencies);
-        Set<Set<InferenceVariable>> selected = new HashSet<>();
-        for (Set<InferenceVariable> aSet : allPossibleSets) {
+    private HashSet<HashSet<InferenceVariable>> allSetsWithProperty(HashSet<InferenceVariable> allElements, List<VariableDependency> dependencies) {
+        HashSet<HashSet<InferenceVariable>> allPossibleSets = allPossibleSetsWithProperty(allElements, dependencies);
+        HashSet<HashSet<InferenceVariable>> selected = new HashSet<>();
+        for (HashSet<InferenceVariable> aSet : allPossibleSets) {
             if (!thereAreProperSubsets(aSet, allPossibleSets)) {
                 selected.add(aSet);
             }

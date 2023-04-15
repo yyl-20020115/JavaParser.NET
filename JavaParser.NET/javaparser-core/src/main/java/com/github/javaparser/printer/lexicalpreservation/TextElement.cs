@@ -26,47 +26,47 @@ public abstract class TextElement implements TextElementMatcher, PrintableTextEl
 
     abstract string expand();
 
-    abstract boolean isToken(int tokenKind);
+    abstract bool isToken(int tokenKind);
 
-    /*final*/boolean isCommentToken() {
+    /*final*/bool isCommentToken() {
         return isToken(GeneratedJavaParserConstants.JAVADOC_COMMENT) || isToken(GeneratedJavaParserConstants.SINGLE_LINE_COMMENT) || isToken(GeneratedJavaParserConstants.MULTI_LINE_COMMENT);
     }
 
-    @Override
-    public boolean match(TextElement textElement) {
+    //@Override
+    public bool match(TextElement textElement) {
         return this.equals(textElement);
     }
 
-    abstract boolean isNode(Node node);
+    abstract bool isNode(Node node);
 
-    public abstract boolean isLiteral();
+    public abstract bool isLiteral();
 
-    public abstract boolean isWhiteSpace();
+    public abstract bool isWhiteSpace();
 
-    public abstract boolean isSpaceOrTab();
+    public abstract bool isSpaceOrTab();
 
-    public abstract boolean isNewline();
+    public abstract bool isNewline();
 
-    public abstract boolean isComment();
+    public abstract bool isComment();
 
-    public abstract boolean isSeparator();
+    public abstract bool isSeparator();
 
-    public abstract boolean isIdentifier();
+    public abstract bool isIdentifier();
 
-    public abstract boolean isKeyword();
+    public abstract bool isKeyword();
 
-    public abstract boolean isPrimitive();
+    public abstract bool isPrimitive();
 
-    public /*final*/boolean isWhiteSpaceOrComment() {
+    public /*final*/bool isWhiteSpaceOrComment() {
         return isWhiteSpace() || isComment();
     }
 
     /**
      * Is this TextElement representing a child of the given class?
      */
-    public abstract boolean isChildOfClass(Class<?:Node> nodeClass);
+    public abstract bool isChildOfClass(Class<?:Node> nodeClass);
 
-    public boolean isChild() {
+    public bool isChild() {
         return isChildOfClass(Node.class);
     }
 

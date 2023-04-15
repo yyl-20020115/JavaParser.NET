@@ -25,13 +25,13 @@ namespace com.github.javaparser;
 @RunWith(JUnitReportingRunner.class)
 public class PrettyPrintingTest:BasicJBehaveTest {
 
-    @Override
+    //@Override
     public InjectableStepsFactory stepsFactory() {
         return new InstanceStepsFactory(configuration(), new PrettyPrintingSteps());
     }
 
     public PrettyPrintingTest() {
-        super("**/pretty_printing*.story");
+        base("**/pretty_printing*.story");
     }
 }
 

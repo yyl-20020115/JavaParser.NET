@@ -31,7 +31,7 @@ public class Java11Validator:Java10Validator {
     /*final*/Validator varAlsoInLambdaParameters = new SingleNodeTypeValidator<>(VarType.class, new VarValidator(true));
 
     public Java11Validator() {
-        super();
+        base();
         {
             /*
              * Java 10 released local variable type inference _in for and try-with (JEP286).

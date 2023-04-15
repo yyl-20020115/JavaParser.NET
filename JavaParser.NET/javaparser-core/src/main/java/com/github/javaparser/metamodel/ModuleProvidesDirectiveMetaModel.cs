@@ -36,7 +36,7 @@ public class ModuleProvidesDirectiveMetaModel:ModuleDirectiveMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     ModuleProvidesDirectiveMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, ModuleProvidesDirective.class, "ModuleProvidesDirective", "com.github.javaparser.ast.modules", false, false);
+        base(superBaseNodeMetaModel, ModuleProvidesDirective.class, "ModuleProvidesDirective", "com.github.javaparser.ast.modules", false, false);
     }
 
     public PropertyMetaModel namePropertyMetaModel;

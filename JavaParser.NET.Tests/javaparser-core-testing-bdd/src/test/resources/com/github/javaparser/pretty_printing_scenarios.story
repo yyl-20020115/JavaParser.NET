@@ -358,7 +358,7 @@ Scenario: Both array syntaxes are supported (#416)
 Given the class:
 public class Foo {
     public void m1(boolean[] boolArray) {}
-    public void m1(boolean boolArray[]) {}
+    public void m1(bool boolArray[]) {}
     public void m1(boolean[] boolArray[]) {}
 }
 When the class is parsed by the Java parser
@@ -379,13 +379,13 @@ public class Foo {
 Scenario: Array parts can be annotated
 Given the class:
 class Foo {
-    void m1(@Boo boolean @Index1 [] @ Index2 [] boolArray) {}
+    void m1(@Boo bool @Index1 [] @ Index2 [] boolArray) {}
 }
 When the class is parsed by the Java parser
 Then it is printed as:
 class Foo {
 
-    void m1(@Boo boolean @Index1 [] @Index2 [] boolArray) {
+    void m1(@Boo bool @Index1 [] @Index2 [] boolArray) {
     }
 }
 

@@ -23,18 +23,18 @@ namespace com.github.javaparser.printer.concretesyntaxmodel;
 
 public class CsmIndent implements CsmElement {
 
-    @Override
+    //@Override
     public void prettyPrint(Node node, SourcePrinter printer) {
         printer.indent();
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         return 1;
     }
 
-    @Override
-    public boolean equals(Object obj) {
+    //@Override
+    public bool equals(Object obj) {
         return obj is CsmIndent;
     }
 }

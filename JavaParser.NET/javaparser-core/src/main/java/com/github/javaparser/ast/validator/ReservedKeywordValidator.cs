@@ -37,7 +37,7 @@ public class ReservedKeywordValidator:VisitorValidator {
         error = f("'%s' cannot be used as an identifier as it is a keyword.", keyword);
     }
 
-    @Override
+    //@Override
     public void visit(Name n, ProblemReporter arg) {
         if (n.getIdentifier().equals(keyword)) {
             arg.report(n, error);
@@ -45,7 +45,7 @@ public class ReservedKeywordValidator:VisitorValidator {
         super.visit(n, arg);
     }
 
-    @Override
+    //@Override
     public void visit(SimpleName n, ProblemReporter arg) {
         if (n.getIdentifier().equals(keyword)) {
             arg.report(n, error);

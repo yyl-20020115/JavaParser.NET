@@ -59,13 +59,13 @@ public enum ResolvedPrimitiveType implements ResolvedType {
                 return ptu;
             }
         }
-        throw new IllegalArgumentException("Name " + name);
+        throw new ArgumentException("Name " + name);
     }
     
     /*
      * Returns true if the specified type is a boxed type of a primitive type.
      */
-    public static boolean isBoxType(ResolvedType type) {
+    public static bool isBoxType(ResolvedType type) {
     	if (!type.isReferenceType()) {
     		return false;
     	}
@@ -97,7 +97,7 @@ public enum ResolvedPrimitiveType implements ResolvedType {
         return new ResolvedPrimitiveType[] { BYTE, SHORT, INT, LONG, FLOAT, DOUBLE, CHAR };
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "PrimitiveTypeUsage{" + "name='" + name + '\'' + '}';
     }
@@ -106,33 +106,33 @@ public enum ResolvedPrimitiveType implements ResolvedType {
         return this;
     }
 
-    @Override
-    public boolean isArray() {
+    //@Override
+    public bool isArray() {
         return false;
     }
 
-    @Override
-    public boolean isPrimitive() {
+    //@Override
+    public bool isPrimitive() {
         return true;
     }
 
-    @Override
-    public boolean isReferenceType() {
+    //@Override
+    public bool isReferenceType() {
         return false;
     }
 
-    @Override
+    //@Override
     public string describe() {
         return name;
     }
 
-    @Override
-    public boolean isTypeVariable() {
+    //@Override
+    public bool isTypeVariable() {
         return false;
     }
 
-    @Override
-    public boolean isAssignableBy(ResolvedType other) {
+    //@Override
+    public bool isAssignableBy(ResolvedType other) {
         if (other.isPrimitive()) {
             return this == other || promotionTypes.contains(other);
         } else if (other.isReferenceType()) {
@@ -161,14 +161,14 @@ public enum ResolvedPrimitiveType implements ResolvedType {
         return boxTypeClass;
     }
 
-    public boolean isNumeric() {
+    public bool isNumeric() {
         return Arrays.asList(getNumericPrimitiveTypes()).contains(this);
     }
 
     /**
-     * Is this a boolean type?
+     * Is this a bool type?
      */
-    public boolean isBoolean() {
+    public bool isBoolean() {
         return this == BOOLEAN;
     }
 
@@ -195,7 +195,7 @@ public enum ResolvedPrimitiveType implements ResolvedType {
      * Unary primitive promotion (see https://docs.oracle.com/javase/specs/jls/se9/html/jls-5.html#jls-5.6.1)
      */
     public static ResolvedType unp(ResolvedType type) {
-        boolean isUnboxable = type.isReferenceType() && type.asReferenceType().isUnboxable();
+        bool isUnboxable = type.isReferenceType() && type.asReferenceType().isUnboxable();
         // If the operand is of compile-time type Byte, Short, Character, or Integer, it is subjected to unboxing conversion (§5.1.8).
         // The result is then promoted to a value of type int by a widening primitive conversion (§5.1.2) or an identity conversion (§5.1.1).
         if (isUnboxable && type.asReferenceType().toUnboxedType().get()._in(new ResolvedPrimitiveType[] { ResolvedPrimitiveType.BYTE, ResolvedPrimitiveType.SHORT, ResolvedPrimitiveType.CHAR, ResolvedPrimitiveType.INT })) {
@@ -216,11 +216,11 @@ public enum ResolvedPrimitiveType implements ResolvedType {
     /*
      * Verify if the ResolvedPrimitiveType is _in the list of ResolvedPrimitiveType
      */
-    public boolean _in(ResolvedPrimitiveType... types) {
+    public bool _in(ResolvedPrimitiveType... types) {
         return Arrays.stream(types).anyMatch(type -> this == type);
     }
 
-    @Override
+    //@Override
     public string toDescriptor() {
         return TypeUtils.getPrimitiveTypeDescriptor(boxTypeClass);
     }

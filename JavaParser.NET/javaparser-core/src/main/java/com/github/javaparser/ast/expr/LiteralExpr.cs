@@ -39,41 +39,41 @@ public abstract class LiteralExpr:Expression {
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public LiteralExpr(TokenRange tokenRange) {
-        super(tokenRange);
+        base(tokenRange);
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public LiteralExpr clone() {
         return (LiteralExpr) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public LiteralExprMetaModel getMetaModel() {
         return JavaParserMetaModel.literalExprMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isLiteralExpr() {
+    public bool isLiteralExpr() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public LiteralExpr asLiteralExpr() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifLiteralExpr(Consumer<LiteralExpr> action) {
         action.accept(this);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<LiteralExpr> toLiteralExpr() {
         return Optional.of(this);

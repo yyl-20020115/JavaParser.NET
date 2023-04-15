@@ -25,14 +25,14 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.declarations;
 
 class JavaParserMethodDeclarationTest implements ResolvedMethodDeclarationTest, TypeVariableResolutionCapabilityTest {
 
-    @Override
+    //@Override
     public Optional<Node> getWrappedDeclaration(AssociableToAST associableToAST) {
         return Optional.of(
                 safeCast(associableToAST, JavaParserMethodDeclaration.class).getWrappedNode()
         );
     }
 
-    @Override
+    //@Override
     public JavaParserMethodDeclaration createValue() {
         MethodDeclaration methodDeclaration = StaticJavaParser.parse("class A {void a() {}}")
                 .findFirst(MethodDeclaration.class).get();

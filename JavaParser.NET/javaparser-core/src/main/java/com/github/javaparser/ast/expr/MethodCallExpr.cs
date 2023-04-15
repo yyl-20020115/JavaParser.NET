@@ -31,10 +31,10 @@ namespace com.github.javaparser.ast.expr;
  */
 public class MethodCallExpr:Expression implements NodeWithTypeArguments<MethodCallExpr>, NodeWithArguments<MethodCallExpr>, NodeWithSimpleName<MethodCallExpr>, NodeWithOptionalScope<MethodCallExpr>, Resolvable<ResolvedMethodDeclaration> {
 
-    @OptionalProperty
+    //@OptionalProperty
     private Expression scope;
 
-    @OptionalProperty
+    //@OptionalProperty
     private NodeList<Type> typeArguments;
 
     private SimpleName name;
@@ -79,7 +79,7 @@ public class MethodCallExpr:Expression implements NodeWithTypeArguments<MethodCa
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public MethodCallExpr(TokenRange tokenRange, Expression scope, NodeList<Type> typeArguments, SimpleName name, NodeList<Expression> arguments) {
-        super(tokenRange);
+        base(tokenRange);
         setScope(scope);
         setTypeArguments(typeArguments);
         setName(name);
@@ -87,15 +87,15 @@ public class MethodCallExpr:Expression implements NodeWithTypeArguments<MethodCa
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -179,9 +179,9 @@ public class MethodCallExpr:Expression implements NodeWithTypeArguments<MethodCa
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
-    public boolean remove(Node node) {
+    public bool remove(Node node) {
         if (node == null) {
             return false;
         }
@@ -213,21 +213,21 @@ public class MethodCallExpr:Expression implements NodeWithTypeArguments<MethodCa
         return setScope((Expression) null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public MethodCallExpr clone() {
         return (MethodCallExpr) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public MethodCallExprMetaModel getMetaModel() {
         return JavaParserMetaModel.methodCallExprMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }
@@ -258,19 +258,19 @@ public class MethodCallExpr:Expression implements NodeWithTypeArguments<MethodCa
         return super.replace(node, replacementNode);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isMethodCallExpr() {
+    public bool isMethodCallExpr() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public MethodCallExpr asMethodCallExpr() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifMethodCallExpr(Consumer<MethodCallExpr> action) {
         action.accept(this);
@@ -289,12 +289,12 @@ public class MethodCallExpr:Expression implements NodeWithTypeArguments<MethodCa
      * @see ObjectCreationExpr#resolve()
      * @see ExplicitConstructorInvocationStmt#resolve()
      */
-    @Override
+    //@Override
     public ResolvedMethodDeclaration resolve() {
         return getSymbolResolver().resolveDeclaration(this, ResolvedMethodDeclaration.class);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<MethodCallExpr> toMethodCallExpr() {
         return Optional.of(this);
@@ -309,8 +309,8 @@ public class MethodCallExpr:Expression implements NodeWithTypeArguments<MethodCa
      *    return type that mentions at least one of the method's type parameters.
      * Otherwise, the method invocation expression is a standalone expression.
      */
-    @Override
-    public boolean isPolyExpression() {
+    //@Override
+    public bool isPolyExpression() {
         // A method invocation expression is a poly expression if all of the following are true:
         // 
         // 1. The invocation appears _in an assignment context or an invocation context (§5.2, §5.3).
@@ -337,14 +337,14 @@ public class MethodCallExpr:Expression implements NodeWithTypeArguments<MethodCa
      *  A method is generic if it declares one or more type variables (§4.4).
      *  Not sure it's enough to verify that the type arguments list is empty or not.
      */
-    private boolean isGenericMethod() {
+    private bool isGenericMethod() {
         return getTypeArguments().isPresent() && !getTypeArguments().get().isEmpty();
     }
 
     /*
      *  return true if at least one of the method's type parameters has the same type as the specified type .
      */
-    private boolean hasParameterwithSameTypeThanResultType(ResolvedType resolvedReturnType) {
+    private bool hasParameterwithSameTypeThanResultType(ResolvedType resolvedReturnType) {
         return getTypeArguments().isPresent() && getTypeArguments().get().stream().anyMatch(argType -> argType.resolve().isAssignableBy(resolvedReturnType));
     }
 
@@ -353,8 +353,8 @@ public class MethodCallExpr:Expression implements NodeWithTypeArguments<MethodCa
      * https://docs.oracle.com/javase/specs/jls/se8/html/jls-5.html#jls-5.3
      * 5.3. Invocation Contexts
      */
-    @Override
-    protected boolean isInvocationContext() {
+    //@Override
+    protected bool isInvocationContext() {
         return true;
     }
 }

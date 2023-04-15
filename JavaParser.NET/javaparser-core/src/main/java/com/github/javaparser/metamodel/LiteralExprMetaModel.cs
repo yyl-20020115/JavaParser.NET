@@ -36,11 +36,11 @@ public class LiteralExprMetaModel:ExpressionMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     LiteralExprMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, LiteralExpr.class, "LiteralExpr", "com.github.javaparser.ast.expr", true, false);
+        base(superBaseNodeMetaModel, LiteralExpr.class, "LiteralExpr", "com.github.javaparser.ast.expr", true, false);
     }
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
-    protected LiteralExprMetaModel(Optional<BaseNodeMetaModel> superNodeMetaModel, Class<?:Node> type, string name, string packageName, boolean isAbstract, boolean hasWildcard) {
-        super(superNodeMetaModel, type, name, packageName, isAbstract, hasWildcard);
+    protected LiteralExprMetaModel(Optional<BaseNodeMetaModel> superNodeMetaModel, Class<?:Node> type, string name, string packageName, bool isAbstract, bool hasWildcard) {
+        base(superNodeMetaModel, type, name, packageName, isAbstract, hasWildcard);
     }
 }

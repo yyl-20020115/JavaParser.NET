@@ -34,19 +34,19 @@ public class ModifierValidator:VisitorValidator {
 
     private /*final*/Modifier.Keyword[] interfaceWithStaticAndDefaultAndPrivate = new Modifier.Keyword[] { PUBLIC, PROTECTED, PRIVATE, ABSTRACT, STATIC, FINAL, SYNCHRONIZED, NATIVE, STRICTFP, DEFAULT };
 
-    private /*final*/boolean hasStrictfp;
+    private /*final*/bool hasStrictfp;
 
-    private /*final*/boolean hasDefaultAndStaticInterfaceMethods;
+    private /*final*/bool hasDefaultAndStaticInterfaceMethods;
 
-    private /*final*/boolean hasPrivateInterfaceMethods;
+    private /*final*/bool hasPrivateInterfaceMethods;
 
-    public ModifierValidator(boolean hasStrictfp, boolean hasDefaultAndStaticInterfaceMethods, boolean hasPrivateInterfaceMethods) {
+    public ModifierValidator(bool hasStrictfp, bool hasDefaultAndStaticInterfaceMethods, bool hasPrivateInterfaceMethods) {
         this.hasStrictfp = hasStrictfp;
         this.hasDefaultAndStaticInterfaceMethods = hasDefaultAndStaticInterfaceMethods;
         this.hasPrivateInterfaceMethods = hasPrivateInterfaceMethods;
     }
 
-    @Override
+    //@Override
     public void visit(ClassOrInterfaceDeclaration n, ProblemReporter reporter) {
         if (n.isInterface()) {
             validateInterfaceModifiers(n, reporter);
@@ -74,7 +74,7 @@ public class ModifierValidator:VisitorValidator {
         }
     }
 
-    @Override
+    //@Override
     public void visit(EnumDeclaration n, ProblemReporter reporter) {
         if (n.isTopLevelType()) {
             validateModifiers(n, reporter, PUBLIC, STRICTFP);
@@ -84,32 +84,32 @@ public class ModifierValidator:VisitorValidator {
         super.visit(n, reporter);
     }
 
-    @Override
+    //@Override
     public void visit(AnnotationDeclaration n, ProblemReporter reporter) {
         validateInterfaceModifiers(n, reporter);
         super.visit(n, reporter);
     }
 
-    @Override
+    //@Override
     public void visit(AnnotationMemberDeclaration n, ProblemReporter reporter) {
         validateModifiers(n, reporter, PUBLIC, ABSTRACT);
         super.visit(n, reporter);
     }
 
-    @Override
+    //@Override
     public void visit(ConstructorDeclaration n, ProblemReporter reporter) {
         validateModifiers(n, reporter, PUBLIC, PROTECTED, PRIVATE);
         n.getParameters().forEach(p -> validateModifiers(p, reporter, FINAL));
         super.visit(n, reporter);
     }
 
-    @Override
+    //@Override
     public void visit(FieldDeclaration n, ProblemReporter reporter) {
         validateModifiers(n, reporter, PUBLIC, PROTECTED, PRIVATE, STATIC, FINAL, TRANSIENT, VOLATILE);
         super.visit(n, reporter);
     }
 
-    @Override
+    //@Override
     public void visit(MethodDeclaration n, ProblemReporter reporter) {
         if (n.isAbstract()) {
             /*final*/SeparatedItemStringBuilder builder = new SeparatedItemStringBuilder("Cannot be 'abstract' and also '", "', '", "'.");
@@ -143,7 +143,7 @@ public class ModifierValidator:VisitorValidator {
         super.visit(n, reporter);
     }
 
-    @Override
+    //@Override
     public void visit(LambdaExpr n, ProblemReporter reporter) {
         n.getParameters().forEach(p -> {
             // Final is not allowed on inferred parameters, but those get caught by the parser.
@@ -152,19 +152,19 @@ public class ModifierValidator:VisitorValidator {
         super.visit(n, reporter);
     }
 
-    @Override
+    //@Override
     public void visit(CatchClause n, ProblemReporter reporter) {
         validateModifiers(n.getParameter(), reporter, FINAL);
         super.visit(n, reporter);
     }
 
-    @Override
+    //@Override
     public void visit(VariableDeclarationExpr n, ProblemReporter reporter) {
         validateModifiers(n, reporter, FINAL);
         super.visit(n, reporter);
     }
 
-    @Override
+    //@Override
     public void visit(ModuleRequiresDirective n, ProblemReporter reporter) {
         validateModifiers(n, reporter, TRANSITIVE, STATIC);
         super.visit(n, reporter);
@@ -192,7 +192,7 @@ public class ModifierValidator:VisitorValidator {
         return allowedModifiers;
     }
 
-    private boolean arrayContains(Object[] items, Object searchItem) {
+    private bool arrayContains(Object[] items, Object searchItem) {
         for (Object o : items) {
             if (o == searchItem) {
                 return true;

@@ -148,7 +148,7 @@ public abstract class AbstractGenerator {
      * @param content    Where an annotation has content, it is passed here (otherwise null).
      * @param <T>        Only accept nodes which accept annotations.
      */
-    private <T:NodeWithAnnotations<?>> void annotate(T node, Class<?> annotation, Expression content) {
+    private <T:NodeWithAnnotations<?>> void annotate(T node, Type annotation, Expression content) {
         NodeList<AnnotationExpr> annotations = node.getAnnotations()
                 .stream()
                 .filter(a -> !a.getNameAsString().equals(annotation.getSimpleName()))
@@ -174,7 +174,7 @@ public abstract class AbstractGenerator {
         annotate(node, Generated.class, new StringLiteralExpr(getClass().getName()));
     }
 
-    protected <T:Node & NodeWithAnnotations<?>> void removeAnnotation(T node, Class<?> annotation) {
+    protected <T:Node & NodeWithAnnotations<?>> void removeAnnotation(T node, Type annotation) {
         node.getAnnotations().removeIf(annotationExpr ->
                 annotationExpr.getName().asString().equals(
                         annotation.getSimpleName()
@@ -191,7 +191,7 @@ public abstract class AbstractGenerator {
         removeAnnotation(node, Generated.class);
     }
 
-    protected void removeAnnotationImportIfUnused(CompilationUnit compilationUnit, Class<?> annotation) {
+    protected void removeAnnotationImportIfUnused(CompilationUnit compilationUnit, Type annotation) {
 
         List<AnnotationExpr> staleAnnotations = compilationUnit
                 .findAll(AnnotationExpr.class)

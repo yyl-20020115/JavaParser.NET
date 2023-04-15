@@ -61,24 +61,24 @@ public abstract class Expression:Node {
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public Expression(TokenRange tokenRange) {
-        super(tokenRange);
+        base(tokenRange);
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public Expression clone() {
         return (Expression) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public ExpressionMetaModel getMetaModel() {
         return JavaParserMetaModel.expressionMetaModel;
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isAnnotationExpr() {
+    public bool isAnnotationExpr() {
         return false;
     }
 
@@ -88,7 +88,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isArrayAccessExpr() {
+    public bool isArrayAccessExpr() {
         return false;
     }
 
@@ -98,7 +98,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isArrayCreationExpr() {
+    public bool isArrayCreationExpr() {
         return false;
     }
 
@@ -108,7 +108,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isArrayInitializerExpr() {
+    public bool isArrayInitializerExpr() {
         return false;
     }
 
@@ -118,7 +118,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isAssignExpr() {
+    public bool isAssignExpr() {
         return false;
     }
 
@@ -128,7 +128,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isBinaryExpr() {
+    public bool isBinaryExpr() {
         return false;
     }
 
@@ -138,7 +138,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isBooleanLiteralExpr() {
+    public bool isBooleanLiteralExpr() {
         return false;
     }
 
@@ -148,7 +148,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isCastExpr() {
+    public bool isCastExpr() {
         return false;
     }
 
@@ -158,7 +158,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isCharLiteralExpr() {
+    public bool isCharLiteralExpr() {
         return false;
     }
 
@@ -168,7 +168,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isClassExpr() {
+    public bool isClassExpr() {
         return false;
     }
 
@@ -178,7 +178,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isConditionalExpr() {
+    public bool isConditionalExpr() {
         return false;
     }
 
@@ -188,7 +188,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isDoubleLiteralExpr() {
+    public bool isDoubleLiteralExpr() {
         return false;
     }
 
@@ -198,7 +198,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isEnclosedExpr() {
+    public bool isEnclosedExpr() {
         return false;
     }
 
@@ -208,7 +208,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isFieldAccessExpr() {
+    public bool isFieldAccessExpr() {
         return false;
     }
 
@@ -218,7 +218,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isInstanceOfExpr() {
+    public bool isInstanceOfExpr() {
         return false;
     }
 
@@ -228,7 +228,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isIntegerLiteralExpr() {
+    public bool isIntegerLiteralExpr() {
         return false;
     }
 
@@ -238,7 +238,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isLambdaExpr() {
+    public bool isLambdaExpr() {
         return false;
     }
 
@@ -248,7 +248,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isLiteralExpr() {
+    public bool isLiteralExpr() {
         return false;
     }
 
@@ -258,7 +258,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isLiteralStringValueExpr() {
+    public bool isLiteralStringValueExpr() {
         return false;
     }
 
@@ -268,7 +268,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isLongLiteralExpr() {
+    public bool isLongLiteralExpr() {
         return false;
     }
 
@@ -278,7 +278,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isMarkerAnnotationExpr() {
+    public bool isMarkerAnnotationExpr() {
         return false;
     }
 
@@ -288,7 +288,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isMethodCallExpr() {
+    public bool isMethodCallExpr() {
         return false;
     }
 
@@ -298,7 +298,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isMethodReferenceExpr() {
+    public bool isMethodReferenceExpr() {
         return false;
     }
 
@@ -308,7 +308,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isNameExpr() {
+    public bool isNameExpr() {
         return false;
     }
 
@@ -318,7 +318,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isNormalAnnotationExpr() {
+    public bool isNormalAnnotationExpr() {
         return false;
     }
 
@@ -328,7 +328,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isNullLiteralExpr() {
+    public bool isNullLiteralExpr() {
         return false;
     }
 
@@ -338,7 +338,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isObjectCreationExpr() {
+    public bool isObjectCreationExpr() {
         return false;
     }
 
@@ -348,7 +348,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isSingleMemberAnnotationExpr() {
+    public bool isSingleMemberAnnotationExpr() {
         return false;
     }
 
@@ -358,7 +358,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isStringLiteralExpr() {
+    public bool isStringLiteralExpr() {
         return false;
     }
 
@@ -368,7 +368,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isSuperExpr() {
+    public bool isSuperExpr() {
         return false;
     }
 
@@ -378,7 +378,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isThisExpr() {
+    public bool isThisExpr() {
         return false;
     }
 
@@ -388,7 +388,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isTypeExpr() {
+    public bool isTypeExpr() {
         return false;
     }
 
@@ -398,7 +398,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isUnaryExpr() {
+    public bool isUnaryExpr() {
         return false;
     }
 
@@ -408,7 +408,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isVariableDeclarationExpr() {
+    public bool isVariableDeclarationExpr() {
         return false;
     }
 
@@ -731,7 +731,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isSwitchExpr() {
+    public bool isSwitchExpr() {
         return false;
     }
 
@@ -750,7 +750,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isTextBlockLiteralExpr() {
+    public bool isTextBlockLiteralExpr() {
         return false;
     }
 
@@ -769,7 +769,7 @@ public abstract class Expression:Node {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isPatternExpr() {
+    public bool isPatternExpr() {
         return false;
     }
 
@@ -791,7 +791,7 @@ public abstract class Expression:Node {
      * See https://docs.oracle.com/javase/specs/jls/se8/html/jls-15.html#jls-15.2
      * @return true if the expression is a standalone expression
      */
-    public boolean isStandaloneExpression() {
+    public bool isStandaloneExpression() {
         return !isPolyExpression();
     }
 
@@ -799,7 +799,7 @@ public abstract class Expression:Node {
      * See https://docs.oracle.com/javase/specs/jls/se8/html/jls-15.html#jls-15.2
      * @return true if the expression is a poly expression
      */
-    public boolean isPolyExpression() {
+    public bool isPolyExpression() {
         return false;
     }
 
@@ -807,14 +807,14 @@ public abstract class Expression:Node {
      * 6.5.6.2. Qualified Expression Names
      * https://docs.oracle.com/javase/specs/jls/se7/html/jls-6.html#jls-6.5.6.2
      */
-    public boolean isQualified() {
+    public bool isQualified() {
         return hasScope();
     }
 
     /*
      * Verify if the parent node is an assignment context.
      */
-    public /*final*/boolean appearsInAssignmentContext() {
+    public /*final*/bool appearsInAssignmentContext() {
         if (getParentNode().isPresent() && getParentNode().get() is Expression) {
             return ((Expression) getParentNode().get()).isAssignmentContext();
         }
@@ -826,14 +826,14 @@ public abstract class Expression:Node {
      * https://docs.oracle.com/javase/specs/jls/se8/html/jls-5.html#jls-5.2
      * 5.2. Assignment Contexts: Assignment contexts allow the value of an expression to be assigned (§15.26) to a variable;...
      */
-    protected boolean isAssignmentContext() {
+    protected bool isAssignmentContext() {
         return false;
     }
 
     /*
      * Verify if the parent node is an invocation context.
      */
-    public /*final*/boolean appearsInInvocationContext() {
+    public /*final*/bool appearsInInvocationContext() {
         if (getParentNode().isPresent() && getParentNode().get() is Expression) {
             return ((Expression) getParentNode().get()).isInvocationContext();
         }
@@ -845,7 +845,7 @@ public abstract class Expression:Node {
      * https://docs.oracle.com/javase/specs/jls/se8/html/jls-5.html#jls-5.3
      * 5.3. Invocation Contexts
      */
-    protected boolean isInvocationContext() {
+    protected bool isInvocationContext() {
         return false;
     }
 
@@ -858,7 +858,7 @@ public abstract class Expression:Node {
      * a<>.m()  ==> true because the type argument is elided
      * a<T>.m() ==> false because the type argument is not elided
      */
-    public /*final*/boolean elidesTypeArguments() {
+    public /*final*/bool elidesTypeArguments() {
         if (!(hasScope() && this is NodeWithTypeArguments)) {
             return true;
         }

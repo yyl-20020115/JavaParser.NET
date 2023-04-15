@@ -37,7 +37,7 @@ public interface NodeWithMembers<N:Node>:NodeWithSimpleName<N> {
      */
     NodeList<BodyDeclaration<?>> getMembers();
 
-    void tryAddImportToParentCompilationUnit(Class<?> clazz);
+    void tryAddImportToParentCompilationUnit(Type clazz);
 
     default BodyDeclaration<?> getMember(int i) {
         return getMembers().get(i);
@@ -65,7 +65,7 @@ public interface NodeWithMembers<N:Node>:NodeWithSimpleName<N> {
      * @param modifiers the modifiers like {@link Modifier.Keyword#PUBLIC}
      * @return the {@link FieldDeclaration} created
      */
-    default FieldDeclaration addField(Class<?> typeClass, string name, Modifier.Keyword... modifiers) {
+    default FieldDeclaration addField(Type typeClass, string name, Modifier.Keyword... modifiers) {
         tryAddImportToParentCompilationUnit(typeClass);
         return addField(typeClass.getSimpleName(), name, modifiers);
     }
@@ -108,7 +108,7 @@ public interface NodeWithMembers<N:Node>:NodeWithSimpleName<N> {
      * @param modifiers   the modifiers like {@link Modifier.Keyword#PUBLIC}
      * @return the {@link FieldDeclaration} created
      */
-    default FieldDeclaration addFieldWithInitializer(Class<?> typeClass, string name, Expression initializer, Modifier.Keyword... modifiers) {
+    default FieldDeclaration addFieldWithInitializer(Type typeClass, string name, Expression initializer, Modifier.Keyword... modifiers) {
         tryAddImportToParentCompilationUnit(typeClass);
         return addFieldWithInitializer(typeClass.getSimpleName(), name, initializer, modifiers);
     }
@@ -148,7 +148,7 @@ public interface NodeWithMembers<N:Node>:NodeWithSimpleName<N> {
      * @param name      the name of the field
      * @return the {@link FieldDeclaration} created
      */
-    default FieldDeclaration addPrivateField(Class<?> typeClass, string name) {
+    default FieldDeclaration addPrivateField(Type typeClass, string name) {
         return addField(typeClass, name, PRIVATE);
     }
 
@@ -182,7 +182,7 @@ public interface NodeWithMembers<N:Node>:NodeWithSimpleName<N> {
      * @param name      the name of the field
      * @return the {@link FieldDeclaration} created
      */
-    default FieldDeclaration addPublicField(Class<?> typeClass, string name) {
+    default FieldDeclaration addPublicField(Type typeClass, string name) {
         return addField(typeClass, name, PUBLIC);
     }
 
@@ -216,7 +216,7 @@ public interface NodeWithMembers<N:Node>:NodeWithSimpleName<N> {
      * @param name      the name of the field
      * @return the {@link FieldDeclaration} created
      */
-    default FieldDeclaration addProtectedField(Class<?> typeClass, string name) {
+    default FieldDeclaration addProtectedField(Type typeClass, string name) {
         return addField(typeClass, name, PROTECTED);
     }
 
@@ -355,7 +355,7 @@ public interface NodeWithMembers<N:Node>:NodeWithSimpleName<N> {
      *                   {@code void foo(Map&lt;Integer,String&gt; myMap, int number)}
      * @return the methods found
      */
-    default List<MethodDeclaration> getMethodsByParameterTypes(Class<?>... paramTypes) {
+    default List<MethodDeclaration> getMethodsByParameterTypes(Type... paramTypes) {
         return unmodifiableList(getMethods().stream().filter(m -> m.hasParametersOfType(paramTypes)).collect(toList()));
     }
 
@@ -411,7 +411,7 @@ public interface NodeWithMembers<N:Node>:NodeWithSimpleName<N> {
      *                   {@code Foo(Map&lt;Integer,String&gt; myMap, int number)}
      * @return the constructor found, if any.
      */
-    default Optional<ConstructorDeclaration> getConstructorByParameterTypes(Class<?>... paramTypes) {
+    default Optional<ConstructorDeclaration> getConstructorByParameterTypes(Type... paramTypes) {
         return getConstructors().stream().filter(m -> m.hasParametersOfType(paramTypes)).findFirst();
     }
 
@@ -437,7 +437,7 @@ public interface NodeWithMembers<N:Node>:NodeWithSimpleName<N> {
     /**
      * @return true if there are no members contained _in this node.
      */
-    default boolean isEmpty() {
+    default bool isEmpty() {
         return getMembers().isEmpty();
     }
 }

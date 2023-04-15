@@ -27,12 +27,12 @@ public interface ResolvedEnumConstantDeclaration:ResolvedValueDeclaration {
 
     string getName();
 
-    @Override
-    default boolean isEnumConstant() {
+    //@Override
+    default bool isEnumConstant() {
         return true;
     }
 
-    @Override
+    //@Override
     default ResolvedEnumConstantDeclaration asEnumConstant() {
         return this;
     }

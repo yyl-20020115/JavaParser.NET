@@ -33,7 +33,7 @@ class ModifierVisitorTest:AbstractLexicalPreservingTest {
         list.add(new StringLiteralExpr("c"));
 
         list.accept(new ModifierVisitor<Void>() {
-            @Override
+            //@Override
             public Visitable visit(/*final*/StringLiteralExpr n, /*final*/Void arg) {
                 string v = n.getValue();
 

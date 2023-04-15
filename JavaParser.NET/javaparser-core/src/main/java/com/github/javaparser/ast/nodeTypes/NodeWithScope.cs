@@ -25,7 +25,7 @@ namespace com.github.javaparser.ast.nodeTypes;
 /**
  * Represents a node which has a required scope expression eg. field access (object.method).
  */
-public interface NodeWithScope<N:Node>:NodeWithTraversableScope {
+public interface NodeWithScope<N>:NodeWithTraversableScope where N:Node {
 
     Expression getScope();
 

@@ -36,12 +36,12 @@ public class BodyDeclarationMetaModel:NodeMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     BodyDeclarationMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, BodyDeclaration.class, "BodyDeclaration", "com.github.javaparser.ast.body", true, true);
+        base(superBaseNodeMetaModel, BodyDeclaration.class, "BodyDeclaration", "com.github.javaparser.ast.body", true, true);
     }
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
-    protected BodyDeclarationMetaModel(Optional<BaseNodeMetaModel> superNodeMetaModel, Class<?:Node> type, string name, string packageName, boolean isAbstract, boolean hasWildcard) {
-        super(superNodeMetaModel, type, name, packageName, isAbstract, hasWildcard);
+    protected BodyDeclarationMetaModel(Optional<BaseNodeMetaModel> superNodeMetaModel, Class<?:Node> type, string name, string packageName, bool isAbstract, bool hasWildcard) {
+        base(superNodeMetaModel, type, name, packageName, isAbstract, hasWildcard);
     }
 
     public PropertyMetaModel annotationsPropertyMetaModel;

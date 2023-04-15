@@ -23,14 +23,14 @@ namespace com.github.javaparser.generator;
 
 
 
-public abstract class CompilationUnitGenerator extends Generator {
+public abstract class CompilationUnitGenerator:Generator {
 
 	protected CompilationUnitGenerator(SourceRoot sourceRoot) {
-		super(sourceRoot);
+		base(sourceRoot);
 	}
 
 	//@Override
-	public void generate() throws Exception {
+	public void generate() {
 		List<ParseResult<CompilationUnit>> parsedCus = sourceRoot.tryToParse();
 		for (ParseResult<CompilationUnit> cu : parsedCus) {
 			cu.ifSuccessful(this::generateCompilationUnit);

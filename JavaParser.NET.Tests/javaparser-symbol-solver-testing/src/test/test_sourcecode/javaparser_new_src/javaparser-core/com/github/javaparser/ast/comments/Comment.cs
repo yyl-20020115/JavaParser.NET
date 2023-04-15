@@ -43,7 +43,7 @@ public abstract class Comment:Node {
     }
 
     public Comment(Range range, string content) {
-        super(range);
+        base(range);
         this.content = content;
     }
 
@@ -67,7 +67,7 @@ public abstract class Comment:Node {
         return this;
     }
 
-    public boolean isLineComment()
+    public bool isLineComment()
     {
         return false;
     }
@@ -92,16 +92,16 @@ public abstract class Comment:Node {
             return this;
         }
         if (commentedNode==this) {
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         }
         if (commentedNode is Comment) {
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         }
         this.commentedNode = commentedNode;
         return this;
     }
 
-    public boolean isOrphan()
+    public bool isOrphan()
     {
         return this.commentedNode == null;
     }

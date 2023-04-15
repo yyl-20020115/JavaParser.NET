@@ -79,7 +79,7 @@ public class JavaParserJsonDeserializer {
                 } else if (propertyMetaModel.isNode()) {
                     parameters.put(name, deserializeObject(nodeJson.getJsonObject(name)));
                 } else {
-                    Class<?> type = propertyMetaModel.getType();
+                    Type type = propertyMetaModel.getType();
                     if (type == String.class) {
                         parameters.put(name, nodeJson.getString(name));
                     } else if (type == boolean.class) {
@@ -124,12 +124,12 @@ public class JavaParserJsonDeserializer {
      * @param node instance to which the deserialized value will be set to
      * @return true if propertyKey is read from json and set to Node instance
      */
-    protected boolean readNonMetaProperties(string name, JsonValue jsonValue, Node node) {
+    protected bool readNonMetaProperties(string name, JsonValue jsonValue, Node node) {
         return readRange(name, jsonValue, node)
                 || readTokenRange(name, jsonValue, node);
     }
 
-    protected boolean readRange(string name, JsonValue jsonValue, Node node) {
+    protected bool readRange(string name, JsonValue jsonValue, Node node) {
         if (name.equals(JsonNode.RANGE.propertyKey)) {
             JsonObject jsonObject = (JsonObject)jsonValue;
             Position begin = new Position(
@@ -146,7 +146,7 @@ public class JavaParserJsonDeserializer {
         return false;
     }
 
-    protected boolean readTokenRange(string name, JsonValue jsonValue, Node node) {
+    protected bool readTokenRange(string name, JsonValue jsonValue, Node node) {
         if (name.equals(JsonNode.TOKEN_RANGE.propertyKey)) {
             JsonObject jsonObject = (JsonObject)jsonValue;
             JavaToken begin = readToken(

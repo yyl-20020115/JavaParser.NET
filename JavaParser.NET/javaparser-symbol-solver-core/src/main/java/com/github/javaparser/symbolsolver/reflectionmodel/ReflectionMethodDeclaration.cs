@@ -34,39 +34,39 @@ public class ReflectionMethodDeclaration implements ResolvedMethodDeclaration, T
     public ReflectionMethodDeclaration(Method method, TypeSolver typeSolver) {
         this.method = method;
         if (method.isSynthetic() || method.isBridge()) {
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         }
         this.typeSolver = typeSolver;
     }
 
-    @Override
+    //@Override
     public string getName() {
         return method.getName();
     }
 
-    @Override
-    public boolean isField() {
+    //@Override
+    public bool isField() {
         return false;
     }
 
-    @Override
-    public boolean isParameter() {
+    //@Override
+    public bool isParameter() {
         return false;
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "ReflectionMethodDeclaration{" +
                 "method=" + method +
                 '}';
     }
 
-    @Override
-    public boolean isType() {
+    //@Override
+    public bool isType() {
         return false;
     }
 
-    @Override
+    //@Override
     public ResolvedReferenceTypeDeclaration declaringType() {
         if (method.getDeclaringClass().isInterface()) {
             return new ReflectionInterfaceDeclaration(method.getDeclaringClass(), typeSolver);
@@ -78,19 +78,19 @@ public class ReflectionMethodDeclaration implements ResolvedMethodDeclaration, T
         }
     }
 
-    @Override
+    //@Override
     public ResolvedType getReturnType() {
         return ReflectionFactory.typeUsageFor(method.getGenericReturnType(), typeSolver);
     }
 
-    @Override
+    //@Override
     public int getNumberOfParams() {
         return method.getParameterTypes().length;
     }
 
-    @Override
+    //@Override
     public ResolvedParameterDeclaration getParam(int i) {
-        boolean variadic = false;
+        bool variadic = false;
         if (method.isVarArgs()) {
             variadic = i == (method.getParameterCount() - 1);
         }
@@ -98,7 +98,7 @@ public class ReflectionMethodDeclaration implements ResolvedMethodDeclaration, T
                 typeSolver, variadic, method.getParameters()[i].getName());
     }
 
-    @Override
+    //@Override
     public List<ResolvedTypeParameterDeclaration> getTypeParameters() {
         return Arrays.stream(method.getTypeParameters()).map((refTp) -> new ReflectionTypeParameter(refTp, false, typeSolver)).collect(Collectors.toList());
     }
@@ -107,40 +107,40 @@ public class ReflectionMethodDeclaration implements ResolvedMethodDeclaration, T
         return new MethodDeclarationCommonLogic(this, typeSolver).resolveTypeVariables(context, parameterTypes);
     }
 
-    @Override
-    public boolean isAbstract() {
+    //@Override
+    public bool isAbstract() {
         return Modifier.isAbstract(method.getModifiers());
     }
 
-    @Override
-    public boolean isDefaultMethod() {
+    //@Override
+    public bool isDefaultMethod() {
         return method.isDefault();
     }
 
-    @Override
-    public boolean isStatic() {
+    //@Override
+    public bool isStatic() {
         return Modifier.isStatic(method.getModifiers());
     }
 
-    @Override
+    //@Override
     public AccessSpecifier accessSpecifier() {
         return ReflectionFactory.modifiersToAccessLevel(this.method.getModifiers());
     }
 
-    @Override
+    //@Override
     public int getNumberOfSpecifiedExceptions() {
         return this.method.getExceptionTypes().length;
     }
 
-    @Override
+    //@Override
     public ResolvedType getSpecifiedException(int index) {
         if (index < 0 || index >= getNumberOfSpecifiedExceptions()) {
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         }
         return ReflectionFactory.typeUsageFor(this.method.getExceptionTypes()[index], typeSolver);
     }
 
-    @Override
+    //@Override
     public string toDescriptor() {
         return TypeUtils.getMethodDescriptor(method);
     }

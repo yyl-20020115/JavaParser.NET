@@ -40,7 +40,7 @@ class LexicalDifferenceCalculator {
             return new CalculatedSyntaxModel(new ArrayList<>(elements.subList(index, elements.size())));
         }
 
-        @Override
+        //@Override
         public string toString() {
             return "CalculatedSyntaxModel{" + "elements=" + elements + '}';
         }
@@ -66,18 +66,18 @@ class LexicalDifferenceCalculator {
             this.child = child;
         }
 
-        @Override
+        //@Override
         public void prettyPrint(Node node, SourcePrinter printer) {
             throw new UnsupportedOperationException();
         }
 
-        @Override
+        //@Override
         public string toString() {
             return "child(" + child.getClass().getSimpleName() + ")";
         }
 
-        @Override
-        public boolean equals(Object o) {
+        //@Override
+        public bool equals(Object o) {
             if (this == o)
                 return true;
             if (o == null || getClass() != o.getClass())
@@ -86,7 +86,7 @@ class LexicalDifferenceCalculator {
             return child.equals(csmChild.child);
         }
 
-        @Override
+        //@Override
         public int hashCode() {
             return child.hashCode();
         }
@@ -226,7 +226,7 @@ class LexicalDifferenceCalculator {
                 Collection<?> collection = (Collection<?>) change.getValue(csmList.getProperty(), node);
                 if (!collection.isEmpty()) {
                     calculatedSyntaxModelForNode(csmList.getPreceeding(), node, elements, change);
-                    boolean first = true;
+                    bool first = true;
                     for (Iterator<?> it = collection.iterator(); it.hasNext(); ) {
                         if (!first) {
                             calculatedSyntaxModelForNode(csmList.getSeparatorPre(), node, elements, change);
@@ -248,7 +248,7 @@ class LexicalDifferenceCalculator {
             }
         } else if (csm is CsmConditional) {
             CsmConditional csmConditional = (CsmConditional) csm;
-            boolean satisfied = change.evaluate(csmConditional, node);
+            bool satisfied = change.evaluate(csmConditional, node);
             if (satisfied) {
                 calculatedSyntaxModelForNode(csmConditional.getThenElement(), node, elements, change);
             } else {

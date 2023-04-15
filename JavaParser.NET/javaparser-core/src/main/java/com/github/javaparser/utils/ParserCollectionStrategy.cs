@@ -44,12 +44,12 @@ public class ParserCollectionStrategy implements CollectionStrategy {
         this.parserConfiguration = parserConfiguration;
     }
 
-    @Override
+    //@Override
     public ParserConfiguration getParserConfiguration() {
         return parserConfiguration;
     }
 
-    @Override
+    //@Override
     public ProjectRoot collect(Path path) {
         ProjectRoot projectRoot = new ProjectRoot(path, parserConfiguration);
         try {
@@ -59,7 +59,7 @@ public class ParserCollectionStrategy implements CollectionStrategy {
 
                 /*final*/PathMatcher javaMatcher = getPathMatcher("glob:**.java");
 
-                @Override
+                //@Override
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
                     if (file.getFileName().toString().equals("module-info.java")) {
                         // module-info.java is useless for finding the source root, since it can be placed within any directory.
@@ -74,7 +74,7 @@ public class ParserCollectionStrategy implements CollectionStrategy {
                     return CONTINUE;
                 }
 
-                @Override
+                //@Override
                 public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs){
                     if (Files.isHidden(dir) || (current_root != null && dir.startsWith(current_root))) {
                         return SKIP_SUBTREE;
@@ -82,7 +82,7 @@ public class ParserCollectionStrategy implements CollectionStrategy {
                     return CONTINUE;
                 }
 
-                @Override
+                //@Override
                 public FileVisitResult postVisitDirectory(Path dir, IOException e){
                     if (current_root != null && Files.isSameFile(dir, current_root)) {
                         projectRoot.addSourceRoot(dir);

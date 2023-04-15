@@ -26,14 +26,14 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.declarations;
 
 class JavaParserVariableDeclarationTest implements ResolvedValueDeclarationTest {
 
-    @Override
+    //@Override
     public Optional<Node> getWrappedDeclaration(AssociableToAST associableToAST) {
         return Optional.of(
                 safeCast(associableToAST, JavaParserVariableDeclaration.class).getWrappedNode()
         );
     }
 
-    @Override
+    //@Override
     public JavaParserVariableDeclaration createValue() {
         string code = "class A {a() {string s;}}";
         CompilationUnit compilationUnit = StaticJavaParser.parse(code);
@@ -42,7 +42,7 @@ class JavaParserVariableDeclarationTest implements ResolvedValueDeclarationTest 
         return new JavaParserVariableDeclaration(variableDeclarator, reflectionTypeSolver);
     }
 
-    @Override
+    //@Override
     public string getCanonicalNameOfExpectedType(ResolvedValueDeclaration resolvedDeclaration) {
         return String.class.getCanonicalName();
     }

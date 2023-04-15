@@ -36,6 +36,6 @@ public class JavadocCommentMetaModel:CommentMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     JavadocCommentMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, JavadocComment.class, "JavadocComment", "com.github.javaparser.ast.comments", false, false);
+        base(superBaseNodeMetaModel, JavadocComment.class, "JavadocComment", "com.github.javaparser.ast.comments", false, false);
     }
 }

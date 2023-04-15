@@ -26,7 +26,7 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.declarations;
 
 class JavaParserTypeVariableDeclarationTest:AbstractTypeDeclarationTest {
 
-    @Override
+    //@Override
     public JavaParserTypeVariableDeclaration createValue() {
         CompilationUnit cu = StaticJavaParser.parse("class A<T>{}");
         TypeParameter typeParameter = cu.findFirst(TypeParameter.class).get();
@@ -34,15 +34,15 @@ class JavaParserTypeVariableDeclarationTest:AbstractTypeDeclarationTest {
         return new JavaParserTypeVariableDeclaration(typeParameter, typeSolver);
     }
 
-    @Override
+    //@Override
     public Optional<Node> getWrappedDeclaration(AssociableToAST associableToAST) {
         return Optional.of(
                 safeCast(associableToAST, JavaParserTypeVariableDeclaration.class).getWrappedNode()
         );
     }
 
-    @Override
-    public boolean isFunctionalInterface(AbstractTypeDeclaration typeDeclaration) {
+    //@Override
+    public bool isFunctionalInterface(AbstractTypeDeclaration typeDeclaration) {
         return false;
     }
 

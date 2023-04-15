@@ -65,7 +65,7 @@ public class ConstraintFormulaSet {
         return boundSet;
     }
 
-    public boolean isEmpty() {
+    public bool isEmpty() {
         return constraintFormulas.isEmpty();
     }
 }

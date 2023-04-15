@@ -71,24 +71,24 @@ public class JavaParserAnonymousClassDeclaration:AbstractClassDeclaration
         return JavaParserFactory.getContext(wrappedNode, typeSolver);
     }
 
-    @Override
+    //@Override
     public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes,
-                                                                  boolean staticOnly) {
+                                                                  bool staticOnly) {
         return getContext().solveMethod(name, argumentsTypes, staticOnly);
     }
 
-    @Override
+    //@Override
     public Optional<MethodUsage> solveMethodAsUsage(string name, List<ResolvedType> argumentTypes,
                                                     Context invocationContext, List<ResolvedType> typeParameters) {
         return getContext().solveMethodAsUsage(name, argumentTypes);
     }
 
-    @Override
+    //@Override
     protected ResolvedReferenceType object() {
         return new ReferenceTypeImpl(typeSolver.getSolvedJavaLangObject());
     }
 
-    @Override
+    //@Override
     public Optional<ResolvedReferenceType> getSuperClass() {
         ResolvedReferenceTypeDeclaration superRRTD = superTypeDeclaration.asReferenceType();
         if (superRRTD == null) {
@@ -97,7 +97,7 @@ public class JavaParserAnonymousClassDeclaration:AbstractClassDeclaration
         return Optional.of(new ReferenceTypeImpl(superRRTD));
     }
 
-    @Override
+    //@Override
     public List<ResolvedReferenceType> getInterfaces() {
         return superTypeDeclaration.asReferenceType()
                 .getAncestors()
@@ -107,7 +107,7 @@ public class JavaParserAnonymousClassDeclaration:AbstractClassDeclaration
                 .collect(Collectors.toList());
     }
 
-    @Override
+    //@Override
     public List<ResolvedConstructorDeclaration> getConstructors() {
         if (superTypeDeclaration.isInterface()) {
             return Collections.singletonList(new DefaultConstructorDeclaration<>(this));
@@ -115,13 +115,13 @@ public class JavaParserAnonymousClassDeclaration:AbstractClassDeclaration
         return superTypeDeclaration.asReferenceType().getConstructors();
     }
 
-    @Override
+    //@Override
     public AccessSpecifier accessSpecifier() {
         return AccessSpecifier.PRIVATE;
     }
 
-    @Override
-    public List<ResolvedReferenceType> getAncestors(boolean acceptIncompleteList) {
+    //@Override
+    public List<ResolvedReferenceType> getAncestors(bool acceptIncompleteList) {
         ImmutableList.Builder<ResolvedReferenceType> builder = ImmutableList.builder();
 
         // Only add the super type if it is present (e.g. java.lang.Object has no super class)
@@ -133,7 +133,7 @@ public class JavaParserAnonymousClassDeclaration:AbstractClassDeclaration
         return builder.build();
     }
 
-    @Override
+    //@Override
     public List<ResolvedFieldDeclaration> getAllFields() {
 
         List<JavaParserFieldDeclaration> myFields = findMembersOfKind(FieldDeclaration.class)
@@ -170,8 +170,8 @@ public class JavaParserAnonymousClassDeclaration:AbstractClassDeclaration
                 .build();
     }
 
-    @Override
-    public Set<ResolvedMethodDeclaration> getDeclaredMethods() {
+    //@Override
+    public HashSet<ResolvedMethodDeclaration> getDeclaredMethods() {
         return
                 findMembersOfKind(MethodDeclaration.class)
                         .stream()
@@ -179,32 +179,32 @@ public class JavaParserAnonymousClassDeclaration:AbstractClassDeclaration
                         .collect(Collectors.toSet());
     }
 
-    @Override
-    public boolean isAssignableBy(ResolvedType type) {
+    //@Override
+    public bool isAssignableBy(ResolvedType type) {
         return false;
     }
 
-    @Override
-    public boolean isAssignableBy(ResolvedReferenceTypeDeclaration other) {
+    //@Override
+    public bool isAssignableBy(ResolvedReferenceTypeDeclaration other) {
         return false;
     }
 
-    @Override
-    public boolean hasDirectlyAnnotation(string qualifiedName) {
+    //@Override
+    public bool hasDirectlyAnnotation(string qualifiedName) {
         return false;
     }
 
-    @Override
+    //@Override
     public string getPackageName() {
         return AstResolutionUtils.getPackageName(wrappedNode);
     }
 
-    @Override
+    //@Override
     public string getClassName() {
         return AstResolutionUtils.getClassName("", wrappedNode);
     }
 
-    @Override
+    //@Override
     public string getQualifiedName() {
         string containerName = AstResolutionUtils.containerName(wrappedNode.getParentNode().orElse(null));
         if (containerName.isEmpty()) {
@@ -214,8 +214,8 @@ public class JavaParserAnonymousClassDeclaration:AbstractClassDeclaration
         }
     }
 
-    @Override
-    public Set<ResolvedReferenceTypeDeclaration> internalTypes() {
+    //@Override
+    public HashSet<ResolvedReferenceTypeDeclaration> internalTypes() {
         return
                 findMembersOfKind(TypeDeclaration.class)
                         .stream()
@@ -223,22 +223,22 @@ public class JavaParserAnonymousClassDeclaration:AbstractClassDeclaration
                         .collect(Collectors.toSet());
     }
 
-    @Override
+    //@Override
     public string getName() {
         return name;
     }
 
-    @Override
+    //@Override
     public List<ResolvedTypeParameterDeclaration> getTypeParameters() {
         return Lists.newArrayList();
     }
 
-    @Override
+    //@Override
     public Optional<ResolvedReferenceTypeDeclaration> containerType() {
         throw new UnsupportedOperationException("containerType is not supported for " + this.getClass().getCanonicalName());
     }
 
-    @Override
+    //@Override
     public Optional<Node> toAst() {
         return Optional.of(wrappedNode);
     }

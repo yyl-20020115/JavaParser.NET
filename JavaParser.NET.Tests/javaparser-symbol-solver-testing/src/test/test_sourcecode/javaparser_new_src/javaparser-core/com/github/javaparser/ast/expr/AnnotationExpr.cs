@@ -32,7 +32,7 @@ public abstract class AnnotationExpr:Expression {
 	public AnnotationExpr() {}
 
 	public AnnotationExpr(Range range) {
-		super(range);
+		base(range);
 	}
 
 	public NameExpr getName() {

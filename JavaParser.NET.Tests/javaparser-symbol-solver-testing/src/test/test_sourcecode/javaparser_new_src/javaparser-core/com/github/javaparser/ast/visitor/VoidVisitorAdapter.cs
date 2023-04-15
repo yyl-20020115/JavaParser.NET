@@ -534,7 +534,7 @@ public abstract class VoidVisitorAdapter<A> implements VoidVisitor<A> {
         }
     }
 
-    @Override public void visit(/*final*/UnionType n, /*final*/A arg) {
+    //@Override public void visit(/*final*/UnionType n, /*final*/A arg) {
         visitComment(n.getComment(), arg);
 		visitAnnotations(n, arg);
 		for (ReferenceType element : n.getElements()) {
@@ -691,7 +691,7 @@ public abstract class VoidVisitorAdapter<A> implements VoidVisitor<A> {
 		}
 	}
 
-    @Override
+    //@Override
     public void visit(LambdaExpr n, /*final*/A arg) {
 		visitComment(n.getComment(), arg);
         if (n.getParameters() != null) {
@@ -704,7 +704,7 @@ public abstract class VoidVisitorAdapter<A> implements VoidVisitor<A> {
         }
     }
 
-    @Override
+    //@Override
     public void visit(MethodReferenceExpr n, /*final*/A arg) {
 		visitComment(n.getComment(), arg);
 		if (n.getTypeArguments() != null) {
@@ -717,7 +717,7 @@ public abstract class VoidVisitorAdapter<A> implements VoidVisitor<A> {
         }
     }
 
-    @Override
+    //@Override
     public void visit(TypeExpr n, /*final*/A arg) {
 		visitComment(n.getComment(), arg);
         if (n.getType() != null) {

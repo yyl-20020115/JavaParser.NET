@@ -29,15 +29,15 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.declarators;
 public class VariableSymbolDeclarator:AbstractSymbolDeclarator<VariableDeclarationExpr> {
 
     public VariableSymbolDeclarator(VariableDeclarationExpr wrappedNode, TypeSolver typeSolver) {
-        super(wrappedNode, typeSolver);
+        base(wrappedNode, typeSolver);
         wrappedNode.getParentNode().ifPresent(p -> {
             if (p is FieldDeclaration) {
-                throw new IllegalArgumentException();
+                throw new ArgumentException();
             }
         });
     }
 
-    @Override
+    //@Override
     public List<ResolvedValueDeclaration> getSymbolDeclarations() {
         List<ResolvedValueDeclaration> variables = wrappedNode.getVariables()
                 .stream()

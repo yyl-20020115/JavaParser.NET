@@ -33,7 +33,7 @@ public class CsmSingleReference implements CsmElement {
         this.property = property;
     }
 
-    @Override
+    //@Override
     public void prettyPrint(Node node, SourcePrinter printer) {
         Node child = property.getValueAsSingleReference(node);
         if (child != null) {
@@ -41,7 +41,7 @@ public class CsmSingleReference implements CsmElement {
         }
     }
 
-    @Override
+    //@Override
     public string toString() {
         return String.format("%s(property:%s)", this.getClass().getSimpleName(), getProperty());
     }

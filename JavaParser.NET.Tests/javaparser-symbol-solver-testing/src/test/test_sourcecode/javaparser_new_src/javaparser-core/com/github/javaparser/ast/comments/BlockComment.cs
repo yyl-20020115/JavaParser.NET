@@ -37,11 +37,11 @@ public /*final*/class BlockComment:Comment {
     }
 
     public BlockComment(string content) {
-        super(content);
+        base(content);
     }
 
     public BlockComment(Range range, string content) {
-        super(range, content);
+        base(range, content);
     }
 
     //@Override

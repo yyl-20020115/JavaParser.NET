@@ -27,15 +27,15 @@ namespace com.github.javaparser;
  */
 public class TokenTypes {
 
-    public static boolean isWhitespace(int kind) {
+    public static bool isWhitespace(int kind) {
         return getCategory(kind).isWhitespace();
     }
 
-    public static boolean isEndOfLineToken(int kind) {
+    public static bool isEndOfLineToken(int kind) {
         return getCategory(kind).isEndOfLine();
     }
 
-    public static boolean isWhitespaceOrComment(int kind) {
+    public static bool isWhitespaceOrComment(int kind) {
         return getCategory(kind).isWhitespaceOrComment();
     }
 
@@ -49,15 +49,15 @@ public class TokenTypes {
      *  }</pre>
      */
     //@Deprecated
-    public static boolean isSpaceOrTab(int kind) {
+    public static bool isSpaceOrTab(int kind) {
         return isWhitespaceButNotEndOfLine(kind);
     }
 
-    public static boolean isWhitespaceButNotEndOfLine(int kind) {
+    public static bool isWhitespaceButNotEndOfLine(int kind) {
         return getCategory(kind).isWhitespaceButNotEndOfLine();
     }
 
-    public static boolean isComment(int kind) {
+    public static bool isComment(int kind) {
         return getCategory(kind).isComment();
     }
 

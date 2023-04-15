@@ -77,7 +77,7 @@ class NodePositionTest {
             assertNotNull(n.getRange(), String.format("There should be no node without a range: %s (class: %s)",
                     n, n.getClass().getCanonicalName()));
             if (n.getBegin().get().line == 0 && !n.toString().isEmpty()) {
-                throw new IllegalArgumentException("There should be no node at line 0: " + n + " (class: "
+                throw new ArgumentException("There should be no node at line 0: " + n + " (class: "
                         + n.getClass().getCanonicalName() + ")");
             }
         });

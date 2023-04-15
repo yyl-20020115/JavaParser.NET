@@ -28,31 +28,31 @@ namespace com.github.javaparser.ast.body;
 public /*final*/class InitializerDeclaration:BodyDeclaration<InitializerDeclaration>
         implements NodeWithJavaDoc<InitializerDeclaration> {
 
-    private boolean isStatic;
+    private bool isStatic;
 
     private BlockStmt block;
 
     public InitializerDeclaration() {
     }
 
-    public InitializerDeclaration(boolean isStatic, BlockStmt block) {
-        super(null);
+    public InitializerDeclaration(bool isStatic, BlockStmt block) {
+        base(null);
         setStatic(isStatic);
         setBlock(block);
     }
 
-    public InitializerDeclaration(Range range, boolean isStatic, BlockStmt block) {
-        super(range, null);
+    public InitializerDeclaration(Range range, bool isStatic, BlockStmt block) {
+        base(range, null);
         setStatic(isStatic);
         setBlock(block);
     }
 
-    @Override
+    //@Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
@@ -61,7 +61,7 @@ public /*final*/class InitializerDeclaration:BodyDeclaration<InitializerDeclarat
         return block;
     }
 
-    public boolean isStatic() {
+    public bool isStatic() {
         return isStatic;
     }
 
@@ -71,12 +71,12 @@ public /*final*/class InitializerDeclaration:BodyDeclaration<InitializerDeclarat
         return this;
     }
 
-    public InitializerDeclaration setStatic(boolean isStatic) {
+    public InitializerDeclaration setStatic(bool isStatic) {
         this.isStatic = isStatic;
         return this;
     }
 
-    @Override
+    //@Override
     public JavadocComment getJavaDoc() {
         if(getComment() is JavadocComment){
             return (JavadocComment) getComment();

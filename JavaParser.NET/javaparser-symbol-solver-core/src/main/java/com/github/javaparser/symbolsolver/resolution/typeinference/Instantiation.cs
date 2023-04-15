@@ -43,8 +43,8 @@ public class Instantiation {
         return properType;
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -54,14 +54,14 @@ public class Instantiation {
         return properType.equals(that.properType);
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         int result = inferenceVariable.hashCode();
         result = 31 * result + properType.hashCode();
         return result;
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "Instantiation{" +
                 "inferenceVariable=" + inferenceVariable +

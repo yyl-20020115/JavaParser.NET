@@ -36,6 +36,6 @@ public class LongLiteralExprMetaModel:LiteralStringValueExprMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     LongLiteralExprMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, LongLiteralExpr.class, "LongLiteralExpr", "com.github.javaparser.ast.expr", false, false);
+        base(superBaseNodeMetaModel, LongLiteralExpr.class, "LongLiteralExpr", "com.github.javaparser.ast.expr", false, false);
     }
 }

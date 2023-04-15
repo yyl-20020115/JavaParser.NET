@@ -40,7 +40,7 @@ public /*final*/class ArrayAccessExpr:Expression {
     }
 
     public ArrayAccessExpr(int beginLine, int beginColumn, int endLine, int endColumn, Expression name, Expression index) {
-        super(beginLine, beginColumn, endLine, endColumn);
+        base(beginLine, beginColumn, endLine, endColumn);
         setName(name);
         setIndex(index);
     }

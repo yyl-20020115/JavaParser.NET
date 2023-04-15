@@ -46,21 +46,21 @@ public class ModuleRequiresDirective:ModuleDirective implements NodeWithStaticMo
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public ModuleRequiresDirective(TokenRange tokenRange, NodeList<Modifier> modifiers, Name name) {
-        super(tokenRange);
+        base(tokenRange);
         setModifiers(modifiers);
         setName(name);
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -105,7 +105,7 @@ public class ModuleRequiresDirective:ModuleDirective implements NodeWithStaticMo
     /*
      * A requires static directive indicates that a module is required at compile time, but is optional at runtime. 
      */
-    public boolean isStatic() {
+    public bool isStatic() {
         return hasModifier(STATIC);
     }
     
@@ -113,17 +113,17 @@ public class ModuleRequiresDirective:ModuleDirective implements NodeWithStaticMo
      * Requires transitive—implied readability. 
      * To specify a dependency on another module and to ensure that other modules reading your module also read that dependency
      */
-    public boolean isTransitive() {
+    public bool isTransitive() {
         return hasModifier(TRANSITIVE);
     }
 
-    public ModuleRequiresDirective setTransitive(boolean set) {
+    public ModuleRequiresDirective setTransitive(bool set) {
         return setModifier(TRANSITIVE, set);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
-    public boolean remove(Node node) {
+    public bool remove(Node node) {
         if (node == null) {
             return false;
         }
@@ -136,15 +136,15 @@ public class ModuleRequiresDirective:ModuleDirective implements NodeWithStaticMo
         return super.remove(node);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public ModuleRequiresDirective clone() {
         return (ModuleRequiresDirective) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }
@@ -161,13 +161,13 @@ public class ModuleRequiresDirective:ModuleDirective implements NodeWithStaticMo
         return super.replace(node, replacementNode);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isModuleRequiresStmt() {
+    public bool isModuleRequiresStmt() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public ModuleRequiresDirective asModuleRequiresStmt() {
         return this;
@@ -178,37 +178,37 @@ public class ModuleRequiresDirective:ModuleDirective implements NodeWithStaticMo
         action.accept(this);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<ModuleRequiresDirective> toModuleRequiresStmt() {
         return Optional.of(this);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isModuleRequiresDirective() {
+    public bool isModuleRequiresDirective() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public ModuleRequiresDirective asModuleRequiresDirective() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<ModuleRequiresDirective> toModuleRequiresDirective() {
         return Optional.of(this);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifModuleRequiresDirective(Consumer<ModuleRequiresDirective> action) {
         action.accept(this);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public ModuleRequiresDirectiveMetaModel getMetaModel() {
         return JavaParserMetaModel.moduleRequiresDirectiveMetaModel;

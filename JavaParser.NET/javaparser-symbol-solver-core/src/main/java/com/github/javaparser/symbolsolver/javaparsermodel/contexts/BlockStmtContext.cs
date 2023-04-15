@@ -26,7 +26,7 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.contexts;
 public class BlockStmtContext:AbstractJavaParserContext<BlockStmt> {
 
     public BlockStmtContext(BlockStmt wrappedNode, TypeSolver typeSolver) {
-        super(wrappedNode, typeSolver);
+        base(wrappedNode, typeSolver);
     }
 
     //@Override

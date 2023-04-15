@@ -31,7 +31,7 @@ public abstract class Expression:Node {
 	}
 
 	public Expression(Range range) {
-		super(range);
+		base(range);
 	}
 
 }

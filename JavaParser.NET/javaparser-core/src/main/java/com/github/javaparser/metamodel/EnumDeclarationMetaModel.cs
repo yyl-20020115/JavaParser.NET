@@ -36,7 +36,7 @@ public class EnumDeclarationMetaModel:TypeDeclarationMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     EnumDeclarationMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, EnumDeclaration.class, "EnumDeclaration", "com.github.javaparser.ast.body", false, false);
+        base(superBaseNodeMetaModel, EnumDeclaration.class, "EnumDeclaration", "com.github.javaparser.ast.body", false, false);
     }
 
     public PropertyMetaModel entriesPropertyMetaModel;

@@ -60,7 +60,7 @@ public class Java5Validator:Java1_4Validator {
     /*final*/Validator enumNotAllowed = new ReservedKeywordValidator("enum");
 
     public Java5Validator() {
-        super();
+        base();
         replace(noGenerics, genericsWithoutDiamondOperator);
         add(noPrimitiveGenericArguments);
         add(enumNotAllowed);

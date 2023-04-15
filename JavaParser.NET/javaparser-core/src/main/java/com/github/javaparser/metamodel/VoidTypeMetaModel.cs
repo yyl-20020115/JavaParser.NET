@@ -36,6 +36,6 @@ public class VoidTypeMetaModel:TypeMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     VoidTypeMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, VoidType.class, "VoidType", "com.github.javaparser.ast.type", false, false);
+        base(superBaseNodeMetaModel, VoidType.class, "VoidType", "com.github.javaparser.ast.type", false, false);
     }
 }

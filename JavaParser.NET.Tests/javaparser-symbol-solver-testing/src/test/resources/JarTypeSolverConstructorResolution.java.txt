@@ -3,6 +3,6 @@ namespace java.lang;
 
 public class JarTypeSolverConstructionResolution extends GenericClass<String> {
     public JarTypeSolverConstructionResolution(String s) {
-        super(s);
+        base(s);
     }
 }

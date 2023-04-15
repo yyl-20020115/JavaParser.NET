@@ -28,15 +28,15 @@ namespace com.github.javaparser.generator.metamodel;
  * A hacky thing that collects flags we need from AST types to generate the metamodel.
  */
 class AstTypeAnalysis {
-    /*final*/boolean isAbstract;
-    boolean isOptional = false;
-    boolean isNodeList = false;
-    boolean isSelfType = false;
-    Class<?> innerType;
+    /*final*/bool isAbstract;
+    bool isOptional = false;
+    bool isNodeList = false;
+    bool isSelfType = false;
+    Type innerType;
 
     AstTypeAnalysis(Type type) {
-        if (type is Class<?>) {
-            TypeVariable<?:Class<?>>[] typeParameters = ((Class<?>) type).getTypeParameters();
+        if (type is Type) {
+            TypeVariable<?:Type>[] typeParameters = ((Type) type).getTypeParameters();
             if (typeParameters.length > 0) {
                 isSelfType = true;
             }
@@ -59,7 +59,7 @@ class AstTypeAnalysis {
                 type = t.getActualTypeArguments()[0];
             }
         }
-        innerType = (Class<?>) type;
+        innerType = (Type) type;
         isAbstract = isAbstract(innerType.getModifiers());
     }
 }

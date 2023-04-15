@@ -43,7 +43,7 @@ public class CommentsParser {
     }
 
     public CommentsCollection parse(/*final*/InputStream _in, /*final*/string charsetName), UnsupportedEncodingException {
-        boolean lastWasASlashR = false;
+        bool lastWasASlashR = false;
         BufferedReader br = new BufferedReader(new InputStreamReader(_in, charsetName));
         CommentsCollection comments = new CommentsCollection();
         int r;

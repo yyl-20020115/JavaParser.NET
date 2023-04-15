@@ -26,7 +26,7 @@ namespace com.github.javaparser.printer.lexicalpreservation.changes;
  */
 public interface Change {
 
-    default boolean evaluate(CsmConditional csmConditional, Node node) {
+    default bool evaluate(CsmConditional csmConditional, Node node) {
         switch(csmConditional.getCondition()) {
             case FLAG:
                 return csmConditional.getProperties().stream().anyMatch(p -> (Boolean) getValue(p, node));
@@ -83,7 +83,7 @@ public interface Change {
 	 * could deduce that EXPRESSION_BODY and BODY actually represent the same field
 	 * but the validation condition must not be checked.
 	 */
-    default boolean isEvaluatedOnDerivedProperty(ObservableProperty property) {
+    default bool isEvaluatedOnDerivedProperty(ObservableProperty property) {
     	ObservableProperty currentProperty = getProperty();
 		/*
 		 * By convention we admit that the derived property is suffixed with the name of

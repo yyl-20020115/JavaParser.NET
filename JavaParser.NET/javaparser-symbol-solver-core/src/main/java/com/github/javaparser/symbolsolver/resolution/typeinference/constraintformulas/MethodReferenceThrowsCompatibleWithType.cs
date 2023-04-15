@@ -32,7 +32,7 @@ public class MethodReferenceThrowsCompatibleWithType:ConstraintFormula {
     private MethodReferenceExpr methodReference;
     private ResolvedType T;
 
-    @Override
+    //@Override
     public ReductionResult reduce(BoundSet currentBoundSet) {
         // A constraint formula of the form ‹MethodReference →throws T› is reduced as follows:
         //
@@ -51,8 +51,8 @@ public class MethodReferenceThrowsCompatibleWithType:ConstraintFormula {
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -62,14 +62,14 @@ public class MethodReferenceThrowsCompatibleWithType:ConstraintFormula {
         return T.equals(that.T);
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         int result = methodReference.hashCode();
         result = 31 * result + T.hashCode();
         return result;
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "MethodReferenceThrowsCompatibleWithType{" +
                 "methodReference=" + methodReference +

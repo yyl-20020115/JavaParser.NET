@@ -29,24 +29,24 @@ public /*final*/class EmptyMemberDeclaration:BodyDeclaration<EmptyMemberDeclarat
         implements NodeWithJavaDoc<EmptyMemberDeclaration> {
 
     public EmptyMemberDeclaration() {
-        super(null);
+        base(null);
     }
 
     public EmptyMemberDeclaration(Range range) {
-        super(range, null);
+        base(range, null);
     }
 
-    @Override
+    //@Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public JavadocComment getJavaDoc() {
         if(getComment() is JavadocComment){
             return (JavadocComment) getComment();

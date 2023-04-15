@@ -35,7 +35,7 @@ public class JavaParserVariableDeclaration implements ResolvedValueDeclaration {
 
     public JavaParserVariableDeclaration(VariableDeclarator variableDeclarator, TypeSolver typeSolver) {
         if (typeSolver == null) {
-            throw new IllegalArgumentException("typeSolver should not be null");
+            throw new ArgumentException("typeSolver should not be null");
         }
         this.variableDeclarator = variableDeclarator;
         this.typeSolver = typeSolver;
@@ -45,18 +45,18 @@ public class JavaParserVariableDeclaration implements ResolvedValueDeclaration {
         this.wrappedNode = (VariableDeclarationExpr) demandParentNode(variableDeclarator);
     }
 
-    @Override
+    //@Override
     public ResolvedType getType() {
         return JavaParserFacade.get(typeSolver).convert(variableDeclarator.getType(), wrappedNode);
     }
 
-    @Override
+    //@Override
     public string getName() {
         return variableDeclarator.getName().getId();
     }
 
-    @Override
-    public boolean isVariable() {
+    //@Override
+    public bool isVariable() {
         return true;
     }
 
@@ -73,12 +73,12 @@ public class JavaParserVariableDeclaration implements ResolvedValueDeclaration {
         return variableDeclarator;
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "JavaParserVariableDeclaration{" + getName() + "}";
     }
 
-    @Override
+    //@Override
     public Optional<Node> toAst() {
         return Optional.of(wrappedNode);
     }

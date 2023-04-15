@@ -52,12 +52,12 @@ class PrinterConfigurationTest {
     void testConfigurationError() {
         PrinterConfiguration config = new DefaultPrinterConfiguration();
         // verify configuration error case
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(ArgumentException.class, () -> {
             getOption(config, ConfigOption.PRINT_COMMENTS).get().asValue();
         });
         
         // verify currentValue assignment: example we cannot assign a string to a boolean
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(ArgumentException.class, () -> {
             config.addOption(new DefaultConfigurationOption(ConfigOption.PRINT_COMMENTS, "1"));
         });
     }

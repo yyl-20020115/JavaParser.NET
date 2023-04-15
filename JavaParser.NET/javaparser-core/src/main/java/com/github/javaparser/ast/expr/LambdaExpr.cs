@@ -43,7 +43,7 @@ public class LambdaExpr:Expression implements NodeWithParameters<LambdaExpr> {
 
     private NodeList<Parameter> parameters;
 
-    private boolean isEnclosingParameters;
+    private bool isEnclosingParameters;
 
     private Statement body;
 
@@ -80,7 +80,7 @@ public class LambdaExpr:Expression implements NodeWithParameters<LambdaExpr> {
     }
 
     //@AllFieldsConstructor
-    public LambdaExpr(NodeList<Parameter> parameters, Statement body, boolean isEnclosingParameters) {
+    public LambdaExpr(NodeList<Parameter> parameters, Statement body, bool isEnclosingParameters) {
         this(null, parameters, body, isEnclosingParameters);
     }
 
@@ -88,8 +88,8 @@ public class LambdaExpr:Expression implements NodeWithParameters<LambdaExpr> {
      * This constructor is used by the parser and is considered private.
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
-    public LambdaExpr(TokenRange tokenRange, NodeList<Parameter> parameters, Statement body, boolean isEnclosingParameters) {
-        super(tokenRange);
+    public LambdaExpr(TokenRange tokenRange, NodeList<Parameter> parameters, Statement body, bool isEnclosingParameters) {
+        base(tokenRange);
         setParameters(parameters);
         setBody(body);
         setEnclosingParameters(isEnclosingParameters);
@@ -137,25 +137,25 @@ public class LambdaExpr:Expression implements NodeWithParameters<LambdaExpr> {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
     //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public boolean isEnclosingParameters() {
+    public bool isEnclosingParameters() {
         return isEnclosingParameters;
     }
 
     //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public LambdaExpr setEnclosingParameters(/*final*/boolean isEnclosingParameters) {
+    public LambdaExpr setEnclosingParameters(/*final*/bool isEnclosingParameters) {
         if (isEnclosingParameters == this.isEnclosingParameters) {
             return this;
         }
@@ -164,9 +164,9 @@ public class LambdaExpr:Expression implements NodeWithParameters<LambdaExpr> {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
-    public boolean remove(Node node) {
+    public bool remove(Node node) {
         if (node == null) {
             return false;
         }
@@ -192,21 +192,21 @@ public class LambdaExpr:Expression implements NodeWithParameters<LambdaExpr> {
         }
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public LambdaExpr clone() {
         return (LambdaExpr) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public LambdaExprMetaModel getMetaModel() {
         return JavaParserMetaModel.lambdaExprMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }
@@ -223,25 +223,25 @@ public class LambdaExpr:Expression implements NodeWithParameters<LambdaExpr> {
         return super.replace(node, replacementNode);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isLambdaExpr() {
+    public bool isLambdaExpr() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public LambdaExpr asLambdaExpr() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifLambdaExpr(Consumer<LambdaExpr> action) {
         action.accept(this);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<LambdaExpr> toLambdaExpr() {
         return Optional.of(this);
@@ -250,8 +250,8 @@ public class LambdaExpr:Expression implements NodeWithParameters<LambdaExpr> {
     /*
      * Lambda expressions are always poly expressions
      */
-    @Override
-    public boolean isPolyExpression() {
+    //@Override
+    public bool isPolyExpression() {
         return true;
     }
 }

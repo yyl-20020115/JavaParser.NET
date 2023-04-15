@@ -31,7 +31,7 @@ public class CommentParsingTest:BasicJBehaveTest {
     }
 
     public CommentParsingTest() {
-        super("**/comment*.story");
+        base("**/comment*.story");
     }
 }
 

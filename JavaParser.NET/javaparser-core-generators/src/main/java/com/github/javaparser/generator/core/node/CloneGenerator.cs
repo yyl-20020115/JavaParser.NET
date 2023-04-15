@@ -25,7 +25,7 @@ namespace com.github.javaparser.generator.core.node;
 
 public class CloneGenerator:NodeGenerator {
     public CloneGenerator(SourceRoot sourceRoot) {
-        super(sourceRoot);
+        base(sourceRoot);
     }
 
     //@Override

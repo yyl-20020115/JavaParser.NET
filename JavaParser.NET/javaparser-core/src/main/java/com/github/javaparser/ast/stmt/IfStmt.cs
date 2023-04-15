@@ -36,7 +36,7 @@ public class IfStmt:Statement implements NodeWithCondition<IfStmt> {
 
     private Statement thenStmt;
 
-    @OptionalProperty
+    //@OptionalProperty
     private Statement elseStmt;
 
     public IfStmt() {
@@ -53,22 +53,22 @@ public class IfStmt:Statement implements NodeWithCondition<IfStmt> {
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public IfStmt(TokenRange tokenRange, Expression condition, Statement thenStmt, Statement elseStmt) {
-        super(tokenRange);
+        base(tokenRange);
         setCondition(condition);
         setThenStmt(thenStmt);
         setElseStmt(elseStmt);
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -134,9 +134,9 @@ public class IfStmt:Statement implements NodeWithCondition<IfStmt> {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
-    public boolean remove(Node node) {
+    public bool remove(Node node) {
         if (node == null) {
             return false;
         }
@@ -158,7 +158,7 @@ public class IfStmt:Statement implements NodeWithCondition<IfStmt> {
      * This method returns true if the then branch (which should be always present) is a block statement.
      */
     @DerivedProperty
-    public boolean hasThenBlock() {
+    public bool hasThenBlock() {
         return thenStmt is BlockStmt;
     }
 
@@ -166,7 +166,7 @@ public class IfStmt:Statement implements NodeWithCondition<IfStmt> {
      * This method returns true if the If Statement has an else branch and that branch is a block statement.
      */
     @DerivedProperty
-    public boolean hasElseBlock() {
+    public bool hasElseBlock() {
         return elseStmt is BlockStmt;
     }
 
@@ -174,7 +174,7 @@ public class IfStmt:Statement implements NodeWithCondition<IfStmt> {
      * This method returns true if the If Statement has an else branch and that branch is another If Statement.
      */
     @DerivedProperty
-    public boolean hasCascadingIfStmt() {
+    public bool hasCascadingIfStmt() {
         return elseStmt is IfStmt;
     }
 
@@ -182,25 +182,25 @@ public class IfStmt:Statement implements NodeWithCondition<IfStmt> {
      * This method returns true if the If Statement has an else branch.
      */
     @DerivedProperty
-    public boolean hasElseBranch() {
+    public bool hasElseBranch() {
         return elseStmt != null;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public IfStmt clone() {
         return (IfStmt) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public IfStmtMetaModel getMetaModel() {
         return JavaParserMetaModel.ifStmtMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }
@@ -221,25 +221,25 @@ public class IfStmt:Statement implements NodeWithCondition<IfStmt> {
         return super.replace(node, replacementNode);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isIfStmt() {
+    public bool isIfStmt() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public IfStmt asIfStmt() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifIfStmt(Consumer<IfStmt> action) {
         action.accept(this);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<IfStmt> toIfStmt() {
         return Optional.of(this);

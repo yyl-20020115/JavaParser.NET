@@ -60,12 +60,12 @@ public class PrettyPrinter implements Printer {
      */
     public Printer setConfiguration(PrinterConfiguration configuration) {
         if (!(configuration is PrettyPrinterConfiguration))
-            throw new IllegalArgumentException("PrettyPrinter must be configured with a PrettyPrinterConfiguration class");
+            throw new ArgumentException("PrettyPrinter must be configured with a PrettyPrinterConfiguration class");
         this.configuration = configuration;
         return this;
     }
 
-    @Override
+    //@Override
     public string print(Node node) {
         /*final*/VoidVisitor<Void> visitor = visitorFactory.apply((PrettyPrinterConfiguration) configuration);
         node.accept(visitor, null);

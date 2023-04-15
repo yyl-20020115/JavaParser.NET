@@ -28,7 +28,7 @@ namespace com.github.javaparser.ast.body;
  *
  * @author Julio Vilmar Gesser
  */
-public abstract class TypeDeclaration<T:TypeDeclaration<?>>:BodyDeclaration<T> implements NodeWithSimpleName<T>, NodeWithJavadoc<T>, NodeWithMembers<T>, NodeWithAccessModifiers<T>, NodeWithStaticModifier<T>, NodeWithStrictfpModifier<T> {
+public abstract class TypeDeclaration<T>:BodyDeclaration<T> : NodeWithSimpleName<T>, NodeWithJavadoc<T>, NodeWithMembers<T>, NodeWithAccessModifiers<T>, NodeWithStaticModifier<T>, NodeWithStrictfpModifier<T> where T:TypeDeclaration<T>{
 
     private SimpleName name;
 
@@ -54,7 +54,7 @@ public abstract class TypeDeclaration<T:TypeDeclaration<?>>:BodyDeclaration<T> i
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public TypeDeclaration(TokenRange tokenRange, NodeList<Modifier> modifiers, NodeList<AnnotationExpr> annotations, SimpleName name, NodeList<BodyDeclaration<?>> members) {
-        super(tokenRange, annotations);
+        base(tokenRange, annotations);
         setModifiers(modifiers);
         setName(name);
         setMembers(members);
@@ -138,9 +138,9 @@ public abstract class TypeDeclaration<T:TypeDeclaration<?>>:BodyDeclaration<T> i
         return name;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
-    public boolean remove(Node node) {
+    public bool remove(Node node) {
         if (node == null) {
             return false;
         }
@@ -162,7 +162,7 @@ public abstract class TypeDeclaration<T:TypeDeclaration<?>>:BodyDeclaration<T> i
     /**
      * @return is this type's parent a CompilationUnit?
      */
-    public boolean isTopLevelType() {
+    public bool isTopLevelType() {
         return getParentNode().map(p -> p is CompilationUnit).orElse(false);
     }
 
@@ -192,25 +192,25 @@ public abstract class TypeDeclaration<T:TypeDeclaration<?>>:BodyDeclaration<T> i
      * @return is this type's parent a TypeDeclaration?
      * NOTE: many people are confused over terminology. Refer to https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html .
      */
-    public boolean isNestedType() {
+    public bool isNestedType() {
         return getParentNode().map(p -> p is TypeDeclaration).orElse(false);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public TypeDeclaration<?> clone() {
         return (TypeDeclaration<?>) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public TypeDeclarationMetaModel getMetaModel() {
         return JavaParserMetaModel.typeDeclarationMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }
@@ -233,25 +233,25 @@ public abstract class TypeDeclaration<T:TypeDeclaration<?>>:BodyDeclaration<T> i
         return super.replace(node, replacementNode);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isTypeDeclaration() {
+    public bool isTypeDeclaration() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public TypeDeclaration asTypeDeclaration() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifTypeDeclaration(Consumer<TypeDeclaration> action) {
         action.accept(this);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<TypeDeclaration> toTypeDeclaration() {
         return Optional.of(this);

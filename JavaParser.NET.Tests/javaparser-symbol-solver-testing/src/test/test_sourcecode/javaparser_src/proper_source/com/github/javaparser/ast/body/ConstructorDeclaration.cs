@@ -51,7 +51,7 @@ public /*final*/class ConstructorDeclaration:BodyDeclaration implements Document
 
     public ConstructorDeclaration(int modifiers, List<AnnotationExpr> annotations, List<TypeParameter> typeParameters,
                                   string name, List<Parameter> parameters, List<NameExpr> throws_, BlockStmt block) {
-        super(annotations);
+        base(annotations);
         setModifiers(modifiers);
         setTypeParameters(typeParameters);
         setName(name);
@@ -63,7 +63,7 @@ public /*final*/class ConstructorDeclaration:BodyDeclaration implements Document
     public ConstructorDeclaration(int beginLine, int beginColumn, int endLine, int endColumn, int modifiers,
                                   List<AnnotationExpr> annotations, List<TypeParameter> typeParameters, string name,
                                   List<Parameter> parameters, List<NameExpr> throws_, BlockStmt block) {
-        super(beginLine, beginColumn, endLine, endColumn, annotations);
+        base(beginLine, beginColumn, endLine, endColumn, annotations);
         setModifiers(modifiers);
         setTypeParameters(typeParameters);
         setName(name);
@@ -72,12 +72,12 @@ public /*final*/class ConstructorDeclaration:BodyDeclaration implements Document
         setBlock(block);
     }
 
-    @Override
+    //@Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
@@ -160,9 +160,9 @@ public /*final*/class ConstructorDeclaration:BodyDeclaration implements Document
      * [accessSpecifier] className ([paramType [paramName]])
      * [throws exceptionsList]
      */
-    @Override
-    public string getDeclarationAsString(boolean includingModifiers, boolean includingThrows,
-                                         boolean includingParameterName) {
+    //@Override
+    public string getDeclarationAsString(bool includingModifiers, bool includingThrows,
+                                         bool includingParameterName) {
         StringBuffer sb = new StringBuffer();
         if (includingModifiers) {
             AccessSpecifier accessSpecifier = ModifierSet.getAccessSpecifier(getModifiers());
@@ -171,7 +171,7 @@ public /*final*/class ConstructorDeclaration:BodyDeclaration implements Document
         }
         sb.append(getName());
         sb.append("(");
-        boolean firstParam = true;
+        bool firstParam = true;
         for (Parameter param : getParameters())
         {
             if (firstParam) {
@@ -187,7 +187,7 @@ public /*final*/class ConstructorDeclaration:BodyDeclaration implements Document
         }
         sb.append(")");
         if (includingThrows) {
-            boolean firstThrow = true;
+            bool firstThrow = true;
             for (NameExpr thr : getThrows()) {
                 if (firstThrow) {
                     firstThrow = false;
@@ -201,22 +201,22 @@ public /*final*/class ConstructorDeclaration:BodyDeclaration implements Document
         return sb.toString();
     }
 
-    @Override
-    public string getDeclarationAsString(boolean includingModifiers, boolean includingThrows) {
+    //@Override
+    public string getDeclarationAsString(bool includingModifiers, bool includingThrows) {
         return getDeclarationAsString(includingModifiers, includingThrows, true);
     }
 
-    @Override
+    //@Override
     public string getDeclarationAsString() {
         return getDeclarationAsString(true, true, true);
     }
 
-    @Override
+    //@Override
     public void setJavaDoc(JavadocComment javadocComment) {
         this.javadocComment = javadocComment;
     }
 
-    @Override
+    //@Override
     public JavadocComment getJavaDoc() {
         return javadocComment;
     }

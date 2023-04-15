@@ -18,6 +18,8 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  */
+using com.github.javaparser.ast.visitor;
+
 namespace com.github.javaparser.ast.expr;
 
 
@@ -110,7 +112,7 @@ public class AssignExpr:Expression {
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public AssignExpr(TokenRange tokenRange, Expression target, Expression value, Operator operator) {
-        super(tokenRange);
+        base(tokenRange);
         setTarget(target);
         setValue(value);
         setOperator(operator);
@@ -119,13 +121,13 @@ public class AssignExpr:Expression {
 
     //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
     //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 

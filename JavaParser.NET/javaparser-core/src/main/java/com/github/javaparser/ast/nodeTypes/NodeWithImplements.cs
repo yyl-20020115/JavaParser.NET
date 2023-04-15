@@ -35,7 +35,7 @@ public interface NodeWithImplements<N:Node> {
 
     N setImplementedTypes(NodeList<ClassOrInterfaceType> implementsList);
 
-    void tryAddImportToParentCompilationUnit(Class<?> clazz);
+    void tryAddImportToParentCompilationUnit(Type clazz);
 
     //@SuppressWarnings("unchecked")
     default N setImplementedType(int i, ClassOrInterfaceType implement) {
@@ -59,7 +59,7 @@ public interface NodeWithImplements<N:Node> {
     /**
      * @deprecated use addImplementedType instead
      */
-    default N addImplements(Class<?> clazz) {
+    default N addImplements(Type clazz) {
         return addImplementedType(clazz);
     }
 
@@ -81,7 +81,7 @@ public interface NodeWithImplements<N:Node> {
      * @param clazz the type to implements from
      * @return this
      */
-    default N addImplementedType(Class<?> clazz) {
+    default N addImplementedType(Type clazz) {
         tryAddImportToParentCompilationUnit(clazz);
         return addImplementedType(clazz.getSimpleName());
     }

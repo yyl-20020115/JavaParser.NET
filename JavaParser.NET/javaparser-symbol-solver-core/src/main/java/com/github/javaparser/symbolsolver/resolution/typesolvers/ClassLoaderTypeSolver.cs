@@ -71,7 +71,7 @@ public class ClassLoaderTypeSolver implements TypeSolver {
                             "The ClassLoaderTypeSolver has been probably loaded through the bootstrap class loader. This usage is not supported by the JavaSymbolSolver");
                 }
 
-                Class<?> clazz = classLoader.loadClass(name);
+                Type clazz = classLoader.loadClass(name);
                 return SymbolReference.solved(ReflectionFactory.typeDeclarationFor(clazz, getRoot()));
             } catch (NoClassDefFoundError e) {
                 // We can safely ignore this one because it is triggered when there are package names which are almost the

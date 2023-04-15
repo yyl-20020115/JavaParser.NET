@@ -19,8 +19,8 @@
   Line 92) commentedNode == null ==> boolean
   Line 94) this.commentedNode = commentedNode ==> com.github.javaparser.ast.Node
   Line 97) commentedNode == this ==> boolean
-  Line 99) new IllegalArgumentException() ==> java.lang.IllegalArgumentException
+  Line 99) new ArgumentException() ==> java.lang.ArgumentException
   Line 101) commentedNode instanceof Comment ==> boolean
-  Line 103) new IllegalArgumentException() ==> java.lang.IllegalArgumentException
+  Line 103) new ArgumentException() ==> java.lang.ArgumentException
   Line 105) this.commentedNode = commentedNode ==> com.github.javaparser.ast.Node
   Line 110) this.commentedNode == null ==> boolean

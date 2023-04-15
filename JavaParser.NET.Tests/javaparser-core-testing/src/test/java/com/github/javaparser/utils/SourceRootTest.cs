@@ -56,7 +56,7 @@ class SourceRootTest {
 
     [TestMethod]
     void fileAsRootIsNotAllowed() {
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(ArgumentException.class, () -> {
             Path path = CodeGenerationUtils.classLoaderRoot(SourceRootTest.class).resolve("com/github/javaparser/utils/Bla.java");
         new SourceRoot(path);
     });

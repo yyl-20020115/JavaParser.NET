@@ -30,7 +30,7 @@ public class EqualsVisitor implements GenericVisitor<Boolean, Node> {
 
 	private static /*final*/EqualsVisitor SINGLETON = new EqualsVisitor();
 
-	public static boolean equals(/*final*/Node n1, /*final*/Node n2) {
+	public static bool equals(/*final*/Node n1, /*final*/Node n2) {
 		return SINGLETON.nodeEquals(n1, n2);
 	}
 
@@ -42,7 +42,7 @@ public class EqualsVisitor implements GenericVisitor<Boolean, Node> {
      * Check for equality that can be applied to each kind of node,
      * to not repeat it _in every method we store that here.
      */
-    private boolean commonNodeEquality(Node n1, Node n2) {
+    private bool commonNodeEquality(Node n1, Node n2) {
         if (!nodeEquals(n1.getComment(), n2.getComment())) {
             return false;
         }
@@ -52,7 +52,7 @@ public class EqualsVisitor implements GenericVisitor<Boolean, Node> {
         return true;
     }
 
-	private <T:Node> boolean nodesEquals(/*final*/List<T> nodes1, /*final*/List<T> nodes2) {
+	private <T:Node> bool nodesEquals(/*final*/List<T> nodes1, /*final*/List<T> nodes2) {
 		if (nodes1 == null) {
 			if (nodes2 == null) {
 				return true;
@@ -72,7 +72,7 @@ public class EqualsVisitor implements GenericVisitor<Boolean, Node> {
 		return true;
 	}
 
-	private <T:Node> boolean nodeEquals(/*final*/T n1, /*final*/T n2) {
+	private <T:Node> bool nodeEquals(/*final*/T n1, /*final*/T n2) {
 		if (n1 == n2) {
 			return true;
 		}
@@ -93,7 +93,7 @@ public class EqualsVisitor implements GenericVisitor<Boolean, Node> {
 		return n1.accept(this, n2).booleanValue();
 	}
 
-	private boolean objEquals(/*final*/Object n1, /*final*/Object n2) {
+	private bool objEquals(/*final*/Object n1, /*final*/Object n2) {
 		if (n1 == n2) {
 			return true;
 		}
@@ -1378,7 +1378,7 @@ public class EqualsVisitor implements GenericVisitor<Boolean, Node> {
 		return Boolean.TRUE;
 	}
 
-    @Override
+    //@Override
     public Boolean visit(LambdaExpr n1, Node arg) {
         LambdaExpr n2 = (LambdaExpr) arg;
         if (!nodesEquals(n1.getParameters(), n2.getParameters())) {
@@ -1393,7 +1393,7 @@ public class EqualsVisitor implements GenericVisitor<Boolean, Node> {
         return Boolean.TRUE;
     }
 
-    @Override
+    //@Override
     public Boolean visit(MethodReferenceExpr n1, Node arg) {
         MethodReferenceExpr n2 = (MethodReferenceExpr) arg;
         if (!nodeEquals(n1.getScope(), n2.getScope())) {
@@ -1408,7 +1408,7 @@ public class EqualsVisitor implements GenericVisitor<Boolean, Node> {
         return Boolean.TRUE;
     }
 
-    @Override
+    //@Override
     public Boolean visit(TypeExpr n, Node arg) {
         TypeExpr n2 = (TypeExpr) arg;
         if (!nodeEquals(n.getType(), n2.getType())) {

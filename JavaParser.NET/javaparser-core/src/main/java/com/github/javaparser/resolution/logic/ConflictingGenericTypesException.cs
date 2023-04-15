@@ -28,6 +28,6 @@ namespace com.github.javaparser.resolution.logic;
 public class ConflictingGenericTypesException:RuntimeException {
 
     public ConflictingGenericTypesException(ResolvedType formalType, ResolvedType actualType) {
-        super(String.format("No matching between %s (formal) and %s (actual)", formalType, actualType));
+        base(String.format("No matching between %s (formal) and %s (actual)", formalType, actualType));
     }
 }

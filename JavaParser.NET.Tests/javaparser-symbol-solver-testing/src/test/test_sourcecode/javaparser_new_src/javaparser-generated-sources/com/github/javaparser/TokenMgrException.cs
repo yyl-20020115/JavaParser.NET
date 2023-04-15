@@ -114,7 +114,7 @@ public class TokenMgrException:RuntimeException
    *    curchar     : the offending character
    * Note: You can customize the lexical error message by modifying this method.
    */
-  protected static string LexicalErr(boolean EOFSeen, int lexState, int errorLine, int errorColumn, string errorAfter, int curChar) {
+  protected static string LexicalErr(bool EOFSeen, int lexState, int errorLine, int errorColumn, string errorAfter, int curChar) {
     char curChar1 = (char)curChar;
     return("Lexical error at line " +
           errorLine + ", column " +
@@ -146,12 +146,12 @@ public class TokenMgrException:RuntimeException
 
   /** Constructor with message and reason. */
   public TokenMgrException(string message, int reason) {
-    super(message);
+    base(message);
     errorCode = reason;
   }
 
   /** Full Constructor. */
-  public TokenMgrException(boolean EOFSeen, int lexState, int errorLine, int errorColumn, string errorAfter, int curChar, int reason) {
+  public TokenMgrException(bool EOFSeen, int lexState, int errorLine, int errorColumn, string errorAfter, int curChar, int reason) {
     this(LexicalErr(EOFSeen, lexState, errorLine, errorColumn, errorAfter, curChar), reason);
   }
 }

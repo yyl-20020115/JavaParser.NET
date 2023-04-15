@@ -50,7 +50,7 @@ public abstract class Type:Node implements Resolvable<ResolvedType>, Convertible
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public Type(TokenRange tokenRange, NodeList<AnnotationExpr> annotations) {
-        super(tokenRange);
+        base(tokenRange);
         setAnnotations(annotations);
         customInitialization();
     }
@@ -98,9 +98,9 @@ public abstract class Type:Node implements Resolvable<ResolvedType>, Convertible
         return "";
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
-    public boolean remove(Node node) {
+    public bool remove(Node node) {
         if (node == null) {
             return false;
         }
@@ -115,21 +115,21 @@ public abstract class Type:Node implements Resolvable<ResolvedType>, Convertible
 
     public abstract string asString();
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public Type clone() {
         return (Type) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public TypeMetaModel getMetaModel() {
         return JavaParserMetaModel.typeMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }
@@ -143,7 +143,7 @@ public abstract class Type:Node implements Resolvable<ResolvedType>, Convertible
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isArrayType() {
+    public bool isArrayType() {
         return false;
     }
 
@@ -153,7 +153,7 @@ public abstract class Type:Node implements Resolvable<ResolvedType>, Convertible
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isClassOrInterfaceType() {
+    public bool isClassOrInterfaceType() {
         return false;
     }
 
@@ -163,7 +163,7 @@ public abstract class Type:Node implements Resolvable<ResolvedType>, Convertible
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isIntersectionType() {
+    public bool isIntersectionType() {
         return false;
     }
 
@@ -173,7 +173,7 @@ public abstract class Type:Node implements Resolvable<ResolvedType>, Convertible
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isPrimitiveType() {
+    public bool isPrimitiveType() {
         return false;
     }
 
@@ -183,7 +183,7 @@ public abstract class Type:Node implements Resolvable<ResolvedType>, Convertible
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isReferenceType() {
+    public bool isReferenceType() {
         return false;
     }
 
@@ -193,7 +193,7 @@ public abstract class Type:Node implements Resolvable<ResolvedType>, Convertible
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isTypeParameter() {
+    public bool isTypeParameter() {
         return false;
     }
 
@@ -203,7 +203,7 @@ public abstract class Type:Node implements Resolvable<ResolvedType>, Convertible
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isUnionType() {
+    public bool isUnionType() {
         return false;
     }
 
@@ -213,7 +213,7 @@ public abstract class Type:Node implements Resolvable<ResolvedType>, Convertible
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isUnknownType() {
+    public bool isUnknownType() {
         return false;
     }
 
@@ -223,7 +223,7 @@ public abstract class Type:Node implements Resolvable<ResolvedType>, Convertible
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isVoidType() {
+    public bool isVoidType() {
         return false;
     }
 
@@ -233,7 +233,7 @@ public abstract class Type:Node implements Resolvable<ResolvedType>, Convertible
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isWildcardType() {
+    public bool isWildcardType() {
         return false;
     }
 
@@ -282,7 +282,7 @@ public abstract class Type:Node implements Resolvable<ResolvedType>, Convertible
     public void ifWildcardType(Consumer<WildcardType> action) {
     }
 
-    @Override
+    //@Override
     public abstract ResolvedType resolve();
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
@@ -336,7 +336,7 @@ public abstract class Type:Node implements Resolvable<ResolvedType>, Convertible
     }
 
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isVarType() {
+    public bool isVarType() {
         return false;
     }
 

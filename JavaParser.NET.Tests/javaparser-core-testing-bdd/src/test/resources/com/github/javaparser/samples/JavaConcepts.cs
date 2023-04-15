@@ -58,7 +58,7 @@ public class JavaConcepts<T:List<int[]>, X>:Base implements Serializable {
             x = +x;
             x = ~x;
             --x;
-            boolean b = !false;
+            bool b = !false;
             x &= 2;
             x |= 2;
             x ^= 2;
@@ -132,7 +132,7 @@ public class JavaConcepts<T:List<int[]>, X>:Base implements Serializable {
     public enum Enum {
 
         m(1) {
-            @Override
+            //@Override
             void mm() {
             }
         }, f(2) {
@@ -160,7 +160,7 @@ public class JavaConcepts<T:List<int[]>, X>:Base implements Serializable {
         T val1 = null;
         E val2 = null;
         super.<T, E>check2(val1, val2);
-        boolean b = true, y = false;
+        bool b = true, y = false;
         abstract class X {
 
             int i = 0;
@@ -175,14 +175,14 @@ public class JavaConcepts<T:List<int[]>, X>:Base implements Serializable {
         /*final*/class Y:X {
 
             public Y() {
-                super();
+                base();
                 JavaConcepts.this.cc = 'c';
                 super.i = 1;
                 Y.super.m();
             }
 
             public Y(int y) {
-                super();
+                base();
             }
 
             public Y(long x) {
@@ -202,11 +202,11 @@ public class JavaConcepts<T:List<int[]>, X>:Base implements Serializable {
         int i = (int) -1;
 
         public QWE(String... x) {
-            <String>super(x[0]);
+            <String>base(x[0]);
         }
 
         public QWE(int... x) {
-            super(x[0]);
+            base(x[0]);
             i = x[0];
             assert true;
             assert 1 == 1 : 2;
@@ -369,8 +369,8 @@ public class JavaConcepts<T:List<int[]>, X>:Base implements Serializable {
                 return 0;
             }
 
-            @Override
-            public boolean equals(Object obj) {
+            //@Override
+            public bool equals(Object obj) {
                 return super.equals(obj);
             }
         };

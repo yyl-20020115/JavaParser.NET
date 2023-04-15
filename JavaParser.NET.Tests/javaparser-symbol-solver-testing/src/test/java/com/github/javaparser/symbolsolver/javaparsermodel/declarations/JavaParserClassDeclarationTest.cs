@@ -613,7 +613,7 @@ class JavaParserClassDeclarationTest:AbstractSymbolResolutionTest {
     void testGetDeclaredMethods() {
         JavaParserClassDeclaration constructorDeclaration = (JavaParserClassDeclaration) typeSolverNewCode.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
 
-        Set<ResolvedMethodDeclaration> allMethods = constructorDeclaration.getDeclaredMethods();
+        HashSet<ResolvedMethodDeclaration> allMethods = constructorDeclaration.getDeclaredMethods();
         assertEquals(20, allMethods.size());
 
         List<ResolvedMethodDeclaration> sortedMethods = allMethods.stream()
@@ -646,7 +646,7 @@ class JavaParserClassDeclarationTest:AbstractSymbolResolutionTest {
     void testGetAllMethods() {
         JavaParserClassDeclaration constructorDeclaration = (JavaParserClassDeclaration) typeSolverNewCode.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
 
-        Set<MethodUsage> allMethods = constructorDeclaration.getAllMethods();
+        HashSet<MethodUsage> allMethods = constructorDeclaration.getAllMethods();
 
         List<MethodUsage> sortedMethods = allMethods.stream()
                 .sorted(Comparator.comparing(MethodUsage::getQualifiedSignature))
@@ -686,7 +686,7 @@ class JavaParserClassDeclarationTest:AbstractSymbolResolutionTest {
                 "com.github.javaparser.ast.Node.setUserData(com.github.javaparser.ast.UserDataKey<M>, M)",
                 "com.github.javaparser.ast.Node.toString()",
                 "com.github.javaparser.ast.Node.toStringWithoutComments()",
-                "com.github.javaparser.ast.Node.tryAddImportToParentCompilationUnit(java.lang.Class<?>)",
+                "com.github.javaparser.ast.Node.tryAddImportToParentCompilationUnit(java.lang.Type)",
                 "com.github.javaparser.ast.body.BodyDeclaration.getAnnotations()",
                 "com.github.javaparser.ast.body.BodyDeclaration.setAnnotations(java.util.List<com.github.javaparser.ast.expr.AnnotationExpr>)",
                 "com.github.javaparser.ast.body.ConstructorDeclaration.accept(com.github.javaparser.ast.visitor.GenericVisitor<R, A>, A)",
@@ -738,14 +738,14 @@ class JavaParserClassDeclarationTest:AbstractSymbolResolutionTest {
                 "com.github.javaparser.ast.nodeTypes.NodeWithName.setName(java.lang.String)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithParameters.addAndGetParameter(com.github.javaparser.ast.body.Parameter)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithParameters.addAndGetParameter(com.github.javaparser.ast.type.Type, java.lang.String)",
-                "com.github.javaparser.ast.nodeTypes.NodeWithParameters.addAndGetParameter(java.lang.Class<?>, java.lang.String)",
+                "com.github.javaparser.ast.nodeTypes.NodeWithParameters.addAndGetParameter(java.lang.Type, java.lang.String)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithParameters.addAndGetParameter(java.lang.String, java.lang.String)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithParameters.addParameter(com.github.javaparser.ast.body.Parameter)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithParameters.addParameter(com.github.javaparser.ast.type.Type, java.lang.String)",
-                "com.github.javaparser.ast.nodeTypes.NodeWithParameters.addParameter(java.lang.Class<?>, java.lang.String)",
+                "com.github.javaparser.ast.nodeTypes.NodeWithParameters.addParameter(java.lang.Type, java.lang.String)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithParameters.addParameter(java.lang.String, java.lang.String)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithParameters.getParamByName(java.lang.String)",
-                "com.github.javaparser.ast.nodeTypes.NodeWithParameters.getParamByType(java.lang.Class<?>)",
+                "com.github.javaparser.ast.nodeTypes.NodeWithParameters.getParamByType(java.lang.Type)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithParameters.getParamByType(java.lang.String)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithParameters.setParameters(java.util.List<com.github.javaparser.ast.body.Parameter>)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithThrowable.addThrows(com.github.javaparser.ast.type.ReferenceType)",
@@ -845,11 +845,11 @@ class JavaParserClassDeclarationTest:AbstractSymbolResolutionTest {
     /// Assignability
     ///
 
-    // boolean isAssignableBy(Type type);
+    // bool isAssignableBy(Type type);
 
-    // boolean canBeAssignedTo(TypeDeclaration other)
+    // bool canBeAssignedTo(TypeDeclaration other)
 
-    // boolean isAssignableBy(TypeDeclaration other);
+    // bool isAssignableBy(TypeDeclaration other);
 
     ///
     /// Annotations
@@ -909,7 +909,7 @@ class JavaParserClassDeclarationTest:AbstractSymbolResolutionTest {
     /// Containment
     ///
 
-    // Set<TypeDeclaration> internalTypes()
+    // HashSet<TypeDeclaration> internalTypes()
 
     // Optional<TypeDeclaration> containerType()
 

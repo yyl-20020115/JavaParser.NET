@@ -37,7 +37,7 @@ namespace com.github.javaparser.ast.type;
  */
 public class IntersectionType:Type implements NodeWithAnnotations<IntersectionType> {
 
-    @NonEmptyProperty
+    //@NonEmptyProperty
     private NodeList<ReferenceType> elements;
 
     //@AllFieldsConstructor
@@ -50,20 +50,20 @@ public class IntersectionType:Type implements NodeWithAnnotations<IntersectionTy
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public IntersectionType(TokenRange tokenRange, NodeList<ReferenceType> elements) {
-        super(tokenRange);
+        base(tokenRange);
         setElements(elements);
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -86,14 +86,14 @@ public class IntersectionType:Type implements NodeWithAnnotations<IntersectionTy
         return this;
     }
 
-    @Override
+    //@Override
     public IntersectionType setAnnotations(NodeList<AnnotationExpr> annotations) {
         return (IntersectionType) super.setAnnotations(annotations);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
-    public boolean remove(Node node) {
+    public bool remove(Node node) {
         if (node == null) {
             return false;
         }
@@ -106,26 +106,26 @@ public class IntersectionType:Type implements NodeWithAnnotations<IntersectionTy
         return super.remove(node);
     }
 
-    @Override
+    //@Override
     public string asString() {
         return elements.stream().map(Type::asString).collect(joining("&"));
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public IntersectionType clone() {
         return (IntersectionType) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public IntersectionTypeMetaModel getMetaModel() {
         return JavaParserMetaModel.intersectionTypeMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }
@@ -138,30 +138,30 @@ public class IntersectionType:Type implements NodeWithAnnotations<IntersectionTy
         return super.replace(node, replacementNode);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isIntersectionType() {
+    public bool isIntersectionType() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public IntersectionType asIntersectionType() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifIntersectionType(Consumer<IntersectionType> action) {
         action.accept(this);
     }
 
-    @Override
+    //@Override
     public ResolvedIntersectionType resolve() {
         return getSymbolResolver().toResolvedType(this, ResolvedIntersectionType.class);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<IntersectionType> toIntersectionType() {
         return Optional.of(this);

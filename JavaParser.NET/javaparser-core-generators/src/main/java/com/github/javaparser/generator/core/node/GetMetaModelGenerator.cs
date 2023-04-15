@@ -25,10 +25,10 @@ namespace com.github.javaparser.generator.core.node;
 
 public class GetMetaModelGenerator:NodeGenerator {
     public GetMetaModelGenerator(SourceRoot sourceRoot) {
-        super(sourceRoot);
+        base(sourceRoot);
     }
 
-    @Override
+    //@Override
     protected void generateNode(BaseNodeMetaModel nodeMetaModel, CompilationUnit nodeCu, ClassOrInterfaceDeclaration nodeCoid) {
         /*final*/MethodDeclaration getMetaModelMethod = (MethodDeclaration) parseBodyDeclaration(f("%s public %s getMetaModel() { return JavaParserMetaModel.%s; }",
                 nodeMetaModel.isRootNode() ? "" : "@Override",

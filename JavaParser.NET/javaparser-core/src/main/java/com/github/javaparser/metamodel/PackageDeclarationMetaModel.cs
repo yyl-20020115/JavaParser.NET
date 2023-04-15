@@ -36,7 +36,7 @@ public class PackageDeclarationMetaModel:NodeMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     PackageDeclarationMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, PackageDeclaration.class, "PackageDeclaration", "com.github.javaparser.ast", false, false);
+        base(superBaseNodeMetaModel, PackageDeclaration.class, "PackageDeclaration", "com.github.javaparser.ast", false, false);
     }
 
     public PropertyMetaModel annotationsPropertyMetaModel;

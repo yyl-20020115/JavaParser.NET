@@ -89,7 +89,7 @@ class NodeText {
     int findElement(TextElementMatcher matcher, int from) {
         int res = tryToFindElement(matcher, from);
         if (res == NOT_FOUND) {
-            throw new IllegalArgumentException(String.format("I could not find child '%s' from position %d. Elements: %s", matcher, from, elements));
+            throw new ArgumentException(String.format("I could not find child '%s' from position %d. Elements: %s", matcher, from, elements));
         }
         return res;
     }
@@ -123,7 +123,7 @@ class NodeText {
     // 
     // Removing single elements
     // 
-    public void remove(TextElementMatcher matcher, boolean potentiallyFollowingWhitespace) {
+    public void remove(TextElementMatcher matcher, bool potentiallyFollowingWhitespace) {
         int i = 0;
         for (TextElement e : elements) {
             if (matcher.match(e)) {
@@ -140,7 +140,7 @@ class NodeText {
                 return;
             }
         }
-        throw new IllegalArgumentException();
+        throw new ArgumentException();
     }
 
     // 
@@ -186,7 +186,7 @@ class NodeText {
         return elements;
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "NodeText{" + elements + '}';
     }

@@ -47,7 +47,7 @@ public /*final*/class AnnotationMemberDeclaration:BodyDeclaration implements Doc
     }
 
     public AnnotationMemberDeclaration(int modifiers, List<AnnotationExpr> annotations, Type type, string name, Expression defaultValue) {
-        super(annotations);
+        base(annotations);
         setModifiers(modifiers);
         setType(type);
         setName(name);
@@ -55,7 +55,7 @@ public /*final*/class AnnotationMemberDeclaration:BodyDeclaration implements Doc
     }
 
     public AnnotationMemberDeclaration(int beginLine, int beginColumn, int endLine, int endColumn, int modifiers, List<AnnotationExpr> annotations, Type type, string name, Expression defaultValue) {
-        super(beginLine, beginColumn, endLine, endColumn, annotations);
+        base(beginLine, beginColumn, endLine, endColumn, annotations);
         setModifiers(modifiers);
         setType(type);
         setName(name);

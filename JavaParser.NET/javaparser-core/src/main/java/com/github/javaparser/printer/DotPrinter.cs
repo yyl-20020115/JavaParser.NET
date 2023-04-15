@@ -30,9 +30,9 @@ public class DotPrinter {
 
     private int nodeCount;
 
-    private /*final*/boolean outputNodeType;
+    private /*final*/bool outputNodeType;
 
-    public DotPrinter(boolean outputNodeType) {
+    public DotPrinter(bool outputNodeType) {
         this.outputNodeType = outputNodeType;
     }
 

@@ -34,26 +34,26 @@ public class TypeExpr:Expression implements NodeWithType<TypeExpr> {
     public TypeExpr(){}
 
     public TypeExpr(Range range, Type<?> type) {
-        super(range);
+        base(range);
         setType(type);
     }
 
-    @Override
+    //@Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public Type<?> getType() {
         return type;
     }
 
-    @Override
+    //@Override
     public TypeExpr setType(Type<?> type) {
         this.type = type;
         setAsParentNodeOf(this.type);

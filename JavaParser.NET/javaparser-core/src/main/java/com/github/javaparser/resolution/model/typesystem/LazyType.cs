@@ -38,99 +38,99 @@ public class LazyType implements ResolvedType {
         return concrete;
     }
 
-    @Override
-    public boolean isArray() {
+    //@Override
+    public bool isArray() {
         return getType().isArray();
     }
 
-    @Override
+    //@Override
     public int arrayLevel() {
         return getType().arrayLevel();
     }
 
-    @Override
-    public boolean isPrimitive() {
+    //@Override
+    public bool isPrimitive() {
         return getType().isPrimitive();
     }
 
-    @Override
-    public boolean isNull() {
+    //@Override
+    public bool isNull() {
         return getType().isNull();
     }
 
-    @Override
-    public boolean isReference() {
+    //@Override
+    public bool isReference() {
         return getType().isReference();
     }
 
-    @Override
-    public boolean isReferenceType() {
+    //@Override
+    public bool isReferenceType() {
         return getType().isReferenceType();
     }
 
-    @Override
-    public boolean isVoid() {
+    //@Override
+    public bool isVoid() {
         return getType().isVoid();
     }
 
-    @Override
-    public boolean isTypeVariable() {
+    //@Override
+    public bool isTypeVariable() {
         return getType().isTypeVariable();
     }
 
-    @Override
-    public boolean isWildcard() {
+    //@Override
+    public bool isWildcard() {
         return getType().isWildcard();
     }
 
-    @Override
+    //@Override
     public ResolvedArrayType asArrayType() {
         return getType().asArrayType();
     }
 
-    @Override
+    //@Override
     public ResolvedReferenceType asReferenceType() {
         return getType().asReferenceType();
     }
 
-    @Override
+    //@Override
     public ResolvedTypeParameterDeclaration asTypeParameter() {
         return getType().asTypeParameter();
     }
 
-    @Override
+    //@Override
     public ResolvedTypeVariable asTypeVariable() {
         return getType().asTypeVariable();
     }
 
-    @Override
+    //@Override
     public ResolvedPrimitiveType asPrimitive() {
         return getType().asPrimitive();
     }
 
-    @Override
+    //@Override
     public ResolvedWildcard asWildcard() {
         return getType().asWildcard();
     }
 
-    @Override
+    //@Override
     public string describe() {
         return getType().describe();
     }
 
-    @Override
+    //@Override
     public ResolvedType replaceTypeVariables(ResolvedTypeParameterDeclaration tp, ResolvedType replaced,
                                              Map<ResolvedTypeParameterDeclaration, ResolvedType> inferredTypes) {
         return getType().replaceTypeVariables(tp, replaced, inferredTypes);
     }
 
-    @Override
+    //@Override
     public ResolvedType replaceTypeVariables(ResolvedTypeParameterDeclaration tp, ResolvedType replaced) {
         return getType().replaceTypeVariables(tp, replaced);
     }
 
-    @Override
-    public boolean isAssignableBy(ResolvedType other) {
+    //@Override
+    public bool isAssignableBy(ResolvedType other) {
         return getType().isAssignableBy(other);
     }
 }

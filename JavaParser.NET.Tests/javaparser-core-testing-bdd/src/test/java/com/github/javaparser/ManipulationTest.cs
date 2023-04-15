@@ -26,7 +26,7 @@ namespace com.github.javaparser;
 @RunWith(JUnitReportingRunner.class)
 public class ManipulationTest:BasicJBehaveTest {
 
-    @Override
+    //@Override
     public InjectableStepsFactory stepsFactory() {
         Map<String, Object> state = new HashMap<>();
 
@@ -36,6 +36,6 @@ public class ManipulationTest:BasicJBehaveTest {
     }
 
     public ManipulationTest() {
-        super("**/manipulation*.story");
+        base("**/manipulation*.story");
     }
 }

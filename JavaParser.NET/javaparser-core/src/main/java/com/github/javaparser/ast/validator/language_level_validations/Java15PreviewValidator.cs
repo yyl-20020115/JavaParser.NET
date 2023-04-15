@@ -28,7 +28,7 @@ namespace com.github.javaparser.ast.validator.language_level_validations;
 public class Java15PreviewValidator:Java15Validator {
 
     public Java15PreviewValidator() {
-        super();
+        base();
         // Incubator
         // No new incubator language features added within Java 15
         // Preview

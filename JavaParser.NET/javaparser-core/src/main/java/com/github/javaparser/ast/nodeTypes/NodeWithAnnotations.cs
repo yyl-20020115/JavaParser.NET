@@ -35,7 +35,7 @@ public interface NodeWithAnnotations<N:Node> {
 
     N setAnnotations(NodeList<AnnotationExpr> annotations);
 
-    void tryAddImportToParentCompilationUnit(Class<?> clazz);
+    void tryAddImportToParentCompilationUnit(Type clazz);
 
     default AnnotationExpr getAnnotation(int i) {
         return getAnnotations().get(i);
@@ -179,7 +179,7 @@ public interface NodeWithAnnotations<N:Node> {
      * @param annotationName the name of the annotation
      * @return true if found, false if not
      */
-    default boolean isAnnotationPresent(string annotationName) {
+    default bool isAnnotationPresent(string annotationName) {
         return getAnnotations().stream().anyMatch(a -> a.getName().getIdentifier().equals(annotationName));
     }
 
@@ -189,7 +189,7 @@ public interface NodeWithAnnotations<N:Node> {
      * @param annotationClass the class of the annotation
      * @return true if found, false if not
      */
-    default boolean isAnnotationPresent(Class<?:Annotation> annotationClass) {
+    default bool isAnnotationPresent(Class<?:Annotation> annotationClass) {
         return isAnnotationPresent(annotationClass.getSimpleName());
     }
 

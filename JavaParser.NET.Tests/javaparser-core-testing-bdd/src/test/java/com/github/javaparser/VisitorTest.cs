@@ -26,7 +26,7 @@ namespace com.github.javaparser;
 @RunWith(JUnitReportingRunner.class)
 public class VisitorTest:BasicJBehaveTest {
 
-    @Override
+    //@Override
     public InjectableStepsFactory stepsFactory() {
         Map<String, Object> state = new HashMap<>();
         return new InstanceStepsFactory(configuration(),
@@ -35,7 +35,7 @@ public class VisitorTest:BasicJBehaveTest {
     }
 
     public VisitorTest() {
-        super("**/visitor*.story");
+        base("**/visitor*.story");
     }
 }
 

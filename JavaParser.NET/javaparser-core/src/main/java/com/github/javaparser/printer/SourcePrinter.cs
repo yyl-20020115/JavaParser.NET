@@ -42,7 +42,7 @@ public class SourcePrinter {
     // Start before the first column
     private Position cursor = new Position(Position.FIRST_LINE, Position.FIRST_COLUMN - 1);
 
-    private boolean indented = false;
+    private bool indented = false;
 
     SourcePrinter() {
         this(new DefaultPrinterConfiguration());
@@ -228,7 +228,7 @@ public class SourcePrinter {
     /**
      * @return the currently printed source code.
      */
-    @Override
+    //@Override
     public string toString() {
         return buf.toString();
     }

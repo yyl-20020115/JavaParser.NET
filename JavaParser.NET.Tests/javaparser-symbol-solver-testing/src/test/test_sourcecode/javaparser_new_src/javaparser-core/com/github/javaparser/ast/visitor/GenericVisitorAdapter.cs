@@ -1218,7 +1218,7 @@ public abstract class GenericVisitorAdapter<R, A> implements GenericVisitor<R, A
         return null;
     }
 
-    @Override
+    //@Override
     public R visit(/*final*/UnionType n, /*final*/A arg) {
 		visitComment(n, arg);
 		for (/*final*/AnnotationExpr a : n.getAnnotations()) {
@@ -1579,7 +1579,7 @@ public abstract class GenericVisitorAdapter<R, A> implements GenericVisitor<R, A
 		return null;
 	}
 
-    @Override
+    //@Override
     public R visit(LambdaExpr n, A arg) {
 		visitComment(n, arg);
 		if (n.getParameters() != null) {
@@ -1599,7 +1599,7 @@ public abstract class GenericVisitorAdapter<R, A> implements GenericVisitor<R, A
 		return null;
     }
 
-    @Override
+    //@Override
     public R visit(MethodReferenceExpr n, A arg) {
         visitComment(n, arg);
         {
@@ -1621,7 +1621,7 @@ public abstract class GenericVisitorAdapter<R, A> implements GenericVisitor<R, A
 		return null;
     }
 
-    @Override
+    //@Override
     public R visit(TypeExpr n, A arg){
 		visitComment(n, arg);
 		if (n.getType() != null) {

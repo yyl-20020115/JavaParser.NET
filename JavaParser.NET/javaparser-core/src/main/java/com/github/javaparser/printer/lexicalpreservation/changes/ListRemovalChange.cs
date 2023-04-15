@@ -36,7 +36,7 @@ public class ListRemovalChange implements Change {
         this.index = index;
     }
 
-    @Override
+    //@Override
     public Object getValue(ObservableProperty property, Node node) {
         if (property == observableProperty) {
             Object currentRawValue = new NoChange().getValue(property, node);
@@ -61,7 +61,7 @@ public class ListRemovalChange implements Change {
         }
     }
 
-    @Override
+    //@Override
 	public ObservableProperty getProperty() {
 		return observableProperty;
 	}

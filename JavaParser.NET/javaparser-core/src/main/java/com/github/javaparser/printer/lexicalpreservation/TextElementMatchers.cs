@@ -30,12 +30,12 @@ class TextElementMatchers {
     static TextElementMatcher byNode(/*final*/Node node) {
         return new TextElementMatcher() {
 
-            @Override
-            public boolean match(TextElement textElement) {
+            //@Override
+            public bool match(TextElement textElement) {
                 return textElement.isNode(node);
             }
 
-            @Override
+            //@Override
             public string toString() {
                 return "match node " + node;
             }

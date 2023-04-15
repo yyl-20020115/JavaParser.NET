@@ -233,10 +233,10 @@ class ReferenceTypeTest:AbstractSymbolResolutionTest {
 
             public ResolvedReferenceTypeTester(ResolvedReferenceTypeDeclaration typeDeclaration,
                                                TypeSolver typeSolver) {
-                super(typeDeclaration);
+                base(typeDeclaration);
             }
 
-            public boolean isCorrespondingBoxingType(string name) {
+            public bool isCorrespondingBoxingType(string name) {
                 return super.isCorrespondingBoxingType(name);
             }
 
@@ -275,7 +275,7 @@ class ReferenceTypeTest:AbstractSymbolResolutionTest {
 
         assertEquals(false, numberType.isCorrespondingBoxingType(ResolvedPrimitiveType.INT.describe()));
 
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(ArgumentException.class, () -> {
             intType.isCorrespondingBoxingType("String");
         });
     }
@@ -704,7 +704,7 @@ class ReferenceTypeTest:AbstractSymbolResolutionTest {
     [TestMethod]
     void testDirectAncestorsOfClassWithoutSuperClassOrInterfaces() {
         ResolvedReferenceType buffer = new ReferenceTypeImpl(new ReflectionClassDeclaration(Buffer.class, typeSolver));
-        Set<String> ancestors = buffer.getDirectAncestors()
+        HashSet<String> ancestors = buffer.getDirectAncestors()
                 .stream()
                 .map(ResolvedReferenceType::describe)
                 .collect(Collectors.toSet());
@@ -715,7 +715,7 @@ class ReferenceTypeTest:AbstractSymbolResolutionTest {
     [TestMethod]
     void testDirectAncestorsOfObjectClass() {
         ResolvedReferenceType object = new ReferenceTypeImpl(new ReflectionClassDeclaration(Object.class, typeSolver));
-        Set<String> ancestors = object.getDirectAncestors()
+        HashSet<String> ancestors = object.getDirectAncestors()
                 .stream()
                 .map(ResolvedReferenceType::describe)
                 .collect(Collectors.toSet());
@@ -726,7 +726,7 @@ class ReferenceTypeTest:AbstractSymbolResolutionTest {
     [TestMethod]
     void testDirectAncestorsOfClassWithSuperClass() {
         ResolvedReferenceType charbuffer = new ReferenceTypeImpl(new ReflectionClassDeclaration(CharBuffer.class, typeSolver));
-        Set<String> ancestors = charbuffer.getDirectAncestors()
+        HashSet<String> ancestors = charbuffer.getDirectAncestors()
                 .stream()
                 .map(ResolvedReferenceType::describe)
                 .collect(Collectors.toSet());
@@ -742,7 +742,7 @@ class ReferenceTypeTest:AbstractSymbolResolutionTest {
 
     [TestMethod]
     void testDirectAncestorsOfClassWithInterfaces() {
-        Set<String> ancestors = string.getDirectAncestors()
+        HashSet<String> ancestors = string.getDirectAncestors()
                 .stream()
                 .map(ResolvedReferenceType::describe)
                 .collect(Collectors.toSet());
@@ -773,7 +773,7 @@ class ReferenceTypeTest:AbstractSymbolResolutionTest {
     [TestMethod]
     void testDeclaredFields() {
         TypeSolver typeSolver = new ReflectionTypeSolver();
-        string code = "class A { private int i; char c; public long l; } class B:A { private float f; boolean b; };";
+        string code = "class A { private int i; char c; public long l; } class B:A { private float f; bool b; };";
         ParserConfiguration parserConfiguration = new ParserConfiguration();
         parserConfiguration.setSymbolResolver(new JavaSymbolSolver(typeSolver));
 
@@ -799,7 +799,7 @@ class ReferenceTypeTest:AbstractSymbolResolutionTest {
     [TestMethod]
     void testGetAllFieldsVisibleToInheritors() {
         TypeSolver typeSolver = new ReflectionTypeSolver();
-        string code = "class A { private int i; char c; public long l; } class B:A { private float f; boolean b; };";
+        string code = "class A { private int i; char c; public long l; } class B:A { private float f; bool b; };";
         ParserConfiguration parserConfiguration = new ParserConfiguration();
         parserConfiguration.setSymbolResolver(new JavaSymbolSolver(typeSolver));
 
@@ -931,7 +931,7 @@ class ReferenceTypeTest:AbstractSymbolResolutionTest {
         return Bound.extendsBound(type(type));
     }
 
-    private Set<ResolvedType> toSet(ResolvedType... resolvedTypes) {
+    private HashSet<ResolvedType> toSet(ResolvedType... resolvedTypes) {
         return new HashSet<>(toList(resolvedTypes));
     }
     

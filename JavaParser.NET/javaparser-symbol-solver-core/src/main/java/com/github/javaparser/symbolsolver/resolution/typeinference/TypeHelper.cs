@@ -37,7 +37,7 @@ public class TypeHelper {
     /**
      * The term proper type excludes such "types" that mention inference variables.
      */
-    public static boolean isProperType(ResolvedType type) {
+    public static bool isProperType(ResolvedType type) {
         if (type is InferenceVariable) {
             return false;
         }
@@ -75,7 +75,7 @@ public class TypeHelper {
      * @param t
      * @return
      */
-    public static boolean isCompatibleInAStrictInvocationContext(Expression expression, ResolvedType t) {
+    public static bool isCompatibleInAStrictInvocationContext(Expression expression, ResolvedType t) {
         throw new UnsupportedOperationException();
     }
 
@@ -85,7 +85,7 @@ public class TypeHelper {
      * @param t
      * @return
      */
-    public static boolean isCompatibleInALooseInvocationContext(TypeSolver typeSolver, Expression expression, ResolvedType t) {
+    public static bool isCompatibleInALooseInvocationContext(TypeSolver typeSolver, Expression expression, ResolvedType t) {
         //throw new UnsupportedOperationException("Unable to determine if " + expression + " is compatible _in a loose invocation context with type " + t);
         return isCompatibleInALooseInvocationContext(JavaParserFacade.get(typeSolver).getType(expression), t);
     }
@@ -96,7 +96,7 @@ public class TypeHelper {
      * @param t
      * @return
      */
-    public static boolean isCompatibleInALooseInvocationContext(ResolvedType s, ResolvedType t) {
+    public static bool isCompatibleInALooseInvocationContext(ResolvedType s, ResolvedType t) {
         // Loose invocation contexts allow a more permissive set of conversions, because they are only used for a
         // particular invocation if no applicable declaration can be found using strict invocation contexts. Loose
         // invocation contexts allow the use of one of the following:
@@ -156,7 +156,7 @@ public class TypeHelper {
         return new ReferenceTypeImpl(typeDeclaration.getCorrespondingDeclaration());
     }
 
-    public static boolean areCompatibleThroughWideningReferenceConversion(ResolvedType s, ResolvedType t) {
+    public static bool areCompatibleThroughWideningReferenceConversion(ResolvedType s, ResolvedType t) {
         Optional<ResolvedPrimitiveType> correspondingPrimitiveTypeForS = Arrays.stream(ResolvedPrimitiveType.values()).filter(pt -> pt.getBoxTypeQName().equals(s.asReferenceType().getQualifiedName())).findFirst();
         if (!correspondingPrimitiveTypeForS.isPresent()) {
             return false;
@@ -164,7 +164,7 @@ public class TypeHelper {
         throw new UnsupportedOperationException("areCompatibleThroughWideningReferenceConversion s="+s+", t=" + t);
     }
 
-    public static boolean areCompatibleThroughWideningPrimitiveConversion(ResolvedType s, ResolvedType t) {
+    public static bool areCompatibleThroughWideningPrimitiveConversion(ResolvedType s, ResolvedType t) {
         if (s.isPrimitive() && t.isPrimitive()) {
             return s.isAssignableBy(t);
         } else {
@@ -172,12 +172,12 @@ public class TypeHelper {
         }
     }
 
-    public static Set<InferenceVariable> usedInferenceVariables(ResolvedType type) {
+    public static HashSet<InferenceVariable> usedInferenceVariables(ResolvedType type) {
         if (type.isInferenceVariable()) {
             return new HashSet<>(Arrays.asList((InferenceVariable) type));
         }
         if (type.isReferenceType()) {
-            Set<InferenceVariable> res = new HashSet<>();
+            HashSet<InferenceVariable> res = new HashSet<>();
             for (ResolvedType tp : type.asReferenceType().typeParametersValues()) {
                 res.addAll(usedInferenceVariables(tp));
             }
@@ -191,7 +191,7 @@ public class TypeHelper {
      * The least upper bound, or "lub", of a set of reference types is a shared supertype that is more specific than
      * any other shared supertype (that is, no other shared supertype is a subtype of the least upper bound).
      */
-    public static ResolvedType leastUpperBound(Set<ResolvedType> types) {
+    public static ResolvedType leastUpperBound(HashSet<ResolvedType> types) {
     	LeastUpperBoundLogic logic = LeastUpperBoundLogic.of();
     	return logic.lub(types);
     }
@@ -203,9 +203,9 @@ public class TypeHelper {
     public static Pair<ResolvedType, Boolean> groundTargetTypeOfLambda(LambdaExpr lambdaExpr, ResolvedType T, TypeSolver typeSolver) {
         // The ground target type is derived from T as follows:
         //
-        boolean used18_5_3 = false;
+        bool used18_5_3 = false;
 
-        boolean wildcardParameterized = T.asReferenceType().typeParametersValues().stream()
+        bool wildcardParameterized = T.asReferenceType().typeParametersValues().stream()
                 .anyMatch(tp -> tp.isWildcard());
         if (wildcardParameterized) {
             // - If T is a wildcard-parameterized functional interface type and the lambda expression is explicitly typed,
@@ -257,7 +257,7 @@ public class TypeHelper {
             //   Ti is undefined and there is no function type.
 
             if (Ti == null && Ai.isWildcard() && Ai.asWildcard().mention(originalTypeDeclaration.getTypeParameters())) {
-                throw new IllegalArgumentException();
+                throw new ArgumentException();
             }
 
             // - Otherwise:
@@ -301,16 +301,16 @@ public class TypeHelper {
         if (mu.isPresent()) {
             return MethodType.fromMethodUsage(mu.get());
         } else {
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         }
     }
 
     /**
      * See JLS 5.1.10. Capture Conversion.
      */
-    public static ResolvedType glb(Set<ResolvedType> types) {
+    public static ResolvedType glb(HashSet<ResolvedType> types) {
         if (types.isEmpty()) {
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         }
         if (types.size() == 1) {
             return types.iterator().next();

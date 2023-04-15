@@ -40,17 +40,17 @@ public class JavaParserAnnotationMemberDeclaration implements ResolvedAnnotation
         this.typeSolver = typeSolver;
     }
 
-    @Override
+    //@Override
     public Expression getDefaultValue() {
         return wrappedNode.getDefaultValue().orElse(null);
     }
 
-    @Override
+    //@Override
     public ResolvedType getType() {
         return JavaParserFacade.get(typeSolver).convert(wrappedNode.getType(), getContext());
     }
 
-    @Override
+    //@Override
     public string getName() {
         return wrappedNode.getNameAsString();
     }
@@ -59,7 +59,7 @@ public class JavaParserAnnotationMemberDeclaration implements ResolvedAnnotation
         return JavaParserFactory.getContext(wrappedNode, typeSolver);
     }
 
-    @Override
+    //@Override
     public Optional<Node> toAst() {
         return Optional.of(wrappedNode);
     }

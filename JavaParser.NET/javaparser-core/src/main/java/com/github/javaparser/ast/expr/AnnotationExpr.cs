@@ -28,7 +28,7 @@ namespace com.github.javaparser.ast.expr;
  *
  * @author Julio Vilmar Gesser
  */
-public abstract class AnnotationExpr:Expression implements NodeWithName<AnnotationExpr>, Resolvable<ResolvedAnnotationDeclaration> {
+public abstract class AnnotationExpr:Expression,NodeWithName<AnnotationExpr>, Resolvable<ResolvedAnnotationDeclaration> {
 
     protected Name name;
 
@@ -46,7 +46,7 @@ public abstract class AnnotationExpr:Expression implements NodeWithName<Annotati
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public AnnotationExpr(TokenRange tokenRange, Name name) {
-        super(tokenRange);
+        base(tokenRange);
         setName(name);
         customInitialization();
     }

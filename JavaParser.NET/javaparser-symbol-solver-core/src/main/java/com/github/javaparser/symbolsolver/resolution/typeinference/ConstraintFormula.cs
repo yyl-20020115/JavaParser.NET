@@ -74,8 +74,8 @@ public abstract class ConstraintFormula {
             return empty().withBound(Bound.falseBound());
         }
 
-        @Override
-        public boolean equals(Object o) {
+        //@Override
+        public bool equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
 
@@ -85,14 +85,14 @@ public abstract class ConstraintFormula {
             return constraintFormulas.equals(that.constraintFormulas);
         }
 
-        @Override
+        //@Override
         public int hashCode() {
             int result = boundSet.hashCode();
             result = 31 * result + constraintFormulas.hashCode();
             return result;
         }
 
-        @Override
+        //@Override
         public string toString() {
             return "ReductionResult{" +
                     "boundSet=" + boundSet +
@@ -102,7 +102,7 @@ public abstract class ConstraintFormula {
 
         public ConstraintFormula getConstraint(int index) {
             if (constraintFormulas.size() <= index) {
-                throw new IllegalArgumentException("Constraint with index " + index + " is not available as there are " + constraintFormulas.size() + " constraints");
+                throw new ArgumentException("Constraint with index " + index + " is not available as there are " + constraintFormulas.size() + " constraints");
             }
             return constraintFormulas.get(index);
         }

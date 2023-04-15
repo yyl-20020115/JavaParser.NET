@@ -36,7 +36,7 @@ public class BreakStmtMetaModel:StatementMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     BreakStmtMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, BreakStmt.class, "BreakStmt", "com.github.javaparser.ast.stmt", false, false);
+        base(superBaseNodeMetaModel, BreakStmt.class, "BreakStmt", "com.github.javaparser.ast.stmt", false, false);
     }
 
     public PropertyMetaModel labelPropertyMetaModel;

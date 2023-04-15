@@ -34,7 +34,7 @@ public class Utils {
 		return list == null ? new ArrayList<T>() : list;
 	}
 
-	public static <E> boolean isNullOrEmpty(Collection<E> collection) {
+	public static <E> bool isNullOrEmpty(Collection<E> collection) {
 		return collection == null || collection.isEmpty();
 	}
 

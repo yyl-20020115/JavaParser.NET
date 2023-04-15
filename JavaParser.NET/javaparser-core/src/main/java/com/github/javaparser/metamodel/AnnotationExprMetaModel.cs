@@ -32,16 +32,16 @@ namespace com.github.javaparser.metamodel;
  * For this reason, any changes made directly to this file will be overwritten the next time generators are run.
  */
 //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
-public class AnnotationExprMetaModel extends ExpressionMetaModel {
+public class AnnotationExprMetaModel:ExpressionMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     AnnotationExprMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, AnnotationExpr.class, "AnnotationExpr", "com.github.javaparser.ast.expr", true, false);
+        base(superBaseNodeMetaModel, AnnotationExpr.class, "AnnotationExpr", "com.github.javaparser.ast.expr", true, false);
     }
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
-    protected AnnotationExprMetaModel(Optional<BaseNodeMetaModel> superNodeMetaModel, Class<? extends Node> type, string name, string packageName, bool isAbstract, bool hasWildcard) {
-        super(superNodeMetaModel, type, name, packageName, isAbstract, hasWildcard);
+    protected AnnotationExprMetaModel(Optional<BaseNodeMetaModel> superNodeMetaModel, Class<?:Node> type, string name, string packageName, bool isAbstract, bool hasWildcard) {
+        base(superNodeMetaModel, type, name, packageName, isAbstract, hasWildcard);
     }
 
     public PropertyMetaModel namePropertyMetaModel;

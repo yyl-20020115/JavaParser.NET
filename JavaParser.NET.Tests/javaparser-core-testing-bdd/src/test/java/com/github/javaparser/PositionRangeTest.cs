@@ -26,7 +26,7 @@ namespace com.github.javaparser;
 @RunWith(JUnitReportingRunner.class)
 public class PositionRangeTest:BasicJBehaveTest {
 
-    @Override
+    //@Override
     public InjectableStepsFactory stepsFactory() {
         Map<String, Object> state = new HashMap<>();
 
@@ -36,7 +36,7 @@ public class PositionRangeTest:BasicJBehaveTest {
     }
 
     public PositionRangeTest() {
-        super("**/position_range*.story");
+        base("**/position_range*.story");
     }
 }
 

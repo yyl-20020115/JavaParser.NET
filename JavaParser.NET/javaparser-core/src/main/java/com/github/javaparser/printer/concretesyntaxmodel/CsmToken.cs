@@ -72,7 +72,7 @@ public class CsmToken implements CsmElement {
         this.tokenContentCalculator = tokenContentCalculator;
     }
 
-    @Override
+    //@Override
     public void prettyPrint(Node node, SourcePrinter printer) {
         if (isEndOfLineToken(tokenType)) {
             printer.println();
@@ -81,13 +81,13 @@ public class CsmToken implements CsmElement {
         }
     }
 
-    @Override
+    //@Override
     public string toString() {
         return String.format("%s(property:%s)", this.getClass().getSimpleName(), content);
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -100,7 +100,7 @@ public class CsmToken implements CsmElement {
         return tokenContentCalculator != null ? tokenContentCalculator.equals(csmToken.tokenContentCalculator) : csmToken.tokenContentCalculator == null;
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         int result = tokenType;
         result = 31 * result + (content != null ? content.hashCode() : 0);
@@ -108,15 +108,15 @@ public class CsmToken implements CsmElement {
         return result;
     }
 
-    public boolean isWhiteSpace() {
+    public bool isWhiteSpace() {
         return TokenTypes.isWhitespace(tokenType);
     }
     
-    public boolean isWhiteSpaceNotEol() {
+    public bool isWhiteSpaceNotEol() {
         return isWhiteSpace() && !isNewLine();
     }
 
-    public boolean isNewLine() {
+    public bool isNewLine() {
         return TokenTypes.isEndOfLineToken(tokenType);
     }
 }

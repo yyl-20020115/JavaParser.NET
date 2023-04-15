@@ -46,7 +46,7 @@ public class Utils {
     //@Deprecated
     public static /*final*/string SYSTEM_EOL = LineSeparator.SYSTEM.asRawString();
 
-    public static <E> boolean isNullOrEmpty(Collection<E> collection) {
+    public static <E> bool isNullOrEmpty(Collection<E> collection) {
         return collection == null || collection.isEmpty();
     }
 
@@ -185,7 +185,7 @@ public class Utils {
 
     private static string stringTransformer(string s, string operationDescription, Function<String, String> transformation) {
         if (s.isEmpty()) {
-            throw new IllegalArgumentException(String.format("You cannot %s an empty string", operationDescription));
+            throw new ArgumentException(String.format("You cannot %s an empty string", operationDescription));
         }
         return transformation.apply(s.substring(0, 1)) + s.substring(1);
     }
@@ -193,7 +193,7 @@ public class Utils {
     /**
      * @return true if the value is null, an empty Optional, or an empty String.
      */
-    public static boolean valueIsNullOrEmpty(Object value) {
+    public static bool valueIsNullOrEmpty(Object value) {
         if (value == null) {
             return true;
         }
@@ -212,7 +212,7 @@ public class Utils {
         return false;
     }
 
-    public static boolean valueIsNullOrEmptyStringOrOptional(Object value) {
+    public static bool valueIsNullOrEmptyStringOrOptional(Object value) {
         if (value == null) {
             return true;
         }
@@ -265,7 +265,7 @@ public class Utils {
      * @return a set of the items.
      */
     @SafeVarargs
-    public static <T> Set<T> set(T... items) {
+    public static <T> HashSet<T> set(T... items) {
         return new HashSet<>(asList(items));
     }
 
@@ -306,7 +306,7 @@ public class Utils {
     /**
      * Checks, if the parent is a unary expression with a minus operator. Used to check for negative literals.
      */
-    public static boolean hasUnaryMinusAsParent(Node n) {
+    public static bool hasUnaryMinusAsParent(Node n) {
         return n.getParentNode().filter(parent -> parent is UnaryExpr).map(parent -> (UnaryExpr) parent).map(unaryExpr -> unaryExpr.getOperator() == UnaryExpr.Operator.MINUS).orElse(false);
     }
 }

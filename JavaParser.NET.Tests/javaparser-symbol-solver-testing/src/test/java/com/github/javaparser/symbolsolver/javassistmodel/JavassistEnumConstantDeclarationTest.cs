@@ -25,7 +25,7 @@ namespace com.github.javaparser.symbolsolver.javassistmodel;
 
 class JavassistEnumConstantDeclarationTest implements ResolvedEnumConstantDeclarationTest {
 
-    @Override
+    //@Override
     public JavassistEnumConstantDeclaration createValue() {
         try {
             TypeSolver typeSolver = new ReflectionTypeSolver();
@@ -37,12 +37,12 @@ class JavassistEnumConstantDeclarationTest implements ResolvedEnumConstantDeclar
         }
     }
 
-    @Override
+    //@Override
     public Optional<Node> getWrappedDeclaration(AssociableToAST associableToAST) {
         return Optional.empty();
     }
 
-    @Override
+    //@Override
     public string getCanonicalNameOfExpectedType(ResolvedValueDeclaration resolvedDeclaration) {
         return "java.time.DayOfWeek";
     }

@@ -61,7 +61,7 @@ public class ParseException:Exception {
                         string lexicalStateName
                        )
   {
-    super(initialise(currentTokenVal, expectedTokenSequencesVal, tokenImageVal, lexicalStateName));
+    base(initialise(currentTokenVal, expectedTokenSequencesVal, tokenImageVal, lexicalStateName));
     currentToken = currentTokenVal;
     expectedTokenSequences = expectedTokenSequencesVal;
     tokenImage = tokenImageVal;
@@ -78,12 +78,12 @@ public class ParseException:Exception {
    */
 
   public ParseException() {
-    super();
+    base();
   }
 
   /** Constructor with message. */
   public ParseException(string message) {
-    super(message);
+    base(message);
   }
 
 
@@ -123,7 +123,7 @@ public class ParseException:Exception {
     StringBuffer expected = new StringBuffer();
     
     int maxSize = 0;
-    java.util.TreeSet<String> sortedOptions = new java.util.TreeSet<String>();
+    java.util.HashSet<String> sortedOptions = new java.util.HashSet<String>();
     for (int i = 0; i < expectedTokenSequences.length; i++) {
       if (maxSize < expectedTokenSequences[i].length) {
         maxSize = expectedTokenSequences[i].length;

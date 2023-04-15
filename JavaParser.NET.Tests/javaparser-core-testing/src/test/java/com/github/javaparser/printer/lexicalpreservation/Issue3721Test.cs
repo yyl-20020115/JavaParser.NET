@@ -38,7 +38,7 @@ public class Issue3721Test:AbstractLexicalPreservingTest {
                 "public class Bug {\n"
                 + "\n"
                 + "    public static void main(String[] args) {\n"
-                + "        boolean msg;\n"
+                + "        bool msg;\n"
                 + "    }\n"
                 + "}\n";
                 

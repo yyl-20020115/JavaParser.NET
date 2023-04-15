@@ -30,14 +30,14 @@ public class MethodCallExprContext:AbstractJavaParserContext<MethodCallExpr> {
     ///
 
     public MethodCallExprContext(MethodCallExpr wrappedNode, TypeSolver typeSolver) {
-        super(wrappedNode, typeSolver);
+        base(wrappedNode, typeSolver);
     }
 
     ///
     /// Public methods
     ///
 
-    @Override
+    //@Override
     public Optional<ResolvedType> solveGenericType(string name) {
         Optional<Expression> nodeScope = wrappedNode.getScope();
         if (!nodeScope.isPresent()) {
@@ -52,12 +52,12 @@ public class MethodCallExprContext:AbstractJavaParserContext<MethodCallExpr> {
         return resolvedType;
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "MethodCallExprContext{wrapped=" + wrappedNode + "}";
     }
 
-    @Override
+    //@Override
     public Optional<MethodUsage> solveMethodAsUsage(string name, List<ResolvedType> argumentsTypes) {
         ResolvedType typeOfScope;
         if (wrappedNode.hasScope()) {
@@ -122,13 +122,13 @@ public class MethodCallExprContext:AbstractJavaParserContext<MethodCallExpr> {
         return methodUsage;
     }
 
-    @Override
+    //@Override
     public Optional<Value> solveSymbolAsValue(string name) {
         return solveSymbolAsValueInParentContext(name);
     }
 
-    @Override
-    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
+    //@Override
+    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, bool staticOnly) {
         Collection<ResolvedReferenceTypeDeclaration> rrtds = findTypeDeclarations(wrappedNode.getScope());
 
         if (rrtds.isEmpty()) {

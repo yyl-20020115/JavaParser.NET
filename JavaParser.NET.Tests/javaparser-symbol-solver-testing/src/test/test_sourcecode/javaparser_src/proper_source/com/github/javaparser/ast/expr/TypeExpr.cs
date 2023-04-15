@@ -34,16 +34,16 @@ public class TypeExpr:Expression{
     public TypeExpr(){}
 
     public TypeExpr(int beginLine, int beginColumn, int endLine, int endColumn, Type type) {
-        super(beginLine, beginColumn, endLine, endColumn);
+        base(beginLine, beginColumn, endLine, endColumn);
         setType(type);
     }
 
-    @Override
+    //@Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }

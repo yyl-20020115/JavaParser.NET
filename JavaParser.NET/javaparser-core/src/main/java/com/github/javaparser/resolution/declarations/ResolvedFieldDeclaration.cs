@@ -30,19 +30,19 @@ public interface ResolvedFieldDeclaration:ResolvedValueDeclaration, HasAccessSpe
     /**
      * Is the field static?
      */
-    boolean isStatic();
+    bool isStatic();
 
     /**
      * Is the field volatile?
      */
-    boolean isVolatile();
+    bool isVolatile();
 
-    @Override
-    default boolean isField() {
+    //@Override
+    default bool isField() {
         return true;
     }
 
-    @Override
+    //@Override
     default ResolvedFieldDeclaration asField() {
         return this;
     }

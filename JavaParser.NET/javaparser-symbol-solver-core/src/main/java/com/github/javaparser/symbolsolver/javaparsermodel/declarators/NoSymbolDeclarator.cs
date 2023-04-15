@@ -29,10 +29,10 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.declarators;
 public class NoSymbolDeclarator<N:Node>:AbstractSymbolDeclarator<N> {
 
     public NoSymbolDeclarator(N wrappedNode, TypeSolver typeSolver) {
-        super(wrappedNode, typeSolver);
+        base(wrappedNode, typeSolver);
     }
 
-    @Override
+    //@Override
     public List<ResolvedValueDeclaration> getSymbolDeclarations() {
         return Collections.emptyList();
     }

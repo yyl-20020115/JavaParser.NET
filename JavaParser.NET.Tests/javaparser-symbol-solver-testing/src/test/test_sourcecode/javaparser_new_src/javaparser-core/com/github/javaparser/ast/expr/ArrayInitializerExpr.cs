@@ -39,7 +39,7 @@ public /*final*/class ArrayInitializerExpr:Expression {
     }
 
     public ArrayInitializerExpr(Range range, List<Expression> values) {
-        super(range);
+        base(range);
         setValues(values);
     }
 

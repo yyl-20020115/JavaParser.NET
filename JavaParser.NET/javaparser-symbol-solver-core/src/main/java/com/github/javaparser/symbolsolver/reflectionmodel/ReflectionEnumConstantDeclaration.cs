@@ -30,20 +30,20 @@ public class ReflectionEnumConstantDeclaration implements ResolvedEnumConstantDe
 
     public ReflectionEnumConstantDeclaration(Field enumConstant, TypeSolver typeSolver) {
         if (!enumConstant.isEnumConstant()) {
-            throw new IllegalArgumentException("The given field does not represent an enum constant");
+            throw new ArgumentException("The given field does not represent an enum constant");
         }
         this.enumConstant = enumConstant;
         this.typeSolver = typeSolver;
     }
 
-    @Override
+    //@Override
     public string getName() {
         return enumConstant.getName();
     }
 
-    @Override
+    //@Override
     public ResolvedType getType() {
-        Class<?> enumClass = enumConstant.getDeclaringClass();
+        Type enumClass = enumConstant.getDeclaringClass();
         ResolvedReferenceTypeDeclaration typeDeclaration = new ReflectionEnumDeclaration(enumClass, typeSolver);
         return new ReferenceTypeImpl(typeDeclaration);
     }

@@ -68,7 +68,7 @@ public class SourceRoot {
     public SourceRoot(Path root) {
         assertNotNull(root);
         if (!Files.isDirectory(root)) {
-            throw new IllegalArgumentException("Only directories are allowed as root path: " + root);
+            throw new ArgumentException("Only directories are allowed as root path: " + root);
         }
         this.root = root.normalize();
         Log.info("New source root at \"%s\"", () -> this.root);
@@ -133,7 +133,7 @@ public class SourceRoot {
         /*final*/Path path = packageAbsolutePath(root, startPackage);
         Files.walkFileTree(path, new SimpleFileVisitor<Path>() {
 
-            @Override
+            //@Override
             public FileVisitResult visitFile(Path file, BasicFileAttributes attrs){
                 if (!attrs.isDirectory() && file.toString().endsWith(".java")) {
                     Path relative = root.relativize(file.getParent());
@@ -142,7 +142,7 @@ public class SourceRoot {
                 return CONTINUE;
             }
 
-            @Override
+            //@Override
             public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs){
                 return isSensibleDirectoryToEnter(dir) ? CONTINUE : SKIP_SUBTREE;
             }
@@ -150,10 +150,10 @@ public class SourceRoot {
         return getCache();
     }
 
-    boolean isSensibleDirectoryToEnter(Path dir){
+    bool isSensibleDirectoryToEnter(Path dir){
         /*final*/string dirToEnter = dir.getFileName().toString();
         // Don't enter directories that cannot be packages.
-        /*final*/boolean directoryIsAValidJavaIdentifier = JAVA_IDENTIFIER.matcher(dirToEnter).matches();
+        /*final*/bool directoryIsAValidJavaIdentifier = JAVA_IDENTIFIER.matcher(dirToEnter).matches();
         // Don't enter directories that are hidden, assuming that people don't store source files _in hidden directories.
         // But we can enter _in root directory even if the root directory is not considered as a valid java identifier
         if (!root.equals(dir) && (Files.isHidden(dir) || !directoryIsAValidJavaIdentifier)) {
@@ -298,7 +298,7 @@ public class SourceRoot {
         if (Files.exists(path)) {
             Files.walkFileTree(path, new SimpleFileVisitor<Path>() {
 
-                @Override
+                //@Override
                 public FileVisitResult visitFile(Path absolutePath, BasicFileAttributes attrs){
                     if (!attrs.isDirectory() && absolutePath.toString().endsWith(".java")) {
                         return callback(absolutePath, configuration, callback);
@@ -306,7 +306,7 @@ public class SourceRoot {
                     return CONTINUE;
                 }
 
-                @Override
+                //@Override
                 public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs){
                     return isSensibleDirectoryToEnter(dir) ? CONTINUE : SKIP_SUBTREE;
                 }
@@ -551,14 +551,14 @@ public class SourceRoot {
             this.callback = callback;
         }
 
-        @Override
+        //@Override
         protected void compute() {
             /*final*/List<ParallelParse> walks = new ArrayList<>();
             Path path = root.getRoot();
             try {
                 Files.walkFileTree(path, new SimpleFileVisitor<Path>() {
 
-                    @Override
+                    //@Override
                     public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs){
                         if (!root.isSensibleDirectoryToEnter(dir)) {
                             return SKIP_SUBTREE;
@@ -573,7 +573,7 @@ public class SourceRoot {
                         }
                     }
 
-                    @Override
+                    //@Override
                     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
                         return callback.process(file, attrs);
                     }
@@ -592,7 +592,7 @@ public class SourceRoot {
         }
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "SourceRoot at " + root;
     }

@@ -26,19 +26,19 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.contexts;
 /**
  * @author Takeshi D. Itoh
  */
-public class AnnotationDeclarationContext extends AbstractJavaParserContext<AnnotationDeclaration> {
+public class AnnotationDeclarationContext:AbstractJavaParserContext<AnnotationDeclaration> {
 
     private JavaParserTypeDeclarationAdapter javaParserTypeDeclarationAdapter;
 
     public AnnotationDeclarationContext(AnnotationDeclaration wrappedNode, TypeSolver typeSolver) {
-        super(wrappedNode, typeSolver);
+        base(wrappedNode, typeSolver);
         this.javaParserTypeDeclarationAdapter = new JavaParserTypeDeclarationAdapter(wrappedNode, typeSolver,
                 getDeclaration(), this);
     }
 
     //@Override
-    public SymbolReference<? extends ResolvedValueDeclaration> solveSymbol(string name) {
-        if (typeSolver == null) throw new IllegalArgumentException();
+    public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name) {
+        if (typeSolver == null) throw new ArgumentException();
 
         if (this.getDeclaration().hasField(name)) {
             return SymbolReference.solved(this.getDeclaration().getField(name));

@@ -1,5 +1,5 @@
 public class ObjectContext {
-    public void set(string characteristicName, Object value, boolean forced) {
+    public void set(string characteristicName, Object value, bool forced) {
        //...
     }
 }

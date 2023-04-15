@@ -78,7 +78,7 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.contexts;
 public class ArrayAccessExprContext:AbstractJavaParserContext<ArrayAccessExpr> {
 
     public ArrayAccessExprContext(ArrayAccessExpr wrappedNode, TypeSolver typeSolver) {
-        super(wrappedNode, typeSolver);
+        base(wrappedNode, typeSolver);
     }
 
     public SymbolReference<?:ResolvedValueDeclaration> solveSymbolInParentContext(string name) {

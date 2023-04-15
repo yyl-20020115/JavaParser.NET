@@ -36,7 +36,7 @@ public class LabeledStmtMetaModel:StatementMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     LabeledStmtMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, LabeledStmt.class, "LabeledStmt", "com.github.javaparser.ast.stmt", false, false);
+        base(superBaseNodeMetaModel, LabeledStmt.class, "LabeledStmt", "com.github.javaparser.ast.stmt", false, false);
     }
 
     public PropertyMetaModel labelPropertyMetaModel;

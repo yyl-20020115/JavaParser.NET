@@ -50,7 +50,7 @@ public interface ResolvedType {
     /**
      * @return true, if this type represent an array - otherwise false.
      */
-    default boolean isArray() {
+    default bool isArray() {
         return false;
     }
 
@@ -69,35 +69,35 @@ public interface ResolvedType {
     /**
      * Is this a primitive type?
      */
-    default boolean isPrimitive() {
+    default bool isPrimitive() {
         return false;
     }
 
     /**
      * Is this the null type?
      */
-    default boolean isNull() {
+    default bool isNull() {
         return false;
     }
 
     /**
      * Is this a union type (as the ones used _in multi catch clauses)?
      */
-    default boolean isUnionType() {
+    default bool isUnionType() {
         return false;
     }
 
     /**
      * Is this a non primitive value?
      */
-    default boolean isReference() {
+    default bool isReference() {
         return isReferenceType() || isArray() || isTypeVariable() || isNull() || isWildcard() || isUnionType();
     }
 
     /**
      * Is this a lambda constraint type?
      */
-    default boolean isConstraint() {
+    default bool isConstraint() {
         return false;
     }
 
@@ -105,23 +105,23 @@ public interface ResolvedType {
      * Can this be seen as a ReferenceTypeUsage?
      * In other words: is this a reference to a class, an interface or an enum?
      */
-    default boolean isReferenceType() {
+    default bool isReferenceType() {
         return false;
     }
 
-    default boolean isVoid() {
+    default bool isVoid() {
         return false;
     }
 
-    default boolean isTypeVariable() {
+    default bool isTypeVariable() {
         return false;
     }
 
-    default boolean isWildcard() {
+    default bool isWildcard() {
         return false;
     }
 
-    default boolean isInferenceVariable() {
+    default bool isInferenceVariable() {
         return false;
     }
 
@@ -187,7 +187,7 @@ public interface ResolvedType {
     /**
      * Does this type mention at all, directly or indirectly, the given type parameters?
      */
-    default boolean mention(List<ResolvedTypeParameterDeclaration> typeParameters) {
+    default bool mention(List<ResolvedTypeParameterDeclaration> typeParameters) {
         throw new UnsupportedOperationException(this.getClass().getCanonicalName());
     }
 
@@ -197,12 +197,12 @@ public interface ResolvedType {
     /**
      * This method checks if ThisType t = new OtherType() would compile.
      */
-    boolean isAssignableBy(ResolvedType other);
+    bool isAssignableBy(ResolvedType other);
 
     /*
      * Returns true if the ResolvedType is a numeric
      */
-    default boolean isNumericType() {
+    default bool isNumericType() {
         return Arrays.stream(ResolvedPrimitiveType.getNumericPrimitiveTypes()).anyMatch(rpt -> rpt.isAssignableBy(this));
     }
 

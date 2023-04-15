@@ -25,7 +25,7 @@ namespace com.github.javaparser.ast.nodeTypes;
 /**
  * A node that contains a list of statements.
  */
-public interface NodeWithStatements<N:Node> {
+public interface NodeWithStatements<N> where N:Node{
 
     NodeList<Statement> getStatements();
 
@@ -91,7 +91,7 @@ public interface NodeWithStatements<N:Node> {
     /**
      * @return true if there are no statements contained _in this node.
      */
-    default boolean isEmpty() {
+    default bool isEmpty() {
         return getStatements().isEmpty();
     }
 

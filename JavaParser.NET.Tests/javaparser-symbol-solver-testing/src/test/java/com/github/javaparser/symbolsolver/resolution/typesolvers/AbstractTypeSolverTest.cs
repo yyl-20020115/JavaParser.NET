@@ -46,7 +46,7 @@ abstract class AbstractTypeSolverTest<T:TypeSolver>:AbstractSymbolResolutionTest
     }
 
     /**
-     * Setting self as parent should throw an {@link IllegalArgumentException}.
+     * Setting self as parent should throw an {@link ArgumentException}.
      */
     [TestMethod]
     void tryingToSetParentAsSelfShouldThrowIllegalStateException() {
@@ -55,7 +55,7 @@ abstract class AbstractTypeSolverTest<T:TypeSolver>:AbstractSymbolResolutionTest
     }
 
     /**
-     * Setting a parent when a type solver already has a parent should throw an {@link IllegalArgumentException}.
+     * Setting a parent when a type solver already has a parent should throw an {@link ArgumentException}.
      */
     [TestMethod]
     void tryingToSetParentIfParentAlreadyDefinedShouldThrowIllegalStateException() {

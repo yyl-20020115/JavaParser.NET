@@ -36,7 +36,7 @@ public class WhileStmtMetaModel:StatementMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     WhileStmtMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, WhileStmt.class, "WhileStmt", "com.github.javaparser.ast.stmt", false, false);
+        base(superBaseNodeMetaModel, WhileStmt.class, "WhileStmt", "com.github.javaparser.ast.stmt", false, false);
     }
 
     public PropertyMetaModel bodyPropertyMetaModel;

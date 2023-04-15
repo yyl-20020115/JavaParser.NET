@@ -36,7 +36,7 @@ public class CatchClauseMetaModel:NodeMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     CatchClauseMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, CatchClause.class, "CatchClause", "com.github.javaparser.ast.stmt", false, false);
+        base(superBaseNodeMetaModel, CatchClause.class, "CatchClause", "com.github.javaparser.ast.stmt", false, false);
     }
 
     public PropertyMetaModel bodyPropertyMetaModel;

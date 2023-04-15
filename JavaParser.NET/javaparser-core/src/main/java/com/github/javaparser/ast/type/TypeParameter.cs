@@ -63,21 +63,21 @@ public class TypeParameter:ReferenceType implements NodeWithSimpleName<TypeParam
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public TypeParameter(TokenRange tokenRange, SimpleName name, NodeList<ClassOrInterfaceType> typeBound, NodeList<AnnotationExpr> annotations) {
-        super(tokenRange, annotations);
+        base(tokenRange, annotations);
         setName(name);
         setTypeBound(typeBound);
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -130,15 +130,15 @@ public class TypeParameter:ReferenceType implements NodeWithSimpleName<TypeParam
         return this;
     }
 
-    @Override
+    //@Override
     public TypeParameter setAnnotations(NodeList<AnnotationExpr> annotations) {
         super.setAnnotations(annotations);
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
-    public boolean remove(Node node) {
+    public bool remove(Node node) {
         if (node == null) {
             return false;
         }
@@ -151,33 +151,33 @@ public class TypeParameter:ReferenceType implements NodeWithSimpleName<TypeParam
         return super.remove(node);
     }
 
-    @Override
+    //@Override
     public string asString() {
         StringBuilder str = new StringBuilder(getNameAsString());
         getTypeBound().ifNonEmpty(l -> str.append(l.stream().map(ClassOrInterfaceType::asString).collect(joining("&", ":", ""))));
         return str.toString();
     }
 
-    @Override
+    //@Override
     public string toDescriptor() {
         return String.format("L%s;", resolve().qualifiedName());
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public TypeParameter clone() {
         return (TypeParameter) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public TypeParameterMetaModel getMetaModel() {
         return JavaParserMetaModel.typeParameterMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }
@@ -194,30 +194,30 @@ public class TypeParameter:ReferenceType implements NodeWithSimpleName<TypeParam
         return super.replace(node, replacementNode);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isTypeParameter() {
+    public bool isTypeParameter() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public TypeParameter asTypeParameter() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifTypeParameter(Consumer<TypeParameter> action) {
         action.accept(this);
     }
 
-    @Override
+    //@Override
     public ResolvedTypeVariable resolve() {
         return getSymbolResolver().toResolvedType(this, ResolvedTypeVariable.class);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<TypeParameter> toTypeParameter() {
         return Optional.of(this);

@@ -122,7 +122,7 @@ class NameLogicTest:AbstractNameLogicTest {
 
     [TestMethod]
     void classLiteralTypeName() {
-        assertNameInCodeIsSyntactically("Class<?> c = String.class;", "String",
+        assertNameInCodeIsSyntactically("Type c = String.class;", "String",
                 NameCategory.TYPE_NAME, ParseStart.STATEMENT);
     }
 
@@ -304,7 +304,7 @@ class NameLogicTest:AbstractNameLogicTest {
 
     [TestMethod]
     void qualifiedConstructorSuperClassInvocationExpressionName() {
-        assertNameInCodeIsSyntactically("class Bar { Bar() { anExpression.super(); } } ", "anExpression",
+        assertNameInCodeIsSyntactically("class Bar { Bar() { anExpression.base(); } } ", "anExpression",
                 NameCategory.EXPRESSION_NAME, ParseStart.COMPILATION_UNIT);
     }
 
@@ -617,7 +617,7 @@ class NameLogicTest:AbstractNameLogicTest {
 
     [TestMethod]
     void classifyRoleClassLiteralTypeName() {
-        assertNameInCodeHasRole("Class<?> c = String.class;", "String",
+        assertNameInCodeHasRole("Type c = String.class;", "String",
                 REFERENCE, ParseStart.STATEMENT);
     }
 
@@ -823,7 +823,7 @@ class NameLogicTest:AbstractNameLogicTest {
 
     [TestMethod]
     void classifyRoleQualifiedConstructorSuperClassInvocationExpressionName() {
-        assertNameInCodeHasRole("class Bar { Bar() { anExpression.super(); } } ", "anExpression",
+        assertNameInCodeHasRole("class Bar { Bar() { anExpression.base(); } } ", "anExpression",
                 REFERENCE, ParseStart.COMPILATION_UNIT);
     }
 

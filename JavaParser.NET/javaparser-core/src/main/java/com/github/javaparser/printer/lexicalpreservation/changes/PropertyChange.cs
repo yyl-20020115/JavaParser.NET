@@ -38,7 +38,7 @@ public class PropertyChange implements Change {
         this.newValue = newValue;
     }
 
-    @Override
+    //@Override
 	public ObservableProperty getProperty() {
         return property;
     }
@@ -51,7 +51,7 @@ public class PropertyChange implements Change {
         return newValue;
     }
 
-    @Override
+    //@Override
     public Object getValue(ObservableProperty property, Node node) {
         if (property == this.property) {
             return newValue;

@@ -5,7 +5,7 @@
   Line 44) InputStream in = new ByteArrayInputStream(source.getBytes(Charset.defaultCharset())) ==> java.io.InputStream
   Line 44) new ByteArrayInputStream(source.getBytes(Charset.defaultCharset())) ==> java.io.ByteArrayInputStream
   Line 45) parse(in, Charset.defaultCharset().name()) ==> com.github.javaparser.ast.comments.CommentsCollection
-  Line 49) boolean lastWasASlashR = false ==> boolean
+  Line 49) bool lastWasASlashR = false ==> boolean
   Line 49) false ==> boolean
   Line 50) BufferedReader br = new BufferedReader(new InputStreamReader(in, charsetName)) ==> java.io.BufferedReader
   Line 50) new BufferedReader(new InputStreamReader(in, charsetName)) ==> java.io.BufferedReader

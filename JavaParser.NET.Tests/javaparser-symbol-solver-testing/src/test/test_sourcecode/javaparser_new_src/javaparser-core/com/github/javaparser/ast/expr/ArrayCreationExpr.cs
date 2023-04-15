@@ -45,7 +45,7 @@ public /*final*/class ArrayCreationExpr:Expression implements NodeWithType<Array
     }
 
     public ArrayCreationExpr(Range range, Type type, List<ArrayCreationLevel> levels, ArrayInitializerExpr initializer) {
-        super(range);
+        base(range);
         setLevels(levels);
         setType(type);
         setInitializer(initializer);
@@ -57,7 +57,7 @@ public /*final*/class ArrayCreationExpr:Expression implements NodeWithType<Array
     }
 
     public ArrayCreationExpr(Range range, Type type) {
-        super(range);
+        base(range);
         setType(type);
         setInitializer(null);
     }

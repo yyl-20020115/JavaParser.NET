@@ -44,19 +44,19 @@ public class JavadocComment:Comment {
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public JavadocComment(TokenRange tokenRange, string content) {
-        super(tokenRange, content);
+        base(tokenRange, content);
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -64,43 +64,43 @@ public class JavadocComment:Comment {
         return parseJavadoc(getContent());
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public JavadocComment clone() {
         return (JavadocComment) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public JavadocCommentMetaModel getMetaModel() {
         return JavaParserMetaModel.javadocCommentMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isJavadocComment() {
+    public bool isJavadocComment() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public JavadocComment asJavadocComment() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifJavadocComment(Consumer<JavadocComment> action) {
         action.accept(this);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<JavadocComment> toJavadocComment() {
         return Optional.of(this);
     }
     
-    @Override
+    //@Override
 	public string getHeader() {
 		return "/**";
 	}

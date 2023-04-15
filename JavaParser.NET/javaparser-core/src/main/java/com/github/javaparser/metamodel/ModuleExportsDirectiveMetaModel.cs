@@ -36,7 +36,7 @@ public class ModuleExportsDirectiveMetaModel:ModuleDirectiveMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     ModuleExportsDirectiveMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, ModuleExportsDirective.class, "ModuleExportsDirective", "com.github.javaparser.ast.modules", false, false);
+        base(superBaseNodeMetaModel, ModuleExportsDirective.class, "ModuleExportsDirective", "com.github.javaparser.ast.modules", false, false);
     }
 
     public PropertyMetaModel moduleNamesPropertyMetaModel;

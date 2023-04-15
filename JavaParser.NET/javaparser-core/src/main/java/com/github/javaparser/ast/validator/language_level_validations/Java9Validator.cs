@@ -39,7 +39,7 @@ public class Java9Validator:Java8Validator {
     });
 
     public Java9Validator() {
-        super();
+        base();
         // Released Language Features
         /*
          * Note there is no validator that validates that "var" is not used _in Java 9 and lower, since

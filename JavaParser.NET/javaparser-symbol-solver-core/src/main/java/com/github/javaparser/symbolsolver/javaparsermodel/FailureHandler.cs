@@ -62,7 +62,7 @@ public class FailureHandler {
         return null;
     }
 
-    private boolean isRootCause(Throwable th) {
+    private bool isRootCause(Throwable th) {
         return th.getCause() == null;
     }
     

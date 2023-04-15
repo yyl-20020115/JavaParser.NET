@@ -56,7 +56,7 @@ public class LongLiteralExpr:LiteralStringValueExpr {
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public LongLiteralExpr(TokenRange tokenRange, string value) {
-        super(tokenRange, value);
+        base(tokenRange, value);
         customInitialization();
     }
 
@@ -69,15 +69,15 @@ public class LongLiteralExpr:LiteralStringValueExpr {
         this(null, String.valueOf(value));
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -144,37 +144,37 @@ public class LongLiteralExpr:LiteralStringValueExpr {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public LongLiteralExpr clone() {
         return (LongLiteralExpr) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public LongLiteralExprMetaModel getMetaModel() {
         return JavaParserMetaModel.longLiteralExprMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isLongLiteralExpr() {
+    public bool isLongLiteralExpr() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public LongLiteralExpr asLongLiteralExpr() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifLongLiteralExpr(Consumer<LongLiteralExpr> action) {
         action.accept(this);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<LongLiteralExpr> toLongLiteralExpr() {
         return Optional.of(this);

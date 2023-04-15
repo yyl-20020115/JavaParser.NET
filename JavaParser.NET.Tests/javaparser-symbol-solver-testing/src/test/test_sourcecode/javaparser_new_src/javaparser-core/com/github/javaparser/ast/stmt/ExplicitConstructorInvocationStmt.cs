@@ -31,7 +31,7 @@ public /*final*/class ExplicitConstructorInvocationStmt:Statement implements Nod
 
     private List<Type<?>> typeArguments;
 
-    private boolean isThis;
+    private bool isThis;
 
 	private Expression expr;
 
@@ -40,7 +40,7 @@ public /*final*/class ExplicitConstructorInvocationStmt:Statement implements Nod
 	public ExplicitConstructorInvocationStmt() {
 	}
 
-	public ExplicitConstructorInvocationStmt(/*final*/boolean isThis,
+	public ExplicitConstructorInvocationStmt(/*final*/bool isThis,
 			/*final*/Expression expr, /*final*/List<Expression> args) {
 		setThis(isThis);
 		setExpr(expr);
@@ -48,9 +48,9 @@ public /*final*/class ExplicitConstructorInvocationStmt:Statement implements Nod
 	}
 
 	public ExplicitConstructorInvocationStmt(Range range,
-	                                         /*final*/List<Type<?>> typeArguments, /*final*/boolean isThis,
+	                                         /*final*/List<Type<?>> typeArguments, /*final*/bool isThis,
 	                                         /*final*/Expression expr, /*final*/List<Expression> args) {
-		super(range);
+		base(range);
 		setTypeArguments(typeArguments);
 		setThis(isThis);
 		setExpr(expr);
@@ -58,12 +58,12 @@ public /*final*/class ExplicitConstructorInvocationStmt:Statement implements Nod
 	}
 
 	@Override
-	public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+	public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
 		return v.visit(this, arg);
 	}
 
 	@Override
-	public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+	public void accept<A>(VoidVisitor<A> v, A arg) {
 		v.visit(this, arg);
 	}
 
@@ -76,7 +76,7 @@ public /*final*/class ExplicitConstructorInvocationStmt:Statement implements Nod
 		return expr;
 	}
 
-	public boolean isThis() {
+	public bool isThis() {
 		return isThis;
 	}
 
@@ -92,17 +92,17 @@ public /*final*/class ExplicitConstructorInvocationStmt:Statement implements Nod
 		return this;
 	}
 
-	public ExplicitConstructorInvocationStmt setThis(/*final*/boolean isThis) {
+	public ExplicitConstructorInvocationStmt setThis(/*final*/bool isThis) {
 		this.isThis = isThis;
 		return this;
 	}
 
-    @Override
+    //@Override
     public List<Type<?>> getTypeArguments() {
         return typeArguments;
     }
 
-    @Override
+    //@Override
     public ExplicitConstructorInvocationStmt setTypeArguments(/*final*/List<Type<?>> types) {
         this.typeArguments = types;
         setAsParentNodeOf(this.typeArguments);

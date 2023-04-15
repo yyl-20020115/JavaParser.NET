@@ -121,7 +121,7 @@ public interface NodeWithAnnotations<T> {
      * @param annotationName the name of the annotation
      * @return true if found, false if not
      */
-    public default boolean isAnnotationPresent(string annotationName) {
+    public default bool isAnnotationPresent(string annotationName) {
         return getAnnotations().stream().anyMatch(a -> a.getName().getName().equals(annotationName));
     }
 
@@ -131,7 +131,7 @@ public interface NodeWithAnnotations<T> {
      * @param annotationClass the class of the annotation
      * @return true if found, false if not
      */
-    public default boolean isAnnotationPresent(Class<?:Annotation> annotationClass) {
+    public default bool isAnnotationPresent(Class<?:Annotation> annotationClass) {
         return isAnnotationPresent(annotationClass.getSimpleName());
     }
 

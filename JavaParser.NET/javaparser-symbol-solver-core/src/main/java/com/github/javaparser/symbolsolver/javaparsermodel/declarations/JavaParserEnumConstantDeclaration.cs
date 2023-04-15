@@ -37,12 +37,12 @@ public class JavaParserEnumConstantDeclaration implements ResolvedEnumConstantDe
         this.typeSolver = typeSolver;
     }
 
-    @Override
+    //@Override
     public ResolvedType getType() {
         return new ReferenceTypeImpl(new JavaParserEnumDeclaration((EnumDeclaration) demandParentNode(wrappedNode), typeSolver));
     }
 
-    @Override
+    //@Override
     public string getName() {
         return wrappedNode.getName().getId();
     }
@@ -56,7 +56,7 @@ public class JavaParserEnumConstantDeclaration implements ResolvedEnumConstantDe
         return wrappedNode;
     }
 
-    @Override
+    //@Override
     public Optional<Node> toAst() {
         return Optional.of(wrappedNode);
     }

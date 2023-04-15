@@ -30,10 +30,10 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.contexts;
 public class ObjectCreationContext:AbstractJavaParserContext<ObjectCreationExpr> {
 
     public ObjectCreationContext(ObjectCreationExpr wrappedNode, TypeSolver typeSolver) {
-        super(wrappedNode, typeSolver);
+        base(wrappedNode, typeSolver);
     }
 
-    @Override
+    //@Override
     public SymbolReference<ResolvedTypeDeclaration> solveType(string name, List<ResolvedType> typeArguments) {
         if (wrappedNode.hasScope()) {
             Expression scope = wrappedNode.getScope().get();
@@ -56,13 +56,13 @@ public class ObjectCreationContext:AbstractJavaParserContext<ObjectCreationExpr>
         return JavaParserFactory.getContext(parentNode, typeSolver).solveType(name, typeArguments);
     }
 
-    @Override
+    //@Override
     public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name) {
         return JavaParserFactory.getContext(demandParentNode(wrappedNode), typeSolver).solveSymbol(name);
     }
 
-    @Override
-    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
+    //@Override
+    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, bool staticOnly) {
         return JavaParserFactory.getContext(demandParentNode(wrappedNode), typeSolver).solveMethod(name, argumentsTypes, false);
     }
 

@@ -61,7 +61,7 @@ public /*final*/class FieldDeclaration:BodyDeclaration<FieldDeclaration> impleme
 
     public FieldDeclaration(EnumSet<Modifier> modifiers, List<AnnotationExpr> annotations, Type elementType, List<ArrayBracketPair> arrayBracketPairsAfterElementType,
                             List<VariableDeclarator> variables) {
-        super(annotations);
+        base(annotations);
         setModifiers(modifiers);
         setElementType(elementType);
         setVariables(variables);
@@ -70,7 +70,7 @@ public /*final*/class FieldDeclaration:BodyDeclaration<FieldDeclaration> impleme
 
     public FieldDeclaration(Range range, EnumSet<Modifier> modifiers, List<AnnotationExpr> annotations, Type elementType,
                             List<VariableDeclarator> variables, List<ArrayBracketPair> arrayBracketPairsAfterElementType) {
-        super(range, annotations);
+        base(range, annotations);
         setModifiers(modifiers);
         setElementType(elementType);
         setVariables(variables);
@@ -112,12 +112,12 @@ public /*final*/class FieldDeclaration:BodyDeclaration<FieldDeclaration> impleme
         return create(modifiers, type, variable);
     }
 
-    @Override
+    //@Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
@@ -128,31 +128,31 @@ public /*final*/class FieldDeclaration:BodyDeclaration<FieldDeclaration> impleme
      * @see Modifier
      * @return modifiers
      */
-    @Override
+    //@Override
     public EnumSet<Modifier> getModifiers() {
         return modifiers;
     }
 
-    @Override
+    //@Override
     public List<VariableDeclarator> getVariables() {
         variables = ensureNotNull(variables);
         return variables;
     }
 
-    @Override
+    //@Override
     public FieldDeclaration setModifiers(EnumSet<Modifier> modifiers) {
         this.modifiers = modifiers;
         return this;
     }
 
-    @Override
+    //@Override
     public FieldDeclaration setVariables(List<VariableDeclarator> variables) {
         this.variables = variables;
         setAsParentNodeOf(this.variables);
         return this;
     }
 
-    @Override
+    //@Override
     public JavadocComment getJavaDoc() {
         if (getComment() is JavadocComment) {
             return (JavadocComment) getComment();
@@ -227,12 +227,12 @@ public /*final*/class FieldDeclaration:BodyDeclaration<FieldDeclaration> impleme
     }
 
 
-    @Override
+    //@Override
     public Type getElementType() {
         return elementType;
     }
 
-    @Override
+    //@Override
     public FieldDeclaration setElementType(/*final*/Type elementType) {
         this.elementType = elementType;
         setAsParentNodeOf(this.elementType);
@@ -247,7 +247,7 @@ public /*final*/class FieldDeclaration:BodyDeclaration<FieldDeclaration> impleme
         return arrayBracketPairsAfterElementType;
     }
 
-    @Override
+    //@Override
     public FieldDeclaration setArrayBracketPairsAfterElementType(List<ArrayBracketPair> arrayBracketPairsAfterType) {
         this.arrayBracketPairsAfterElementType = arrayBracketPairsAfterType;
         setAsParentNodeOf(arrayBracketPairsAfterType);

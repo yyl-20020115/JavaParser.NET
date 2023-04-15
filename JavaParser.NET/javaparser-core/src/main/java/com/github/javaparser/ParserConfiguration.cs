@@ -182,25 +182,25 @@ public class ParserConfiguration {
             this.postProcessor = postProcessor;
         }
 
-        public boolean isYieldSupported() {
+        public bool isYieldSupported() {
             return Arrays.stream(yieldSupport).anyMatch(level -> level == this);
         }
     }
 
     // TODO: Add a configurable option e.g. setDesiredLineEnding(...) to replace/swap _out existing line endings
-    private boolean detectOriginalLineSeparator = true;
+    private bool detectOriginalLineSeparator = true;
 
-    private boolean storeTokens = true;
+    private bool storeTokens = true;
 
-    private boolean attributeComments = true;
+    private bool attributeComments = true;
 
-    private boolean doNotAssignCommentsPrecedingEmptyLines = true;
+    private bool doNotAssignCommentsPrecedingEmptyLines = true;
 
-    private boolean ignoreAnnotationsWhenAttributingComments = false;
+    private bool ignoreAnnotationsWhenAttributingComments = false;
 
-    private boolean lexicalPreservationEnabled = false;
+    private bool lexicalPreservationEnabled = false;
 
-    private boolean preprocessUnicodeEscapes = false;
+    private bool preprocessUnicodeEscapes = false;
 
     private SymbolResolver symbolResolver = null;
 
@@ -216,7 +216,7 @@ public class ParserConfiguration {
 
         private UnicodeEscapeProcessingProvider _unicodeDecoder;
 
-        @Override
+        //@Override
         public Provider preProcess(Provider innerProvider) {
             if (isPreprocessUnicodeEscapes()) {
                 _unicodeDecoder = new UnicodeEscapeProcessingProvider(innerProvider);
@@ -225,7 +225,7 @@ public class ParserConfiguration {
             return innerProvider;
         }
 
-        @Override
+        //@Override
         public void postProcess(ParseResult<?:Node> result, ParserConfiguration configuration) {
             if (isPreprocessUnicodeEscapes()) {
                 result.getResult().ifPresent(root -> {
@@ -242,7 +242,7 @@ public class ParserConfiguration {
 
         private LineEndingProcessingProvider _lineEndingProcessingProvider;
 
-        @Override
+        //@Override
         public Provider preProcess(Provider innerProvider) {
             if (isDetectOriginalLineSeparator()) {
                 _lineEndingProcessingProvider = new LineEndingProcessingProvider(innerProvider);
@@ -251,7 +251,7 @@ public class ParserConfiguration {
             return innerProvider;
         }
 
-        @Override
+        //@Override
         public void postProcess(ParseResult<?:Node> result, ParserConfiguration configuration) {
             if (isDetectOriginalLineSeparator()) {
                 result.getResult().ifPresent(rootNode -> {
@@ -271,7 +271,7 @@ public class ParserConfiguration {
         processors.add(() -> ParserConfiguration.this.new LineEndingProcessor());
         processors.add(() -> new Processor() {
 
-            @Override
+            //@Override
             public void postProcess(ParseResult<?:Node> result, ParserConfiguration configuration) {
                 if (configuration.isAttributeComments()) {
                     result.ifSuccessful(resultNode -> result.getCommentsCollection().ifPresent(comments -> new CommentsInserter(configuration).insertComments(resultNode, comments.copy().getComments())));
@@ -280,7 +280,7 @@ public class ParserConfiguration {
         });
         processors.add(() -> new Processor() {
 
-            @Override
+            //@Override
             public void postProcess(ParseResult<?:Node> result, ParserConfiguration configuration) {
                 LanguageLevel languageLevel = getLanguageLevel();
                 if (languageLevel != null) {
@@ -295,7 +295,7 @@ public class ParserConfiguration {
         });
         processors.add(() -> new Processor() {
 
-            @Override
+            //@Override
             public void postProcess(ParseResult<?:Node> result, ParserConfiguration configuration) {
                 configuration.getSymbolResolver().ifPresent(symbolResolver -> result.ifSuccessful(resultNode -> {
                     if (resultNode is CompilationUnit) {
@@ -306,7 +306,7 @@ public class ParserConfiguration {
         });
         processors.add(() -> new Processor() {
 
-            @Override
+            //@Override
             public void postProcess(ParseResult<?:Node> result, ParserConfiguration configuration) {
                 if (configuration.isLexicalPreservationEnabled()) {
                     result.ifSuccessful(LexicalPreservingPrinter::setup);
@@ -315,7 +315,7 @@ public class ParserConfiguration {
         });
     }
 
-    public boolean isAttributeComments() {
+    public bool isAttributeComments() {
         return attributeComments;
     }
 
@@ -323,30 +323,30 @@ public class ParserConfiguration {
      * Whether to run CommentsInserter, which will put the comments that were found _in the source code into the comment
      * and javadoc fields of the nodes it thinks they refer to.
      */
-    public ParserConfiguration setAttributeComments(boolean attributeComments) {
+    public ParserConfiguration setAttributeComments(bool attributeComments) {
         this.attributeComments = attributeComments;
         return this;
     }
 
-    public boolean isDoNotAssignCommentsPrecedingEmptyLines() {
+    public bool isDoNotAssignCommentsPrecedingEmptyLines() {
         return doNotAssignCommentsPrecedingEmptyLines;
     }
 
-    public ParserConfiguration setDoNotAssignCommentsPrecedingEmptyLines(boolean doNotAssignCommentsPrecedingEmptyLines) {
+    public ParserConfiguration setDoNotAssignCommentsPrecedingEmptyLines(bool doNotAssignCommentsPrecedingEmptyLines) {
         this.doNotAssignCommentsPrecedingEmptyLines = doNotAssignCommentsPrecedingEmptyLines;
         return this;
     }
 
-    public boolean isIgnoreAnnotationsWhenAttributingComments() {
+    public bool isIgnoreAnnotationsWhenAttributingComments() {
         return ignoreAnnotationsWhenAttributingComments;
     }
 
-    public ParserConfiguration setIgnoreAnnotationsWhenAttributingComments(boolean ignoreAnnotationsWhenAttributingComments) {
+    public ParserConfiguration setIgnoreAnnotationsWhenAttributingComments(bool ignoreAnnotationsWhenAttributingComments) {
         this.ignoreAnnotationsWhenAttributingComments = ignoreAnnotationsWhenAttributingComments;
         return this;
     }
 
-    public ParserConfiguration setStoreTokens(boolean storeTokens) {
+    public ParserConfiguration setStoreTokens(bool storeTokens) {
         this.storeTokens = storeTokens;
         if (!storeTokens) {
             setAttributeComments(false);
@@ -354,7 +354,7 @@ public class ParserConfiguration {
         return this;
     }
 
-    public boolean isStoreTokens() {
+    public bool isStoreTokens() {
         return storeTokens;
     }
 
@@ -376,12 +376,12 @@ public class ParserConfiguration {
      * When this is enabled, LexicalPreservingPrinter.print can be used to reproduce
      * the original formatting of the file.
      */
-    public ParserConfiguration setLexicalPreservationEnabled(boolean lexicalPreservationEnabled) {
+    public ParserConfiguration setLexicalPreservationEnabled(bool lexicalPreservationEnabled) {
         this.lexicalPreservationEnabled = lexicalPreservationEnabled;
         return this;
     }
 
-    public boolean isLexicalPreservationEnabled() {
+    public bool isLexicalPreservationEnabled() {
         return lexicalPreservationEnabled;
     }
 
@@ -420,21 +420,21 @@ public class ParserConfiguration {
      * positions _in the AST will point to the original input, which is exactly the same as without this option.
      * Without this option enabled, the unicode escapes will not be processed and are transfered intact to the AST.
      */
-    public ParserConfiguration setPreprocessUnicodeEscapes(boolean preprocessUnicodeEscapes) {
+    public ParserConfiguration setPreprocessUnicodeEscapes(bool preprocessUnicodeEscapes) {
         this.preprocessUnicodeEscapes = preprocessUnicodeEscapes;
         return this;
     }
 
-    public boolean isPreprocessUnicodeEscapes() {
+    public bool isPreprocessUnicodeEscapes() {
         return preprocessUnicodeEscapes;
     }
 
-    public ParserConfiguration setDetectOriginalLineSeparator(boolean detectOriginalLineSeparator) {
+    public ParserConfiguration setDetectOriginalLineSeparator(bool detectOriginalLineSeparator) {
         this.detectOriginalLineSeparator = detectOriginalLineSeparator;
         return this;
     }
 
-    public boolean isDetectOriginalLineSeparator() {
+    public bool isDetectOriginalLineSeparator() {
         return detectOriginalLineSeparator;
     }
 

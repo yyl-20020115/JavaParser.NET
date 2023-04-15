@@ -33,17 +33,17 @@ public /*final*/class AnnotationDeclaration:TypeDeclaration<AnnotationDeclaratio
     }
 
     public AnnotationDeclaration(EnumSet<Modifier> modifiers, string name) {
-        super(modifiers, name);
+        base(modifiers, name);
     }
 
     public AnnotationDeclaration(EnumSet<Modifier> modifiers, List<AnnotationExpr> annotations, string name,
                                  List<BodyDeclaration<?>> members) {
-        super(annotations, modifiers, name, members);
+        base(annotations, modifiers, name, members);
     }
 
     public AnnotationDeclaration(Range range, EnumSet<Modifier> modifiers, List<AnnotationExpr> annotations, string name,
                                  List<BodyDeclaration<?>> members) {
-        super(range, annotations, modifiers, name, members);
+        base(range, annotations, modifiers, name, members);
     }
 
     //@Override

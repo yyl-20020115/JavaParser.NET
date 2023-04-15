@@ -28,7 +28,7 @@ namespace com.github.javaparser.ast.validator.language_level_validations;
 public class Java16Validator:Java15Validator {
 
     public Java16Validator() {
-        super();
+        base();
         // Released Language Features
         // Pattern Matching for is released within Java 16 - https://openjdk.java.net/jeps/305
         remove(noPatternMatchingInstanceOf);

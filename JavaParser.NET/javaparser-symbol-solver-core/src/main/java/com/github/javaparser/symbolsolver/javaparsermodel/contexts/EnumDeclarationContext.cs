@@ -31,14 +31,14 @@ public class EnumDeclarationContext:AbstractJavaParserContext<EnumDeclaration> {
     private JavaParserTypeDeclarationAdapter javaParserTypeDeclarationAdapter;
 
     public EnumDeclarationContext(EnumDeclaration wrappedNode, TypeSolver typeSolver) {
-        super(wrappedNode, typeSolver);
+        base(wrappedNode, typeSolver);
         this.javaParserTypeDeclarationAdapter = new JavaParserTypeDeclarationAdapter(wrappedNode, typeSolver,
                 getDeclaration(), this);
     }
 
-    @Override
+    //@Override
     public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name) {
-        if (typeSolver == null) throw new IllegalArgumentException();
+        if (typeSolver == null) throw new ArgumentException();
 
         // among constants
         for (EnumConstantDeclaration constant : wrappedNode.getEntries()) {
@@ -55,13 +55,13 @@ public class EnumDeclarationContext:AbstractJavaParserContext<EnumDeclaration> {
         return solveSymbolInParentContext(name);
     }
 
-    @Override
+    //@Override
     public SymbolReference<ResolvedTypeDeclaration> solveType(string name, List<ResolvedType> resolvedTypes) {
         return javaParserTypeDeclarationAdapter.solveType(name, resolvedTypes);
     }
 
-    @Override
-    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
+    //@Override
+    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, bool staticOnly) {
         return javaParserTypeDeclarationAdapter.solveMethod(name, argumentsTypes, staticOnly);
     }
 

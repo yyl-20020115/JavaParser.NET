@@ -31,7 +31,7 @@ public class ObservationTest {
         CompilationUnit cu = parse(code);
         List<String> changes = new ArrayList<>();
         AstObserver observer = new AstObserverAdapter() {
-            @Override
+            //@Override
             public void propertyChange(Node observedNode, ObservableProperty property, Object oldValue, Object newValue) {
                 changes.add(String.format("%s.%s changed from %s to %s", observedNode.getClass().getSimpleName(), property.name().toLowerCase(), oldValue, newValue));
             }
@@ -61,7 +61,7 @@ public class ObservationTest {
         CompilationUnit cu = parse(code);
         List<String> changes = new ArrayList<>();
         AstObserver observer = new AstObserverAdapter() {
-            @Override
+            //@Override
             public void propertyChange(Node observedNode, ObservableProperty property, Object oldValue, Object newValue) {
                 changes.add(String.format("%s.%s changed from %s to %s", observedNode.getClass().getSimpleName(), property.name().toLowerCase(), oldValue, newValue));
             }
@@ -89,7 +89,7 @@ public class ObservationTest {
         CompilationUnit cu = parse(code);
         List<String> changes = new ArrayList<>();
         AstObserver observer = new AstObserverAdapter() {
-            @Override
+            //@Override
             public void propertyChange(Node observedNode, ObservableProperty property, Object oldValue, Object newValue) {
                 changes.add(String.format("%s.%s changed from %s to %s", observedNode.getClass().getSimpleName(), property.name().toLowerCase(), oldValue, newValue));
             }
@@ -125,7 +125,7 @@ public class ObservationTest {
         CompilationUnit cu = parse(code);
         List<String> changes = new ArrayList<>();
         AstObserver observer = new AstObserverAdapter() {
-            @Override
+            //@Override
             public void propertyChange(Node observedNode, ObservableProperty property, Object oldValue, Object newValue) {
                 changes.add(String.format("%s.%s changed from %s to %s", observedNode.getClass().getSimpleName(), property.name().toLowerCase(), oldValue, newValue));
             }
@@ -165,7 +165,7 @@ public class ObservationTest {
         List<String> changes = new ArrayList<>();
         AstObserver observer = new AstObserverAdapter() {
 
-            @Override
+            //@Override
             public void listChange(NodeList<?> observedNode, ListChangeType type, int index, Node nodeAddedOrRemoved) {
                 changes.add("removing [" + nodeAddedOrRemoved + "] from index " + index);
             }
@@ -183,7 +183,7 @@ public class ObservationTest {
         List<String> changes = new ArrayList<>();
         AstObserver observer = new AstObserverAdapter() {
 
-            @Override
+            //@Override
             public void listChange(NodeList<?> observedNode, ListChangeType type, int index, Node nodeAddedOrRemoved) {
                 changes.add("removing [" + nodeAddedOrRemoved + "] from index " + index);
             }
@@ -202,12 +202,12 @@ public class ObservationTest {
         List<String> changes = new ArrayList<>();
         AstObserver observer = new AstObserverAdapter() {
 
-            @Override
+            //@Override
             public void propertyChange(Node observedNode, ObservableProperty property, Object oldValue, Object newValue) {
                 changes.add("setting [" + property + "] to " + newValue);
             }
 
-            @Override
+            //@Override
             public void listChange(NodeList<?> observedNode, ListChangeType type, int index, Node nodeAddedOrRemoved) {
                 changes.add("removing [" + nodeAddedOrRemoved + "] from index " + index);
             }

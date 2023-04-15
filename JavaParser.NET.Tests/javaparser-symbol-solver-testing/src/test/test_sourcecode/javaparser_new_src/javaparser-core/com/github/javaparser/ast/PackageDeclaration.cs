@@ -55,17 +55,17 @@ public /*final*/class PackageDeclaration:Node implements NodeWithAnnotations<Pac
     }
 
     public PackageDeclaration(Range range, List<AnnotationExpr> annotations, NameExpr name) {
-        super(range);
+        base(range);
         setAnnotations(annotations);
         setName(name);
     }
 
-    @Override
+    //@Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }

@@ -80,7 +80,7 @@ public class CompactConstructorDeclaration:BodyDeclaration<CompactConstructorDec
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public CompactConstructorDeclaration(TokenRange tokenRange, NodeList<Modifier> modifiers, NodeList<AnnotationExpr> annotations, NodeList<TypeParameter> typeParameters, SimpleName name, NodeList<ReferenceType> thrownExceptions, BlockStmt body) {
-        super(tokenRange, annotations);
+        base(tokenRange, annotations);
         setModifiers(modifiers);
         setTypeParameters(typeParameters);
         setName(name);
@@ -91,13 +91,13 @@ public class CompactConstructorDeclaration:BodyDeclaration<CompactConstructorDec
 
     //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
     //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -345,7 +345,7 @@ public class CompactConstructorDeclaration:BodyDeclaration<CompactConstructorDec
      * This constructor is used by the parser and is considered private.
      */
     public CompactConstructorDeclaration(TokenRange tokenRange, NodeList<AnnotationExpr> annotations, BlockStmt body) {
-        super(tokenRange, annotations);
+        base(tokenRange, annotations);
         setBody(body);
         customInitialization();
     }

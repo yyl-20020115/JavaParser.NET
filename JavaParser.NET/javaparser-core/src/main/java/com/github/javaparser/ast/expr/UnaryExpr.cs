@@ -48,9 +48,9 @@ public class UnaryExpr:Expression implements NodeWithExpression<UnaryExpr> {
 
         private /*final*/string codeRepresentation;
 
-        private /*final*/boolean isPostfix;
+        private /*final*/bool isPostfix;
 
-        Operator(string codeRepresentation, boolean isPostfix) {
+        Operator(string codeRepresentation, bool isPostfix) {
             this.codeRepresentation = codeRepresentation;
             this.isPostfix = isPostfix;
         }
@@ -59,11 +59,11 @@ public class UnaryExpr:Expression implements NodeWithExpression<UnaryExpr> {
             return codeRepresentation;
         }
 
-        public boolean isPostfix() {
+        public bool isPostfix() {
             return isPostfix;
         }
 
-        public boolean isPrefix() {
+        public bool isPrefix() {
             return !isPostfix();
         }
     }
@@ -86,21 +86,21 @@ public class UnaryExpr:Expression implements NodeWithExpression<UnaryExpr> {
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public UnaryExpr(TokenRange tokenRange, Expression expression, Operator operator) {
-        super(tokenRange);
+        base(tokenRange);
         setExpression(expression);
         setOperator(operator);
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -140,30 +140,30 @@ public class UnaryExpr:Expression implements NodeWithExpression<UnaryExpr> {
     }
 
     @DerivedProperty
-    public boolean isPostfix() {
+    public bool isPostfix() {
         return operator.isPostfix();
     }
 
     @DerivedProperty
-    public boolean isPrefix() {
+    public bool isPrefix() {
         return !isPostfix();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public UnaryExpr clone() {
         return (UnaryExpr) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public UnaryExprMetaModel getMetaModel() {
         return JavaParserMetaModel.unaryExprMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }
@@ -174,25 +174,25 @@ public class UnaryExpr:Expression implements NodeWithExpression<UnaryExpr> {
         return super.replace(node, replacementNode);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isUnaryExpr() {
+    public bool isUnaryExpr() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public UnaryExpr asUnaryExpr() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifUnaryExpr(Consumer<UnaryExpr> action) {
         action.accept(this);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<UnaryExpr> toUnaryExpr() {
         return Optional.of(this);

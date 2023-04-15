@@ -42,38 +42,38 @@ public class NoCache<K, V> implements Cache<K, V> {
         return new NoCache<>();
     }
 
-    @Override
+    //@Override
     public void put(K key, V value) {
         // Nothing to do here.
     }
 
-    @Override
+    //@Override
     public Optional<V> get(K key) {
         return Optional.empty();
     }
 
-    @Override
+    //@Override
     public void remove(K key) {
         // Nothing to do here.
     }
 
-    @Override
+    //@Override
     public void removeAll() {
         // Nothing to do here.
     }
 
-    @Override
-    public boolean contains(K key) {
+    //@Override
+    public bool contains(K key) {
         return false;
     }
 
-    @Override
+    //@Override
     public long size() {
         return 0;
     }
 
-    @Override
-    public boolean isEmpty() {
+    //@Override
+    public bool isEmpty() {
         return true;
     }
 

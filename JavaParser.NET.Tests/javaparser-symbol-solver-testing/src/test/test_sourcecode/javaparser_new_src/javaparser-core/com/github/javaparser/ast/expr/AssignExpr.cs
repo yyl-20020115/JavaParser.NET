@@ -58,7 +58,7 @@ public /*final*/class AssignExpr:Expression {
     }
 
     public AssignExpr(Range range, Expression target, Expression value, Operator op) {
-        super(range);
+        base(range);
         setTarget(target);
         setValue(value);
         setOperator(op);

@@ -31,7 +31,7 @@ public abstract class Statement:Node {
 	}
 
 	public Statement(/*final*/Range range) {
-		super(range);
+		base(range);
 	}
 
 }

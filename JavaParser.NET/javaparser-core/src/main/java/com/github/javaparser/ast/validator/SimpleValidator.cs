@@ -29,7 +29,7 @@ namespace com.github.javaparser.ast.validator;
 public class SimpleValidator<N:Node>:SingleNodeTypeValidator<N> {
 
     public SimpleValidator(Class<N> type, Predicate<N> condition, BiConsumer<N, ProblemReporter> problemSupplier) {
-        super(type, (node, problemReporter) -> {
+        base(type, (node, problemReporter) -> {
             if (condition.test(node)) {
                 problemSupplier.accept(node, problemReporter);
             }

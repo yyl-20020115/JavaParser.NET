@@ -33,7 +33,7 @@ public class LambdaExpr:Expression {
 
 	private List<Parameter> parameters;
 
-	private boolean parametersEnclosed;
+	private bool parametersEnclosed;
 
 	private Statement body;
 
@@ -42,9 +42,9 @@ public class LambdaExpr:Expression {
 
 	public LambdaExpr(int beginLine, int beginColumn, int endLine,
                       int endColumn, List<Parameter> parameters, Statement body,
-                      boolean parametersEnclosed) {
+                      bool parametersEnclosed) {
 
-		super(beginLine, beginColumn, endLine, endColumn);
+		base(beginLine, beginColumn, endLine, endColumn);
 		setParameters(parameters);
 		setBody(body);
         setParametersEnclosed(parametersEnclosed);
@@ -78,11 +78,11 @@ public class LambdaExpr:Expression {
 		v.visit(this, arg);
 	}
 
-	public boolean isParametersEnclosed() {
+	public bool isParametersEnclosed() {
 		return parametersEnclosed;
 	}
 
-	public void setParametersEnclosed(boolean parametersEnclosed) {
+	public void setParametersEnclosed(bool parametersEnclosed) {
 		this.parametersEnclosed = parametersEnclosed;
 	}
 

@@ -36,7 +36,7 @@ public class ModifierMetaModel:NodeMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     ModifierMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, Modifier.class, "Modifier", "com.github.javaparser.ast", false, false);
+        base(superBaseNodeMetaModel, Modifier.class, "Modifier", "com.github.javaparser.ast", false, false);
     }
 
     public PropertyMetaModel keywordPropertyMetaModel;

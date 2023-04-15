@@ -27,7 +27,7 @@ namespace com.github.javaparser.printer.lexicalpreservation.transformations.ast.
 /**
  * Transforming AnnotationDeclaration and verifying the LexicalPreservation works as expected.
  */
-class AnnotationDeclarationTransformationsTest extends AbstractLexicalPreservingTest {
+class AnnotationDeclarationTransformationsTest:AbstractLexicalPreservingTest {
 
     [TestMethod]
     void unchangedExamples(){

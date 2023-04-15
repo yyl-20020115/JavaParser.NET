@@ -25,9 +25,9 @@ namespace com.github.javaparser.printer.configuration.imports;
 
 public class DefaultImportOrderingStrategy implements ImportOrderingStrategy {
 
-    private boolean sortImportsAlphabetically = false;
+    private bool sortImportsAlphabetically = false;
 
-    @Override
+    //@Override
     public List<NodeList<ImportDeclaration>> sortImports(NodeList<ImportDeclaration> nodes) {
 
         if (sortImportsAlphabetically) {
@@ -39,13 +39,13 @@ public class DefaultImportOrderingStrategy implements ImportOrderingStrategy {
         return Collections.singletonList(nodes);
     }
 
-    @Override
-    public void setSortImportsAlphabetically(boolean sortImportsAlphabetically) {
+    //@Override
+    public void setSortImportsAlphabetically(bool sortImportsAlphabetically) {
         this.sortImportsAlphabetically = sortImportsAlphabetically;
     }
 
-    @Override
-    public boolean isSortImportsAlphabetically() {
+    //@Override
+    public bool isSortImportsAlphabetically() {
         return sortImportsAlphabetically;
     }
 

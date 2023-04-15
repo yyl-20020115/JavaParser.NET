@@ -38,19 +38,19 @@ public class JavaParserAnnotationDeclaration:AbstractTypeDeclaration implements 
         this.javaParserTypeAdapter = new JavaParserTypeAdapter<>(wrappedNode, typeSolver);
     }
 
-    @Override
-    public List<ResolvedReferenceType> getAncestors(boolean acceptIncompleteList) {
+    //@Override
+    public List<ResolvedReferenceType> getAncestors(bool acceptIncompleteList) {
         List<ResolvedReferenceType> ancestors = new ArrayList<>();
         ancestors.add(new ReferenceTypeImpl(typeSolver.solveType("java.lang.annotation.Annotation")));
         return ancestors;
     }
 
-    @Override
-    public Set<ResolvedReferenceTypeDeclaration> internalTypes() {
+    //@Override
+    public HashSet<ResolvedReferenceTypeDeclaration> internalTypes() {
         return javaParserTypeAdapter.internalTypes();
     }
 
-    @Override
+    //@Override
     public List<ResolvedFieldDeclaration> getAllFields() {
          return wrappedNode.getFields().stream()
                 .flatMap(field -> field.getVariables().stream())
@@ -58,39 +58,39 @@ public class JavaParserAnnotationDeclaration:AbstractTypeDeclaration implements 
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public Set<ResolvedMethodDeclaration> getDeclaredMethods() {
+    //@Override
+    public HashSet<ResolvedMethodDeclaration> getDeclaredMethods() {
         // TODO #1838
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    public boolean isAssignableBy(ResolvedType type) {
+    //@Override
+    public bool isAssignableBy(ResolvedType type) {
         // TODO #1836
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    public boolean isAssignableBy(ResolvedReferenceTypeDeclaration other) {
+    //@Override
+    public bool isAssignableBy(ResolvedReferenceTypeDeclaration other) {
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    public boolean hasDirectlyAnnotation(string canonicalName) {
+    //@Override
+    public bool hasDirectlyAnnotation(string canonicalName) {
         return AstResolutionUtils.hasDirectlyAnnotation(wrappedNode, typeSolver, canonicalName);
     }
 
-    @Override
+    //@Override
     public string getPackageName() {
         return AstResolutionUtils.getPackageName(wrappedNode);
     }
 
-    @Override
+    //@Override
     public string getClassName() {
         return AstResolutionUtils.getClassName("", wrappedNode);
     }
 
-    @Override
+    //@Override
     public string getQualifiedName() {
         string containerName = AstResolutionUtils.containerName(wrappedNode.getParentNode().orElse(null));
         if (containerName.isEmpty()) {
@@ -100,7 +100,7 @@ public class JavaParserAnnotationDeclaration:AbstractTypeDeclaration implements 
         }
     }
 
-    @Override
+    //@Override
     public string getName() {
         return wrappedNode.getName().getId();
     }
@@ -110,19 +110,19 @@ public class JavaParserAnnotationDeclaration:AbstractTypeDeclaration implements 
      *
      * @return An empty list.
      */
-    @Override
+    //@Override
     public List<ResolvedTypeParameterDeclaration> getTypeParameters() {
         // Annotation declarations cannot have type parameters - i.e. we can always return an empty list.
         return Collections.emptyList();
     }
 
-    @Override
+    //@Override
     public Optional<ResolvedReferenceTypeDeclaration> containerType() {
         // TODO #1841
         throw new UnsupportedOperationException("containerType is not supported for " + this.getClass().getCanonicalName());
     }
 
-    @Override
+    //@Override
     public List<ResolvedAnnotationMemberDeclaration> getAnnotationMembers() {
         return wrappedNode.getMembers().stream()
                 .filter(m -> m is AnnotationMemberDeclaration)
@@ -130,17 +130,17 @@ public class JavaParserAnnotationDeclaration:AbstractTypeDeclaration implements 
                 .collect(Collectors.toList());
     }
 
-    @Override
+    //@Override
     public List<ResolvedConstructorDeclaration> getConstructors() {
         return Collections.emptyList();
     }
 
-    @Override
-    public boolean isInheritable() {
+    //@Override
+    public bool isInheritable() {
         return wrappedNode.getAnnotationByClass(Inherited.class).isPresent();
     }
 
-    @Override
+    //@Override
     public Optional<Node> toAst() {
         return Optional.of(wrappedNode);
     }

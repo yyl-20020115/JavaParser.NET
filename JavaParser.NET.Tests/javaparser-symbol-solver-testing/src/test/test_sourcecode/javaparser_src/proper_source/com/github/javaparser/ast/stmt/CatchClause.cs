@@ -47,18 +47,18 @@ public /*final*/class CatchClause:Node {
     public CatchClause(/*final*/int beginLine, /*final*/int beginColumn, /*final*/int endLine, /*final*/int endColumn,
     	    /*final*/int exceptModifier, /*final*/List<AnnotationExpr> exceptAnnotations, /*final*/List<Type> exceptTypes, 
     	    /*final*/VariableDeclaratorId exceptId, /*final*/BlockStmt catchBlock) {
-        super(beginLine, beginColumn, endLine, endColumn);
+        base(beginLine, beginColumn, endLine, endColumn);
         setExcept(new MultiTypeParameter(beginLine, beginColumn, endLine, endColumn, exceptModifier, exceptAnnotations, exceptTypes, exceptId));
         setCatchBlock(catchBlock);
     }
 
 	//@Override 
-	public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+	public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
 		return v.visit(this, arg);
 	}
 
 	//@Override
-	public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+	public void accept<A>(VoidVisitor<A> v, A arg) {
 		v.visit(this, arg);
 	}
 

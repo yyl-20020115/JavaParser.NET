@@ -34,7 +34,7 @@ public class ReflectionEnumDeclaration:AbstractTypeDeclaration
   /// Fields
   ///
 
-  private Class<?> clazz;
+  private Type clazz;
   private TypeSolver typeSolver;
   private ReflectionClassAdapter reflectionClassAdapter;
 
@@ -42,21 +42,21 @@ public class ReflectionEnumDeclaration:AbstractTypeDeclaration
   /// Constructors
   ///
 
-  public ReflectionEnumDeclaration(Class<?> clazz, TypeSolver typeSolver) {
+  public ReflectionEnumDeclaration(Type clazz, TypeSolver typeSolver) {
     if (clazz == null) {
-      throw new IllegalArgumentException("Class should not be null");
+      throw new ArgumentException("Class should not be null");
     }
     if (clazz.isInterface()) {
-      throw new IllegalArgumentException("Class should not be an interface");
+      throw new ArgumentException("Class should not be an interface");
     }
     if (clazz.isPrimitive()) {
-      throw new IllegalArgumentException("Class should not represent a primitive class");
+      throw new ArgumentException("Class should not represent a primitive class");
     }
     if (clazz.isArray()) {
-      throw new IllegalArgumentException("Class should not be an array");
+      throw new ArgumentException("Class should not be an array");
     }
     if (!clazz.isEnum()) {
-      throw new IllegalArgumentException("Class should be an enum");
+      throw new ArgumentException("Class should be an enum");
     }
     this.clazz = clazz;
     this.typeSolver = typeSolver;
@@ -100,9 +100,9 @@ public class ReflectionEnumDeclaration:AbstractTypeDeclaration
   }
 
   @Override
-  public List<ResolvedReferenceType> getAncestors(boolean acceptIncompleteList) {
+  public List<ResolvedReferenceType> getAncestors(bool acceptIncompleteList) {
     // we do not attempt to perform any symbol solving when analyzing ancestors _in the reflection model, so we can
-    // simply ignore the boolean parameter here; an UnsolvedSymbolException cannot occur
+    // simply ignore the bool parameter here; an UnsolvedSymbolException cannot occur
     return reflectionClassAdapter.getAncestors();
   }
 
@@ -112,7 +112,7 @@ public class ReflectionEnumDeclaration:AbstractTypeDeclaration
   }
 
   @Override
-  public boolean hasField(string name) {
+  public bool hasField(string name) {
     return reflectionClassAdapter.hasField(name);
   }
 
@@ -122,22 +122,22 @@ public class ReflectionEnumDeclaration:AbstractTypeDeclaration
   }
 
   @Override
-  public Set<ResolvedMethodDeclaration> getDeclaredMethods() {
+  public HashSet<ResolvedMethodDeclaration> getDeclaredMethods() {
     return reflectionClassAdapter.getDeclaredMethods();
   }
 
   @Override
-  public boolean isAssignableBy(ResolvedType type) {
+  public bool isAssignableBy(ResolvedType type) {
     return reflectionClassAdapter.isAssignableBy(type);
   }
 
   @Override
-  public boolean isAssignableBy(ResolvedReferenceTypeDeclaration other) {
+  public bool isAssignableBy(ResolvedReferenceTypeDeclaration other) {
     return isAssignableBy(new ReferenceTypeImpl(other));
   }
 
   @Override
-  public boolean hasDirectlyAnnotation(string qualifiedName) {
+  public bool hasDirectlyAnnotation(string qualifiedName) {
     return reflectionClassAdapter.hasDirectlyAnnotation(qualifiedName);
   }
 
@@ -152,7 +152,7 @@ public class ReflectionEnumDeclaration:AbstractTypeDeclaration
   }
 
   @Override
-  public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> parameterTypes, boolean staticOnly) {
+  public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> parameterTypes, bool staticOnly) {
     return ReflectionMethodResolutionLogic.solveMethod(name, parameterTypes, staticOnly,
             typeSolver,this, clazz);
   }
@@ -207,7 +207,7 @@ public class ReflectionEnumDeclaration:AbstractTypeDeclaration
   }
 
   @Override
-  public Set<ResolvedReferenceTypeDeclaration> internalTypes() {
+  public HashSet<ResolvedReferenceTypeDeclaration> internalTypes() {
     return Arrays.stream(this.clazz.getDeclaredClasses())
             .map(ic -> ReflectionFactory.typeDeclarationFor(ic, typeSolver))
             .collect(Collectors.toSet());

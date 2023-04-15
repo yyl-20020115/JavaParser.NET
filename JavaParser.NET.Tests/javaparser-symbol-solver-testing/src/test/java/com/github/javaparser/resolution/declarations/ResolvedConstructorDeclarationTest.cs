@@ -23,7 +23,7 @@ namespace com.github.javaparser.resolution.declarations;
 
 public interface ResolvedConstructorDeclarationTest:ResolvedMethodLikeDeclarationTest, AssociableToASTTest {
 
-    @Override
+    //@Override
     ResolvedConstructorDeclaration createValue();
 
 }

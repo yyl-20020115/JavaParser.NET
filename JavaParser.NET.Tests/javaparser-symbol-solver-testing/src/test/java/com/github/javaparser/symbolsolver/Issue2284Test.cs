@@ -36,7 +36,7 @@ public class Issue2284Test:AbstractSymbolResolutionTest {
         string s = 
                 "public enum Enum {\n" + 
                 "    CONSTANT_ENUM() {\n" + 
-                "        @Override\n" + 
+                "        //@Override\n" + 
                 "        string getEnumName() {\n" + 
                 "            return \"CONSTANT_ENUM\";\n" + 
                 "        }\n" + 

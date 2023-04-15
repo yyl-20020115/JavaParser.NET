@@ -567,7 +567,7 @@ class JavaParserInterfaceDeclarationTest:AbstractTypeDeclarationTest {
     void testGetDeclaredMethods() {
         JavaParserClassDeclaration constructorDeclaration = (JavaParserClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
 
-        Set<ResolvedMethodDeclaration> allMethods = constructorDeclaration.getDeclaredMethods();
+        HashSet<ResolvedMethodDeclaration> allMethods = constructorDeclaration.getDeclaredMethods();
         assertEquals(20, allMethods.size());
 
         List<ResolvedMethodDeclaration> sortedMethods = allMethods.stream()
@@ -600,7 +600,7 @@ class JavaParserInterfaceDeclarationTest:AbstractTypeDeclarationTest {
     void testGetAllMethods() {
         JavaParserClassDeclaration constructorDeclaration = (JavaParserClassDeclaration) typeSolver.solveType("com.github.javaparser.ast.body.ConstructorDeclaration");
 
-        Set<MethodUsage> allMethods = constructorDeclaration.getAllMethods();
+        HashSet<MethodUsage> allMethods = constructorDeclaration.getAllMethods();
 
         List<MethodUsage> sortedMethods = allMethods.stream()
                 .sorted(Comparator.comparing(MethodUsage::getQualifiedSignature))
@@ -640,7 +640,7 @@ class JavaParserInterfaceDeclarationTest:AbstractTypeDeclarationTest {
                 "com.github.javaparser.ast.Node.setUserData(com.github.javaparser.ast.UserDataKey<M>, M)",
                 "com.github.javaparser.ast.Node.toString()",
                 "com.github.javaparser.ast.Node.toStringWithoutComments()",
-                "com.github.javaparser.ast.Node.tryAddImportToParentCompilationUnit(java.lang.Class<?>)",
+                "com.github.javaparser.ast.Node.tryAddImportToParentCompilationUnit(java.lang.Type)",
                 "com.github.javaparser.ast.body.BodyDeclaration.getAnnotations()",
                 "com.github.javaparser.ast.body.BodyDeclaration.setAnnotations(java.util.List<com.github.javaparser.ast.expr.AnnotationExpr>)",
                 "com.github.javaparser.ast.body.ConstructorDeclaration.accept(com.github.javaparser.ast.visitor.GenericVisitor<R, A>, A)",
@@ -692,14 +692,14 @@ class JavaParserInterfaceDeclarationTest:AbstractTypeDeclarationTest {
                 "com.github.javaparser.ast.nodeTypes.NodeWithName.setName(java.lang.String)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithParameters.addAndGetParameter(com.github.javaparser.ast.body.Parameter)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithParameters.addAndGetParameter(com.github.javaparser.ast.type.Type, java.lang.String)",
-                "com.github.javaparser.ast.nodeTypes.NodeWithParameters.addAndGetParameter(java.lang.Class<?>, java.lang.String)",
+                "com.github.javaparser.ast.nodeTypes.NodeWithParameters.addAndGetParameter(java.lang.Type, java.lang.String)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithParameters.addAndGetParameter(java.lang.String, java.lang.String)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithParameters.addParameter(com.github.javaparser.ast.body.Parameter)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithParameters.addParameter(com.github.javaparser.ast.type.Type, java.lang.String)",
-                "com.github.javaparser.ast.nodeTypes.NodeWithParameters.addParameter(java.lang.Class<?>, java.lang.String)",
+                "com.github.javaparser.ast.nodeTypes.NodeWithParameters.addParameter(java.lang.Type, java.lang.String)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithParameters.addParameter(java.lang.String, java.lang.String)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithParameters.getParamByName(java.lang.String)",
-                "com.github.javaparser.ast.nodeTypes.NodeWithParameters.getParamByType(java.lang.Class<?>)",
+                "com.github.javaparser.ast.nodeTypes.NodeWithParameters.getParamByType(java.lang.Type)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithParameters.getParamByType(java.lang.String)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithParameters.setParameters(java.util.List<com.github.javaparser.ast.body.Parameter>)",
                 "com.github.javaparser.ast.nodeTypes.NodeWithThrowable.addThrows(com.github.javaparser.ast.type.ReferenceType)",
@@ -832,11 +832,11 @@ class JavaParserInterfaceDeclarationTest:AbstractTypeDeclarationTest {
     /// Assignability
     ///
 
-    // boolean isAssignableBy(Type type);
+    // bool isAssignableBy(Type type);
 
-    // boolean canBeAssignedTo(TypeDeclaration other)
+    // bool canBeAssignedTo(TypeDeclaration other)
 
-    // boolean isAssignableBy(TypeDeclaration other);
+    // bool isAssignableBy(TypeDeclaration other);
 
     ///
     /// Annotations
@@ -858,7 +858,7 @@ class JavaParserInterfaceDeclarationTest:AbstractTypeDeclarationTest {
     /// Containment
     ///
 
-    // Set<TypeDeclaration> internalTypes()
+    // HashSet<TypeDeclaration> internalTypes()
 
     // Optional<TypeDeclaration> containerType()
 
@@ -880,29 +880,29 @@ class JavaParserInterfaceDeclarationTest:AbstractTypeDeclarationTest {
         }
     }
 
-    @Override
+    //@Override
     public Optional<Node> getWrappedDeclaration(AssociableToAST associableToAST) {
         return Optional.of(
                 safeCast(associableToAST, JavaParserInterfaceDeclaration.class).getWrappedNode()
         );
     }
 
-    @Override
+    //@Override
     public JavaParserInterfaceDeclaration createValue() {
         ClassOrInterfaceDeclaration classOrInterface = StaticJavaParser.parse("interface A {}")
                         .findFirst(ClassOrInterfaceDeclaration.class).get();
         return new JavaParserInterfaceDeclaration(classOrInterface, typeSolver);
     }
 
-    @Override
-    public boolean isFunctionalInterface(AbstractTypeDeclaration typeDeclaration) {
+    //@Override
+    public bool isFunctionalInterface(AbstractTypeDeclaration typeDeclaration) {
         return false;
     }
 
     @Disabled(value = "This test was disable _in this class due to a bug reported at https://github" +
             ".com/javaparser/javaparser/issues/3061. It should be renabled when the issue is fixed.")
     [TestMethod]
-    @Override
+    //@Override
     public void containerTypeCantBeNull() {
         super.containerTypeCantBeNull();
     }

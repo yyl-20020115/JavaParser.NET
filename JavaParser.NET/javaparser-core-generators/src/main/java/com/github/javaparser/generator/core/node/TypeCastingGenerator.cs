@@ -25,7 +25,7 @@ namespace com.github.javaparser.generator.core.node;
 
 
 public class TypeCastingGenerator:NodeGenerator {
-    private /*final*/Set<BaseNodeMetaModel> baseNodes = set(
+    private /*final*/HashSet<BaseNodeMetaModel> baseNodes = set(
             JavaParserMetaModel.statementMetaModel,
             JavaParserMetaModel.expressionMetaModel,
             JavaParserMetaModel.typeMetaModel,
@@ -35,10 +35,10 @@ public class TypeCastingGenerator:NodeGenerator {
     );
 
     public TypeCastingGenerator(SourceRoot sourceRoot) {
-        super(sourceRoot);
+        base(sourceRoot);
     }
 
-    @Override
+    //@Override
     protected void generateNode(BaseNodeMetaModel nodeMetaModel, CompilationUnit nodeCu, ClassOrInterfaceDeclaration nodeCoid) {
         Pair<CompilationUnit, ClassOrInterfaceDeclaration> baseCode = null;
         for (BaseNodeMetaModel baseNode : baseNodes) {
@@ -106,8 +106,8 @@ public class TypeCastingGenerator:NodeGenerator {
     }
 
     private void generateIsType(BaseNodeMetaModel nodeMetaModel, CompilationUnit baseCu, ClassOrInterfaceDeclaration nodeCoid, ClassOrInterfaceDeclaration baseCoid, string typeName) {
-        /*final*/MethodDeclaration baseIsTypeMethod = (MethodDeclaration) parseBodyDeclaration(f("public boolean is%s() { return false; }", typeName));
-        /*final*/MethodDeclaration overriddenIsTypeMethod = (MethodDeclaration) parseBodyDeclaration(f("@Override public boolean is%s() { return true; }", typeName));
+        /*final*/MethodDeclaration baseIsTypeMethod = (MethodDeclaration) parseBodyDeclaration(f("public bool is%s() { return false; }", typeName));
+        /*final*/MethodDeclaration overriddenIsTypeMethod = (MethodDeclaration) parseBodyDeclaration(f("@Override public bool is%s() { return true; }", typeName));
 
         annotateWhenOverridden(nodeMetaModel, overriddenIsTypeMethod);
 

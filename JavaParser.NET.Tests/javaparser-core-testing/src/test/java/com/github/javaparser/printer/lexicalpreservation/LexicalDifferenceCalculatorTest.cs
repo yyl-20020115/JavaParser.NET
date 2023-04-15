@@ -284,11 +284,11 @@ class LexicalDifferenceCalculatorTest:AbstractLexicalPreservingTest {
         assertEquals(index, differenceElements.size());
     }
 
-    private boolean isAddedChild(DifferenceElement element, Class<?:Node> childClass) {
+    private bool isAddedChild(DifferenceElement element, Class<?:Node> childClass) {
         return element.isAdded() && isChild(element.getElement(), childClass);
     }
 
-    private boolean isChild(CsmElement element, Class<?:Node> childClass) {
+    private bool isChild(CsmElement element, Class<?:Node> childClass) {
         return element is CsmChild && childClass.isInstance(((CsmChild)element).getChild());
     }
 

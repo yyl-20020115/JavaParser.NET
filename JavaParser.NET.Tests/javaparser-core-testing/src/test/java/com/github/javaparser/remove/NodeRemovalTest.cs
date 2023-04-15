@@ -32,7 +32,7 @@ class NodeRemovalTest: AbstractLexicalPreservingTest{
 	void testRemoveClassFromCompilationUnit() {
 		ClassOrInterfaceDeclaration testClass = compilationUnit.addClass("test");
 		assertEquals(1, compilationUnit.getTypes().size());
-		boolean remove = testClass.remove();
+		bool remove = testClass.remove();
 		assertTrue(remove);
 		assertEquals(0, compilationUnit.getTypes().size());
 	}
@@ -43,7 +43,7 @@ class NodeRemovalTest: AbstractLexicalPreservingTest{
 
 		FieldDeclaration addField = testClass.addField(String.class, "test");
 		assertEquals(1, testClass.getMembers().size());
-		boolean remove = addField.remove();
+		bool remove = addField.remove();
 		assertTrue(remove);
 		assertEquals(0, testClass.getMembers().size());
 	}
@@ -56,7 +56,7 @@ class NodeRemovalTest: AbstractLexicalPreservingTest{
 		BlockStmt methodBody = addMethod.createBody();
 		Statement addStatement = methodBody.addAndGetStatement("test");
 		assertEquals(1, methodBody.getStatements().size());
-		boolean remove = addStatement.remove();
+		bool remove = addStatement.remove();
 		assertTrue(remove);
 		assertEquals(0, methodBody.getStatements().size());
 	}
@@ -76,8 +76,8 @@ class NodeRemovalTest: AbstractLexicalPreservingTest{
 	}
 
 	// remove the node and parent's node until response is true
-	boolean remove(Node node) {
-		boolean result = node.remove();
+	bool remove(Node node) {
+		bool result = node.remove();
 		if (!result && node.getParentNode().isPresent())
 			result = remove(node.getParentNode().get());
 		return result;

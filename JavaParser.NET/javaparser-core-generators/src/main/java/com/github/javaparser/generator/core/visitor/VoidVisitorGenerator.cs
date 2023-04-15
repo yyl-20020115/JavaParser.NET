@@ -27,10 +27,10 @@ namespace com.github.javaparser.generator.core.visitor;
  */
 public class VoidVisitorGenerator:VisitorGenerator {
     public VoidVisitorGenerator(SourceRoot sourceRoot) {
-        super(sourceRoot, "com.github.javaparser.ast.visitor", "VoidVisitor", "void", "A", true);
+        base(sourceRoot, "com.github.javaparser.ast.visitor", "VoidVisitor", "void", "A", true);
     }
 
-    @Override
+    //@Override
     protected void generateVisitMethodBody(BaseNodeMetaModel node, MethodDeclaration visitMethod, CompilationUnit compilationUnit) {
         visitMethod.getParameters().forEach(p -> p.setFinal(false));
 

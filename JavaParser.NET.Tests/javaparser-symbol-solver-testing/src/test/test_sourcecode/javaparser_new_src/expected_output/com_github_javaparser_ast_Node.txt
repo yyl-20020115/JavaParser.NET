@@ -35,7 +35,7 @@
   Line 324) range.isAfter(position) ==> com.github.javaparser.Range.isAfter(com.github.javaparser.Position)
   Line 328) range.isBefore(position) ==> com.github.javaparser.Range.isBefore(com.github.javaparser.Position)
   Line 336) getParentNodeOfType(CompilationUnit.class) ==> com.github.javaparser.ast.Node.getParentNodeOfType(java.lang.Class<T>)
-  Line 338) parentNode.addImport(clazz) ==> com.github.javaparser.ast.CompilationUnit.addImport(java.lang.Class<?>)
+  Line 338) parentNode.addImport(clazz) ==> com.github.javaparser.ast.CompilationUnit.addImport(java.lang.Type)
   Line 349) getChildrenNodes() ==> com.github.javaparser.ast.Node.getChildrenNodes()
   Line 350) clazz.isInstance(child) ==> java.lang.Class.isInstance(java.lang.Object)
   Line 351) nodes.add(clazz.cast(child)) ==> java.util.List.add(E)

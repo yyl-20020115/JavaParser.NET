@@ -49,7 +49,7 @@ public class ArrayAccessExpr:Expression {
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public ArrayAccessExpr(TokenRange tokenRange, Expression name, Expression index) {
-        super(tokenRange);
+        base(tokenRange);
         setName(name);
         setIndex(index);
         customInitialization();
@@ -57,13 +57,13 @@ public class ArrayAccessExpr:Expression {
 
     //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
     //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 

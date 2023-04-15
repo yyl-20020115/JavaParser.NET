@@ -25,7 +25,7 @@ namespace com.github.javaparser.ast.stmt;
 
 /**
  * A call to super or this _in a constructor or initializer.
- * <br>{@code class X { X() { super(15); } }}
+ * <br>{@code class X { X() { base(15); } }}
  * <br>{@code class X { X() { this(1, 2); } }}
  *
  * @author Julio Vilmar Gesser
@@ -34,12 +34,12 @@ namespace com.github.javaparser.ast.stmt;
  */
 public class ExplicitConstructorInvocationStmt:Statement implements NodeWithTypeArguments<ExplicitConstructorInvocationStmt>, NodeWithArguments<ExplicitConstructorInvocationStmt>, Resolvable<ResolvedConstructorDeclaration> {
 
-    @OptionalProperty
+    //@OptionalProperty
     private NodeList<Type> typeArguments;
 
-    private boolean isThis;
+    private bool isThis;
 
-    @OptionalProperty
+    //@OptionalProperty
     private Expression expression;
 
     private NodeList<Expression> arguments;
@@ -48,12 +48,12 @@ public class ExplicitConstructorInvocationStmt:Statement implements NodeWithType
         this(null, null, true, null, new NodeList<>());
     }
 
-    public ExplicitConstructorInvocationStmt(/*final*/boolean isThis, /*final*/Expression expression, /*final*/NodeList<Expression> arguments) {
+    public ExplicitConstructorInvocationStmt(/*final*/bool isThis, /*final*/Expression expression, /*final*/NodeList<Expression> arguments) {
         this(null, null, isThis, expression, arguments);
     }
 
     //@AllFieldsConstructor
-    public ExplicitConstructorInvocationStmt(/*final*/NodeList<Type> typeArguments, /*final*/boolean isThis, /*final*/Expression expression, /*final*/NodeList<Expression> arguments) {
+    public ExplicitConstructorInvocationStmt(/*final*/NodeList<Type> typeArguments, /*final*/bool isThis, /*final*/Expression expression, /*final*/NodeList<Expression> arguments) {
         this(null, typeArguments, isThis, expression, arguments);
     }
 
@@ -61,8 +61,8 @@ public class ExplicitConstructorInvocationStmt:Statement implements NodeWithType
      * This constructor is used by the parser and is considered private.
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
-    public ExplicitConstructorInvocationStmt(TokenRange tokenRange, NodeList<Type> typeArguments, boolean isThis, Expression expression, NodeList<Expression> arguments) {
-        super(tokenRange);
+    public ExplicitConstructorInvocationStmt(TokenRange tokenRange, NodeList<Type> typeArguments, bool isThis, Expression expression, NodeList<Expression> arguments) {
+        base(tokenRange);
         setTypeArguments(typeArguments);
         setThis(isThis);
         setExpression(expression);
@@ -70,15 +70,15 @@ public class ExplicitConstructorInvocationStmt:Statement implements NodeWithType
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -93,7 +93,7 @@ public class ExplicitConstructorInvocationStmt:Statement implements NodeWithType
     }
 
     //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public boolean isThis() {
+    public bool isThis() {
         return isThis;
     }
 
@@ -131,7 +131,7 @@ public class ExplicitConstructorInvocationStmt:Statement implements NodeWithType
     }
 
     //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public ExplicitConstructorInvocationStmt setThis(/*final*/boolean isThis) {
+    public ExplicitConstructorInvocationStmt setThis(/*final*/bool isThis) {
         if (isThis == this.isThis) {
             return this;
         }
@@ -164,9 +164,9 @@ public class ExplicitConstructorInvocationStmt:Statement implements NodeWithType
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
-    public boolean remove(Node node) {
+    public bool remove(Node node) {
         if (node == null) {
             return false;
         }
@@ -198,21 +198,21 @@ public class ExplicitConstructorInvocationStmt:Statement implements NodeWithType
         return setExpression((Expression) null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public ExplicitConstructorInvocationStmt clone() {
         return (ExplicitConstructorInvocationStmt) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public ExplicitConstructorInvocationStmtMetaModel getMetaModel() {
         return JavaParserMetaModel.explicitConstructorInvocationStmtMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }
@@ -239,19 +239,19 @@ public class ExplicitConstructorInvocationStmt:Statement implements NodeWithType
         return super.replace(node, replacementNode);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isExplicitConstructorInvocationStmt() {
+    public bool isExplicitConstructorInvocationStmt() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public ExplicitConstructorInvocationStmt asExplicitConstructorInvocationStmt() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifExplicitConstructorInvocationStmt(Consumer<ExplicitConstructorInvocationStmt> action) {
         action.accept(this);
@@ -274,7 +274,7 @@ public class ExplicitConstructorInvocationStmt:Statement implements NodeWithType
         return getSymbolResolver().resolveDeclaration(this, ResolvedConstructorDeclaration.class);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<ExplicitConstructorInvocationStmt> toExplicitConstructorInvocationStmt() {
         return Optional.of(this);

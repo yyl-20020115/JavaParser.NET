@@ -29,21 +29,21 @@ public class MultiTypeParameter:BaseParameter {
     public MultiTypeParameter() {}
 
     public MultiTypeParameter(int modifiers, List<AnnotationExpr> annotations, List<Type> types, VariableDeclaratorId id) {
-        super(modifiers, annotations, id);
+        base(modifiers, annotations, id);
         this.types = types;
     }
 
     public MultiTypeParameter(int beginLine, int beginColumn, int endLine, int endColumn, int modifiers, List<AnnotationExpr> annotations, List<Type> types, VariableDeclaratorId id) {
-        super(beginLine, beginColumn, endLine, endColumn, modifiers, annotations, id);
+        base(beginLine, beginColumn, endLine, endColumn, modifiers, annotations, id);
         this.types = types;
 	}
 
-    @Override
+    //@Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
     
-    @Override
+    //@Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }

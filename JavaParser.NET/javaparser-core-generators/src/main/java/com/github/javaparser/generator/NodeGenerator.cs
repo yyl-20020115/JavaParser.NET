@@ -29,7 +29,7 @@ namespace com.github.javaparser.generator;
  */
 public abstract class NodeGenerator:Generator {
     protected NodeGenerator(SourceRoot sourceRoot) {
-        super(sourceRoot);
+        base(sourceRoot);
     }
 
     public /*final*/void generate() {
@@ -55,9 +55,9 @@ public abstract class NodeGenerator:Generator {
      */
     protected void annotateWhenOverridden(BaseNodeMetaModel nodeMetaModel, MethodDeclaration methodDeclaration) {
         Class<?:Node> type = nodeMetaModel.getType();
-        Class<?> superClass = type.getSuperclass();
+        Type superClass = type.getSuperclass();
 
-        boolean isOverriding = Arrays.stream(superClass.getMethods())
+        bool isOverriding = Arrays.stream(superClass.getMethods())
                 .filter(m -> m.getName().equals(methodDeclaration.getNameAsString()))
                 .anyMatch(m -> m.getParameters().length == methodDeclaration.getParameters().size());
         if (isOverriding) {

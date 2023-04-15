@@ -13,7 +13,7 @@ public interface NodeWithExtends<T> {
      * @param clazz the class to extand from
      * @return this
      */
-    public default T addExtends(Class<?> clazz) {
+    public default T addExtends(Type clazz) {
         ((Node) this).tryAddImportToParentCompilationUnit(clazz);
         return addExtends(clazz.getSimpleName());
     }

@@ -64,17 +64,17 @@ public /*final*/class VariableDeclarator:Node implements
     }
 
     public VariableDeclarator(Range range, VariableDeclaratorId id, Expression init) {
-        super(range);
+        base(range);
         setId(id);
         setInit(init);
     }
 
-    @Override
+    //@Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
@@ -109,7 +109,7 @@ public /*final*/class VariableDeclarator:Node implements
     }
 
 
-    @Override
+    //@Override
     public Type getType() {
         NodeWithElementType<?> elementType = getParentNodeOfType(NodeWithElementType.class);
 
@@ -118,7 +118,7 @@ public /*final*/class VariableDeclarator:Node implements
                 getId().getArrayBracketPairsAfterId());
     }
 
-    @Override
+    //@Override
     public VariableDeclarator setType(Type type) {
         Pair<Type, List<ArrayBracketPair>> unwrapped = ArrayType.unwrapArrayTypes(type);
         NodeWithElementType<?> nodeWithElementType = getParentNodeOfType(NodeWithElementType.class);

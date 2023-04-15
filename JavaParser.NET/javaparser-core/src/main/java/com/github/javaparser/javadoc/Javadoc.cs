@@ -103,7 +103,7 @@ public class Javadoc {
     public JavadocComment toComment(string indentation) {
         for (char c : indentation.toCharArray()) {
             if (!Character.isWhitespace(c)) {
-                throw new IllegalArgumentException("The indentation string should be composed only by whitespace characters");
+                throw new ArgumentException("The indentation string should be composed only by whitespace characters");
             }
         }
         StringBuilder sb = new StringBuilder();
@@ -133,8 +133,8 @@ public class Javadoc {
         return this.blockTags;
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -143,14 +143,14 @@ public class Javadoc {
         return description.equals(document.description) && blockTags.equals(document.blockTags);
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         int result = description.hashCode();
         result = 31 * result + blockTags.hashCode();
         return result;
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "Javadoc{" + "description=" + description + ", blockTags=" + blockTags + '}';
     }

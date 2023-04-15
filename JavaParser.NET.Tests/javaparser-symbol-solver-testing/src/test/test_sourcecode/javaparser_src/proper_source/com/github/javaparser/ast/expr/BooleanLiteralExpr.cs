@@ -37,7 +37,7 @@ public /*final*/class BooleanLiteralExpr:LiteralExpr {
     }
 
     public BooleanLiteralExpr(int beginLine, int beginColumn, int endLine, int endColumn, bool value) {
-        super(beginLine, beginColumn, endLine, endColumn);
+        base(beginLine, beginColumn, endLine, endColumn);
         setValue(value);
     }
 

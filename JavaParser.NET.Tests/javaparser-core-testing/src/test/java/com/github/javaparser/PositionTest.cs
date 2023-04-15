@@ -40,12 +40,12 @@ public class PositionTest {
 
     [TestMethod]
     public void testPositionExceptionFormat() {
-        IllegalArgumentException thrown1 = Assertions.assertThrows(IllegalArgumentException.class,
+        ArgumentException thrown1 = Assertions.assertThrows(ArgumentException.class,
                 () -> new Position(-10, 1));
 
         assertEquals("Can't position at line -10", thrown1.getMessage());
 
-        IllegalArgumentException thrown2 = Assertions.assertThrows(IllegalArgumentException.class,
+        ArgumentException thrown2 = Assertions.assertThrows(ArgumentException.class,
                 () -> new Position(1, -10));
 
         assertEquals("Can't position at column -10", thrown2.getMessage());

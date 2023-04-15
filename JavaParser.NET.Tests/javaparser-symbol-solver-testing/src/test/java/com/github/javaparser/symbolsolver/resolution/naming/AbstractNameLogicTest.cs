@@ -24,7 +24,7 @@ namespace com.github.javaparser.symbolsolver.resolution.naming;
 
 
 
-public abstract class AbstractNameLogicTest extends AbstractResolutionTest {
+public abstract class AbstractNameLogicTest:AbstractResolutionTest {
 
     protected Node getNameInCodeTollerant(string code, string name, ParseStart parseStart) {
         return getNameInCode(code, name, parseStart, true, Optional.empty());
@@ -38,11 +38,11 @@ public abstract class AbstractNameLogicTest extends AbstractResolutionTest {
         return getNameInCode(code, name, parseStart, false, Optional.empty());
     }
 
-    protected <N extends Node> N parse(string code, ParseStart<N> parseStart) {
+    protected <N:Node> N parse(string code, ParseStart<N> parseStart) {
         return parse(code, parseStart, Optional.empty());
     }
 
-    protected <N extends Node> N parse(string code, ParseStart<N> parseStart, Optional<TypeSolver> typeSolver) {
+    protected <N:Node> N parse(string code, ParseStart<N> parseStart, Optional<TypeSolver> typeSolver) {
         ParserConfiguration parserConfiguration = new ParserConfiguration();
         parserConfiguration.setLanguageLevel(ParserConfiguration.LanguageLevel.JAVA_14_PREVIEW);
         if (typeSolver.isPresent()) {
@@ -80,13 +80,13 @@ public abstract class AbstractNameLogicTest extends AbstractResolutionTest {
         }
 
         if (matchingNames.size() == 0) {
-            throw new IllegalArgumentException("Not found. Names found: " + String.join(", ",
+            throw new ArgumentException("Not found. Names found: " + String.join(", ",
                     allNames.stream().map(NameLogic::nameAsString).collect(Collectors.toList())));
         } else if (matchingNames.size() > 1) {
             if (tollerant) {
                 return matchingNames.get(matchingNames.size() - 1);
             } else {
-                throw new IllegalArgumentException("Ambiguous: there are several matching.");
+                throw new ArgumentException("Ambiguous: there are several matching.");
             }
         } else {
             return matchingNames.get(0);

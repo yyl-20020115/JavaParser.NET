@@ -398,9 +398,9 @@ public /*final*/class JavaParser {
     }
 
     /**
-     * Parses the this(...) and super(...) statements that may occur at the start of a constructor.
+     * Parses the this(...) and base(...) statements that may occur at the start of a constructor.
      *
-     * @param statement a statement like super("hello");
+     * @param statement a statement like base("hello");
      * @return the AST for the statement.
      * @throws ParseProblemException if the source code has parser errors
      */

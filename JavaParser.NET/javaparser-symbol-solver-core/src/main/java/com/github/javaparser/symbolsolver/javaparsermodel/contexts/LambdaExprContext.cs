@@ -30,10 +30,10 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.contexts;
 public class LambdaExprContext:AbstractJavaParserContext<LambdaExpr> {
     
     public LambdaExprContext(LambdaExpr wrappedNode, TypeSolver typeSolver) {
-        super(wrappedNode, typeSolver);
+        base(wrappedNode, typeSolver);
     }
 
-    @Override
+    //@Override
     public Optional<Value> solveSymbolAsValue(string name) {
         int index = -1;
         for (Parameter parameter : wrappedNode.getParameters()) {
@@ -64,7 +64,7 @@ public class LambdaExprContext:AbstractJavaParserContext<LambdaExpr> {
                             });
 
                             // Find the position of this lambda argument
-                            boolean found = false;
+                            bool found = false;
                             int lambdaParamIndex;
                             for (lambdaParamIndex = 0; lambdaParamIndex < wrappedNode.getParameters().size(); lambdaParamIndex++){
                                 if (wrappedNode.getParameter(lambdaParamIndex).getName().getIdentifier().equals(name)){
@@ -179,7 +179,7 @@ public class LambdaExprContext:AbstractJavaParserContext<LambdaExpr> {
         return solveSymbolAsValueInParentContext(name);
     }
 
-    @Override
+    //@Override
     public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name) {
         for (Parameter parameter : wrappedNode.getParameters()) {
             SymbolDeclarator sb = JavaParserFactory.getSymbolDeclarator(parameter, typeSolver);
@@ -193,13 +193,13 @@ public class LambdaExprContext:AbstractJavaParserContext<LambdaExpr> {
         return solveSymbolInParentContext(name);
     }
 
-    @Override
-    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
+    //@Override
+    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, bool staticOnly) {
         // TODO: Document why staticOnly is forced to be false.
         return solveMethodInParentContext(name, argumentsTypes, false);
     }
 
-    @Override
+    //@Override
     public List<Parameter> parametersExposedToChild(Node child) {
         // TODO/FIXME: Presumably the parameters must be exposed to all children and their descendants, not just the direct child?
         if (child == wrappedNode.getBody()) {

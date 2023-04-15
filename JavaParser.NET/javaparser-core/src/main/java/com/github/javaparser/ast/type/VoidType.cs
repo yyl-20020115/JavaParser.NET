@@ -41,73 +41,73 @@ public class VoidType:Type implements NodeWithAnnotations<VoidType> {
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public VoidType(TokenRange tokenRange) {
-        super(tokenRange);
+        base(tokenRange);
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public VoidType setAnnotations(NodeList<AnnotationExpr> annotations) {
         return (VoidType) super.setAnnotations(annotations);
     }
 
-    @Override
+    //@Override
     public string asString() {
         return "void";
     }
 
-    @Override
+    //@Override
     public string toDescriptor() {
         return "V";
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public VoidType clone() {
         return (VoidType) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public VoidTypeMetaModel getMetaModel() {
         return JavaParserMetaModel.voidTypeMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isVoidType() {
+    public bool isVoidType() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public VoidType asVoidType() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifVoidType(Consumer<VoidType> action) {
         action.accept(this);
     }
 
-    @Override
+    //@Override
     public ResolvedVoidType resolve() {
         return getSymbolResolver().toResolvedType(this, ResolvedVoidType.class);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<VoidType> toVoidType() {
         return Optional.of(this);

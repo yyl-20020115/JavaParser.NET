@@ -29,7 +29,7 @@ public class Issue2397Test:AbstractSymbolResolutionTest {
         string sourceCode = "static /*final*/class ConstantFuture<T> implements Future<T> {\n" +
                 "        private /*final*/T value;\n" +
                 "      \n" +
-                "        @Override\n" +
+                "        //@Override\n" +
                 "        public T get() {\n" +
                 "            return value;\n" +
                 "        }\n" +
@@ -55,7 +55,7 @@ public class Issue2397Test:AbstractSymbolResolutionTest {
 
         ParseResult<CompilationUnit> cu = parser.parse(sourceCode);
         cu.ifSuccessful( c -> c.accept(new VoidVisitorAdapter<Void>() {
-            @Override
+            //@Override
             public void visit(ClassOrInterfaceType classOrInterfaceType, Void arg) {
                 super.visit(classOrInterfaceType, arg);
 

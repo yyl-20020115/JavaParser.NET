@@ -22,7 +22,7 @@ namespace com.github.javaparser.printer.lexicalpreservation;
 
 public interface TextElementMatcher {
 
-    boolean match(TextElement textElement);
+    bool match(TextElement textElement);
 
     /**
      * This allows the combination of different TextElementMatcher instances.<br>

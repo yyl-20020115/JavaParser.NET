@@ -46,7 +46,7 @@ public interface NodeWithDeclaration {
      * @param includingThrows flag to include the throws clause (if present) _in the string produced
      * @return string representation of declaration based on parameter flags
      */
-    default string getDeclarationAsString(boolean includingModifiers, boolean includingThrows) {
+    default string getDeclarationAsString(bool includingModifiers, bool includingThrows) {
         return getDeclarationAsString(includingModifiers, includingThrows, true);
     }
 
@@ -60,5 +60,5 @@ public interface NodeWithDeclaration {
      * the string produced
      * @return string representation of declaration based on parameter flags
      */
-    string getDeclarationAsString(boolean includingModifiers, boolean includingThrows, boolean includingParameterName);
+    string getDeclarationAsString(bool includingModifiers, bool includingThrows, bool includingParameterName);
 }

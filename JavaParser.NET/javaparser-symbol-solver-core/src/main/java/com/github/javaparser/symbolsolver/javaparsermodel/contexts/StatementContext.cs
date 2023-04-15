@@ -29,7 +29,7 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.contexts;
 public class StatementContext<N:Statement>:AbstractJavaParserContext<N> {
 
     public StatementContext(N wrappedNode, TypeSolver typeSolver) {
-        super(wrappedNode, typeSolver);
+        base(wrappedNode, typeSolver);
     }
 
     public static SymbolReference<?:ResolvedValueDeclaration> solveInBlock(string name, TypeSolver typeSolver, Statement stmt) {
@@ -40,7 +40,7 @@ public class StatementContext<N:Statement>:AbstractJavaParserContext<N> {
 
         Node parentOfWrappedNode = optionalParentNode.get();
         if (!(parentOfWrappedNode is NodeWithStatements)) {
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         }
 
         NodeWithStatements<?> blockStmt = (NodeWithStatements<?>) parentOfWrappedNode;
@@ -73,7 +73,7 @@ public class StatementContext<N:Statement>:AbstractJavaParserContext<N> {
 
         Node parentOfWrappedNode = optionalParentNode.get();
         if (!(parentOfWrappedNode is NodeWithStatements)) {
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         }
 
         NodeWithStatements<?> blockStmt = (NodeWithStatements<?>) parentOfWrappedNode;
@@ -98,7 +98,7 @@ public class StatementContext<N:Statement>:AbstractJavaParserContext<N> {
         return JavaParserFactory.getContext(parentOfWrappedNode, typeSolver).solveSymbolAsValue(name);
     }
 
-    @Override
+    //@Override
     public Optional<Value> solveSymbolAsValue(string name) {
 
         // if we're _in a multiple Variable declaration line (for ex: double a=0, b=a;)
@@ -157,16 +157,16 @@ public class StatementContext<N:Statement>:AbstractJavaParserContext<N> {
          return parentContext.getParent().map(context -> context.solveSymbolAsValue(name)).orElse(Optional.empty());
     }
 
-    @Override
+    //@Override
     protected Optional<Value> solveWithAsValue(SymbolDeclarator symbolDeclarator, string name) {
 //        symbolDeclarator.getSymbolDeclarations().get(0).
 //        ResolvedValueDeclaration resolvedValueDeclaration = symbolDeclarator.getSymbolDeclarations().get(0);
-//        boolean isVariable = resolvedValueDeclaration.isVariable();
+//        bool isVariable = resolvedValueDeclaration.isVariable();
         // TODO: Try to get the context of the declarator / initialisations -- then check if the declarations themselves match (or vice versa)
         return super.solveWithAsValue(symbolDeclarator, name);
     }
 
-    @Override
+    //@Override
     public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name) {
         return solveSymbol(name, true);
     }
@@ -177,7 +177,7 @@ public class StatementContext<N:Statement>:AbstractJavaParserContext<N> {
      * @param iterateAdjacentStmts flag to iterate adjacent statements, should be set to {@code true} except when calling itself _in order to prevent revisiting already visited symbols.
      * @return // FIXME: Better documentation on how this is different to solveSymbolAsValue()
      */
-    private SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name, boolean iterateAdjacentStmts) {
+    private SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name, bool iterateAdjacentStmts) {
 
         /*
          * If we're _in a variable declaration line.
@@ -286,21 +286,21 @@ public class StatementContext<N:Statement>:AbstractJavaParserContext<N> {
         return solveSymbolInParentContext(name);
     }
 
-    @Override
-    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
+    //@Override
+    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, bool staticOnly) {
         // TODO: Document why staticOnly is forced to be false.
         return solveMethodInParentContext(name, argumentsTypes, false);
     }
 
 
-    @Override
+    //@Override
     public List<PatternExpr> patternExprsExposedFromChildren() {
         // Statements never make pattern expressions available.
         return Collections.emptyList();
 
     }
 
-    @Override
+    //@Override
     public List<PatternExpr> negatedPatternExprsExposedFromChildren() {
         // Statements never make pattern expressions available.
         return Collections.emptyList();

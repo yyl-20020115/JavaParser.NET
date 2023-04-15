@@ -29,7 +29,7 @@ namespace com.github.javaparser.symbolsolver.reflectionmodel;
  */
 public class ReflectionPatternDeclaration implements ResolvedPatternDeclaration {
 
-    private Class<?> type;
+    private Type type;
     private TypeSolver typeSolver;
     private string name;
 
@@ -38,43 +38,43 @@ public class ReflectionPatternDeclaration implements ResolvedPatternDeclaration 
      * @param typeSolver
      * @param name       can potentially be null
      */
-    public ReflectionPatternDeclaration(Class<?> type, TypeSolver typeSolver, string name) {
+    public ReflectionPatternDeclaration(Type type, TypeSolver typeSolver, string name) {
         this.type = type;
         this.typeSolver = typeSolver;
         this.name = name;
     }
 
-    @Override
+    //@Override
     public string getName() {
         return name;
     }
 
-    @Override
-    public boolean hasName() {
+    //@Override
+    public bool hasName() {
         return name != null;
     }
 
-    @Override
-    public boolean isField() {
+    //@Override
+    public bool isField() {
         return false;
     }
 
-    @Override
-    public boolean isParameter() {
+    //@Override
+    public bool isParameter() {
         return false;
     }
 
-    @Override
-    public boolean isPattern() {
+    //@Override
+    public bool isPattern() {
         return true;
     }
 
-    @Override
-    public boolean isType() {
+    //@Override
+    public bool isType() {
         return false;
     }
 
-    @Override
+    //@Override
     public ResolvedType getType() {
         return ReflectionFactory.typeUsageFor(type, typeSolver);
     }

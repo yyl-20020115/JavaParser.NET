@@ -11,7 +11,7 @@ public class JavaTest {
         }
     }
     class Solved {
-        public boolean isSolved() {
+        public bool isSolved() {
             return true;
         }
     }

@@ -147,7 +147,7 @@ class SwitchExprTest {
 
     [TestMethod]
     void yieldExpression2() {
-        parseStatement("boolean b = switch (5) {\n" +
+        parseStatement("bool b = switch (5) {\n" +
                 "    case 3 -> {\n" +
                 "        yield true || false;\n" +
                 "    }\n" +

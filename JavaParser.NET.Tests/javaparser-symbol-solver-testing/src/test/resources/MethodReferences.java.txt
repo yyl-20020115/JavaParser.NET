@@ -1,7 +1,7 @@
 
 
 public interface Predicate<T> {
-    boolean test(T t);
+    bool test(T t);
 }
 
 interface Function<T, R> {
@@ -42,11 +42,11 @@ public class SuperClass {
         System.out.println(val);
     }
 
-    boolean isEqual(Integer i, Integer j) {
+    bool isEqual(Integer i, Integer j) {
         return i.equals(j);
     }
 
-    boolean isEqualAsStrings(Integer i, String j) {
+    bool isEqualAsStrings(Integer i, String j) {
         return i.toString().equals(j);
     }
 
@@ -75,7 +75,7 @@ public class MethodReferences extends SuperClass {
         System.out.println(s);
     }
 
-    boolean isAnyEqualToString5(List<Integer> list, BiFunction<Integer, String, Boolean> biFunction) {
+    bool isAnyEqualToString5(List<Integer> list, BiFunction<Integer, String, Boolean> biFunction) {
         for (Integer integer : list) {
             if (biFunction.apply(integer, "5")) {
                 return true;

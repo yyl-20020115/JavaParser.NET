@@ -34,17 +34,17 @@ public class Log {
      */
     public static class StandardOutStandardErrorAdapter implements Adapter {
 
-        @Override
+        //@Override
         public void info(Supplier<String> messageSupplier) {
             System._out.println(messageSupplier.get());
         }
 
-        @Override
+        //@Override
         public void trace(Supplier<String> messageSupplier) {
             System._out.println(messageSupplier.get());
         }
 
-        @Override
+        //@Override
         public void error(Supplier<Throwable> throwableSupplier, Supplier<String> messageSupplier) {
             Throwable throwable = throwableSupplier.get();
             string message = messageSupplier.get();
@@ -75,15 +75,15 @@ public class Log {
      */
     public static class SilentAdapter implements Adapter {
 
-        @Override
+        //@Override
         public void info(Supplier<String> messageSupplier) {
         }
 
-        @Override
+        //@Override
         public void trace(Supplier<String> messageSupplier) {
         }
 
-        @Override
+        //@Override
         public void error(Supplier<Throwable> throwableSupplier, Supplier<String> messageSupplier) {
         }
     }

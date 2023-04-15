@@ -47,7 +47,7 @@ public interface NodeWithType<N:Node, T:Type> {
      */
     N setType(T type);
 
-    void tryAddImportToParentCompilationUnit(Class<?> clazz);
+    void tryAddImportToParentCompilationUnit(Type clazz);
 
     /**
      * Sets this type to this class and try to import it to the {@link CompilationUnit} if needed
@@ -56,7 +56,7 @@ public interface NodeWithType<N:Node, T:Type> {
      * @return this
      */
     //@SuppressWarnings("unchecked")
-    default N setType(Class<?> typeClass) {
+    default N setType(Type typeClass) {
         tryAddImportToParentCompilationUnit(typeClass);
         return setType((T) parseType(typeClass.getSimpleName()));
     }

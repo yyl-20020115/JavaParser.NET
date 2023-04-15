@@ -45,7 +45,7 @@ class CodeGenerationUtilsTest {
         assertEquals("blue", getterToPropertyName("isBlue"));
         assertEquals("value", getterToPropertyName("hasValue"));
 
-        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class,
+        ArgumentException thrown = assertThrows(ArgumentException.class,
                 () -> getterToPropertyName("value"));
         assertEquals("Unexpected getterName 'value'", thrown.getMessage());
     }

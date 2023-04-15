@@ -36,25 +36,25 @@ public /*final*/class LineComment:Comment {
     }
 
     public LineComment(string content) {
-        super(content);
+        base(content);
     }
 
     public LineComment(Range range, string content) {
-        super(range, content);
+        base(range, content);
     }
 
-    @Override
+    //@Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
-    @Override
-    public boolean isLineComment()
+    //@Override
+    public bool isLineComment()
     {
         return true;
     }

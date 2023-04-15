@@ -68,6 +68,6 @@ public interface Solver {
      *
      * @return The class resolved.
      */
-	ResolvedType classToResolvedType(Class<?> clazz);
+	ResolvedType classToResolvedType(Type clazz);
 
 }

@@ -36,7 +36,7 @@ public class VariableDeclaratorMetaModel:NodeMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     VariableDeclaratorMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, VariableDeclarator.class, "VariableDeclarator", "com.github.javaparser.ast.body", false, false);
+        base(superBaseNodeMetaModel, VariableDeclarator.class, "VariableDeclarator", "com.github.javaparser.ast.body", false, false);
     }
 
     public PropertyMetaModel initializerPropertyMetaModel;

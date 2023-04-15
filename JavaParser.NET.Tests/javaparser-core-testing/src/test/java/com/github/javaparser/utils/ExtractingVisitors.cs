@@ -32,7 +32,7 @@ public /*final*/class ExtractingVisitors {
 
     public static List<CharLiteralExpr> extractCharLiteralExprs(Node node) {
         return extract(node, new GenericVisitorAdapter<Void, List<CharLiteralExpr>>() {
-            @Override
+            //@Override
             public Void visit(CharLiteralExpr n, List<CharLiteralExpr> accumulator) {
                 accumulator.add(n);
                 return super.visit(n, accumulator);

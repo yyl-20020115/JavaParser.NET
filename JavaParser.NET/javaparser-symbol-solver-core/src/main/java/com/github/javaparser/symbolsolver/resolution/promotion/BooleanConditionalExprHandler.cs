@@ -23,7 +23,7 @@ namespace com.github.javaparser.symbolsolver.resolution.promotion;
 
 /*
  * Boolean conditional expressions are standalone expressions
- * The type of a boolean conditional expression is determined as follows:
+ * The type of a bool conditional expression is determined as follows:
  * If the second and third operands are both of type Boolean, the conditional expression has type Boolean.
  * Otherwise, the conditional expression has type boolean.
  */

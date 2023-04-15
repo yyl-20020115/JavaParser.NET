@@ -37,7 +37,7 @@ public interface NodeWithThrowable<T> {
      * @param clazz the class of the exception
      * @return true if found _in throws clause, false if not
      */
-    public default boolean isThrows(Class<?:Throwable> clazz) {
+    public default bool isThrows(Class<?:Throwable> clazz) {
         return isThrows(clazz.getSimpleName());
     }
 
@@ -47,7 +47,7 @@ public interface NodeWithThrowable<T> {
      * @param throwableName the class of the exception
      * @return true if found _in throws clause, false if not
      */
-    public default boolean isThrows(string throwableName) {
+    public default bool isThrows(string throwableName) {
         return getThrows().stream().anyMatch(t -> t.toString().equals(throwableName));
     }
 }

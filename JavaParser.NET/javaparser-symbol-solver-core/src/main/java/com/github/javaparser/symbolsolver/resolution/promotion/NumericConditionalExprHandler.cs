@@ -53,7 +53,7 @@ public class NumericConditionalExprHandler implements ConditionalExprHandler {
         this.elseExpr = elseExpr;
     }
 
-    @Override
+    //@Override
     public ResolvedType resolveType() {
         string qnameTypeThenExpr = thenExpr.isPrimitive() ? thenExpr.asPrimitive().describe()
                 : thenExpr.asReferenceType().describe();
@@ -138,23 +138,23 @@ public class NumericConditionalExprHandler implements ConditionalExprHandler {
     /*
      * Verify if the {code ResolvedType} is equals to one of the specified primitive types
      */
-    protected boolean exactMatch(ResolvedType type, ResolvedPrimitiveType... types) {
+    protected bool exactMatch(ResolvedType type, ResolvedPrimitiveType... types) {
         return type.isPrimitive() && type.asPrimitive()._in(types);
     }
     
-    protected boolean relaxMatch(ResolvedType type, ResolvedPrimitiveType... types) {
+    protected bool relaxMatch(ResolvedType type, ResolvedPrimitiveType... types) {
         return exactMatch(type, types) || (type.isReferenceType() && Arrays.stream(types).anyMatch(t -> type.asReferenceType().getQualifiedName().equals(t.getBoxTypeQName())));
     }
     
     /*
      * Verify if the {code ResolvedType} can be resolve to the specified primitive type
      */
-    protected boolean isResolvableTo(ResolvedPrimitiveType toType, ResolvedType resolvedType) {
+    protected bool isResolvableTo(ResolvedPrimitiveType toType, ResolvedType resolvedType) {
         // force to verify boxed type
         return isResolvableTo(toType, resolvedType, true);
     }
 
-    protected boolean isResolvableTo(ResolvedPrimitiveType toType, ResolvedType resolvedType, boolean verifyBoxedType) {
+    protected bool isResolvableTo(ResolvedPrimitiveType toType, ResolvedType resolvedType, bool verifyBoxedType) {
         return NumericConverter.entrySet().stream().filter(e -> e.getKey() == toType)
                 .flatMap(entry -> entry.getValue().stream())
                 .anyMatch(rt -> rt == resolvedType || (verifyBoxedType && resolvedType.isReferenceType()

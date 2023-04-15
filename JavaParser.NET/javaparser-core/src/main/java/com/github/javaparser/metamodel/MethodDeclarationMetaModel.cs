@@ -36,7 +36,7 @@ public class MethodDeclarationMetaModel:CallableDeclarationMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     MethodDeclarationMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, MethodDeclaration.class, "MethodDeclaration", "com.github.javaparser.ast.body", false, false);
+        base(superBaseNodeMetaModel, MethodDeclaration.class, "MethodDeclaration", "com.github.javaparser.ast.body", false, false);
     }
 
     public PropertyMetaModel bodyPropertyMetaModel;

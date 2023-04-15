@@ -36,6 +36,6 @@ public class BlockCommentMetaModel:CommentMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     BlockCommentMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, BlockComment.class, "BlockComment", "com.github.javaparser.ast.comments", false, false);
+        base(superBaseNodeMetaModel, BlockComment.class, "BlockComment", "com.github.javaparser.ast.comments", false, false);
     }
 }

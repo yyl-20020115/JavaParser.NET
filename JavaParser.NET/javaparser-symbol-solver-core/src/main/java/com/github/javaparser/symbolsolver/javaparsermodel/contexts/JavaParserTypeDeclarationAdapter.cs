@@ -126,7 +126,7 @@ public class JavaParserTypeDeclarationAdapter {
                 .solveType(name, typeArguments);
     }
 
-    private boolean isCompositeName(string name) {
+    private bool isCompositeName(string name) {
     	return name.indexOf('.') > -1;
     }
 
@@ -138,7 +138,7 @@ public class JavaParserTypeDeclarationAdapter {
     	return isCompositeName(name) ? name.substring(0, name.lastIndexOf(".")) : name;
     }
 
-    private <T:NodeWithTypeArguments<?>> boolean compareTypes(List<?:Type> types,
+    private <T:NodeWithTypeArguments<?>> bool compareTypes(List<?:Type> types,
                                                                       List<ResolvedType> resolvedTypeArguments) {
         // If the user want's to solve the type without having prior knowledge of the type arguments.
         if (resolvedTypeArguments == null) {
@@ -148,16 +148,16 @@ public class JavaParserTypeDeclarationAdapter {
         return types.size() == resolvedTypeArguments.size();
     }
 
-    private <T:NodeWithTypeArguments<?>> boolean compareTypeArguments(T type, List<ResolvedType> resolvedTypeArguments) {
+    private <T:NodeWithTypeArguments<?>> bool compareTypeArguments(T type, List<ResolvedType> resolvedTypeArguments) {
         return compareTypes(type.getTypeArguments().orElse(new NodeList<>()), resolvedTypeArguments);
     }
 
-    private <T:NodeWithTypeParameters<?>> boolean compareTypeParameters(T type,
+    private <T:NodeWithTypeParameters<?>> bool compareTypeParameters(T type,
                                                                                List<ResolvedType> resolvedTypeArguments) {
         return compareTypes(type.getTypeParameters(), resolvedTypeArguments);
     }
 
-    private boolean compareTypeParameters(TypeDeclaration<?> typeDeclaration, List<ResolvedType> resolvedTypeArguments) {
+    private bool compareTypeParameters(TypeDeclaration<?> typeDeclaration, List<ResolvedType> resolvedTypeArguments) {
         if (typeDeclaration is NodeWithTypeParameters) {
             return compareTypeParameters((NodeWithTypeParameters<?>) typeDeclaration, resolvedTypeArguments);
         } else {
@@ -180,7 +180,7 @@ public class JavaParserTypeDeclarationAdapter {
                         .orElseThrow(() -> new RuntimeException("TypeDeclaration unexpectedly empty."));
 
                 for (ResolvedTypeDeclaration internalTypeDeclaration : ancestorReferenceTypeDeclaration.internalTypes()) {
-                    boolean visible = true;
+                    bool visible = true;
                     if (internalTypeDeclaration is ResolvedReferenceTypeDeclaration) {
                         ResolvedReferenceTypeDeclaration resolvedReferenceTypeDeclaration = internalTypeDeclaration.asReferenceType();
                         if (resolvedReferenceTypeDeclaration is HasAccessSpecifier) {
@@ -208,7 +208,7 @@ public class JavaParserTypeDeclarationAdapter {
         return null; // FIXME -- Avoid returning null.
     }
 
-    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
+    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, bool staticOnly) {
 
         // Begin by locating methods declared "here"
         List<ResolvedMethodDeclaration> candidateMethods = typeDeclaration.getDeclaredMethods().stream()

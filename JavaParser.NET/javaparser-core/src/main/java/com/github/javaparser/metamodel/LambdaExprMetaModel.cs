@@ -36,7 +36,7 @@ public class LambdaExprMetaModel:ExpressionMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     LambdaExprMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, LambdaExpr.class, "LambdaExpr", "com.github.javaparser.ast.expr", false, false);
+        base(superBaseNodeMetaModel, LambdaExpr.class, "LambdaExpr", "com.github.javaparser.ast.expr", false, false);
     }
 
     public PropertyMetaModel bodyPropertyMetaModel;

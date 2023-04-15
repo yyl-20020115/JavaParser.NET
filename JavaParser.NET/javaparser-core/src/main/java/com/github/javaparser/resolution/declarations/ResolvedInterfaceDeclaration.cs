@@ -29,8 +29,8 @@ namespace com.github.javaparser.resolution.declarations;
  */
 public interface ResolvedInterfaceDeclaration:ResolvedReferenceTypeDeclaration, ResolvedTypeParametrizable, HasAccessSpecifier {
 
-    @Override
-    default boolean isInterface() {
+    //@Override
+    default bool isInterface() {
         return true;
     }
 

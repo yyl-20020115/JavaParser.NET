@@ -25,10 +25,10 @@ namespace com.github.javaparser.symbolsolver.reflectionmodel.comparators;
 /**
  * @author Federico Tomassetti
  */
-public class ClassComparator implements Comparator<Class<?>> {
+public class ClassComparator implements Comparator<Type> {
 
     //@Override
-    public int compare(Class<?> o1, Class<?> o2) {
+    public int compare(Type o1, Type o2) {
         int subCompare;
         subCompare = o1.getCanonicalName().compareTo(o2.getCanonicalName());
         if (subCompare != 0) return subCompare;

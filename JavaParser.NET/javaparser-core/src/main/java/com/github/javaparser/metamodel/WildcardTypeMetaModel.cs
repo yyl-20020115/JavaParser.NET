@@ -36,7 +36,7 @@ public class WildcardTypeMetaModel:TypeMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     WildcardTypeMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, WildcardType.class, "WildcardType", "com.github.javaparser.ast.type", false, false);
+        base(superBaseNodeMetaModel, WildcardType.class, "WildcardType", "com.github.javaparser.ast.type", false, false);
     }
 
     public PropertyMetaModel extendedTypePropertyMetaModel;

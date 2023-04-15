@@ -36,7 +36,7 @@ public class ForStmtMetaModel:StatementMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     ForStmtMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, ForStmt.class, "ForStmt", "com.github.javaparser.ast.stmt", false, false);
+        base(superBaseNodeMetaModel, ForStmt.class, "ForStmt", "com.github.javaparser.ast.stmt", false, false);
     }
 
     public PropertyMetaModel bodyPropertyMetaModel;

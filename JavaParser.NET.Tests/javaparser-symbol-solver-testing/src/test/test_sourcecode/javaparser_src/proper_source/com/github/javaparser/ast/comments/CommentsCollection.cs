@@ -54,7 +54,7 @@ public class CommentsCollection {
         this.javadocComments.add(javadocComment);
     }
 
-    public boolean contains(Comment comment){
+    public bool contains(Comment comment){
         for (Comment c : getAll()){
             // we tollerate a difference of one element _in the end column:
             // it depends how \r and \n are calculated...

@@ -47,33 +47,33 @@ public class Issue3030Test:AbstractResolutionTest {
                 "                this.delegate = delegate;\n" +
                 "            }\n" +
                 "\n" +
-                "            @Override\n" +
-                "            public boolean tryAdvance(Consumer<? super T> action) {\n" +
+                "            //@Override\n" +
+                "            public bool tryAdvance(Consumer<? super T> action) {\n" +
                 "                return delegate.tryAdvance((IntConsumer) i -> action.accept(function.apply(i)));\n" +
                 "            }\n" +
                 "\n" +
-                "            @Override\n" +
+                "            //@Override\n" +
                 "            public void forEachRemaining(Consumer<? super T> action) {\n" +
                 "                delegate.forEachRemaining((IntConsumer) i -> action.accept(function.apply(i)));\n" +
                 "            }\n" +
                 "\n" +
-                "            @Override\n" +
+                "            //@Override\n" +
                 "            public Spliterator<T> trySplit() {\n" +
                 "                Spliterator.OfInt split = delegate.trySplit();\n" +
                 "                return (split == null) ? null : new WithCharacteristics(split);\n" +
                 "            }\n" +
                 "\n" +
-                "            @Override\n" +
+                "            //@Override\n" +
                 "            public long estimateSize() {\n" +
                 "                return delegate.estimateSize();\n" +
                 "            }\n" +
                 "\n" +
-                "            @Override\n" +
+                "            //@Override\n" +
                 "            public int characteristics() {\n" +
                 "                return Spliterator.ORDERED | Spliterator.SIZED | Spliterator.SUBSIZED | extraCharacteristics;\n" +
                 "            }\n" +
                 "\n" +
-                "            @Override\n" +
+                "            //@Override\n" +
                 "            public Comparator<? super T> getComparator() {\n" +
                 "                if (hasCharacteristics(Spliterator.SORTED)) {\n" +
                 "                    return comparator;\n" +

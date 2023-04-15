@@ -41,27 +41,27 @@ public /*final*/class VariableDeclaratorId:Node implements NodeWithName<Variable
     }
 
     public VariableDeclaratorId(Range range, string name, List<ArrayBracketPair> arrayBracketPairsAfterId) {
-        super(range);
+        base(range);
         setName(name);
         setArrayBracketPairsAfterId(arrayBracketPairsAfterId);
     }
 
-    @Override
+    //@Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public string getName() {
         return name;
     }
 
-    @Override
+    //@Override
     public VariableDeclaratorId setName(string name) {
         this.name = name;
         return this;

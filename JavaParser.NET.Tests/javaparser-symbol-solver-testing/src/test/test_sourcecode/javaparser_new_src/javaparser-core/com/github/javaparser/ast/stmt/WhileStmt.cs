@@ -40,16 +40,16 @@ public /*final*/class WhileStmt:Statement implements NodeWithBody<WhileStmt> {
 	}
 
 	public WhileStmt(Range range, /*final*/Expression condition, /*final*/Statement body) {
-		super(range);
+		base(range);
 		setCondition(condition);
 		setBody(body);
 	}
 
-	@Override public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+	@Override public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
 		return v.visit(this, arg);
 	}
 
-	@Override public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+	@Override public void accept<A>(VoidVisitor<A> v, A arg) {
 		v.visit(this, arg);
 	}
 

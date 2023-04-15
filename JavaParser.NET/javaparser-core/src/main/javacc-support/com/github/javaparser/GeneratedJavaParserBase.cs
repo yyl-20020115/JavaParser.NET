@@ -45,7 +45,7 @@ abstract class GeneratedJavaParserBase {
     /* The problems encountered while parsing */
     List<Problem> problems = new ArrayList<>();
     /* Configuration flag whether we store tokens and tokenranges */
-    boolean storeTokens;
+    bool storeTokens;
 
     /* Resets the parser for reuse, gaining a little performance */
     void reset(Provider provider) {
@@ -163,7 +163,7 @@ abstract class GeneratedJavaParserBase {
     }
 
     /* Makes the parser keep a list of tokens */
-    void setStoreTokens(boolean storeTokens) {
+    void setStoreTokens(bool storeTokens) {
         this.storeTokens = storeTokens;
         getTokenSource().setStoreTokens(storeTokens);
     }
@@ -283,7 +283,7 @@ abstract class GeneratedJavaParserBase {
     private void propagateRangeGrowthOnRight(Node node, Node endNode) {
         if (storeTokens) {
             node.getParentNode().ifPresent(nodeParent -> {
-                boolean isChildOnTheRightBorderOfParent = node.getTokenRange().get().getEnd().equals(nodeParent.getTokenRange().get().getEnd());
+                bool isChildOnTheRightBorderOfParent = node.getTokenRange().get().getEnd().equals(nodeParent.getTokenRange().get().getEnd());
                 if (isChildOnTheRightBorderOfParent) {
                     propagateRangeGrowthOnRight(nodeParent, endNode);
                 }
@@ -348,7 +348,7 @@ abstract class GeneratedJavaParserBase {
         /*final*/StringBuilder expected = new StringBuilder();
 
         int maxExpectedTokenSequenceLength = 0;
-        TreeSet<String> sortedOptions = new TreeSet<>();
+        HashSet<String> sortedOptions = new HashSet<>();
         for (int i = 0; i < exception.expectedTokenSequences.length; i++) {
             if (maxExpectedTokenSequenceLength < exception.expectedTokenSequences[i].length) {
                 maxExpectedTokenSequenceLength = exception.expectedTokenSequences[i].length;

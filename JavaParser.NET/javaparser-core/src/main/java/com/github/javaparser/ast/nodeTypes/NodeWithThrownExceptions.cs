@@ -18,6 +18,8 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  */
+using com.github.javaparser.ast.type;
+
 namespace com.github.javaparser.ast.nodeTypes;
 
 
@@ -25,13 +27,13 @@ namespace com.github.javaparser.ast.nodeTypes;
 /**
  * A node that declares the types of exception it throws.
  */
-public interface NodeWithThrownExceptions<N:Node> {
+public interface NodeWithThrownExceptions<N> where N:Node {
 
     N setThrownExceptions(NodeList<ReferenceType> thrownExceptions);
 
     NodeList<ReferenceType> getThrownExceptions();
 
-    void tryAddImportToParentCompilationUnit(Class<?> clazz);
+    void tryAddImportToParentCompilationUnit(Type clazz);
 
     default ReferenceType getThrownException(int i) {
         return getThrownExceptions().get(i);
@@ -68,7 +70,7 @@ public interface NodeWithThrownExceptions<N:Node> {
      * @param clazz the class of the exception
      * @return true if found _in throws clause, false if not
      */
-    default boolean isThrown(Class<?:Throwable> clazz) {
+    default bool isThrown(Class<?:Throwable> clazz) {
         return isThrown(clazz.getSimpleName());
     }
 
@@ -80,7 +82,7 @@ public interface NodeWithThrownExceptions<N:Node> {
      * @param throwableName the class of the exception
      * @return true if found _in throws clause, false if not
      */
-    default boolean isThrown(string throwableName) {
+    default bool isThrown(string throwableName) {
         return getThrownExceptions().stream().anyMatch(t -> t.toString().equals(throwableName));
     }
 }

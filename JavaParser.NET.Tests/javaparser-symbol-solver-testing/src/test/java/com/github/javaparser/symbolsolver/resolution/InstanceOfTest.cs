@@ -56,32 +56,32 @@ public class InstanceOfTest {
             "\n" +
             "    public void localVariable_shouldNotResolve() {\n" +
             "        string obj = \"abc\";\n" +
-            "        boolean condition = obj is string s;\n" +
-            "        boolean result = s.contains(\"fails - not _in scope\");\n" +
+            "        bool condition = obj is string s;\n" +
+            "        bool result = s.contains(\"fails - not _in scope\");\n" +
             "    }\n" +
             "\n" +
             "    public void localVariable_shouldNotResolve_usageFollowsDeclaration_shouldNotResolve() {\n" +
             "        string obj = \"abc\";\n" +
-            "        boolean condition = obj is string s;\n" +
-            "        boolean result;\n" +
+            "        bool condition = obj is string s;\n" +
+            "        bool result;\n" +
             "        result = s.contains(\"fails - not _in scope\");\n" +
             "    }\n" +
             "\n" +
             "    public void localVariable_shouldNotResolve_usagePreceedsDeclaration_shouldNotResolve() {\n" +
             "        string obj = \"abc\";\n" +
-            "        boolean result;\n" +
+            "        bool result;\n" +
             "        result = s.contains(\"fails - not _in scope\");\n" +
-            "        boolean condition = obj is string s;\n" +
+            "        bool condition = obj is string s;\n" +
             "    }\n" +
             "\n" +
             "    public void localVariable_shouldNotResolve_logicalAnd_shouldResolve() {\n" +
             "        string obj = \"abc\";\n" +
-            "        boolean condition = obj is string s && s.contains(\"_in scope\");\n" +
+            "        bool condition = obj is string s && s.contains(\"_in scope\");\n" +
             "    }\n" +
             "\n" +
             "    public void localVariable_shouldNotResolve_logicalOr_shouldNotResolve() {\n" +
             "        string obj = \"abc\";\n" +
-            "        boolean condition = obj is string s || s.contains(\"fails - not _in scope\");\n" +
+            "        bool condition = obj is string s || s.contains(\"fails - not _in scope\");\n" +
             "    }\n" +
             "\n" +
             "    public void if_conditional_emptyBlock_logicalAnd_shouldResolve() {\n" +
@@ -100,7 +100,7 @@ public class InstanceOfTest {
             "\n" +
             "    public void if_conditional_negated_shouldResolveToLocalVariableNotPattern() {\n" +
             "        List<Integer> s;\n" +
-            "        boolean result;\n" +
+            "        bool result;\n" +
             "        string obj = \"abc\";\n" +
             "        if (!(obj is string s) && true) {\n" +
             "            result = s.contains(\"fails - not _in scope\");\n" +
@@ -108,7 +108,7 @@ public class InstanceOfTest {
             "    }\n" +
             "\n" +
             "    public void if_else_conditional_mixedResolveResults() {\n" +
-            "        boolean result;\n" +
+            "        bool result;\n" +
             "        string obj = \"abc\";\n" +
             "        if ((obj is string s) && true) {\n" +
             "            result = s.contains(\"_in scope\");\n" +
@@ -118,7 +118,7 @@ public class InstanceOfTest {
             "    }\n" +
             "\n" +
             "    public void if_else_conditional_negated_mixedResolveResults() {\n" +
-            "        boolean result;\n" +
+            "        bool result;\n" +
             "        string obj = \"abc\";\n" +
             "        if (!(obj is string s) && true) {\n" +
             "            result = s.contains(\"fails - not _in scope\");\n" +
@@ -136,7 +136,7 @@ public class InstanceOfTest {
             "    }\n" +
             "\n" +
             "    public void if_conditional_1_mixedResolveResults() {\n" +
-            "        boolean result;\n" +
+            "        bool result;\n" +
             "        string obj = \"abc\";\n" +
             "        if ((obj is string s) && true) {\n" +
             "            result = s.contains(\"_in scope\");\n" +
@@ -147,7 +147,7 @@ public class InstanceOfTest {
             "\n" +
             "    public void if_conditional_negated_no_braces_on_else_mixed() {\n" +
             "        List<Integer> s;\n" +
-            "        boolean result;\n" +
+            "        bool result;\n" +
             "        string obj = \"abc\";\n" +
             "        if (!(obj is string s) && true) {\n" +
             "            // Empty BlockStmt\n" +
@@ -157,7 +157,7 @@ public class InstanceOfTest {
             "\n" +
             "    public void if_conditional_negated_no_braces_on_if_shouldResolveToLocalVariableNotPattern() {\n" +
             "        List<Integer> s;\n" +
-            "        boolean result;\n" +
+            "        bool result;\n" +
             "        string obj = \"abc\";\n" +
             "        if (!(obj is string s) && true) \n" +
             "            result = s.contains(\"fails - not _in scope\");\n" +
@@ -193,7 +193,7 @@ public class InstanceOfTest {
         /*final*/string x = "" +
                 "class X {\n" +
                 "  public X() {\n" +
-                "    boolean result;\n" +
+                "    bool result;\n" +
                 "    string obj = \"abc\";\n" +
                 "    if (!(obj is string s) && true) {\n" +
                 "        result = s.contains(\"b\");\n" +

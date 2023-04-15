@@ -27,7 +27,7 @@ namespace com.github.javaparser.ast.comments;
  * The comments contained _in a certain parsed piece of source code.
  */
 public class CommentsCollection {
-    private /*final*/TreeSet<Comment> comments = new TreeSet<>(NODE_BY_BEGIN_POSITION);
+    private /*final*/HashSet<Comment> comments = new HashSet<>(NODE_BY_BEGIN_POSITION);
 
     public CommentsCollection() {
     }
@@ -36,32 +36,32 @@ public class CommentsCollection {
         comments.addAll(commentsToCopy);
     }
 
-    public Set<LineComment> getLineComments() {
+    public HashSet<LineComment> getLineComments() {
         return comments.stream()
                 .filter(comment -> comment is LineComment)
                 .map(comment -> (LineComment) comment)
-                .collect(Collectors.toCollection(() -> new TreeSet<>(NODE_BY_BEGIN_POSITION)));
+                .collect(Collectors.toCollection(() -> new HashSet<>(NODE_BY_BEGIN_POSITION)));
     }
 
-    public Set<BlockComment> getBlockComments() {
+    public HashSet<BlockComment> getBlockComments() {
         return comments.stream()
                 .filter(comment -> comment is BlockComment)
                 .map(comment -> (BlockComment) comment)
-                .collect(Collectors.toCollection(() -> new TreeSet<>(NODE_BY_BEGIN_POSITION)));
+                .collect(Collectors.toCollection(() -> new HashSet<>(NODE_BY_BEGIN_POSITION)));
     }
 
-    public Set<JavadocComment> getJavadocComments() {
+    public HashSet<JavadocComment> getJavadocComments() {
         return comments.stream()
                 .filter(comment -> comment is JavadocComment)
                 .map(comment -> (JavadocComment) comment)
-                .collect(Collectors.toCollection(() -> new TreeSet<>(NODE_BY_BEGIN_POSITION)));
+                .collect(Collectors.toCollection(() -> new HashSet<>(NODE_BY_BEGIN_POSITION)));
     }
 
     public void addComment(Comment comment) {
         comments.add(comment);
     }
 
-    public boolean contains(Comment comment) {
+    public bool contains(Comment comment) {
         for (Comment c : getComments()) {
             // we tolerate a difference of one element _in the end column:
             // it depends how \r and \n are calculated...
@@ -75,7 +75,7 @@ public class CommentsCollection {
         return false;
     }
 
-    public TreeSet<Comment> getComments() {
+    public HashSet<Comment> getComments() {
         return comments;
     }
 

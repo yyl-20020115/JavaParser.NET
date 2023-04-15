@@ -12,5 +12,5 @@
   Line 30) primitiveClass.equals(wrapperClass) ==> java.lang.Object.equals(java.lang.Object)
   Line 31) wrapperPrimitiveMap.put(wrapperClass, primitiveClass) ==> java.util.Map.put(K, V)
   Line 51) type.isPrimitive() ==> java.lang.Class.isPrimitive()
-  Line 51) isPrimitiveWrapper(type) ==> com.github.javaparser.utils.ClassUtils.isPrimitiveWrapper(java.lang.Class<?>)
+  Line 51) isPrimitiveWrapper(type) ==> com.github.javaparser.utils.ClassUtils.isPrimitiveWrapper(java.lang.Type)
   Line 67) wrapperPrimitiveMap.containsKey(type) ==> java.util.Map.containsKey(java.lang.Object)

@@ -38,13 +38,13 @@ public /*final*/class EnumDeclaration:TypeDeclaration<EnumDeclaration>
     }
 
     public EnumDeclaration(EnumSet<Modifier> modifiers, string name) {
-        super(modifiers, name);
+        base(modifiers, name);
     }
 
     public EnumDeclaration(EnumSet<Modifier> modifiers, List<AnnotationExpr> annotations, string name,
                            List<ClassOrInterfaceType> implementsList, List<EnumConstantDeclaration> entries,
                            List<BodyDeclaration<?>> members) {
-        super(annotations, modifiers, name, members);
+        base(annotations, modifiers, name, members);
         setImplements(implementsList);
         setEntries(entries);
     }
@@ -52,18 +52,18 @@ public /*final*/class EnumDeclaration:TypeDeclaration<EnumDeclaration>
     public EnumDeclaration(Range range, EnumSet<Modifier> modifiers, List<AnnotationExpr> annotations, string name,
                            List<ClassOrInterfaceType> implementsList, List<EnumConstantDeclaration> entries,
                            List<BodyDeclaration<?>> members) {
-        super(range, annotations, modifiers, name, members);
+        base(range, annotations, modifiers, name, members);
         setImplements(implementsList);
         setEntries(entries);
     }
 
-    @Override
+    //@Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
 
-    @Override
+    //@Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
@@ -73,7 +73,7 @@ public /*final*/class EnumDeclaration:TypeDeclaration<EnumDeclaration>
         return entries;
     }
 
-    @Override
+    //@Override
     public List<ClassOrInterfaceType> getImplements() {
         implementsList = ensureNotNull(implementsList);
         return implementsList;
@@ -85,7 +85,7 @@ public /*final*/class EnumDeclaration:TypeDeclaration<EnumDeclaration>
         return this;
     }
 
-    @Override
+    //@Override
     public EnumDeclaration setImplements(List<ClassOrInterfaceType> implementsList) {
         this.implementsList = implementsList;
 		setAsParentNodeOf(this.implementsList);

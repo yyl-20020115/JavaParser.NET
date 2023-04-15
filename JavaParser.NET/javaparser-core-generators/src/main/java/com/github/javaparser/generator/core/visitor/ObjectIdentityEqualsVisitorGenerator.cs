@@ -27,10 +27,10 @@ namespace com.github.javaparser.generator.core.visitor;
  */
 public class ObjectIdentityEqualsVisitorGenerator:VisitorGenerator {
     public ObjectIdentityEqualsVisitorGenerator(SourceRoot sourceRoot) {
-        super(sourceRoot, "com.github.javaparser.ast.visitor", "ObjectIdentityEqualsVisitor", "Boolean", "Visitable", true);
+        base(sourceRoot, "com.github.javaparser.ast.visitor", "ObjectIdentityEqualsVisitor", "Boolean", "Visitable", true);
     }
 
-    @Override
+    //@Override
     protected void generateVisitMethodBody(BaseNodeMetaModel node, MethodDeclaration visitMethod, CompilationUnit compilationUnit) {
         visitMethod.getParameters().forEach(p -> p.setFinal(true));
 

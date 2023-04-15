@@ -36,7 +36,7 @@ public class IfStmtMetaModel:StatementMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     IfStmtMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, IfStmt.class, "IfStmt", "com.github.javaparser.ast.stmt", false, false);
+        base(superBaseNodeMetaModel, IfStmt.class, "IfStmt", "com.github.javaparser.ast.stmt", false, false);
     }
 
     public PropertyMetaModel conditionPropertyMetaModel;

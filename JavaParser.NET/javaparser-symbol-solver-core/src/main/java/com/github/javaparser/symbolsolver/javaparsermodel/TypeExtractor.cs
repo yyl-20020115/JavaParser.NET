@@ -41,7 +41,7 @@ public class TypeExtractor:DefaultVisitorAdapter {
         stringReferenceType = new LazyType(v -> new ReferenceTypeImpl(typeSolver.solveType(JAVA_LANG_STRING)));
     }
 
-    @Override
+    //@Override
     public ResolvedType visit(VariableDeclarator node, Boolean solveLambdas) {
         if (demandParentNode(node) is FieldDeclaration) {
             return facade.convertToUsage(node.getType());
@@ -51,7 +51,7 @@ public class TypeExtractor:DefaultVisitorAdapter {
         throw new UnsupportedOperationException(demandParentNode(node).getClass().getCanonicalName());
     }
 
-    @Override
+    //@Override
     public ResolvedType visit(Parameter node, Boolean solveLambdas) {
         if (node.getType() is UnknownType) {
             throw new IllegalStateException("Parameter has unknown type: " + node);
@@ -60,7 +60,7 @@ public class TypeExtractor:DefaultVisitorAdapter {
     }
 
 
-    @Override
+    //@Override
     public ResolvedType visit(ArrayAccessExpr node, Boolean solveLambdas) {
         ResolvedType arrayUsageType = node.getName().accept(this, solveLambdas);
         if (arrayUsageType.isArray()) {
@@ -69,7 +69,7 @@ public class TypeExtractor:DefaultVisitorAdapter {
         return arrayUsageType;
     }
 
-    @Override
+    //@Override
     public ResolvedType visit(ArrayCreationExpr node, Boolean solveLambdas) {
         ResolvedType res = facade.convertToUsage(node.getElementType(), JavaParserFactory.getContext(node, typeSolver));
         for (int i = 0; i < node.getLevels().size(); i++) {
@@ -78,17 +78,17 @@ public class TypeExtractor:DefaultVisitorAdapter {
         return res;
     }
 
-    @Override
+    //@Override
     public ResolvedType visit(ArrayInitializerExpr node, Boolean solveLambdas) {
         throw new UnsupportedOperationException(node.getClass().getCanonicalName());
     }
 
-    @Override
+    //@Override
     public ResolvedType visit(AssignExpr node, Boolean solveLambdas) {
         return node.getTarget().accept(this, solveLambdas);
     }
 
-    @Override
+    //@Override
     public ResolvedType visit(BinaryExpr node, Boolean solveLambdas) {
         switch (node.getOperator()) {
             case PLUS:
@@ -120,12 +120,12 @@ public class TypeExtractor:DefaultVisitorAdapter {
         }
     }
 
-    @Override
+    //@Override
     public ResolvedType visit(CastExpr node, Boolean solveLambdas) {
         return facade.convertToUsage(node.getType(), JavaParserFactory.getContext(node, typeSolver));
     }
 
-    @Override
+    //@Override
     public ResolvedType visit(ClassExpr node, Boolean solveLambdas) {
         // This implementation does not regard the actual type argument of the ClassExpr.
         ResolvedType jssType = facade.convertToUsage(node.getType());
@@ -136,16 +136,16 @@ public class TypeExtractor:DefaultVisitorAdapter {
      * The conditional operator has three operand expressions. ? appears between the first and second expressions, and
      * : appears between the second and third expressions.
      * There are three kinds of conditional expressions, classified according to the second and third operand
-     * expressions: boolean conditional expressions, numeric conditional expressions, and reference conditional
+     * expressions: bool conditional expressions, numeric conditional expressions, and reference conditional
      * expressions.
      * The classification rules are as follows:
-     * 1/ If both the second and the third operand expressions are boolean expressions, the conditional expression is a
-     * boolean conditional expression.
+     * 1/ If both the second and the third operand expressions are bool expressions, the conditional expression is a
+     * bool conditional expression.
      * 2/ If both the second and the third operand expressions are numeric expressions, the conditional expression is a
      * numeric conditional expression.
      * 3/ Otherwise, the conditional expression is a reference conditional expression
      */
-    @Override
+    //@Override
     public ResolvedType visit(ConditionalExpr node, Boolean solveLambdas) {
         ResolvedType thenExpr = node.getThenExpr().accept(this, solveLambdas);
         ResolvedType elseExpr = node.getElseExpr().accept(this, solveLambdas);
@@ -159,12 +159,12 @@ public class TypeExtractor:DefaultVisitorAdapter {
         return node.getThenExpr().accept(this, solveLambdas);
     }
 
-    private boolean isCompatible(ResolvedType resolvedType, ResolvedPrimitiveType primitiveType) {
+    private bool isCompatible(ResolvedType resolvedType, ResolvedPrimitiveType primitiveType) {
         return (resolvedType.isPrimitive() && resolvedType.asPrimitive().equals(primitiveType))
         || (resolvedType.isReferenceType() && resolvedType.asReferenceType().isUnboxableTo(primitiveType));
     }
 
-    @Override
+    //@Override
     public ResolvedType visit(EnclosedExpr node, Boolean solveLambdas) {
         return node.getInner().accept(this, solveLambdas);
     }
@@ -187,7 +187,7 @@ public class TypeExtractor:DefaultVisitorAdapter {
         }
     }
 
-    @Override
+    //@Override
     public ResolvedType visit(FieldAccessExpr node, Boolean solveLambdas) {
         // We should understand if this is a static access
         if (node.getScope() is NameExpr ||
@@ -235,32 +235,32 @@ public class TypeExtractor:DefaultVisitorAdapter {
         throw new UnsolvedSymbolException(node.getName().getId());
     }
 
-    @Override
+    //@Override
     public ResolvedType visit(InstanceOfExpr node, Boolean solveLambdas) {
         return ResolvedPrimitiveType.BOOLEAN;
     }
 
-    @Override
+    //@Override
     public ResolvedType visit(StringLiteralExpr node, Boolean solveLambdas) {
         return stringReferenceType;
     }
 
-    @Override
+    //@Override
     public ResolvedType visit(IntegerLiteralExpr node, Boolean solveLambdas) {
         return ResolvedPrimitiveType.INT;
     }
 
-    @Override
+    //@Override
     public ResolvedType visit(LongLiteralExpr node, Boolean solveLambdas) {
         return ResolvedPrimitiveType.LONG;
     }
 
-    @Override
+    //@Override
     public ResolvedType visit(CharLiteralExpr node, Boolean solveLambdas) {
         return ResolvedPrimitiveType.CHAR;
     }
 
-    @Override
+    //@Override
     public ResolvedType visit(DoubleLiteralExpr node, Boolean solveLambdas) {
         if (node.getValue().toLowerCase().endsWith("f")) {
             return ResolvedPrimitiveType.FLOAT;
@@ -268,17 +268,17 @@ public class TypeExtractor:DefaultVisitorAdapter {
         return ResolvedPrimitiveType.DOUBLE;
     }
 
-    @Override
+    //@Override
     public ResolvedType visit(BooleanLiteralExpr node, Boolean solveLambdas) {
         return ResolvedPrimitiveType.BOOLEAN;
     }
 
-    @Override
+    //@Override
     public ResolvedType visit(NullLiteralExpr node, Boolean solveLambdas) {
         return NullType.INSTANCE;
     }
 
-    @Override
+    //@Override
     public ResolvedType visit(MethodCallExpr node, Boolean solveLambdas) {
         Log.trace("getType on method call %s", ()-> node);
         // first solve the method
@@ -289,7 +289,7 @@ public class TypeExtractor:DefaultVisitorAdapter {
         // the type is the return type of the method
     }
 
-    @Override
+    //@Override
     public ResolvedType visit(NameExpr node, Boolean solveLambdas) {
         Log.trace("getType on name expr %s", ()-> node);
         Optional<Value> value = createSolver().solveSymbolAsValue(node.getName().getId(), node);
@@ -300,7 +300,7 @@ public class TypeExtractor:DefaultVisitorAdapter {
         }
     }
 
-    @Override
+    //@Override
     public ResolvedType visit(TypeExpr node, Boolean solveLambdas) {
         Log.trace("getType on type expr %s", ()-> node);
         if (!(node.getType() is ClassOrInterfaceType)) {
@@ -327,12 +327,12 @@ public class TypeExtractor:DefaultVisitorAdapter {
         throw new UnsolvedSymbolException("Solving " + node, classOrInterfaceType.getName().getId());
     }
 
-    @Override
+    //@Override
     public ResolvedType visit(ObjectCreationExpr node, Boolean solveLambdas) {
         return facade.convertToUsage(node.getType());
     }
 
-    @Override
+    //@Override
     public ResolvedType visit(ThisExpr node, Boolean solveLambdas) {
         // If 'this' is prefixed by a class eg. MyClass.this
         if (node.getTypeName().isPresent()) {
@@ -355,7 +355,7 @@ public class TypeExtractor:DefaultVisitorAdapter {
         return new ReferenceTypeImpl(facade.getTypeDeclaration(facade.findContainingTypeDeclOrObjectCreationExpr(node)));
     }
 
-    @Override
+    //@Override
     public ResolvedType visit(SuperExpr node, Boolean solveLambdas) {
         // If 'super' is prefixed by a class eg. MyClass.this
         if (node.getTypeName().isPresent()) {
@@ -386,7 +386,7 @@ public class TypeExtractor:DefaultVisitorAdapter {
         }
     }
 
-    @Override
+    //@Override
     public ResolvedType visit(UnaryExpr node, Boolean solveLambdas) {
         switch (node.getOperator()) {
             case MINUS:
@@ -405,7 +405,7 @@ public class TypeExtractor:DefaultVisitorAdapter {
         }
     }
 
-    @Override
+    //@Override
     public ResolvedType visit(VariableDeclarationExpr node, Boolean solveLambdas) {
         if (node.getVariables().size() != 1) {
             throw new UnsupportedOperationException();
@@ -414,7 +414,7 @@ public class TypeExtractor:DefaultVisitorAdapter {
     }
 
 
-    @Override
+    //@Override
     public ResolvedType visit(LambdaExpr node, Boolean solveLambdas) {
         Node parentNode = demandParentNode(node, IS_NOT_ENCLOSED_EXPR);
         if (parentNode is MethodCallExpr) {
@@ -434,7 +434,7 @@ public class TypeExtractor:DefaultVisitorAdapter {
                     Expression scope = callExpr.getScope().get();
 
                     // If it is a static call we should not try to get the type of the scope
-                    boolean staticCall = false;
+                    bool staticCall = false;
                     if (scope is NameExpr) {
                         NameExpr nameExpr = (NameExpr) scope;
                         try {
@@ -513,7 +513,7 @@ public class TypeExtractor:DefaultVisitorAdapter {
                 List<ReturnStmt> returnStmts = blockStmt.findAll(ReturnStmt.class);
 
                 if (returnStmts.size() > 0) {
-                	Set<ResolvedType> resolvedTypes = returnStmts.stream()
+                	HashSet<ResolvedType> resolvedTypes = returnStmts.stream()
                           .map(returnStmt -> returnStmt.getExpression()
                         		  .map(e -> facade.getType(e))
                         		  .orElse(ResolvedVoidType.INSTANCE))
@@ -546,7 +546,7 @@ public class TypeExtractor:DefaultVisitorAdapter {
         return result;
     }
 
-    @Override
+    //@Override
     public ResolvedType visit(MethodReferenceExpr node, Boolean solveLambdas) {
     	if ("new".equals(node.getIdentifier())) {
 			return node.getScope().calculateResolvedType();
@@ -602,12 +602,12 @@ public class TypeExtractor:DefaultVisitorAdapter {
         throw new UnsupportedOperationException("The type of a method reference expr depends on the position and its return value");
     }
 
-    @Override
+    //@Override
     public ResolvedType visit(FieldDeclaration node, Boolean solveLambdas) {
         if (node.getVariables().size() == 1) {
             return node.getVariables().get(0).accept(this, solveLambdas);
         }
-        throw new IllegalArgumentException("Cannot resolve the type of a field with multiple variable declarations. Pick one");
+        throw new ArgumentException("Cannot resolve the type of a field with multiple variable declarations. Pick one");
     }
 
     private static int getParamPos(Expression node) {
@@ -616,7 +616,7 @@ public class TypeExtractor:DefaultVisitorAdapter {
             MethodCallExpr call = (MethodCallExpr) parentNode;
             return call.getArgumentPosition(node, EXCLUDE_ENCLOSED_EXPR);
         }
-        throw new IllegalArgumentException();
+        throw new ArgumentException();
     }
 
     protected Solver createSolver() {

@@ -48,7 +48,7 @@ public class Issue2595Test {
                 "\n" +
                 "    @FunctionalInterface\n" +
                 "    public interface ClassMetric<T>:Function<String, T> {\n" +
-                "        @Override\n" +
+                "        //@Override\n" +
                 "        T apply(string c);\n" +
                 "    }\n" +
                 "\n" +
@@ -76,7 +76,7 @@ public class Issue2595Test {
                 "\n" +
                 "    @FunctionalInterface\n" +
                 "    public interface ClassMetric:Function<String, Integer> {\n" +
-                "        @Override\n" +
+                "        //@Override\n" +
                 "        Integer apply(string c);\n" +
                 "    }\n" +
                 "}";
@@ -117,7 +117,7 @@ public class Issue2595Test {
                 "\n" +
                 "public class TestIssue2595 {\n" +
                 "    ClassMetric fdp = new ClassMetric() {\n" +
-                "        @Override\n" +
+                "        //@Override\n" +
                 "        public Integer apply(string c) {\n" +
                 "            List<String> classFieldNames = getAllClassFieldNames(c);\n" +
                 "            return classFieldNames.size();\n" +
@@ -130,7 +130,7 @@ public class Issue2595Test {
                 "\n" +
                 "    @FunctionalInterface\n" +
                 "    public interface ClassMetric:Function<String, Integer> {\n" +
-                "        @Override\n" +
+                "        //@Override\n" +
                 "        Integer apply(string c);\n" +
                 "    }\n" +
                 "}";

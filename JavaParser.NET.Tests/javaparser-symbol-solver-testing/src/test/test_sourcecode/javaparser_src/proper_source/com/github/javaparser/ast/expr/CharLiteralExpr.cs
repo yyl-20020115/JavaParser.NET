@@ -31,11 +31,11 @@ public /*final*/class CharLiteralExpr:StringLiteralExpr {
     }
 
     public CharLiteralExpr(string value) {
-        super(value);
+        base(value);
     }
 
     public CharLiteralExpr(int beginLine, int beginColumn, int endLine, int endColumn, string value) {
-        super(beginLine, beginColumn, endLine, endColumn, value);
+        base(beginLine, beginColumn, endLine, endColumn, value);
     }
 
     //@Override

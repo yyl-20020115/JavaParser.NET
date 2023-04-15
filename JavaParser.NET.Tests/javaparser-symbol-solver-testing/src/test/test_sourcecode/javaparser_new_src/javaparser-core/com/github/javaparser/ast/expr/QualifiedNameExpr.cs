@@ -33,20 +33,20 @@ public /*final*/class QualifiedNameExpr:NameExpr {
 	}
 
 	public QualifiedNameExpr(/*final*/NameExpr scope, /*final*/string name) {
-		super(name);
+		base(name);
 		setQualifier(scope);
 	}
 
 	public QualifiedNameExpr(/*final*/Range range, /*final*/NameExpr scope, /*final*/string name) {
-		super(range, name);
+		base(range, name);
 		setQualifier(scope);
 	}
 
-	@Override public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+	@Override public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
 		return v.visit(this, arg);
 	}
 
-	@Override public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+	@Override public void accept<A>(VoidVisitor<A> v, A arg) {
 		v.visit(this, arg);
 	}
 

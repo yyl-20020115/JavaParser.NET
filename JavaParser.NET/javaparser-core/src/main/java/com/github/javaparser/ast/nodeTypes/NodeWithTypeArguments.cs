@@ -52,7 +52,7 @@ public interface NodeWithTypeArguments<N:Node> {
      * @return whether the type arguments look like {@code <>}.
      */
     @DerivedProperty
-    default boolean isUsingDiamondOperator() {
+    default bool isUsingDiamondOperator() {
         return getTypeArguments().isPresent() && getTypeArguments().get().isEmpty();
     }
 

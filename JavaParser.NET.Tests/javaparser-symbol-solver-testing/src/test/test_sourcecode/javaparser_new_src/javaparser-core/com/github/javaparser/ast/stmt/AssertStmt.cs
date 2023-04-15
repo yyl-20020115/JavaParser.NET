@@ -44,7 +44,7 @@ public /*final*/class AssertStmt:Statement {
 	}
 
 	public AssertStmt(/*final*/Range range, /*final*/Expression check, /*final*/Expression msg) {
-		super(range);
+		base(range);
 		
 		setCheck(check);
 		setMessage(msg);
@@ -52,12 +52,12 @@ public /*final*/class AssertStmt:Statement {
 	}
 
 	//@Override 
-	public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+	public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
 		return v.visit(this, arg);
 	}
 
 	//@Override 
-	public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+	public void accept<A>(VoidVisitor<A> v, A arg) {
 		v.visit(this, arg);
 	}
 

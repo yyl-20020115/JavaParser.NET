@@ -29,10 +29,10 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.declarators;
 public class ParameterSymbolDeclarator:AbstractSymbolDeclarator<Parameter> {
 
     public ParameterSymbolDeclarator(Parameter wrappedNode, TypeSolver typeSolver) {
-        super(wrappedNode, typeSolver);
+        base(wrappedNode, typeSolver);
     }
 
-    @Override
+    //@Override
     public List<ResolvedValueDeclaration> getSymbolDeclarations() {
         List<ResolvedValueDeclaration> symbols = new LinkedList<>();
         symbols.add(JavaParserSymbolDeclaration.parameter(wrappedNode, typeSolver));

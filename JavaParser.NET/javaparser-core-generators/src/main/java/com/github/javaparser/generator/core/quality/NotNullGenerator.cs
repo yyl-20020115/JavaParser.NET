@@ -30,7 +30,7 @@ namespace com.github.javaparser.generator.core.quality;
 public class NotNullGenerator:CompilationUnitGenerator {
 
 	public NotNullGenerator(SourceRoot sourceRoot) {
-		super(sourceRoot);
+		base(sourceRoot);
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class NotNullGenerator:CompilationUnitGenerator {
 	 * Generate the pre conditions based on the method parameters.
 	 * <br>
 	 * If parameters are annotated with {@link com.github.javaparser.quality.NotNull} and a {@code null} is
-	 * passed, the method should throw an {@link IllegalArgumentException}.
+	 * passed, the method should throw an {@link ArgumentException}.
 	 * <br>
 	 * If annotated with {@link com.github.javaparser.quality.Nullable}, other annotation or none, nothing should be
 	 * changed.
@@ -59,7 +59,7 @@ public class NotNullGenerator:CompilationUnitGenerator {
 	 * Generate the pre conditions based on the constructor parameters.
 	 * <br>
 	 * If parameters are annotated with {@link com.github.javaparser.quality.NotNull} and a {@code null} is
-	 * passed, the method should throw an {@link IllegalArgumentException}.
+	 * passed, the method should throw an {@link ArgumentException}.
 	 * <br>
 	 * If annotated with {@link com.github.javaparser.quality.Nullable}, other annotation or none, nothing should be
 	 * changed.
@@ -74,7 +74,7 @@ public class NotNullGenerator:CompilationUnitGenerator {
 	 * Generate the pre conditions for the parameters.
 	 * <br>
 	 * If parameters are annotated with {@link com.github.javaparser.quality.NotNull} and a {@code null} is
-	 * passed, the method should throw an {@link IllegalArgumentException}.
+	 * passed, the method should throw an {@link ArgumentException}.
 	 * <br>
 	 * If annotated with {@link com.github.javaparser.quality.Nullable}, other annotation or none, nothing should be
 	 * changed.

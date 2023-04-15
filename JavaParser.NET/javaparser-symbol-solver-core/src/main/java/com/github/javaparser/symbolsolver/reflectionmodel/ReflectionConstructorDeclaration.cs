@@ -36,22 +36,22 @@ public class ReflectionConstructorDeclaration implements ResolvedConstructorDecl
         this.typeSolver = typeSolver;
     }
 
-    @Override
+    //@Override
     public ResolvedClassDeclaration declaringType() {
         return new ReflectionClassDeclaration(constructor.getDeclaringClass(), typeSolver);
     }
 
-    @Override
+    //@Override
     public int getNumberOfParams() {
         return constructor.getParameterCount();
     }
 
-    @Override
+    //@Override
     public ResolvedParameterDeclaration getParam(int i) {
         if (i < 0 || i >= getNumberOfParams()) {
-            throw new IllegalArgumentException(String.format("No param with index %d. Number of params: %d", i, getNumberOfParams()));
+            throw new ArgumentException(String.format("No param with index %d. Number of params: %d", i, getNumberOfParams()));
         }
-        boolean variadic = false;
+        bool variadic = false;
         if (constructor.isVarArgs()) {
             variadic = i == (constructor.getParameterCount() - 1);
         }
@@ -60,30 +60,30 @@ public class ReflectionConstructorDeclaration implements ResolvedConstructorDecl
                 constructor.getParameters()[i].getName());
     }
 
-    @Override
+    //@Override
     public string getName() {
         return constructor.getDeclaringClass().getSimpleName();
     }
 
-    @Override
+    //@Override
     public AccessSpecifier accessSpecifier() {
         return ReflectionFactory.modifiersToAccessLevel(constructor.getModifiers());
     }
 
-    @Override
+    //@Override
     public List<ResolvedTypeParameterDeclaration> getTypeParameters() {
         return Arrays.stream(constructor.getTypeParameters()).map((refTp) -> new ReflectionTypeParameter(refTp, false, typeSolver)).collect(Collectors.toList());
     }
 
-    @Override
+    //@Override
     public int getNumberOfSpecifiedExceptions() {
         return this.constructor.getExceptionTypes().length;
     }
 
-    @Override
+    //@Override
     public ResolvedType getSpecifiedException(int index) {
         if (index < 0 || index >= getNumberOfSpecifiedExceptions()) {
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         }
         return ReflectionFactory.typeUsageFor(this.constructor.getExceptionTypes()[index], typeSolver);
     }

@@ -53,7 +53,7 @@ public class Issue2592Test:AbstractLexicalPreservingTest {
         Parameter p2 = new Parameter(p1.getModifiers(), p1.getType(), new SimpleName("a_renamed"));
 
         //here we replace a parameter
-        boolean isReplaced = md.get().replace(p1, p2);
+        bool isReplaced = md.get().replace(p1, p2);
         assertTrue(isReplaced); //the replacement seemed to work
 
 

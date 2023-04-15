@@ -30,11 +30,11 @@ public class ReflectionFactory {
     
     private static string JAVA_LANG_OBJECT = Object.class.getCanonicalName();
 
-    public static ResolvedReferenceTypeDeclaration typeDeclarationFor(Class<?> clazz, TypeSolver typeSolver) {
+    public static ResolvedReferenceTypeDeclaration typeDeclarationFor(Type clazz, TypeSolver typeSolver) {
         if (clazz.isArray()) {
-            throw new IllegalArgumentException("No type declaration available for an Array");
+            throw new ArgumentException("No type declaration available for an Array");
         } else if (clazz.isPrimitive()) {
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         } else if (clazz.isAnnotation()) {
             return new ReflectionAnnotationDeclaration(clazz, typeSolver);
         } else if (clazz.isInterface()) {
@@ -49,7 +49,7 @@ public class ReflectionFactory {
     public static ResolvedType typeUsageFor(java.lang.reflect.Type type, TypeSolver typeSolver) {
         if (type is java.lang.reflect.TypeVariable) {
             java.lang.reflect.TypeVariable<?> tv = (java.lang.reflect.TypeVariable<?>) type;
-            boolean declaredOnClass = tv.getGenericDeclaration() is java.lang.reflect.Type;
+            bool declaredOnClass = tv.getGenericDeclaration() is java.lang.reflect.Type;
             ResolvedTypeParameterDeclaration typeParameter = new ReflectionTypeParameter(tv, declaredOnClass, typeSolver);
             return new ResolvedTypeVariable(typeParameter);
         } else if (type is ParameterizedType) {
@@ -61,7 +61,7 @@ public class ReflectionFactory {
             rawType = rawType.transformTypeParameters(tp -> typeUsageFor(actualTypes.remove(0), typeSolver)).asReferenceType();
             return rawType;
         } else if (type is Class) {
-            Class<?> c = (Class<?>) type;
+            Type c = (Type) type;
             if (c.isPrimitive()) {
                 if (c.getName().equals(Void.TYPE.getName())) {
                     return ResolvedVoidType.INSTANCE;

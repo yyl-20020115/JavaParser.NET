@@ -38,8 +38,8 @@ public class ResolvedArrayType implements ResolvedType {
     // /
     // / Object methods
     // /
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -50,12 +50,12 @@ public class ResolvedArrayType implements ResolvedType {
         return true;
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         return baseType.hashCode();
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "ResolvedArrayType{" + baseType + "}";
     }
@@ -63,17 +63,17 @@ public class ResolvedArrayType implements ResolvedType {
     // /
     // / Type methods
     // /
-    @Override
+    //@Override
     public ResolvedArrayType asArrayType() {
         return this;
     }
 
-    @Override
-    public boolean isArray() {
+    //@Override
+    public bool isArray() {
         return true;
     }
 
-    @Override
+    //@Override
     public string describe() {
         return baseType.describe() + "[]";
     }
@@ -82,9 +82,9 @@ public class ResolvedArrayType implements ResolvedType {
         return baseType;
     }
 
-    @Override
+    //@Override
     // https://docs.oracle.com/javase/specs/jls/se8/html/jls-5.html#jls-5.2
-	public boolean isAssignableBy(ResolvedType other) {
+	public bool isAssignableBy(ResolvedType other) {
 		if (other.isNull()) {
 			return true;
 		}
@@ -105,7 +105,7 @@ public class ResolvedArrayType implements ResolvedType {
 		return false;
 	}
 
-    @Override
+    //@Override
     public ResolvedType replaceTypeVariables(ResolvedTypeParameterDeclaration tpToReplace, ResolvedType replaced, Map<ResolvedTypeParameterDeclaration, ResolvedType> inferredTypes) {
         ResolvedType baseTypeReplaced = baseType.replaceTypeVariables(tpToReplace, replaced, inferredTypes);
         if (baseTypeReplaced == baseType) {
@@ -119,12 +119,12 @@ public class ResolvedArrayType implements ResolvedType {
     // / Erasure
     // /
     // The erasure of an array type T[] is |T|[].
-    @Override
+    //@Override
     public ResolvedType erasure() {
         return new ResolvedArrayType(baseType.erasure());
     }
 
-    @Override
+    //@Override
     public string toDescriptor() {
         StringBuffer sb = new StringBuffer();
         sb.append("[");

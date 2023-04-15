@@ -29,10 +29,10 @@ namespace com.github.javaparser.generator.core.visitor;
  */
 public class HashCodeVisitorGenerator:VisitorGenerator {
     public HashCodeVisitorGenerator(SourceRoot sourceRoot) {
-        super(sourceRoot, "com.github.javaparser.ast.visitor", "HashCodeVisitor", "Integer", "Void", true);
+        base(sourceRoot, "com.github.javaparser.ast.visitor", "HashCodeVisitor", "Integer", "Void", true);
     }
 
-    @Override
+    //@Override
     protected void generateVisitMethodBody(BaseNodeMetaModel node, MethodDeclaration visitMethod, CompilationUnit compilationUnit) {
         visitMethod.getParameters().forEach(p -> p.setFinal(true));
 
@@ -54,7 +54,7 @@ public class HashCodeVisitorGenerator:VisitorGenerator {
                         builder.append("(n.%s.accept(this, arg))", getter);
                     }
                 } else {
-                    Class<?> type = field.getType();
+                    Type type = field.getType();
                     if (type.equals(boolean.class)) {
                         builder.append("(n.%s?1:0)", getter);
                     } else if (type.equals(int.class)) {

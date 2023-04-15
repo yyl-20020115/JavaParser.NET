@@ -23,7 +23,7 @@ namespace com.github.javaparser.ast.nodeTypes;
 
 
 
-public interface NodeWithParameters<N:Node> {
+public interface NodeWithParameters<N> where N:Node {
 
     NodeList<Parameter> getParameters();
 
@@ -31,7 +31,7 @@ public interface NodeWithParameters<N:Node> {
         return getParameters().get(i);
     }
 
-    void tryAddImportToParentCompilationUnit(Class<?> clazz);
+    void tryAddImportToParentCompilationUnit(Type clazz);
 
     //@SuppressWarnings("unchecked")
     default N setParameter(int i, Parameter parameter) {
@@ -45,7 +45,7 @@ public interface NodeWithParameters<N:Node> {
         return addParameter(new Parameter(type, name));
     }
 
-    default N addParameter(Class<?> paramClass, string name) {
+    default N addParameter(Type paramClass, string name) {
         tryAddImportToParentCompilationUnit(paramClass);
         return addParameter(parseType(paramClass.getSimpleName()), name);
     }
@@ -70,7 +70,7 @@ public interface NodeWithParameters<N:Node> {
         return addAndGetParameter(new Parameter(type, name));
     }
 
-    default Parameter addAndGetParameter(Class<?> paramClass, string name) {
+    default Parameter addAndGetParameter(Type paramClass, string name) {
         tryAddImportToParentCompilationUnit(paramClass);
         return addAndGetParameter(parseType(paramClass.getSimpleName()), name);
     }
@@ -117,7 +117,7 @@ public interface NodeWithParameters<N:Node> {
      * @param type the type of the param <b>take care about generics, it wont work</b>
      * @return null if not found, the param found otherwise
      */
-    default Optional<Parameter> getParameterByType(Class<?> type) {
+    default Optional<Parameter> getParameterByType(Type type) {
         return getParameters().stream().filter(p -> p.getType().toString().equals(type.getSimpleName())).findFirst();
     }
 
@@ -136,7 +136,7 @@ public interface NodeWithParameters<N:Node> {
      *                   {@code void foo(Map&lt;Integer,String&gt; myMap, int number)}.
      * @return {@code true} if all parameters match one by one, _in the given order.
      */
-    default boolean hasParametersOfType(String... paramTypes) {
+    default bool hasParametersOfType(String... paramTypes) {
         return getParameters().stream().map(p -> p.getType().asString()).collect(toList()).equals(Arrays.asList(paramTypes));
     }
 
@@ -152,7 +152,7 @@ public interface NodeWithParameters<N:Node> {
      *                   {@code void foo(Map&lt;Integer,String&gt; myMap, int number)}.
      * @return {@code true} if all parameters match one by one, _in the given order.
      */
-    default boolean hasParametersOfType(Class<?>... paramTypes) {
+    default bool hasParametersOfType(Type... paramTypes) {
         return getParameters().stream().// if p.getType() is a class or interface type, we want to consider its erasure, i.e., if the parameter
         // is "List<String>", we want to consider it as "List", so we need to call getName()
         map(p -> p.getType().toClassOrInterfaceType().map(NodeWithSimpleName::getNameAsString).orElse(p.getType().asString())).collect(toList()).equals(Stream.of(paramTypes).map(Class::getSimpleName).collect(toList()));

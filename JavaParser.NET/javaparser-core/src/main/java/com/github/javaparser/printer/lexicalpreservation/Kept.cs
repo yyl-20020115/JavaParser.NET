@@ -29,13 +29,13 @@ public class Kept implements DifferenceElement {
         this.element = element;
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "Kept{" + element + '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -44,12 +44,12 @@ public class Kept implements DifferenceElement {
         return element.equals(kept.element);
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         return element.hashCode();
     }
 
-    @Override
+    //@Override
     public CsmElement getElement() {
         return element;
     }
@@ -62,34 +62,34 @@ public class Kept implements DifferenceElement {
         throw new IllegalStateException("Kept is not a " + CsmToken.class.getSimpleName());
     }
 
-    @Override
-    public boolean isAdded() {
+    //@Override
+    public bool isAdded() {
         return false;
     }
 
-    @Override
-    public boolean isRemoved() {
+    //@Override
+    public bool isRemoved() {
         return false;
     }
 
-    @Override
-    public boolean isKept() {
+    //@Override
+    public bool isKept() {
         return true;
     }
 
-    public boolean isIndent() {
+    public bool isIndent() {
         return element is CsmIndent;
     }
 
-    public boolean isUnindent() {
+    public bool isUnindent() {
         return element is CsmUnindent;
     }
 
-    public boolean isToken() {
+    public bool isToken() {
         return element is CsmToken;
     }
 
-    public boolean isPrimitiveType() {
+    public bool isPrimitiveType() {
         if (isChild()) {
             LexicalDifferenceCalculator.CsmChild csmChild = (LexicalDifferenceCalculator.CsmChild) element;
             return csmChild.getChild() is PrimitiveType;
@@ -97,7 +97,7 @@ public class Kept implements DifferenceElement {
         return false;
     }
 
-    public boolean isWhiteSpace() {
+    public bool isWhiteSpace() {
         if (isToken()) {
             CsmToken csmToken = (CsmToken) element;
             return csmToken.isWhiteSpace();
@@ -105,7 +105,7 @@ public class Kept implements DifferenceElement {
         return false;
     }
 
-    public boolean isWhiteSpaceOrComment() {
+    public bool isWhiteSpaceOrComment() {
         if (isToken()) {
             CsmToken csmToken = (CsmToken) element;
             return TokenTypes.isWhitespaceOrComment(csmToken.getTokenType());
@@ -113,7 +113,7 @@ public class Kept implements DifferenceElement {
         return false;
     }
 
-    public boolean isNewLine() {
+    public bool isNewLine() {
         if (isToken()) {
             CsmToken csmToken = (CsmToken) element;
             return csmToken.isNewLine();

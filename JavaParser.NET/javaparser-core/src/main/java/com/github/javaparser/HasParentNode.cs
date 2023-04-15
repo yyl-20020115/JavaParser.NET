@@ -30,7 +30,7 @@ public interface HasParentNode<T>:Observable {
     /**
      * Returns true if the parent has a parent
      */
-    default boolean hasParentNode() {
+    default bool hasParentNode() {
         return getParentNode().isPresent();
     }
 
@@ -102,7 +102,7 @@ public interface HasParentNode<T>:Observable {
      * @return {@code true} if this node is a descendant of the given node, and {@code false} otherwise.
      * @see Node#isAncestorOf(Node)
      */
-    default boolean isDescendantOf(Node ancestor) {
+    default bool isDescendantOf(Node ancestor) {
         return findAncestor(n -> n == ancestor, Node.class).isPresent();
     }
 }

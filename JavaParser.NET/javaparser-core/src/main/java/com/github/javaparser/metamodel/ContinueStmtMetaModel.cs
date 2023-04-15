@@ -36,7 +36,7 @@ public class ContinueStmtMetaModel:StatementMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     ContinueStmtMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, ContinueStmt.class, "ContinueStmt", "com.github.javaparser.ast.stmt", false, false);
+        base(superBaseNodeMetaModel, ContinueStmt.class, "ContinueStmt", "com.github.javaparser.ast.stmt", false, false);
     }
 
     public PropertyMetaModel labelPropertyMetaModel;

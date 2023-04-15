@@ -26,24 +26,24 @@ public class IfStatementContext:StatementContext<IfStmt> {
 //public class IfStatementContext:AbstractJavaParserContext<IfStmt> {
 
     public IfStatementContext(IfStmt wrappedNode, TypeSolver typeSolver) {
-        super(wrappedNode, typeSolver);
+        base(wrappedNode, typeSolver);
     }
 
 
-    @Override
+    //@Override
     public List<PatternExpr> patternExprsExposedToChild(Node child) {
         Expression condition = wrappedNode.getCondition();
         Context conditionContext = JavaParserFactory.getContext(condition, typeSolver);
 
         List<PatternExpr> results = new ArrayList<>();
 
-        boolean givenNodeIsWithinThenStatement = wrappedNode.getThenStmt().containsWithinRange(child);
+        bool givenNodeIsWithinThenStatement = wrappedNode.getThenStmt().containsWithinRange(child);
         if(givenNodeIsWithinThenStatement) {
             results.addAll(conditionContext.patternExprsExposedFromChildren());
         }
 
         wrappedNode.getElseStmt().ifPresent(elseStatement -> {
-            boolean givenNodeIsWithinElseStatement = elseStatement.containsWithinRange(child);
+            bool givenNodeIsWithinElseStatement = elseStatement.containsWithinRange(child);
             if(givenNodeIsWithinElseStatement) {
                 results.addAll(conditionContext.negatedPatternExprsExposedFromChildren());
             }
@@ -66,7 +66,7 @@ public class IfStatementContext:StatementContext<IfStmt> {
      *
      * @return true, If this is an if inside of an if...
      */
-    public boolean nodeContextIsChainedIfElseIf(Context parentContext) {
+    public bool nodeContextIsChainedIfElseIf(Context parentContext) {
         return parentContext is AbstractJavaParserContext
                 && ((AbstractJavaParserContext<?>) this).getWrappedNode() is IfStmt
                 && ((AbstractJavaParserContext<?>) parentContext).getWrappedNode() is IfStmt;
@@ -83,7 +83,7 @@ public class IfStatementContext:StatementContext<IfStmt> {
      *
      * @return true, If this is an else inside of an if...
      */
-    public boolean nodeContextIsImmediateChildElse(Context parentContext) {
+    public bool nodeContextIsImmediateChildElse(Context parentContext) {
         if (!(parentContext is AbstractJavaParserContext)) {
             return false;
         }
@@ -100,7 +100,7 @@ public class IfStatementContext:StatementContext<IfStmt> {
         if (wrappedParentNode is IfStmt) {
             IfStmt parentIfStmt = (IfStmt) wrappedParentNode;
             if (parentIfStmt.getElseStmt().isPresent()) {
-                boolean currentNodeIsAnElseBlock = parentIfStmt.getElseStmt().get() == wrappedNode;
+                bool currentNodeIsAnElseBlock = parentIfStmt.getElseStmt().get() == wrappedNode;
                 if (currentNodeIsAnElseBlock) {
                     return true;
                 }
@@ -121,7 +121,7 @@ public class IfStatementContext:StatementContext<IfStmt> {
      *
      * @return true, If this is an else inside of an if...
      */
-    public boolean nodeContextIsThenOfIfStmt(Context parentContext) {
+    public bool nodeContextIsThenOfIfStmt(Context parentContext) {
         if (!(parentContext is AbstractJavaParserContext)) {
             return false;
         }
@@ -137,7 +137,7 @@ public class IfStatementContext:StatementContext<IfStmt> {
 
         if (wrappedParentNode is IfStmt) {
             IfStmt parentIfStmt = (IfStmt) wrappedParentNode;
-            boolean currentNodeIsAnElseBlock = parentIfStmt.getThenStmt() == wrappedNode;
+            bool currentNodeIsAnElseBlock = parentIfStmt.getThenStmt() == wrappedNode;
             if (currentNodeIsAnElseBlock) {
                 return true;
             }
@@ -147,7 +147,7 @@ public class IfStatementContext:StatementContext<IfStmt> {
     }
 
 
-    public boolean nodeContextIsConditionOfIfStmt(Context parentContext) {
+    public bool nodeContextIsConditionOfIfStmt(Context parentContext) {
         if (!(parentContext is AbstractJavaParserContext)) {
             return false;
         }
@@ -163,7 +163,7 @@ public class IfStatementContext:StatementContext<IfStmt> {
 
         if (wrappedParentNode is IfStmt) {
             IfStmt parentIfStmt = (IfStmt) wrappedParentNode;
-            boolean currentNodeIsCondition = parentIfStmt.getCondition() == wrappedNode;
+            bool currentNodeIsCondition = parentIfStmt.getCondition() == wrappedNode;
             if (currentNodeIsCondition) {
                 return true;
             }

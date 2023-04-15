@@ -41,57 +41,57 @@ public interface ResolvedTypeParameterDeclaration:ResolvedTypeDeclaration {
     static ResolvedTypeParameterDeclaration onType(/*final*/string name, string classQName, List<Bound> bounds) {
         return new ResolvedTypeParameterDeclaration() {
 
-            @Override
+            //@Override
             public string getName() {
                 return name;
             }
 
-            @Override
-            public boolean declaredOnType() {
+            //@Override
+            public bool declaredOnType() {
                 return true;
             }
 
-            @Override
-            public boolean declaredOnMethod() {
+            //@Override
+            public bool declaredOnMethod() {
                 return false;
             }
 
-            @Override
-            public boolean declaredOnConstructor() {
+            //@Override
+            public bool declaredOnConstructor() {
                 return false;
             }
 
-            @Override
+            //@Override
             public string getContainerQualifiedName() {
                 return classQName;
             }
 
-            @Override
+            //@Override
             public string getContainerId() {
                 return classQName;
             }
 
-            @Override
+            //@Override
             public ResolvedTypeParametrizable getContainer() {
                 return null;
             }
 
-            @Override
+            //@Override
             public List<Bound> getBounds() {
                 return bounds;
             }
 
-            @Override
+            //@Override
             public string toString() {
                 return "TypeParameter onType " + name;
             }
 
-            @Override
+            //@Override
             public Optional<ResolvedReferenceTypeDeclaration> containerType() {
                 throw new UnsupportedOperationException();
             }
 
-            @Override
+            //@Override
             public ResolvedReferenceType object() {
                 throw new UnsupportedOperationException();
             }
@@ -102,27 +102,27 @@ public interface ResolvedTypeParameterDeclaration:ResolvedTypeDeclaration {
     /**
      * Name of the type parameter.
      */
-    @Override
+    //@Override
 	string getName();
 
     /**
      * Is the type parameter been defined on a type?
      */
-    default boolean declaredOnType() {
+    default bool declaredOnType() {
         return (getContainer() is ResolvedReferenceTypeDeclaration);
     }
 
     /**
      * Is the type parameter been defined on a method?
      */
-    default boolean declaredOnMethod() {
+    default bool declaredOnMethod() {
         return (getContainer() is ResolvedMethodDeclaration);
     }
 
     /**
      * Is the type parameter been defined on a constructor?
      */
-    default boolean declaredOnConstructor() {
+    default bool declaredOnConstructor() {
         return (getContainer() is ResolvedConstructorDeclaration);
     }
 
@@ -130,7 +130,7 @@ public interface ResolvedTypeParameterDeclaration:ResolvedTypeDeclaration {
      * The package name of the type bound(s).
      * This is unsupported because there is no package for a Type Parameter, only for its container.
      */
-    @Override
+    //@Override
 	default string getPackageName() {
         throw new UnsupportedOperationException();
     }
@@ -139,7 +139,7 @@ public interface ResolvedTypeParameterDeclaration:ResolvedTypeDeclaration {
      * The class(es) wrapping the type bound(s).
      * This is unsupported because there is no class for a Type Parameter, only for its container.
      */
-    @Override
+    //@Override
 	default string getClassName() {
         throw new UnsupportedOperationException();
     }
@@ -149,7 +149,7 @@ public interface ResolvedTypeParameterDeclaration:ResolvedTypeDeclaration {
      * It is composed by the qualified name of the container followed by a dot and the name of the Type Parameter.
      * The qualified name of a method is its qualified signature.
      */
-    @Override
+    //@Override
 	default string getQualifiedName() {
         return String.format("%s.%s", getContainerId(), getName());
     }
@@ -179,14 +179,14 @@ public interface ResolvedTypeParameterDeclaration:ResolvedTypeDeclaration {
     /**
      * Has the type parameter a bound?
      */
-    default boolean hasBound() {
+    default bool hasBound() {
         return hasLowerBound() || hasUpperBound();
     }
 
     /**
      * Has the type parameter a lower bound?
      */
-    default boolean hasLowerBound() {
+    default bool hasLowerBound() {
         for (Bound b : getBounds()) {
             if (b.isExtends()) {
                 return true;
@@ -198,7 +198,7 @@ public interface ResolvedTypeParameterDeclaration:ResolvedTypeDeclaration {
     /**
      * Has the type parameter an upper bound?
      */
-    default boolean hasUpperBound() {
+    default bool hasUpperBound() {
         for (Bound b : getBounds()) {
             if (b.isSuper()) {
                 return true;
@@ -235,27 +235,27 @@ public interface ResolvedTypeParameterDeclaration:ResolvedTypeDeclaration {
         throw new IllegalStateException();
     }
 
-    @Override
+    //@Override
     default ResolvedTypeParameterDeclaration asTypeParameter() {
         return this;
     }
 
-    @Override
-    default boolean isTypeParameter() {
+    //@Override
+    default bool isTypeParameter() {
         return true;
     }
 
     /**
      * Return true if the Type variable is bounded
      */
-    default boolean isBounded() {
+    default bool isBounded() {
         return !isUnbounded();
     }
 
     /**
      * Return true if the Type variable is unbounded
      */
-    default boolean isUnbounded() {
+    default bool isUnbounded() {
         return getBounds().isEmpty();
     }
 
@@ -269,11 +269,11 @@ public interface ResolvedTypeParameterDeclaration:ResolvedTypeDeclaration {
      */
     class Bound {
 
-        private boolean extendsBound;
+        private bool extendsBound;
 
         private ResolvedType type;
 
-        private Bound(boolean extendsBound, ResolvedType type) {
+        private Bound(bool extendsBound, ResolvedType type) {
             this.extendsBound = extendsBound;
             this.type = type;
         }
@@ -308,24 +308,24 @@ public interface ResolvedTypeParameterDeclaration:ResolvedTypeDeclaration {
         /**
          * Is this an:bound?
          */
-        public boolean isExtends() {
+        public bool isExtends() {
             return extendsBound;
         }
 
         /**
          * Is this a super bound?
          */
-        public boolean isSuper() {
+        public bool isSuper() {
             return !isExtends();
         }
 
-        @Override
+        //@Override
         public string toString() {
             return "Bound{" + "extendsBound=" + extendsBound + ", type=" + type + '}';
         }
 
-        @Override
-        public boolean equals(Object o) {
+        //@Override
+        public bool equals(Object o) {
             if (this == o)
                 return true;
             if (o == null || getClass() != o.getClass())
@@ -336,7 +336,7 @@ public interface ResolvedTypeParameterDeclaration:ResolvedTypeDeclaration {
             return type != null ? type.equals(bound.type) : bound.type == null;
         }
 
-        @Override
+        //@Override
         public int hashCode() {
             int result = (extendsBound ? 1 : 0);
             result = 31 * result + (type != null ? type.hashCode() : 0);

@@ -23,47 +23,47 @@ public interface NodeWithModifiers<T> {
         return (T) this;
     }
 
-    default boolean isStatic() {
+    default bool isStatic() {
         return getModifiers().contains(Modifier.STATIC);
     }
 
-    default boolean isAbstract() {
+    default bool isAbstract() {
         return getModifiers().contains(Modifier.ABSTRACT);
     }
 
-    default boolean isFinal() {
+    default bool isFinal() {
         return getModifiers().contains(Modifier.FINAL);
     }
 
-    default boolean isNative() {
+    default bool isNative() {
         return getModifiers().contains(Modifier.NATIVE);
     }
 
-    default boolean isPrivate() {
+    default bool isPrivate() {
         return getModifiers().contains(Modifier.PRIVATE);
     }
 
-    default boolean isProtected() {
+    default bool isProtected() {
         return getModifiers().contains(Modifier.PROTECTED);
     }
 
-    default boolean isPublic() {
+    default bool isPublic() {
         return getModifiers().contains(Modifier.PUBLIC);
     }
 
-    default boolean isStrictfp() {
+    default bool isStrictfp() {
         return getModifiers().contains(Modifier.STRICTFP);
     }
 
-    default boolean isSynchronized() {
+    default bool isSynchronized() {
         return getModifiers().contains(Modifier.SYNCHRONIZED);
     }
 
-    default boolean isTransient() {
+    default bool isTransient() {
         return getModifiers().contains(Modifier.TRANSIENT);
     }
 
-    default boolean isVolatile() {
+    default bool isVolatile() {
         return getModifiers().contains(Modifier.VOLATILE);
     }
 }

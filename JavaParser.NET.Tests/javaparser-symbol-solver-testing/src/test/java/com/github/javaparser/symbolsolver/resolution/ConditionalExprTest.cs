@@ -58,11 +58,11 @@ class ConditionalExprTest:AbstractResolutionTest {
     [TestMethod]
     void test_boolean_conditional_expression() {
         // If the second and third operands are both of type Boolean, the conditional expression has type Boolean.
-        string code = "class A { public void m() { boolean r = true ? Boolean.TRUE : Boolean.FALSE;}}";
+        string code = "class A { public void m() { bool r = true ? Boolean.TRUE : Boolean.FALSE;}}";
         ResolvedType rt1 = StaticJavaParser.parse(code).findFirst(ConditionalExpr.class).get().calculateResolvedType();
         assertEquals("java.lang.Boolean", rt1.describe());
         // Otherwise, the conditional expression has type boolean.
-        code = "class A { public void m() { boolean r = true ? true : Boolean.FALSE;}}";
+        code = "class A { public void m() { bool r = true ? true : Boolean.FALSE;}}";
         ResolvedType rt2 = StaticJavaParser.parse(code).findFirst(ConditionalExpr.class).get().calculateResolvedType();
         assertEquals("boolean", rt2.describe());
     }

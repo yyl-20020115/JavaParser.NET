@@ -40,7 +40,7 @@ public class VariableDeclarationExpr:Expression implements NodeWithFinalModifier
 
     private NodeList<AnnotationExpr> annotations;
 
-    @NonEmptyProperty
+    //@NonEmptyProperty
     private NodeList<VariableDeclarator> variables;
 
     public VariableDeclarationExpr() {
@@ -81,22 +81,22 @@ public class VariableDeclarationExpr:Expression implements NodeWithFinalModifier
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public VariableDeclarationExpr(TokenRange tokenRange, NodeList<Modifier> modifiers, NodeList<AnnotationExpr> annotations, NodeList<VariableDeclarator> variables) {
-        super(tokenRange);
+        base(tokenRange);
         setModifiers(modifiers);
         setAnnotations(annotations);
         setVariables(variables);
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -163,9 +163,9 @@ public class VariableDeclarationExpr:Expression implements NodeWithFinalModifier
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
-    public boolean remove(Node node) {
+    public bool remove(Node node) {
         if (node == null) {
             return false;
         }
@@ -190,21 +190,21 @@ public class VariableDeclarationExpr:Expression implements NodeWithFinalModifier
         return super.remove(node);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public VariableDeclarationExpr clone() {
         return (VariableDeclarationExpr) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public VariableDeclarationExprMetaModel getMetaModel() {
         return JavaParserMetaModel.variableDeclarationExprMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }
@@ -229,25 +229,25 @@ public class VariableDeclarationExpr:Expression implements NodeWithFinalModifier
         return super.replace(node, replacementNode);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isVariableDeclarationExpr() {
+    public bool isVariableDeclarationExpr() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public VariableDeclarationExpr asVariableDeclarationExpr() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifVariableDeclarationExpr(Consumer<VariableDeclarationExpr> action) {
         action.accept(this);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<VariableDeclarationExpr> toVariableDeclarationExpr() {
         return Optional.of(this);

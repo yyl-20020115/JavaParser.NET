@@ -30,7 +30,7 @@ public interface ResolvedDeclaration:AssociableToAST {
     /**
      * Anonymous classes do not have a name, for example.
      */
-    default boolean hasName() {
+    default bool hasName() {
         return true;
     }
 
@@ -42,42 +42,42 @@ public interface ResolvedDeclaration:AssociableToAST {
     /**
      * Does this declaration represents a class field?
      */
-    default boolean isField() {
+    default bool isField() {
         return false;
     }
 
     /**
      * Does this declaration represents a variable?
      */
-    default boolean isVariable() {
+    default bool isVariable() {
         return false;
     }
 
     /**
      * Does this declaration represents an enum constant?
      */
-    default boolean isEnumConstant() {
+    default bool isEnumConstant() {
         return false;
     }
 
     /**
      * Does this declaration represents a pattern declaration?
      */
-    default boolean isPattern() {
+    default bool isPattern() {
         return false;
     }
 
     /**
      * Does this declaration represents a method parameter?
      */
-    default boolean isParameter() {
+    default bool isParameter() {
         return false;
     }
 
     /**
      * Does this declaration represents a type?
      */
-    default boolean isType() {
+    default bool isType() {
         return false;
     }
 
@@ -85,7 +85,7 @@ public interface ResolvedDeclaration:AssociableToAST {
      * Does this declaration represents a method?
      * // FIXME: This is never overridden.
      */
-    default boolean isMethod() {
+    default bool isMethod() {
         return false;
     }
 

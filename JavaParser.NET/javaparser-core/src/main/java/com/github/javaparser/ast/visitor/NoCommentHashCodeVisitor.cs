@@ -377,67 +377,67 @@ public class NoCommentHashCodeVisitor implements GenericVisitor<Integer, Void> {
         return (n.getModifiers().accept(this, arg)) * 31 + (n.getName().accept(this, arg));
     }
 
-    @Override()
+    //@Override()
     public Integer visit(/*final*/ModuleExportsDirective n, /*final*/Void arg) {
         return (n.getModuleNames().accept(this, arg)) * 31 + (n.getName().accept(this, arg));
     }
 
-    @Override()
+    //@Override()
     public Integer visit(/*final*/ModuleProvidesDirective n, /*final*/Void arg) {
         return (n.getName().accept(this, arg)) * 31 + (n.getWith().accept(this, arg));
     }
 
-    @Override()
+    //@Override()
     public Integer visit(/*final*/ModuleUsesDirective n, /*final*/Void arg) {
         return (n.getName().accept(this, arg));
     }
 
-    @Override
+    //@Override
     public Integer visit(/*final*/ModuleOpensDirective n, /*final*/Void arg) {
         return (n.getModuleNames().accept(this, arg)) * 31 + (n.getName().accept(this, arg));
     }
 
-    @Override
+    //@Override
     public Integer visit(/*final*/UnparsableStmt n, /*final*/Void arg) {
         return 0;
     }
 
-    @Override
+    //@Override
     public Integer visit(/*final*/ReceiverParameter n, /*final*/Void arg) {
         return (n.getAnnotations().accept(this, arg)) * 31 + (n.getName().accept(this, arg)) * 31 + (n.getType().accept(this, arg));
     }
 
-    @Override
+    //@Override
     public Integer visit(/*final*/VarType n, /*final*/Void arg) {
         return (n.getAnnotations().accept(this, arg));
     }
 
-    @Override
+    //@Override
     public Integer visit(/*final*/Modifier n, /*final*/Void arg) {
         return (n.getKeyword().hashCode());
     }
 
-    @Override
+    //@Override
     public Integer visit(/*final*/SwitchExpr n, /*final*/Void arg) {
         return (n.getEntries().accept(this, arg)) * 31 + (n.getSelector().accept(this, arg));
     }
 
-    @Override
+    //@Override
     public Integer visit(/*final*/YieldStmt n, /*final*/Void arg) {
         return (n.getExpression().accept(this, arg));
     }
 
-    @Override
+    //@Override
     public Integer visit(/*final*/TextBlockLiteralExpr n, /*final*/Void arg) {
         return (n.getValue().hashCode());
     }
 
-    @Override
+    //@Override
     public Integer visit(/*final*/PatternExpr n, /*final*/Void arg) {
         return (n.getModifiers().accept(this, arg)) * 31 + (n.getName().accept(this, arg)) * 31 + (n.getType().accept(this, arg));
     }
 
-    @Override
+    //@Override
     public Integer visit(/*final*/RecordDeclaration n, /*final*/Void arg) {
         return (n.getImplementedTypes().accept(this, arg)) * 31 + (n.getParameters().accept(this, arg)) * 31 + (n.getReceiverParameter().isPresent() ? n.getReceiverParameter().get().accept(this, arg) : 0) * 31 + (n.getTypeParameters().accept(this, arg)) * 31 + (n.getMembers().accept(this, arg)) * 31 + (n.getModifiers().accept(this, arg)) * 31 + (n.getName().accept(this, arg)) * 31 + (n.getAnnotations().accept(this, arg));
     }

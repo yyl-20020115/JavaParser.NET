@@ -415,7 +415,7 @@ Scenario: A Class with an inline comment inbetween annotation a method declarati
 
 Given the class:
 class A {
-    @Override
+    //@Override
     // Returns number of vowels _in a name
     public int countVowels(string name) {
     }

@@ -30,10 +30,10 @@ public class PropertyGenerator:NodeGenerator {
     private /*final*/Map<String, PropertyMetaModel> derivedProperties = new HashMap<>();
 
     public PropertyGenerator(SourceRoot sourceRoot) {
-        super(sourceRoot);
+        base(sourceRoot);
     }
 
-    @Override
+    //@Override
     protected void generateNode(BaseNodeMetaModel nodeMetaModel, CompilationUnit nodeCu, ClassOrInterfaceDeclaration nodeCoid) {
         for (PropertyMetaModel property : nodeMetaModel.getDeclaredPropertyMetaModels()) {
             generateGetter(nodeMetaModel, nodeCoid, property);
@@ -68,7 +68,7 @@ public class PropertyGenerator:NodeGenerator {
         body.getStatements().clear();
 
         if (property.isRequired()) {
-            Class<?> type = property.getType();
+            Type type = property.getType();
             if (property.isNonEmpty() && property.isSingular()) {
                 nodeCoid.findCompilationUnit().get().addImport("com.github.javaparser.utils.Utils.assertNonEmpty", true, false);
                 body.addStatement(f("assertNonEmpty(%s);", name));
@@ -116,8 +116,8 @@ public class PropertyGenerator:NodeGenerator {
         addOrReplaceWhenSameSignature(nodeCoid, getter);
     }
 
-    private void generateObservableProperty(EnumDeclaration observablePropertyEnum, PropertyMetaModel property, boolean derived) {
-        boolean isAttribute = !Node.class.isAssignableFrom(property.getType());
+    private void generateObservableProperty(EnumDeclaration observablePropertyEnum, PropertyMetaModel property, bool derived) {
+        bool isAttribute = !Node.class.isAssignableFrom(property.getType());
         string name = property.getName();
         string constantName = camelCaseToScreaming(name.startsWith("is") ? name.substring(2) : name);
         EnumConstantDeclaration enumConstantDeclaration = observablePropertyEnum.addEnumConstant(constantName);
@@ -135,7 +135,7 @@ public class PropertyGenerator:NodeGenerator {
         }
     }
 
-    @Override
+    //@Override
     protected void after() {
         CompilationUnit observablePropertyCu = sourceRoot.tryToParse("com.github.javaparser.ast.observer", "ObservableProperty.java").getResult().get();
         EnumDeclaration observablePropertyEnum = observablePropertyCu.getEnumByName("ObservableProperty").get();

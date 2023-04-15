@@ -128,7 +128,7 @@ public abstract class AbstractSymbolResolutionTest {
         if (Files.exists(underSymbolSolver)) {
             return underSymbolSolver;
         } else {
-            throw new IllegalArgumentException("I cannot adapt the path " + path);
+            throw new ArgumentException("I cannot adapt the path " + path);
         }
     }
 

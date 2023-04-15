@@ -26,7 +26,7 @@ namespace com.github.javaparser;
 @RunWith(JUnitReportingRunner.class)
 public class ParsingTest:BasicJBehaveTest {
 
-    @Override
+    //@Override
     public InjectableStepsFactory stepsFactory() {
         Map<String, Object> state = new HashMap<>();
 
@@ -36,7 +36,7 @@ public class ParsingTest:BasicJBehaveTest {
     }
 
     public ParsingTest() {
-        super("**/parsing*.story");
+        base("**/parsing*.story");
     }
 }
 

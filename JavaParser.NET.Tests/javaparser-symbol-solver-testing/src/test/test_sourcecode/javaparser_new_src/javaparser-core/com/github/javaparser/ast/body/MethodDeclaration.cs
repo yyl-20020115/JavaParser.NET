@@ -54,7 +54,7 @@ public /*final*/class MethodDeclaration:BodyDeclaration<MethodDeclaration> imple
 
     private BlockStmt body;
 
-    private boolean isDefault = false;
+    private bool isDefault = false;
 
     private List<ArrayBracketPair> arrayBracketPairsAfterType;
 
@@ -87,7 +87,7 @@ public /*final*/class MethodDeclaration:BodyDeclaration<MethodDeclaration> imple
                              /*final*/List<ArrayBracketPair> arrayBracketPairsAfterParameterList,
                              /*final*/List<ReferenceType> throws_, 
                              /*final*/BlockStmt body) {
-        super(annotations);
+        base(annotations);
         setModifiers(modifiers);
         setTypeParameters(typeParameters);
         setElementType(elementType);
@@ -110,7 +110,7 @@ public /*final*/class MethodDeclaration:BodyDeclaration<MethodDeclaration> imple
                              /*final*/List<ArrayBracketPair> arrayBracketPairsAfterParameterList,
                              /*final*/List<ReferenceType> throws_, 
                              /*final*/BlockStmt body) {
-        super(range, annotations);
+        base(range, annotations);
         setModifiers(modifiers);
         setTypeParameters(typeParameters);
         setElementType(elementType);
@@ -122,17 +122,17 @@ public /*final*/class MethodDeclaration:BodyDeclaration<MethodDeclaration> imple
         setBody(body);
     }
 
-    @Override
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    //@Override
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    //@Override
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public BlockStmt getBody() {
         return body;
     }
@@ -143,12 +143,12 @@ public /*final*/class MethodDeclaration:BodyDeclaration<MethodDeclaration> imple
      * @see Modifier
      * @return modifiers
      */
-    @Override
+    //@Override
     public EnumSet<Modifier> getModifiers() {
         return modifiers;
     }
 
-    @Override
+    //@Override
     public string getName() {
         return name.getName();
     }
@@ -157,26 +157,26 @@ public /*final*/class MethodDeclaration:BodyDeclaration<MethodDeclaration> imple
         return name;
     }
 
-    @Override
+    //@Override
     public List<Parameter> getParameters() {
         parameters = ensureNotNull(parameters);
         return parameters;
     }
 
-    @Override
+    //@Override
     public List<ReferenceType> getThrows() {
         throws_ = ensureNotNull(throws_);
         return throws_;
     }
 
-    @Override
+    //@Override
     public Type getType() {
         return wrapInArrayTypes(getElementType(),
                 getArrayBracketPairsAfterElementType(),
                 getArrayBracketPairsAfterParameterList());
     }
 
-    @Override
+    //@Override
     public Type getElementType() {
         return elementType;
     }
@@ -186,20 +186,20 @@ public /*final*/class MethodDeclaration:BodyDeclaration<MethodDeclaration> imple
         return typeParameters;
     }
 
-    @Override
+    //@Override
     public MethodDeclaration setBody(/*final*/BlockStmt body) {
         this.body = body;
         setAsParentNodeOf(this.body);
         return this;
     }
 
-    @Override
+    //@Override
     public MethodDeclaration setModifiers(/*final*/EnumSet<Modifier> modifiers) {
         this.modifiers = modifiers;
         return this;
     }
 
-    @Override
+    //@Override
     public MethodDeclaration setName(/*final*/string name) {
         setNameExpr(new NameExpr(name));
         return this;
@@ -211,21 +211,21 @@ public /*final*/class MethodDeclaration:BodyDeclaration<MethodDeclaration> imple
         return this;
     }
 
-    @Override
+    //@Override
     public MethodDeclaration setParameters(/*final*/List<Parameter> parameters) {
         this.parameters = parameters;
         setAsParentNodeOf(this.parameters);
         return this;
     }
 
-    @Override
+    //@Override
     public MethodDeclaration setThrows(/*final*/List<ReferenceType> throws_) {
         this.throws_ = throws_;
         setAsParentNodeOf(this.throws_);
         return this;
     }
 
-    @Override
+    //@Override
     public MethodDeclaration setType(/*final*/Type type) {
         Pair<Type, List<ArrayBracketPair>> typeListPair = unwrapArrayTypes(type);
         setElementType(typeListPair.a);
@@ -234,7 +234,7 @@ public /*final*/class MethodDeclaration:BodyDeclaration<MethodDeclaration> imple
         return this;
     }
 
-    @Override
+    //@Override
     public MethodDeclaration setElementType(/*final*/Type elementType) {
         this.elementType = elementType;
         setAsParentNodeOf(this.elementType);
@@ -247,22 +247,22 @@ public /*final*/class MethodDeclaration:BodyDeclaration<MethodDeclaration> imple
         return this;
     }
 
-    public boolean isDefault() {
+    public bool isDefault() {
         return isDefault;
     }
 
-    public MethodDeclaration setDefault(boolean isDefault) {
+    public MethodDeclaration setDefault(bool isDefault) {
         this.isDefault = isDefault;
         return this;
     }
 
-    @Override
+    //@Override
     public string getDeclarationAsString() {
         return getDeclarationAsString(true, true, true);
     }
 
-    @Override
-    public string getDeclarationAsString(boolean includingModifiers, boolean includingThrows) {
+    //@Override
+    public string getDeclarationAsString(bool includingModifiers, bool includingThrows) {
         return getDeclarationAsString(includingModifiers, includingThrows, true);
     }
 
@@ -275,9 +275,9 @@ public /*final*/class MethodDeclaration:BodyDeclaration<MethodDeclaration> imple
      * 
      * @return method declaration as String
      */
-    @Override
-    public string getDeclarationAsString(boolean includingModifiers, boolean includingThrows,
-                                         boolean includingParameterName) {
+    //@Override
+    public string getDeclarationAsString(bool includingModifiers, bool includingThrows,
+                                         bool includingParameterName) {
         StringBuilder sb = new StringBuilder();
         if (includingModifiers) {
             AccessSpecifier accessSpecifier = Modifier.getAccessSpecifier(getModifiers());
@@ -304,7 +304,7 @@ public /*final*/class MethodDeclaration:BodyDeclaration<MethodDeclaration> imple
         sb.append(" ");
         sb.append(getName());
         sb.append("(");
-        boolean firstParam = true;
+        bool firstParam = true;
         for (Parameter param : getParameters()) {
             if (firstParam) {
                 firstParam = false;
@@ -322,7 +322,7 @@ public /*final*/class MethodDeclaration:BodyDeclaration<MethodDeclaration> imple
         }
         sb.append(")");
         if (includingThrows) {
-            boolean firstThrow = true;
+            bool firstThrow = true;
             for (ReferenceType thr : getThrows()) {
                 if (firstThrow) {
                     firstThrow = false;
@@ -336,7 +336,7 @@ public /*final*/class MethodDeclaration:BodyDeclaration<MethodDeclaration> imple
         return sb.toString();
     }
 
-    @Override
+    //@Override
     public JavadocComment getJavaDoc() {
         if (getComment() is JavadocComment) {
             return (JavadocComment) getComment();
@@ -352,7 +352,7 @@ public /*final*/class MethodDeclaration:BodyDeclaration<MethodDeclaration> imple
         return arrayBracketPairsAfterType;
     }
 
-    @Override
+    //@Override
     public MethodDeclaration setArrayBracketPairsAfterElementType(List<ArrayBracketPair> arrayBracketPairsAfterType) {
         this.arrayBracketPairsAfterType = arrayBracketPairsAfterType;
         setAsParentNodeOf(arrayBracketPairsAfterType);

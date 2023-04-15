@@ -52,21 +52,21 @@ public class MemberValuePair:Node implements NodeWithSimpleName<MemberValuePair>
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public MemberValuePair(TokenRange tokenRange, SimpleName name, Expression value) {
-        super(tokenRange);
+        base(tokenRange);
         setName(name);
         setValue(value);
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -108,21 +108,21 @@ public class MemberValuePair:Node implements NodeWithSimpleName<MemberValuePair>
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public MemberValuePair clone() {
         return (MemberValuePair) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public MemberValuePairMetaModel getMetaModel() {
         return JavaParserMetaModel.memberValuePairMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }

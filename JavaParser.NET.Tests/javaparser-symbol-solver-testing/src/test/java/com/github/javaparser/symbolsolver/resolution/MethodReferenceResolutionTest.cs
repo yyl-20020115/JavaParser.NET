@@ -372,7 +372,7 @@ class MethodReferenceResolutionTest:AbstractResolutionTest {
                 "public class StreamTest {\n" +
                 "    \n" +
                 "    public void streamTest () {\n" +
-                "        Set<Integer> intSet = new HashSet<Integer>() {{\n" +
+                "        HashSet<Integer> intSet = new HashSet<Integer>() {{\n" +
                 "           add(1);\n" +
                 "           add(2);\n" +
                 "        }};\n" +
@@ -409,7 +409,7 @@ class MethodReferenceResolutionTest:AbstractResolutionTest {
                         "public class StreamTest {\n" +
                         "    \n" +
                         "    public void streamTest () {\n" +
-                        "        Set<Integer> intSet = new HashSet<Integer>() {{\n" +
+                        "        HashSet<Integer> intSet = new HashSet<Integer>() {{\n" +
                         "           add(1);\n" +
                         "           add(2);\n" +
                         "        }};\n" +
@@ -423,7 +423,7 @@ class MethodReferenceResolutionTest:AbstractResolutionTest {
 
         int errorCount = 0;
 
-        Set<MethodCallExpr> methodCallExpr = new HashSet<>(cu.findAll(MethodCallExpr.class));
+        HashSet<MethodCallExpr> methodCallExpr = new HashSet<>(cu.findAll(MethodCallExpr.class));
         for (MethodCallExpr expr : methodCallExpr) {
             try {
                 ResolvedMethodDeclaration rd = expr.resolve();
@@ -450,14 +450,14 @@ class MethodReferenceResolutionTest:AbstractResolutionTest {
                 "        list.stream().filter(this::isNotEmpty).forEach(s -> System._out.println(s));\n" +
                 "    }\n" +
                 "\n" +
-                "    private boolean isNotEmpty(string s) {\n" +
+                "    private bool isNotEmpty(string s) {\n" +
                 "        return s != null && s.length() > 0;\n" +
                 "    }\n" +
                 "}\n";
         TypeSolver typeSolver = new ReflectionTypeSolver(false);
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(typeSolver));
         CompilationUnit cu = StaticJavaParser.parse(s);
-        Set<MethodCallExpr> methodCallExpr = new HashSet<>(cu.findAll(MethodCallExpr.class));
+        HashSet<MethodCallExpr> methodCallExpr = new HashSet<>(cu.findAll(MethodCallExpr.class));
 
         int errorCount = 0;
 
@@ -481,7 +481,7 @@ class MethodReferenceResolutionTest:AbstractResolutionTest {
                 "      print(s -> s.toLowerCase(), \"STRING TO LOWERCASE\");\n" +
                 "      print(new Function<String, String>()\n" +
                 "      {\n" +
-                "         @Override\n" +
+                "         //@Override\n" +
                 "         public string apply(string s) // receives argument _in parameter s;\n" +
                 "         {                             // doesn't need to close over s\n" +
                 "            return s.toLowerCase();\n" +
@@ -499,7 +499,7 @@ class MethodReferenceResolutionTest:AbstractResolutionTest {
         TypeSolver typeSolver = new ReflectionTypeSolver(false);
         StaticJavaParser.getConfiguration().setSymbolResolver(new JavaSymbolSolver(typeSolver));
         CompilationUnit cu = StaticJavaParser.parse(s);
-        Set<MethodCallExpr> methodCallExpr = new HashSet<>(cu.findAll(MethodCallExpr.class));
+        HashSet<MethodCallExpr> methodCallExpr = new HashSet<>(cu.findAll(MethodCallExpr.class));
 
         int errorCount = 0;
 
@@ -535,7 +535,7 @@ class MethodReferenceResolutionTest:AbstractResolutionTest {
 
         int errorCount = 0;
 
-        Set<MethodReferenceExpr> methodeRefExpr = new HashSet<>(cu.findAll(MethodReferenceExpr.class));
+        HashSet<MethodReferenceExpr> methodeRefExpr = new HashSet<>(cu.findAll(MethodReferenceExpr.class));
         for (MethodReferenceExpr expr : methodeRefExpr) {
             try {
                 ResolvedMethodDeclaration md = expr.resolve();

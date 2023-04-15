@@ -73,11 +73,11 @@ public interface NodeWithJavadoc<N:Node> {
         return setJavadocComment(javadoc.toComment());
     }
 
-    default boolean removeJavaDocComment() {
+    default bool removeJavaDocComment() {
         return hasJavaDocComment() && getComment().get().remove();
     }
 
-    default boolean hasJavaDocComment() {
+    default bool hasJavaDocComment() {
         return getComment().isPresent() && getComment().get() is JavadocComment;
     }
 }

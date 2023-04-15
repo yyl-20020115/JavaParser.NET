@@ -45,7 +45,7 @@ public abstract class TypeDeclaration:BodyDeclaration implements NamedNode {
 	public TypeDeclaration(List<AnnotationExpr> annotations,
 			int modifiers, string name,
 			List<BodyDeclaration> members) {
-		super(annotations);
+		base(annotations);
 		setName(name);
 		setModifiers(modifiers);
 		setMembers(members);
@@ -55,7 +55,7 @@ public abstract class TypeDeclaration:BodyDeclaration implements NamedNode {
 			int endColumn, List<AnnotationExpr> annotations,
 			int modifiers, string name,
 			List<BodyDeclaration> members) {
-		super(beginLine, beginColumn, endLine, endColumn, annotations);
+		base(beginLine, beginColumn, endLine, endColumn, annotations);
 		setName(name);
 		setModifiers(modifiers);
 		setMembers(members);

@@ -29,11 +29,11 @@ public class TokenKindGenerator:Generator {
     private /*final*/SourceRoot generatedJavaCcSourceRoot;
 
     public TokenKindGenerator(SourceRoot sourceRoot, SourceRoot generatedJavaCcSourceRoot) {
-        super(sourceRoot);
+        base(sourceRoot);
         this.generatedJavaCcSourceRoot = generatedJavaCcSourceRoot;
     }
 
-    @Override
+    //@Override
     public void generate() {
         Log.info("Running %s", () -> getClass().getSimpleName());
         

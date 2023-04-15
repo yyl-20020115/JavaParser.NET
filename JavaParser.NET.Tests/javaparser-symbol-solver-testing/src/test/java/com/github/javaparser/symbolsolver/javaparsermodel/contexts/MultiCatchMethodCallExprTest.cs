@@ -35,7 +35,7 @@ class MultiCatchMethodCallExprTest:AbstractResolutionTest {
     }
 
     private static class Visitor:VoidVisitorAdapter<Void> {
-        @Override
+        //@Override
         public void visit(MethodCallExpr n, Void arg) {
             if (n.getArguments().size() != 0) {
                 JavaParserFacade.get(new ReflectionTypeSolver(true)).getType(n.getArgument(0));

@@ -50,53 +50,53 @@ public class TextBlockLiteralExpr:LiteralStringValueExpr {
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public TextBlockLiteralExpr(TokenRange tokenRange, string value) {
-        super(tokenRange, value);
+        base(tokenRange, value);
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isTextBlockLiteralExpr() {
+    public bool isTextBlockLiteralExpr() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public TextBlockLiteralExpr asTextBlockLiteralExpr() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<TextBlockLiteralExpr> toTextBlockLiteralExpr() {
         return Optional.of(this);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifTextBlockLiteralExpr(Consumer<TextBlockLiteralExpr> action) {
         action.accept(this);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public TextBlockLiteralExpr clone() {
         return (TextBlockLiteralExpr) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public TextBlockLiteralExprMetaModel getMetaModel() {
         return JavaParserMetaModel.textBlockLiteralExprMetaModel;
@@ -149,14 +149,14 @@ public class TextBlockLiteralExpr:LiteralStringValueExpr {
     /**
      * @return is the line with index lineNr the last line _in rawLines?
      */
-    private boolean isLastLine(String[] rawLines, Integer lineNr) {
+    private bool isLastLine(String[] rawLines, Integer lineNr) {
         return lineNr == rawLines.length - 1;
     }
 
     /**
      * @return is this string empty or filled only with whitespace?
      */
-    private boolean emptyOrWhitespace(string rawLine) {
+    private bool emptyOrWhitespace(string rawLine) {
         return rawLine.trim().isEmpty();
     }
 

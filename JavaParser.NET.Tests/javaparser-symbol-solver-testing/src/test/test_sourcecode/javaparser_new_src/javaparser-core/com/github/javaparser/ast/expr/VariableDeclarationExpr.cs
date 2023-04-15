@@ -87,7 +87,7 @@ public /*final*/class VariableDeclarationExpr:Expression implements
                                    /*final*/Type elementType,
                                    /*final*/List<VariableDeclarator> variables,
                                    /*final*/List<ArrayBracketPair> arrayBracketPairsAfterType) {
-        super(range);
+        base(range);
         setModifiers(modifiers);
         setAnnotations(annotations);
         setElementType(elementType);
@@ -104,17 +104,17 @@ public /*final*/class VariableDeclarationExpr:Expression implements
         return new VariableDeclarationExpr(type, name);
     }
 
-    @Override
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    //@Override
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    //@Override
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public List<AnnotationExpr> getAnnotations() {
         annotations = ensureNotNull(annotations);
         return annotations;
@@ -126,43 +126,43 @@ public /*final*/class VariableDeclarationExpr:Expression implements
      * @see Modifier
      * @return modifiers
      */
-    @Override
+    //@Override
     public EnumSet<Modifier> getModifiers() {
         return modifiers;
     }
 
-    @Override
+    //@Override
     public Type getElementType() {
         return elementType;
     }
 
-    @Override
+    //@Override
     public List<VariableDeclarator> getVariables() {
         variables = ensureNotNull(variables);
         return variables;
     }
 
-    @Override
+    //@Override
     public VariableDeclarationExpr setAnnotations(/*final*/List<AnnotationExpr> annotations) {
         this.annotations = annotations;
         setAsParentNodeOf(this.annotations);
         return this;
     }
 
-    @Override
+    //@Override
     public VariableDeclarationExpr setModifiers(/*final*/EnumSet<Modifier> modifiers) {
         this.modifiers = modifiers;
         return this;
     }
 
-    @Override
+    //@Override
     public VariableDeclarationExpr setElementType(/*final*/Type elementType) {
         this.elementType = elementType;
         setAsParentNodeOf(this.elementType);
         return this;
     }
 
-    @Override
+    //@Override
     public VariableDeclarationExpr setVariables(/*final*/List<VariableDeclarator> variables) {
         this.variables = variables;
         setAsParentNodeOf(this.variables);
@@ -174,7 +174,7 @@ public /*final*/class VariableDeclarationExpr:Expression implements
         return arrayBracketPairsAfterType;
     }
 
-    @Override
+    //@Override
     public VariableDeclarationExpr setArrayBracketPairsAfterElementType(List<ArrayBracketPair> arrayBracketPairsAfterType) {
         this.arrayBracketPairsAfterType = arrayBracketPairsAfterType;
         setAsParentNodeOf(arrayBracketPairsAfterType);

@@ -29,10 +29,10 @@ namespace com.github.javaparser.generator.core.visitor;
  */
 public class GenericListVisitorAdapterGenerator:VisitorGenerator {
     public GenericListVisitorAdapterGenerator(SourceRoot sourceRoot) {
-        super(sourceRoot, "com.github.javaparser.ast.visitor", "GenericListVisitorAdapter", "List<R>", "A", true);
+        base(sourceRoot, "com.github.javaparser.ast.visitor", "GenericListVisitorAdapter", "List<R>", "A", true);
     }
 
-    @Override
+    //@Override
     protected void generateVisitMethodBody(BaseNodeMetaModel node, MethodDeclaration visitMethod, CompilationUnit compilationUnit) {
         visitMethod.getParameters().forEach(p -> p.setFinal(true));
 
@@ -57,7 +57,7 @@ public class GenericListVisitorAdapterGenerator:VisitorGenerator {
             }
         }
         body.addStatement("return result;");
-        Arrays.stream(new Class<?>[] {List.class, ArrayList.class}).filter(c ->
+        Arrays.stream(new Type[] {List.class, ArrayList.class}).filter(c ->
                 compilationUnit.getImports().stream().noneMatch(
                         i -> c.getName().equals(i.getName().asString())
                 )

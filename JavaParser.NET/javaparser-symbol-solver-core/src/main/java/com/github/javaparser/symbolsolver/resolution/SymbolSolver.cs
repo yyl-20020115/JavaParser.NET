@@ -32,44 +32,44 @@ public class SymbolSolver implements Solver {
 
     public SymbolSolver(TypeSolver typeSolver) {
         if (typeSolver == null) {
-            throw new IllegalArgumentException("Missing Parameter - Cannot initialise a SymbolSolver, without a way to solve types.");
+            throw new ArgumentException("Missing Parameter - Cannot initialise a SymbolSolver, without a way to solve types.");
         }
 
         this.typeSolver = typeSolver;
     }
 
-    @Override
+    //@Override
 	public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name, Context context) {
         return context.solveSymbol(name);
     }
 
-    @Override
+    //@Override
 	public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name, Node node) {
         return solveSymbol(name, JavaParserFactory.getContext(node, typeSolver));
     }
 
-    @Override
+    //@Override
 	public Optional<Value> solveSymbolAsValue(string name, Context context) {
         return context.solveSymbolAsValue(name);
     }
 
-    @Override
+    //@Override
 	public Optional<Value> solveSymbolAsValue(string name, Node node) {
         Context context = JavaParserFactory.getContext(node, typeSolver);
         return solveSymbolAsValue(name, context);
     }
 
-    @Override
+    //@Override
 	public SymbolReference<?:ResolvedTypeDeclaration> solveType(string name, Context context) {
         return context.solveType(name);
     }
 
-    @Override
+    //@Override
 	public SymbolReference<?:ResolvedTypeDeclaration> solveType(string name, Node node) {
         return solveType(name, JavaParserFactory.getContext(node, typeSolver));
     }
 
-    @Override
+    //@Override
 	public MethodUsage solveMethod(string methodName, List<ResolvedType> argumentsTypes, Context context) {
         SymbolReference<ResolvedMethodDeclaration> decl = context.solveMethod(methodName, argumentsTypes, false);
         if (!decl.isSolved()) {
@@ -78,12 +78,12 @@ public class SymbolSolver implements Solver {
         return new MethodUsage(decl.getCorrespondingDeclaration());
     }
 
-    @Override
+    //@Override
 	public MethodUsage solveMethod(string methodName, List<ResolvedType> argumentsTypes, Node node) {
         return solveMethod(methodName, argumentsTypes, JavaParserFactory.getContext(node, typeSolver));
     }
 
-    @Override
+    //@Override
 	public ResolvedTypeDeclaration solveType(Type type) {
         if (type is ClassOrInterfaceType) {
 
@@ -100,7 +100,7 @@ public class SymbolSolver implements Solver {
         }
     }
 
-    @Override
+    //@Override
 	public ResolvedType solveTypeUsage(string name, Context context) {
         Optional<ResolvedType> genericType = context.solveGenericType(name);
         if (genericType.isPresent()) {
@@ -116,7 +116,7 @@ public class SymbolSolver implements Solver {
      * <p>
      * It should contain its own private fields but not inherited private fields.
      */
-    @Override
+    //@Override
 	public SymbolReference<?:ResolvedValueDeclaration> solveSymbolInType(ResolvedTypeDeclaration typeDeclaration, string name) {
         if (typeDeclaration is SymbolResolutionCapability) {
             return ((SymbolResolutionCapability) typeDeclaration).solveSymbol(name, typeSolver);
@@ -130,7 +130,7 @@ public class SymbolSolver implements Solver {
      * @deprecated Similarly to solveType this should eventually disappear as the symbol resolution logic should be more general
      * and do not be specific to JavaParser classes like _in this case.
      */
-    @Override
+    //@Override
 	//@Deprecated
     public SymbolReference<ResolvedTypeDeclaration> solveTypeInType(ResolvedTypeDeclaration typeDeclaration, string name) {
         if (typeDeclaration is JavaParserClassDeclaration) {
@@ -149,7 +149,7 @@ public class SymbolSolver implements Solver {
      *
      * @return The class resolved.
      */
-    public ResolvedType classToResolvedType(Class<?> clazz) {
+    public ResolvedType classToResolvedType(Type clazz) {
         if (clazz.isPrimitive()) {
             return ResolvedPrimitiveType.byName(clazz.getName());
         }

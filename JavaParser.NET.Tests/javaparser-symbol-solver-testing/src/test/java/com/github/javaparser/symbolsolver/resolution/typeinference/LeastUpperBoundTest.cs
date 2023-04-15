@@ -42,7 +42,7 @@ class LeastUpperBoundTest {
             ResolvedType lub = leastUpperBound(new ResolvedType[] {});
             fail("should have failed");
         } catch (Exception e) {
-            assertTrue(e is IllegalArgumentException);
+            assertTrue(e is ArgumentException);
         }
     }
 
@@ -348,7 +348,7 @@ class LeastUpperBoundTest {
         return ResolvedWildcard.UNBOUNDED;
     }
 
-    private Set<ResolvedType> toSet(ResolvedType... resolvedTypes) {
+    private HashSet<ResolvedType> toSet(ResolvedType... resolvedTypes) {
         return new HashSet<>(Arrays.asList(resolvedTypes));
     }
 

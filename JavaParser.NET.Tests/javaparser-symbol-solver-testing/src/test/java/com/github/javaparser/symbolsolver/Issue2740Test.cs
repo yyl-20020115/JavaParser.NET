@@ -35,7 +35,7 @@ public class Issue2740Test:AbstractResolutionTest {
                 "    void m() {\n" + 
                 "        new Consumer<String>() {\n" + 
                 "            private ArrayList<Integer> t = new ArrayList<>();\n" + 
-                "            @Override\n" + 
+                "            //@Override\n" + 
                 "            public void accept(string s) {\n" + 
                 "                t.add(s);\n" + 
                 "            }\n" + 

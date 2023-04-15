@@ -26,12 +26,12 @@ namespace com.github.javaparser.generator.core.node;
 
 public class RemoveMethodGenerator:NodeGenerator {
     public RemoveMethodGenerator(SourceRoot sourceRoot) {
-        super(sourceRoot);
+        base(sourceRoot);
     }
 
-    @Override
+    //@Override
     protected void generateNode(BaseNodeMetaModel nodeMetaModel, CompilationUnit nodeCu, ClassOrInterfaceDeclaration nodeCoid) {
-        MethodDeclaration removeNodeMethod = (MethodDeclaration) parseBodyDeclaration("public boolean remove(Node node) {}");
+        MethodDeclaration removeNodeMethod = (MethodDeclaration) parseBodyDeclaration("public bool remove(Node node) {}");
         nodeCu.addImport(Node.class);
         annotateWhenOverridden(nodeMetaModel, removeNodeMethod);
 

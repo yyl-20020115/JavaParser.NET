@@ -69,12 +69,12 @@ class UtilsTest {
     [TestMethod]
     void testReaderToString(){
         Reader reader = new Reader() {
-            @Override
+            //@Override
             public int read(char[] chars, int i, int i1){
                 return 0;
             }
 
-            @Override
+            //@Override
             public void close(){
             }
         };
@@ -125,7 +125,7 @@ class UtilsTest {
 
     [TestMethod]
     void capitalizeOnEmptyString() {
-        assertThrows(IllegalArgumentException.class, () -> capitalize(""));
+        assertThrows(ArgumentException.class, () -> capitalize(""));
     }
 
     [TestMethod]
@@ -140,7 +140,7 @@ class UtilsTest {
 
     [TestMethod]
     void decapitalizeOnEmptyString() {
-        assertThrows(IllegalArgumentException.class, () -> decapitalize(""));
+        assertThrows(ArgumentException.class, () -> decapitalize(""));
     }
 
     [TestMethod]

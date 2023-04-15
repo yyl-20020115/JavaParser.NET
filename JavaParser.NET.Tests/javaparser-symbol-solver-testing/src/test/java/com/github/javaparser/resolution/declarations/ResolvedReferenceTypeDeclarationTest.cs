@@ -25,7 +25,7 @@ namespace com.github.javaparser.resolution.declarations;
 
 public interface ResolvedReferenceTypeDeclarationTest:ResolvedTypeDeclarationTest, ResolvedTypeParametrizableTest {
 
-    @Override
+    //@Override
     ResolvedReferenceTypeDeclaration createValue();
 
     [TestMethod]

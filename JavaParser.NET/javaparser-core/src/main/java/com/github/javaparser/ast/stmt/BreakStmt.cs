@@ -44,7 +44,7 @@ namespace com.github.javaparser.ast.stmt;
  */
 public class BreakStmt:Statement {
 
-    @OptionalProperty
+    //@OptionalProperty
     private SimpleName label;
 
     public BreakStmt() {
@@ -65,20 +65,20 @@ public class BreakStmt:Statement {
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public BreakStmt(TokenRange tokenRange, SimpleName label) {
-        super(tokenRange);
+        base(tokenRange);
         setLabel(label);
         customInitialization();
     }
 
     //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
     //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 

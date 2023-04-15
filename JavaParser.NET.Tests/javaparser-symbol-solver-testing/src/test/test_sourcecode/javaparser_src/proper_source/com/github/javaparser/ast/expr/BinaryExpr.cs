@@ -65,7 +65,7 @@ public /*final*/class BinaryExpr:Expression {
     }
 
     public BinaryExpr(int beginLine, int beginColumn, int endLine, int endColumn, Expression left, Expression right, Operator op) {
-        super(beginLine, beginColumn, endLine, endColumn);
+        base(beginLine, beginColumn, endLine, endColumn);
     	setLeft(left);
     	setRight(right);
     	setOperator(op);

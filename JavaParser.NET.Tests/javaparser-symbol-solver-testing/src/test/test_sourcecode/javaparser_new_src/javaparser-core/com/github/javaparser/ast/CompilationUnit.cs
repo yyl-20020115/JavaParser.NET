@@ -62,7 +62,7 @@ public /*final*/class CompilationUnit:Node {
 
     public CompilationUnit(Range range, PackageDeclaration pakage, List<ImportDeclaration> imports,
                            List<TypeDeclaration<?>> types) {
-        super(range);
+        base(range);
         setPackage(pakage);
         setImports(imports);
         setTypes(types);
@@ -208,7 +208,7 @@ public /*final*/class CompilationUnit:Node {
      * @param clazz the class to import
      * @return this, the {@link CompilationUnit}
      */
-    public CompilationUnit addImport(Class<?> clazz) {
+    public CompilationUnit addImport(Type clazz) {
         if (ClassUtils.isPrimitiveOrWrapper(clazz) || clazz.getName().startsWith("java.lang"))
             return this;
         else if (clazz.isArray() && !ClassUtils.isPrimitiveOrWrapper(clazz.getComponentType())

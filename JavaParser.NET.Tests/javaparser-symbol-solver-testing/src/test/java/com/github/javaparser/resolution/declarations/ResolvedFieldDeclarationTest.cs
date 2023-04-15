@@ -30,7 +30,7 @@ public interface ResolvedFieldDeclarationTest:ResolvedValueDeclarationTest, HasA
      *
      * @return The non-static value.
      */
-    @Override
+    //@Override
     ResolvedFieldDeclaration createValue();
 
     /**

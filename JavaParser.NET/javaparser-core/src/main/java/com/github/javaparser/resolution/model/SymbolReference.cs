@@ -116,11 +116,11 @@ public class SymbolReference<S:ResolvedDeclaration> {
     /**
      * Is the reference solved?
      */
-    public boolean isSolved() {
+    public bool isSolved() {
         return getDeclaration().isPresent();
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "SymbolReference{" + correspondingDeclaration + "}";
     }

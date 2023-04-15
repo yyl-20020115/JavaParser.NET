@@ -39,7 +39,7 @@ public class ListAdditionChange implements Change {
         this.nodeAdded = nodeAdded;
     }
 
-    @Override
+    //@Override
     public Object getValue(ObservableProperty property, Node node) {
         if (property == observableProperty) {
             Object currentRawValue = new NoChange().getValue(property, node);

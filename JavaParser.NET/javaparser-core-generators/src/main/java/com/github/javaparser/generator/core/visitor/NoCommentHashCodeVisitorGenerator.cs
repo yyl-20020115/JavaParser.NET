@@ -27,10 +27,10 @@ namespace com.github.javaparser.generator.core.visitor;
 public class NoCommentHashCodeVisitorGenerator:VisitorGenerator {
 
     public NoCommentHashCodeVisitorGenerator(SourceRoot sourceRoot) {
-        super(sourceRoot, "com.github.javaparser.ast.visitor", "NoCommentHashCodeVisitor", "Integer", "Void", true);
+        base(sourceRoot, "com.github.javaparser.ast.visitor", "NoCommentHashCodeVisitor", "Integer", "Void", true);
     }
 
-    @Override
+    //@Override
     protected void generateVisitMethodBody(BaseNodeMetaModel node, MethodDeclaration visitMethod,
                                            CompilationUnit compilationUnit) {
         visitMethod.getParameters().forEach(p -> p.setFinal(true));
@@ -62,7 +62,7 @@ public class NoCommentHashCodeVisitorGenerator:VisitorGenerator {
                         builder.append("(n.%s.accept(this, arg))", getter);
                     }
                 } else {
-                    Class<?> type = field.getType();
+                    Type type = field.getType();
                     if (type.equals(boolean.class)) {
                         builder.append("(n.%s?1:0)", getter);
                     } else if (type.equals(int.class)) {

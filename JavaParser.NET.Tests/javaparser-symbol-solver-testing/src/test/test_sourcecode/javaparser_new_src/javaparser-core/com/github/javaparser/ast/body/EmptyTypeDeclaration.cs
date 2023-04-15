@@ -29,19 +29,19 @@ namespace com.github.javaparser.ast.body;
 public /*final*/class EmptyTypeDeclaration:TypeDeclaration<EmptyTypeDeclaration> {
 
     public EmptyTypeDeclaration() {
-        super(null, EnumSet.noneOf(Modifier.class), null, null);
+        base(null, EnumSet.noneOf(Modifier.class), null, null);
     }
 
     public EmptyTypeDeclaration(Range range) {
-        super(range, null, EnumSet.noneOf(Modifier.class), null, null);
+        base(range, null, EnumSet.noneOf(Modifier.class), null, null);
     }
 
-    @Override
+    //@Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }

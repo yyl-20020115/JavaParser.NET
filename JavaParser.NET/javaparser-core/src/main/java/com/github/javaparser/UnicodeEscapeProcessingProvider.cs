@@ -46,7 +46,7 @@ public class UnicodeEscapeProcessingProvider implements Provider {
      */
     private int _pos = 0;
 
-    private boolean _backslashSeen;
+    private bool _backslashSeen;
 
     private /*final*/LineCounter _inputLine = new LineCounter();
 
@@ -85,7 +85,7 @@ public class UnicodeEscapeProcessingProvider implements Provider {
         return _outputLine;
     }
 
-    @Override
+    //@Override
     public int read(char[] buffer, /*final*/int offset, int len){
         int pos = offset;
         int stop = offset + len;
@@ -106,7 +106,7 @@ public class UnicodeEscapeProcessingProvider implements Provider {
         return pos - offset;
     }
 
-    @Override
+    //@Override
     public void close(){
         _input.close();
     }
@@ -266,7 +266,7 @@ public class UnicodeEscapeProcessingProvider implements Provider {
         return _data[_pos++];
     }
 
-    private boolean isBufferEmpty() {
+    private bool isBufferEmpty() {
         return _pos >= _len;
     }
 
@@ -323,13 +323,13 @@ public class UnicodeEscapeProcessingProvider implements Provider {
          * Creates a {@link UnicodeEscapeProcessingProvider.PositionMapping}.
          */
         public PositionMapping() {
-            super();
+            base();
         }
 
         /**
          * Whether this is the identity transformation.
          */
-        public boolean isEmpty() {
+        public bool isEmpty() {
             return _deltas.isEmpty();
         }
 
@@ -368,17 +368,17 @@ public class UnicodeEscapeProcessingProvider implements Provider {
              */
             PositionUpdate NONE = new PositionUpdate() {
 
-                @Override
+                //@Override
                 public int transformLine(int line) {
                     return line;
                 }
 
-                @Override
+                //@Override
                 public int transformColumn(int column) {
                     return column;
                 }
 
-                @Override
+                //@Override
                 public Position transform(Position pos) {
                     return pos;
                 }
@@ -424,22 +424,22 @@ public class UnicodeEscapeProcessingProvider implements Provider {
              * Creates a {@link PositionUpdate}.
              */
             public DeltaInfo(int line, int column, int lineDelta, int columnDelta) {
-                super(line, column);
+                base(line, column);
                 _lineDelta = lineDelta;
                 _columnDelta = columnDelta;
             }
 
-            @Override
+            //@Override
             public int transformLine(int sourceLine) {
                 return sourceLine + _lineDelta;
             }
 
-            @Override
+            //@Override
             public int transformColumn(int sourceColumn) {
                 return sourceColumn + _columnDelta;
             }
 
-            @Override
+            //@Override
             public string toString() {
                 return "(" + line + ", " + column + ": " + _lineDelta + ", " + _columnDelta + ")";
             }
@@ -519,7 +519,7 @@ public class UnicodeEscapeProcessingProvider implements Provider {
         /**
          * Whether {@link #CR} has been seen on the input as last character.
          */
-        private boolean _crSeen;
+        private bool _crSeen;
 
         private int _line = 1;
 
@@ -529,7 +529,7 @@ public class UnicodeEscapeProcessingProvider implements Provider {
          * Creates a {@link UnicodeEscapeProcessingProvider.LineCounter}.
          */
         public LineCounter() {
-            super();
+            base();
         }
 
         /**

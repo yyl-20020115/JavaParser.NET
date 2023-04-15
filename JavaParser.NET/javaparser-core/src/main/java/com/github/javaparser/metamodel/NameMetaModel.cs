@@ -36,7 +36,7 @@ public class NameMetaModel:NodeMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     NameMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, Name.class, "Name", "com.github.javaparser.ast.expr", false, false);
+        base(superBaseNodeMetaModel, Name.class, "Name", "com.github.javaparser.ast.expr", false, false);
     }
 
     public PropertyMetaModel identifierPropertyMetaModel;

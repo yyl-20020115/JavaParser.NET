@@ -36,7 +36,7 @@ public class BlockStmtMetaModel:StatementMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     BlockStmtMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, BlockStmt.class, "BlockStmt", "com.github.javaparser.ast.stmt", false, false);
+        base(superBaseNodeMetaModel, BlockStmt.class, "BlockStmt", "com.github.javaparser.ast.stmt", false, false);
     }
 
     public PropertyMetaModel statementsPropertyMetaModel;

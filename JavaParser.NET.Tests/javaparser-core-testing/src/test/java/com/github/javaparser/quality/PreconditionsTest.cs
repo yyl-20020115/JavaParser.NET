@@ -32,7 +32,7 @@ class PreconditionsTest {
 
 	[TestMethod]
 	void checkArgument_withFalseExpression() {
-		assertThrows(IllegalArgumentException.class, () -> checkArgument(false));
+		assertThrows(ArgumentException.class, () -> checkArgument(false));
 	}
 
 	[TestMethod]
@@ -42,7 +42,7 @@ class PreconditionsTest {
 
 	[TestMethod]
 	void checkNotNull_withNull() {
-		assertThrows(IllegalArgumentException.class, () -> checkNotNull(null));
+		assertThrows(ArgumentException.class, () -> checkNotNull(null));
 	}
 
 }

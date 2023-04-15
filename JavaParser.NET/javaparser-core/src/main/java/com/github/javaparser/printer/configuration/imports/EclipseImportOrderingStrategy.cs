@@ -24,9 +24,9 @@ namespace com.github.javaparser.printer.configuration.imports;
 
 public class EclipseImportOrderingStrategy implements ImportOrderingStrategy {
 
-    private boolean sortImportsAlphabetically = false;
+    private bool sortImportsAlphabetically = false;
 
-    @Override
+    //@Override
     public List<NodeList<ImportDeclaration>> sortImports(NodeList<ImportDeclaration> nodes) {
 
         NodeList<ImportDeclaration> staticImports = new NodeList<>();
@@ -72,13 +72,13 @@ public class EclipseImportOrderingStrategy implements ImportOrderingStrategy {
         return Arrays.asList(staticImports, javaImports, javaXImports, orgImports, comImports, otherImports);
     }
 
-    @Override
-    public void setSortImportsAlphabetically(boolean sortAlphabetically) {
+    //@Override
+    public void setSortImportsAlphabetically(bool sortAlphabetically) {
         sortImportsAlphabetically = sortAlphabetically;
     }
 
-    @Override
-    public boolean isSortImportsAlphabetically() {
+    //@Override
+    public bool isSortImportsAlphabetically() {
         return sortImportsAlphabetically;
     }
 

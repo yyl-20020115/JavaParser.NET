@@ -41,7 +41,7 @@ class CommentsInserter {
      * Comments are attributed to the thing they comment and are removed from
      * the comments.
      */
-    private void insertComments(CompilationUnit cu, TreeSet<Comment> comments) {
+    private void insertComments(CompilationUnit cu, HashSet<Comment> comments) {
         if (comments.isEmpty())
             return;
 
@@ -69,7 +69,7 @@ class CommentsInserter {
      * This method try to attributes the nodes received to child of the node. It
      * returns the node that were not attributed.
      */
-    void insertComments(Node node, TreeSet<Comment> commentsToAttribute) {
+    void insertComments(Node node, HashSet<Comment> commentsToAttribute) {
         if (commentsToAttribute.isEmpty())
             return;
         
@@ -89,7 +89,7 @@ class CommentsInserter {
         PositionUtils.sortByBeginPosition(children);
 
         for (Node child : children) {
-            TreeSet<Comment> commentsInsideChild = new TreeSet<>(NODE_BY_BEGIN_POSITION);
+            HashSet<Comment> commentsInsideChild = new HashSet<>(NODE_BY_BEGIN_POSITION);
             for (Comment c : commentsToAttribute) {
                 if (PositionUtils.nodeContains(child, c,
                         configuration.doNotConsiderAnnotationsAsNodeStartForCodeAttribution)) {
@@ -153,7 +153,7 @@ class CommentsInserter {
         }
     }
 
-    private boolean attributeLineCommentToNodeOrChild(Node node, LineComment lineComment) {
+    private bool attributeLineCommentToNodeOrChild(Node node, LineComment lineComment) {
         // The node start and end at the same line as the comment,
         // let's give to it the comment
         if (node.getBegin().line == lineComment.getBegin().line
@@ -180,7 +180,7 @@ class CommentsInserter {
         }
     }
 
-    private boolean thereAreLinesBetween(Node a, Node b) {
+    private bool thereAreLinesBetween(Node a, Node b) {
         if (!PositionUtils.areInOrder(a, b)) {
             return thereAreLinesBetween(b, a);
         }

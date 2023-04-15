@@ -70,27 +70,27 @@ public /*final*/class ModifierSet {
         return modifiers | mod;
     }
 
-    public static boolean hasModifier(int modifiers, int modifier) {
+    public static bool hasModifier(int modifiers, int modifier) {
         return (modifiers & modifier) != 0;
     }
 
-    public static boolean isAbstract(int modifiers) {
+    public static bool isAbstract(int modifiers) {
         return (modifiers & ABSTRACT) != 0;
     }
 
-    public static boolean isFinal(int modifiers) {
+    public static bool isFinal(int modifiers) {
         return (modifiers & FINAL) != 0;
     }
 
-    public static boolean isNative(int modifiers) {
+    public static bool isNative(int modifiers) {
         return (modifiers & NATIVE) != 0;
     }
 
-    public static boolean isPrivate(int modifiers) {
+    public static bool isPrivate(int modifiers) {
         return (modifiers & PRIVATE) != 0;
     }
 
-    public static boolean isProtected(int modifiers) {
+    public static bool isProtected(int modifiers) {
         return (modifiers & PROTECTED) != 0;
     }
 
@@ -101,31 +101,31 @@ public /*final*/class ModifierSet {
      * @param modifiers indicator
      * @return true if modifier denotes package level access
      */
-    public static boolean hasPackageLevelAccess(int modifiers) {
+    public static bool hasPackageLevelAccess(int modifiers) {
         return !isPublic(modifiers) && !isProtected(modifiers) && !isPrivate(modifiers);
     }
 
-    public static boolean isPublic(int modifiers) {
+    public static bool isPublic(int modifiers) {
         return (modifiers & PUBLIC) != 0;
     }
 
-    public static boolean isStatic(int modifiers) {
+    public static bool isStatic(int modifiers) {
         return (modifiers & STATIC) != 0;
     }
 
-    public static boolean isStrictfp(int modifiers) {
+    public static bool isStrictfp(int modifiers) {
         return (modifiers & STRICTFP) != 0;
     }
 
-    public static boolean isSynchronized(int modifiers) {
+    public static bool isSynchronized(int modifiers) {
         return (modifiers & SYNCHRONIZED) != 0;
     }
 
-    public static boolean isTransient(int modifiers) {
+    public static bool isTransient(int modifiers) {
         return (modifiers & TRANSIENT) != 0;
     }
 
-    public static boolean isVolatile(int modifiers) {
+    public static bool isVolatile(int modifiers) {
         return (modifiers & VOLATILE) != 0;
     }
 

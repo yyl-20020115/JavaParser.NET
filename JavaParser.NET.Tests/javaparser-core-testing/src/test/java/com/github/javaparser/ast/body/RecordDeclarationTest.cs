@@ -607,7 +607,7 @@ public class RecordDeclarationTest {
                 "\n" +
                 "  public Range {\n" +
                 "    if (lo > hi)  /* referring here to the implicit constructor parameters */\n" +
-                "      throw new IllegalArgumentException(String.format(\"(%d,%d)\", lo, hi));\n" +
+                "      throw new ArgumentException(String.format(\"(%d,%d)\", lo, hi));\n" +
                 "  }\n" +
                 "}"
         );

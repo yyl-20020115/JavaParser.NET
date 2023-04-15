@@ -29,7 +29,7 @@ namespace com.github.javaparser.symbolsolver.resolution.typeinference.bounds;
  *
  * @author Federico Tomassetti
  */
-public class CapturesBound extends Bound {
+public class CapturesBound:Bound {
     private List<InferenceVariable> inferenceVariables;
     private List<ResolvedType> typesOrWildcards;
 
@@ -44,7 +44,7 @@ public class CapturesBound extends Bound {
     }
 
     //@Override
-    public Set<InferenceVariable> usedInferenceVariables() {
+    public HashSet<InferenceVariable> usedInferenceVariables() {
         throw new UnsupportedOperationException();
     }
 

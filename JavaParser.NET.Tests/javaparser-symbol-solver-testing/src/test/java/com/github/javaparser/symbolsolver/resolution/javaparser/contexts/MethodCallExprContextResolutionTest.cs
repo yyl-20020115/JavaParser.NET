@@ -142,7 +142,7 @@ class MethodCallExprContextResolutionTest:AbstractResolutionTest {
 				.setSymbolResolver(new JavaSymbolSolver(typeSolver));
 		StaticJavaParser.setConfiguration(config);
 		CompilationUnit cu = parseSample("Issue2667");
-		Set<MethodCallExpr> methodCallExpr = new HashSet<>(cu.findAll(MethodCallExpr.class));
+		HashSet<MethodCallExpr> methodCallExpr = new HashSet<>(cu.findAll(MethodCallExpr.class));
 
 		int errorCount = 0;
 

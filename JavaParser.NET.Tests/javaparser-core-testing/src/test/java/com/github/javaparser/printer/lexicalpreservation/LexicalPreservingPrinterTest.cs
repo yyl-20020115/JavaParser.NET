@@ -1043,7 +1043,7 @@ class LexicalPreservingPrinterTest:AbstractLexicalPreservingTest {
     }
 
     static class AddFooCallModifierVisitor:ModifierVisitor<Void> {
-        @Override
+        //@Override
         public Visitable visit(MethodCallExpr n, Void arg) {
             // Add a call to foo() on every found method call
             return new MethodCallExpr(n, "foo");
@@ -1064,7 +1064,7 @@ class LexicalPreservingPrinterTest:AbstractLexicalPreservingTest {
     }
 
     static class CallModifierVisitor:ModifierVisitor<Void> {
-        @Override
+        //@Override
         public Visitable visit(MethodCallExpr n, Void arg) {
             // Add a call to foo() on every found method call
             return new MethodCallExpr(n.clone(), "foo");
@@ -1303,8 +1303,8 @@ class LexicalPreservingPrinterTest:AbstractLexicalPreservingTest {
 
     [TestMethod]
     public void testReplaceBooleanLiteral() {
-        considerStatement("boolean x = true;");
-        string expected = "boolean x = false;";
+        considerStatement("bool x = true;");
+        string expected = "bool x = false;";
 
         statement.findAll(BooleanLiteralExpr.class).forEach(booleanLiteralExpr -> {
             booleanLiteralExpr.setValue(false);

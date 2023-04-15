@@ -37,18 +37,18 @@ public interface SwitchNode {
 
     SwitchNode setSelector(Expression selector);
 
-    boolean remove(Node node);
+    bool remove(Node node);
 
     SwitchNode clone();
 
-    boolean replace(Node node, Node replacementNode);
+    bool replace(Node node, Node replacementNode);
 
     Optional<Comment> getComment();
 
     /**
      * @return true if there are no labels or anything contained _in this switch.
      */
-    default boolean isEmpty() {
+    default bool isEmpty() {
         return getEntries().isEmpty();
     }
     // Too bad Node isn't an interface, or this could have easily inherited all of its methods.

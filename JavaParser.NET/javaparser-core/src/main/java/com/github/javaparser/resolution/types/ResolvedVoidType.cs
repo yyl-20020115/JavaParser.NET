@@ -32,13 +32,13 @@ public class ResolvedVoidType implements ResolvedType {
     private ResolvedVoidType() {
     }
 
-    @Override
+    //@Override
     public string describe() {
         return "void";
     }
 
-    @Override
-    public boolean isAssignableBy(ResolvedType other) {
+    //@Override
+    public bool isAssignableBy(ResolvedType other) {
         // According to https://docs.oracle.com/javase/specs/jls/se16/html/jls-14.html#jls-14.8:
         // """
         // Note that the Java programming language does not allow a "cast to void" - void is not a type - so the
@@ -53,12 +53,12 @@ public class ResolvedVoidType implements ResolvedType {
         return false;
     }
 
-    @Override
-    public boolean isVoid() {
+    //@Override
+    public bool isVoid() {
         return true;
     }
 
-    @Override
+    //@Override
     public string toDescriptor() {
         return "V";
     }

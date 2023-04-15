@@ -34,10 +34,10 @@ public abstract class VisitorGenerator:Generator {
     private /*final*/string visitorClassName;
     private /*final*/string returnType;
     private /*final*/string argumentType;
-    private /*final*/boolean createMissingVisitMethods;
+    private /*final*/bool createMissingVisitMethods;
 
-    protected VisitorGenerator(SourceRoot sourceRoot, string pkg, string visitorClassName, string returnType, string argumentType, boolean createMissingVisitMethods) {
-        super(sourceRoot);
+    protected VisitorGenerator(SourceRoot sourceRoot, string pkg, string visitorClassName, string returnType, string argumentType, bool createMissingVisitMethods) {
+        base(sourceRoot);
         this.pkg = pkg;
         this.visitorClassName = visitorClassName;
         this.returnType = returnType;

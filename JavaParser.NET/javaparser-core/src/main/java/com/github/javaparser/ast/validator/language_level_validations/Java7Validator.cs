@@ -45,7 +45,7 @@ public class Java7Validator:Java6Validator {
     });
 
     public Java7Validator() {
-        super();
+        base();
         remove(genericsWithoutDiamondOperator);
         replace(tryWithoutResources, tryWithLimitedResources);
         remove(noBinaryIntegerLiterals);

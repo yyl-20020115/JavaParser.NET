@@ -36,7 +36,7 @@ public class IntersectionTypeMetaModel:TypeMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     IntersectionTypeMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, IntersectionType.class, "IntersectionType", "com.github.javaparser.ast.type", false, false);
+        base(superBaseNodeMetaModel, IntersectionType.class, "IntersectionType", "com.github.javaparser.ast.type", false, false);
     }
 
     public PropertyMetaModel elementsPropertyMetaModel;

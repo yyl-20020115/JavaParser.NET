@@ -30,6 +30,6 @@ public abstract class LiteralExpr:Expression {
 	}
 
 	public LiteralExpr(/*final*/int beginLine, /*final*/int beginColumn, /*final*/int endLine, /*final*/int endColumn) {
-		super(beginLine, beginColumn, endLine, endColumn);
+		base(beginLine, beginColumn, endLine, endColumn);
 	}
 }

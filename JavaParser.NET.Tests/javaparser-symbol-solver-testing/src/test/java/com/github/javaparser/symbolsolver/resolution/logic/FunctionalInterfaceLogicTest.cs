@@ -39,7 +39,7 @@ class FunctionalInterfaceLogicTest:AbstractSymbolResolutionTest {
 	[TestMethod]
 	void notFunctionalBecauseItDeclaresNothingWhichIsNotAlreadyAMemberOfObject() {
 		string code = "interface NonFunc {\n"
-				+ "    boolean equals(Object obj);\n"
+				+ "    bool equals(Object obj);\n"
 				+ "}";
 
 		CompilationUnit cu = StaticJavaParser.parse(code);
@@ -57,7 +57,7 @@ class FunctionalInterfaceLogicTest:AbstractSymbolResolutionTest {
 	[TestMethod]
 	void subinterfaceCanBeFunctionalByDclaringAnAbstractMethodWhichIsNotAMemberOfObject() {
 		string code = "interface NonFunc {\n"
-				+ "    boolean equals(Object obj);\n" + "}\n"
+				+ "    bool equals(Object obj);\n" + "}\n"
 				+ "interface Func:NonFunc {\n"
 				+ "    int compare(string o1, string o2);\n" + "}";
 
@@ -76,7 +76,7 @@ class FunctionalInterfaceLogicTest:AbstractSymbolResolutionTest {
 	[TestMethod]
 	void isFunctionalBecauseItHasOneAbstractNonObjectMethod() {
 		string code = "interface Comparator<T> {\n"
-				+ "    boolean equals(Object obj);\n"
+				+ "    bool equals(Object obj);\n"
 				+ "    int compare(T o1, T o2);\n" + "}";
 
 		CompilationUnit cu = StaticJavaParser.parse(code);
@@ -247,8 +247,8 @@ class FunctionalInterfaceLogicTest:AbstractSymbolResolutionTest {
 	@Disabled("Waiting Return-Type-Substituable is fully implemented on reference type.")
 	void genericFunctionalInterfacesWithReturnTypeSubstituable() {
 		string code = "interface I    { Object m(Class c); }\r\n"
-				+ "interface J<S> { S m(Class<?> c); }\r\n"
-				+ "interface K<T> { T m(Class<?> c); }\r\n"
+				+ "interface J<S> { S m(Type c); }\r\n"
+				+ "interface K<T> { T m(Type c); }\r\n"
 				+ "interface Functional<S,T>:I, J<S>, K<T> {}";
 
 		CompilationUnit cu = StaticJavaParser.parse(code);
@@ -265,7 +265,7 @@ class FunctionalInterfaceLogicTest:AbstractSymbolResolutionTest {
 	void genericFunctionalInterfacesWithGenericParameter() {
 		string code =
 				"    public interface Foo<T>:java.util.function.Function<String, T> {\n" +
-                "        @Override\n" +
+                "        //@Override\n" +
                 "        T apply(string c);\n" +
                 "    }\n";
 

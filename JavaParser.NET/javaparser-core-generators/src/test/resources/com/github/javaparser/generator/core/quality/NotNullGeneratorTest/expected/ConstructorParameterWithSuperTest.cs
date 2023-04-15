@@ -28,7 +28,7 @@ class A {
 class B {
 
     public B(@NotNull string c) {
-        super("ok");
+        base("ok");
         Preconditions.checkNotNull(c, "Parameter c can't be null.");
     }
 }

@@ -31,7 +31,7 @@ namespace com.github.javaparser.ast.stmt;
  */
 public class ContinueStmt:Statement implements NodeWithOptionalLabel<ContinueStmt> {
 
-    @OptionalProperty
+    //@OptionalProperty
     private SimpleName label;
 
     public ContinueStmt() {
@@ -52,20 +52,20 @@ public class ContinueStmt:Statement implements NodeWithOptionalLabel<ContinueStm
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public ContinueStmt(TokenRange tokenRange, SimpleName label) {
-        super(tokenRange);
+        base(tokenRange);
         setLabel(label);
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -93,9 +93,9 @@ public class ContinueStmt:Statement implements NodeWithOptionalLabel<ContinueStm
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
-    public boolean remove(Node node) {
+    public bool remove(Node node) {
         if (node == null) {
             return false;
         }
@@ -113,21 +113,21 @@ public class ContinueStmt:Statement implements NodeWithOptionalLabel<ContinueStm
         return setLabel((SimpleName) null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public ContinueStmt clone() {
         return (ContinueStmt) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public ContinueStmtMetaModel getMetaModel() {
         return JavaParserMetaModel.continueStmtMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }
@@ -140,25 +140,25 @@ public class ContinueStmt:Statement implements NodeWithOptionalLabel<ContinueStm
         return super.replace(node, replacementNode);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isContinueStmt() {
+    public bool isContinueStmt() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public ContinueStmt asContinueStmt() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifContinueStmt(Consumer<ContinueStmt> action) {
         action.accept(this);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<ContinueStmt> toContinueStmt() {
         return Optional.of(this);

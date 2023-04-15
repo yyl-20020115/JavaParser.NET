@@ -55,7 +55,7 @@ public class IntegerLiteralExpr:LiteralStringValueExpr {
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public IntegerLiteralExpr(TokenRange tokenRange, string value) {
-        super(tokenRange, value);
+        base(tokenRange, value);
         customInitialization();
     }
 
@@ -68,15 +68,15 @@ public class IntegerLiteralExpr:LiteralStringValueExpr {
         this(null, String.valueOf(value));
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -139,37 +139,37 @@ public class IntegerLiteralExpr:LiteralStringValueExpr {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public IntegerLiteralExpr clone() {
         return (IntegerLiteralExpr) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public IntegerLiteralExprMetaModel getMetaModel() {
         return JavaParserMetaModel.integerLiteralExprMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isIntegerLiteralExpr() {
+    public bool isIntegerLiteralExpr() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public IntegerLiteralExpr asIntegerLiteralExpr() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifIntegerLiteralExpr(Consumer<IntegerLiteralExpr> action) {
         action.accept(this);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<IntegerLiteralExpr> toIntegerLiteralExpr() {
         return Optional.of(this);

@@ -46,7 +46,7 @@ public abstract class Bound {
      * A bound is satisfied by an inference variable substitution if, after applying the substitution,
      * the assertion is true.
      */
-    public abstract boolean isSatisfied(InferenceVariableSubstitution inferenceVariableSubstitution);
+    public abstract bool isSatisfied(InferenceVariableSubstitution inferenceVariableSubstitution);
 
     ///
     /// Classification of bounds
@@ -62,7 +62,7 @@ public abstract class Bound {
         return Optional.empty();
     }
 
-    boolean isAnInstantiationFor(InferenceVariable v) {
+    bool isAnInstantiationFor(InferenceVariable v) {
         return isAnInstantiation().isPresent() && isAnInstantiation().get().getInferenceVariable().equals(v);
     }
 
@@ -108,11 +108,11 @@ public abstract class Bound {
      * Other bounds relate two inference variables, or an inference variable to a type that contains inference
      * variables. Such bounds, of the form S = T or S &lt;: T, are called dependencies.
      */
-    public boolean isADependency() {
+    public bool isADependency() {
         return false;
     }
 
-    boolean isThrowsBoundOn(InferenceVariable inferenceVariable) {
+    bool isThrowsBoundOn(InferenceVariable inferenceVariable) {
         return false;
     }
 
@@ -120,5 +120,5 @@ public abstract class Bound {
     /// Other methods
     ///
 
-    public abstract Set<InferenceVariable> usedInferenceVariables();
+    public abstract HashSet<InferenceVariable> usedInferenceVariables();
 }

@@ -70,7 +70,7 @@ public class CsmList implements CsmElement {
         this.following = following;
     }
 
-    @Override
+    //@Override
     public void prettyPrint(Node node, SourcePrinter printer) {
         if (property.isAboutNodes()) {
             NodeList<?:Node> nodeList = property.getValueAsMultipleReference(node);
@@ -115,7 +115,7 @@ public class CsmList implements CsmElement {
         }
     }
 
-    @Override
+    //@Override
     public string toString() {
         return String.format("%s(property:%s)", this.getClass().getSimpleName(), getProperty());
     }

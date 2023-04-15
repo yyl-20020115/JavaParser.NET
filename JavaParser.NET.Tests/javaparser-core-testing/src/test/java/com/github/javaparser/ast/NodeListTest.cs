@@ -30,7 +30,7 @@ class NodeListTest:AbstractLexicalPreservingTest {
     void replace() {
         /*final*/NodeList<Name> list = nodeList(new Name("a"), new Name("b"), new Name("c"));
 
-        /*final*/boolean replaced = list.replace(new Name("b"), new Name("z"));
+        /*final*/bool replaced = list.replace(new Name("b"), new Name("z"));
 
         assertTrue(replaced);
         assertEquals(3, list.size());
@@ -165,22 +165,22 @@ class NodeListTest:AbstractLexicalPreservingTest {
             List<String> listChanges;
             List<String> listReplacements;
             AstObserver testObserver = new AstObserver() {
-                @Override
+                //@Override
                 public void propertyChange(Node observedNode, ObservableProperty property, Object oldValue, Object newValue) {
                     propertyChanges.add(String.format("%s.%s changed from %s to %s", observedNode.getClass().getSimpleName(), property.name().toLowerCase(), oldValue, newValue));
                 }
 
-                @Override
+                //@Override
                 public void parentChange(Node observedNode, Node previousParent, Node newParent) {
                     parentChanges.add(String.format("%s 's parent changed from %s to %s", observedNode.getClass().getSimpleName(), previousParent, newParent));
                 }
 
-                @Override
+                //@Override
                 public void listChange(NodeList<?> observedNode, ListChangeType type, int index, Node nodeAddedOrRemoved) {
                     listChanges.add(String.format("%s %s to/from %s at position %d", nodeAddedOrRemoved.getClass().getSimpleName(), type.name(), observedNode.getClass().getSimpleName(), index));
                 }
 
-                @Override
+                //@Override
                 public void listReplacement(NodeList<?> observedNode, int index, Node oldNode, Node newNode) {
                     listReplacements.add(String.format("%s replaced within %s at position %d", newNode.getClass().getSimpleName(), observedNode.getClass().getSimpleName(), index));
                 }
@@ -355,7 +355,7 @@ class NodeListTest:AbstractLexicalPreservingTest {
             void whenSet() {
                 assertFalse(iterator.hasNext());
                 assertFalse(iterator.hasPrevious());
-                assertThrows(IllegalArgumentException.class, () -> {
+                assertThrows(ArgumentException.class, () -> {
                     // Note that the cursor is initially at -1, thus not possible to set the value here
                     iterator.set(new Name("abc"));
                 });

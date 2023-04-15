@@ -92,7 +92,7 @@
   Line 258) sb.append(" ") ==> java.lang.StringBuffer
   Line 259) sb.append(getName()) ==> java.lang.StringBuffer
   Line 260) sb.append("(") ==> java.lang.StringBuffer
-  Line 261) boolean firstParam = true ==> boolean
+  Line 261) bool firstParam = true ==> boolean
   Line 261) true ==> boolean
   Line 262) Parameter param ==> com.github.javaparser.ast.body.Parameter
   Line 262) getParameters() ==> java.util.List<com.github.javaparser.ast.body.Parameter>
@@ -106,7 +106,7 @@
   Line 274) sb.append("...") ==> java.lang.StringBuffer
   Line 278) sb.append(")") ==> java.lang.StringBuffer
   Line 279) includingThrows ==> boolean
-  Line 280) boolean firstThrow = true ==> boolean
+  Line 280) bool firstThrow = true ==> boolean
   Line 280) true ==> boolean
   Line 281) NameExpr thr ==> com.github.javaparser.ast.expr.NameExpr
   Line 281) getThrows() ==> java.util.List<com.github.javaparser.ast.expr.NameExpr>

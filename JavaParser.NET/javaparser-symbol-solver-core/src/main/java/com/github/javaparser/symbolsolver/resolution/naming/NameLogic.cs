@@ -32,20 +32,20 @@ public class NameLogic {
     /**
      * Is the given node a non-qualified name?
      *
-     * @throws IllegalArgumentException if the node is not a name
+     * @throws ArgumentException if the node is not a name
      */
-    public static boolean isSimpleName(Node node) {
+    public static bool isSimpleName(Node node) {
         return !isQualifiedName(node);
     }
 
     /**
      * Is the given node a qualified name?
      *
-     * @throws IllegalArgumentException if the node is not a name
+     * @throws ArgumentException if the node is not a name
      */
-    public static boolean isQualifiedName(Node node) {
+    public static bool isQualifiedName(Node node) {
         if (!isAName(node)) {
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         }
         return nameAsString(node).contains(".");
     }
@@ -56,7 +56,7 @@ public class NameLogic {
      * Note that while most specific AST classes either always represent names or never represent names
      * there are exceptions as the FieldAccessExpr
      */
-    public static boolean isAName(Node node) {
+    public static bool isAName(Node node) {
         if (node is FieldAccessExpr) {
             FieldAccessExpr fieldAccessExpr = (FieldAccessExpr) node;
             return isAName(fieldAccessExpr.getScope());
@@ -92,10 +92,10 @@ public class NameLogic {
      */
     public static NameRole classifyRole(Node name) {
         if (!isAName(name)) {
-            throw new IllegalArgumentException("The given node is not a name");
+            throw new ArgumentException("The given node is not a name");
         }
         if (!name.getParentNode().isPresent()) {
-            throw new IllegalArgumentException("We cannot understand the role of a name if it has no parent");
+            throw new ArgumentException("We cannot understand the role of a name if it has no parent");
         }
         if (whenParentIs(Name.class, name, (p, c) -> p.getQualifier().isPresent() && p.getQualifier().get() == c)) {
             return classifyRole(name.getParentNode().get());
@@ -291,10 +291,10 @@ public class NameLogic {
 
     public static NameCategory classifyReference(Node name, TypeSolver typeSolver) {
         if (!name.getParentNode().isPresent()) {
-            throw new IllegalArgumentException("We cannot understand the category of a name if it has no parent");
+            throw new ArgumentException("We cannot understand the category of a name if it has no parent");
         }
         if (classifyRole(name) != NameRole.REFERENCE) {
-            throw new IllegalArgumentException("This method can be used only to classify names used as references");
+            throw new ArgumentException("This method can be used only to classify names used as references");
         }
 
         // JLS 6.5
@@ -320,7 +320,7 @@ public class NameLogic {
     private static NameCategory reclassificationOfContextuallyAmbiguousNames(Node name, NameCategory ambiguousCategory,
                                                                              TypeSolver typeSolver) {
         if (!ambiguousCategory.isNeedingDisambiguation()) {
-            throw new IllegalArgumentException("The Name Category is not ambiguous: " + ambiguousCategory);
+            throw new ArgumentException("The Name Category is not ambiguous: " + ambiguousCategory);
         }
         if (ambiguousCategory == NameCategory.AMBIGUOUS_NAME && isSimpleName(name)) {
             return reclassificationOfContextuallyAmbiguousSimpleAmbiguousName(name, typeSolver);
@@ -541,7 +541,7 @@ public class NameLogic {
                 + name.getParentNode().get().getClass().getSimpleName() + ". See " + name + " at " + name.getRange());
     }
 
-    private static boolean isSyntacticallyAAmbiguousName(Node name) {
+    private static bool isSyntacticallyAAmbiguousName(Node name) {
         // A name is syntactically classified as an AmbiguousName _in these contexts:
         //
         // 1. To the left of the "." _in a qualified ExpressionName
@@ -570,7 +570,7 @@ public class NameLogic {
         return false;
     }
 
-    private static boolean isSyntacticallyAPackageOrTypeName(Node name) {
+    private static bool isSyntacticallyAPackageOrTypeName(Node name) {
         // A name is syntactically classified as a PackageOrTypeName _in these contexts:
         //
         // 1. To the left of the "." _in a qualified TypeName
@@ -589,7 +589,7 @@ public class NameLogic {
         return false;
     }
 
-    private static boolean isSyntacticallyAMethodName(Node name) {
+    private static bool isSyntacticallyAMethodName(Node name) {
         // A name is syntactically classified as a MethodName _in this context:
         //
         // 1. Before the "(" _in a method invocation expression (§15.12)
@@ -601,7 +601,7 @@ public class NameLogic {
         return false;
     }
 
-    private static boolean isSyntacticallyAModuleName(Node name) {
+    private static bool isSyntacticallyAModuleName(Node name) {
         // A name is syntactically classified as a ModuleName _in these contexts:
         //
         // 1. In a requires directive _in a module declaration (§7.7.1)
@@ -622,7 +622,7 @@ public class NameLogic {
         return false;
     }
 
-    private static boolean isSyntacticallyAPackageName(Node name) {
+    private static bool isSyntacticallyAPackageName(Node name) {
         // A name is syntactically classified as a PackageName _in these contexts:
         //
         // 1. To the right of exports or opens _in a module declaration
@@ -641,7 +641,7 @@ public class NameLogic {
         return false;
     }
 
-    private static boolean isSyntacticallyATypeName(Node name) {
+    private static bool isSyntacticallyATypeName(Node name) {
         // A name is syntactically classified as a TypeName _in these contexts:
         //
         // The first eleven non-generic contexts (§6.1):
@@ -854,7 +854,7 @@ public class NameLogic {
         return false;
     }
 
-    private static boolean isSyntacticallyAnExpressionName(Node name) {
+    private static bool isSyntacticallyAnExpressionName(Node name) {
         // A name is syntactically classified as an ExpressionName _in these contexts:
         //
         // 1. As the qualifying expression _in a qualified superclass constructor invocation (§8.8.7.1)
@@ -961,7 +961,7 @@ public class NameLogic {
      */
     public static string nameAsString(Node name) {
         if (!isAName(name)) {
-            throw new IllegalArgumentException("A name was expected");
+            throw new ArgumentException("A name was expected");
         }
         if (name is Name) {
             return ((Name) name).asString();
@@ -974,7 +974,7 @@ public class NameLogic {
             if (isAName(fieldAccessExpr.getScope())) {
                 return nameAsString(fieldAccessExpr.getScope()) + "." + nameAsString(fieldAccessExpr.getName());
             } else {
-                throw new IllegalArgumentException();
+                throw new ArgumentException();
             }
         } else if (name is NameExpr) {
             return ((NameExpr) name).getNameAsString();
@@ -985,14 +985,14 @@ public class NameLogic {
     }
 
     private interface PredicateOnParentAndChild<P:Node, C:Node> {
-        boolean isSatisfied(P parent, C child);
+        bool isSatisfied(P parent, C child);
     }
 
-    private static <P:Node, C:Node> boolean whenParentIs(Class<P> parentClass, C child) {
+    private static <P:Node, C:Node> bool whenParentIs(Class<P> parentClass, C child) {
         return whenParentIs(parentClass, child, (p, c) -> true);
     }
 
-    private static <P:Node, C:Node> boolean whenParentIs(
+    private static <P:Node, C:Node> bool whenParentIs(
             Class<P> parentClass,
             C child,
             PredicateOnParentAndChild<P, C> predicate) {

@@ -42,8 +42,8 @@ class InitializeConstructorParametersStatementsGenerator {
         }
     }
 
-    private Field findFieldInClass(Class<?> nodeClass, string name) {
-        Class<?> searchClass = nodeClass;
+    private Field findFieldInClass(Type nodeClass, string name) {
+        Type searchClass = nodeClass;
         do {
             for (Field field : searchClass.getDeclaredFields()) {
                 if (field.getName().equals(name)) {

@@ -30,7 +30,7 @@ public abstract class AbstractMethodLikeDeclarationContext
         <T:Node & NodeWithParameters<T> & NodeWithTypeParameters<T>>:AbstractJavaParserContext<T> {
 
     public AbstractMethodLikeDeclarationContext(T wrappedNode, TypeSolver typeSolver) {
-        super(wrappedNode, typeSolver);
+        base(wrappedNode, typeSolver);
     }
 
     

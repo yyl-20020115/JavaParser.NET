@@ -47,7 +47,7 @@ class MethodsResolutionTest:AbstractResolutionTest {
         MethodCallExpr assertCall = (MethodCallExpr) ((ExpressionStmt) ((BlockStmt) ifStmt.getThenStmt()).getStatement(0)).getExpression();
         MethodCallExpr formatCall = (MethodCallExpr) assertCall.getArguments().get(0);
 
-        boolean exception1, exception2, exception3, exception4;
+        bool exception1, exception2, exception3, exception4;
         try {
             formatCall.resolve();
             exception1 = false;

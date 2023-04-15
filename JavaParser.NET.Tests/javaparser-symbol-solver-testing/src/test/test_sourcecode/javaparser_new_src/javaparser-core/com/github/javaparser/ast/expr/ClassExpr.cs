@@ -42,7 +42,7 @@ public /*final*/class ClassExpr:Expression implements NodeWithType<ClassExpr> {
     }
 
     public ClassExpr(Range range, Type type) {
-        super(range);
+        base(range);
         setType(type);
     }
 

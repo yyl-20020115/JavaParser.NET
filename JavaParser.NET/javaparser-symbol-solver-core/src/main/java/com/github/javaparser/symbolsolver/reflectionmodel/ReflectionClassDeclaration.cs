@@ -33,7 +33,7 @@ public class ReflectionClassDeclaration:AbstractClassDeclaration
     /// Fields
     ///
 
-    private Class<?> clazz;
+    private Type clazz;
     private TypeSolver typeSolver;
     private ReflectionClassAdapter reflectionClassAdapter;
 
@@ -41,21 +41,21 @@ public class ReflectionClassDeclaration:AbstractClassDeclaration
     /// Constructors
     ///
 
-    public ReflectionClassDeclaration(Class<?> clazz, TypeSolver typeSolver) {
+    public ReflectionClassDeclaration(Type clazz, TypeSolver typeSolver) {
         if (clazz == null) {
-            throw new IllegalArgumentException("Class should not be null");
+            throw new ArgumentException("Class should not be null");
         }
         if (clazz.isInterface()) {
-            throw new IllegalArgumentException("Class should not be an interface");
+            throw new ArgumentException("Class should not be an interface");
         }
         if (clazz.isPrimitive()) {
-            throw new IllegalArgumentException("Class should not represent a primitive class");
+            throw new ArgumentException("Class should not represent a primitive class");
         }
         if (clazz.isArray()) {
-            throw new IllegalArgumentException("Class should not be an array");
+            throw new ArgumentException("Class should not be an array");
         }
         if (clazz.isEnum()) {
-            throw new IllegalArgumentException("Class should not be an enum");
+            throw new ArgumentException("Class should not be an enum");
         }
         this.clazz = clazz;
         this.typeSolver = typeSolver;
@@ -66,20 +66,20 @@ public class ReflectionClassDeclaration:AbstractClassDeclaration
     /// Public methods
     ///
 
-    @Override
-    public Set<ResolvedMethodDeclaration> getDeclaredMethods() {
+    //@Override
+    public HashSet<ResolvedMethodDeclaration> getDeclaredMethods() {
         return reflectionClassAdapter.getDeclaredMethods();
     }
 
-    @Override
-    public List<ResolvedReferenceType> getAncestors(boolean acceptIncompleteList) {
+    //@Override
+    public List<ResolvedReferenceType> getAncestors(bool acceptIncompleteList) {
         // we do not attempt to perform any symbol solving when analyzing ancestors _in the reflection model, so we can
-        // simply ignore the boolean parameter here; an UnsolvedSymbolException cannot occur
+        // simply ignore the bool parameter here; an UnsolvedSymbolException cannot occur
         return reflectionClassAdapter.getAncestors();
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -90,13 +90,13 @@ public class ReflectionClassDeclaration:AbstractClassDeclaration
         return true;
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         return clazz.hashCode();
     }
 
 
-    @Override
+    //@Override
     public string getPackageName() {
         if (clazz.getPackage() != null) {
             return clazz.getPackage().getName();
@@ -104,7 +104,7 @@ public class ReflectionClassDeclaration:AbstractClassDeclaration
         return null;
     }
 
-    @Override
+    //@Override
     public string getClassName() {
         string canonicalName = clazz.getCanonicalName();
         if (canonicalName != null && getPackageName() != null) {
@@ -113,14 +113,14 @@ public class ReflectionClassDeclaration:AbstractClassDeclaration
         return null;
     }
 
-    @Override
+    //@Override
     public string getQualifiedName() {
         return clazz.getCanonicalName();
     }
 
-    @Override
+    //@Override
     //@Deprecated
-    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
+    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, bool staticOnly) {
         Predicate<Method> staticFilter = m -> !staticOnly || (staticOnly && Modifier.isStatic(m.getModifiers()));
 
         List<ResolvedMethodDeclaration> candidateSolvedMethods = new ArrayList<>();
@@ -176,7 +176,7 @@ public class ReflectionClassDeclaration:AbstractClassDeclaration
         return MethodResolutionLogic.findMostApplicable(candidateSolvedMethods, name, argumentsTypes, typeSolver);
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "ReflectionClassDeclaration{" +
                 "clazz=" + getId() +
@@ -232,8 +232,8 @@ public class ReflectionClassDeclaration:AbstractClassDeclaration
         return ref;
     }
 
-    @Override
-    public boolean canBeAssignedTo(ResolvedReferenceTypeDeclaration other) {
+    //@Override
+    public bool canBeAssignedTo(ResolvedReferenceTypeDeclaration other) {
         if (other is LambdaArgumentTypePlaceholder) {
             return isFunctionalInterface();
         }
@@ -244,7 +244,7 @@ public class ReflectionClassDeclaration:AbstractClassDeclaration
                 && new ReflectionClassDeclaration(clazz.getSuperclass(), typeSolver).canBeAssignedTo(other)) {
             return true;
         }
-        for (Class<?> interfaze : clazz.getInterfaces()) {
+        for (Type interfaze : clazz.getInterfaces()) {
             if (new ReflectionInterfaceDeclaration(interfaze, typeSolver).canBeAssignedTo(other)) {
                 return true;
             }
@@ -253,27 +253,27 @@ public class ReflectionClassDeclaration:AbstractClassDeclaration
         return false;
     }
 
-    @Override
-    public boolean isAssignableBy(ResolvedType type) {
+    //@Override
+    public bool isAssignableBy(ResolvedType type) {
         return reflectionClassAdapter.isAssignableBy(type);
     }
 
-    @Override
-    public boolean isTypeParameter() {
+    //@Override
+    public bool isTypeParameter() {
         return false;
     }
 
-    @Override
+    //@Override
     public ResolvedFieldDeclaration getField(string name) {
         return reflectionClassAdapter.getField(name);
     }
 
-    @Override
+    //@Override
     public List<ResolvedFieldDeclaration> getAllFields() {
         return reflectionClassAdapter.getAllFields();
     }
 
-    @Override
+    //@Override
     public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name, TypeSolver typeSolver) {
         for (Field field : clazz.getFields()) {
             if (field.getName().equals(name)) {
@@ -283,47 +283,47 @@ public class ReflectionClassDeclaration:AbstractClassDeclaration
         return SymbolReference.unsolved();
     }
 
-    @Override
-    public boolean hasDirectlyAnnotation(string canonicalName) {
+    //@Override
+    public bool hasDirectlyAnnotation(string canonicalName) {
         return reflectionClassAdapter.hasDirectlyAnnotation(canonicalName);
     }
 
-    @Override
-    public boolean hasField(string name) {
+    //@Override
+    public bool hasField(string name) {
         return reflectionClassAdapter.hasField(name);
     }
 
-    @Override
-    public boolean isAssignableBy(ResolvedReferenceTypeDeclaration other) {
+    //@Override
+    public bool isAssignableBy(ResolvedReferenceTypeDeclaration other) {
         return isAssignableBy(new ReferenceTypeImpl(other));
     }
 
-    @Override
+    //@Override
     public string getName() {
         return clazz.getSimpleName();
     }
 
-    @Override
-    public boolean isField() {
+    //@Override
+    public bool isField() {
         return false;
     }
 
-    @Override
-    public boolean isParameter() {
+    //@Override
+    public bool isParameter() {
         return false;
     }
 
-    @Override
-    public boolean isType() {
+    //@Override
+    public bool isType() {
         return true;
     }
 
-    @Override
-    public boolean isClass() {
+    //@Override
+    public bool isClass() {
         return !clazz.isInterface();
     }
 
-    @Override
+    //@Override
     public Optional<ResolvedReferenceType> getSuperClass() {
         if(!reflectionClassAdapter.getSuperClass().isPresent()) {
             return Optional.empty();
@@ -331,38 +331,38 @@ public class ReflectionClassDeclaration:AbstractClassDeclaration
         return Optional.of(reflectionClassAdapter.getSuperClass().get());
     }
 
-    @Override
+    //@Override
     public List<ResolvedReferenceType> getInterfaces() {
         return reflectionClassAdapter.getInterfaces();
     }
 
-    @Override
-    public boolean isInterface() {
+    //@Override
+    public bool isInterface() {
         return clazz.isInterface();
     }
 
-    @Override
+    //@Override
     public List<ResolvedTypeParameterDeclaration> getTypeParameters() {
         return reflectionClassAdapter.getTypeParameters();
     }
 
-    @Override
+    //@Override
     public AccessSpecifier accessSpecifier() {
         return ReflectionFactory.modifiersToAccessLevel(this.clazz.getModifiers());
     }
 
-    @Override
+    //@Override
     public List<ResolvedConstructorDeclaration> getConstructors() {
         return reflectionClassAdapter.getConstructors();
     }
 
-    @Override
+    //@Override
     public Optional<ResolvedReferenceTypeDeclaration> containerType() {
         return reflectionClassAdapter.containerType();
     }
 
-    @Override
-    public Set<ResolvedReferenceTypeDeclaration> internalTypes() {
+    //@Override
+    public HashSet<ResolvedReferenceTypeDeclaration> internalTypes() {
         return Arrays.stream(this.clazz.getDeclaredClasses())
                 .map(ic -> ReflectionFactory.typeDeclarationFor(ic, typeSolver))
                 .collect(Collectors.toSet());
@@ -372,7 +372,7 @@ public class ReflectionClassDeclaration:AbstractClassDeclaration
     /// Protected methods
     ///
 
-    @Override
+    //@Override
     protected ResolvedReferenceType object() {
         return new ReferenceTypeImpl(typeSolver.getSolvedJavaLangObject());
     }

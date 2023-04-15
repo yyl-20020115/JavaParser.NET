@@ -29,26 +29,26 @@ public /*final*/class Preconditions {
     /**
      * Ensures the truth of an expression involving one or more parameters to the calling method.
      *
-     * @param expression 	a boolean expression.
+     * @param expression 	a bool expression.
      * @param message		the exception message to use if the check fails;
      *                      will be converted to a string using String.valueOf(Object)
      *
-     * @throws IllegalArgumentException if expression is false.
+     * @throws ArgumentException if expression is false.
      */
-    public static void checkArgument(boolean expression, Object message) {
+    public static void checkArgument(bool expression, Object message) {
         if (!expression) {
-            throw new IllegalArgumentException(String.valueOf(message));
+            throw new ArgumentException(String.valueOf(message));
         }
     }
 
     /**
      * Ensures the truth of an expression involving one or more parameters to the calling method.
      *
-     * @param expression 	a boolean expression.
+     * @param expression 	a bool expression.
      *
-     * @throws IllegalArgumentException if expression is false.
+     * @throws ArgumentException if expression is false.
      */
-    public static void checkArgument(boolean expression) {
+    public static void checkArgument(bool expression) {
         checkArgument(expression, "Invalid argument provided.");
     }
 
@@ -59,7 +59,7 @@ public /*final*/class Preconditions {
      * @param message		the exception message to use if the check fails;
      *                      will be converted to a string using String.valueOf(Object)
      *
-     * @throws IllegalArgumentException if reference is {@code null}.
+     * @throws ArgumentException if reference is {@code null}.
      */
     public static void checkNotNull(Object reference, Object message) {
         checkArgument(reference != null, message);
@@ -70,7 +70,7 @@ public /*final*/class Preconditions {
      *
      * @param reference 	an object reference.
      *
-     * @throws IllegalArgumentException if reference is {@code null}.
+     * @throws ArgumentException if reference is {@code null}.
      */
     public static void checkNotNull(Object reference) {
         checkNotNull(reference, "A null value is not allowed here.");

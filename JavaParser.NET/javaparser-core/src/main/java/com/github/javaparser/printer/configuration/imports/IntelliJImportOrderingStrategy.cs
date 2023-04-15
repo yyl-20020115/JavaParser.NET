@@ -24,9 +24,9 @@ namespace com.github.javaparser.printer.configuration.imports;
 
 public class IntelliJImportOrderingStrategy implements ImportOrderingStrategy {
 
-    private boolean sortImportsAlphabetically = false;
+    private bool sortImportsAlphabetically = false;
 
-    @Override
+    //@Override
     public List<NodeList<ImportDeclaration>> sortImports(NodeList<ImportDeclaration> nodes) {
 
         NodeList<ImportDeclaration> otherImports = new NodeList<>();
@@ -60,13 +60,13 @@ public class IntelliJImportOrderingStrategy implements ImportOrderingStrategy {
         return Arrays.asList(otherImports, javaImports, staticImports);
     }
 
-    @Override
-    public void setSortImportsAlphabetically(boolean sortAlphabetically) {
+    //@Override
+    public void setSortImportsAlphabetically(bool sortAlphabetically) {
         sortImportsAlphabetically = sortAlphabetically;
     }
 
-    @Override
-    public boolean isSortImportsAlphabetically() {
+    //@Override
+    public bool isSortImportsAlphabetically() {
         return sortImportsAlphabetically;
     }
 

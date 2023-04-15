@@ -40,7 +40,7 @@ public /*final*/class CastExpr:Expression implements NodeWithType<CastExpr> {
     }
 
     public CastExpr(Range range, Type type, Expression expr) {
-        super(range);
+        base(range);
         setType(type);
     	setExpr(expr);
     }

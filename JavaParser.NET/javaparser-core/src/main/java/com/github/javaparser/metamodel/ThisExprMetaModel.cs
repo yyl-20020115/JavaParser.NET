@@ -36,7 +36,7 @@ public class ThisExprMetaModel:ExpressionMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     ThisExprMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, ThisExpr.class, "ThisExpr", "com.github.javaparser.ast.expr", false, false);
+        base(superBaseNodeMetaModel, ThisExpr.class, "ThisExpr", "com.github.javaparser.ast.expr", false, false);
     }
 
     public PropertyMetaModel typeNamePropertyMetaModel;

@@ -78,7 +78,7 @@ public interface TypeSolver {
         return solveType(JAVA_LANG_OBJECT);
     }
 
-    default boolean hasType(string name) {
+    default bool hasType(string name) {
         return tryToSolveType(name).isSolved();
     }
     

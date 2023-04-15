@@ -27,19 +27,19 @@ namespace com.github.javaparser.resolution.declarations;
  */
 public interface ResolvedParameterDeclaration:ResolvedValueDeclaration {
 
-    @Override
-    default boolean isParameter() {
+    //@Override
+    default bool isParameter() {
         return true;
     }
 
     /**
      * Necessary because parameters obtained through reflection could not have a name.
      */
-    default boolean hasName() {
+    default bool hasName() {
         return true;
     }
 
-    @Override
+    //@Override
     default ResolvedParameterDeclaration asParameter() {
         return this;
     }
@@ -47,7 +47,7 @@ public interface ResolvedParameterDeclaration:ResolvedValueDeclaration {
     /**
      * Is this parameter declared as variadic?
      */
-    boolean isVariadic();
+    bool isVariadic();
 
     /**
      * Describe the type of the parameter. In practice add three dots to the type name

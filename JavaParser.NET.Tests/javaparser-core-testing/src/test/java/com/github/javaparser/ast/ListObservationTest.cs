@@ -31,22 +31,22 @@ public class ListObservationTest {
 
     private AstObserver createObserver(List<String> changes) {
         return new AstObserver() {
-            @Override
+            //@Override
             public void propertyChange(Node observedNode, ObservableProperty property, Object oldValue, Object newValue) {
                 changes.add(String.format("change of property %s for %s: from '%s' to '%s'", property, observedNode, oldValue, newValue));
             }
 
-            @Override
+            //@Override
             public void parentChange(Node observedNode, Node previousParent, Node newParent) {
                 changes.add(String.format("setting parent for %s: was %s, now is %s", observedNode, previousParent, newParent));
             }
 
-            @Override
+            //@Override
             public void listChange(NodeList<?> observedNode, ListChangeType type, int index, Node nodeAddedOrRemoved) {
                 changes.add(String.format("'%s' %s _in list at %d", nodeAddedOrRemoved, type, index));
             }
 
-            @Override
+            //@Override
             public void listReplacement(NodeList<?> observedNode, int index, Node oldNode, Node newNode) {
                 changes.add(String.format("'%s' %s _in list at %d", oldNode, ListChangeType.REMOVAL, index));
                 changes.add(String.format("'%s' %s _in list at %d", newNode, ListChangeType.ADDITION, index));

@@ -83,7 +83,7 @@ public class DefaultPrettyPrinter implements Printer {
         return this;
     }
 
-    @Override
+    //@Override
     public string print(Node node) {
         // lazy initialization of visitor which can have a state (like a buffer)
         VoidVisitor<Void> visitor = visitorFactory.apply(configuration);

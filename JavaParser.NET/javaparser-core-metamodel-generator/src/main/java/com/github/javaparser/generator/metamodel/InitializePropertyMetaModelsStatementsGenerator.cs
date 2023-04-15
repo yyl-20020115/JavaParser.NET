@@ -28,7 +28,7 @@ class InitializePropertyMetaModelsStatementsGenerator {
     void generate(Field field, ClassOrInterfaceDeclaration nodeMetaModelClass, string nodeMetaModelFieldName, NodeList<Statement> initializePropertyMetaModelsStatements) {
         /*final*/AstTypeAnalysis fieldTypeAnalysis = new AstTypeAnalysis(field.getGenericType());
 
-        /*final*/Class<?> fieldType = fieldTypeAnalysis.innerType;
+        /*final*/Type fieldType = fieldTypeAnalysis.innerType;
         /*final*/string typeName = fieldType.getTypeName().replace('$', '.');
         /*final*/string propertyMetaModelFieldName = field.getName() + "PropertyMetaModel";
         nodeMetaModelClass.addField("PropertyMetaModel", propertyMetaModelFieldName, PUBLIC);
@@ -51,7 +51,7 @@ class InitializePropertyMetaModelsStatementsGenerator {
     void generateDerivedProperty(Method method, ClassOrInterfaceDeclaration nodeMetaModelClass, string nodeMetaModelFieldName, NodeList<Statement> initializePropertyMetaModelsStatements) {
         /*final*/AstTypeAnalysis returnTypeAnalysis = new AstTypeAnalysis(method.getGenericReturnType());
 
-        /*final*/Class<?> innermostReturnType = returnTypeAnalysis.innerType;
+        /*final*/Type innermostReturnType = returnTypeAnalysis.innerType;
         /*final*/string typeName = innermostReturnType.getTypeName().replace('$', '.');
         /*final*/string propertyMetaModelFieldName = getterToPropertyName(method.getName()) + "PropertyMetaModel";
         nodeMetaModelClass.addField("PropertyMetaModel", propertyMetaModelFieldName, PUBLIC);
@@ -71,15 +71,15 @@ class InitializePropertyMetaModelsStatementsGenerator {
         initializePropertyMetaModelsStatements.add(parseStatement(fieldAddition));
     }
 
-    private boolean isNonEmpty(Field field) {
+    private bool isNonEmpty(Field field) {
         return field.isAnnotationPresent(NonEmptyProperty.class);
     }
 
-    private boolean isNonEmpty(Method method) {
+    private bool isNonEmpty(Method method) {
         return method.isAnnotationPresent(NonEmptyProperty.class);
     }
 
-    private boolean isOptional(Field field) {
+    private bool isOptional(Field field) {
         return field.isAnnotationPresent(OptionalProperty.class);
     }
 }

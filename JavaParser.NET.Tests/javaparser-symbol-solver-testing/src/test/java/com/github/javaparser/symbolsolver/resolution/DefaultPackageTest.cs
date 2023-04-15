@@ -37,98 +37,98 @@ class DefaultPackageTest {
             this.qualifiedName = qualifiedName;
         }
 
-        @Override
+        //@Override
         public AccessSpecifier accessSpecifier() {
             throw new UnsupportedOperationException();
         }
 
-        @Override
+        //@Override
         public List<ResolvedTypeParameterDeclaration> getTypeParameters() {
             return new LinkedList<>();
         }
 
-        @Override
-        public Set<ResolvedReferenceTypeDeclaration> internalTypes() {
+        //@Override
+        public HashSet<ResolvedReferenceTypeDeclaration> internalTypes() {
             return new HashSet<>();
         }
 
-        @Override
+        //@Override
         public string getName() {
             throw new UnsupportedOperationException();
         }
 
-        @Override
-        public List<ResolvedReferenceType> getAncestors(boolean acceptIncompleteList) {
+        //@Override
+        public List<ResolvedReferenceType> getAncestors(bool acceptIncompleteList) {
             throw new UnsupportedOperationException();
         }
 
-        @Override
+        //@Override
         public List<ResolvedFieldDeclaration> getAllFields() {
             throw new UnsupportedOperationException();
         }
 
-        @Override
-        public Set<ResolvedMethodDeclaration> getDeclaredMethods() {
+        //@Override
+        public HashSet<ResolvedMethodDeclaration> getDeclaredMethods() {
             throw new UnsupportedOperationException();
         }
 
-        @Override
-        public boolean isAssignableBy(ResolvedType type) {
+        //@Override
+        public bool isAssignableBy(ResolvedType type) {
             throw new UnsupportedOperationException();
         }
 
-        @Override
-        public boolean isAssignableBy(ResolvedReferenceTypeDeclaration other) {
+        //@Override
+        public bool isAssignableBy(ResolvedReferenceTypeDeclaration other) {
             throw new UnsupportedOperationException();
         }
 
-        @Override
-        public boolean hasDirectlyAnnotation(string qualifiedName) {
+        //@Override
+        public bool hasDirectlyAnnotation(string qualifiedName) {
             throw new UnsupportedOperationException();
         }
 
-        @Override
+        //@Override
         public Optional<ResolvedReferenceType> getSuperClass() {
             throw new UnsupportedOperationException();
         }
 
-        @Override
+        //@Override
         public List<ResolvedReferenceType> getInterfaces() {
             throw new UnsupportedOperationException();
         }
 
-        @Override
+        //@Override
         public List<ResolvedConstructorDeclaration> getConstructors() {
             throw new UnsupportedOperationException();
         }
 
-        @Override
+        //@Override
         protected ResolvedReferenceType object() {
             throw new UnsupportedOperationException();
         }
 
-        @Override
+        //@Override
         public string getPackageName() {
             throw new UnsupportedOperationException();
         }
 
-        @Override
+        //@Override
         public string getClassName() {
             throw new UnsupportedOperationException();
         }
 
-        @Override
+        //@Override
         public string getQualifiedName() {
             return qualifiedName;
         }
 
-        @Override
+        //@Override
         public Optional<ResolvedReferenceTypeDeclaration> containerType() {
             throw new UnsupportedOperationException();
         }
 
-        @Override
-        public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
+        //@Override
+        public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, bool staticOnly) {
             throw new UnsupportedOperationException();
         }
     }

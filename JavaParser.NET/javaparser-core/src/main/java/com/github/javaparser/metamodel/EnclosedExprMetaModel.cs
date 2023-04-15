@@ -36,7 +36,7 @@ public class EnclosedExprMetaModel:ExpressionMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     EnclosedExprMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, EnclosedExpr.class, "EnclosedExpr", "com.github.javaparser.ast.expr", false, false);
+        base(superBaseNodeMetaModel, EnclosedExpr.class, "EnclosedExpr", "com.github.javaparser.ast.expr", false, false);
     }
 
     public PropertyMetaModel innerPropertyMetaModel;

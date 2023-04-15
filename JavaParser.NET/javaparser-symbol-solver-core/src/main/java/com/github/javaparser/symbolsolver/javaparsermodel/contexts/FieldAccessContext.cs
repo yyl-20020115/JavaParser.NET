@@ -32,10 +32,10 @@ public class FieldAccessContext:AbstractJavaParserContext<FieldAccessExpr> {
     private static /*final*/string ARRAY_LENGTH_FIELD_NAME = "length";
 
     public FieldAccessContext(FieldAccessExpr wrappedNode, TypeSolver typeSolver) {
-        super(wrappedNode, typeSolver);
+        base(wrappedNode, typeSolver);
     }
 
-    @Override
+    //@Override
     public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name) {
         if (wrappedNode.getName().toString().equals(name)) {
             if (wrappedNode.getScope() is ThisExpr) {
@@ -51,17 +51,17 @@ public class FieldAccessContext:AbstractJavaParserContext<FieldAccessExpr> {
         return JavaParserFactory.getContext(demandParentNode(wrappedNode), typeSolver).solveSymbol(name);
     }
 
-    @Override
+    //@Override
     public SymbolReference<ResolvedTypeDeclaration> solveType(string name, List<ResolvedType> typeArguments) {
         return JavaParserFactory.getContext(demandParentNode(wrappedNode), typeSolver).solveType(name, typeArguments);
     }
 
-    @Override
-    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> parameterTypes, boolean staticOnly) {
+    //@Override
+    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> parameterTypes, bool staticOnly) {
         return JavaParserFactory.getContext(demandParentNode(wrappedNode), typeSolver).solveMethod(name, parameterTypes, false);
     }
 
-    @Override
+    //@Override
     public Optional<Value> solveSymbolAsValue(string name) {
         Expression scope = wrappedNode.getScope();
         if (wrappedNode.getName().toString().equals(name)) {

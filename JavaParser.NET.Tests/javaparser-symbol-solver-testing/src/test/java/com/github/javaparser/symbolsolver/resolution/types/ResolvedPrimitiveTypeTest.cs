@@ -39,7 +39,7 @@ class ResolvedPrimitiveTypeTest:AbstractResolutionTest {
 
     [TestMethod]
     void byNameInValidOptions() {
-        assertThrows(IllegalArgumentException.class, () -> ResolvedPrimitiveType.byName("unexisting"));
+        assertThrows(ArgumentException.class, () -> ResolvedPrimitiveType.byName("unexisting"));
     }
     
     [TestMethod]

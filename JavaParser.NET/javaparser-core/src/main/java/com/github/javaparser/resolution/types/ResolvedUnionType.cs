@@ -33,7 +33,7 @@ public class ResolvedUnionType implements ResolvedType {
 
     public ResolvedUnionType(List<ResolvedType> elements) {
         if (elements.size() < 2) {
-            throw new IllegalArgumentException("An union type should have at least two elements. This has " + elements.size());
+            throw new ArgumentException("An union type should have at least two elements. This has " + elements.size());
         }
         this.elements = new LinkedList<>(elements);
     }
@@ -50,8 +50,8 @@ public class ResolvedUnionType implements ResolvedType {
         return reduce.orElse(new ArrayList<>()).stream().findFirst();
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -60,27 +60,27 @@ public class ResolvedUnionType implements ResolvedType {
         return new HashSet<>(elements).equals(new HashSet<>(that.elements));
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         return new HashSet<>(elements).hashCode();
     }
 
-    @Override
+    //@Override
     public string describe() {
         return String.join(" | ", elements.stream().map(ResolvedType::describe).collect(Collectors.toList()));
     }
 
-    @Override
-    public boolean isAssignableBy(ResolvedType other) {
+    //@Override
+    public bool isAssignableBy(ResolvedType other) {
         return elements.stream().allMatch(e -> e.isAssignableBy(other));
     }
 
-    @Override
-    public boolean isUnionType() {
+    //@Override
+    public bool isUnionType() {
         return true;
     }
 
-    @Override
+    //@Override
     public ResolvedUnionType asUnionType() {
         return this;
     }

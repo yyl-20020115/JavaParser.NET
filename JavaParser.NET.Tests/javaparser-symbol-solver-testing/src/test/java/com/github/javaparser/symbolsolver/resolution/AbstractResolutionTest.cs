@@ -58,7 +58,7 @@ public abstract class AbstractResolutionTest:AbstractSymbolResolutionTest {
             throw new RuntimeException("Unable to find sample " + sampleName);
         }
         JavaParser javaParser = createParserWithResolver(typeSolver);
-        return javaParser.parse(is).getResult().orElseThrow(() -> new IllegalArgumentException("Sample does not parse: " + sampleName));
+        return javaParser.parse(is).getResult().orElseThrow(() -> new ArgumentException("Sample does not parse: " + sampleName));
     }
 
     protected JavaParser createParserWithResolver(TypeSolver typeSolver) {

@@ -1,5 +1,5 @@
 class Super {
-    protected boolean k;
+    protected bool k;
     public static char m;
 }
 

@@ -34,7 +34,7 @@ public class CsmMix implements CsmElement {
             throw new NullPointerException();
         }
         if (elements.stream().anyMatch(Objects::isNull)) {
-            throw new IllegalArgumentException("Null element _in the mix");
+            throw new ArgumentException("Null element _in the mix");
         }
         this.elements = elements;
     }
@@ -43,13 +43,13 @@ public class CsmMix implements CsmElement {
         return elements;
     }
 
-    @Override
+    //@Override
     public void prettyPrint(Node node, SourcePrinter printer) {
         elements.forEach(e -> e.prettyPrint(node, printer));
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -58,12 +58,12 @@ public class CsmMix implements CsmElement {
         return elements != null ? elements.equals(csmMix.elements) : csmMix.elements == null;
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         return elements != null ? elements.hashCode() : 0;
     }
 
-    @Override
+    //@Override
     public string toString() {
         return elements.stream().map(e -> e.toString()).collect(Collectors.joining(",", "CsmMix[", "]"));
     }

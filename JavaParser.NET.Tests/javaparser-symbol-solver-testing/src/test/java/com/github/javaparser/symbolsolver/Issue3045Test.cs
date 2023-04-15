@@ -33,7 +33,7 @@ class Issue3045Test:AbstractResolutionTest {
 			  "import com.google.common.base.Function;\n" +
 	          "public class A {\n" +
 	          "    private static /*final*/Function<Object, Object> MAP = new Function<Object, Object>() {\n" +
-	          "        @Override\n" +
+	          "        //@Override\n" +
 	          "        public Object apply(Object input) {\n" +
 	          "            return null;\n" +
 	          "        }\n" +

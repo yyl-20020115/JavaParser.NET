@@ -31,13 +31,13 @@ namespace com.github.javaparser.ast.visitor;
  */
 public class DumpVisitor implements VoidVisitor<Object> {
 
-	private boolean printComments;
+	private bool printComments;
 
 	public DumpVisitor() {
 		this(true);
 	}
 
-	public DumpVisitor(boolean printComments) {
+	public DumpVisitor(bool printComments) {
 		this.printComments = printComments;
 	}
 
@@ -51,7 +51,7 @@ public class DumpVisitor implements VoidVisitor<Object> {
 
 		private int level = 0;
 
-		private boolean indented = false;
+		private bool indented = false;
 
 		private /*final*/StringBuilder buf = new StringBuilder();
 
@@ -129,7 +129,7 @@ public class DumpVisitor implements VoidVisitor<Object> {
 		}
 	}
 
-	private void printAnnotations(/*final*/List<AnnotationExpr> annotations, boolean prefixWithASpace, /*final*/Object arg) {
+	private void printAnnotations(/*final*/List<AnnotationExpr> annotations, bool prefixWithASpace, /*final*/Object arg) {
 		if (!isNullOrEmpty(annotations)) {
 			if(prefixWithASpace){
 				printer.print(" ");
@@ -436,7 +436,7 @@ public class DumpVisitor implements VoidVisitor<Object> {
 	public void visit(/*final*/IntersectionType n, /*final*/Object arg) {
 		printJavaComment(n.getComment(), arg);
 		printAnnotations(n.getAnnotations(), false, arg);
-		boolean isFirst = true;
+		bool isFirst = true;
 		for (ReferenceType element : n.getElements()) {
 			element.accept(this, arg);
 			if (isFirst) {
@@ -447,10 +447,10 @@ public class DumpVisitor implements VoidVisitor<Object> {
 		}
 	}
 
-    @Override public void visit(/*final*/UnionType n, /*final*/Object arg) {
+    //@Override public void visit(/*final*/UnionType n, /*final*/Object arg) {
         printJavaComment(n.getComment(), arg);
 		printAnnotations(n.getAnnotations(), true, arg);
-        boolean isFirst = true;
+        bool isFirst = true;
         for (ReferenceType element : n.getElements()) {
             if (isFirst) {
                 isFirst = false;
@@ -1248,7 +1248,7 @@ public class DumpVisitor implements VoidVisitor<Object> {
 		printJavaComment(n.getComment(), arg);
 		printer.print("if (");
 		n.getCondition().accept(this, arg);
-		/*final*/boolean thenBlock = n.getThenStmt() is BlockStmt;
+		/*final*/bool thenBlock = n.getThenStmt() is BlockStmt;
 		if (thenBlock) // block statement should start on the same line
 			printer.print(") ");
 		else {
@@ -1263,8 +1263,8 @@ public class DumpVisitor implements VoidVisitor<Object> {
 				printer.print(" ");
 			else
 				printer.printLn();
-			/*final*/boolean elseIf = n.getElseStmt() is IfStmt;
-			/*final*/boolean elseBlock = n.getElseStmt() is BlockStmt;
+			/*final*/bool elseIf = n.getElseStmt() is IfStmt;
+			/*final*/bool elseBlock = n.getElseStmt() is BlockStmt;
 			if (elseIf || elseBlock) // put chained if and start of block statement on a same level
 				printer.print("else ");
 			else {
@@ -1373,7 +1373,7 @@ public class DumpVisitor implements VoidVisitor<Object> {
 		if (!n.getResources().isEmpty()) {
 			printer.print("(");
 			Iterator<VariableDeclarationExpr> resources = n.getResources().iterator();
-			boolean first = true;
+			bool first = true;
 			while (resources.hasNext()) {
 				visit(resources.next(), arg);
 				if (resources.hasNext()) {
@@ -1516,7 +1516,7 @@ public class DumpVisitor implements VoidVisitor<Object> {
 		printJavaComment(n.getComment(), arg);
 
 		/*final*/List<Parameter> parameters = n.getParameters();
-		/*final*/boolean printPar = n.isParametersEnclosed();
+		/*final*/bool printPar = n.isParametersEnclosed();
 
 		if (printPar) {
 			printer.print("(");
@@ -1611,7 +1611,7 @@ public class DumpVisitor implements VoidVisitor<Object> {
 		}
 
 		int commentsAtEnd = 0;
-		boolean findingComments = true;
+		bool findingComments = true;
 		while (findingComments && commentsAtEnd < everything.size()) {
 			Node last = everything.get(everything.size() - 1 - commentsAtEnd);
 			findingComments = (last is Comment);

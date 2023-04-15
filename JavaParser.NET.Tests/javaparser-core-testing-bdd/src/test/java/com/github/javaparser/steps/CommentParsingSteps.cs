@@ -55,12 +55,12 @@ public class CommentParsingSteps {
     }
 
     @When("the do not consider annotations as node start for code attribution is $value on the Java parser")
-    public void whenTheDoNotConsiderAnnotationsAsNodeStartForCodeAttributionIsTrueOnTheJavaParser(boolean value) {
+    public void whenTheDoNotConsiderAnnotationsAsNodeStartForCodeAttributionIsTrueOnTheJavaParser(bool value) {
         configuration.setIgnoreAnnotationsWhenAttributingComments(value);
     }
 
     @When("the do not assign comments preceding empty lines is $value on the Java parser")
-    public void whenTheDoNotAssignCommentsPrecedingEmptyLinesIsTrueOnTheJavaParser(boolean value) {
+    public void whenTheDoNotAssignCommentsPrecedingEmptyLinesIsTrueOnTheJavaParser(bool value) {
         configuration.setDoNotAssignCommentsPrecedingEmptyLines(value);
     }
 
@@ -83,7 +83,7 @@ public class CommentParsingSteps {
         assertThat(commentsCollection.size(), is(expectedCount));
     }
 
-    private <T:Comment> T getCommentAt(Set<T> set, int index) {
+    private <T:Comment> T getCommentAt(HashSet<T> set, int index) {
         Iterator<T> iterator = set.iterator();
         T comment = null;
         while (index >= 0) {

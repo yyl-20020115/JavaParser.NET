@@ -52,18 +52,18 @@ public /*final*/class MethodCallExpr:Expression {
 
 	public MethodCallExpr(/*final*/int beginLine, /*final*/int beginColumn, /*final*/int endLine, /*final*/int endColumn,
 			/*final*/Expression scope, /*final*/List<Type> typeArgs, /*final*/string name, /*final*/List<Expression> args) {
-		super(beginLine, beginColumn, endLine, endColumn);
+		base(beginLine, beginColumn, endLine, endColumn);
 		setScope(scope);
 		setTypeArgs(typeArgs);
 		setName(name);
 		setArgs(args);
 	}
 
-	@Override public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+	@Override public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
 		return v.visit(this, arg);
 	}
 
-	@Override public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+	@Override public void accept<A>(VoidVisitor<A> v, A arg) {
 		v.visit(this, arg);
 	}
 

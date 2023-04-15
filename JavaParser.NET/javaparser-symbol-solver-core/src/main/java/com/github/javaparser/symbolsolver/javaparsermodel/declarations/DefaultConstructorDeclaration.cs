@@ -37,42 +37,42 @@ public class DefaultConstructorDeclaration<N:ResolvedReferenceTypeDeclaration> i
         this.declaringType = declaringType;
     }
 
-    @Override
+    //@Override
     public N declaringType() {
         return declaringType;
     }
 
-    @Override
+    //@Override
     public int getNumberOfParams() {
         return 0;
     }
 
-    @Override
+    //@Override
     public ResolvedParameterDeclaration getParam(int i) {
         throw new UnsupportedOperationException("The default constructor has no parameters");
     }
 
-    @Override
+    //@Override
     public string getName() {
         return declaringType.getName();
     }
 
-    @Override
+    //@Override
     public AccessSpecifier accessSpecifier() {
         return AccessSpecifier.PUBLIC;
     }
 
-    @Override
+    //@Override
     public List<ResolvedTypeParameterDeclaration> getTypeParameters() {
         return Collections.emptyList();
     }
 
-    @Override
+    //@Override
     public int getNumberOfSpecifiedExceptions() {
         return 0;
     }
 
-    @Override
+    //@Override
     public ResolvedType getSpecifiedException(int index) {
         throw new UnsupportedOperationException("The default constructor does not throw exceptions");
     }

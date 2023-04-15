@@ -25,10 +25,10 @@ namespace com.github.javaparser.printer;
 public class TestVisitor:DefaultPrettyPrinterVisitor {
 
     public TestVisitor(PrinterConfiguration configuration, SourcePrinter printer) {
-        super(configuration, printer);
+        base(configuration, printer);
     }
     
-    @Override
+    //@Override
     public void visit(/*final*/ClassOrInterfaceDeclaration n, /*final*/Void arg) {
         printer.print("test");
     }

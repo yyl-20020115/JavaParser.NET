@@ -150,20 +150,20 @@ public class PrimitiveType:Type implements NodeWithAnnotations<PrimitiveType> {
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public PrimitiveType(TokenRange tokenRange, Primitive type, NodeList<AnnotationExpr> annotations) {
-        super(tokenRange, annotations);
+        base(tokenRange, annotations);
         setType(type);
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -176,7 +176,7 @@ public class PrimitiveType:Type implements NodeWithAnnotations<PrimitiveType> {
         return type.toBoxedType();
     }
 
-    @Override
+    //@Override
     public string toDescriptor() {
         return type.toDescriptor();
     }
@@ -192,52 +192,52 @@ public class PrimitiveType:Type implements NodeWithAnnotations<PrimitiveType> {
         return this;
     }
 
-    @Override
+    //@Override
     public string asString() {
         return type.asString();
     }
 
-    @Override
+    //@Override
     public PrimitiveType setAnnotations(NodeList<AnnotationExpr> annotations) {
         return (PrimitiveType) super.setAnnotations(annotations);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public PrimitiveType clone() {
         return (PrimitiveType) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public PrimitiveTypeMetaModel getMetaModel() {
         return JavaParserMetaModel.primitiveTypeMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isPrimitiveType() {
+    public bool isPrimitiveType() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public PrimitiveType asPrimitiveType() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifPrimitiveType(Consumer<PrimitiveType> action) {
         action.accept(this);
     }
 
-    @Override
+    //@Override
     public ResolvedPrimitiveType resolve() {
         return getSymbolResolver().toResolvedType(this, ResolvedPrimitiveType.class);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<PrimitiveType> toPrimitiveType() {
         return Optional.of(this);

@@ -35,32 +35,32 @@ public class NullType implements ResolvedType {
         // prevent instantiation
     }
 
-    @Override
-    public boolean isArray() {
+    //@Override
+    public bool isArray() {
         return false;
     }
 
-    public boolean isNull() {
+    public bool isNull() {
         return true;
     }
 
-    @Override
-    public boolean isReferenceType() {
+    //@Override
+    public bool isReferenceType() {
         return false;
     }
 
-    @Override
+    //@Override
     public string describe() {
         return "null";
     }
 
-    @Override
-    public boolean isTypeVariable() {
+    //@Override
+    public bool isTypeVariable() {
         return false;
     }
 
-    @Override
-    public boolean isAssignableBy(ResolvedType other) {
+    //@Override
+    public bool isAssignableBy(ResolvedType other) {
         throw new UnsupportedOperationException("It does not make sense to assign a value to null, it can only be assigned");
     }
 

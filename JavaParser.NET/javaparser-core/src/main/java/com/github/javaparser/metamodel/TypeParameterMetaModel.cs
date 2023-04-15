@@ -36,7 +36,7 @@ public class TypeParameterMetaModel:ReferenceTypeMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     TypeParameterMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, TypeParameter.class, "TypeParameter", "com.github.javaparser.ast.type", false, false);
+        base(superBaseNodeMetaModel, TypeParameter.class, "TypeParameter", "com.github.javaparser.ast.type", false, false);
     }
 
     public PropertyMetaModel namePropertyMetaModel;

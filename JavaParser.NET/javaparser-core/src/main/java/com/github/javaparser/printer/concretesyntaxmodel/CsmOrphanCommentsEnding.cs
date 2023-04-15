@@ -25,7 +25,7 @@ namespace com.github.javaparser.printer.concretesyntaxmodel;
 
 public class CsmOrphanCommentsEnding implements CsmElement {
 
-    @Override
+    //@Override
     public void prettyPrint(Node node, SourcePrinter printer) {
         List<Node> everything = new LinkedList<>();
         everything.addAll(node.getChildNodes());
@@ -34,7 +34,7 @@ public class CsmOrphanCommentsEnding implements CsmElement {
             return;
         }
         int commentsAtEnd = 0;
-        boolean findingComments = true;
+        bool findingComments = true;
         while (findingComments && commentsAtEnd < everything.size()) {
             Node last = everything.get(everything.size() - 1 - commentsAtEnd);
             findingComments = (last is Comment);

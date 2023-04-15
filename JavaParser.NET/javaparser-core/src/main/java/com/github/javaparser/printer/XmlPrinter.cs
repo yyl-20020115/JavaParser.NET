@@ -28,9 +28,9 @@ namespace com.github.javaparser.printer;
  */
 public class XmlPrinter {
 
-    private /*final*/boolean outputNodeType;
+    private /*final*/bool outputNodeType;
 
-    public XmlPrinter(boolean outputNodeType) {
+    public XmlPrinter(bool outputNodeType) {
         this.outputNodeType = outputNodeType;
     }
 

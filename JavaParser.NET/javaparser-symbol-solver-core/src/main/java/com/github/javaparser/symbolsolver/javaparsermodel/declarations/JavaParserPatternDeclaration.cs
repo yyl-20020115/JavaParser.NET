@@ -38,12 +38,12 @@ public class JavaParserPatternDeclaration implements ResolvedPatternDeclaration 
         this.typeSolver = typeSolver;
     }
 
-    @Override
+    //@Override
     public string getName() {
         return wrappedNode.getName().getId();
     }
 
-    @Override
+    //@Override
     public ResolvedType getType() {
         return JavaParserFacade.get(typeSolver).convert(wrappedNode.getType(), wrappedNode);
     }
@@ -57,7 +57,7 @@ public class JavaParserPatternDeclaration implements ResolvedPatternDeclaration 
         return wrappedNode;
     }
 
-    @Override
+    //@Override
     public Optional<Node> toAst() {
         return Optional.of(wrappedNode);
     }

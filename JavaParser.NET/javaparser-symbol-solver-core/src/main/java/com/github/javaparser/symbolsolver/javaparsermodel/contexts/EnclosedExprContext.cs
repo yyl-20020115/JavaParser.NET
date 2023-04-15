@@ -26,10 +26,10 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.contexts;
 public class EnclosedExprContext:AbstractJavaParserContext<EnclosedExpr> {
 
     public EnclosedExprContext(EnclosedExpr wrappedNode, TypeSolver typeSolver) {
-        super(wrappedNode, typeSolver);
+        base(wrappedNode, typeSolver);
     }
 
-    @Override
+    //@Override
     public List<PatternExpr> patternExprsExposedFromChildren() {
         List<PatternExpr> results = new ArrayList<>();
 
@@ -50,7 +50,7 @@ public class EnclosedExprContext:AbstractJavaParserContext<EnclosedExpr> {
         return results;
     }
 
-    @Override
+    //@Override
     public List<PatternExpr> negatedPatternExprsExposedFromChildren() {
         List<PatternExpr> results = new ArrayList<>();
 

@@ -38,7 +38,7 @@ public abstract class BodyDeclaration<T>:Node implements NodeWithAnnotations<T> 
     }
 
     public BodyDeclaration(Range range, List<AnnotationExpr> annotations) {
-        super(range);
+        base(range);
     	setAnnotations(annotations);
     }
 

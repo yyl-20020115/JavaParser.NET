@@ -37,20 +37,20 @@ public class ImportDeclaration:Node implements NodeWithName<ImportDeclaration> {
 
     private Name name;
 
-    private boolean isStatic;
+    private bool isStatic;
 
-    private boolean isAsterisk;
+    private bool isAsterisk;
 
     private ImportDeclaration() {
         this(null, new Name(), false, false);
     }
 
-    public ImportDeclaration(string name, boolean isStatic, boolean isAsterisk) {
+    public ImportDeclaration(string name, bool isStatic, bool isAsterisk) {
         this(null, parseName(name), isStatic, isAsterisk);
     }
 
     //@AllFieldsConstructor
-    public ImportDeclaration(Name name, boolean isStatic, boolean isAsterisk) {
+    public ImportDeclaration(Name name, bool isStatic, bool isAsterisk) {
         this(null, name, isStatic, isAsterisk);
     }
 
@@ -58,23 +58,23 @@ public class ImportDeclaration:Node implements NodeWithName<ImportDeclaration> {
      * This constructor is used by the parser and is considered private.
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
-    public ImportDeclaration(TokenRange tokenRange, Name name, boolean isStatic, boolean isAsterisk) {
-        super(tokenRange);
+    public ImportDeclaration(TokenRange tokenRange, Name name, bool isStatic, bool isAsterisk) {
+        base(tokenRange);
         setName(name);
         setStatic(isStatic);
         setAsterisk(isAsterisk);
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -90,17 +90,17 @@ public class ImportDeclaration:Node implements NodeWithName<ImportDeclaration> {
      * Return if the import ends with "*".
      */
     //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public boolean isAsterisk() {
+    public bool isAsterisk() {
         return isAsterisk;
     }
 
     //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public boolean isStatic() {
+    public bool isStatic() {
         return isStatic;
     }
 
     //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public ImportDeclaration setAsterisk(/*final*/boolean isAsterisk) {
+    public ImportDeclaration setAsterisk(/*final*/bool isAsterisk) {
         if (isAsterisk == this.isAsterisk) {
             return this;
         }
@@ -124,7 +124,7 @@ public class ImportDeclaration:Node implements NodeWithName<ImportDeclaration> {
     }
 
     //@Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public ImportDeclaration setStatic(/*final*/boolean isStatic) {
+    public ImportDeclaration setStatic(/*final*/bool isStatic) {
         if (isStatic == this.isStatic) {
             return this;
         }
@@ -133,21 +133,21 @@ public class ImportDeclaration:Node implements NodeWithName<ImportDeclaration> {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public ImportDeclaration clone() {
         return (ImportDeclaration) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public ImportDeclarationMetaModel getMetaModel() {
         return JavaParserMetaModel.importDeclarationMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }

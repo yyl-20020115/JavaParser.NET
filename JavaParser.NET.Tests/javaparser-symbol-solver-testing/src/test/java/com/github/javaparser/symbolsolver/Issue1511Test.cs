@@ -25,7 +25,7 @@ namespace com.github.javaparser.symbolsolver;
 
 
 /**
- * IndexOutOfBoundsException when attempting to resolve super() #1511
+ * IndexOutOfBoundsException when attempting to resolve base() #1511
  *
  * @see <a href="https://github.com/javaparser/javaparser/issues/1511">https://github.com/javaparser/javaparser/issues/1511</a>
  */

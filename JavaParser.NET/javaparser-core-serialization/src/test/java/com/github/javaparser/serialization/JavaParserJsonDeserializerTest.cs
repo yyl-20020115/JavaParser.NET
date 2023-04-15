@@ -119,7 +119,7 @@ class JavaParserJsonDeserializerTest {
                 "     * @param a blub\n" +
                 "     * @return true \n" +
                 "     */" +
-                "     public boolean test(int a) { return true; }\n" +
+                "     public bool test(int a) { return true; }\n" +
                 "}");
         string serialized = serialize(cu, false);
 
@@ -160,17 +160,17 @@ class JavaParserJsonDeserializerTest {
     [TestMethod]
     void testAttachingSymbolResolver() {
         SymbolResolver stubResolver = new SymbolResolver() {
-            @Override
+            //@Override
             public <T> T resolveDeclaration(Node node, Class<T> resultClass) {
                 return null;
             }
 
-            @Override
+            //@Override
             public <T> T toResolvedType(Type javaparserType, Class<T> resultClass) {
                 return null;
             }
 
-            @Override
+            //@Override
             public ResolvedType calculateType(Expression expression) {
                 return null;
             }

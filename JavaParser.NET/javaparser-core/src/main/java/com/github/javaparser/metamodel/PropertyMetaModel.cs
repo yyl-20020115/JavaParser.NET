@@ -32,19 +32,19 @@ public class PropertyMetaModel {
 
     private /*final*/string name;
 
-    private /*final*/Class<?> type;
+    private /*final*/Type type;
 
     private /*final*/Optional<BaseNodeMetaModel> nodeReference;
 
-    private /*final*/boolean isOptional;
+    private /*final*/bool isOptional;
 
-    private /*final*/boolean isNonEmpty;
+    private /*final*/bool isNonEmpty;
 
-    private /*final*/boolean isNodeList;
+    private /*final*/bool isNodeList;
 
-    private /*final*/boolean hasWildcard;
+    private /*final*/bool hasWildcard;
 
-    public PropertyMetaModel(BaseNodeMetaModel containingNodeMetaModel, string name, Class<?> type, Optional<BaseNodeMetaModel> nodeReference, boolean isOptional, boolean isNonEmpty, boolean isNodeList, boolean hasWildcard) {
+    public PropertyMetaModel(BaseNodeMetaModel containingNodeMetaModel, string name, Type type, Optional<BaseNodeMetaModel> nodeReference, bool isOptional, bool isNonEmpty, bool isNodeList, bool hasWildcard) {
         this.containingNodeMetaModel = containingNodeMetaModel;
         this.name = name;
         this.type = type;
@@ -58,14 +58,14 @@ public class PropertyMetaModel {
     /**
      * @return is this the field fieldName on class c?
      */
-    public boolean is(Class<?:Node> c, string fieldName) {
+    public bool is(Class<?:Node> c, string fieldName) {
         return containingNodeMetaModel.is(c) && name.equals(fieldName);
     }
 
     /**
      * @return is this fields called fieldName?
      */
-    public boolean is(string fieldName) {
+    public bool is(string fieldName) {
         return name.equals(fieldName);
     }
 
@@ -100,14 +100,14 @@ public class PropertyMetaModel {
     /**
      * @return if this property is a string or a NodeList: whether it may be empty.
      */
-    public boolean isNonEmpty() {
+    public bool isNonEmpty() {
         return isNonEmpty;
     }
 
     /**
      * @return the class of the field.
      */
-    public Class<?> getType() {
+    public Type getType() {
         return type;
     }
 
@@ -121,45 +121,45 @@ public class PropertyMetaModel {
     /**
      * @return whether this property is optional.
      */
-    public boolean isOptional() {
+    public bool isOptional() {
         return isOptional;
     }
 
     /**
      * @return whether this property is not optional.
      */
-    public boolean isRequired() {
+    public bool isRequired() {
         return !isOptional;
     }
 
     /**
      * @return whether this property is contained _in a NodeList.
      */
-    public boolean isNodeList() {
+    public bool isNodeList() {
         return isNodeList;
     }
 
     /**
      * @return whether this property has a wildcard following it, like BodyDeclaration&lt;?&gt;.
      */
-    public boolean hasWildcard() {
+    public bool hasWildcard() {
         return hasWildcard;
     }
 
     /**
      * @return whether this property is not a list or set.
      */
-    public boolean isSingular() {
+    public bool isSingular() {
         return !isNodeList;
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "(" + getTypeName() + ")\t" + containingNodeMetaModel + "#" + name;
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -172,7 +172,7 @@ public class PropertyMetaModel {
         return true;
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         int result = name.hashCode();
         result = 31 * result + type.hashCode();
@@ -219,7 +219,7 @@ public class PropertyMetaModel {
     /**
      * @return is this property an AST Node?
      */
-    public boolean isNode() {
+    public bool isNode() {
         return getNodeReference().isPresent();
     }
 
@@ -233,7 +233,7 @@ public class PropertyMetaModel {
     /**
      * @return is this property an attribute, meaning: not a node?
      */
-    public boolean isAttribute() {
+    public bool isAttribute() {
         return !isNode();
     }
 
@@ -243,7 +243,7 @@ public class PropertyMetaModel {
      */
     public Object getValue(Node node) {
         try {
-            for (Class<?> c = node.getClass(); c != null; c = c.getSuperclass()) {
+            for (Type c = node.getClass(); c != null; c = c.getSuperclass()) {
                 Field[] fields = c.getDeclaredFields();
                 for (Field classField : fields) {
                     if (classField.getName().equals(getName())) {

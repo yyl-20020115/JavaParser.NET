@@ -36,6 +36,6 @@ public class UnknownTypeMetaModel:TypeMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     UnknownTypeMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, UnknownType.class, "UnknownType", "com.github.javaparser.ast.type", false, false);
+        base(superBaseNodeMetaModel, UnknownType.class, "UnknownType", "com.github.javaparser.ast.type", false, false);
     }
 }

@@ -31,7 +31,7 @@ public class SeparatedItemStringBuilder {
 
     private /*final*/string postfix;
 
-    private boolean hasItems = false;
+    private bool hasItems = false;
 
     private StringBuilder builder;
 
@@ -53,14 +53,14 @@ public class SeparatedItemStringBuilder {
         return this;
     }
 
-    public boolean hasItems() {
+    public bool hasItems() {
         return hasItems;
     }
 
     /**
      * Convert the builder into its /*final*/string representation.
      */
-    @Override
+    //@Override
     public string toString() {
         // This order of toStringing avoids debuggers from making a mess.
         return builder.toString() + postfix;

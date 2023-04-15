@@ -36,7 +36,7 @@ public class ReturnStmtMetaModel:StatementMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     ReturnStmtMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, ReturnStmt.class, "ReturnStmt", "com.github.javaparser.ast.stmt", false, false);
+        base(superBaseNodeMetaModel, ReturnStmt.class, "ReturnStmt", "com.github.javaparser.ast.stmt", false, false);
     }
 
     public PropertyMetaModel expressionPropertyMetaModel;

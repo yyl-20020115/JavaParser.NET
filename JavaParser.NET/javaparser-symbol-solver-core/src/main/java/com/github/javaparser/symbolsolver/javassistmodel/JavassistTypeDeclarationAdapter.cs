@@ -70,7 +70,7 @@ public class JavassistTypeDeclarationAdapter {
         return getInterfaces(false);
     }
 
-    private List<ResolvedReferenceType> getInterfaces(boolean acceptIncompleteList) {
+    private List<ResolvedReferenceType> getInterfaces(bool acceptIncompleteList) {
         List<ResolvedReferenceType> interfaces = new ArrayList<>();
         try {
             if (ctClass.getGenericSignature() == null) {
@@ -103,7 +103,7 @@ public class JavassistTypeDeclarationAdapter {
         return interfaces;
     }
 
-    public List<ResolvedReferenceType> getAncestors(boolean acceptIncompleteList) {
+    public List<ResolvedReferenceType> getAncestors(bool acceptIncompleteList) {
         List<ResolvedReferenceType> ancestors = new ArrayList<>();
 
         try {
@@ -117,7 +117,7 @@ public class JavassistTypeDeclarationAdapter {
         return ancestors;
     }
 
-    public Set<ResolvedMethodDeclaration> getDeclaredMethods() {
+    public HashSet<ResolvedMethodDeclaration> getDeclaredMethods() {
         return Arrays.stream(ctClass.getDeclaredMethods())
                 .filter(m -> ((m.getMethodInfo().getAccessFlags() & AccessFlag.BRIDGE) == 0)
                         && ((m.getMethodInfo().getAccessFlags() & AccessFlag.SYNTHETIC) == 0))
@@ -174,7 +174,7 @@ public class JavassistTypeDeclarationAdapter {
         }
     }
 
-    public boolean isAssignableBy(ResolvedType other) {
+    public bool isAssignableBy(ResolvedType other) {
 
         if (other.isNull()) {
             return true;
@@ -187,7 +187,7 @@ public class JavassistTypeDeclarationAdapter {
         return other.isAssignableBy(new ReferenceTypeImpl(typeDeclaration));
     }
 
-    public boolean isAssignableBy(ResolvedReferenceTypeDeclaration other) {
+    public bool isAssignableBy(ResolvedReferenceTypeDeclaration other) {
         return isAssignableBy(new ReferenceTypeImpl(other));
     }
 
@@ -199,7 +199,7 @@ public class JavassistTypeDeclarationAdapter {
      *
      * @return The nested classes.
      */
-    public Set<ResolvedReferenceTypeDeclaration> internalTypes() {
+    public HashSet<ResolvedReferenceTypeDeclaration> internalTypes() {
         try {
             return Stream.of(ctClass.getNestedClasses())
                     .map(clazz -> JavassistFactory.toTypeDeclaration(clazz, typeSolver))

@@ -34,8 +34,8 @@ public class VariableDeclarator:Node implements NodeWithType<VariableDeclarator,
 
     private SimpleName name;
 
-    @OptionalProperty
-    @NonEmptyProperty
+    //@OptionalProperty
+    //@NonEmptyProperty
     private Expression initializer;
 
     private Type type;
@@ -73,20 +73,20 @@ public class VariableDeclarator:Node implements NodeWithType<VariableDeclarator,
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public VariableDeclarator(TokenRange tokenRange, Type type, SimpleName name, Expression initializer) {
-        super(tokenRange);
+        base(tokenRange);
         setType(type);
         setName(name);
         setInitializer(initializer);
         customInitialization();
     }
 
-    @Override
+    //@Override
     protected void customInitialization() {
         // We register an observer on the type property. When it is changed the MaximumCommonType is changes as well,
         // because it is derived from the type of the variables it contains, for this reason we notify about the change
         register(new AstObserverAdapter() {
 
-            @Override
+            //@Override
             public void propertyChange(Node observedNode, ObservableProperty property, Object oldValue, Object newValue) {
                 if (property == ObservableProperty.TYPE) {
                     VariableDeclarator vd = VariableDeclarator.this;
@@ -111,15 +111,15 @@ public class VariableDeclarator:Node implements NodeWithType<VariableDeclarator,
         });
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -195,9 +195,9 @@ public class VariableDeclarator:Node implements NodeWithType<VariableDeclarator,
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
-    public boolean remove(Node node) {
+    public bool remove(Node node) {
         if (node == null) {
             return false;
         }
@@ -215,21 +215,21 @@ public class VariableDeclarator:Node implements NodeWithType<VariableDeclarator,
         return setInitializer((Expression) null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public VariableDeclarator clone() {
         return (VariableDeclarator) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public VariableDeclaratorMetaModel getMetaModel() {
         return JavaParserMetaModel.variableDeclaratorMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }
@@ -250,7 +250,7 @@ public class VariableDeclarator:Node implements NodeWithType<VariableDeclarator,
         return super.replace(node, replacementNode);
     }
 
-    @Override
+    //@Override
     public ResolvedValueDeclaration resolve() {
         return getSymbolResolver().resolveDeclaration(this, ResolvedValueDeclaration.class);
     }

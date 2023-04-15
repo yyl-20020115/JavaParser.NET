@@ -37,16 +37,16 @@ class Issue1364Test:AbstractResolutionTest {
         fakeObject.setName(new SimpleName("java.lang.Object"));
 
         TypeSolver typeSolver = new TypeSolver() {
-            @Override
+            //@Override
             public TypeSolver getParent() {
                 return null;
             }
 
-            @Override
+            //@Override
             public void setParent(TypeSolver parent) {
             }
 
-            @Override
+            //@Override
             public SymbolReference<ResolvedReferenceTypeDeclaration> tryToSolveType(string name) {
                 if ("java.lang.Object".equals(name)) {
                     // custom handling

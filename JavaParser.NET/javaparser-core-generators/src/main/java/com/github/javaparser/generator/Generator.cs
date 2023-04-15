@@ -48,7 +48,7 @@ public abstract class Generator {
         annotate(method, Override.class, null);
     }
 
-    private <T:Node & NodeWithAnnotations<?>> void annotate(T node, Class<?> annotation, Expression content) {
+    private <T:Node & NodeWithAnnotations<?>> void annotate(T node, Type annotation, Expression content) {
         node.setAnnotations(
                 node.getAnnotations().stream()
                         .filter(a -> !a.getNameAsString().equals(annotation.getSimpleName()))

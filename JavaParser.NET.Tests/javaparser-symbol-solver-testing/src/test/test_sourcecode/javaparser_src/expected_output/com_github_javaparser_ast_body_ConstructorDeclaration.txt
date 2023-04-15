@@ -61,7 +61,7 @@
   Line 182) sb.append(accessSpecifier == AccessSpecifier.DEFAULT ? "" : " ") ==> java.lang.StringBuffer
   Line 184) sb.append(getName()) ==> java.lang.StringBuffer
   Line 185) sb.append("(") ==> java.lang.StringBuffer
-  Line 186) boolean firstParam = true ==> boolean
+  Line 186) bool firstParam = true ==> boolean
   Line 186) true ==> boolean
   Line 187) Parameter param ==> com.github.javaparser.ast.body.Parameter
   Line 187) getParameters() ==> java.util.List<com.github.javaparser.ast.body.Parameter>
@@ -73,7 +73,7 @@
   Line 197) sb.append(param.getType().toStringWithoutComments()) ==> java.lang.StringBuffer
   Line 200) sb.append(")") ==> java.lang.StringBuffer
   Line 201) includingThrows ==> boolean
-  Line 202) boolean firstThrow = true ==> boolean
+  Line 202) bool firstThrow = true ==> boolean
   Line 202) true ==> boolean
   Line 203) NameExpr thr ==> com.github.javaparser.ast.expr.NameExpr
   Line 203) getThrows() ==> java.util.List<com.github.javaparser.ast.expr.NameExpr>

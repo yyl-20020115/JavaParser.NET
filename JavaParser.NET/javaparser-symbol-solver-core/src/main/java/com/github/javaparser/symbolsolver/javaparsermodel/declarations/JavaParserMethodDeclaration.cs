@@ -37,7 +37,7 @@ public class JavaParserMethodDeclaration implements ResolvedMethodDeclaration, T
         this.typeSolver = typeSolver;
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "JavaParserMethodDeclaration{" +
                 "wrappedNode=" + wrappedNode +
@@ -45,7 +45,7 @@ public class JavaParserMethodDeclaration implements ResolvedMethodDeclaration, T
                 '}';
     }
 
-    @Override
+    //@Override
     public ResolvedReferenceTypeDeclaration declaringType() {
         if (demandParentNode(wrappedNode) is ObjectCreationExpr) {
             ObjectCreationExpr parentNode = (ObjectCreationExpr) demandParentNode(wrappedNode);
@@ -61,20 +61,20 @@ public class JavaParserMethodDeclaration implements ResolvedMethodDeclaration, T
     	return new JavaSymbolSolver(typeSolver);
     }
 
-    @Override
+    //@Override
     public ResolvedType getReturnType() {
         return JavaParserFacade.get(typeSolver).convert(wrappedNode.getType(), getContext());
     }
 
-    @Override
+    //@Override
     public int getNumberOfParams() {
         return wrappedNode.getParameters().size();
     }
 
-    @Override
+    //@Override
     public ResolvedParameterDeclaration getParam(int i) {
         if (i < 0 || i >= getNumberOfParams()) {
-            throw new IllegalArgumentException(String.format("No param with index %d. Number of params: %d", i, getNumberOfParams()));
+            throw new ArgumentException(String.format("No param with index %d. Number of params: %d", i, getNumberOfParams()));
         }
         return new JavaParserParameterDeclaration(wrappedNode.getParameters().get(i), typeSolver);
     }
@@ -91,28 +91,28 @@ public class JavaParserMethodDeclaration implements ResolvedMethodDeclaration, T
         return JavaParserFactory.getContext(wrappedNode, typeSolver);
     }
 
-    @Override
-    public boolean isAbstract() {
+    //@Override
+    public bool isAbstract() {
         return !wrappedNode.getBody().isPresent();
     }
 
-    @Override
+    //@Override
     public string getName() {
         return wrappedNode.getName().getId();
     }
 
-    @Override
+    //@Override
     public List<ResolvedTypeParameterDeclaration> getTypeParameters() {
         return this.wrappedNode.getTypeParameters().stream().map((astTp) -> new JavaParserTypeParameter(astTp, typeSolver)).collect(Collectors.toList());
     }
 
-    @Override
-    public boolean isDefaultMethod() {
+    //@Override
+    public bool isDefaultMethod() {
         return wrappedNode.isDefault();
     }
 
-    @Override
-    public boolean isStatic() {
+    //@Override
+    public bool isStatic() {
         return wrappedNode.isStatic();
     }
 
@@ -125,32 +125,32 @@ public class JavaParserMethodDeclaration implements ResolvedMethodDeclaration, T
         return wrappedNode;
     }
 
-    @Override
+    //@Override
     public AccessSpecifier accessSpecifier() {
         return wrappedNode.getAccessSpecifier();
     }
 
-    @Override
+    //@Override
     public int getNumberOfSpecifiedExceptions() {
         return wrappedNode.getThrownExceptions().size();
     }
 
-    @Override
+    //@Override
     public ResolvedType getSpecifiedException(int index) {
         if (index < 0 || index >= getNumberOfSpecifiedExceptions()) {
-            throw new IllegalArgumentException(String.format("No exception with index %d. Number of exceptions: %d",
+            throw new ArgumentException(String.format("No exception with index %d. Number of exceptions: %d",
                     index, getNumberOfSpecifiedExceptions()));
         }
         return JavaParserFacade.get(typeSolver).convert(wrappedNode.getThrownExceptions()
                 .get(index), wrappedNode);
     }
 
-    @Override
+    //@Override
     public Optional<Node> toAst() {
         return Optional.of(wrappedNode);
     }
 
-    @Override
+    //@Override
     public string toDescriptor() {
         return wrappedNode.toDescriptor();
     }

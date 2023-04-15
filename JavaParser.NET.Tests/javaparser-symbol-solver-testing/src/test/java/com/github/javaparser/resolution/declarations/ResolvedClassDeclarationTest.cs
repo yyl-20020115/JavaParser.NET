@@ -26,7 +26,7 @@ namespace com.github.javaparser.resolution.declarations;
 public interface ResolvedClassDeclarationTest:ResolvedReferenceTypeDeclarationTest, ResolvedTypeParametrizableTest,
         HasAccessSpecifierTest {
 
-    @Override
+    //@Override
     ResolvedClassDeclaration createValue();
 
     [TestMethod]

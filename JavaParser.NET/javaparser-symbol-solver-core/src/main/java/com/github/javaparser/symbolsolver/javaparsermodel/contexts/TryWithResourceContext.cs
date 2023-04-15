@@ -27,10 +27,10 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.contexts;
 public class TryWithResourceContext:AbstractJavaParserContext<TryStmt> {
 
     public TryWithResourceContext(TryStmt wrappedNode, TypeSolver typeSolver) {
-        super(wrappedNode, typeSolver);
+        base(wrappedNode, typeSolver);
     }
 
-    @Override
+    //@Override
     public Optional<Value> solveSymbolAsValue(string name) {
         for (Expression expr : wrappedNode.getResources()) {
             if (expr is VariableDeclarationExpr) {
@@ -50,7 +50,7 @@ public class TryWithResourceContext:AbstractJavaParserContext<TryStmt> {
         }
     }
 
-    @Override
+    //@Override
     public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name) {
         for (Expression expr : wrappedNode.getResources()) {
             if (expr is VariableDeclarationExpr) {
@@ -69,13 +69,13 @@ public class TryWithResourceContext:AbstractJavaParserContext<TryStmt> {
         }
     }
 
-    @Override
-    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
+    //@Override
+    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, bool staticOnly) {
         // TODO: Document why staticOnly is forced to be false.
         return solveMethodInParentContext(name, argumentsTypes, false);
     }
 
-    @Override
+    //@Override
     public List<VariableDeclarator> localVariablesExposedToChild(Node child) {
         NodeList<Expression> resources = wrappedNode.getResources();
         for (int i=0;i<resources.size();i++) {

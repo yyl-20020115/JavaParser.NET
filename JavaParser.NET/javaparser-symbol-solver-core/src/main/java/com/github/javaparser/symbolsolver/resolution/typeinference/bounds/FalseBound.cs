@@ -40,18 +40,18 @@ public class FalseBound:Bound {
         return INSTANCE;
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "FalseBound{}";
     }
 
-    @Override
-    public boolean isSatisfied(InferenceVariableSubstitution inferenceVariableSubstitution) {
+    //@Override
+    public bool isSatisfied(InferenceVariableSubstitution inferenceVariableSubstitution) {
         return false;
     }
 
-    @Override
-    public Set<InferenceVariable> usedInferenceVariables() {
+    //@Override
+    public HashSet<InferenceVariable> usedInferenceVariables() {
         return Collections.emptySet();
     }
 }

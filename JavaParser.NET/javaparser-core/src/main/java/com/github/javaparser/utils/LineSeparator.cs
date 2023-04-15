@@ -92,20 +92,20 @@ public enum LineSeparator {
     }
 
     public static LineSeparator getLineEnding(int countCr, int countLf, int countCrLf) {
-        boolean noLineEndings = countCr == 0 && countLf == 0 && countCrLf == 0;
+        bool noLineEndings = countCr == 0 && countLf == 0 && countCrLf == 0;
         if (noLineEndings) {
             return NONE;
         }
-        boolean crOnly = countCr > 0 && countLf == 0 && countCrLf == 0;
+        bool crOnly = countCr > 0 && countLf == 0 && countCrLf == 0;
         if (crOnly) {
             return CR;
         }
-        boolean lfOnly = countCr == 0 && countLf > 0 && countCrLf == 0;
+        bool lfOnly = countCr == 0 && countLf > 0 && countCrLf == 0;
         if (lfOnly) {
             return LF;
         }
         // Note that wherever \r\n are found, there will also be an equal number of \r and \n characters found.
-        boolean crLfOnly = countCr == countLf && countLf == countCrLf;
+        bool crLfOnly = countCr == countLf && countLf == countCrLf;
         if (crLfOnly) {
             return CRLF;
         }
@@ -147,11 +147,11 @@ public enum LineSeparator {
         return description;
     }
 
-    public boolean equalsString(LineSeparator lineSeparator) {
+    public bool equalsString(LineSeparator lineSeparator) {
         return text.equals(lineSeparator.asRawString());
     }
 
-    public boolean isStandardEol() {
+    public bool isStandardEol() {
         // Compare based on the strings to allow for e.g. LineSeparator.SYSTEM
         return equalsString(LineSeparator.CR) || equalsString(LineSeparator.LF) || equalsString(LineSeparator.CRLF);
     }
@@ -177,7 +177,7 @@ public enum LineSeparator {
 //        return Optional.empty();
 //    }
 
-    @Override
+    //@Override
     public string toString() {
         return asRawString();
     }

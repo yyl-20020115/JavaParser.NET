@@ -87,7 +87,7 @@ public interface ResolvedMethodLikeDeclaration:ResolvedDeclaration, ResolvedType
     int getNumberOfParams();
 
     /**
-     * Get the ParameterDeclaration at the corresponding position or throw IllegalArgumentException.
+     * Get the ParameterDeclaration at the corresponding position or throw ArgumentException.
      */
     ResolvedParameterDeclaration getParam(int i);
 
@@ -121,7 +121,7 @@ public interface ResolvedMethodLikeDeclaration:ResolvedDeclaration, ResolvedType
      * Has the method or construcor a variadic parameter?
      * Note that when a method has a variadic parameter it should have an array type.
      */
-    default boolean hasVariadicParameter() {
+    default bool hasVariadicParameter() {
         if (getNumberOfParams() == 0) {
             return false;
         } else {
@@ -129,7 +129,7 @@ public interface ResolvedMethodLikeDeclaration:ResolvedDeclaration, ResolvedType
         }
     }
 
-    @Override
+    //@Override
     default Optional<ResolvedTypeParameterDeclaration> findTypeParameter(string name) {
         for (ResolvedTypeParameterDeclaration tp : this.getTypeParameters()) {
             if (tp.getName().equals(name)) {
@@ -147,7 +147,7 @@ public interface ResolvedMethodLikeDeclaration:ResolvedDeclaration, ResolvedType
     /**
      * Type of the corresponding entry _in the throws clause.
      *
-     * @throws IllegalArgumentException if the index is negative or it is equal or greater than the value returned by
+     * @throws ArgumentException if the index is negative or it is equal or greater than the value returned by
      *                                  getNumberOfSpecifiedExceptions
      * @throws UnsupportedOperationException for those types of methods of constructor that do not declare exceptions
      */

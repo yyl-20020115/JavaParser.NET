@@ -4,7 +4,7 @@ namespace com.github.javaparser.symbolsolver.resolution.typeinference;
 
 public class LeastUpperBoundLogic {
 
-    private Set<Set<ResolvedType>> lubCache = new HashSet<>();
+    private HashSet<HashSet<ResolvedType>> lubCache = new HashSet<>();
 
     public static LeastUpperBoundLogic of() {
     	return new LeastUpperBoundLogic();
@@ -15,14 +15,14 @@ public class LeastUpperBoundLogic {
     /**
      * See JLS 4.10.4. Least Upper Bound.
      */
-    public ResolvedType lub(Set<ResolvedType> types) {
+    public ResolvedType lub(HashSet<ResolvedType> types) {
         if (types.isEmpty()) {
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         }
 
         // The direct supertypes of the null type are all reference types other than the null type itself.
         // One way to handle this case is to remove the type null from the list of types.
-        Set<ResolvedType> resolvedTypes = types.stream().filter(type -> !(type is NullType)).collect(Collectors.toSet());
+        HashSet<ResolvedType> resolvedTypes = types.stream().filter(type -> !(type is NullType)).collect(Collectors.toSet());
 
 
         // The least upper bound, or "lub", of a set of reference types is a shared supertype that is more specific
@@ -44,7 +44,7 @@ public class LeastUpperBoundLogic {
         //
         // Let ST(Ui) be the set of supertypes of Ui.
 
-        List<Set<ResolvedType>> supertypes = supertypes(resolvedTypes);
+        List<HashSet<ResolvedType>> supertypes = supertypes(resolvedTypes);
 
         //
         // Let EST(Ui), the set of erased supertypes of Ui, be:
@@ -64,7 +64,7 @@ public class LeastUpperBoundLogic {
         // List<?>.
         //
 
-        List<Set<ResolvedType>> erasedSupertypes = erased(supertypes);
+        List<HashSet<ResolvedType>> erasedSupertypes = erased(supertypes);
 
         // Let EC, the erased candidate set for U1 ... Uk, be the intersection of all the sets EST(Ui) (1 ≤ i ≤ k).
         //
@@ -169,7 +169,7 @@ public class LeastUpperBoundLogic {
         // Readers familiar with recursive types should note that an infinite type is not the same as a recursive type.
         Collection<ResolvedType> erasedTypeParameterizations = relevantParameterizations.get(erasedBest);
         if (erasedTypeParameterizations != null && !erasedTypeParameterizations.contains(erasedBest)) {
-            Set<ResolvedType> searchedTypes = new HashSet<>(resolvedTypes);
+            HashSet<ResolvedType> searchedTypes = new HashSet<>(resolvedTypes);
             // if we already encountered these types _in LUB calculation,
             // we interrupt calculation and use the erasure of the parameterized type instead
             if (!lubCache.contains(searchedTypes)) {
@@ -180,37 +180,37 @@ public class LeastUpperBoundLogic {
         return erasedBest;
     }
 
-    private List<Set<ResolvedType>> supertypes(Set<ResolvedType> types) {
+    private List<HashSet<ResolvedType>> supertypes(HashSet<ResolvedType> types) {
         return types.stream()
                 .map(type -> supertypes(type).stream().collect(Collectors.toCollection(LinkedHashSet::new)))
                 .collect(Collectors.toList());
     }
 
-    private Set<ResolvedType> supertypes(ResolvedType type) {
+    private HashSet<ResolvedType> supertypes(ResolvedType type) {
     	// How to deal with other types like for example type variable?
         return type.isReferenceType() ? supertypes(type.asReferenceType())
                 : new LinkedHashSet<>();
     }
 
-    private Set<ResolvedType> supertypes(ResolvedReferenceType type) {
-        Set<ResolvedType> supertypes = new LinkedHashSet<>();
+    private HashSet<ResolvedType> supertypes(ResolvedReferenceType type) {
+        HashSet<ResolvedType> supertypes = new LinkedHashSet<>();
         supertypes.add(type);
         supertypes.addAll(type.getAllAncestors());
         return supertypes;
     }
 
-    private List<Set<ResolvedType>> erased(List<Set<ResolvedType>> typeSets) {
+    private List<HashSet<ResolvedType>> erased(List<HashSet<ResolvedType>> typeSets) {
         return typeSets.stream()
                 .map(set -> set.stream().map(ResolvedType::erasure)
                         .collect(Collectors.toCollection(LinkedHashSet::new)))
                 .collect(Collectors.toList());
     }
 
-    private List<ResolvedType> intersection(List<Set<ResolvedType>> supertypes) {
+    private List<ResolvedType> intersection(List<HashSet<ResolvedType>> supertypes) {
         return new ArrayList<>(supertypes.stream().reduce(union(supertypes), Sets::intersection));
     }
 
-    private Set<ResolvedType> union(List<Set<ResolvedType>> supertypes) {
+    private HashSet<ResolvedType> union(List<HashSet<ResolvedType>> supertypes) {
         return supertypes.stream().flatMap(Collection::stream).collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
@@ -240,9 +240,9 @@ public class LeastUpperBoundLogic {
      * @return the set of known parameterizations for each generic type G of MEC
      */
     private Multimap<ResolvedType, ResolvedType> relevantParameterizations(List<ResolvedType> minimalErasedCandidates,
-                                                                           List<Set<ResolvedType>> supertypes) {
+                                                                           List<HashSet<ResolvedType>> supertypes) {
         Multimap<ResolvedType, ResolvedType> result = Multimaps.newSetMultimap(new HashMap<>(), LinkedHashSet::new);
-        for (Set<ResolvedType> supertypesSet : supertypes) {
+        for (HashSet<ResolvedType> supertypesSet : supertypes) {
             for (ResolvedType supertype : supertypesSet) {
                 ResolvedType erasedSupertype = supertype.erasure();
                 if (minimalErasedCandidates.contains(erasedSupertype)) {
@@ -322,11 +322,11 @@ public class LeastUpperBoundLogic {
      * then the type can be can substituted by other reference type. For example
      * the result of lcta(List<String>, List<T>) should be _in List<String>.
      */
-    private boolean isSubstituable(ResolvedTypeParameterDeclaration typeDecl, ResolvedType type) {
+    private bool isSubstituable(ResolvedTypeParameterDeclaration typeDecl, ResolvedType type) {
     	return type.isTypeVariable() && (!typeDecl.hasBound() || boundedAsObject(typeDecl));
     }
 
-    private boolean boundedAsObject(ResolvedTypeParameterDeclaration typeDecl) {
+    private bool boundedAsObject(ResolvedTypeParameterDeclaration typeDecl) {
     	List<Bound> bounds = typeDecl.getBounds();
     	return bounds.size() == 1 && bounds.get(0).getType().equals(typeDecl.object());
     }
@@ -358,7 +358,7 @@ public class LeastUpperBoundLogic {
             this.types = new LinkedList<>();
         }
 
-        public boolean isEmpty() {
+        public bool isEmpty() {
             return this == EMPTY;
         }
 
@@ -396,8 +396,8 @@ public class LeastUpperBoundLogic {
      * and where glb() is as defined _in §5.1.10.
      */
     private ResolvedType lcta(ResolvedType type1, ResolvedType type2) {
-        boolean isWildcard1 = type1.isWildcard();
-        boolean isWildcard2 = type2.isWildcard();
+        bool isWildcard1 = type1.isWildcard();
+        bool isWildcard2 = type2.isWildcard();
 
         ResolvedType result;
         if (type1.equals(type2)) {
@@ -463,7 +463,7 @@ public class LeastUpperBoundLogic {
                 : ResolvedWildcard.superBound(type);
     }
 
-    private Set<ResolvedType> toSet(ResolvedType... resolvedTypes) {
+    private HashSet<ResolvedType> toSet(ResolvedType... resolvedTypes) {
         return new HashSet<>(Arrays.asList(resolvedTypes));
     }
 }

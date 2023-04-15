@@ -37,7 +37,7 @@ public class JavassistConstructorDeclaration implements ResolvedConstructorDecla
         this.methodLikeAdaper = new JavassistMethodLikeDeclarationAdapter(ctConstructor, typeSolver, this);
     }
 
-    @Override
+    //@Override
     public string toString() {
         return getClass().getSimpleName() + "{" +
                 "ctConstructor=" + ctConstructor.getName() +
@@ -45,57 +45,57 @@ public class JavassistConstructorDeclaration implements ResolvedConstructorDecla
                 '}';
     }
 
-    @Override
+    //@Override
     public string getName() {
         return ctConstructor.getName();
     }
 
-    @Override
-    public boolean isField() {
+    //@Override
+    public bool isField() {
         return false;
     }
 
-    @Override
-    public boolean isParameter() {
+    //@Override
+    public bool isParameter() {
         return false;
     }
 
-    @Override
-    public boolean isType() {
+    //@Override
+    public bool isType() {
         return false;
     }
 
-    @Override
+    //@Override
     public ResolvedReferenceTypeDeclaration declaringType() {
         return JavassistFactory.toTypeDeclaration(ctConstructor.getDeclaringClass(), typeSolver);
     }
 
-    @Override
+    //@Override
     public int getNumberOfParams() {
         return methodLikeAdaper.getNumberOfParams();
     }
 
-    @Override
+    //@Override
     public ResolvedParameterDeclaration getParam(int i) {
         return methodLikeAdaper.getParam(i);
     }
 
-    @Override
+    //@Override
     public List<ResolvedTypeParameterDeclaration> getTypeParameters() {
         return methodLikeAdaper.getTypeParameters();
     }
 
-    @Override
+    //@Override
     public AccessSpecifier accessSpecifier() {
         return JavassistFactory.modifiersToAccessLevel(ctConstructor.getModifiers());
     }
 
-    @Override
+    //@Override
     public int getNumberOfSpecifiedExceptions() {
         return methodLikeAdaper.getNumberOfSpecifiedExceptions();
     }
 
-    @Override
+    //@Override
     public ResolvedType getSpecifiedException(int index) {
         return methodLikeAdaper.getSpecifiedException(index);
     }

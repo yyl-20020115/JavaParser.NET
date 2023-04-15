@@ -61,8 +61,8 @@ public interface ImportOrderingStrategy {
      */
     List<NodeList<ImportDeclaration>> sortImports(NodeList<ImportDeclaration> imports);
 
-    void setSortImportsAlphabetically(boolean sortAlphabetically);
+    void setSortImportsAlphabetically(bool sortAlphabetically);
 
-    boolean isSortImportsAlphabetically();
+    bool isSortImportsAlphabetically();
 
 }

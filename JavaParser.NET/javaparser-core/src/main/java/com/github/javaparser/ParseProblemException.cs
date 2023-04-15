@@ -33,7 +33,7 @@ public class ParseProblemException:RuntimeException {
     private /*final*/List<Problem> problems;
 
     public ParseProblemException(List<Problem> problems) {
-        super(createMessage(assertNotNull(problems)));
+        base(createMessage(assertNotNull(problems)));
         this.problems = problems;
     }
 

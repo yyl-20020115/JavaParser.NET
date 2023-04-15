@@ -36,20 +36,20 @@ public class PhantomNodeLogic {
 
     private static /*final*/AstObserver cacheCleaner = new AstObserverAdapter() {
 
-        @Override
+        //@Override
         public void parentChange(Node observedNode, Node previousParent, Node newParent) {
             isPhantomNodeCache.remove(observedNode);
         }
     };
 
-    static boolean isPhantomNode(Node node) {
+    static bool isPhantomNode(Node node) {
         if (isPhantomNodeCache.containsKey(node)) {
             return isPhantomNodeCache.get(node);
         } else {
             if (node is UnknownType) {
                 return true;
             }
-            boolean res = (node.getParentNode().isPresent() && node.getParentNode().get().hasRange() && node.hasRange() && !node.getParentNode().get().getRange().get().contains(node.getRange().get()) || inPhantomNode(node, LEVELS_TO_EXPLORE));
+            bool res = (node.getParentNode().isPresent() && node.getParentNode().get().hasRange() && node.hasRange() && !node.getParentNode().get().getRange().get().contains(node.getRange().get()) || inPhantomNode(node, LEVELS_TO_EXPLORE));
             isPhantomNodeCache.put(node, res);
             node.register(cacheCleaner);
             return res;
@@ -59,7 +59,7 @@ public class PhantomNodeLogic {
     /**
      * A node contained _in a phantom node is also a phantom node. We limit how many levels up we check just for performance reasons.
      */
-    private static boolean inPhantomNode(Node node, int levels) {
+    private static bool inPhantomNode(Node node, int levels) {
         return node.getParentNode().isPresent() && (isPhantomNode(node.getParentNode().get()) || inPhantomNode(node.getParentNode().get(), levels - 1));
     }
 

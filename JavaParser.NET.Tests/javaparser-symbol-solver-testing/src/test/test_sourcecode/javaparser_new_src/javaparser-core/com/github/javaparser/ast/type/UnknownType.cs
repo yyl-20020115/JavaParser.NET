@@ -35,22 +35,22 @@ public /*final*/class UnknownType:Type<UnknownType> {
     public UnknownType() {
     }
 
-    @Override
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    //@Override
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    //@Override
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public List<AnnotationExpr> getAnnotations() {
         throw new IllegalStateException("Inferred lambda types cannot be annotated.");
     }
 
-    @Override
+    //@Override
     public UnknownType setAnnotations(List<AnnotationExpr> annotations) {
         throw new IllegalStateException("Inferred lambda types cannot be annotated.");
     }

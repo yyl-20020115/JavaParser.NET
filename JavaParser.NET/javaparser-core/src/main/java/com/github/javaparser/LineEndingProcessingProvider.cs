@@ -62,7 +62,7 @@ public class LineEndingProcessingProvider implements Provider {
         _data = new char[bufferSize];
     }
 
-    @Override
+    //@Override
     public void close(){
         _input.close();
     }
@@ -80,7 +80,7 @@ public class LineEndingProcessingProvider implements Provider {
         return LineSeparator.getLineEnding(eolCounts.getOrDefault(LineSeparator.CR, 0), eolCounts.getOrDefault(LineSeparator.LF, 0), eolCounts.getOrDefault(LineSeparator.CRLF, 0));
     }
 
-    private boolean isBufferEmpty() {
+    private bool isBufferEmpty() {
         return _pos >= _len;
     }
 
@@ -99,7 +99,7 @@ public class LineEndingProcessingProvider implements Provider {
         return _data[_pos++];
     }
 
-    @Override
+    //@Override
     public int read(char[] buffer, /*final*/int offset, int len){
         int pos = offset;
         int stop = offset + len;

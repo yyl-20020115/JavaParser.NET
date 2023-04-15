@@ -28,29 +28,29 @@ namespace com.github.javaparser.ast.body;
 public /*final*/class EmptyTypeDeclaration:TypeDeclaration implements DocumentableNode {
 
     public EmptyTypeDeclaration() {
-        super(null, 0, null, null);
+        base(null, 0, null, null);
     }
 
     public EmptyTypeDeclaration(int beginLine, int beginColumn, int endLine, int endColumn) {
-        super(beginLine, beginColumn, endLine, endColumn, null, 0, null, null);
+        base(beginLine, beginColumn, endLine, endColumn, null, 0, null, null);
     }
 
-    @Override
+    //@Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public void setJavaDoc(JavadocComment javadocComment) {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    @Override
+    //@Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public JavadocComment getJavaDoc() {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }

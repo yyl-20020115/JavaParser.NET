@@ -47,7 +47,7 @@ public abstract class TypeDeclaration<T>:BodyDeclaration<T>
 	public TypeDeclaration(List<AnnotationExpr> annotations,
                            EnumSet<Modifier> modifiers, string name,
                            List<BodyDeclaration<?>> members) {
-		super(annotations);
+		base(annotations);
 		setName(name);
 		setModifiers(modifiers);
 		setMembers(members);
@@ -56,7 +56,7 @@ public abstract class TypeDeclaration<T>:BodyDeclaration<T>
 	public TypeDeclaration(Range range, List<AnnotationExpr> annotations,
                            EnumSet<Modifier> modifiers, string name,
                            List<BodyDeclaration<?>> members) {
-		super(range, annotations);
+		base(range, annotations);
 		setName(name);
 		setModifiers(modifiers);
 		setMembers(members);
@@ -80,7 +80,7 @@ public abstract class TypeDeclaration<T>:BodyDeclaration<T>
 		return this;
 	}
 
-    @Override
+    //@Override
     public List<BodyDeclaration<?>> getMembers() {
         	members = ensureNotNull(members);
         	return members;
@@ -103,7 +103,7 @@ public abstract class TypeDeclaration<T>:BodyDeclaration<T>
 	}
 
     //@SuppressWarnings("unchecked")
-    @Override
+    //@Override
     public T setMembers(List<BodyDeclaration<?>> members) {
 		this.members = members;
 		setAsParentNodeOf(this.members);
@@ -111,13 +111,13 @@ public abstract class TypeDeclaration<T>:BodyDeclaration<T>
 	}
 
     //@SuppressWarnings("unchecked")
-    @Override
+    //@Override
     public T setModifiers(EnumSet<Modifier> modifiers) {
 		this.modifiers = modifiers;
         return (T) this;
 	}
 
-    @Override
+    //@Override
     //@SuppressWarnings("unchecked")
     public T setName(string name) {
 		setNameExpr(new NameExpr(name));

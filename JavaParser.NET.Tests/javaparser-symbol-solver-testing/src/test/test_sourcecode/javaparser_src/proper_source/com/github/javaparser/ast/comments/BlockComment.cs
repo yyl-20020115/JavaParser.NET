@@ -37,11 +37,11 @@ public /*final*/class BlockComment:Comment {
     }
 
     public BlockComment(string content) {
-        super(content);
+        base(content);
     }
 
     public BlockComment(int beginLine, int beginColumn, int endLine, int endColumn, string content) {
-        super(beginLine, beginColumn, endLine, endColumn, content);
+        base(beginLine, beginColumn, endLine, endColumn, content);
     }
 
     //@Override

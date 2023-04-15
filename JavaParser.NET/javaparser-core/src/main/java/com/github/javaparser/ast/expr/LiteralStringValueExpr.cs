@@ -40,7 +40,7 @@ public abstract class LiteralStringValueExpr:LiteralExpr {
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public LiteralStringValueExpr(TokenRange tokenRange, string value) {
-        super(tokenRange);
+        base(tokenRange);
         setValue(value);
         customInitialization();
     }
@@ -61,37 +61,37 @@ public abstract class LiteralStringValueExpr:LiteralExpr {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public LiteralStringValueExpr clone() {
         return (LiteralStringValueExpr) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public LiteralStringValueExprMetaModel getMetaModel() {
         return JavaParserMetaModel.literalStringValueExprMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isLiteralStringValueExpr() {
+    public bool isLiteralStringValueExpr() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public LiteralStringValueExpr asLiteralStringValueExpr() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifLiteralStringValueExpr(Consumer<LiteralStringValueExpr> action) {
         action.accept(this);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<LiteralStringValueExpr> toLiteralStringValueExpr() {
         return Optional.of(this);

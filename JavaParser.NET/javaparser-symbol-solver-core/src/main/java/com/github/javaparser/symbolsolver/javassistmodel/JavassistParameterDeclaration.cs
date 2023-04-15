@@ -28,21 +28,21 @@ namespace com.github.javaparser.symbolsolver.javassistmodel;
 public class JavassistParameterDeclaration implements ResolvedParameterDeclaration {
     private ResolvedType type;
     private TypeSolver typeSolver;
-    private boolean variadic;
+    private bool variadic;
     private string name;
 
-    public JavassistParameterDeclaration(CtClass type, TypeSolver typeSolver, boolean variadic, string name) {
+    public JavassistParameterDeclaration(CtClass type, TypeSolver typeSolver, bool variadic, string name) {
         this(JavassistFactory.typeUsageFor(type, typeSolver), typeSolver, variadic, name);
     }
 
-    public JavassistParameterDeclaration(ResolvedType type, TypeSolver typeSolver, boolean variadic, string name) {
+    public JavassistParameterDeclaration(ResolvedType type, TypeSolver typeSolver, bool variadic, string name) {
         this.name = name;
         this.type = type;
         this.typeSolver = typeSolver;
         this.variadic = variadic;
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "JavassistParameterDeclaration{" +
                 "type=" + type +
@@ -51,37 +51,37 @@ public class JavassistParameterDeclaration implements ResolvedParameterDeclarati
                 '}';
     }
 
-    @Override
-    public boolean hasName() {
+    //@Override
+    public bool hasName() {
         return name != null;
     }
 
-    @Override
+    //@Override
     public string getName() {
         return name;
     }
 
-    @Override
-    public boolean isField() {
+    //@Override
+    public bool isField() {
         return false;
     }
 
-    @Override
-    public boolean isParameter() {
+    //@Override
+    public bool isParameter() {
         return true;
     }
 
-    @Override
-    public boolean isVariadic() {
+    //@Override
+    public bool isVariadic() {
         return variadic;
     }
 
-    @Override
-    public boolean isType() {
+    //@Override
+    public bool isType() {
         return false;
     }
 
-    @Override
+    //@Override
     public ResolvedType getType() {
         return type;
     }

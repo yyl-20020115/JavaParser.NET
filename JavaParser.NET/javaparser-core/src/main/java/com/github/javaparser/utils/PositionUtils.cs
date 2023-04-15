@@ -37,19 +37,19 @@ public /*final*/class PositionUtils {
         sortByBeginPosition(nodes, false);
     }
 
-    public static <T:Node> void sortByBeginPosition(List<T> nodes, /*final*/boolean ignoringAnnotations) {
+    public static <T:Node> void sortByBeginPosition(List<T> nodes, /*final*/bool ignoringAnnotations) {
         nodes.sort((o1, o2) -> PositionUtils.compare(o1, o2, ignoringAnnotations));
     }
 
-    public static boolean areInOrder(Node a, Node b) {
+    public static bool areInOrder(Node a, Node b) {
         return areInOrder(a, b, false);
     }
 
-    public static boolean areInOrder(Node a, Node b, boolean ignoringAnnotations) {
+    public static bool areInOrder(Node a, Node b, bool ignoringAnnotations) {
         return compare(a, b, ignoringAnnotations) <= 0;
     }
 
-    private static int compare(Node a, Node b, boolean ignoringAnnotations) {
+    private static int compare(Node a, Node b, bool ignoringAnnotations) {
         if (a.hasRange() && !b.hasRange()) {
             return -1;
         }
@@ -142,12 +142,12 @@ public /*final*/class PositionUtils {
      * If `ignoringAnnotations` is false, annotations on the container are ignored. For this reason, where
      * `container == other`, the raw `other` may extend beyond the sans-annotations `container` thus return false.
      */
-    public static boolean nodeContains(Node container, Node other, boolean ignoringAnnotations) {
+    public static bool nodeContains(Node container, Node other, bool ignoringAnnotations) {
         if (!container.hasRange()) {
-            throw new IllegalArgumentException("Cannot compare the positions of nodes if container node does not have a range.");
+            throw new ArgumentException("Cannot compare the positions of nodes if container node does not have a range.");
         }
         if (!other.hasRange()) {
-            throw new IllegalArgumentException("Cannot compare the positions of nodes if contained node does not have a range.");
+            throw new ArgumentException("Cannot compare the positions of nodes if contained node does not have a range.");
         }
         // // FIXME: Not all nodes seem to have the compilation unit available?
         // if (!Objects.equals(container.findCompilationUnit(), other.findCompilationUnit())) {
@@ -155,8 +155,8 @@ public /*final*/class PositionUtils {
         // // ... or both not within a CU (i.e. both are Optional.empty())
         // return false;
         // }
-        /*final*/boolean nodeCanHaveAnnotations = container is NodeWithAnnotations;
-        // /*final*/boolean hasAnnotations = PositionUtils.getLastAnnotation(container) != null;
+        /*final*/bool nodeCanHaveAnnotations = container is NodeWithAnnotations;
+        // /*final*/bool hasAnnotations = PositionUtils.getLastAnnotation(container) != null;
         if (!ignoringAnnotations || PositionUtils.getLastAnnotation(container) == null) {
             // No special consideration required - perform simple range check.
             return container.containsWithinRange(other);

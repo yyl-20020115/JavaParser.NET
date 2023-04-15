@@ -36,7 +36,7 @@ public class AssertStmtMetaModel:StatementMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     AssertStmtMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, AssertStmt.class, "AssertStmt", "com.github.javaparser.ast.stmt", false, false);
+        base(superBaseNodeMetaModel, AssertStmt.class, "AssertStmt", "com.github.javaparser.ast.stmt", false, false);
     }
 
     public PropertyMetaModel checkPropertyMetaModel;

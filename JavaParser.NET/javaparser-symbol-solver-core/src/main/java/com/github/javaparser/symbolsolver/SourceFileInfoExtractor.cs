@@ -189,7 +189,7 @@ public class SourceFileInfoExtractor
     public void solve(Path path)
     {
         Files.walkFileTree(path, new SimpleFileVisitor<Path>() {
-            @Override
+            //@Override
             public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
     {
                 if (file.toString().endsWith(".java")) {
@@ -208,7 +208,7 @@ nodes.forEach(n -> solve(n));
     public void solveMethodCalls(Path path)
 {
     Files.walkFileTree(path, new SimpleFileVisitor<Path>() {
-            @Override
+            //@Override
             public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
 {
                 if (file.toString().endsWith(".java")) {

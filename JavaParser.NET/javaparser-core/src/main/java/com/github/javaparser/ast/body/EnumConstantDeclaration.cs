@@ -54,22 +54,22 @@ public class EnumConstantDeclaration:BodyDeclaration<EnumConstantDeclaration> im
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public EnumConstantDeclaration(TokenRange tokenRange, NodeList<AnnotationExpr> annotations, SimpleName name, NodeList<Expression> arguments, NodeList<BodyDeclaration<?>> classBody) {
-        super(tokenRange, annotations);
+        base(tokenRange, annotations);
         setName(name);
         setArguments(arguments);
         setClassBody(classBody);
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -130,9 +130,9 @@ public class EnumConstantDeclaration:BodyDeclaration<EnumConstantDeclaration> im
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
-    public boolean remove(Node node) {
+    public bool remove(Node node) {
         if (node == null) {
             return false;
         }
@@ -151,21 +151,21 @@ public class EnumConstantDeclaration:BodyDeclaration<EnumConstantDeclaration> im
         return super.remove(node);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public EnumConstantDeclaration clone() {
         return (EnumConstantDeclaration) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public EnumConstantDeclarationMetaModel getMetaModel() {
         return JavaParserMetaModel.enumConstantDeclarationMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }
@@ -188,30 +188,30 @@ public class EnumConstantDeclaration:BodyDeclaration<EnumConstantDeclaration> im
         return super.replace(node, replacementNode);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isEnumConstantDeclaration() {
+    public bool isEnumConstantDeclaration() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public EnumConstantDeclaration asEnumConstantDeclaration() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifEnumConstantDeclaration(Consumer<EnumConstantDeclaration> action) {
         action.accept(this);
     }
 
-    @Override
+    //@Override
     public ResolvedEnumConstantDeclaration resolve() {
         return getSymbolResolver().resolveDeclaration(this, ResolvedEnumConstantDeclaration.class);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<EnumConstantDeclaration> toEnumConstantDeclaration() {
         return Optional.of(this);

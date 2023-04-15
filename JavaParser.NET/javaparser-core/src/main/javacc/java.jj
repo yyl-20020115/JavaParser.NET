@@ -95,7 +95,7 @@ namespace com.github.javaparser;
         jj_input_stream.setTabSize(size);
     }
 
-    @Override
+    //@Override
     GeneratedJavaParserTokenManager getTokenSource() {
         return token_source;
     }
@@ -178,8 +178,8 @@ TOKEN_MGR_DECLS :
     private CommentsCollection commentsCollection = new CommentsCollection();
     private JavaToken homeToken;
     private Stack<Token> tokenWorkStack = new Stack<Token>();
-    private boolean storeTokens;
-    private boolean yieldSupported = false;
+    private bool storeTokens;
+    private bool yieldSupported = false;
 
     void reset() {
         tokens = new ArrayList<JavaToken>();
@@ -204,7 +204,7 @@ TOKEN_MGR_DECLS :
     }
 
     /* Makes the parser keep a list of tokens */
-    public void setStoreTokens(boolean storeTokens) {
+    public void setStoreTokens(bool storeTokens) {
         this.storeTokens = storeTokens;
     }
 
@@ -1171,8 +1171,8 @@ PackageDeclaration PackageDeclaration():
 ImportDeclaration ImportDeclaration():
 {
     Name name;
-    boolean isStatic = false;
-    boolean isAsterisk = false;
+    bool isStatic = false;
+    bool isAsterisk = false;
     JavaToken begin;
 }
 {
@@ -1295,7 +1295,7 @@ ModifierHolder Modifiers():
  */
 ClassOrInterfaceDeclaration ClassOrInterfaceDeclaration(ModifierHolder modifier):
 {
-    boolean isInterface;
+    bool isInterface;
     SimpleName name;
     RangedList<TypeParameter> typePar = new RangedList<TypeParameter>(emptyNodeList());
     NodeList<ClassOrInterfaceType> extList = emptyNodeList();
@@ -1399,7 +1399,7 @@ RecordDeclaration RecordDeclaration(ModifierHolder modifier):
  */
 NodeList<ClassOrInterfaceType> ExtendsList():
 {
-    boolean extendsMoreThanOne = false;
+    bool extendsMoreThanOne = false;
     NodeList<ClassOrInterfaceType> ret = new NodeList<ClassOrInterfaceType>();
     ClassOrInterfaceType cit;
 }
@@ -2297,7 +2297,7 @@ Parameter Parameter():
 {
     ModifierHolder modifier;
     Type partialType;
-    boolean isVarArg = false;
+    bool isVarArg = false;
     Pair<SimpleName, List<ArrayBracketPair>> id;
     NodeList<AnnotationExpr> varArgAnnotations = emptyNodeList();
 }
@@ -2442,7 +2442,7 @@ ConstructorDeclaration ConstructorDeclaration(ModifierHolder modifier):
  */
 ExplicitConstructorInvocationStmt ExplicitConstructorInvocation():
 {
-    boolean isThis = false;
+    bool isThis = false;
     NodeList<Expression> args;
     Expression expr = null;
     RangedList<Type> typeArgs = new RangedList<Type>(null);
@@ -2528,7 +2528,7 @@ InitializerDeclaration InitializerDeclaration():
 {
     BlockStmt body;
     JavaToken begin = INVALID;
-    boolean isStatic = false;
+    bool isStatic = false;
 }
 {
     [ "static" { isStatic = true; begin=token();} ]
@@ -2902,7 +2902,7 @@ SimpleName SimpleName():
  *
  *         abstract   continue   for          new         switch
  *         assert     default    if           package     synchronized
- *         boolean    do         goto         private     this
+ *         bool    do         goto         private     this
  *         break      double     implements   protected   throw
  *         byte       else       import       public      throws
  *         case       enum       instanceof   return      transient
@@ -2920,7 +2920,7 @@ String Identifier():
 {
     (
         // TODO: Explain why these keywords are explicitly flagged up as "included", and why they're not already covered by {@code <IDENTIFIER>}.
-        // TODO: Explain how / where boolean and null literals are excluded.
+        // TODO: Explain how / where bool and null literals are excluded.
         // Make sure the module info keywords don't interfere with normal Java parsing by matching them as normal identifiers.
         <MODULE> | <REQUIRES> | <TO> | <WITH> | <OPEN> | <OPENS> | <USES> | <EXPORTS> | <PROVIDES> | <TRANSITIVE> |
         // Make sure older Java versions parse
@@ -3715,8 +3715,8 @@ Expression PrimaryPrefix():
     RangedList<Type> typeArgs = new RangedList<Type>(null);
     NodeList<Expression> args = emptyNodeList();
     NodeList<Parameter> params = emptyNodeList();
-    boolean hasArgs = false;
-    boolean isLambda = false;
+    bool hasArgs = false;
+    bool isLambda = false;
     Type type;
     JavaToken begin;
     Parameter p = null;
@@ -3829,7 +3829,7 @@ Expression PrimarySuffixWithoutSuper(Expression scope):
     Expression ret;
     RangedList<Type> typeArgs = new RangedList<Type>(null);
     NodeList<Expression> args = emptyNodeList();
-    boolean hasArgs = false;
+    bool hasArgs = false;
     SimpleName name;
 }
 {
@@ -5643,7 +5643,7 @@ ModuleDirective ModuleDirective():
 ModuleDeclaration ModuleDeclaration(ModifierHolder modifier):
 {
     NodeList<ModuleDirective> directives = new NodeList<ModuleDirective>();
-    boolean open=false;
+    bool open=false;
     ModuleDirective directive;
     Name name;
     JavaToken begin = modifier.begin;

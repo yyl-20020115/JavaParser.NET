@@ -35,17 +35,17 @@ namespace com.github.javaparser.ast.expr;
  */
 public class ObjectCreationExpr:Expression implements NodeWithTypeArguments<ObjectCreationExpr>, NodeWithType<ObjectCreationExpr, ClassOrInterfaceType>, NodeWithArguments<ObjectCreationExpr>, NodeWithOptionalScope<ObjectCreationExpr>, Resolvable<ResolvedConstructorDeclaration> {
 
-    @OptionalProperty
+    //@OptionalProperty
     private Expression scope;
 
     private ClassOrInterfaceType type;
 
-    @OptionalProperty
+    //@OptionalProperty
     private NodeList<Type> typeArguments;
 
     private NodeList<Expression> arguments;
 
-    @OptionalProperty
+    //@OptionalProperty
     private NodeList<BodyDeclaration<?>> anonymousClassBody;
 
     public ObjectCreationExpr() {
@@ -73,7 +73,7 @@ public class ObjectCreationExpr:Expression implements NodeWithTypeArguments<Obje
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public ObjectCreationExpr(TokenRange tokenRange, Expression scope, ClassOrInterfaceType type, NodeList<Type> typeArguments, NodeList<Expression> arguments, NodeList<BodyDeclaration<?>> anonymousClassBody) {
-        super(tokenRange);
+        base(tokenRange);
         setScope(scope);
         setType(type);
         setTypeArguments(typeArguments);
@@ -82,15 +82,15 @@ public class ObjectCreationExpr:Expression implements NodeWithTypeArguments<Obje
         customInitialization();
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
@@ -212,9 +212,9 @@ public class ObjectCreationExpr:Expression implements NodeWithTypeArguments<Obje
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
-    public boolean remove(Node node) {
+    public bool remove(Node node) {
         if (node == null) {
             return false;
         }
@@ -254,21 +254,21 @@ public class ObjectCreationExpr:Expression implements NodeWithTypeArguments<Obje
         return setScope((Expression) null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public ObjectCreationExpr clone() {
         return (ObjectCreationExpr) accept(new CloneVisitor(), null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public ObjectCreationExprMetaModel getMetaModel() {
         return JavaParserMetaModel.objectCreationExprMetaModel;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }
@@ -307,19 +307,19 @@ public class ObjectCreationExpr:Expression implements NodeWithTypeArguments<Obje
         return super.replace(node, replacementNode);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isObjectCreationExpr() {
+    public bool isObjectCreationExpr() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public ObjectCreationExpr asObjectCreationExpr() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifObjectCreationExpr(Consumer<ObjectCreationExpr> action) {
         action.accept(this);
@@ -338,12 +338,12 @@ public class ObjectCreationExpr:Expression implements NodeWithTypeArguments<Obje
      * @see MethodCallExpr#resolve()
      * @see ExplicitConstructorInvocationStmt#resolve()
      */
-    @Override
+    //@Override
     public ResolvedConstructorDeclaration resolve() {
         return getSymbolResolver().resolveDeclaration(this, ResolvedConstructorDeclaration.class);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<ObjectCreationExpr> toObjectCreationExpr() {
         return Optional.of(this);
@@ -354,8 +354,8 @@ public class ObjectCreationExpr:Expression implements NodeWithTypeArguments<Obje
      * arguments to the class, and it appears _in an assignment context or an invocation context (§5.2, §5.3).
      * Otherwise, it is a standalone expression.
      */
-    @Override
-    public boolean isPolyExpression() {
+    //@Override
+    public bool isPolyExpression() {
         return isUsingDiamondOperator() && (appearsInInvocationContext() || appearsInAssignmentContext());
     }
 }

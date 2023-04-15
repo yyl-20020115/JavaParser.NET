@@ -31,7 +31,7 @@ class JavaParserFieldDeclarationTest implements ResolvedFieldDeclarationTest {
         CompilationUnit compilationUnit = StaticJavaParser.parse("class A {string s;}");
         VariableDeclarator variableDeclarator = compilationUnit.findFirst(FieldDeclaration.class).get()
                 .getVariable(0);
-        assertThrows(IllegalArgumentException.class,
+        assertThrows(ArgumentException.class,
                 () -> new JavaParserFieldDeclaration(variableDeclarator, null));
     }
     
@@ -57,7 +57,7 @@ class JavaParserFieldDeclarationTest implements ResolvedFieldDeclarationTest {
     //  Initialize ResolvedFieldDeclarationTest
     //
 
-    private static ResolvedFieldDeclaration createResolvedFieldDeclaration(boolean isStatic) {
+    private static ResolvedFieldDeclaration createResolvedFieldDeclaration(bool isStatic) {
         string code = isStatic ? "class A {static string s;}" : "class A {string s;}";
         FieldDeclaration fieldDeclaration = StaticJavaParser.parse(code)
                 .findFirst(FieldDeclaration.class).get();
@@ -65,24 +65,24 @@ class JavaParserFieldDeclarationTest implements ResolvedFieldDeclarationTest {
         return new JavaParserFieldDeclaration(fieldDeclaration.getVariable(0), reflectionTypeSolver);
     }
 
-    @Override
+    //@Override
     public ResolvedFieldDeclaration createValue() {
         return createResolvedFieldDeclaration(false);
     }
 
-    @Override
+    //@Override
     public ResolvedFieldDeclaration createStaticValue() {
         return createResolvedFieldDeclaration(true);
     }
 
-    @Override
+    //@Override
     public Optional<Node> getWrappedDeclaration(AssociableToAST associableToAST) {
         return Optional.of(
                 safeCast(associableToAST, JavaParserFieldDeclaration.class).getWrappedNode()
         );
     }
 
-    @Override
+    //@Override
     public string getCanonicalNameOfExpectedType(ResolvedValueDeclaration resolvedDeclaration) {
         return String.class.getCanonicalName();
     }

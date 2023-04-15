@@ -31,6 +31,6 @@ public class MethodAmbiguityException:RuntimeException {
      * Create an instance from a description of the reason why there is ambiguity _in this particular case.
      */
     public MethodAmbiguityException(string description) {
-        super(description);
+        base(description);
     }
 }

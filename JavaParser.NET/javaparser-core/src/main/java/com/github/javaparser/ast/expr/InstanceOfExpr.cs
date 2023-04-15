@@ -36,7 +36,7 @@ namespace com.github.javaparser.ast.expr;
  * Example:
  * <br>{@code tool is Drill}
  * <br>
- * <br>This is then used wherever a conditional/boolean value can be used. For example:
+ * <br>This is then used wherever a conditional/bool value can be used. For example:
  * <br>
  * <pre>{@code if (obj is String) {
  *     string s = (String) obj;
@@ -51,7 +51,7 @@ namespace com.github.javaparser.ast.expr;
  * Example:
  * <br>{@code tool is Drill d}
  * <br>
- * <br>This is then used wherever a conditional/boolean value can be used. The scope of the variable created can vary, and is defined further within
+ * <br>This is then used wherever a conditional/bool value can be used. The scope of the variable created can vary, and is defined further within
  * <a href="https://bugs.openjdk.java.net/browse/JDK-8181287">JEP305</a>.
  * <br>
  * <pre>{@code if (obj is string s) {
@@ -82,7 +82,7 @@ public class InstanceOfExpr:Expression implements NodeWithType<InstanceOfExpr, R
 
     private Expression expression;
 
-    @OptionalProperty
+    //@OptionalProperty
     private PatternExpr pattern;
 
     private ReferenceType type;
@@ -105,7 +105,7 @@ public class InstanceOfExpr:Expression implements NodeWithType<InstanceOfExpr, R
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public InstanceOfExpr(TokenRange tokenRange, Expression expression, ReferenceType type, PatternExpr pattern) {
-        super(tokenRange);
+        base(tokenRange);
         setExpression(expression);
         setType(type);
         setPattern(pattern);
@@ -128,25 +128,25 @@ public class InstanceOfExpr:Expression implements NodeWithType<InstanceOfExpr, R
         }
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public InstanceOfExpr asInstanceOfExpr() {
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public InstanceOfExpr clone() {
         return (InstanceOfExpr) accept(new CloneVisitor(), null);
@@ -157,7 +157,7 @@ public class InstanceOfExpr:Expression implements NodeWithType<InstanceOfExpr, R
         return expression;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public InstanceOfExprMetaModel getMetaModel() {
         return JavaParserMetaModel.instanceOfExprMetaModel;
@@ -173,21 +173,21 @@ public class InstanceOfExpr:Expression implements NodeWithType<InstanceOfExpr, R
         return type;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifInstanceOfExpr(Consumer<InstanceOfExpr> action) {
         action.accept(this);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
-    public boolean isInstanceOfExpr() {
+    public bool isInstanceOfExpr() {
         return true;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
-    public boolean remove(Node node) {
+    public bool remove(Node node) {
         if (node == null) {
             return false;
         }
@@ -205,9 +205,9 @@ public class InstanceOfExpr:Expression implements NodeWithType<InstanceOfExpr, R
         return setPattern((PatternExpr) null);
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
-    public boolean replace(Node node, Node replacementNode) {
+    public bool replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
         }
@@ -269,7 +269,7 @@ public class InstanceOfExpr:Expression implements NodeWithType<InstanceOfExpr, R
         return this;
     }
 
-    @Override
+    //@Override
     //@Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<InstanceOfExpr> toInstanceOfExpr() {
         return Optional.of(this);

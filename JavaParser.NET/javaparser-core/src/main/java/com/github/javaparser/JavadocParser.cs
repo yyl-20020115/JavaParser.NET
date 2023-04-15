@@ -67,7 +67,7 @@ class JavadocParser {
         return new JavadocBlockTag(tagName, rest);
     }
 
-    private static boolean isABlockLine(string line) {
+    private static bool isABlockLine(string line) {
         return line.trim().startsWith(BLOCK_TAG_PREFIX);
     }
 

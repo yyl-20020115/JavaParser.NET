@@ -39,32 +39,32 @@ public /*final*/class ImportDeclaration:Node {
 
     private NameExpr name;
 
-    private boolean static_;
+    private bool static_;
 
-    private boolean asterisk;
+    private bool asterisk;
 
     public ImportDeclaration() {
     }
 
-    public ImportDeclaration(NameExpr name, boolean isStatic, boolean isAsterisk) {
+    public ImportDeclaration(NameExpr name, bool isStatic, bool isAsterisk) {
         setAsterisk(isAsterisk);
         setName(name);
         setStatic(isStatic);
     }
 
-    public ImportDeclaration(int beginLine, int beginColumn, int endLine, int endColumn, NameExpr name, boolean isStatic, boolean isAsterisk) {
-        super(beginLine, beginColumn, endLine, endColumn);
+    public ImportDeclaration(int beginLine, int beginColumn, int endLine, int endColumn, NameExpr name, bool isStatic, bool isAsterisk) {
+        base(beginLine, beginColumn, endLine, endColumn);
         setAsterisk(isAsterisk);
         setName(name);
         setStatic(isStatic);
     }
 
-    @Override
+    //@Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
@@ -84,7 +84,7 @@ public /*final*/class ImportDeclaration:Node {
      * @return <code>true</code> if the import ends with "*", <code>false</code>
      *         otherwise
      */
-    public boolean isAsterisk() {
+    public bool isAsterisk() {
         return asterisk;
     }
 
@@ -94,7 +94,7 @@ public /*final*/class ImportDeclaration:Node {
      * @return <code>true</code> if the import is static, <code>false</code>
      *         otherwise
      */
-    public boolean isStatic() {
+    public bool isStatic() {
         return static_;
     }
 
@@ -104,7 +104,7 @@ public /*final*/class ImportDeclaration:Node {
      * @param asterisk
      *            <code>true</code> if this import is asterisk
      */
-    public void setAsterisk(boolean asterisk) {
+    public void setAsterisk(bool asterisk) {
         this.asterisk = asterisk;
     }
 
@@ -125,7 +125,7 @@ public /*final*/class ImportDeclaration:Node {
      * @param static_
      *            <code>true</code> if this import is static
      */
-    public void setStatic(boolean static_) {
+    public void setStatic(bool static_) {
         this.static_ = static_;
     }
 

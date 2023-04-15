@@ -36,17 +36,17 @@ public class JavaParserParameterDeclaration implements ResolvedParameterDeclarat
         this.typeSolver = typeSolver;
     }
 
-    @Override
+    //@Override
     public string getName() {
         return wrappedNode.getName().getId();
     }
 
-    @Override
-    public boolean isVariadic() {
+    //@Override
+    public bool isVariadic() {
         return wrappedNode.isVarArgs();
     }
 
-    @Override
+    //@Override
     public ResolvedType getType() {
         if (wrappedNode.getType() is UnknownType && JavaParserFactory.getContext(wrappedNode, typeSolver) is LambdaExprContext) {
             Optional<Value> value = JavaParserFactory.getContext(wrappedNode, typeSolver).solveSymbolAsValue(wrappedNode.getNameAsString());
@@ -71,7 +71,7 @@ public class JavaParserParameterDeclaration implements ResolvedParameterDeclarat
         return wrappedNode;
     }
 
-    @Override
+    //@Override
     public Optional<Node> toAst() {
         return Optional.of(wrappedNode);
     }

@@ -31,6 +31,6 @@ public abstract class ReferenceType<T:ReferenceType>:Type<T> {
 	}
 
 	public ReferenceType(/*final*/Range range) {
-		super(range);
+		base(range);
 	}
 }

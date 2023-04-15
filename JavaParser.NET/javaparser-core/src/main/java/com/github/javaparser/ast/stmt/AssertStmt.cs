@@ -32,7 +32,7 @@ public class AssertStmt:Statement {
 
     private Expression check;
 
-    @OptionalProperty
+    //@OptionalProperty
     private Expression message;
 
     public AssertStmt() {
@@ -53,7 +53,7 @@ public class AssertStmt:Statement {
      */
     //@Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public AssertStmt(TokenRange tokenRange, Expression check, Expression message) {
-        super(tokenRange);
+        base(tokenRange);
         setCheck(check);
         setMessage(message);
         customInitialization();
@@ -61,13 +61,13 @@ public class AssertStmt:Statement {
 
     //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <R, A> R accept(/*final*/GenericVisitor<R, A> v, /*final*/A arg) {
+    public R accept<R, A>(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
     //@Override
     //@Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
-    public <A> void accept(/*final*/VoidVisitor<A> v, /*final*/A arg) {
+    public void accept<A>(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }
 

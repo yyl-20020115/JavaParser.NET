@@ -93,7 +93,7 @@ public class Java1_0Validator:Validators {
     /*final*/Validator noRecordDeclaration = new SimpleValidator<>(RecordDeclaration.class, n -> true, (n, reporter) -> reporter.report(n, "Record Declarations are not supported."));
 
     public Java1_0Validator() {
-        super(new CommonValidators());
+        base(new CommonValidators());
         add(modifiersWithoutStrictfpAndDefaultAndStaticInterfaceMethodsAndPrivateInterfaceMethods);
         add(noAssertKeyword);
         add(noInnerClasses);

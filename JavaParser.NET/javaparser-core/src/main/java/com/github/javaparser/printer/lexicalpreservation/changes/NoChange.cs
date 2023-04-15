@@ -26,12 +26,12 @@ namespace com.github.javaparser.printer.lexicalpreservation.changes;
  */
 public class NoChange implements Change {
 
-    @Override
+    //@Override
     public Object getValue(ObservableProperty property, Node node) {
         return property.getRawValue(node);
     }
 
-    @Override
+    //@Override
 	public ObservableProperty getProperty() {
 		return null;
 	}

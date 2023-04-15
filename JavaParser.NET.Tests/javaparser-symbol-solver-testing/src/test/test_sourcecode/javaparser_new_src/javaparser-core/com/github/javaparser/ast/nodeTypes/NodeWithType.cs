@@ -52,7 +52,7 @@ public interface NodeWithType<T> {
      * @param typeClass the type
      * @return this
      */
-    default T setType(Class<?> typeClass) {
+    default T setType(Type typeClass) {
         ((Node) this).tryAddImportToParentCompilationUnit(typeClass);
         return setType(new ClassOrInterfaceType(typeClass.getSimpleName()));
     }

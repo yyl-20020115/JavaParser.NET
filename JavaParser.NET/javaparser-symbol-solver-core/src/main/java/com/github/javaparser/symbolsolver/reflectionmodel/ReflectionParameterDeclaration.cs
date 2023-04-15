@@ -27,10 +27,10 @@ namespace com.github.javaparser.symbolsolver.reflectionmodel;
  * @author Federico Tomassetti
  */
 public class ReflectionParameterDeclaration implements ResolvedParameterDeclaration {
-    private Class<?> type;
+    private Type type;
     private java.lang.reflect.Type genericType;
     private TypeSolver typeSolver;
-    private boolean variadic;
+    private bool variadic;
     private string name;
 
     /**
@@ -41,8 +41,8 @@ public class ReflectionParameterDeclaration implements ResolvedParameterDeclarat
      * @param variadic
      * @param name can potentially be null
      */
-    public ReflectionParameterDeclaration(Class<?> type, java.lang.reflect.Type genericType, TypeSolver typeSolver,
-                                          boolean variadic, string name) {
+    public ReflectionParameterDeclaration(Type type, java.lang.reflect.Type genericType, TypeSolver typeSolver,
+                                          bool variadic, string name) {
         this.type = type;
         this.genericType = genericType;
         this.typeSolver = typeSolver;
@@ -54,17 +54,17 @@ public class ReflectionParameterDeclaration implements ResolvedParameterDeclarat
      *
      * @return the name, which can be potentially null
      */
-    @Override
+    //@Override
     public string getName() {
         return name;
     }
 
-    @Override
-    public boolean hasName() {
+    //@Override
+    public bool hasName() {
         return name != null;
     }
 
-    @Override
+    //@Override
     public string toString() {
         return "ReflectionParameterDeclaration{" +
                 "type=" + type +
@@ -72,33 +72,33 @@ public class ReflectionParameterDeclaration implements ResolvedParameterDeclarat
                 '}';
     }
 
-    @Override
-    public boolean isField() {
+    //@Override
+    public bool isField() {
         return false;
     }
 
-    @Override
-    public boolean isParameter() {
+    //@Override
+    public bool isParameter() {
         return true;
     }
 
-    @Override
-    public boolean isVariadic() {
+    //@Override
+    public bool isVariadic() {
         return variadic;
     }
 
-    @Override
-    public boolean isType() {
+    //@Override
+    public bool isType() {
         return false;
     }
 
-    @Override
+    //@Override
     public ResolvedType getType() {
         return ReflectionFactory.typeUsageFor(genericType, typeSolver);
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ReflectionParameterDeclaration that = (ReflectionParameterDeclaration) o;
@@ -109,7 +109,7 @@ public class ReflectionParameterDeclaration implements ResolvedParameterDeclarat
                 Objects.equals(name, that.name);
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         return Objects.hash(type, genericType, typeSolver, variadic, name);
     }

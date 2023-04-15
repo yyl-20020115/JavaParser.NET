@@ -32,7 +32,7 @@ public class AnonymousClassDeclarationContext:AbstractJavaParserContext<ObjectCr
       new JavaParserAnonymousClassDeclaration(wrappedNode, typeSolver);
 
   public AnonymousClassDeclarationContext(ObjectCreationExpr node, TypeSolver typeSolver) {
-    super(node, typeSolver);
+    base(node, typeSolver);
     Preconditions.checkArgument(node.getAnonymousClassBody().isPresent(),
                                 "An anonymous class must have a body");
   }

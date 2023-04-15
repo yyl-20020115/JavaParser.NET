@@ -42,7 +42,7 @@ public class Java8Validator:Java7Validator {
     });
 
     public Java8Validator() {
-        super();
+        base();
         replace(modifiersWithoutDefaultAndStaticInterfaceMethodsAndPrivateInterfaceMethods, modifiersWithoutPrivateInterfaceMethods);
         add(defaultMethodsInInterface);
         remove(noLambdas);

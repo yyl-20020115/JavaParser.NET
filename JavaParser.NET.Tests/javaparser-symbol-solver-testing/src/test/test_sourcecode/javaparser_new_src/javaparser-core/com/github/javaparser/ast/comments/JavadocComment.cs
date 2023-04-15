@@ -31,19 +31,19 @@ public /*final*/class JavadocComment:Comment {
     }
 
     public JavadocComment(string content) {
-        super(content);
+        base(content);
     }
 
     public JavadocComment(Range range, string content) {
-        super(range, content);
+        base(range, content);
     }
 
-    @Override
+    //@Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
         return v.visit(this, arg);
     }
 
-    @Override
+    //@Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
         v.visit(this, arg);
     }

@@ -30,10 +30,10 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.contexts;
 public class SwitchEntryContext:AbstractJavaParserContext<SwitchEntry> {
 
     public SwitchEntryContext(SwitchEntry wrappedNode, TypeSolver typeSolver) {
-        super(wrappedNode, typeSolver);
+        base(wrappedNode, typeSolver);
     }
 
-    @Override
+    //@Override
     public SymbolReference<?:ResolvedValueDeclaration> solveSymbol(string name) {
         SwitchStmt switchStmt = (SwitchStmt) demandParentNode(wrappedNode);
         ResolvedType type = JavaParserFacade.get(typeSolver).getType(switchStmt.getSelector());
@@ -77,8 +77,8 @@ public class SwitchEntryContext:AbstractJavaParserContext<SwitchEntry> {
         return solveSymbolInParentContext(name);
     }
 
-    @Override
-    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, boolean staticOnly) {
+    //@Override
+    public SymbolReference<ResolvedMethodDeclaration> solveMethod(string name, List<ResolvedType> argumentsTypes, bool staticOnly) {
         // TODO: Document why staticOnly is forced to be false.
         return solveMethodInParentContext(name, argumentsTypes, false);
     }

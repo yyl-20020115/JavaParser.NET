@@ -46,40 +46,40 @@ public class InMemoryCache<K, V> implements Cache<K, V>  {
 
     private /*final*/Map<K, V> mappedValues = new WeakHashMap<>();
 
-    @Override
+    //@Override
     public void put(K key, V value) {
         mappedValues.put(key, value);
     }
 
-    @Override
+    //@Override
     public Optional<V> get(K key) {
         return Optional.ofNullable(
                 mappedValues.get(key)
         );
     }
 
-    @Override
+    //@Override
     public void remove(K key) {
         mappedValues.remove(key);
     }
 
-    @Override
+    //@Override
     public void removeAll() {
         mappedValues.clear();
     }
 
-    @Override
-    public boolean contains(K key) {
+    //@Override
+    public bool contains(K key) {
         return mappedValues.containsKey(key);
     }
 
-    @Override
+    //@Override
     public long size() {
         return mappedValues.size();
     }
 
-    @Override
-    public boolean isEmpty() {
+    //@Override
+    public bool isEmpty() {
         return mappedValues.isEmpty();
     }
 

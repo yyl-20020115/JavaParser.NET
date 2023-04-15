@@ -34,7 +34,7 @@ public class ReflectionAnnotationDeclaration:AbstractTypeDeclaration implements 
     /// Fields
     ///
 
-    private Class<?> clazz;
+    private Type clazz;
     private TypeSolver typeSolver;
     private ReflectionClassAdapter reflectionClassAdapter;
 
@@ -42,9 +42,9 @@ public class ReflectionAnnotationDeclaration:AbstractTypeDeclaration implements 
     /// Constructor
     ///
 
-    public ReflectionAnnotationDeclaration(Class<?> clazz, TypeSolver typeSolver) {
+    public ReflectionAnnotationDeclaration(Type clazz, TypeSolver typeSolver) {
         if (!clazz.isAnnotation()) {
-            throw new IllegalArgumentException("The given type is not an annotation.");
+            throw new ArgumentException("The given type is not an annotation.");
         }
 
         this.clazz = clazz;
@@ -56,7 +56,7 @@ public class ReflectionAnnotationDeclaration:AbstractTypeDeclaration implements 
     /// Public methods
     ///
 
-    @Override
+    //@Override
     public string getPackageName() {
         if (clazz.getPackage() != null) {
             return clazz.getPackage().getName();
@@ -64,7 +64,7 @@ public class ReflectionAnnotationDeclaration:AbstractTypeDeclaration implements 
         return "";
     }
 
-    @Override
+    //@Override
     public string getClassName() {
         string qualifiedName = getQualifiedName();
         if(qualifiedName.contains(".")) {
@@ -74,20 +74,20 @@ public class ReflectionAnnotationDeclaration:AbstractTypeDeclaration implements 
         }
     }
 
-    @Override
+    //@Override
     public string getQualifiedName() {
         return clazz.getCanonicalName();
     }
 
-    @Override
+    //@Override
     public string toString() {
         return getClass().getSimpleName() + "{" +
                "clazz=" + clazz.getCanonicalName() +
                '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
+    //@Override
+    public bool equals(Object o) {
         if (this == o) return true;
         if (!(o is ReflectionAnnotationDeclaration)) return false;
 
@@ -96,51 +96,51 @@ public class ReflectionAnnotationDeclaration:AbstractTypeDeclaration implements 
         return clazz.getCanonicalName().equals(that.clazz.getCanonicalName());
     }
 
-    @Override
+    //@Override
     public int hashCode() {
         return clazz.getCanonicalName().hashCode();
     }
 
-    @Override
-    public boolean isAssignableBy(ResolvedType type) {
+    //@Override
+    public bool isAssignableBy(ResolvedType type) {
         // TODO #1836
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    public boolean isAssignableBy(ResolvedReferenceTypeDeclaration other) {
+    //@Override
+    public bool isAssignableBy(ResolvedReferenceTypeDeclaration other) {
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    public boolean hasDirectlyAnnotation(string canonicalName) {
+    //@Override
+    public bool hasDirectlyAnnotation(string canonicalName) {
         return reflectionClassAdapter.hasDirectlyAnnotation(canonicalName);
     }
 
-    @Override
+    //@Override
     public List<ResolvedFieldDeclaration> getAllFields() {
         return reflectionClassAdapter.getAllFields();
     }
 
-    @Override
-    public List<ResolvedReferenceType> getAncestors(boolean acceptIncompleteList) {
+    //@Override
+    public List<ResolvedReferenceType> getAncestors(bool acceptIncompleteList) {
         // we do not attempt to perform any symbol solving when analyzing ancestors _in the reflection model, so we can
-        // simply ignore the boolean parameter here; an UnsolvedSymbolException cannot occur
+        // simply ignore the bool parameter here; an UnsolvedSymbolException cannot occur
         return reflectionClassAdapter.getAncestors();
     }
 
-    @Override
-    public Set<ResolvedMethodDeclaration> getDeclaredMethods() {
+    //@Override
+    public HashSet<ResolvedMethodDeclaration> getDeclaredMethods() {
         // TODO #1838
         throw new UnsupportedOperationException();
     }
 
-    @Override
+    //@Override
     public string getName() {
         return clazz.getSimpleName();
     }
 
-    @Override
+    //@Override
     public Optional<ResolvedReferenceTypeDeclaration> containerType() {
         // TODO #1841
         throw new UnsupportedOperationException("containerType() is not supported for " + this.getClass().getCanonicalName());
@@ -151,32 +151,32 @@ public class ReflectionAnnotationDeclaration:AbstractTypeDeclaration implements 
      *
      * @return An empty list.
      */
-    @Override
+    //@Override
     public List<ResolvedTypeParameterDeclaration> getTypeParameters() {
         // Annotation declarations cannot have type parameters - i.e. we can always return an empty list.
         return Collections.emptyList();
     }
 
-    @Override
-    public Set<ResolvedReferenceTypeDeclaration> internalTypes() {
+    //@Override
+    public HashSet<ResolvedReferenceTypeDeclaration> internalTypes() {
         return Arrays.stream(this.clazz.getDeclaredClasses())
             .map(ic -> ReflectionFactory.typeDeclarationFor(ic, typeSolver))
             .collect(Collectors.toSet());
     }
 
-    @Override
+    //@Override
     public List<ResolvedConstructorDeclaration> getConstructors() {
         return Collections.emptyList();
     }
 
-    @Override
+    //@Override
     public List<ResolvedAnnotationMemberDeclaration> getAnnotationMembers() {
         return Stream.of(clazz.getDeclaredMethods())
                        .map(m -> new ReflectionAnnotationMemberDeclaration(m, typeSolver))
                        .collect(Collectors.toList());
     }
 
-    @Override
+    //@Override
     public Optional<MethodUsage> solveMethodAsUsage(/*final*/string name,
                                                     /*final*/List<ResolvedType> parameterTypes,
                                                     /*final*/Context invokationContext,
@@ -211,16 +211,16 @@ public class ReflectionAnnotationDeclaration:AbstractTypeDeclaration implements 
         }
     }
 
-    @Override
+    //@Override
     public SymbolReference<ResolvedMethodDeclaration> solveMethod(/*final*/string name,
                                                                   /*final*/List<ResolvedType> argumentsTypes,
-                                                                  /*final*/boolean staticOnly) {
+                                                                  /*final*/bool staticOnly) {
         return ReflectionMethodResolutionLogic.solveMethod(name, argumentsTypes, staticOnly,
             typeSolver,this, clazz);
     }
 
-    @Override
-    public boolean isInheritable() {
+    //@Override
+    public bool isInheritable() {
         return clazz.getAnnotation(Inherited.class) != null;
     }
 }

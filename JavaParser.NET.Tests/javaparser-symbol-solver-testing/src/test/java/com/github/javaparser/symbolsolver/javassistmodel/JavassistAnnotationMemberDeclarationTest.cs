@@ -25,7 +25,7 @@ namespace com.github.javaparser.symbolsolver.javassistmodel;
 
 class JavassistAnnotationMemberDeclarationTest implements ResolvedAnnotationMemberDeclarationTest {
 
-    @Override
+    //@Override
     public JavassistAnnotationMemberDeclaration createValue() {
         try {
             TypeSolver typeSolver = new ReflectionTypeSolver();
@@ -40,12 +40,12 @@ class JavassistAnnotationMemberDeclarationTest implements ResolvedAnnotationMemb
         }
     }
 
-    @Override
+    //@Override
     public Optional<Node> getWrappedDeclaration(AssociableToAST associableToAST) {
         return Optional.empty();
     }
 
-    @Override
+    //@Override
     public string getCanonicalNameOfExpectedType(ResolvedValueDeclaration resolvedDeclaration) {
         return "java.lang.StringBuilder";
     }

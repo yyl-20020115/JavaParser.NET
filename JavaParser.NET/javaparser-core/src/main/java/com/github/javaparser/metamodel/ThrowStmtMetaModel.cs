@@ -36,7 +36,7 @@ public class ThrowStmtMetaModel:StatementMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     ThrowStmtMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, ThrowStmt.class, "ThrowStmt", "com.github.javaparser.ast.stmt", false, false);
+        base(superBaseNodeMetaModel, ThrowStmt.class, "ThrowStmt", "com.github.javaparser.ast.stmt", false, false);
     }
 
     public PropertyMetaModel expressionPropertyMetaModel;

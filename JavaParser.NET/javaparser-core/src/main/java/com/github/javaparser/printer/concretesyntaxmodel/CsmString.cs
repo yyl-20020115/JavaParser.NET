@@ -33,14 +33,14 @@ public class CsmString implements CsmElement {
         return property;
     }
 
-    @Override
+    //@Override
     public void prettyPrint(Node node, SourcePrinter printer) {
         printer.print("\"");
         printer.print(property.getValueAsStringAttribute(node));
         printer.print("\"");
     }
 
-    @Override
+    //@Override
     public string toString() {
         return String.format("%s(property:%s)", this.getClass().getSimpleName(), getProperty());
     }

@@ -27,7 +27,7 @@ namespace com.github.javaparser.symbolsolver.reflectionmodel.comparators;
  */
 public class MethodComparator implements Comparator<Method> {
 
-    @Override
+    //@Override
     public int compare(Method o1, Method o2) {
         int compareName = o1.getName().compareTo(o2.getName());
         if (compareName != 0) return compareName;

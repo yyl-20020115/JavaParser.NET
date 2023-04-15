@@ -36,6 +36,6 @@ public class LineCommentMetaModel:CommentMetaModel {
 
     //@Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     LineCommentMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, LineComment.class, "LineComment", "com.github.javaparser.ast.comments", false, false);
+        base(superBaseNodeMetaModel, LineComment.class, "LineComment", "com.github.javaparser.ast.comments", false, false);
     }
 }

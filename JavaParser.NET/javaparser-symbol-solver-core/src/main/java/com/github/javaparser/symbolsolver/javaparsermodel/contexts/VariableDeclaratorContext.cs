@@ -29,10 +29,10 @@ namespace com.github.javaparser.symbolsolver.javaparsermodel.contexts;
 public class VariableDeclaratorContext:AbstractJavaParserContext<VariableDeclarator> {
 
     public VariableDeclaratorContext(VariableDeclarator wrappedNode, TypeSolver typeSolver) {
-        super(wrappedNode, typeSolver);
+        base(wrappedNode, typeSolver);
     }
 
-    @Override
+    //@Override
     public List<VariableDeclarator> localVariablesExposedToChild(Node child) {
         if (wrappedNode.getInitializer().isPresent() && wrappedNode.getInitializer().get() == child) {
             return Collections.singletonList(wrappedNode);
@@ -41,13 +41,13 @@ public class VariableDeclaratorContext:AbstractJavaParserContext<VariableDeclara
         return Collections.emptyList();
     }
 
-    @Override
+    //@Override
     public List<PatternExpr> patternExprsExposedFromChildren() {
         // Variable declarators never make pattern expressions available.
         return Collections.emptyList();
     }
 
-    @Override
+    //@Override
     public List<PatternExpr> negatedPatternExprsExposedFromChildren() {
         // Variable declarators never make pattern expressions available.
         return Collections.emptyList();

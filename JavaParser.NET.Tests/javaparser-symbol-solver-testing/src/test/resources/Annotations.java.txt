@@ -30,8 +30,8 @@ public @interface MyAnnotationWithDefaultValue {
 
 @MyAnnotation
 class CA {
-    @Override
-    public boolean equals(Object o) { return true; }
+    //@Override
+    public bool equals(Object o) { return true; }
 
     @Before
     public void setUp() {}
@@ -44,7 +44,7 @@ class CB extends CA {
 
 @MyAnnotationWithSingleValue(42)
 class CC {
-    public boolean foo(Object o) { @SuppressWarnings("unchecked") String s = (String) o; }
+    public bool foo(Object o) { @SuppressWarnings("unchecked") String s = (String) o; }
 
     @Ignore("lalala") @Test public void testSomething() {}
 }

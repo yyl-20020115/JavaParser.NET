@@ -235,10 +235,10 @@ class ActivityStack
     paramIntent.setFlags(paramIntent.getFlags() & (paramInt ^ 0xFFFFFFFF));
   }
 
-  private static boolean a(p paramp, ClearTarget paramClearTarget, ComponentName paramComponentName)
+  private static bool a(p paramp, ClearTarget paramClearTarget, ComponentName paramComponentName)
   {
-    boolean bool1 = false;
-    boolean bool3;
+    bool bool1 = false;
+    bool bool3;
     switch (e.a[paramClearTarget.ordinal()])
     {
     default:
@@ -279,7 +279,7 @@ class ActivityStack
     {
       int i;
       int j;
-      boolean bool2;
+      bool bool2;
       int k;
       synchronized (paramp.e)
       {
@@ -378,7 +378,7 @@ class ActivityStack
     }
   }
 
-  private static boolean b(Intent paramIntent, int paramInt)
+  private static bool b(Intent paramIntent, int paramInt)
   {
     return (paramInt & paramIntent.getFlags()) != 0;
   }
@@ -1351,7 +1351,7 @@ class ActivityStack
     }
   }
 
-  /*final*/boolean f(int paramInt, IBinder paramIBinder)
+  /*final*/bool f(int paramInt, IBinder paramIBinder)
   {
     v.a(b, "onActivityDestroyed>>>>>>>>>>>>>>>token: %s", new Object[] { paramIBinder });
     synchronized (this.a)

@@ -56,7 +56,7 @@ public class JavaConcepts<T:List<int[]>, X>:Base implements Serializable {
             x = +x;
             x = ~x;
             --x;
-            boolean b = !false;
+            bool b = !false;
             x &= 2;
             x |= 2;
             x ^= 2;
@@ -128,7 +128,7 @@ public class JavaConcepts<T:List<int[]>, X>:Base implements Serializable {
     public enum Enum {
 
         m(1) {
-            @Override
+            //@Override
             void mm() {
             }
         }, f(2) {
@@ -156,7 +156,7 @@ public class JavaConcepts<T:List<int[]>, X>:Base implements Serializable {
         T val1 = null;
         E val2 = null;
         super.<T, E>check2(val1, val2);
-        boolean b = true, y = false;
+        bool b = true, y = false;
         abstract class X {
 
             int i = 0;
@@ -168,17 +168,17 @@ public class JavaConcepts<T:List<int[]>, X>:Base implements Serializable {
             }
         }
         //@Deprecated
-        final class Y:X {
+        /*final*/class Y:X {
 
             public Y() {
-                super();
+                base();
                 JavaConcepts.this.cc = 'c';
                 super.i = 1;
                 Y.super.m();
             }
 
             public Y(int y) {
-                super();
+                base();
             }
 
             public Y(long x) {
@@ -193,16 +193,16 @@ public class JavaConcepts<T:List<int[]>, X>:Base implements Serializable {
     private class QWE:JavaConcepts<List<int[]>, String> {
 
         //@Deprecated
-        final int z = 0;
+        /*final*/int z = 0;
 
         int i = (int) -1;
 
         public QWE(String... x) {
-            <String>super(x[0]);
+            <String>base(x[0]);
         }
 
         public QWE(int... x) {
-            super(x[0]);
+            base(x[0]);
             i = x[0];
             assert true;
             assert 1 == 1 : 2;
@@ -281,7 +281,7 @@ public class JavaConcepts<T:List<int[]>, X>:Base implements Serializable {
         for (//@Deprecated int i : arr4[0]) {
             x--;
         }
-        for (//@Deprecated final int i = 0, j = 1; i < 10; x++) {
+        for (//@Deprecated /*final*/int i = 0, j = 1; i < 10; x++) {
             break;
         }
         int i, j;
@@ -302,7 +302,7 @@ public class JavaConcepts<T:List<int[]>, X>:Base implements Serializable {
             if (file == null) {
                 throw new NullPointerException("blah");
             }
-        } catch (final NullPointerException e) {
+        } catch (/*final*/NullPointerException e) {
             System._out.println("catch");
         } catch (RuntimeException e) {
             System._out.println("catch");
@@ -341,7 +341,7 @@ public class JavaConcepts<T:List<int[]>, X>:Base implements Serializable {
             System._out.println("whatever");
         } catch (RuntimeException e) {
             System._out.println(e);
-        } catch (final Exception | Error e) {
+        } catch (/*final*/Exception | Error e) {
             System._out.println(e);
         }
         return JavaParser.parse(file);
@@ -365,8 +365,8 @@ public class JavaConcepts<T:List<int[]>, X>:Base implements Serializable {
                 return 0;
             }
 
-            @Override
-            public boolean equals(Object obj) {
+            //@Override
+            public bool equals(Object obj) {
                 return super.equals(obj);
             }
         };
